@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <version>37.0</version>
     <types>
         <members>AppSwitcher</members>
         <members>Salesforce1</members>
@@ -74,6 +75,7 @@
         <members>dataloader3935__c.X3935Contact__c</members>
         <members>dataloader3935__c.permissiontesting1__c</members>
         <members>dataloader3935__c.permissiontesting2__c</members>
+        <members>dataloader3935__c.permissiontesting3__c</members>
         <members>dataloader3935__c.permissiontesting__c</members>
         <members>testing__mdt.testingmetadatafield1__c</members>
         <members>testing__mdt.testingmetadatafield2__c</members>
@@ -427,6 +429,33 @@
     </types>
     <types>
         <members>Account</members>
+        <members>Activities</members>
+        <members>Address</members>
+        <members>BusinessHours</members>
+        <members>Case</members>
+        <members>Company</members>
+        <members>Contract</members>
+        <members>Entitlement</members>
+        <members>Forecasting</members>
+        <members>Ideas</members>
+        <members>Knowledge</members>
+        <members>LiveAgent</members>
+        <members>Mobile</members>
+        <members>Name</members>
+        <members>Opportunity</members>
+        <members>Order</members>
+        <members>OrgPreference</members>
+        <members>PathAssistant</members>
+        <members>PersonalJourney</members>
+        <members>Product</members>
+        <members>Quote</members>
+        <members>Search</members>
+        <members>Security</members>
+        <members>Territory2</members>
+        <name>Settings</name>
+    </types>
+    <types>
+        <members>Account</members>
         <members>Asset</members>
         <members>Campaign</members>
         <members>Case</members>
@@ -518,32 +547,4 @@
         <members>Account.Update Namefield</members>
         <name>WorkflowRule</name>
     </types>
-    <types>
-        <members>Account</members>
-        <members>Activities</members>
-        <members>Address</members>
-        <members>BusinessHours</members>
-        <members>Case</members>
-        <members>Company</members>
-        <members>Contract</members>
-        <members>Entitlement</members>
-        <members>Forecasting</members>
-        <members>Ideas</members>
-        <members>Knowledge</members>
-        <members>LiveAgent</members>
-        <members>Mobile</members>
-        <members>Name</members>
-        <members>Opportunity</members>
-        <members>Order</members>
-        <members>OrgPreference</members>
-        <members>PathAssistant</members>
-        <members>PersonalJourney</members>
-        <members>Product</members>
-        <members>Quote</members>
-        <members>Search</members>
-        <members>Security</members>
-        <members>Territory2</members>
-        <name>Settings</name>
-    </types>
-    <version>37.0</version>
 </Package>
