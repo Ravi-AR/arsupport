@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>testing custom metadata types</description>
+    <fields>
+        <fullName>testingmetadatafield1__c</fullName>
+        <description>testingmetadatafield1</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>testingmetadatafield1</label>
+        <length>20</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>testingmetadatafield2__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>testingmetadatafield2</label>
+        <length>20</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>testing</label>
+    <pluralLabel>testings</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>
