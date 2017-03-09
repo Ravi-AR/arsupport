@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>dataloader3935</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>dataloader3935s</value>
+    </caseValues>
+    <fields>
+        <label><!-- AccountDataload --></label>
+        <name>AccountDataload__c</name>
+        <relationshipLabel><!-- dataloader3935s --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Test1 --></label>
+        <name>Test1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Test --></label>
+        <name>Test__c</name>
+    </fields>
+    <fields>
+        <label><!-- 3935Contact --></label>
+        <name>X3935Contact__c</name>
+        <relationshipLabel><!-- dataloader3935s --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- permissiontesting1 --></label>
+        <name>permissiontesting1__c</name>
+    </fields>
+    <fields>
+        <label><!-- permissiontesting2 --></label>
+        <name>permissiontesting2__c</name>
+    </fields>
+    <fields>
+        <label><!-- permissiontesting3 --></label>
+        <name>permissiontesting3__c</name>
+    </fields>
+    <fields>
+        <label><!-- permissiontesting4 --></label>
+        <name>permissiontesting4__c</name>
+    </fields>
+    <fields>
+        <label><!-- permissiontesting --></label>
+        <name>permissiontesting__c</name>
+    </fields>
+    <layouts>
+        <layout>dataloader3935 Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>
