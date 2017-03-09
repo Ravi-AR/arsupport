@@ -18,6 +18,4 @@
     <tab>standard-Product2</tab>
     <tab>standard-report</tab>
     <tab>standard-Dashboard</tab>
-    <tab>dataloader3935__c</tab>
-    <tab>testobjectcreated__c</tab>
 </CustomApplication>

@@ -14,14 +14,6 @@
         <relationshipLabel><!-- dataloader3935s --></relationshipLabel>
     </fields>
     <fields>
-        <label><!-- Test1 --></label>
-        <name>Test1__c</name>
-    </fields>
-    <fields>
-        <label><!-- Test --></label>
-        <name>Test__c</name>
-    </fields>
-    <fields>
         <label><!-- 3935Contact --></label>
         <name>X3935Contact__c</name>
         <relationshipLabel><!-- dataloader3935s --></relationshipLabel>
@@ -34,16 +26,5 @@
         <label><!-- permissiontesting2 --></label>
         <name>permissiontesting2__c</name>
     </fields>
-    <fields>
-        <label><!-- permissiontesting --></label>
-        <name>permissiontesting__c</name>
-    </fields>
-    <layouts>
-        <layout>dataloader3935 Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
     <startsWith>Consonant</startsWith>
 </CustomObjectTranslation>

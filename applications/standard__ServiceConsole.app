@@ -4,6 +4,7 @@
     <detailPageRefreshMethod>none</detailPageRefreshMethod>
     <enableCustomizeMyTabs>false</enableCustomizeMyTabs>
     <enableKeyboardShortcuts>true</enableKeyboardShortcuts>
+    <enableListViewHover>true</enableListViewHover>
     <enableListViewReskin>true</enableListViewReskin>
     <enableMultiMonitorComponents>true</enableMultiMonitorComponents>
     <enablePinTabs>true</enablePinTabs>
@@ -173,12 +174,7 @@
     <tab>standard-Opportunity</tab>
     <tab>standard-Lead</tab>
     <tab>standard-Knowledge</tab>
-    <tab>dataloader3935__c</tab>
-    <tab>testobjectcreated__c</tab>
     <workspaceMappings>
-        <mapping>
-            <tab>dataloader3935__c</tab>
-        </mapping>
         <mapping>
             <tab>standard-Account</tab>
         </mapping>
@@ -199,9 +195,6 @@
         <mapping>
             <fieldName>AccountId</fieldName>
             <tab>standard-Opportunity</tab>
-        </mapping>
-        <mapping>
-            <tab>testobjectcreated__c</tab>
         </mapping>
     </workspaceMappings>
 </CustomApplication>
