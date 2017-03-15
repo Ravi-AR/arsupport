@@ -78,6 +78,7 @@
         <members>dataloader3935__c.permissiontesting3__c</members>
         <members>dataloader3935__c.permissiontesting4__c</members>
         <members>dataloader3935__c.permissiontesting__c</members>
+        <members>dataloader3935__c.picklistcommit2__c</members>
         <members>dataloader3935__c.picklistcommitcheck__c</members>
         <members>testing__mdt.testingmetadatafield1__c</members>
         <members>testing__mdt.testingmetadatafield2__c</members>

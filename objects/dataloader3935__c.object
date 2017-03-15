@@ -151,6 +151,43 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>picklistcommit2__c</fullName>
+        <externalId>false</externalId>
+        <label>picklistcommit2</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>run1</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>run1</label>
+                </value>
+                <value>
+                    <fullName>run2</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>run2</label>
+                </value>
+                <value>
+                    <fullName>run3</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>run3</label>
+                </value>
+                <value>
+                    <fullName>run4</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>run4</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>picklistcommitcheck__c</fullName>
         <externalId>false</externalId>
         <label>picklistcommitcheck</label>
