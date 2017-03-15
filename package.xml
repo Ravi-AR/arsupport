@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-    <version>37.0</version>
+    <version>39.0</version>
     <types>
         <members>AppSwitcher</members>
         <members>Salesforce1</members>
@@ -78,6 +78,7 @@
         <members>dataloader3935__c.permissiontesting3__c</members>
         <members>dataloader3935__c.permissiontesting4__c</members>
         <members>dataloader3935__c.permissiontesting__c</members>
+        <members>dataloader3935__c.picklistcommitcheck__c</members>
         <members>testing__mdt.testingmetadatafield1__c</members>
         <members>testing__mdt.testingmetadatafield2__c</members>
         <name>CustomField</name>
