@@ -460,6 +460,7 @@
     </types>
     <types>
         <members>Case</members>
+        <members>Case.sharingrulerun2</members>
         <name>SharingCriteriaRule</name>
     </types>
     <types>
