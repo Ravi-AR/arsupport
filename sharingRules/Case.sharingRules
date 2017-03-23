@@ -28,4 +28,22 @@
             <value>True</value>
         </criteriaItems>
     </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>sharingrulerun3</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>sharingrulerun3</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+        <criteriaItems>
+            <field>picklist1__c</field>
+            <operation>equals</operation>
+            <value>4</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>picklist2__c</field>
+            <operation>equals</operation>
+            <value>d</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
 </SharingRules>

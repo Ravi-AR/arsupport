@@ -461,6 +461,7 @@
     <types>
         <members>Case</members>
         <members>Case.sharingrulerun2</members>
+        <members>Case.sharingrulerun3</members>
         <members>Lead</members>
         <name>SharingCriteriaRule</name>
     </types>
