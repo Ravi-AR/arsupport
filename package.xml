@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-    <version>39.0</version>
+    <version>37.0</version>
     <types>
         <members>AppSwitcher</members>
         <members>Salesforce1</members>
@@ -73,6 +73,7 @@
         <members>dataloader3935__c.Test1__c</members>
         <members>dataloader3935__c.Test__c</members>
         <members>dataloader3935__c.X3935Contact__c</members>
+        <members>dataloader3935__c.ezcommitdeltatestrun1__c</members>
         <members>dataloader3935__c.permissiontesting1__c</members>
         <members>dataloader3935__c.permissiontesting2__c</members>
         <members>dataloader3935__c.permissiontesting3__c</members>
