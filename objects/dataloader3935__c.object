@@ -146,6 +146,63 @@
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>picklistcommitcheck__c</fullName>
+        <externalId>false</externalId>
+        <label>picklistcommitcheck</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pick3</fullName>
+                    <default>false</default>
+                    <label>Pick3</label>
+                </value>
+                <value>
+                    <fullName>Pick4</fullName>
+                    <default>false</default>
+                    <label>Pick4</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>picklistrun2__c</fullName>
+        <description>testingschemaincommit&amp;build</description>
+        <externalId>false</externalId>
+        <label>picklistrun2</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+                <value>
+                    <fullName>4</fullName>
+                    <default>false</default>
+                    <label>4</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
     <label>dataloader3935</label>
     <listViews>
         <fullName>All</fullName>
