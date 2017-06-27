@@ -5,6 +5,7 @@
         <members>ApexC1</members>
         <members>ApexC2</members>
         <members>Scenario1</members>
+        <members>Scenario2</members>
         <members>SupportStatus</members>
         <members>TestApexClass</members>
         <name>ApexClass</name>
