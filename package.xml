@@ -583,6 +583,7 @@
         <members>Territory2Model.trname1__c</members>
         <members>Territory2Model.trname2__c</members>
         <members>Territory2Model.trstatus__c</members>
+        <members>Training1__c.SampleField__c</members>
         <members>User.ManagerId</members>
         <members>UserProvisioningRequest.AppName</members>
         <members>UserProvisioningRequest.ApprovalStatus</members>
@@ -663,6 +664,7 @@
         <members>Task</members>
         <members>Territory2</members>
         <members>Territory2Model</members>
+        <members>Training1__c</members>
         <members>User</members>
         <members>UserProvisioningRequest</members>
         <members>UserTerritory2Association</members>
