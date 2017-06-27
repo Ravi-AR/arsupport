@@ -4,6 +4,7 @@
     <types>
         <members>ApexC1</members>
         <members>ApexC2</members>
+        <members>Scenario1</members>
         <members>SupportStatus</members>
         <members>TestApexClass</members>
         <name>ApexClass</name>
@@ -588,6 +589,8 @@
         <members>Training1__c.SampleField3__c</members>
         <members>Training1__c.SampleField4__c</members>
         <members>Training1__c.SampleField__c</members>
+        <members>Training2__c.field1__c</members>
+        <members>Training2__c.field2__c</members>
         <members>User.ManagerId</members>
         <members>UserProvisioningRequest.AppName</members>
         <members>UserProvisioningRequest.ApprovalStatus</members>
@@ -669,6 +672,7 @@
         <members>Territory2</members>
         <members>Territory2Model</members>
         <members>Training1__c</members>
+        <members>Training2__c</members>
         <members>User</members>
         <members>UserProvisioningRequest</members>
         <members>UserTerritory2Association</members>
