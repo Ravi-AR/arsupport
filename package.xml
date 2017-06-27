@@ -583,6 +583,8 @@
         <members>Territory2Model.trname1__c</members>
         <members>Territory2Model.trname2__c</members>
         <members>Territory2Model.trstatus__c</members>
+        <members>Training1__c.SampleField3__c</members>
+        <members>Training1__c.SampleField4__c</members>
         <members>Training1__c.SampleField__c</members>
         <members>User.ManagerId</members>
         <members>UserProvisioningRequest.AppName</members>
