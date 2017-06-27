@@ -589,6 +589,7 @@
         <members>Training1__c.SampleField3__c</members>
         <members>Training1__c.SampleField4__c</members>
         <members>Training1__c.SampleField__c</members>
+        <members>Training2__c.Field3__c</members>
         <members>Training2__c.field1__c</members>
         <members>Training2__c.field2__c</members>
         <members>User.ManagerId</members>
