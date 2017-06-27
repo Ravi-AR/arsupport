@@ -2,6 +2,8 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <version>39.0</version>
     <types>
+        <members>ApexC1</members>
+        <members>ApexC2</members>
         <members>SupportStatus</members>
         <members>TestApexClass</members>
         <name>ApexClass</name>
