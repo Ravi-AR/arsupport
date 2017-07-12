@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>leadsrrun</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>leadsrrun</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+        <criteriaItems>
+            <field>Email</field>
+            <operation>equals</operation>
+            <value>123@gmail.com</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+</SharingRules>

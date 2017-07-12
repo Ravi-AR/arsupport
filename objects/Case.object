@@ -58,6 +58,7 @@
     </actionOverrides>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <enableFeeds>true</enableFeeds>
+    <externalSharingModel>ReadWriteTransfer</externalSharingModel>
     <fields>
         <fullName>AccountId</fullName>
         <trackFeedHistory>false</trackFeedHistory>
@@ -139,6 +140,18 @@
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Login_Url__c</fullName>
+        <externalId>false</externalId>
+        <label>Login Url</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Origin</fullName>
@@ -286,6 +299,13 @@
         </valueSet>
     </fields>
     <fields>
+        <fullName>SourceId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
         <fullName>Status</fullName>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
@@ -315,11 +335,211 @@
         <trackTrending>false</trackTrending>
     </fields>
     <fields>
+        <fullName>Testfield1__c</fullName>
+        <externalId>false</externalId>
+        <label>Testfield1</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Value1</fullName>
+                    <default>false</default>
+                    <label>Value1</label>
+                </value>
+                <value>
+                    <fullName>Value2</fullName>
+                    <default>false</default>
+                    <label>Value2</label>
+                </value>
+                <value>
+                    <fullName>Value3</fullName>
+                    <default>false</default>
+                    <label>Value3</label>
+                </value>
+                <value>
+                    <fullName>Value4</fullName>
+                    <default>false</default>
+                    <label>Value4</label>
+                </value>
+                <value>
+                    <fullName>Value5</fullName>
+                    <default>false</default>
+                    <label>Value5</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Testfield2__c</fullName>
+        <externalId>false</externalId>
+        <label>Testfield2</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Testfield1__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Number1</fullName>
+                    <default>false</default>
+                    <label>Number1</label>
+                </value>
+                <value>
+                    <fullName>Number2</fullName>
+                    <default>false</default>
+                    <label>Number2</label>
+                </value>
+                <value>
+                    <fullName>Number3</fullName>
+                    <default>false</default>
+                    <label>Number3</label>
+                </value>
+                <value>
+                    <fullName>Number4</fullName>
+                    <default>false</default>
+                    <label>Number4</label>
+                </value>
+                <value>
+                    <fullName>Number5</fullName>
+                    <default>false</default>
+                    <label>Number5</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Value1</controllingFieldValue>
+                <controllingFieldValue>Value2</controllingFieldValue>
+                <controllingFieldValue>Value3</controllingFieldValue>
+                <controllingFieldValue>Value4</controllingFieldValue>
+                <controllingFieldValue>Value5</controllingFieldValue>
+                <valueName>Number2</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Value1</controllingFieldValue>
+                <controllingFieldValue>Value2</controllingFieldValue>
+                <controllingFieldValue>Value3</controllingFieldValue>
+                <controllingFieldValue>Value4</controllingFieldValue>
+                <controllingFieldValue>Value5</controllingFieldValue>
+                <valueName>Number3</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Value1</controllingFieldValue>
+                <controllingFieldValue>Value2</controllingFieldValue>
+                <controllingFieldValue>Value3</controllingFieldValue>
+                <controllingFieldValue>Value4</controllingFieldValue>
+                <controllingFieldValue>Value5</controllingFieldValue>
+                <valueName>Number4</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>Type</fullName>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>picklist1__c</fullName>
+        <externalId>false</externalId>
+        <label>picklist1</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+                <value>
+                    <fullName>4</fullName>
+                    <default>false</default>
+                    <label>4</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>picklist2__c</fullName>
+        <externalId>false</externalId>
+        <label>picklist2</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>picklist1__c</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>a</fullName>
+                    <default>false</default>
+                    <label>a</label>
+                </value>
+                <value>
+                    <fullName>b</fullName>
+                    <default>false</default>
+                    <label>b</label>
+                </value>
+                <value>
+                    <fullName>c</fullName>
+                    <default>false</default>
+                    <label>c</label>
+                </value>
+                <value>
+                    <fullName>d</fullName>
+                    <default>false</default>
+                    <label>d</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>1</controllingFieldValue>
+                <controllingFieldValue>2</controllingFieldValue>
+                <controllingFieldValue>3</controllingFieldValue>
+                <valueName>b</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>1</controllingFieldValue>
+                <controllingFieldValue>2</controllingFieldValue>
+                <controllingFieldValue>3</controllingFieldValue>
+                <valueName>c</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>1</controllingFieldValue>
+                <controllingFieldValue>4</controllingFieldValue>
+                <valueName>d</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>2</controllingFieldValue>
+                <controllingFieldValue>4</controllingFieldValue>
+                <valueName>a</valueName>
+            </valueSettings>
+        </valueSet>
     </fields>
     <listViews>
         <fullName>AllClosedCases</fullName>

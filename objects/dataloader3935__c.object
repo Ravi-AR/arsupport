@@ -51,6 +51,7 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
     <fields>
         <fullName>AccountDataload__c</fullName>
         <externalId>false</externalId>
@@ -95,6 +96,16 @@
         <required>true</required>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ezcommitdeltatestrun1__c</fullName>
+        <externalId>false</externalId>
+        <label>ezcommitdeltatestrun1</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>permissiontesting1__c</fullName>
@@ -145,6 +156,39 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>picklistcommit2__c</fullName>
+        <externalId>false</externalId>
+        <label>picklistcommit2</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>run1</fullName>
+                    <default>false</default>
+                    <label>run1</label>
+                </value>
+                <value>
+                    <fullName>run2</fullName>
+                    <default>false</default>
+                    <label>run2</label>
+                </value>
+                <value>
+                    <fullName>run3</fullName>
+                    <default>false</default>
+                    <label>run3</label>
+                </value>
+                <value>
+                    <fullName>run4</fullName>
+                    <default>false</default>
+                    <label>run4</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>picklistcommitcheck__c</fullName>

@@ -27,6 +27,10 @@
         <relationshipLabel><!-- dataloader3935s --></relationshipLabel>
     </fields>
     <fields>
+        <label><!-- ezcommitdeltatestrun1 --></label>
+        <name>ezcommitdeltatestrun1__c</name>
+    </fields>
+    <fields>
         <label><!-- permissiontesting1 --></label>
         <name>permissiontesting1__c</name>
     </fields>
@@ -45,6 +49,58 @@
     <fields>
         <label><!-- permissiontesting --></label>
         <name>permissiontesting__c</name>
+    </fields>
+    <fields>
+        <label><!-- picklistcommit2 --></label>
+        <name>picklistcommit2__c</name>
+        <picklistValues>
+            <masterLabel>run1</masterLabel>
+            <translation><!-- run1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>run2</masterLabel>
+            <translation><!-- run2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>run3</masterLabel>
+            <translation><!-- run3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>run4</masterLabel>
+            <translation><!-- run4 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- picklistcommitcheck --></label>
+        <name>picklistcommitcheck__c</name>
+        <picklistValues>
+            <masterLabel>Pick3</masterLabel>
+            <translation><!-- Pick3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pick4</masterLabel>
+            <translation><!-- Pick4 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- picklistrun2 --></label>
+        <name>picklistrun2__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
     </fields>
     <layouts>
         <layout>dataloader3935 Layout</layout>
