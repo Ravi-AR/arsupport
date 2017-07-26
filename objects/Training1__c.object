@@ -54,6 +54,16 @@
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>ReadWrite</externalSharingModel>
     <fields>
+        <fullName>CheckingMerge__c</fullName>
+        <externalId>false</externalId>
+        <label>CheckingMerge</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>PicklistRun1__c</fullName>
         <externalId>false</externalId>
         <label>PicklistRun1</label>

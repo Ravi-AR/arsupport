@@ -83,6 +83,7 @@
         <members>Territory2Model.trname1__c</members>
         <members>Territory2Model.trname2__c</members>
         <members>Territory2Model.trstatus__c</members>
+        <members>Training1__c.CheckingMerge__c</members>
         <members>Training1__c.PicklistRun1__c</members>
         <members>Training1__c.SampleField2__c</members>
         <members>Training1__c.SampleField3__c</members>
