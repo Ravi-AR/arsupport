@@ -584,6 +584,7 @@
         <members>Territory2Model.trname2__c</members>
         <members>Territory2Model.trstatus__c</members>
         <members>Training1__c.PicklistRun1__c</members>
+        <members>Training1__c.ValicateCommitField__c</members>
         <members>User.ManagerId</members>
         <members>UserProvisioningRequest.AppName</members>
         <members>UserProvisioningRequest.ApprovalStatus</members>
