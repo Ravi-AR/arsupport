@@ -4,7 +4,12 @@
     <types>
         <members>SupportStatus</members>
         <members>TestApexClass</members>
+        <members>WebtoCaseController</members>
         <name>ApexClass</name>
+    </types>
+    <types>
+        <members>WebtoCaseController</members>
+        <name>ApexPage</name>
     </types>
     <types>
         <members>AppSwitcher</members>
