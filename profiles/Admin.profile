@@ -1268,6 +1268,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Support_Test__c.PLTest__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Support_Test__c.field1__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Task.ActivityDate</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1313,6 +1323,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Training1__c.CheckingMerge__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Training1__c.PicklistRun1__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Training1__c.SampleField2__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1329,6 +1349,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Training1__c.SampleField__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Training1__c.ValicateCommitField__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1658,6 +1683,24 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
+        <object>Support_Test__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Training1__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
         <object>dataloader3935__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
@@ -1684,6 +1727,11 @@
         <default>true</default>
         <recordType>Metric.Progress</recordType>
         <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Support_Test__c.RCTyp1</recordType>
+        <visible>false</visible>
     </recordTypeVisibilities>
     <tabVisibilities>
         <tab>dataloader3935__c</tab>
