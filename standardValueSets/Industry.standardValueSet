@@ -122,6 +122,11 @@
         <label>Not For Profit</label>
     </standardValue>
     <standardValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </standardValue>
+    <standardValue>
         <fullName>Recreation</fullName>
         <default>false</default>
         <label>Recreation</label>
@@ -157,8 +162,18 @@
         <label>Utilities</label>
     </standardValue>
     <standardValue>
-        <fullName>Other</fullName>
+        <fullName>pavan@techsophy.com</fullName>
         <default>false</default>
-        <label>Other</label>
+        <label>pavan@techsophy.com</label>
+    </standardValue>
+    <standardValue>
+        <fullName>SAAS</fullName>
+        <default>false</default>
+        <label>SAAS</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Networking</fullName>
+        <default>false</default>
+        <label>Networking</label>
     </standardValue>
 </StandardValueSet>

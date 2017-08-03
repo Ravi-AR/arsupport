@@ -77,16 +77,6 @@
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
     </fields>
-    <fields>
-        <fullName>pdlyt1__c</fullName>
-        <externalId>false</externalId>
-        <label>pdlyt1</label>
-        <length>10</length>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
     <listViews>
         <fullName>AllProducts</fullName>
         <filterScope>Everything</filterScope>

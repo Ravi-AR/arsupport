@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
     <defaultLandingTab>standard-home</defaultLandingTab>
-    <detailPageRefreshMethod>none</detailPageRefreshMethod>
-    <enableCustomizeMyTabs>false</enableCustomizeMyTabs>
+    <detailPageRefreshMethod>autoRefresh</detailPageRefreshMethod>
+    <enableCustomizeMyTabs>true</enableCustomizeMyTabs>
     <enableKeyboardShortcuts>true</enableKeyboardShortcuts>
     <enableListViewHover>true</enableListViewHover>
     <enableListViewReskin>true</enableListViewReskin>
@@ -164,27 +164,31 @@
         </defaultShortcut>
     </keyboardShortcuts>
     <listPlacement>
-        <location>full</location>
+        <location>left</location>
+        <units>percent</units>
+        <width>50</width>
     </listPlacement>
-    <listRefreshMethod>none</listRefreshMethod>
+    <listRefreshMethod>refreshList</listRefreshMethod>
     <saveUserSessions>true</saveUserSessions>
     <tab>standard-Account</tab>
     <tab>standard-Contact</tab>
     <tab>standard-Case</tab>
-    <tab>standard-Opportunity</tab>
-    <tab>standard-Lead</tab>
-    <tab>standard-Knowledge</tab>
-    <tab>dataloader3935__c</tab>
-    <tab>testobjectcreated__c</tab>
+    <tab>standard-report</tab>
+    <tab>standard-Dashboard</tab>
+    <tab>Support_Test__c</tab>
+    <tab>TrailHeaDX__c</tab>
     <workspaceMappings>
         <mapping>
-            <tab>dataloader3935__c</tab>
+            <tab>Support_Test__c</tab>
         </mapping>
         <mapping>
+            <tab>TrailHeaDX__c</tab>
+        </mapping>
+        <mapping>
+            <fieldName>ParentId</fieldName>
             <tab>standard-Account</tab>
         </mapping>
         <mapping>
-            <fieldName>AccountId</fieldName>
             <tab>standard-Case</tab>
         </mapping>
         <mapping>
@@ -192,17 +196,10 @@
             <tab>standard-Contact</tab>
         </mapping>
         <mapping>
-            <tab>standard-Knowledge</tab>
+            <tab>standard-Dashboard</tab>
         </mapping>
         <mapping>
-            <tab>standard-Lead</tab>
-        </mapping>
-        <mapping>
-            <fieldName>AccountId</fieldName>
-            <tab>standard-Opportunity</tab>
-        </mapping>
-        <mapping>
-            <tab>testobjectcreated__c</tab>
+            <tab>standard-report</tab>
         </mapping>
     </workspaceMappings>
 </CustomApplication>

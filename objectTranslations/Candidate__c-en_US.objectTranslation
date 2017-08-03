@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Candidate</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Candidates</value>
+    </caseValues>
+    <fields>
+        <label><!-- Candidate Join Date --></label>
+        <name>Candidate_Join_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- City --></label>
+        <name>City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Country --></label>
+        <name>Country__c</name>
+    </fields>
+    <fields>
+        <label><!-- Current Employer --></label>
+        <name>Current_Employer__c</name>
+    </fields>
+    <fields>
+        <label><!-- Education --></label>
+        <name>Education__c</name>
+        <picklistValues>
+            <masterLabel>Graduate</masterLabel>
+            <translation><!-- Graduate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>High School</masterLabel>
+            <translation><!-- High School --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Some College</masterLabel>
+            <translation><!-- Some College --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Undergraduate</masterLabel>
+            <translation><!-- Undergraduate --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Email --></label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fax --></label>
+        <name>Fax__c</name>
+    </fields>
+    <fields>
+        <label><!-- First Name --></label>
+        <name>First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Name --></label>
+        <name>Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mobile --></label>
+        <name>Mobile__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phone --></label>
+        <name>Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- SSN --></label>
+        <name>SSN__c</name>
+    </fields>
+    <fields>
+        <label><!-- State/Province --></label>
+        <name>State_Province__c</name>
+    </fields>
+    <fields>
+        <label><!-- Street --></label>
+        <name>Street__c</name>
+    </fields>
+    <fields>
+        <label><!-- US Citizen --></label>
+        <name>US_Citizen__c</name>
+    </fields>
+    <fields>
+        <label><!-- Visa Required --></label>
+        <name>Visa__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Years of Experience --></label>
+        <name>Years_of_Experience__c</name>
+    </fields>
+    <fields>
+        <label><!-- Zip Code --></label>
+        <name>Zip_Code__c</name>
+    </fields>
+    <layouts>
+        <layout>Candidate Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Chart Type --></label>
+        <name>smlfcom__Chart_Type__c</name>
+        <picklistValues>
+            <masterLabel>Duration</masterLabel>
+            <translation><!-- Duration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Forecast_Details</masterLabel>
+            <translation><!-- Forecast_Details --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pipe_Coverage</masterLabel>
+            <translation><!-- Pipe_Coverage --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Quarterly_Summary</masterLabel>
+            <translation><!-- Quarterly_Summary --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Standard Waterfall</masterLabel>
+            <translation><!-- Standard Waterfall --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Field API Name Text --></label>
+        <name>smlfcom__Field_API_Name_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- Field API Name --></label>
+        <name>smlfcom__Field_API_Name__c</name>
+        <picklistValues>
+            <masterLabel>Dimension1__c</masterLabel>
+            <translation><!-- Dimension1__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dimension2__c</masterLabel>
+            <translation><!-- Dimension2__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dimension3__c</masterLabel>
+            <translation><!-- Dimension3__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dimension5__c</masterLabel>
+            <translation><!-- Dimension5__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dimension6__c</masterLabel>
+            <translation><!-- Dimension6__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dimension7__c</masterLabel>
+            <translation><!-- Dimension7__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Metric2__c</masterLabel>
+            <translation><!-- Metric2__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Metric_3__c</masterLabel>
+            <translation><!-- Metric_3__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Metric_4__c</masterLabel>
+            <translation><!-- Metric_4__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Metric_5__c</masterLabel>
+            <translation><!-- Metric_5__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Metric__c</masterLabel>
+            <translation><!-- Metric__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Opportunity__r.ForecastCategoryName</masterLabel>
+            <translation><!-- Opportunity__r.ForecastCategoryName --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Opportunity__r.StageName</masterLabel>
+            <translation><!-- Opportunity__r.StageName --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Opportunity__r.Type</masterLabel>
+            <translation><!-- Opportunity__r.Type --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Opportunity__r.owner.name</masterLabel>
+            <translation><!-- Opportunity__r.owner.name --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Record_Name__c</masterLabel>
+            <translation><!-- Record_Name__c --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Is Percent Field --></label>
+        <name>smlfcom__Is_Percent_Field__c</name>
+    </fields>
+    <fields>
+        <label><!-- Label --></label>
+        <name>smlfcom__Label__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>smlfcom__Type__c</name>
+        <picklistValues>
+            <masterLabel>Chart</masterLabel>
+            <translation><!-- Chart --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Compare Table</masterLabel>
+            <translation><!-- Compare Table --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KPI Box</masterLabel>
+            <translation><!-- KPI Box --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- order --></label>
+        <name>smlfcom__order__c</name>
+    </fields>
+    <layouts>
+        <layout>SML Forecast Detail Data Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

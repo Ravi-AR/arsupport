@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
-    <emailDefault>false</emailDefault>
-    <headers>PersonalTagging</headers>
-    <headers>PublicTagging</headers>
+    <customButtons>Scope_Information_Document</customButtons>
+    <excludeButtons>Clone</excludeButtons>
+    <excludeButtons>Submit</excludeButtons>
     <layoutSections>
         <customLabel>false</customLabel>
         <detailHeading>false</detailHeading>
@@ -10,47 +10,31 @@
         <label>Opportunity Information</label>
         <layoutColumns>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>OwnerId</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>IsPrivate</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Required</behavior>
                 <field>Name</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>AccountId</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Type</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>LeadSource</field>
-            </layoutItems>
-        </layoutColumns>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Amount</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>ExpectedRevenue</field>
+                <behavior>Required</behavior>
+                <field>Contact_Name__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>CloseDate</field>
+                <field>Competitors__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>NextStep</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Number_of_Product_Subscriptions__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns>
             <layoutItems>
                 <behavior>Required</behavior>
                 <field>StageName</field>
@@ -60,96 +44,192 @@
                 <field>Probability</field>
             </layoutItems>
             <layoutItems>
+                <behavior>Required</behavior>
+                <field>CloseDate</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Edit</behavior>
-                <field>CampaignId</field>
+                <field>OwnerId</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Type</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Team_Size__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
-        <customLabel>false</customLabel>
-        <detailHeading>false</detailHeading>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
-        <label>Other Information</label>
-        <layoutColumns/>
-        <layoutColumns/>
-        <style>TwoColumnsTopToBottom</style>
-    </layoutSections>
-    <layoutSections>
-        <customLabel>false</customLabel>
-        <detailHeading>false</detailHeading>
-        <editHeading>true</editHeading>
-        <label>Additional Information</label>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>OrderNumber__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>CurrentGenerators__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>TrackingNumber__c</field>
-            </layoutItems>
-        </layoutColumns>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>MainCompetitors__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>DeliveryInstallationStatus__c</field>
-            </layoutItems>
-        </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
-    </layoutSections>
-    <layoutSections>
-        <customLabel>false</customLabel>
-        <detailHeading>false</detailHeading>
-        <editHeading>true</editHeading>
-        <label>System Information</label>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>CreatedById</field>
-            </layoutItems>
-        </layoutColumns>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>LastModifiedById</field>
-            </layoutItems>
-        </layoutColumns>
-        <style>TwoColumnsTopToBottom</style>
-    </layoutSections>
-    <layoutSections>
-        <customLabel>false</customLabel>
-        <detailHeading>false</detailHeading>
-        <editHeading>true</editHeading>
-        <label>Description Information</label>
+        <label>Description and Add.Info</label>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Description</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Additional_Info__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
+    </layoutSections>
+    <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Revenue Information</label>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Opportunity_Amount__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Total_Discount_c__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <style>TwoColumnsLeftToRight</style>
+    </layoutSections>
+    <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Customer Success Info</label>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Pre_SalesEngineer__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Implementation_Engineer__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Playground_Set__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Time_Zone__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Is_eligibile_for_Premier_support__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Version_Control_Type__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Evaluation_Start_Date__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Evaluation_End_Date__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Implementation_Start_Date__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Implementation_End_Date__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <style>TwoColumnsLeftToRight</style>
+    </layoutSections>
+    <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>true</editHeading>
+        <label>System Info</label>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>of_days_in_Proposal__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>of_days_in_Negotiation__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>LastModifiedById</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>days_in_Playground__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>of_days_in_Trail_Completed__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>CreatedById</field>
+            </layoutItems>
+        </layoutColumns>
+        <style>TwoColumnsLeftToRight</style>
+    </layoutSections>
+    <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Billing Information</label>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Country__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns/>
+        <style>TwoColumnsLeftToRight</style>
     </layoutSections>
     <layoutSections>
         <customLabel>false</customLabel>
         <detailHeading>false</detailHeading>
         <editHeading>false</editHeading>
-        <layoutColumns>
-            <layoutItems>
-                <customLink>DeliveryStatus</customLink>
-            </layoutItems>
-        </layoutColumns>
+        <label>Custom Links</label>
+        <layoutColumns/>
         <layoutColumns/>
         <layoutColumns/>
         <style>CustomLinks</style>
+    </layoutSections>
+    <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>false</editHeading>
+        <label>Old Opportunity Flow Info (Ref Only, please ignore)</label>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>No_of_Subscriptions__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>PS_Hrs__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Amount</field>
+            </layoutItems>
+        </layoutColumns>
+        <style>TwoColumnsLeftToRight</style>
     </layoutSections>
     <quickActionList>
         <quickActionListItems>
@@ -159,28 +239,13 @@
             <quickActionName>FeedItem.ContentPost</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
-            <quickActionName>NewTask</quickActionName>
-        </quickActionListItems>
-        <quickActionListItems>
-            <quickActionName>LogACall</quickActionName>
-        </quickActionListItems>
-        <quickActionListItems>
-            <quickActionName>NewCase</quickActionName>
-        </quickActionListItems>
-        <quickActionListItems>
-            <quickActionName>NewNote</quickActionName>
-        </quickActionListItems>
-        <quickActionListItems>
-            <quickActionName>NewEvent</quickActionName>
+            <quickActionName>FeedItem.RypplePost</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
             <quickActionName>FeedItem.LinkPost</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
             <quickActionName>FeedItem.PollPost</quickActionName>
-        </quickActionListItems>
-        <quickActionListItems>
-            <quickActionName>FeedItem.QuestionPost</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
             <quickActionName>SendEmail</quickActionName>
@@ -203,20 +268,23 @@
     <relatedLists>
         <fields>Product2</fields>
         <fields>Quantity</fields>
+        <fields>of_Months__c</fields>
         <fields>UnitPrice</fields>
-        <fields>ServiceDate</fields>
         <fields>Description</fields>
+        <fields>Discount__c</fields>
+        <fields>ServiceDate</fields>
+        <fields>Total_Price__c</fields>
         <relatedList>RelatedLineItemList</relatedList>
     </relatedLists>
     <relatedLists>
-        <fields>TASK.SUBJECT</fields>
-        <fields>TASK.WHO_NAME</fields>
-        <fields>ACTIVITY.TASK</fields>
-        <fields>TASK.DUE_DATE</fields>
-        <fields>TASK.STATUS</fields>
-        <fields>TASK.PRIORITY</fields>
-        <fields>CORE.USERS.FULL_NAME</fields>
-        <relatedList>RelatedActivityList</relatedList>
+        <fields>QUOTE.QUOTENUMBER</fields>
+        <fields>QUOTE.NAME</fields>
+        <fields>QUOTE.ISSYNCING</fields>
+        <fields>QUOTE.EXPIRATIONDATE</fields>
+        <fields>QUOTE.SUBTOTAL</fields>
+        <fields>QUOTE.TOTALPRICE</fields>
+        <fields>CreatedBy</fields>
+        <relatedList>RelatedQuoteList</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>TASK.SUBJECT</fields>
@@ -231,25 +299,66 @@
         <relatedList>RelatedNoteList</relatedList>
     </relatedLists>
     <relatedLists>
+        <fields>NAME</fields>
+        <fields>Is_primary__c</fields>
+        <fields>AutoRABIT_POC__c</fields>
+        <fields>Scope__c</fields>
+        <fields>sign_off_Criteria__c</fields>
+        <relatedList>Scope_Poc_Information__c.Opportunity__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>Active__c</fields>
+        <fields>Billable_Rate__c</fields>
+        <fields>Budget__c</fields>
+        <fields>Customer__c</fields>
+        <fields>Customer_Contact__c</fields>
+        <fields>Hours_billed__c</fields>
+        <fields>Total_Hours_Spent__c</fields>
+        <relatedList>Project__c.Opportunity__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>TASK.SUBJECT</fields>
+        <fields>TASK.WHO_NAME</fields>
+        <fields>ACTIVITY.TASK</fields>
+        <fields>TASK.DUE_DATE</fields>
+        <fields>TASK.STATUS</fields>
+        <fields>TASK.PRIORITY</fields>
+        <fields>CORE.USERS.FULL_NAME</fields>
+        <relatedList>RelatedActivityList</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <relatedList>RelatedEntityHistoryList</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Sales_Order_Form__c.Opportunity__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>Company_Name__c</fields>
+        <fields>OpportunityAcc__c</fields>
+        <fields>Lead__c</fields>
+        <fields>No_of_Sanbox_in_Release__c</fields>
+        <fields>Challenges__c</fields>
+        <relatedList>Questionnaire_Implementation__c.Opportunity__c</relatedList>
+    </relatedLists>
+    <relatedLists>
         <relatedList>RelatedContactRoleList</relatedList>
     </relatedLists>
     <relatedLists>
-        <fields>ACCOUNT.NAME</fields>
-        <fields>PARTNER.ROLE</fields>
-        <fields>PARTNER.PRIMARY</fields>
-        <relatedList>RelatedPartnerList</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <relatedList>RelatedCompetitorList</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <relatedList>RelatedOpportunityHistoryList</relatedList>
+        <relatedList>RelatedContentNoteList</relatedList>
     </relatedLists>
     <relatedObjects>AccountId</relatedObjects>
-    <runAssignmentRulesDefault>false</runAssignmentRulesDefault>
-    <showEmailCheckbox>true</showEmailCheckbox>
-    <showHighlightsPanel>false</showHighlightsPanel>
-    <showInteractionLogPanel>false</showInteractionLogPanel>
-    <showRunAssignmentRulesCheckbox>true</showRunAssignmentRulesCheckbox>
+    <showEmailCheckbox>false</showEmailCheckbox>
+    <showHighlightsPanel>true</showHighlightsPanel>
+    <showInteractionLogPanel>true</showInteractionLogPanel>
+    <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
+    <summaryLayout>
+        <masterLabel>00hF000000Rn71I</masterLabel>
+        <sizeX>4</sizeX>
+        <sizeY>0</sizeY>
+        <summaryLayoutStyle>Default</summaryLayoutStyle>
+    </summaryLayout>
 </Layout>

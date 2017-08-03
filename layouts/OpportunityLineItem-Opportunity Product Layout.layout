@@ -19,9 +19,38 @@
                 <field>ProductCode</field>
             </layoutItems>
             <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Is_this_PS__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Description</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>ServiceDate</field>
+            </layoutItems>
+        </layoutColumns>
+        <style>TwoColumnsTopToBottom</style>
+    </layoutSections>
+    <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Pricing Details</label>
+        <layoutColumns>
+            <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>ListPrice</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>of_Months__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns>
             <layoutItems>
                 <behavior>Required</behavior>
                 <field>UnitPrice</field>
@@ -30,23 +59,22 @@
                 <behavior>Required</behavior>
                 <field>Quantity</field>
             </layoutItems>
-        </layoutColumns>
-        <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>ServiceDate</field>
+                <field>Discount__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>TotalPrice</field>
+                <field>Total_Price__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsTopToBottom</style>
+        <style>TwoColumnsLeftToRight</style>
     </layoutSections>
     <layoutSections>
         <customLabel>false</customLabel>
         <detailHeading>false</detailHeading>
         <editHeading>true</editHeading>
+        <label>System Information</label>
         <layoutColumns>
             <layoutItems>
                 <behavior>Readonly</behavior>
@@ -65,30 +93,36 @@
         <customLabel>false</customLabel>
         <detailHeading>false</detailHeading>
         <editHeading>false</editHeading>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Description</field>
-            </layoutItems>
-        </layoutColumns>
+        <label>Description Information</label>
+        <layoutColumns/>
         <style>OneColumn</style>
     </layoutSections>
     <layoutSections>
-        <customLabel>false</customLabel>
+        <customLabel>true</customLabel>
         <detailHeading>false</detailHeading>
         <editHeading>true</editHeading>
+        <label>Custom Links</label>
         <layoutColumns/>
         <layoutColumns/>
         <layoutColumns/>
         <style>CustomLinks</style>
     </layoutSections>
+    <multilineLayoutFields>ProductCode</multilineLayoutFields>
+    <multilineLayoutFields>ServiceDate</multilineLayoutFields>
     <multilineLayoutFields>Product2Id</multilineLayoutFields>
     <multilineLayoutFields>Quantity</multilineLayoutFields>
     <multilineLayoutFields>UnitPrice</multilineLayoutFields>
-    <multilineLayoutFields>ServiceDate</multilineLayoutFields>
+    <multilineLayoutFields>of_Months__c</multilineLayoutFields>
     <multilineLayoutFields>Description</multilineLayoutFields>
+    <multilineLayoutFields>Is_this_PS__c</multilineLayoutFields>
     <multilineLayoutFields>OpportunityId</multilineLayoutFields>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
+    <summaryLayout>
+        <masterLabel>00hF000000Rn71U</masterLabel>
+        <sizeX>4</sizeX>
+        <sizeY>0</sizeY>
+        <summaryLayoutStyle>Default</summaryLayoutStyle>
+    </summaryLayout>
 </Layout>

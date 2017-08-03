@@ -72,13 +72,126 @@
         <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
-    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <businessProcesses>
+        <fullName>AutoRABIT Lead Process</fullName>
+        <isActive>true</isActive>
+        <values>
+            <fullName>Contacted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Convert</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DNC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Demo Performed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lost</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Open</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Qualified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Scheduled Demo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unqualified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unresponsive</fullName>
+            <default>false</default>
+        </values>
+    </businessProcesses>
+    <businessProcesses>
+        <fullName>Techsophy lead Process</fullName>
+        <isActive>true</isActive>
+        <values>
+            <fullName>Contacted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DNC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Demo Performed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lost</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Open</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Qualified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unresponsive</fullName>
+            <default>false</default>
+        </values>
+    </businessProcesses>
+    <compactLayoutAssignment>Lead_Quick_Start</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Lead_Quick_Start</fullName>
+        <fields>Name</fields>
+        <fields>Company</fields>
+        <fields>Phone</fields>
+        <fields>Email</fields>
+        <fields>LinkedIn_URL__c</fields>
+        <fields>LeadSource</fields>
+        <fields>Status</fields>
+        <fields>AnnualRevenue</fields>
+        <fields>Designation__c</fields>
+        <fields>Title</fields>
+        <label>Lead Quick Start</label>
+    </compactLayouts>
     <enableFeeds>true</enableFeeds>
     <enableHistory>true</enableHistory>
+    <fields>
+        <fullName>Additional_Info__c</fullName>
+        <externalId>false</externalId>
+        <label>Additional Info</label>
+        <length>30000</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
     <fields>
         <fullName>Address</fullName>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Age__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(IsConverted,ConvertedDate - DATEVALUE(CreatedDate), TODAY() - DATEVALUE(CreatedDate))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Age</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>AnnualRevenue</fullName>
@@ -86,29 +199,11 @@
         <trackHistory>false</trackHistory>
     </fields>
     <fields>
-        <fullName>CampaignId</fullName>
-        <type>Lookup</type>
-    </fields>
-    <fields>
-        <fullName>CleanStatus</fullName>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-    </fields>
-    <fields>
-        <fullName>Company</fullName>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-    </fields>
-    <fields>
-        <fullName>CompanyDunsNumber</fullName>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-    </fields>
-    <fields>
-        <fullName>CurrentGenerators__c</fullName>
-        <externalId>false</externalId>
-        <label>Current Generator(s)</label>
-        <length>100</length>
+        <fullName>AutorabitExtId__c</fullName>
+        <description>External Id created by AutoRABIT</description>
+        <externalId>true</externalId>
+        <label>AutorabitExtId__c</label>
+        <length>18</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -116,15 +211,263 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>DandbCompanyId</fullName>
+        <fullName>Business_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Business Type</label>
+        <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Product</fullName>
+                    <default>false</default>
+                    <label>Product</label>
+                </value>
+                <value>
+                    <fullName>Services</fullName>
+                    <default>false</default>
+                    <label>Services</label>
+                </value>
+                <value>
+                    <fullName>Dev Ops Consulting</fullName>
+                    <default>false</default>
+                    <label>DevOps Consulting</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Business_Unit__c</fullName>
+        <externalId>false</externalId>
+        <label>Business Unit</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>AutoRABIT</fullName>
+                    <default>false</default>
+                    <label>AutoRABIT</label>
+                </value>
+                <value>
+                    <fullName>BPM Services</fullName>
+                    <default>false</default>
+                    <label>BPM Services</label>
+                </value>
+                <value>
+                    <fullName>Consulting</fullName>
+                    <default>false</default>
+                    <label>Consulting</label>
+                </value>
+                <value>
+                    <fullName>Migile</fullName>
+                    <default>false</default>
+                    <label>Migile</label>
+                </value>
+                <value>
+                    <fullName>Social Champ</fullName>
+                    <default>false</default>
+                    <label>Social Champ</label>
+                </value>
+                <value>
+                    <fullName>Emerging Technologies</fullName>
+                    <default>false</default>
+                    <label>Emerging Technologies</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>CallFire_Notes__c</fullName>
+        <description>Shows customers&apos; comments while being contacted</description>
+        <externalId>false</externalId>
+        <label>CallFire Notes</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CampaignId</fullName>
         <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Comments</label>
+        <length>18</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Company_Size__c</fullName>
+        <description>Shows No of Employees. Replaced &quot; No of Employees field&quot; to access special characters as well.</description>
+        <externalId>false</externalId>
+        <label>Company Size</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Company_URL__c</fullName>
+        <description>Field to add company&apos;s website.</description>
+        <externalId>false</externalId>
+        <label>Company URL</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Competitor__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the competitor</inlineHelpText>
+        <label>Competitor</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Copado</fullName>
+                    <default>false</default>
+                    <label>Copado</label>
+                </value>
+                <value>
+                    <fullName>Flosum</fullName>
+                    <default>false</default>
+                    <label>Flosum</label>
+                </value>
+                <value>
+                    <fullName>Gearset</fullName>
+                    <default>false</default>
+                    <label>Gearset</label>
+                </value>
+                <value>
+                    <fullName>Atlassian - Bamboo</fullName>
+                    <default>false</default>
+                    <label>Bamboo</label>
+                </value>
+                <value>
+                    <fullName>Dream factory – Snapshot</fullName>
+                    <default>false</default>
+                    <label>Snapshot</label>
+                </value>
+                <value>
+                    <fullName>Jitterbit</fullName>
+                    <default>false</default>
+                    <label>Jitterbit</label>
+                </value>
+                <value>
+                    <fullName>Odaseva</fullName>
+                    <default>false</default>
+                    <label>Odaseva</label>
+                </value>
+                <value>
+                    <fullName>AssureClick</fullName>
+                    <default>false</default>
+                    <label>AssureClick</label>
+                </value>
+                <value>
+                    <fullName>Provar</fullName>
+                    <default>false</default>
+                    <label>Provar</label>
+                </value>
+                <value>
+                    <fullName>Others</fullName>
+                    <default>false</default>
+                    <label>Others</label>
+                </value>
+                <value>
+                    <fullName>Jenkins</fullName>
+                    <default>false</default>
+                    <label>Jenkins</label>
+                </value>
+                <value>
+                    <fullName>Homegrown</fullName>
+                    <default>false</default>
+                    <label>Homegrown</label>
+                </value>
+                <value>
+                    <fullName>None</fullName>
+                    <default>false</default>
+                    <label>None</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CompleteLeadURL__c</fullName>
+        <externalId>false</externalId>
+        <formula>&quot;https://na43.salesforce.com/&quot; + Id</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>CompleteLeadURL</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Days_since_Create__c</fullName>
+        <externalId>false</externalId>
+        <formula>TODAY() - datevalue(CreatedDate)</formula>
+        <inlineHelpText>Days since the Lead has been created</inlineHelpText>
+        <label>Days since Create</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Days_to_Convert__c</fullName>
+        <description>Time taken to convert the Lead</description>
+        <externalId>false</externalId>
+        <formula>ConvertedDate - DateValue(CreatedDate)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label># Days to Convert</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Description</fullName>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Designation__c</fullName>
+        <externalId>false</externalId>
+        <label>Designation</label>
+        <length>18</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>DoNotCall</fullName>
@@ -134,12 +477,23 @@
     <fields>
         <fullName>Email</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
     </fields>
     <fields>
         <fullName>Fax</fullName>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Full_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>FirstName +&quot; &quot;+ LastName</formula>
+        <inlineHelpText>Full name of the Lead</inlineHelpText>
+        <label>Full Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>HasOptedOutOfEmail</fullName>
@@ -152,10 +506,45 @@
         <trackHistory>false</trackHistory>
     </fields>
     <fields>
+        <fullName>Implementation_Questionnaire__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Implementation Questionnaire</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Industry</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Infrastructure__c</fullName>
+        <description>Infrastructure preference</description>
+        <externalId>false</externalId>
+        <label>Infrastructure</label>
+        <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Shared</fullName>
+                    <default>false</default>
+                    <label>Shared</label>
+                </value>
+                <value>
+                    <fullName>Exclusive</fullName>
+                    <default>false</default>
+                    <label>Exclusive</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Jigsaw</fullName>
@@ -172,9 +561,210 @@
         <type>Picklist</type>
     </fields>
     <fields>
-        <fullName>MobilePhone</fullName>
+        <fullName>LeadSourceCandidate_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>LeadSourceCandidate Name</label>
+        <length>36</length>
+        <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeadSource_Skill__c</fullName>
+        <externalId>false</externalId>
+        <label>LeadSource Skill</label>
+        <length>36</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeadType__c</fullName>
+        <externalId>false</externalId>
+        <formula>RecordType.DeveloperName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>LeadType</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lead_Number__c</fullName>
+        <displayFormat>LE-{0}</displayFormat>
+        <externalId>false</externalId>
+        <label>Lead Number</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </fields>
+    <fields>
+        <fullName>Lead_Source_Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Lead Source Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Leads</relationshipLabel>
+        <relationshipName>Leads</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Lead_Source_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Lead Source Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>LeadSource</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>true</sorted>
+                <value>
+                    <fullName>App Exchange</fullName>
+                    <default>false</default>
+                    <label>App Exchange</label>
+                </value>
+                <value>
+                    <fullName>AutoRABIT</fullName>
+                    <default>false</default>
+                    <label>AutoRABIT</label>
+                </value>
+                <value>
+                    <fullName>Contact Form</fullName>
+                    <default>false</default>
+                    <label>Contact Form</label>
+                </value>
+                <value>
+                    <fullName>Data.com</fullName>
+                    <default>false</default>
+                    <label>Data.com</label>
+                </value>
+                <value>
+                    <fullName>DF15</fullName>
+                    <default>false</default>
+                    <label>DF15</label>
+                </value>
+                <value>
+                    <fullName>DF16</fullName>
+                    <default>false</default>
+                    <label>DF16</label>
+                </value>
+                <value>
+                    <fullName>DF17</fullName>
+                    <default>false</default>
+                    <label>DF17</label>
+                </value>
+                <value>
+                    <fullName>London Tour 17</fullName>
+                    <default>false</default>
+                    <label>London Tour 17</label>
+                </value>
+                <value>
+                    <fullName>Meet Up</fullName>
+                    <default>false</default>
+                    <label>Meet Up</label>
+                </value>
+                <value>
+                    <fullName>NY Tour 16</fullName>
+                    <default>false</default>
+                    <label>NY Tour 16</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Prospect Cloud</fullName>
+                    <default>false</default>
+                    <label>Prospect Cloud</label>
+                </value>
+                <value>
+                    <fullName>TDX17</fullName>
+                    <default>false</default>
+                    <label>TDX17</label>
+                </value>
+                <value>
+                    <fullName>Webinar</fullName>
+                    <default>false</default>
+                    <label>Webinar</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>SFDC Event</controllingFieldValue>
+                <valueName>DF15</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>SFDC Event</controllingFieldValue>
+                <valueName>DF16</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>SFDC Event</controllingFieldValue>
+                <valueName>DF17</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>SFDC Event</controllingFieldValue>
+                <valueName>London Tour 17</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>SFDC Event</controllingFieldValue>
+                <valueName>Meet Up</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>SFDC Event</controllingFieldValue>
+                <valueName>NY Tour 16</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>SFDC Event</controllingFieldValue>
+                <valueName>TDX17</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>List Service</controllingFieldValue>
+                <valueName>Data.com</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>List Service</controllingFieldValue>
+                <valueName>Prospect Cloud</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Web Site</controllingFieldValue>
+                <valueName>App Exchange</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Web Site</controllingFieldValue>
+                <valueName>AutoRABIT</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Web Site</controllingFieldValue>
+                <valueName>Contact Form</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Web Site</controllingFieldValue>
+                <valueName>Webinar</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>LinkedIn_URL__c</fullName>
+        <externalId>false</externalId>
+        <label>LinkedIn URL</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>MobilePhone</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
     </fields>
     <fields>
         <fullName>Name</fullName>
@@ -182,15 +772,22 @@
         <trackHistory>false</trackHistory>
     </fields>
     <fields>
-        <fullName>NumberOfEmployees</fullName>
+        <fullName>No_of_Attachments__c</fullName>
+        <externalId>false</externalId>
+        <label>No.of Attachments</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
     <fields>
-        <fullName>NumberofLocations__c</fullName>
+        <fullName>No_of_Users__c</fullName>
         <externalId>false</externalId>
-        <label>Number of Locations</label>
-        <precision>3</precision>
+        <label>No.of Users</label>
+        <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
         <trackFeedHistory>false</trackFeedHistory>
@@ -199,68 +796,92 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>NumberOfEmployees</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Other_Competitors__c</fullName>
+        <externalId>false</externalId>
+        <label>Other Competitors</label>
+        <length>90</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_Persona__c</fullName>
+        <externalId>false</externalId>
+        <label>Other Persona</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>OwnerId</fullName>
         <trackFeedHistory>true</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Persona__c</fullName>
+        <externalId>false</externalId>
+        <label>Persona</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>true</sorted>
+                <value>
+                    <fullName>Architect</fullName>
+                    <default>false</default>
+                    <label>Architect</label>
+                </value>
+                <value>
+                    <fullName>CXO&apos;s</fullName>
+                    <default>false</default>
+                    <label>CXO&apos;s</label>
+                </value>
+                <value>
+                    <fullName>Developer/Admin</fullName>
+                    <default>false</default>
+                    <label>Developer/Admin</label>
+                </value>
+                <value>
+                    <fullName>Head/VP/Director</fullName>
+                    <default>false</default>
+                    <label>Head/VP/Director</label>
+                </value>
+                <value>
+                    <fullName>Manager</fullName>
+                    <default>false</default>
+                    <label>Manager</label>
+                </value>
+                <value>
+                    <fullName>MVP</fullName>
+                    <default>false</default>
+                    <label>MVP</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Phone</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-    </fields>
-    <fields>
-        <fullName>Primary__c</fullName>
-        <externalId>false</externalId>
-        <label>Primary</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                    <label>No</label>
-                </value>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                    <label>Yes</label>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
-    </fields>
-    <fields>
-        <fullName>ProductInterest__c</fullName>
-        <externalId>false</externalId>
-        <label>Product Interest</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>GC1000 series</fullName>
-                    <default>false</default>
-                    <label>GC1000 series</label>
-                </value>
-                <value>
-                    <fullName>GC5000 series</fullName>
-                    <default>false</default>
-                    <label>GC5000 series</label>
-                </value>
-                <value>
-                    <fullName>GC3000 series</fullName>
-                    <default>false</default>
-                    <label>GC3000 series</label>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
+        <trackHistory>true</trackHistory>
     </fields>
     <fields>
         <fullName>Rating</fullName>
@@ -269,10 +890,83 @@
         <type>Picklist</type>
     </fields>
     <fields>
-        <fullName>SICCode__c</fullName>
+        <fullName>Record_Owner__c</fullName>
         <externalId>false</externalId>
-        <label>SIC Code</label>
-        <length>15</length>
+        <label>Record Owner</label>
+        <length>18</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Recordtype__c</fullName>
+        <externalId>false</externalId>
+        <formula>RecordType.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Recordtype</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SFGA__CorrelationID__c</fullName>
+        <defaultValue>&quot;none&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>The Correlation ID Field is used by Salesforce for Google AdWords for automatic correlation of web information with new leads created through a standard web-to-lead form</description>
+        <externalId>false</externalId>
+        <label>CorrelationID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SFGA__Correlation_Data__c</fullName>
+        <defaultValue>&quot;none&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>The Correlation Data field is designed for use by Salesforce for Google AdWords to store all relevant lead tracking information about a web generated lead</description>
+        <externalId>false</externalId>
+        <label>Correlation Data</label>
+        <length>32000</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>SFGA__Web_Source__c</fullName>
+        <defaultValue>&quot;none&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This field is designed for future use by Salesforce for Google AdWords as an alternative to the Lead Source field for web generated leads.</description>
+        <externalId>false</externalId>
+        <label>Web Source</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Secondary_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Secondary Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Secondary_Lead_Source__c</fullName>
+        <externalId>false</externalId>
+        <label>Secondary Lead Source</label>
+        <length>12</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -282,51 +976,79 @@
     <fields>
         <fullName>Status</fullName>
         <trackFeedHistory>true</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Time_Zone__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the Time Zone of the client  (Ex: EST, PST, IST etc.)</inlineHelpText>
+        <label>Time Zone</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Title</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <length>36</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Website</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>true</trackHistory>
+        <trackHistory>false</trackHistory>
     </fields>
     <listViews>
-        <fullName>AllOpenLeads</fullName>
+        <fullName>AutoRABIT_Open_Leads</fullName>
+        <booleanFilter>(1 or 3) and 2</booleanFilter>
+        <columns>FULL_NAME</columns>
+        <columns>LEAD.COMPANY</columns>
+        <columns>LEAD.STATUS</columns>
+        <columns>LEAD.LEAD_SOURCE</columns>
+        <columns>LEAD.FIRST_NAME</columns>
+        <columns>LEAD.CREATED_DATE</columns>
+        <columns>LEAD.LAST_UPDATE</columns>
+        <columns>CORE.USERS.FIRST_NAME</columns>
+        <columns>CREATEDBY_USER.ALIAS</columns>
         <filterScope>Everything</filterScope>
+        <filters>
+            <field>LEAD.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Lead.AutoRABIT_RecordType</value>
+        </filters>
         <filters>
             <field>LEAD.STATUS</field>
-            <operation>notContain</operation>
-            <value>closed</value>
-        </filters>
-        <label>All Open Leads</label>
-    </listViews>
-    <listViews>
-        <fullName>MyUnreadLeads</fullName>
-        <filterScope>Mine</filterScope>
-        <filters>
-            <field>LEAD.UNREAD</field>
             <operation>equals</operation>
-            <value>1</value>
+            <value>Open,Qualified,Contacted,Scheduled Demo,Demo Performed</value>
         </filters>
-        <label>My Unread Leads</label>
-    </listViews>
-    <listViews>
-        <fullName>TodaysLeads</fullName>
-        <filterScope>Everything</filterScope>
         <filters>
-            <field>LEAD.CREATED_DATE</field>
+            <field>Business_Unit__c</field>
             <operation>equals</operation>
-            <value>TODAY</value>
+            <value>AutoRABIT</value>
         </filters>
-        <label>Today&apos;s Leads</label>
+        <label>AutoRABIT Open Leads</label>
+        <language>en_US</language>
+        <sharedTo>
+            <group>AutoRABIT_Sales_Group</group>
+        </sharedTo>
     </listViews>
     <listViews>
-        <fullName>ViewCustom1</fullName>
+        <fullName>BPM_Leads</fullName>
+        <booleanFilter>1 OR 2</booleanFilter>
         <columns>FULL_NAME</columns>
         <columns>LEAD.COMPANY</columns>
         <columns>LEAD.STATE</columns>
@@ -336,10 +1058,157 @@
         <columns>CORE.USERS.ALIAS</columns>
         <columns>LEAD.UNREAD</columns>
         <filterScope>Everything</filterScope>
-        <label>View - Custom 1</label>
+        <filters>
+            <field>Business_Unit__c</field>
+            <operation>equals</operation>
+            <value>BPM Services</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.FIRST_NAME</field>
+            <operation>equals</operation>
+            <value>PSK</value>
+        </filters>
+        <label>BPM Leads</label>
+        <sharedTo>
+            <group>BPM_Services_Group</group>
+        </sharedTo>
     </listViews>
     <listViews>
-        <fullName>ViewCustom2</fullName>
+        <fullName>ColdCalls</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>LEAD.COMPANY</columns>
+        <columns>LEAD.STATE_CODE</columns>
+        <columns>LEAD.EMAIL</columns>
+        <columns>LEAD.PHONE</columns>
+        <columns>LEAD.MOBILE_PHONE</columns>
+        <columns>LEAD.COUNTRY_CODE</columns>
+        <columns>LEAD.STATUS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>LEAD.STATUS</field>
+            <operation>equals</operation>
+            <value>Open,Qualified,Contacted,Unresponsive,Lost,DNC,Unqualified</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.FIRST_NAME</field>
+            <operation>equals</operation>
+            <value>Navneeth</value>
+        </filters>
+        <label>ColdCalls</label>
+        <language>en_US</language>
+    </listViews>
+    <listViews>
+        <fullName>Consulting_Leads</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>LEAD.COMPANY</columns>
+        <columns>LEAD.STATE</columns>
+        <columns>LEAD.EMAIL</columns>
+        <columns>LEAD.STATUS</columns>
+        <columns>LEAD.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>LEAD.UNREAD</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.FIRST_NAME</field>
+            <operation>equals</operation>
+            <value>Pavan</value>
+        </filters>
+        <label>Consulting Leads</label>
+        <sharedTo>
+            <role>AutoRABIT</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Emerging_Technologies</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>LEAD.COMPANY</columns>
+        <columns>LEAD.STATE</columns>
+        <columns>LEAD.EMAIL</columns>
+        <columns>LEAD.STATUS</columns>
+        <columns>LEAD.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>LEAD.UNREAD</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>LEAD.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Lead.Emerging_Technologies_Record_Type</value>
+        </filters>
+        <label>Emerging Technologies</label>
+        <sharedTo>
+            <group>BPM_Services_Group</group>
+            <group>Consulting_Group</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Gary_s_Leads</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>LEAD.COMPANY</columns>
+        <columns>LEAD.STATE_CODE</columns>
+        <columns>LEAD.EMAIL</columns>
+        <columns>LEAD.STATUS</columns>
+        <columns>LEAD.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>LEAD.UNREAD</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.FIRST_NAME</field>
+            <operation>equals</operation>
+            <value>Gary</value>
+        </filters>
+        <filters>
+            <field>LeadType__c</field>
+            <operation>equals</operation>
+            <value>Self Generated</value>
+        </filters>
+        <label>Gary&apos;s Leads</label>
+        <language>en_US</language>
+        <sharedTo>
+            <group>AutoRABIT_Sales_Group</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Londor_Tour_17_Leads</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>LEAD.COMPANY</columns>
+        <columns>LEAD.STATE_CODE</columns>
+        <columns>LEAD.EMAIL</columns>
+        <columns>LEAD.STATUS</columns>
+        <columns>LEAD.CREATED_DATE</columns>
+        <columns>CORE.USERS.FIRST_NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Lead_Source_Type__c</field>
+            <operation>equals</operation>
+            <value>London Tour 17</value>
+        </filters>
+        <label>Londor Tour 17 Leads</label>
+        <language>en_US</language>
+    </listViews>
+    <listViews>
+        <fullName>Migile_Leads</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>LEAD.COMPANY</columns>
+        <columns>LEAD.STATE</columns>
+        <columns>LEAD.EMAIL</columns>
+        <columns>LEAD.STATUS</columns>
+        <columns>LEAD.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>LEAD.UNREAD</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>LEAD.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Lead.Migile_Record_Type</value>
+        </filters>
+        <label>Migile Leads</label>
+        <sharedTo>
+            <group>BPM_Services_Group</group>
+            <group>Consulting_Group</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>My_Leads</fullName>
         <columns>FULL_NAME</columns>
         <columns>LEAD.COMPANY</columns>
         <columns>LEAD.STATE</columns>
@@ -350,8 +1219,2736 @@
         <columns>LEAD.UNREAD</columns>
         <columns>LEAD.LEAD_SOURCE</columns>
         <filterScope>Everything</filterScope>
-        <label>View - Custom 2</label>
+        <filters>
+            <field>CORE.USERS.FIRST_NAME</field>
+            <operation>equals</operation>
+            <value>Abhilash</value>
+        </filters>
+        <label>My Leads</label>
+        <language>en_US</language>
     </listViews>
+    <listViews>
+        <fullName>Social_Champ_Leads</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>LEAD.COMPANY</columns>
+        <columns>LEAD.STATE</columns>
+        <columns>LEAD.EMAIL</columns>
+        <columns>LEAD.STATUS</columns>
+        <columns>LEAD.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>LEAD.UNREAD</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>LEAD.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Lead.Social_Champ</value>
+        </filters>
+        <label>Social Champ Leads</label>
+        <sharedTo>
+            <group>BPM_Services_Group</group>
+            <group>Consulting_Group</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>TDX17_Leads_ROW_Exc_CA</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>LEAD.COMPANY</columns>
+        <columns>LEAD.EMAIL</columns>
+        <columns>LEAD.STATUS</columns>
+        <columns>LEAD.COUNTRY_CODE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Lead_Source_Type__c</field>
+            <operation>equals</operation>
+            <value>TDX17</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.ALIAS</field>
+            <operation>equals</operation>
+            <value>Mark</value>
+        </filters>
+        <filters>
+            <field>LEAD.COUNTRY_CODE</field>
+            <operation>notEqual</operation>
+            <value>CA</value>
+        </filters>
+        <label>TDX17 Leads - RoW Excluding Canada</label>
+        <language>en_US</language>
+    </listViews>
+    <listViews>
+        <fullName>TDX17_Leads_US</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>LEAD.COMPANY</columns>
+        <columns>LEAD.EMAIL</columns>
+        <columns>LEAD.COUNTRY_CODE</columns>
+        <columns>LEAD.STATUS</columns>
+        <columns>LEAD.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Lead_Source_Type__c</field>
+            <operation>equals</operation>
+            <value>TDX17</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.ALIAS</field>
+            <operation>notEqual</operation>
+            <value>Mark</value>
+        </filters>
+        <label>TDX17 Leads - US</label>
+        <language>en_US</language>
+    </listViews>
+    <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>AutoRABIT_RecordType</fullName>
+        <active>true</active>
+        <businessProcess>AutoRABIT Lead Process</businessProcess>
+        <description>This record type defines Business Unit AutoRABIT</description>
+        <label>AutoRABIT RecordType</label>
+        <picklistValues>
+            <picklist>Business_Type__c</picklist>
+            <values>
+                <fullName>Dev Ops Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Services</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Business_Unit__c</picklist>
+            <values>
+                <fullName>AutoRABIT</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Competitor__c</picklist>
+            <values>
+                <fullName>AssureClick</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Atlassian - Bamboo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Copado</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dream factory %E2%80%93 Snapshot</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flosum</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gearset</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Homegrown</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Jenkins</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Jitterbit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Odaseva</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Others</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provar</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Industry</picklist>
+            <values>
+                <fullName>Agriculture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Apparel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Banking</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Biotechnology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chemicals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Construction</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Electronics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Energy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Engineering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Entertainment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Environmental</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Food %26 Beverage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Government</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Healthcare</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospitality</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Insurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Machinery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manufacturing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Networking</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not For Profit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recreation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Retail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SAAS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Telecommunications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transportation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Utilities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>pavan%40techsophy%2Ecom</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Infrastructure__c</picklist>
+            <values>
+                <fullName>Exclusive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shared</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LeadSource</picklist>
+            <values>
+                <fullName>Cold Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Conference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Data%2Ecom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Demand Generation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Direct Mail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Existing Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>External Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flosum</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>List Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prospect Cloud</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Public Relations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SFDC Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SFDC Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Self Generated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Internal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Trade Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web Site</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Word of mouth</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Lead_Source_Type__c</picklist>
+            <values>
+                <fullName>App Exchange</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AutoRABIT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Contact Form</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF16</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF17</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Data%2Ecom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>London Tour 17</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Meet Up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NY Tour 16</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prospect Cloud</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TDX17</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Webinar</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Name</picklist>
+            <values>
+                <fullName>Dr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mrs%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ms%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prof%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Persona__c</picklist>
+            <values>
+                <fullName>Architect</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CXO%27s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developer%2FAdmin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Head%2FVP%2FDirector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MVP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manager</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Rating</picklist>
+            <values>
+                <fullName>Acquired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cold</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hot</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Market Failed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Project Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shutdown</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Warm</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>BPM_Record_Type</fullName>
+        <active>true</active>
+        <businessProcess>Techsophy lead Process</businessProcess>
+        <description>This record type defines Business Unit  types related to BPM Services</description>
+        <label>BPM Record Type</label>
+        <picklistValues>
+            <picklist>Business_Type__c</picklist>
+            <values>
+                <fullName>Dev Ops Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Services</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Business_Unit__c</picklist>
+            <values>
+                <fullName>BPM Services</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Emerging Technologies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Migile</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Champ</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Competitor__c</picklist>
+            <values>
+                <fullName>AssureClick</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Atlassian - Bamboo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Copado</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dream factory %E2%80%93 Snapshot</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flosum</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gearset</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Jitterbit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Odaseva</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Others</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provar</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Industry</picklist>
+            <values>
+                <fullName>Agriculture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Apparel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Banking</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Biotechnology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chemicals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Construction</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Electronics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Energy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Engineering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Entertainment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Environmental</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Food %26 Beverage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Government</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Healthcare</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospitality</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Insurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Machinery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manufacturing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not For Profit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recreation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Retail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Telecommunications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transportation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Utilities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>pavan%40techsophy%2Ecom</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Infrastructure__c</picklist>
+            <values>
+                <fullName>Exclusive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shared</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LeadSource</picklist>
+            <values>
+                <fullName>Cold Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Conference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Direct Mail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Existing Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>External Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Public Relations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Self Generated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Internal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Trade Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web Site</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Word of mouth</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Lead_Source_Type__c</picklist>
+            <values>
+                <fullName>App Exchange</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AutoRABIT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Contact Form</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF16</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF17</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Data%2Ecom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Meet Up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NY Tour 16</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prospect Cloud</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Webinar</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Name</picklist>
+            <values>
+                <fullName>Dr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mrs%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ms%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prof%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Persona__c</picklist>
+            <values>
+                <fullName>Architect</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CXO%27s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developer%2FAdmin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Head%2FVP%2FDirector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MVP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manager</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Rating</picklist>
+            <values>
+                <fullName>Acquired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cold</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hot</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Market Failed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Project Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shutdown</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Warm</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Consulting_Record_Type</fullName>
+        <active>true</active>
+        <businessProcess>Techsophy lead Process</businessProcess>
+        <description>This record type defines Business Unit types for Consulting</description>
+        <label>Consulting Record Type</label>
+        <picklistValues>
+            <picklist>Business_Type__c</picklist>
+            <values>
+                <fullName>Dev Ops Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Services</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Business_Unit__c</picklist>
+            <values>
+                <fullName>Consulting</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Emerging Technologies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Migile</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Champ</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Competitor__c</picklist>
+            <values>
+                <fullName>AssureClick</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Atlassian - Bamboo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Copado</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dream factory %E2%80%93 Snapshot</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flosum</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gearset</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Jitterbit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Odaseva</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Others</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provar</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Industry</picklist>
+            <values>
+                <fullName>Agriculture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Apparel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Banking</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Biotechnology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chemicals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Construction</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Electronics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Energy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Engineering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Entertainment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Environmental</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Food %26 Beverage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Government</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Healthcare</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospitality</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Insurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Machinery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manufacturing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not For Profit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recreation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Retail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Telecommunications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transportation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Utilities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>pavan%40techsophy%2Ecom</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Infrastructure__c</picklist>
+            <values>
+                <fullName>Exclusive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shared</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LeadSource</picklist>
+            <values>
+                <fullName>Cold Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Conference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Direct Mail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Existing Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>External Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Public Relations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Self Generated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Internal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Trade Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web Site</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Word of mouth</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Lead_Source_Type__c</picklist>
+            <values>
+                <fullName>App Exchange</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AutoRABIT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Contact Form</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF16</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF17</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Data%2Ecom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Meet Up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NY Tour 16</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prospect Cloud</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Webinar</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Name</picklist>
+            <values>
+                <fullName>Dr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mrs%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ms%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prof%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Persona__c</picklist>
+            <values>
+                <fullName>Architect</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CXO%27s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developer%2FAdmin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Head%2FVP%2FDirector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MVP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manager</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Rating</picklist>
+            <values>
+                <fullName>Acquired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cold</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hot</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Market Failed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Project Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shutdown</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Warm</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Emerging_Technologies_Record_Type</fullName>
+        <active>true</active>
+        <businessProcess>Techsophy lead Process</businessProcess>
+        <label>Emerging Technologies Record Type</label>
+        <picklistValues>
+            <picklist>Business_Type__c</picklist>
+            <values>
+                <fullName>Dev Ops Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Services</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Business_Unit__c</picklist>
+            <values>
+                <fullName>AutoRABIT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BPM Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emerging Technologies</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Migile</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Champ</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Competitor__c</picklist>
+            <values>
+                <fullName>AssureClick</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Atlassian - Bamboo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Copado</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dream factory %E2%80%93 Snapshot</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flosum</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gearset</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Jitterbit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Odaseva</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Others</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provar</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Industry</picklist>
+            <values>
+                <fullName>Agriculture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Apparel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Banking</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Biotechnology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chemicals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Construction</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Electronics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Energy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Engineering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Entertainment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Environmental</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Food %26 Beverage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Government</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Healthcare</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospitality</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Insurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Machinery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manufacturing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not For Profit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recreation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Retail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Telecommunications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transportation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Utilities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>pavan%40techsophy%2Ecom</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Infrastructure__c</picklist>
+            <values>
+                <fullName>Exclusive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shared</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LeadSource</picklist>
+            <values>
+                <fullName>Cold Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Conference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Direct Mail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Existing Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>External Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Public Relations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Self Generated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Internal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Trade Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web Site</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Word of mouth</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Lead_Source_Type__c</picklist>
+            <values>
+                <fullName>App Exchange</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AutoRABIT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Contact Form</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF16</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF17</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Data%2Ecom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Meet Up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NY Tour 16</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prospect Cloud</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Webinar</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Name</picklist>
+            <values>
+                <fullName>Dr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mrs%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ms%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prof%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Persona__c</picklist>
+            <values>
+                <fullName>Architect</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CXO%27s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developer%2FAdmin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Head%2FVP%2FDirector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MVP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manager</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Rating</picklist>
+            <values>
+                <fullName>Acquired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cold</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hot</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Market Failed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Project Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shutdown</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Warm</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Migile_Record_Type</fullName>
+        <active>true</active>
+        <businessProcess>Techsophy lead Process</businessProcess>
+        <description>This record type defines Business Unit type for Migile</description>
+        <label>Migile Record Type</label>
+        <picklistValues>
+            <picklist>Business_Type__c</picklist>
+            <values>
+                <fullName>Dev Ops Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Services</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Business_Unit__c</picklist>
+            <values>
+                <fullName>BPM Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emerging Technologies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Migile</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Social Champ</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Competitor__c</picklist>
+            <values>
+                <fullName>AssureClick</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Atlassian - Bamboo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Copado</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dream factory %E2%80%93 Snapshot</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flosum</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gearset</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Jitterbit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Odaseva</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Others</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provar</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Industry</picklist>
+            <values>
+                <fullName>Agriculture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Apparel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Banking</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Biotechnology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chemicals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Construction</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Electronics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Energy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Engineering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Entertainment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Environmental</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Food %26 Beverage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Government</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Healthcare</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospitality</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Insurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Machinery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manufacturing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not For Profit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recreation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Retail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Telecommunications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transportation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Utilities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>pavan%40techsophy%2Ecom</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Infrastructure__c</picklist>
+            <values>
+                <fullName>Exclusive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shared</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LeadSource</picklist>
+            <values>
+                <fullName>Cold Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Conference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Direct Mail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Existing Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>External Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Public Relations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Self Generated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Internal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Trade Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web Site</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Word of mouth</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Lead_Source_Type__c</picklist>
+            <values>
+                <fullName>App Exchange</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AutoRABIT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Contact Form</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF16</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF17</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Data%2Ecom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Meet Up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NY Tour 16</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prospect Cloud</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Webinar</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Name</picklist>
+            <values>
+                <fullName>Dr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mrs%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ms%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prof%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Persona__c</picklist>
+            <values>
+                <fullName>Architect</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CXO%27s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developer%2FAdmin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Head%2FVP%2FDirector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MVP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manager</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Rating</picklist>
+            <values>
+                <fullName>Acquired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cold</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hot</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Market Failed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Project Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shutdown</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Warm</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Social_Champ</fullName>
+        <active>true</active>
+        <businessProcess>Techsophy lead Process</businessProcess>
+        <label>Social Champ Record Type</label>
+        <picklistValues>
+            <picklist>Business_Type__c</picklist>
+            <values>
+                <fullName>Dev Ops Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Services</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Business_Unit__c</picklist>
+            <values>
+                <fullName>BPM Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emerging Technologies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Migile</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Champ</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Competitor__c</picklist>
+            <values>
+                <fullName>AssureClick</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Atlassian - Bamboo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Copado</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dream factory %E2%80%93 Snapshot</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flosum</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gearset</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Jitterbit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Odaseva</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Others</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provar</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Industry</picklist>
+            <values>
+                <fullName>Agriculture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Apparel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Banking</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Biotechnology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chemicals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Construction</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Electronics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Energy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Engineering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Entertainment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Environmental</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Food %26 Beverage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Government</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Healthcare</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospitality</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Insurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Machinery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manufacturing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not For Profit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recreation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Retail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Telecommunications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transportation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Utilities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>pavan%40techsophy%2Ecom</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Infrastructure__c</picklist>
+            <values>
+                <fullName>Exclusive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shared</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LeadSource</picklist>
+            <values>
+                <fullName>Cold Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Conference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Direct Mail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Existing Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>External Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Public Relations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Self Generated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Internal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Trade Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web Site</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Word of mouth</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Lead_Source_Type__c</picklist>
+            <values>
+                <fullName>App Exchange</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AutoRABIT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Contact Form</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF16</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DF17</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Data%2Ecom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Meet Up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NY Tour 16</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prospect Cloud</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Webinar</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Name</picklist>
+            <values>
+                <fullName>Mr%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Persona__c</picklist>
+            <values>
+                <fullName>Architect</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CXO%27s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developer%2FAdmin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Head%2FVP%2FDirector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MVP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manager</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Rating</picklist>
+            <values>
+                <fullName>Acquired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cold</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hot</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Market Failed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Project Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shutdown</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Warm</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
     <searchLayouts>
         <customTabListAdditionalFields>FULL_NAME</customTabListAdditionalFields>
         <customTabListAdditionalFields>LEAD.COMPANY</customTabListAdditionalFields>
@@ -371,5 +3968,179 @@
         <searchResultsAdditionalFields>LEAD.STATUS</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>ReadWriteTransfer</sharingModel>
+    <sharingModel>Private</sharingModel>
+    <validationRules>
+        <fullName>Address_Validation</fullName>
+        <active>false</active>
+        <errorConditionFormula>City  = Null ||  State = Null</errorConditionFormula>
+        <errorMessage>test validation.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>If_Competitor_is_Others_Specify_it</fullName>
+        <active>true</active>
+        <errorConditionFormula>IF(INCLUDES(Competitor__c,&quot;Others&quot;),Other_Competitors__c==null,false)</errorConditionFormula>
+        <errorDisplayField>Other_Competitors__c</errorDisplayField>
+        <errorMessage>Other_Competitors__c field cannot be left blank</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Lead_Source_Contact</fullName>
+        <active>false</active>
+        <description>When your &apos;Lead source&apos; is SFDC Referral or External Referral or Partner, then you need to choose the respective Lead source contact</description>
+        <errorConditionFormula>AND( 
+OR( 
+ISPICKVAL( LeadSource,&apos;SFDC Referral&apos;), 
+ISPICKVAL( LeadSource,&apos;External Referral&apos;), 
+ISPICKVAL( LeadSource,&apos;Partner&apos;), 
+ISBLANK(Lead_Source_Contact__c)))</errorConditionFormula>
+        <errorDisplayField>Lead_Source_Contact__c</errorDisplayField>
+        <errorMessage>Enter &apos;Lead Source Contact&apos;</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Making_Other_Persona_field_as_Required</fullName>
+        <active>true</active>
+        <errorConditionFormula>ISPICKVAL( Persona__c , &apos;Other&apos;) &amp;&amp;
+  ISBLANK( Other_Persona__c )</errorConditionFormula>
+        <errorDisplayField>Other_Persona__c</errorDisplayField>
+        <errorMessage>Please mention Other Persona value</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Validation_on_Lead_Conversion</fullName>
+        <active>false</active>
+        <description>This validation rule is to check if there are no attachments on conversion</description>
+        <errorConditionFormula>AND( IsConverted ,  (ISBLANK(No_of_Attachments__c) || No_of_Attachments__c &lt;=0))</errorConditionFormula>
+        <errorMessage>Please attach the necessary document and convert the Lead</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>AltavistaNews</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>true</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>true</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Altavista News</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>true</showsLocation>
+        <showsStatus>true</showsStatus>
+        <url>http://news.altavista.com/search?nc=0&amp;q={!Lead_Company}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>GoogleMaps</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Google Maps</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>http://maps.google.com/maps?f=q&amp;hl=en&amp;q={!Lead_Street}+{!Lead_City}+{!Lead_State}&amp;om=1</url>
+    </webLinks>
+    <webLinks>
+        <fullName>GoogleNews</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Google News</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>http://www.google.com/news?&amp;q={!Lead_Company}&amp;btnG=Search+News</url>
+    </webLinks>
+    <webLinks>
+        <fullName>GoogleSearch</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Google Search</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>http://www.google.com/search?q={!Lead_Company}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>HooversProfile</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>true</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>true</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Hoovers Profile</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>true</showsLocation>
+        <showsStatus>true</showsStatus>
+        <url>http://search.hoovers.com/cgi-bin/hol_search?which=company&amp;query_string={!Lead_Company}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>SendGmail</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Send Gmail</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>https://mail.google.com/mail?view=cm&amp;tf=0&amp;to={!Lead_Email}&lt;{!Lead_LastName}, {!Lead_FirstName}&gt;&amp;tf=1</url>
+    </webLinks>
+    <webLinks>
+        <fullName>YahooMaps</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>true</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>true</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Yahoo Maps</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>true</showsLocation>
+        <showsStatus>true</showsStatus>
+        <url>http://maps.yahoo.com/py/maps.py?cn={!Lead_Country}&amp;csz={!Lead_City}+{!Lead_State}+{!Lead_PostalCode}+&amp;addr={!Lead_Address}</url>
+    </webLinks>
 </CustomObject>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Field API Name --></label>
+        <name>smlfcom__Field_API_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Field Label --></label>
+        <name>smlfcom__Field_Label__c</name>
+    </fields>
+    <fields>
+        <label><!-- Field Value --></label>
+        <name>smlfcom__Field_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Active --></label>
+        <name>smlfcom__Is_Active__c</name>
+    </fields>
+</CustomObjectTranslation>

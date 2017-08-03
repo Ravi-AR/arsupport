@@ -7,6 +7,8 @@
     <tab>standard-OtherUserProfile</tab>
     <tab>standard-CollaborationGroup</tab>
     <tab>standard-File</tab>
-    <tab>dataloader3935__c</tab>
-    <tab>testobjectcreated__c</tab>
+    <tab>Customer_Satisfaction_Survey__c</tab>
+    <tab>DF_16_Leads__c</tab>
+    <tab>Support_Test__c</tab>
+    <tab>TrailHeaDX__c</tab>
 </CustomApplication>

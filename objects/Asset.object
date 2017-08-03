@@ -36,6 +36,20 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>AssetLevel</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>AssetProvidedById</fullName>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AssetServicedById</fullName>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
         <fullName>ContactId</fullName>
         <trackHistory>false</trackHistory>
         <type>Lookup</type>
@@ -53,13 +67,12 @@
         <trackHistory>false</trackHistory>
     </fields>
     <fields>
-        <fullName>Name</fullName>
+        <fullName>IsInternal</fullName>
         <trackHistory>false</trackHistory>
     </fields>
     <fields>
-        <fullName>OwnerId</fullName>
+        <fullName>Name</fullName>
         <trackHistory>false</trackHistory>
-        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>ParentId</fullName>
@@ -100,7 +113,6 @@
     </fields>
     <fields>
         <fullName>SerialNumber</fullName>
-        <inlineHelpText>testing asset with support</inlineHelpText>
         <trackHistory>false</trackHistory>
     </fields>
     <fields>

@@ -1,4 +1,4 @@
-public with sharing class SupportStatus {
+public class SupportStatus {
 
     public string emailValue {get;set;}
     public List<Case> caseListAll {get;Set;}
@@ -17,17 +17,20 @@ public void searchCases(){
         searchCaseList(emailValue);   
     }
     
-private Boolean searchCaseList(String searchString){
+public Boolean searchCaseList(String searchString){
+ system.debug('---CheckCall---');
         caseListAll = new List<Case>();
         caseList = new List<Case>();
+        if(!String.isBlank(searchString))
         caseListAll = [SELECT CaseNumber, SuppliedName, Subject, Status, Reason, Type, SuppliedEmail, SuppliedCompany, Login_Url__c FROM Case WHERE SuppliedEmail =: searchString ORDER BY CaseNumber desc];
 
         for(Case c: caseListAll){
-            if(c.Reason != 'Other' && c.Type != 'Other')
+            if(c.Reason != 'Other' && c.Type != 'Other' && c.SuppliedEmail != '')
             {
                 caseList.add(c);                
             }            
         }
+        
         hideTable = !caseList.isEmpty();
         return hideTable;
     }    

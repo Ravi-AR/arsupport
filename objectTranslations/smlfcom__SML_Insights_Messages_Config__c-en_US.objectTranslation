@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Insight Dimension 1 --></label>
+        <name>smlfcom__Insight_Dimension_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insight Dimension 2 --></label>
+        <name>smlfcom__Insight_Dimension_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insight Dimension 3 --></label>
+        <name>smlfcom__Insight_Dimension_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Manager Id --></label>
+        <name>smlfcom__Manager_Id__c</name>
+    </fields>
+</CustomObjectTranslation>

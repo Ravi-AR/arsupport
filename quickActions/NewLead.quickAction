@@ -34,5 +34,6 @@
     </quickActionLayout>
     <standardLabel>New</standardLabel>
     <targetObject>Lead</targetObject>
+    <targetRecordType>Lead.AutoRABIT_RecordType</targetRecordType>
     <type>Create</type>
 </QuickAction>

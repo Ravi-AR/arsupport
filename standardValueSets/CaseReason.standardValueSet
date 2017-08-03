@@ -1,46 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
-    <sorted>false</sorted>
+    <sorted>true</sorted>
     <standardValue>
-        <fullName>Installation</fullName>
+        <fullName>Builds/Project Failures</fullName>
         <default>false</default>
-        <label>Installation</label>
+        <label>Builds/Project Failures</label>
         <cssExposed>false</cssExposed>
     </standardValue>
     <standardValue>
-        <fullName>Equipment Complexity</fullName>
+        <fullName>Data Loader</fullName>
         <default>false</default>
-        <label>Equipment Complexity</label>
+        <label>Data Loader</label>
         <cssExposed>false</cssExposed>
     </standardValue>
     <standardValue>
-        <fullName>Performance</fullName>
+        <fullName>Deployments</fullName>
         <default>false</default>
-        <label>Performance</label>
+        <label>Deployments</label>
         <cssExposed>false</cssExposed>
     </standardValue>
     <standardValue>
-        <fullName>Breakdown</fullName>
+        <fullName>EZ - Commits</fullName>
         <default>false</default>
-        <label>Breakdown</label>
+        <label>EZ - Commits</label>
         <cssExposed>false</cssExposed>
     </standardValue>
     <standardValue>
-        <fullName>Equipment Design</fullName>
+        <fullName>FAQ</fullName>
         <default>false</default>
-        <label>Equipment Design</label>
+        <label>FAQ</label>
         <cssExposed>false</cssExposed>
     </standardValue>
     <standardValue>
-        <fullName>Feedback</fullName>
+        <fullName>Functionality</fullName>
         <default>false</default>
-        <label>Feedback</label>
+        <label>Functionality</label>
+        <cssExposed>false</cssExposed>
+    </standardValue>
+    <standardValue>
+        <fullName>Login Issue</fullName>
+        <default>false</default>
+        <label>Login Issue</label>
         <cssExposed>false</cssExposed>
     </standardValue>
     <standardValue>
         <fullName>Other</fullName>
         <default>false</default>
         <label>Other</label>
+        <cssExposed>false</cssExposed>
+    </standardValue>
+    <standardValue>
+        <fullName>Sync Orgs</fullName>
+        <default>false</default>
+        <label>Sync Orgs</label>
+        <cssExposed>false</cssExposed>
+    </standardValue>
+    <standardValue>
+        <fullName>Test Automation Factory(TAF)</fullName>
+        <default>false</default>
+        <label>Test Automation Factory(TAF)</label>
+        <cssExposed>false</cssExposed>
+    </standardValue>
+    <standardValue>
+        <fullName>Version Control</fullName>
+        <default>false</default>
+        <label>Version Control</label>
         <cssExposed>false</cssExposed>
     </standardValue>
 </StandardValueSet>
