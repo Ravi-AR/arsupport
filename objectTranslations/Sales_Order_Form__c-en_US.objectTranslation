@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Sales Order Form</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Sales Order Forms</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account Lookup --></label>
+        <name>Account_Lookup__c</name>
+        <relationshipLabel><!-- Sales Order Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Address --></label>
+        <name>Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved By --></label>
+        <name>Approved_By__c</name>
+        <relationshipLabel><!-- Sales Order Forms (Approved By) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Approver Email --></label>
+        <name>Approver_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- AutoRABIT Accounts --></label>
+        <name>AutoRABIT_Accounts__c</name>
+    </fields>
+    <fields>
+        <label><!-- Billing Address --></label>
+        <name>Billing_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Billing contact person&apos;s name --></label>
+        <name>Billing_contact_person_s_name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Billing methodology details --></label>
+        <name>Billing_methodology_details__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Name --></label>
+        <name>Client_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Email Invoice to --></label>
+        <name>Email_Invoice_to__c</name>
+    </fields>
+    <fields>
+        <label><!-- Email --></label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Client Location --></label>
+        <name>End_Client_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hourly cost --></label>
+        <name>Hourly_cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoicing frequency --></label>
+        <name>Invoicing_frequency__c</name>
+    </fields>
+    <fields>
+        <label><!-- No. of Subscriptions --></label>
+        <name>No_of_Subscriptions__c</name>
+    </fields>
+    <fields>
+        <label><!-- No. of Support --></label>
+        <name>No_of_Support__c</name>
+    </fields>
+    <fields>
+        <label><!-- No. of hours --></label>
+        <name>No_of_hours__c</name>
+    </fields>
+    <fields>
+        <label><!-- No. of months --></label>
+        <name>No_of_months__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity Lookup --></label>
+        <name>Opportunity_Lookup__c</name>
+        <relationshipLabel><!-- Sales Order Forms (Opportunity Lookup) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- Sales Order Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Phone --></label>
+        <name>Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Projected End Date --></label>
+        <name>Projected_End_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Projected Support End Date --></label>
+        <name>Projected_Support_End_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rate --></label>
+        <name>Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Order Form Status --></label>
+        <name>Sales_Order_Form_Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sales Person --></label>
+        <name>Sales_Person__c</name>
+        <relationshipLabel><!-- Sales Order Forms (Sales Person) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>Start_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Support Rate --></label>
+        <name>Support_Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Support Start Date --></label>
+        <name>Support_Start_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Was any 3rd party services used? --></label>
+        <name>Was_any_3rd_party_services_used__c</name>
+    </fields>
+    <fields>
+        <label><!-- Was support purchased? --></label>
+        <name>Was_support_purchased__c</name>
+    </fields>
+    <fields>
+        <label><!-- Who will AutoRABIT pay for item --></label>
+        <name>Who_will_AutoRABIT_pay_for_item__c</name>
+    </fields>
+    <fields>
+        <label><!-- 3rd Party Billing Contact Name --></label>
+        <name>X3rd_Party_Billing_Contact_Name__c</name>
+    </fields>
+    <layouts>
+        <layout>Sales Order Form Layout</layout>
+        <sections>
+            <label><!-- 3rd Party Information(IF ANY) --></label>
+            <section>3rd Party Information(IF ANY)</section>
+        </sections>
+        <sections>
+            <label><!-- Account Details --></label>
+            <section>Account Details</section>
+        </sections>
+        <sections>
+            <label><!-- Billing Information --></label>
+            <section>Billing Information</section>
+        </sections>
+        <sections>
+            <label><!-- Client --></label>
+            <section>Client</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Product Details --></label>
+            <section>Product Details</section>
+        </sections>
+        <sections>
+            <label><!-- Service Details --></label>
+            <section>Service Details</section>
+        </sections>
+        <sections>
+            <label><!-- Subscription Details --></label>
+            <section>Subscription Details</section>
+        </sections>
+        <sections>
+            <label><!-- Support Details --></label>
+            <section>Support Details</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Please fill all the details in 3rd party information --></errorMessage>
+        <name>Third_Party_Services</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please fill all the fields in &apos;Support Details&apos; section --></errorMessage>
+        <name>Was_Support_Purchased</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Export --></label>
+        <name>Export</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Export_as_an_Email --></label>
+        <name>Export_as_an_Email</name>
+    </webLinks>
+</CustomObjectTranslation>

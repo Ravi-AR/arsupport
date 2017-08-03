@@ -1,0 +1,2091 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>AddInfluence</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <businessProcesses>
+        <fullName>AutoRABIT Record Type</fullName>
+        <isActive>true</isActive>
+        <values>
+            <fullName>Closed Lost</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed Won</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed Won-Implementation Incomplete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Demo Performed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Free POC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Negotiation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PS Sub Item</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Paid POC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PlayGround</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Procurement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Procurement Stage Continued</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Proposal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Schedule Planning</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Scoping</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trial Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trial Expired</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trial Initiated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unresponsive</fullName>
+            <default>false</default>
+        </values>
+    </businessProcesses>
+    <businessProcesses>
+        <fullName>BPM Process</fullName>
+        <isActive>true</isActive>
+        <values>
+            <fullName>Closed Lost</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed Won</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Negotiation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Proposal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ROI document</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unresponsive</fullName>
+            <default>false</default>
+        </values>
+    </businessProcesses>
+    <businessProcesses>
+        <fullName>Consulting</fullName>
+        <description>This record type defines Business Unit types for Consulting</description>
+        <isActive>true</isActive>
+        <values>
+            <fullName>Closed Lost</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed Won</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Negotiation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Proposal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ROI document</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trial Expired</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trial Initiated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unresponsive</fullName>
+            <default>false</default>
+        </values>
+    </businessProcesses>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <fields>
+        <fullName>AccountId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Additional_Info__c</fullName>
+        <externalId>false</externalId>
+        <label>Additional Info</label>
+        <length>30000</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Address_Info__c</fullName>
+        <externalId>false</externalId>
+        <label>Address Info</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Age_del__c</fullName>
+        <externalId>false</externalId>
+        <formula>TODAY()  -   DATEVALUE(CreatedDate)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Opportunity Age</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Amount</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>AutorabitExtId__c</fullName>
+        <description>External Id created by AutoRABIT</description>
+        <externalId>true</externalId>
+        <label>AutorabitExtId__c</label>
+        <length>18</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Business_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Business Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Product</fullName>
+                    <default>false</default>
+                    <label>Product</label>
+                </value>
+                <value>
+                    <fullName>Services</fullName>
+                    <default>false</default>
+                    <label>Services</label>
+                </value>
+                <value>
+                    <fullName>Dev Ops Consulting</fullName>
+                    <default>false</default>
+                    <label>DevOps Consulting</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>CampaignId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CloseDate</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Company_URL__c</fullName>
+        <externalId>false</externalId>
+        <label>Company URL</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Competitors__c</fullName>
+        <externalId>false</externalId>
+        <label>Competitors</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Copado</fullName>
+                    <default>false</default>
+                    <label>Copado</label>
+                </value>
+                <value>
+                    <fullName>Flosum</fullName>
+                    <default>false</default>
+                    <label>Flosum</label>
+                </value>
+                <value>
+                    <fullName>Gearset</fullName>
+                    <default>false</default>
+                    <label>Gearset</label>
+                </value>
+                <value>
+                    <fullName>Jenkins</fullName>
+                    <default>false</default>
+                    <label>Jenkins</label>
+                </value>
+                <value>
+                    <fullName>Atlassian - Bamboo</fullName>
+                    <default>false</default>
+                    <label>Bamboo</label>
+                </value>
+                <value>
+                    <fullName>Dream factory – Snapshot</fullName>
+                    <default>false</default>
+                    <label>Snapshot</label>
+                </value>
+                <value>
+                    <fullName>Jitterbit</fullName>
+                    <default>false</default>
+                    <label>Jitterbit</label>
+                </value>
+                <value>
+                    <fullName>Odaseva</fullName>
+                    <default>false</default>
+                    <label>Odaseva</label>
+                </value>
+                <value>
+                    <fullName>Homegrown</fullName>
+                    <default>false</default>
+                    <label>Homegrown</label>
+                </value>
+                <value>
+                    <fullName>Provar</fullName>
+                    <default>false</default>
+                    <label>Provar</label>
+                </value>
+                <value>
+                    <fullName>None</fullName>
+                    <default>false</default>
+                    <label>None</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Contact_Name__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Contact Name</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Opportunities</relationshipLabel>
+        <relationshipName>Opportunities</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ContractId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Country__c</fullName>
+        <externalId>false</externalId>
+        <formula>Account.BillingCountry</formula>
+        <inlineHelpText>Billing Country</inlineHelpText>
+        <label>Country</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Discount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Use this field to capture any discounts given to the client. Entering a value in this field will automatically update the amounts field.</description>
+        <externalId>false</externalId>
+        <label>Discount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Evaluation_End_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Evaluation End Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Evaluation_Start_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Evaluation Start Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ExpectedRevenue</fullName>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Implementation_End_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Implementation End Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Implementation_Engineer__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Implementation Engineer</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Opportunities1</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Implementation_Start_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Implementation Start Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>IsPrivate</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Is_eligibile_for_Premier_support__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Enable if the Customer is eligible for Premier support.
+If this is not enabled ,it means customer is availing standard support services.</inlineHelpText>
+        <label>Is eligibile for Premier support</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>LeadSource</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>LinkedIn_URL__c</fullName>
+        <externalId>false</externalId>
+        <label>LinkedIn URL</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Name</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>NextStep</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>No_of_Subscriptions__c</fullName>
+        <description>Stores No of Subscriptions per client</description>
+        <externalId>false</externalId>
+        <label>No. of Subscriptions</label>
+        <precision>7</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Product_Subscriptions__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Product Subscriptions</label>
+        <summarizedField>OpportunityLineItem.Quantity</summarizedField>
+        <summaryFilterItems>
+            <field>OpportunityLineItem.Is_this_PS__c</field>
+            <operation>notEqual</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>OpportunityLineItem.OpportunityId</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Opportunity Amount</label>
+        <summarizedField>OpportunityLineItem.Total_Price__c</summarizedField>
+        <summaryForeignKey>OpportunityLineItem.OpportunityId</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Opportunity Number</label>
+        <length>30</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Opportunity Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_Competitors__c</fullName>
+        <externalId>false</externalId>
+        <label>Other Competitors</label>
+        <length>90</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OwnerId</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>PS_Hrs__c</fullName>
+        <description>Stores No of Professional Svc Hours per client.</description>
+        <externalId>false</externalId>
+        <label>PS Hrs</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Playground_Set__c</fullName>
+        <externalId>false</externalId>
+        <label>Playground Set</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>StageName</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Playground Set 01</fullName>
+                    <default>false</default>
+                    <label>Playground Set 01</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 02</fullName>
+                    <default>false</default>
+                    <label>Playground Set 02</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 03</fullName>
+                    <default>false</default>
+                    <label>Playground Set 03</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 04</fullName>
+                    <default>false</default>
+                    <label>Playground Set 04</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 05</fullName>
+                    <default>false</default>
+                    <label>Playground Set 05</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 06</fullName>
+                    <default>false</default>
+                    <label>Playground Set 06</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 07</fullName>
+                    <default>false</default>
+                    <label>Playground Set 07</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 08</fullName>
+                    <default>false</default>
+                    <label>Playground Set 08</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 09</fullName>
+                    <default>false</default>
+                    <label>Playground Set 09</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 10</fullName>
+                    <default>false</default>
+                    <label>Playground Set 10</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 11</fullName>
+                    <default>false</default>
+                    <label>Playground Set 11</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 12</fullName>
+                    <default>false</default>
+                    <label>Playground Set 12</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 13</fullName>
+                    <default>false</default>
+                    <label>Playground Set 13</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 14</fullName>
+                    <default>false</default>
+                    <label>Playground Set 14</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 15</fullName>
+                    <default>false</default>
+                    <label>Playground Set 15</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 16</fullName>
+                    <default>false</default>
+                    <label>Playground Set 16</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 17</fullName>
+                    <default>false</default>
+                    <label>Playground Set 17</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 18</fullName>
+                    <default>false</default>
+                    <label>Playground Set 18</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 19</fullName>
+                    <default>false</default>
+                    <label>Playground Set 19</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 20</fullName>
+                    <default>false</default>
+                    <label>Playground Set 20</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 21</fullName>
+                    <default>false</default>
+                    <label>Playground Set 21</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 22</fullName>
+                    <default>false</default>
+                    <label>Playground Set 22</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 23</fullName>
+                    <default>false</default>
+                    <label>Playground Set 23</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 24</fullName>
+                    <default>false</default>
+                    <label>Playground Set 24</label>
+                </value>
+                <value>
+                    <fullName>Playground Set 25</fullName>
+                    <default>false</default>
+                    <label>Playground Set 25</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 01</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 02</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 03</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 04</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 05</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 06</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 07</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 08</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 09</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 10</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 11</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 12</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 13</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 14</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 15</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 16</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 17</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 18</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 19</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 20</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 21</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 22</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 23</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 24</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Procurement</controllingFieldValue>
+                <controllingFieldValue>Negotiation</controllingFieldValue>
+                <controllingFieldValue>Procurement Stage Continued</controllingFieldValue>
+                <controllingFieldValue>Closed Won-Implementation Incomplete</controllingFieldValue>
+                <controllingFieldValue>Proposal</controllingFieldValue>
+                <controllingFieldValue>Trial Completed</controllingFieldValue>
+                <controllingFieldValue>PlayGround</controllingFieldValue>
+                <controllingFieldValue>Closed Won</controllingFieldValue>
+                <valueName>Playground Set 25</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Pre_SalesEngineer__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Customer Success Engineer</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Opportunities</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Pricebook2Id</fullName>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>PriorStage__c</fullName>
+        <description>Captures the previous stage value</description>
+        <externalId>false</externalId>
+        <label>PriorStage</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Probability</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>StageName</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Stage_Negotiation_Set_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Stage &quot;Negotiation&quot; Set Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Stage_Playground_Set_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Stage &quot;Playground&quot; Set Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Stage_Proposal_Set_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Stage &quot;Proposal&quot; Set Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Stage_Trial_completed_Set_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Stage &quot;Trial completed&quot; Set Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>SyncedQuoteId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Team_Size__c</fullName>
+        <description>Created to REPLACE the naming convention for Quantity field to represent accurately as Team Size</description>
+        <externalId>false</externalId>
+        <label>Team Size</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Time_Zone__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the Time Zone of the client (Ex: EST, PST, IST etc.)</inlineHelpText>
+        <label>Time Zone</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TotalOpportunityQuantity</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Total_Discount_c__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(Total_List_Price_for_Opp_Products__c != 0, 1 - (Amount/Total_List_Price_for_Opp_Products__c), 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Discount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Total_List_Price_for_Opp_Products__c</fullName>
+        <externalId>false</externalId>
+        <label>Total List Price for Opp Products</label>
+        <summarizedField>OpportunityLineItem.Total_List_Price__c</summarizedField>
+        <summaryForeignKey>OpportunityLineItem.OpportunityId</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Products__c</fullName>
+        <externalId>false</externalId>
+        <label>Total Products</label>
+        <summarizedField>OpportunityLineItem.Quantity</summarizedField>
+        <summaryForeignKey>OpportunityLineItem.OpportunityId</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Type</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Version_Control_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Version Control Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>BitBucket</fullName>
+                    <default>false</default>
+                    <label>BitBucket</label>
+                </value>
+                <value>
+                    <fullName>GitHub</fullName>
+                    <default>false</default>
+                    <label>GitHub</label>
+                </value>
+                <value>
+                    <fullName>Perforce</fullName>
+                    <default>false</default>
+                    <label>Perforce</label>
+                </value>
+                <value>
+                    <fullName>SVN</fullName>
+                    <default>false</default>
+                    <label>SVN</label>
+                </value>
+                <value>
+                    <fullName>TFS</fullName>
+                    <default>false</default>
+                    <label>TFS</label>
+                </value>
+                <value>
+                    <fullName>GitLab</fullName>
+                    <default>false</default>
+                    <label>GitLab</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>days_in_Playground__c</fullName>
+        <description>days_in_Playground</description>
+        <externalId>false</externalId>
+        <label># of days in Playground</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>of_Months__c</fullName>
+        <defaultValue>12</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Is this an annual subscription? If not, please enter the number of months</inlineHelpText>
+        <label># of Months</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>of_days_in_Negotiation__c</fullName>
+        <description># of days in Negotiation</description>
+        <externalId>false</externalId>
+        <label># of days in Negotiation</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>of_days_in_Proposal__c</fullName>
+        <externalId>false</externalId>
+        <label># of days in Proposal</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>of_days_in_Trail_Completed__c</fullName>
+        <description># of days in Trail Completed</description>
+        <externalId>false</externalId>
+        <label># of days in Trail Completed</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <listViews>
+        <fullName>Abhi_s_Opportunities</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>OPPORTUNITY.NEXT_STEP</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.FIRST_NAME</field>
+            <operation>equals</operation>
+            <value>Abhilash</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.STAGE_NAME</field>
+            <operation>notEqual</operation>
+            <value>Closed Won,Closed Lost</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Opportunity.AutoRABIT</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.STAGE_NAME</field>
+            <operation>equals</operation>
+            <value>Closed Won</value>
+        </filters>
+        <label>Abhi&apos;s Opportunities</label>
+        <language>en_US</language>
+        <sharedTo>
+            <group>AutoRABIT_Sales_Group</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>All_Closed_Won</fullName>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>OPPORTUNITY.NEXT_STEP</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.STAGE_NAME</field>
+            <operation>equals</operation>
+            <value>Closed Won</value>
+        </filters>
+        <label>All Closed Won</label>
+        <language>en_US</language>
+    </listViews>
+    <listViews>
+        <fullName>BPM_Opportunities</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>UPDATEDBY_USER.ALIAS</columns>
+        <columns>OPPORTUNITY.LAST_UPDATE</columns>
+        <columns>OPPORTUNITY.LAST_ACTIVITY</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>012F0000001K371,012F0000001K376,012F0000001clfE</value>
+        </filters>
+        <label>BPM Opportunities</label>
+        <language>en_US</language>
+        <sharedTo>
+            <group>BPM_Services_Group</group>
+            <group>Consulting_Group</group>
+            <role>AutoRABIT</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Brad_Opportunities</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>PS_Hrs__c</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>OPPORTUNITY.PROBABILITY</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>OPPORTUNITY.NEXT_STEP</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.FIRST_NAME</field>
+            <operation>equals</operation>
+            <value>Brad</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.STAGE_NAME</field>
+            <operation>notEqual</operation>
+            <value>Closed Won,Closed Lost</value>
+        </filters>
+        <label>Brad Opportunities</label>
+        <language>en_US</language>
+        <sharedTo>
+            <group>AutoRABIT_Sales_Group</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Closed_Won_View</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>OPPORTUNITY.NEXT_STEP</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>ACCOUNT.SITE</columns>
+        <columns>OPPORTUNITY.QUANTITY</columns>
+        <columns>OPPORTUNITY.LAST_ACTIVITY</columns>
+        <columns>Contact_Name__c</columns>
+        <columns>Evaluation_End_Date__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.STAGE_NAME</field>
+            <operation>equals</operation>
+            <value>Closed Won</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Opportunity.AutoRABIT</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.NEXT_STEP</field>
+            <operation>notContain</operation>
+            <value>Implementation Complete</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.FIRST_NAME</field>
+            <operation>notContain</operation>
+            <value>Navneeth</value>
+        </filters>
+        <label>Closed Won_Imp_Status Open</label>
+        <language>en_US</language>
+    </listViews>
+    <listViews>
+        <fullName>ClosingNextMonth</fullName>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CLOSED</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.CLOSE_DATE</field>
+            <operation>equals</operation>
+            <value>NEXT_MONTH</value>
+        </filters>
+        <label>Closing Next Month</label>
+    </listViews>
+    <listViews>
+        <fullName>ClosingThisMonth</fullName>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CLOSED</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.CLOSE_DATE</field>
+            <operation>equals</operation>
+            <value>THIS_MONTH</value>
+        </filters>
+        <label>Closing This Month</label>
+    </listViews>
+    <listViews>
+        <fullName>Customer_Success_ROW</fullName>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>Contact_Name__c</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>Evaluation_Start_Date__c</columns>
+        <columns>Evaluation_End_Date__c</columns>
+        <columns>OPPORTUNITY.NEXT_STEP</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <columns>Pre_SalesEngineer__c</columns>
+        <columns>Playground_Set__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Opportunity.AutoRABIT</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.FIRST_NAME</field>
+            <operation>equals</operation>
+            <value>Navneeth</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.STAGE_NAME</field>
+            <operation>equals</operation>
+            <value>Scoping,Trial Initiated,Trial Expired,Trial Completed,PlayGround,Free POC</value>
+        </filters>
+        <label>Customer Success ROW</label>
+        <language>en_US</language>
+        <sharedTo>
+            <group>AutoRABIT_Sales_Group</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Customer_Success_USA</fullName>
+        <booleanFilter>(1 OR 4) AND 2 AND 3</booleanFilter>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>Pre_SalesEngineer__c</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>Evaluation_Start_Date__c</columns>
+        <columns>Evaluation_End_Date__c</columns>
+        <columns>OPPORTUNITY.NEXT_STEP</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Contact_Name__c</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>OPPORTUNITY.LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.STAGE_NAME</field>
+            <operation>equals</operation>
+            <value>Scoping,PlayGround,Free POC,Paid POC,Trial Initiated,Trial Expired</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Opportunity.AutoRABIT</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.FIRST_NAME</field>
+            <operation>notContain</operation>
+            <value>navneeth</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.STAGE_NAME</field>
+            <operation>equals</operation>
+            <value>Trial Completed,Proposal,Negotiation,ROI document</value>
+        </filters>
+        <label>Customer Success USA</label>
+        <language>en_US</language>
+        <sharedTo>
+            <group>AutoRABIT_Sales_Group</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Default_Opportunity_Pipeline</fullName>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CLOSE_DATE</field>
+            <operation>greaterOrEqual</operation>
+            <value>LAST_N_MONTHS:3</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.RECORDTYPE</field>
+            <operation>equals</operation>
+        </filters>
+        <label>Opportunity Pipeline</label>
+    </listViews>
+    <listViews>
+        <fullName>Gary_s_Opportunities</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.FIRST_NAME</field>
+            <operation>equals</operation>
+            <value>Gary</value>
+        </filters>
+        <label>Gary&apos;s Opportunities</label>
+        <language>en_US</language>
+        <sharedTo>
+            <group>AutoRABIT_Sales_Group</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Navneeth_s_Opportunities</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>Pre_SalesEngineer__c</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.FIRST_NAME</field>
+            <operation>equals</operation>
+            <value>Navneeth</value>
+        </filters>
+        <label>Navneeth&apos;s Opportunities</label>
+        <language>en_US</language>
+        <sharedTo>
+            <group>AutoRABIT_Sales_Group</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Opportunities_AR_Current</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>Age_del__c</columns>
+        <columns>OPPORTUNITY.NEXT_STEP</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>OPPORTUNITY.PROBABILITY</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>UPDATEDBY_USER.ALIAS</columns>
+        <columns>OPPORTUNITY.LAST_UPDATE</columns>
+        <columns>OPPORTUNITY.LAST_ACTIVITY</columns>
+        <columns>Evaluation_End_Date__c</columns>
+        <columns>Evaluation_Start_Date__c</columns>
+        <columns>Contact_Name__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.STAGE_NAME</field>
+            <operation>notEqual</operation>
+            <value>Closed Won,Closed Lost,Unresponsive</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Opportunity.AutoRABIT</value>
+        </filters>
+        <label>Opportunities_AR_Current</label>
+        <language>en_US</language>
+    </listViews>
+    <listViews>
+        <fullName>Sundeep_Opportunities</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ALIAS</field>
+            <operation>equals</operation>
+            <value>skupp</value>
+        </filters>
+        <label>Sundeep Opportunities</label>
+        <language>en_US</language>
+    </listViews>
+    <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
+    <recordTypeTrackHistory>true</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>AutoRABIT</fullName>
+        <active>true</active>
+        <businessProcess>AutoRABIT Record Type</businessProcess>
+        <description>For opportunities related to AutoRABIT</description>
+        <label>AutoRABIT</label>
+        <picklistValues>
+            <picklist>Business_Type__c</picklist>
+            <values>
+                <fullName>Dev Ops Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Services</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Competitors__c</picklist>
+            <values>
+                <fullName>Atlassian - Bamboo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Copado</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dream factory %E2%80%93 Snapshot</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flosum</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gearset</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Homegrown</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Jenkins</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Jitterbit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Odaseva</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provar</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ForecastCategoryName</picklist>
+            <values>
+                <fullName>Best Case</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Commit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Omitted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pipeline</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Is_eligibile_for_Premier_support__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LeadSource</picklist>
+            <values>
+                <fullName>Cold Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Conference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Demand Generation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Direct Mail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Existing Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>External Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flosum</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>List Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Public Relations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SFDC Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SFDC Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Self Generated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Internal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Trade Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web Site</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Word of mouth</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Playground_Set__c</picklist>
+            <values>
+                <fullName>Playground Set 01</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 02</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 03</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 04</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 05</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 06</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 07</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 08</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 09</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 10</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 11</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 13</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 14</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 16</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 17</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 18</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 19</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 20</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 21</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 22</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 23</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 24</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playground Set 25</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Existing Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Business</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Version_Control_Type__c</picklist>
+            <values>
+                <fullName>BitBucket</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GitHub</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Perforce</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SVN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TFS</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>OPPORTUNITY.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ACCOUNT.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>OPPORTUNITY.CLOSE_DATE</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>OPPORTUNITY.NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ACCOUNT.NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ACCOUNT.SITE</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>OPPORTUNITY.NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ACCOUNT.NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ACCOUNT.SITE</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>OPPORTUNITY.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ACCOUNT.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ACCOUNT.SITE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>OPPORTUNITY.STAGE_NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>OPPORTUNITY.CLOSE_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <validationRules>
+        <fullName>Competitior_Info_Mandatory</fullName>
+        <active>false</active>
+        <errorConditionFormula>ISBlank(Competitors__c)</errorConditionFormula>
+        <errorMessage>Please insert the name of the competitors. If there are no competitors, please choose None as an option.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Lock_Records_to_Prevent_Other_User_Edits</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND($User.ProfileId = Owner.Profile.Id,  $Profile.Name ==&apos;System Adminstrator&apos;)</errorConditionFormula>
+        <errorMessage>Only the Owner of the Opp can make changes to the record. Please contact the Owner of the record for further action.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>PG_set_madatory_on_PG_stage</fullName>
+        <active>true</active>
+        <description>The &quot;Playground Set&quot; field is mandatory when stage is Playground</description>
+        <errorConditionFormula>AND(ISPICKVAL( StageName,&apos;Playground&apos;),ISBLANK(TEXT( Playground_Set__c)))</errorConditionFormula>
+        <errorDisplayField>Playground_Set__c</errorDisplayField>
+        <errorMessage>Playground set is a mandatory field</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Premium_support_field_mandatory</fullName>
+        <active>true</active>
+        <description>This rule will make the premium support field mandatory if the stage is set to Closed Won</description>
+        <errorConditionFormula>AND(ISPICKVAL( StageName,&apos;Closed Won&apos;),ISBLANK(TEXT( Is_eligibile_for_Premier_support__c)))</errorConditionFormula>
+        <errorDisplayField>Is_eligibile_for_Premier_support__c</errorDisplayField>
+        <errorMessage>This field is required for Closed Won Stage</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VC_Type_mandatory_on_PG_stage</fullName>
+        <active>true</active>
+        <description>The &quot;Version Control Type&quot; field is mandatory on Playground stage.</description>
+        <errorConditionFormula>AND(ISPICKVAL( StageName,&apos;Playground&apos;),ISBLANK(TEXT( Version_Control_Type__c )))</errorConditionFormula>
+        <errorDisplayField>Version_Control_Type__c</errorDisplayField>
+        <errorMessage>Version Control Type is a mandatory field</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Scope_Information_Document</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Scope Information Document</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>window.open(&quot;/apex/ScopeInformationPage?opptyId={!Opportunity.Id}&amp;company_name={!URLENCODE(Opportunity.Account)}&quot;, &quot;_blank&quot;);</url>
+    </webLinks>
+</CustomObject>
