@@ -12,6 +12,7 @@
     </fields>
     <fields>
         <fullName>PicklistRun1__c</fullName>
+        <description>TestingPicklistdeploy</description>
         <externalId>false</externalId>
         <label>PicklistRun1</label>
         <required>false</required>
@@ -40,6 +41,26 @@
                     <fullName>4</fullName>
                     <default>false</default>
                     <label>4</label>
+                </value>
+                <value>
+                    <fullName>5</fullName>
+                    <default>false</default>
+                    <label>5</label>
+                </value>
+                <value>
+                    <fullName>6</fullName>
+                    <default>false</default>
+                    <label>6</label>
+                </value>
+                <value>
+                    <fullName>7</fullName>
+                    <default>false</default>
+                    <label>7</label>
+                </value>
+                <value>
+                    <fullName>8</fullName>
+                    <default>false</default>
+                    <label>8</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
