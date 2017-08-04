@@ -701,6 +701,10 @@
         <name>Document</name>
     </types>
     <types>
+        <members>rcpana__Training2__c.TestingDuplicateRule</members>
+        <name>DuplicateRule</name>
+    </types>
+    <types>
         <members>Case.Standard</members>
         <name>EscalationRule</name>
     </types>
