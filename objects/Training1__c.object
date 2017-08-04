@@ -65,4 +65,9 @@
             </valueSetDefinition>
         </valueSet>
     </fields>
+    <recordTypes>
+        <fullName>TestingRecordTypeDeployment</fullName>
+        <active>true</active>
+        <label>TestingRecordTypeDeployment</label>
+    </recordTypes>
 </CustomObject>

@@ -901,6 +901,7 @@
         <members>Idea.InternalIdeasIdeaRecordType</members>
         <members>Metric.Completion</members>
         <members>Metric.Progress</members>
+        <members>Training1__c.TestingRecordTypeDeployment</members>
         <name>RecordType</name>
     </types>
     <types>
