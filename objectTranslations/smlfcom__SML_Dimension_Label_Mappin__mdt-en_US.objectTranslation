@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Chart Type --></label>
+        <name>smlfcom__Chart_Type__c</name>
+        <picklistValues>
+            <masterLabel>Flow</masterLabel>
+            <translation><!-- Flow --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Forecast_Details</masterLabel>
+            <translation><!-- Forecast_Details --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Quarterly_Summary</masterLabel>
+            <translation><!-- Quarterly_Summary --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Waterfall</masterLabel>
+            <translation><!-- Waterfall --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>custom_trendline</masterLabel>
+            <translation><!-- custom_trendline --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Dimension API Name --></label>
+        <name>smlfcom__Dimension_API_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dimension Label --></label>
+        <name>smlfcom__Dimension_Label__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Linked Field? --></label>
+        <name>smlfcom__Is_Linked_Field__c</name>
+    </fields>
+</CustomObjectTranslation>

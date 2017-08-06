@@ -41,6 +41,23 @@
         <fullName>Discount</fullName>
     </fields>
     <fields>
+        <fullName>Discount__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Discount percentage based on Total price and Sale Price.</inlineHelpText>
+        <label>Discount Given (%)</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Is_this_PS__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Is this a Service ?</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>ListPrice</fullName>
     </fields>
     <fields>
@@ -67,6 +84,42 @@
         <fullName>TotalPrice</fullName>
     </fields>
     <fields>
+        <fullName>Total_List_Price__c</fullName>
+        <externalId>false</externalId>
+        <formula>Quantity *  ListPrice</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total List Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Price__c</fullName>
+        <externalId>false</externalId>
+        <formula>if( Is_this_PS__c = false, (Quantity* UnitPrice* of_Months__c),Quantity* UnitPrice)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Quantity*Sale Price*number of months</inlineHelpText>
+        <label>Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
         <fullName>UnitPrice</fullName>
+    </fields>
+    <fields>
+        <fullName>of_Months__c</fullName>
+        <defaultValue>12</defaultValue>
+        <description>Contract period</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If this is NOT an annual subs, please enter the number of Months.</inlineHelpText>
+        <label># of Months</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
 </CustomObject>

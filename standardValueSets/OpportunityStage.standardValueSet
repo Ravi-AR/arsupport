@@ -2,75 +2,130 @@
 <StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <sorted>false</sorted>
     <standardValue>
-        <fullName>Prospecting</fullName>
+        <fullName>Demo Performed</fullName>
         <default>false</default>
-        <label>Prospecting</label>
+        <label>Demo Performed</label>
         <closed>false</closed>
         <forecastCategory>Pipeline</forecastCategory>
         <probability>10</probability>
         <won>false</won>
     </standardValue>
     <standardValue>
-        <fullName>Qualification</fullName>
+        <fullName>Schedule Planning</fullName>
         <default>false</default>
-        <label>Qualification</label>
+        <label>Schedule Planning</label>
         <closed>false</closed>
         <forecastCategory>Pipeline</forecastCategory>
-        <probability>10</probability>
+        <probability>15</probability>
         <won>false</won>
     </standardValue>
     <standardValue>
-        <fullName>Needs Analysis</fullName>
+        <fullName>Scoping</fullName>
         <default>false</default>
-        <label>Needs Analysis</label>
+        <label>Scoping</label>
         <closed>false</closed>
         <forecastCategory>Pipeline</forecastCategory>
         <probability>20</probability>
         <won>false</won>
     </standardValue>
     <standardValue>
-        <fullName>Value Proposition</fullName>
+        <fullName>PlayGround</fullName>
         <default>false</default>
-        <label>Value Proposition</label>
+        <description>Set to this Stage when opportunity is used the Playground environment</description>
+        <label>PlayGround</label>
         <closed>false</closed>
         <forecastCategory>Pipeline</forecastCategory>
         <probability>50</probability>
         <won>false</won>
     </standardValue>
     <standardValue>
-        <fullName>Id. Decision Makers</fullName>
+        <fullName>Free POC</fullName>
         <default>false</default>
-        <label>Id. Decision Makers</label>
+        <label>Free POC</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>30</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Paid POC</fullName>
+        <default>false</default>
+        <label>Paid POC</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>30</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Trial Initiated</fullName>
+        <default>false</default>
+        <label>Trial Initiated</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>25</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Trial Expired</fullName>
+        <default>false</default>
+        <label>Trial Expired</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>5</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Trial Completed</fullName>
+        <default>false</default>
+        <label>Trial Completed</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>30</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Proposal</fullName>
+        <default>false</default>
+        <label>Proposal</label>
+        <closed>false</closed>
+        <forecastCategory>BestCase</forecastCategory>
+        <probability>50</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>ROI document</fullName>
+        <default>false</default>
+        <label>ROI document</label>
         <closed>false</closed>
         <forecastCategory>Pipeline</forecastCategory>
         <probability>60</probability>
         <won>false</won>
     </standardValue>
     <standardValue>
-        <fullName>Perception Analysis</fullName>
+        <fullName>Negotiation</fullName>
         <default>false</default>
-        <label>Perception Analysis</label>
+        <label>Negotiation</label>
         <closed>false</closed>
-        <forecastCategory>Pipeline</forecastCategory>
-        <probability>70</probability>
+        <forecastCategory>BestCase</forecastCategory>
+        <probability>60</probability>
         <won>false</won>
     </standardValue>
     <standardValue>
-        <fullName>Proposal/Price Quote</fullName>
+        <fullName>Procurement</fullName>
         <default>false</default>
-        <label>Proposal/Price Quote</label>
+        <label>Procurement</label>
         <closed>false</closed>
-        <forecastCategory>Pipeline</forecastCategory>
-        <probability>75</probability>
+        <forecastCategory>Forecast</forecastCategory>
+        <probability>85</probability>
         <won>false</won>
     </standardValue>
     <standardValue>
-        <fullName>Negotiation/Review</fullName>
+        <fullName>Procurement Stage Continued</fullName>
         <default>false</default>
-        <label>Negotiation/Review</label>
+        <label>Procurement Stage Continued</label>
         <closed>false</closed>
-        <forecastCategory>Pipeline</forecastCategory>
-        <probability>90</probability>
+        <forecastCategory>Forecast</forecastCategory>
+        <probability>85</probability>
         <won>false</won>
     </standardValue>
     <standardValue>
@@ -83,10 +138,38 @@
         <won>true</won>
     </standardValue>
     <standardValue>
+        <fullName>Closed Won-Implementation Incomplete</fullName>
+        <default>false</default>
+        <description>Closed Won-Implementation Incomplete - Schedule Technical Discovery Session</description>
+        <label>Closed Won-Implementation Incomplete</label>
+        <closed>true</closed>
+        <forecastCategory>Closed</forecastCategory>
+        <probability>100</probability>
+        <won>true</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Unresponsive</fullName>
+        <default>false</default>
+        <label>Unresponsive</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>0</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
         <fullName>Closed Lost</fullName>
         <default>false</default>
         <label>Closed Lost</label>
         <closed>true</closed>
+        <forecastCategory>Omitted</forecastCategory>
+        <probability>0</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>PS Sub Item</fullName>
+        <default>false</default>
+        <label>PS Sub Item</label>
+        <closed>false</closed>
         <forecastCategory>Omitted</forecastCategory>
         <probability>0</probability>
         <won>false</won>

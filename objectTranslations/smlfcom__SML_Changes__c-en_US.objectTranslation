@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Account --></label>
+        <name>smlfcom__Account__c</name>
+        <relationshipLabel><!-- SML Changes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Current Bucket --></label>
+        <name>smlfcom__Current_Bucket__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dimension-1 --></label>
+        <name>smlfcom__Dimension1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dimension-2 --></label>
+        <name>smlfcom__Dimension2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dimension-3 --></label>
+        <name>smlfcom__Dimension3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dimension-4 --></label>
+        <name>smlfcom__Dimension4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dimension-5 --></label>
+        <name>smlfcom__Dimension5__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dimension-6 --></label>
+        <name>smlfcom__Dimension6__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dimension-7 --></label>
+        <name>smlfcom__Dimension7__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dimension-8 --></label>
+        <name>smlfcom__Dimension8__c</name>
+    </fields>
+    <fields>
+        <label><!-- Filter Chart Type --></label>
+        <name>smlfcom__Filter_Chart_Type__c</name>
+        <picklistValues>
+            <masterLabel>Custom_Trendline</masterLabel>
+            <translation><!-- Custom_Trendline --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Duration</masterLabel>
+            <translation><!-- Duration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extrapolation_Whatif</masterLabel>
+            <translation><!-- Extrapolation_Whatif --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Flow</masterLabel>
+            <translation><!-- Flow --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Forecast_Details</masterLabel>
+            <translation><!-- Forecast_Details --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Quarterly_Summary</masterLabel>
+            <translation><!-- Quarterly_Summary --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SML Change Filter</masterLabel>
+            <translation><!-- SML Change Filter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Waterfall</masterLabel>
+            <translation><!-- Waterfall --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Filter Fields --></label>
+        <name>smlfcom__Filter_Fields__c</name>
+        <picklistValues>
+            <masterLabel>Dimension1__c</masterLabel>
+            <translation><!-- Dimension1__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dimension2__c</masterLabel>
+            <translation><!-- Dimension2__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dimension3__c</masterLabel>
+            <translation><!-- Dimension3__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dimension5__c</masterLabel>
+            <translation><!-- Dimension5__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dimension6__c</masterLabel>
+            <translation><!-- Dimension6__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dimension7__c</masterLabel>
+            <translation><!-- Dimension7__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Record_Name__c</masterLabel>
+            <translation><!-- Record_Name__c --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Filter Value --></label>
+        <name>smlfcom__Filter_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Test Record? --></label>
+        <name>smlfcom__Is_Test_Record__c</name>
+    </fields>
+    <fields>
+        <label><!-- Metric2 --></label>
+        <name>smlfcom__Metric2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Metric 3 --></label>
+        <name>smlfcom__Metric_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Metric 4 --></label>
+        <name>smlfcom__Metric_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Metric 5 --></label>
+        <name>smlfcom__Metric_5__c</name>
+    </fields>
+    <fields>
+        <label><!-- Metric --></label>
+        <name>smlfcom__Metric__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owner --></label>
+        <name>smlfcom__Owner__c</name>
+        <relationshipLabel><!-- SML Changes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Period --></label>
+        <name>smlfcom__Period__c</name>
+    </fields>
+    <fields>
+        <label><!-- Previous Bucket --></label>
+        <name>smlfcom__Previous_Bucket__c</name>
+    </fields>
+    <fields>
+        <label><!-- Previous Metric --></label>
+        <name>smlfcom__Previous_Metric__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record Name --></label>
+        <name>smlfcom__Record_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- SF Id --></label>
+        <name>smlfcom__SF_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Snapshot Duration --></label>
+        <name>smlfcom__Snapshot_Duration__c</name>
+        <picklistValues>
+            <masterLabel>six_months</masterLabel>
+            <translation><!-- six_months --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>this_month</masterLabel>
+            <translation><!-- this_month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>this_quarter</masterLabel>
+            <translation><!-- this_quarter --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Start Date Filter --></label>
+        <name>smlfcom__Start_Date_Filter__c</name>
+        <picklistValues>
+            <masterLabel>14</masterLabel>
+            <translation><!-- 14 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7</masterLabel>
+            <translation><!-- 7 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Qrtr</masterLabel>
+            <translation><!-- Qrtr --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Test Field To Be Deleted --></label>
+        <name>smlfcom__Test_Field_To_Be_Deleted__c</name>
+    </fields>
+    <fields>
+        <label><!-- View Type (Text) --></label>
+        <name>smlfcom__View_Type_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- View Type --></label>
+        <name>smlfcom__View_Type__c</name>
+        <picklistValues>
+            <masterLabel>Custom_Trendline</masterLabel>
+            <translation><!-- Custom_Trendline --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Duration</masterLabel>
+            <translation><!-- Duration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extrapolation_Whatif</masterLabel>
+            <translation><!-- Extrapolation_Whatif --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Flow</masterLabel>
+            <translation><!-- Flow --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Forecast_Details</masterLabel>
+            <translation><!-- Forecast_Details --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Quarterly_Summary</masterLabel>
+            <translation><!-- Quarterly_Summary --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SML Change Filter</masterLabel>
+            <translation><!-- SML Change Filter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Waterfall</masterLabel>
+            <translation><!-- Waterfall --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- previous_ref_date --></label>
+        <name>smlfcom__previous_ref_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- ref_date --></label>
+        <name>smlfcom__ref_date__c</name>
+    </fields>
+    <layouts>
+        <layout>SML Change Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Dimensions --></label>
+            <section>Dimensions</section>
+        </sections>
+        <sections>
+            <label><!-- Pipeline --></label>
+            <section>Pipeline</section>
+        </sections>
+        <sections>
+            <label><!-- Waterfall --></label>
+            <section>Waterfall</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

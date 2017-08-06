@@ -4293,7 +4293,7 @@
             <integrationValue>United States</integrationValue>
             <isoCode>US</isoCode>
             <label>United States</label>
-            <orgDefault>false</orgDefault>
+            <orgDefault>true</orgDefault>
             <standard>true</standard>
             <states>
                 <active>false</active>
@@ -4857,9 +4857,9 @@
         </countries>
         <countries>
             <active>true</active>
-            <integrationValue>Vietnam</integrationValue>
+            <integrationValue>Viet Nam</integrationValue>
             <isoCode>VN</isoCode>
-            <label>Vietnam</label>
+            <label>Viet Nam</label>
             <orgDefault>false</orgDefault>
             <standard>true</standard>
             <visible>true</visible>

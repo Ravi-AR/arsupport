@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Reports Junction</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Reports Junction</value>
+    </caseValues>
+    <fields>
+        <label><!-- Component ID --></label>
+        <name>Component_ID__c</name>
+        <relationshipLabel><!-- Reports Junction --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Operation ID --></label>
+        <name>Operation_ID__c</name>
+        <relationshipLabel><!-- Reports Junction --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

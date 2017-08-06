@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- AmountValue --></label>
+        <name>smlfcom__AmountValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Avg days to close --></label>
+        <name>smlfcom__Avg_days_to_close__c</name>
+    </fields>
+    <fields>
+        <label><!-- Avg deal amount --></label>
+        <name>smlfcom__Avg_deal_amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Created By User --></label>
+        <name>smlfcom__Created_By_User__c</name>
+        <relationshipLabel><!-- SML Stores --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Data Source Name --></label>
+        <name>smlfcom__Data_Source_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dont Use --></label>
+        <name>smlfcom__DateValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Value --></label>
+        <name>smlfcom__Date_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date --></label>
+        <name>smlfcom__Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dim Type --></label>
+        <name>smlfcom__Dim_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dim Value --></label>
+        <name>smlfcom__Dim_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dimension-1 --></label>
+        <name>smlfcom__Dimension_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dimension-2 --></label>
+        <name>smlfcom__Dimension_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dimension-3 --></label>
+        <name>smlfcom__Dimension_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dimension-4 --></label>
+        <name>smlfcom__Dimension_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dimension-5 --></label>
+        <name>smlfcom__Dimension_5__c</name>
+    </fields>
+    <fields>
+        <label><!-- Endpoint parameters --></label>
+        <name>smlfcom__Endpoint_parameters__c</name>
+    </fields>
+    <fields>
+        <label><!-- Forecast Type --></label>
+        <name>smlfcom__Forecast_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Global? --></label>
+        <name>smlfcom__Global__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insight Chart Dates --></label>
+        <name>smlfcom__Insight_Chart_Dates__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insight Chart Dimensions --></label>
+        <name>smlfcom__Insight_Chart_Dimensions__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insight Chart Measures --></label>
+        <name>smlfcom__Insight_Chart_Measures__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insight Chart Name --></label>
+        <name>smlfcom__Insight_Chart_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insight Chart Objects --></label>
+        <name>smlfcom__Insight_Chart_Objects__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Dimension --></label>
+        <name>smlfcom__Insight_Dimension__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insight HTML --></label>
+        <name>smlfcom__Insight_HTML__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insight Image Location --></label>
+        <name>smlfcom__Insight_Image_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insight Measure Value --></label>
+        <name>smlfcom__Insight_Measure_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insight Message --></label>
+        <name>smlfcom__Insight_Message__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insight Placement --></label>
+        <name>smlfcom__Insight_Placement__c</name>
+        <picklistValues>
+            <masterLabel>Duration</masterLabel>
+            <translation><!-- Duration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Flow</masterLabel>
+            <translation><!-- Flow --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Forecast</masterLabel>
+            <translation><!-- Forecast --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Main</masterLabel>
+            <translation><!-- Main --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Waterfall</masterLabel>
+            <translation><!-- Waterfall --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Insight Title --></label>
+        <name>smlfcom__Insight_Title__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Test Record? --></label>
+        <name>smlfcom__Is_Test_Record__c</name>
+    </fields>
+    <fields>
+        <label><!-- Load --></label>
+        <name>smlfcom__Load__c</name>
+        <picklistValues>
+            <masterLabel>Full file</masterLabel>
+            <translation><!-- Full file --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Incremental</masterLabel>
+            <translation><!-- Incremental --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Metric-1 --></label>
+        <name>smlfcom__Metric_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Metric-2 --></label>
+        <name>smlfcom__Metric_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notify Management --></label>
+        <name>smlfcom__Notify_Management__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notify Manager --></label>
+        <name>smlfcom__Notify_Manager__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notify Owner --></label>
+        <name>smlfcom__Notify_Owner__c</name>
+    </fields>
+    <fields>
+        <label><!-- NumDaysIn --></label>
+        <name>smlfcom__NumDaysIn__c</name>
+    </fields>
+    <fields>
+        <label><!-- Num of opps --></label>
+        <name>smlfcom__Num_of_opps__c</name>
+    </fields>
+    <fields>
+        <label><!-- Num sales reps --></label>
+        <name>smlfcom__Num_sales_reps__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object --></label>
+        <name>smlfcom__Object__c</name>
+    </fields>
+    <fields>
+        <label><!-- Period --></label>
+        <name>smlfcom__Period__c</name>
+        <picklistValues>
+            <masterLabel>Last Year</masterLabel>
+            <translation><!-- Last Year --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Previous History</masterLabel>
+            <translation><!-- Previous History --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>This Year</masterLabel>
+            <translation><!-- This Year --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Request Details --></label>
+        <name>smlfcom__Request_Details__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rule Action --></label>
+        <name>smlfcom__Rule_Action__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rule Desc --></label>
+        <name>smlfcom__Rule_Desc__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rule Id --></label>
+        <name>smlfcom__Rule_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rule --></label>
+        <name>smlfcom__Rule__c</name>
+    </fields>
+    <fields>
+        <label><!-- Stage --></label>
+        <name>smlfcom__Stage__c</name>
+    </fields>
+    <fields>
+        <label><!-- System --></label>
+        <name>smlfcom__System__c</name>
+        <picklistValues>
+            <masterLabel>Aria</masterLabel>
+            <translation><!-- Aria --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Netsuite</masterLabel>
+            <translation><!-- Netsuite --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SFTP</masterLabel>
+            <translation><!-- SFTP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce</masterLabel>
+            <translation><!-- Salesforce --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Workday</masterLabel>
+            <translation><!-- Workday --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zuora</masterLabel>
+            <translation><!-- Zuora --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Text1 --></label>
+        <name>smlfcom__Text1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Text2 --></label>
+        <name>smlfcom__Text2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Text3 --></label>
+        <name>smlfcom__Text3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Text4 --></label>
+        <name>smlfcom__Text4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Timing Picklist 2 --></label>
+        <name>smlfcom__Timing_Picklist_2__c</name>
+        <picklistValues>
+            <masterLabel>1 hrs</masterLabel>
+            <translation><!-- 1 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10 hrs</masterLabel>
+            <translation><!-- 10 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11 hrs</masterLabel>
+            <translation><!-- 11 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12 hrs</masterLabel>
+            <translation><!-- 12 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13 hrs</masterLabel>
+            <translation><!-- 13 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14 hrs</masterLabel>
+            <translation><!-- 14 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15 hrs</masterLabel>
+            <translation><!-- 15 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16 hrs</masterLabel>
+            <translation><!-- 16 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17 hrs</masterLabel>
+            <translation><!-- 17 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18 hrs</masterLabel>
+            <translation><!-- 18 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19 hrs</masterLabel>
+            <translation><!-- 19 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2 hrs</masterLabel>
+            <translation><!-- 2 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20 hrs</masterLabel>
+            <translation><!-- 20 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21 hrs</masterLabel>
+            <translation><!-- 21 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>22 hrs</masterLabel>
+            <translation><!-- 22 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>23 hrs</masterLabel>
+            <translation><!-- 23 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>24 hrs</masterLabel>
+            <translation><!-- 24 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3 hrs</masterLabel>
+            <translation><!-- 3 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4 hrs</masterLabel>
+            <translation><!-- 4 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5 hrs</masterLabel>
+            <translation><!-- 5 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6 hrs</masterLabel>
+            <translation><!-- 6 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7 hrs</masterLabel>
+            <translation><!-- 7 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8 hrs</masterLabel>
+            <translation><!-- 8 hrs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9 hrs</masterLabel>
+            <translation><!-- 9 hrs --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Timing --></label>
+        <name>smlfcom__Timing__c</name>
+        <picklistValues>
+            <masterLabel>Daily</masterLabel>
+            <translation><!-- Daily --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Monthly</masterLabel>
+            <translation><!-- Monthly --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weekly</masterLabel>
+            <translation><!-- Weekly --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>smlfcom__Type__c</name>
+        <picklistValues>
+            <masterLabel>Push To Salesforce</masterLabel>
+            <translation><!-- Push To Salesforce --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Push To Wave</masterLabel>
+            <translation><!-- Push To Wave --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Snapshot</masterLabel>
+            <translation><!-- Snapshot --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- View Type --></label>
+        <name>smlfcom__View_Type__c</name>
+        <picklistValues>
+            <masterLabel>Change</masterLabel>
+            <translation><!-- Change --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Content</masterLabel>
+            <translation><!-- Content --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Data_Sources</masterLabel>
+            <translation><!-- Data_Sources --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Forecast</masterLabel>
+            <translation><!-- Forecast --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Forecast_Metadata</masterLabel>
+            <translation><!-- Forecast_Metadata --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Insight_charts</masterLabel>
+            <translation><!-- Insight_charts --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Insights_Messages</masterLabel>
+            <translation><!-- Insights_Messages --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Matched_Rules</masterLabel>
+            <translation><!-- Matched_Rules --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pipeline</masterLabel>
+            <translation><!-- Pipeline --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rule</masterLabel>
+            <translation><!-- Rule --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stage</masterLabel>
+            <translation><!-- Stage --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SummaryInsights</masterLabel>
+            <translation><!-- SummaryInsights --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Waterfall</masterLabel>
+            <translation><!-- Waterfall --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>custom_trendline</masterLabel>
+            <translation><!-- custom_trendline --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- WinningActivityCountDetails --></label>
+        <name>smlfcom__WinningActivityCountDetails__c</name>
+    </fields>
+    <fields>
+        <label><!-- linear regression formula --></label>
+        <name>smlfcom__linear_regression_formula__c</name>
+    </fields>
+    <fields>
+        <label><!-- percent wins --></label>
+        <name>smlfcom__percent_wins__c</name>
+    </fields>
+    <fields>
+        <label><!-- sftp-password --></label>
+        <name>smlfcom__sftp_password__c</name>
+    </fields>
+    <fields>
+        <label><!-- sftp-username --></label>
+        <name>smlfcom__sftp_username__c</name>
+    </fields>
+    <layouts>
+        <layout>SML Store Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Custom_Trendline --></label>
+            <section>Custom_Trendline</section>
+        </sections>
+        <sections>
+            <label><!-- Data Sources --></label>
+            <section>Data Sources</section>
+        </sections>
+        <sections>
+            <label><!-- Forecast --></label>
+            <section>Forecast</section>
+        </sections>
+        <sections>
+            <label><!-- Forecast_MetaData --></label>
+            <section>Forecast_MetaData</section>
+        </sections>
+        <sections>
+            <label><!-- Insight Chart --></label>
+            <section>Insight Chart</section>
+        </sections>
+        <sections>
+            <label><!-- Insights Messages --></label>
+            <section>Insights Messages</section>
+        </sections>
+        <sections>
+            <label><!-- Miscellaneous --></label>
+            <section>Miscellaneous</section>
+        </sections>
+        <sections>
+            <label><!-- Rule --></label>
+            <section>Rule</section>
+        </sections>
+        <sections>
+            <label><!-- Stage --></label>
+            <section>Stage</section>
+        </sections>
+        <sections>
+            <label><!-- SummaryInsights --></label>
+            <section>SummaryInsights</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

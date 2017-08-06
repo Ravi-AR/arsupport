@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- ActivityCountDetails --></label>
+        <name>smlfcom__ActivityCountDetails__c</name>
+    </fields>
+    <fields>
+        <label><!-- ActivityCount --></label>
+        <name>smlfcom__ActivityCount__c</name>
+    </fields>
+    <fields>
+        <label><!-- AmountChangeActual --></label>
+        <name>smlfcom__AmountChangeActual__c</name>
+    </fields>
+    <fields>
+        <label><!-- AmountChangePercent --></label>
+        <name>smlfcom__AmountChangePercent__c</name>
+    </fields>
+    <fields>
+        <label><!-- CloseDateChange --></label>
+        <name>smlfcom__CloseDateChange__c</name>
+    </fields>
+    <fields>
+        <label><!-- CloseDateQuarterChange --></label>
+        <name>smlfcom__CloseDateQuarterChange__c</name>
+    </fields>
+    <fields>
+        <label><!-- CloseThisQuarterProbability --></label>
+        <name>smlfcom__CloseThisQuarterProbability__c</name>
+    </fields>
+    <fields>
+        <label><!-- CurrentAmount --></label>
+        <name>smlfcom__CurrentAmount__c</name>
+    </fields>
+    <fields>
+        <label><!-- CurrentCloseDate --></label>
+        <name>smlfcom__CurrentCloseDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- DaysInCurrentStage --></label>
+        <name>smlfcom__DaysInCurrentStage__c</name>
+    </fields>
+    <fields>
+        <label><!-- DaysSinceLastActivity --></label>
+        <name>smlfcom__DaysSinceLastActivity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>smlfcom__Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- EarliestCloseDate --></label>
+        <name>smlfcom__EarliestCloseDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ending Bucket --></label>
+        <name>smlfcom__Ending_Bucket__c</name>
+    </fields>
+    <fields>
+        <label><!-- ForecastCategoryRepeat --></label>
+        <name>smlfcom__ForecastCategoryRepeat__c</name>
+    </fields>
+    <fields>
+        <label><!-- From --></label>
+        <name>smlfcom__From__c</name>
+    </fields>
+    <fields>
+        <label><!-- HighestAmount --></label>
+        <name>smlfcom__HighestAmount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Test Record? --></label>
+        <name>smlfcom__Is_Test_Record__c</name>
+    </fields>
+    <fields>
+        <label><!-- LatestActivityEmotionDetails --></label>
+        <name>smlfcom__LatestActivityEmotionDetails__c</name>
+    </fields>
+    <fields>
+        <label><!-- LatestActivityEmotion --></label>
+        <name>smlfcom__LatestActivityEmotion__c</name>
+    </fields>
+    <fields>
+        <label><!-- LatestCloseDate --></label>
+        <name>smlfcom__LatestCloseDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- LowestAmount --></label>
+        <name>smlfcom__LowestAmount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Matched Rule Details --></label>
+        <name>smlfcom__Matched_Rule_Details__c</name>
+    </fields>
+    <fields>
+        <label><!-- Matched Rule Id --></label>
+        <name>smlfcom__Matched_Rule_Id1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Matched Rule Id --></label>
+        <name>smlfcom__Matched_Rule_Id__c</name>
+        <relationshipLabel><!-- SML Opportunity Changes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Matched Rules --></label>
+        <name>smlfcom__Matched_Rules__c</name>
+    </fields>
+    <fields>
+        <label><!-- NegativeReason --></label>
+        <name>smlfcom__NegativeReason__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notified Management --></label>
+        <name>smlfcom__Notified_Management__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notfied Manager --></label>
+        <name>smlfcom__Notified_Manager__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notified User --></label>
+        <name>smlfcom__Notified_User__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notified? --></label>
+        <name>smlfcom__Notified__c</name>
+    </fields>
+    <fields>
+        <label><!-- NumAmtDecreases --></label>
+        <name>smlfcom__NumAmtDecreases__c</name>
+    </fields>
+    <fields>
+        <label><!-- NumAmtIncreases --></label>
+        <name>smlfcom__NumAmtIncreases__c</name>
+    </fields>
+    <fields>
+        <label><!-- NumCloseDtDecreases --></label>
+        <name>smlfcom__NumCloseDtDecreases__c</name>
+    </fields>
+    <fields>
+        <label><!-- NumCloseDtIncreases --></label>
+        <name>smlfcom__NumCloseDtIncreases__c</name>
+    </fields>
+    <fields>
+        <label><!-- NumTimesFCRepeated --></label>
+        <name>smlfcom__NumTimesFCRepeated__c</name>
+    </fields>
+    <fields>
+        <label><!-- NumTimesStageRepeated --></label>
+        <name>smlfcom__NumTimesStageRepeated__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>smlfcom__Opportunity__c</name>
+        <relationshipLabel><!-- SML Opportunity Changes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Period --></label>
+        <name>smlfcom__Period__c</name>
+    </fields>
+    <fields>
+        <label><!-- PositiveReason --></label>
+        <name>smlfcom__PositiveReason__c</name>
+    </fields>
+    <fields>
+        <label><!-- Previous Amount --></label>
+        <name>smlfcom__Previous_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Previous Close Date --></label>
+        <name>smlfcom__Previous_Close_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Previous Forecast Category --></label>
+        <name>smlfcom__Previous_Forecast_Category__c</name>
+    </fields>
+    <fields>
+        <label><!-- Previous Stage --></label>
+        <name>smlfcom__Previous_Stage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Published Date --></label>
+        <name>smlfcom__Published_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Region --></label>
+        <name>smlfcom__Region__c</name>
+        <picklistValues>
+            <masterLabel>East</masterLabel>
+            <translation><!-- East --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>West</masterLabel>
+            <translation><!-- West --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- RepeatedForecastCat --></label>
+        <name>smlfcom__RepeatedForecastCat__c</name>
+    </fields>
+    <fields>
+        <label><!-- RepeatedStageName --></label>
+        <name>smlfcom__RepeatedStageName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rule Action --></label>
+        <name>smlfcom__Rule_Action__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rule Desc --></label>
+        <name>smlfcom__Rule_Desc__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rule Id --></label>
+        <name>smlfcom__Rule_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rule --></label>
+        <name>smlfcom__Rule__c</name>
+    </fields>
+    <fields>
+        <label><!-- Snapshot Date Type --></label>
+        <name>smlfcom__Snapshot_Date_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Date Filter --></label>
+        <name>smlfcom__Start_Date_Filter__c</name>
+        <picklistValues>
+            <masterLabel>14</masterLabel>
+            <translation><!-- 14 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7</masterLabel>
+            <translation><!-- 7 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Qrtr</masterLabel>
+            <translation><!-- Qrtr --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>smlfcom__Start_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- TimePeriod --></label>
+        <name>smlfcom__TimePeriod__c</name>
+    </fields>
+    <fields>
+        <label><!-- Title --></label>
+        <name>smlfcom__Title__c</name>
+    </fields>
+    <fields>
+        <label><!-- To --></label>
+        <name>smlfcom__To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>smlfcom__Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- URL --></label>
+        <name>smlfcom__URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Value --></label>
+        <name>smlfcom__Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Variable --></label>
+        <name>smlfcom__Variable__c</name>
+    </fields>
+    <fields>
+        <label><!-- View Type --></label>
+        <name>smlfcom__View_Type__c</name>
+        <picklistValues>
+            <masterLabel>Change</masterLabel>
+            <translation><!-- Change --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Content</masterLabel>
+            <translation><!-- Content --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Forecast</masterLabel>
+            <translation><!-- Forecast --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Matched_Rules</masterLabel>
+            <translation><!-- Matched_Rules --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pipeline</masterLabel>
+            <translation><!-- Pipeline --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rule</masterLabel>
+            <translation><!-- Rule --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Waterfall</masterLabel>
+            <translation><!-- Waterfall --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Win Score --></label>
+        <name>smlfcom__Win_Score__c</name>
+    </fields>
+    <layouts>
+        <layout>SML Opportunity Change Layout</layout>
+        <sections>
+            <label><!-- Changes --></label>
+            <section>Changes</section>
+        </sections>
+        <sections>
+            <label><!-- Content --></label>
+            <section>Content</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Forecast --></label>
+            <section>Forecast</section>
+        </sections>
+        <sections>
+            <label><!-- Pipeline --></label>
+            <section>Pipeline</section>
+        </sections>
+        <sections>
+            <label><!-- Rule --></label>
+            <section>Rule</section>
+        </sections>
+        <sections>
+            <label><!-- Waterfall --></label>
+            <section>Waterfall</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>SML Opportunity Forecast Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Forecast --></label>
+            <section>Forecast</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>SML Opportunity Pipeline Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Pipeline --></label>
+            <section>Pipeline</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>SML Opportunity Waterfall Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Waterfall --></label>
+            <section>Waterfall</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>
