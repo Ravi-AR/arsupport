@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <version>39.0</version>
     <types>
         <members>ARApexclass2</members>
         <members>ARApexclass234</members>
@@ -822,6 +823,7 @@
         <members>TrailHeaDX__c.X50__c</members>
         <members>TrailHeaDX__c.X5_to_14__c</members>
         <members>TrailHeaDX__c.Yes__c</members>
+        <members>Training1__c.CheckingMerge__c</members>
         <members>User.AutorabitExtId__c</members>
         <members>User.Count__c</members>
         <members>User.Link_to_User__c</members>
@@ -2176,6 +2178,32 @@
         <name>SamlSsoConfig</name>
     </types>
     <types>
+        <members>Account</members>
+        <members>Activities</members>
+        <members>Address</members>
+        <members>BusinessHours</members>
+        <members>Case</members>
+        <members>ChatterAnswers</members>
+        <members>Company</members>
+        <members>Contract</members>
+        <members>Entitlement</members>
+        <members>FileUploadAndDownloadSecurity</members>
+        <members>Ideas</members>
+        <members>Macro</members>
+        <members>Mobile</members>
+        <members>Name</members>
+        <members>Opportunity</members>
+        <members>Order</members>
+        <members>OrgPreference</members>
+        <members>PathAssistant</members>
+        <members>PersonalJourney</members>
+        <members>Product</members>
+        <members>Quote</members>
+        <members>Search</members>
+        <members>Security</members>
+        <name>Settings</name>
+    </types>
+    <types>
         <members>Account.Accounts_for_AutoRABIT</members>
         <members>Account.BPM_Sales_Group</members>
         <members>Lead.BPM_Sales_Group</members>
@@ -2577,31 +2605,4 @@
         <members>Opportunity.Please_fill_out_Sales_Order_Form</members>
         <name>WorkflowTask</name>
     </types>
-    <types>
-        <members>Account</members>
-        <members>Activities</members>
-        <members>Address</members>
-        <members>BusinessHours</members>
-        <members>Case</members>
-        <members>ChatterAnswers</members>
-        <members>Company</members>
-        <members>Contract</members>
-        <members>Entitlement</members>
-        <members>FileUploadAndDownloadSecurity</members>
-        <members>Ideas</members>
-        <members>Macro</members>
-        <members>Mobile</members>
-        <members>Name</members>
-        <members>Opportunity</members>
-        <members>Order</members>
-        <members>OrgPreference</members>
-        <members>PathAssistant</members>
-        <members>PersonalJourney</members>
-        <members>Product</members>
-        <members>Quote</members>
-        <members>Search</members>
-        <members>Security</members>
-        <name>Settings</name>
-    </types>
-    <version>39.0</version>
 </Package>

@@ -2,6 +2,7 @@
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <fullName>CheckingMerge__c</fullName>
+        <description>Checking Compare Commit Feature</description>
         <externalId>false</externalId>
         <label>CheckingMerge</label>
         <length>10</length>
