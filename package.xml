@@ -4,6 +4,7 @@
     <types>
         <members>ApexC1</members>
         <members>ApexC2</members>
+        <members>Scenario2</members>
         <members>SupportStatus</members>
         <members>TestApexClass</members>
         <members>WebtoCaseController</members>
