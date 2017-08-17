@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <version>39.0</version>
+    <types>
+        <members>AnswersHome</members>
+        <members>BandwidthExceeded</members>
+        <members>BootstrapTemplate</members>
+        <members>BtnApplyPaymentPlan</members>
+        <members>BtnCreateEzidebitCustomer</members>
+        <members>BtnEditEzidebitAccountWidget</members>
+        <members>BtnEditEzidebitCustomer</members>
+        <members>BtnEzidebitPayNow</members>
+        <members>BtnEzidebitPayNowLX</members>
+        <members>BtnEzidebitPaymentPlan</members>
+        <members>BtnEzidebitProcessRefund</members>
+        <members>BtnEzidebitRetrieveCustomer</members>
+        <members>BtnEzidebitSendBulkEmails</members>
+        <members>BtnEzidebitSendPaymentEmail</members>
+        <members>BtnEzidebitSendPaymentEmailLX</members>
+        <members>ChangePassword</members>
+        <members>CommunitiesLanding</members>
+        <members>CommunitiesLogin</members>
+        <members>CommunitiesSelfReg</members>
+        <members>CommunitiesSelfRegConfirm</members>
+        <members>CommunitiesTemplate</members>
+        <members>CreatePaymentPlanFlow</members>
+        <members>DeployScheduledJobs</members>
+        <members>Exception</members>
+        <members>EzidebitSettings</members>
+        <members>FileNotFound</members>
+        <members>ForgotPassword</members>
+        <members>ForgotPasswordConfirm</members>
+        <members>IdeasHome</members>
+        <members>InMaintenance</members>
+        <members>MyProfilePage</members>
+        <members>SiteLogin</members>
+        <members>SiteRegister</members>
+        <members>SiteRegisterConfirm</members>
+        <members>SiteTemplate</members>
+        <members>StdExceptionTemplate</members>
+        <members>Unauthorized</members>
+        <members>UnderConstruction</members>
+        <members>VFPageTest1</members>
+        <members>btnNewOpportunityInvoice</members>
+        <members>btnNewOpportunityInvoices</members>
+        <name>ApexPage</name>
+    </types>
     <types>
         <members>AppSwitcher</members>
         <members>Salesforce1</members>
@@ -488,6 +533,35 @@
         <name>Role</name>
     </types>
     <types>
+        <members>Account</members>
+        <members>Activities</members>
+        <members>Address</members>
+        <members>BusinessHours</members>
+        <members>Case</members>
+        <members>Company</members>
+        <members>Contract</members>
+        <members>Entitlement</members>
+        <members>FileUploadAndDownloadSecurity</members>
+        <members>Forecasting</members>
+        <members>Ideas</members>
+        <members>Knowledge</members>
+        <members>LiveAgent</members>
+        <members>Macro</members>
+        <members>Mobile</members>
+        <members>Name</members>
+        <members>Opportunity</members>
+        <members>Order</members>
+        <members>OrgPreference</members>
+        <members>PathAssistant</members>
+        <members>PersonalJourney</members>
+        <members>Product</members>
+        <members>Quote</members>
+        <members>Search</members>
+        <members>Security</members>
+        <members>Territory2</members>
+        <name>Settings</name>
+    </types>
+    <types>
         <members>Case.sharingrulerun2</members>
         <members>Case.sharingrulerun3</members>
         <members>Lead.leadsrrun</members>
@@ -590,34 +664,4 @@
         <members>Account.Update Namefield</members>
         <name>WorkflowRule</name>
     </types>
-    <types>
-        <members>Account</members>
-        <members>Activities</members>
-        <members>Address</members>
-        <members>BusinessHours</members>
-        <members>Case</members>
-        <members>Company</members>
-        <members>Contract</members>
-        <members>Entitlement</members>
-        <members>FileUploadAndDownloadSecurity</members>
-        <members>Forecasting</members>
-        <members>Ideas</members>
-        <members>Knowledge</members>
-        <members>LiveAgent</members>
-        <members>Macro</members>
-        <members>Mobile</members>
-        <members>Name</members>
-        <members>Opportunity</members>
-        <members>Order</members>
-        <members>OrgPreference</members>
-        <members>PathAssistant</members>
-        <members>PersonalJourney</members>
-        <members>Product</members>
-        <members>Quote</members>
-        <members>Search</members>
-        <members>Security</members>
-        <members>Territory2</members>
-        <name>Settings</name>
-    </types>
-    <version>39.0</version>
 </Package>

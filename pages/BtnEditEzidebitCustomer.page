@@ -1,0 +1,55 @@
+<apex:page standardController="Billing_Account__c" extensions="BillingAccountExtension" showHeader="false" > 
+    <head>
+        <style>
+            .bootstrap-sf1 {                
+                background-color: white;
+            }
+        </style>
+    </head>
+    <apex:pagemessages Id="err" />
+    <apex:composition template="BootstrapTemplate">
+        <apex:define name="headerBar">
+        </apex:define>
+        <apex:define name="mainContent">
+            <div class="container-fluid">
+                <div class="row" width="100%">
+                    <div class="col-sm-12">
+                        <div class="page-header page-header-compact">
+                            <apex:image url="{!HTMLENCODE(URLFOR($Resource.iconscolor,'96-color/money_transfer-96.png'))}" style="float:left; margin-right:10px; margin-bottom:5px;" width="50" height="50"></apex:image>
+                            <h1 align="left" style="font-weight:normal; font-size:1.5em; color:#4c4c4c; font-family:'Helvetica'">Update Ezidebit Customer</h1>
+                            <p align="left" style="font-weight:normal; font-size:1.0em; color:#000000; font-family:'Helvetica'">Confirm that you would like to send an amended set of customer details to Ezidebit.  Otherwise return to the Billing Account.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" width="100%">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body" align="center">
+                                <div class="row">
+                                    <div class="col-md-12" style="text-align:center;">
+                                        <div class="btn-group" role="group">
+                                            <apex:commandbutton styleclass="btn btn-primary" value="Confirm" action="{!callCustmerUpdateInterface}" rerender="err" status="stat"></apex:commandbutton>
+                                            <apex:commandbutton styleclass="btn btn-primary" value="Return to Billing Account" onclick="returntoAcc()" rerender="err" status="stat"></apex:commandbutton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <apex:actionfunction name="rta" action="{!returnToBAccount}" rerender="selection"  status="stat" />
+        </apex:define>
+    </apex:composition>
+    <script>
+    function returntoAcc ()
+    {
+        if ( (typeof window.sforce != 'undefined') && (window.sforce!=null) ) {
+          sforce.one.navigateToURL('/{!URLENCODE(Billing_Account__c.id)}');
+        }
+        else {
+          rta();
+        }
+    }
+ </script>
+</apex:page>

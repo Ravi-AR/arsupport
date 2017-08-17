@@ -1,0 +1,406 @@
+<apex:page controller="EzidebitSettingsController" docType="{!HTMLENCODE('html-5.0')}" showHeader="{!HTMLENCODE('true')}">
+
+
+    <apex:pageMessages id="err" />
+    <head>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>        
+        <apex:includeScript value="{!HTMLENCODE(URLFOR($Resource.jquery))}"/>
+        <apex:stylesheet value="{!HTMLENCODE(URLFOR($Resource.bootstrapsf1, 'bootstrapsf1/dist/css/bootstrap-namespaced.css'))}"/>
+        <apex:includeScript value="{!HTMLENCODE(URLFOR($Resource.Bootstrap,'bootstrap-3.3.4-dist/js/bootstrap.min.js'))}"/>  
+                
+        <style>
+            /* This is for the full screen DIV */
+            .popupBackground {
+                /* Background color */
+                background-color:black;
+                opacity: 0.20;
+                filter: alpha(opacity = 20);
+             
+                /* Dimensions */
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 998;
+                position: absolute;
+                 
+                /* Mouse */
+                cursor:wait;
+            }
+          
+            /* This is for the message DIV */
+            .PopupPanel {
+                /* Background color */
+                border: solid 2px #ffba1a;
+                background-color: white;
+          
+                /* Dimensions */
+                left: 50%;
+                width: 200px;
+                margin-left: -100px;
+                top: 50%;
+                height: 75px;
+                margin-top: -25px;
+                z-index: 999;
+                position: fixed;
+                /* Mouse */
+                cursor:pointer;
+            }
+
+            * {
+                font-family:Helvetica, Arial, sans-serif;
+            }
+            .teachlist ul 
+            {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                border: none;
+                font-size: 20px;
+            }
+            .h2, h2 {
+                font-size: 100%;
+            }
+  
+            .dateFormat{display:none;}
+          
+            .bootstrap-styles {
+                @import 'bootstrapsf1';
+            }  
+            .body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+          
+            /* lookup field override */
+            .lookupInput a {
+                display:block;
+                position: absolute;
+                top: 0px;
+            }
+            .lookupInput img {
+                float: right;
+            }
+            span.lookupInput {
+                position: relative;
+                display: inherit;
+            }
+            .lookupInput a, .lookupInput a{
+                border: none !important;
+                background: none !important;
+            }
+            .bootstrap-sf1 {                
+                background-color: white;
+            }
+        </style>   
+    </head>
+    <apex:actionStatus id="stat" stopText="">
+        <apex:facet name="start">
+            <div>
+                <div class="popupBackground" />
+                <div class="PopupPanel">
+                    <table border="0" bordercolor="red" width="100%" height="100%">
+                        <tr>
+                            <td align="center"><b>Please Wait</b></td>
+                        </tr>
+                        <tr>
+                            <td valign="center" align="center"><img src="{!HTMLENCODE($Resource.loadingImage)}"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>   
+    <div class="bootstrap-sf1">       
+        <div class="container-fluid">
+            <apex:form >
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="page-header page-header-compact" style="margin: 10px 0px 10px;">
+                            
+                            <apex:outputPanel Id="dynamicHeader">
+                                <!--<apex:image url="{!HTMLENCODE($Resource.SMSSettingsIcon)}" style="float:left; margin-right:10px; margin-bottom:5px;" width="50" height="50"></apex:image>-->
+                                <h1 align="left" style="font-weight:normal; font-size:1.5em; color:#4c4c4c; font-family:'Helvetica'">Ezidebit Settings</h1>
+                                <p align="left" style="font-weight:normal; font-size:1.0em; color:#000000; font-family:'Helvetica'"> Set your Ezidebit parameters here. </p>
+                            </apex:outputPanel>
+                        </div> 
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                        </div>
+                            <div class="panel-body">
+                                <div class="row" width="100%">
+                                    <div class="col-md-12" style="text-align:center;">
+                                        <div class="card">
+                                            <div class="row">
+                                                <div class="col-md-2" style="text-align:left;">
+                                                    <apex:outputLabel >Account Widget Address</apex:outputLabel>
+                                                </div>
+                                                <div class="col-md-4" style="text-align:left;">
+                                                   <apex:inputField styleclass="form-control" value="{!newRecord.Account_Widget__c}"/>
+                                               </div>     
+                                                          
+                                              <div class="col-md-2" style="text-align:left;">
+                                               
+                                                    <apex:outputLabel >Public Key</apex:outputLabel>
+                                                </div>
+                                                <div class="col-md-4" style="text-align:left;">
+                                                   <apex:inputField styleclass="form-control" value="{!newRecord.Ezidebit_Public_Key__c}"/>
+                                               </div>                                                
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2" style="text-align:left;">
+                                                    <apex:outputLabel >Pay Now URL</apex:outputLabel>
+                                                </div>
+                                                <div class="col-md-4" style="text-align:left;">
+                                                   <apex:inputField styleclass="form-control" value="{!newRecord.Pay_Now_URL__c}"/>
+                                               </div> 
+                                                <div class="col-md-2" style="text-align:left;">
+                                                    <apex:outputLabel >Digital Key</apex:outputLabel>
+                                                </div>
+                                                <div class="col-md-4" style="text-align:left;">
+                                                   <apex:inputField styleclass="form-control" value="{!newRecord.Digital_Key__c}"/>
+                                               </div>
+                                            </div>     
+                                            <div class="row"> 
+                                            <div class="col-md-2" style="text-align:left;">
+                                                    <apex:outputLabel >EDDR URL</apex:outputLabel>
+                                                </div>
+                                                <div class="col-md-4" style="text-align:left;">
+                                                   <apex:inputField styleclass="form-control" value="{!newRecord.EDDR_URL__c}"/>
+                                               </div>                 
+                                               
+                                               <div class="col-md-2" style="text-align:left;">
+                                                    <apex:outputLabel >Register for Get Payments</apex:outputLabel>
+                                                </div>
+                                                <div class="col-md-4" style="text-align:left;">
+                                                   <apex:inputField styleclass="form-control" value="{!newRecord.Register_for_GetPayments__c}"/>
+                                               </div>  
+                                                    
+                                            </div>
+                                            <div class="row"> 
+                                            <div class="col-md-2" style="text-align:left;">
+                                                    <apex:outputLabel >Production URL</apex:outputLabel>
+                                                </div>
+                                                <div class="col-md-4" style="text-align:left;">
+                                                  <apex:inputField styleclass="form-control" value="{!newRecord.Production_URL__c}"/>
+                                               </div>  
+                                            <div class="col-md-2" style="text-align:left;">
+                                            
+                                                    <apex:outputLabel >Enable Account Level Billing</apex:outputLabel>
+                                                </div>
+                                                <div class="col-md-4" style="text-align:left;">
+                                                   <apex:inputField styleclass="form-control" value="{!newRecord.Enable_Account_Billing__c}"/>
+                                               </div>                 
+                                               
+                                               
+                                                    
+                                            </div>
+                                            <div class="row"> 
+                                            <div class="col-md-2" style="text-align:left;">
+                                                    <apex:outputLabel >Demo URL</apex:outputLabel>
+                                                </div>
+                                                <div class="col-md-4" style="text-align:left;">
+                                                   <apex:inputField styleclass="form-control" value="{!newRecord.Demo_URL__c}"/>
+                                               </div>                 
+                                               <div class="col-md-2" style="text-align:left;">
+                                                    <apex:outputLabel >Use Demo URL</apex:outputLabel>
+                                                </div>
+                                                <div class="col-md-4" style="text-align:left;">
+                                                    <apex:inputField styleclass="form-control" value="{!newRecord.UseDemoURL__c}"/>
+                                                  
+                                               </div>  
+                                               
+                                                    
+                                            </div>
+                                            <div class="row"> 
+                                            <div class="col-md-2" style="text-align:left;">
+                                                    <apex:outputLabel >GST Percent</apex:outputLabel>
+                                                </div>
+                                                <div class="col-md-4" style="text-align:left;">
+                                                   <apex:inputField styleclass="form-control" value="{!newRecord.GST_Percent__c}"/>
+                                               </div>                 
+                                               <div class="col-md-2" style="text-align:left;">
+                                                    <apex:outputLabel >GST Inclusive</apex:outputLabel>
+                                                </div>
+                                                <div class="col-md-4" style="text-align:left;">
+                                                    <apex:inputField styleclass="form-control" value="{!newRecord.GST_Inclusive__c}"/>
+                                                  
+                                               </div>  
+                                               
+                                                    
+                                            </div>
+                                            <div class="row"> 
+                                            <div class="col-md-2" style="text-align:left;">
+                                                    
+                                                </div>
+                                                <div class="col-md-4" style="text-align:left;">
+                                                   
+                                               </div>                 
+                                               <div class="col-md-2" style="text-align:left;">
+                                                    <apex:outputLabel >Enable Contact Billing Account Creation</apex:outputLabel>
+                                                </div>
+                                                <div class="col-md-4" style="text-align:left;">
+                                                    <apex:inputField styleclass="form-control" value="{!newRecord.Enable_Contact_Billing_Account_Creation__c}"/>
+                                                  
+                                               </div>  
+                                               
+                                                    
+                                            </div>
+                                            <div class="row">
+                                                <p></p>
+                                                <p></p>
+                                             
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12" style="text-align:center;">
+                                                    <div class="btn-group" role="group">
+                                                                    
+                                                        <apex:commandButton styleClass="btn btn-primary" value="Save Setting"  action="{!save}" rerender="err" status="stat"  ></apex:commandButton>           
+                                                        
+                                                     </div>
+                                                 </div>    
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="text-align:left;">
+
+                                                    <p></p>
+                                                    <p></p>
+                                                    <p><h3>Key</h3></p>
+                                                    </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12" style="text-align:left;">
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                             <tr>
+                                                                 <th width="20%">Parameter</th>
+                                                                 <th>Description</th>
+                                                             </tr>
+                                                             <tr>
+                                                                 <td>
+                                                                     Account Widget Address
+                                                                 </td>
+                                                                 <td>
+                                                                     The Account Widget should be used for maintenance of bank account/credit card details for existing customers. It is possible to create customers in the Ezidebit Management Systems without Bank Account or Credit Card Details recorded against them, and they will be set to a non-processing Hold Status until the appropriate payment source is provided. This is the base address such as https://widget.ezidebit.com.au/account/
+                                                             </td>
+                                                             </tr>
+                                                             <tr>
+                                                                 <td>
+                                                                     EDDR URL
+                                                                 </td>
+                                                                 <td>
+                                                                     The Electronic Direct Debit Request (eDDR) form is a single web based form designed to capture Direct Debit Request authorisations and create the payer and (optionally) their payment schedule in the Ezidebit Management System. This will be similar to https://ezidebit.com.au/webddr/Request.aspx
+                                                                 </td>
+                                                             </tr>
+    
+                                                             <tr>
+                                                                 <td>
+                                                                     Pay Now URL
+                                                                 </td>
+                                                                 <td>
+                                                                     This is the pay now URL and will be similar to https://simple-business-tech.pay.ezidebit.com.au/.
+                                                                 </td>
+                                                             </tr>
+                                                             <tr>
+                                                                 <td>
+                                                                     Digital Key
+                                                                 </td>
+                                                                 <td>
+                                                                     The integration Digital Key supplied to the client by Ezidebit.
+                                                                 </td>
+                                                             </tr>
+    
+                                                             <tr>
+                                                                 <td>
+                                                                     Public Key
+                                                                 </td>
+                                                                 <td>
+                                                                     The client public key or identifier compound                                                             </td>
+                                                             </tr>
+                                                             <tr>
+                                                                 <td>
+                                                                     Register for Get Payments
+                                                                 </td>
+                                                                 <td>
+                                                                     Indicates that the get payments interface should be run.  
+                                                                 </td>
+                                                             </tr>
+                                                            <tr>
+                                                                 <td>
+                                                                     Enable Account Billing
+                                                                 </td>
+                                                                 <td>
+                                                                     This swaps the organisation over to using Account Level Billing.  This means that individual accounts will no longer be auto created.  One you mark a contact as the main billing contact a billing account will be created for that account.  
+                                                                 </td>
+                                                             </tr>
+                                                             <tr>
+                                                                 <td>
+                                                                     Use Demo URL
+                                                                 </td>
+                                                                 <td>
+                                                                     This setting specifies that you want to send all the interfaces to the demo URL.  This is used for testing.
+                                                                 </td>
+                                                             </tr>
+                                                             <tr>
+                                                                 <td>
+                                                                     Demo URL
+                                                                 </td>
+                                                                 <td>
+                                                                     This is the demo URL.  This is used for testing.
+                                                                 </td>
+                                                             </tr>
+                                                             <tr>
+                                                                 <td>
+                                                                     Production URL
+                                                                 </td>
+                                                                 <td>
+                                                                     This is the Production URL.  This is used for actually billing your clients.
+                                                                 </td>
+                                                             </tr>
+                                                             <tr>
+                                                                 <td>
+                                                                     GST Percent
+                                                                 </td>
+                                                                 <td>
+                                                                     This is the standard GST percentage.  Enter just the whole number such as 10 for 10% or 12.5 for 12.5%.
+                                                                 </td>
+                                                             </tr>
+                                                             <tr>
+                                                                 <td>
+                                                                     GST Inclusive
+                                                                 </td>
+                                                                 <td>
+                                                                     This identifies the prices on opportunity products as being GST inclusive.  This is important when the invoice is created from an opportunity.
+                                                                 </td>
+                                                             </tr>
+                                                             <tr>
+                                                                 <td>
+                                                                     Enable Contact Billing Creation
+                                                                 </td>
+                                                                 <td>
+                                                                     This flag will enable the automatic creation on new individual billing accounts when a contact is created.
+                                                                 </td>
+                                                             </tr>
+                                                           </table>  
+                                                    </div>
+                                                </div>                                              
+                                            </div>
+
+                                        </div>
+                                           
+                                    </div>
+                                </div>
+                             </div>
+                         </div>
+                     </div>
+                 
+             </apex:form> 
+         </div>   
+     </div>   
+
+    </apex:page>

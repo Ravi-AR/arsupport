@@ -1,0 +1,108 @@
+<apex:page standardcontroller="Invoice_Header__c" extensions="InvoiceHeaderExtension">
+    <head>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <apex:includescript value="{!HTMLENCODE(URLFOR($Resource.jquery))}" />
+        <apex:stylesheet value="{!HTMLENCODE(URLFOR($Resource.bootstrapsf1, 'bootstrapsf1/dist/css/bootstrap-namespaced.css'))}" />
+        <apex:includescript value="{!HTMLENCODE(URLFOR($Resource.Bootstrap,'bootstrap-3.3.4-dist/js/bootstrap.min.js'))}" />
+        <style>
+            /* This is for the full screen DIV */
+            .popupBackground {
+                /* Background color */
+                background-color:black;
+                opacity: 0.20;
+                filter: alpha(opacity = 20);
+             
+                /* Dimensions */
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 998;
+                position: absolute;
+                 
+                /* Mouse */
+                cursor:wait;
+            }
+          
+            /* This is for the message DIV */
+            .PopupPanel {
+                /* Background color */
+                border: solid 2px #ffba1a;
+                background-color: white;
+          
+                /* Dimensions */
+                left: 50%;
+                width: 200px;
+                margin-left: -100px;
+                top: 50%;
+                height: 75px;
+                margin-top: -25px;
+                z-index: 999;
+                position: fixed;
+                /* Mouse */
+                cursor:pointer;
+            }
+            .bootstrap-sf1 {                
+                background-color: white;
+            }
+       </style>
+        
+    </head>
+    <apex:pagemessages Id="err" />
+    <apex:actionStatus id="stat" stopText="">
+        <apex:facet name="start">
+            <div>
+                <div class="popupBackground" />
+                <div class="PopupPanel">
+                    <table border="0" bordercolor="red" width="100%" height="100%">
+                        <tr>
+                            <td align="center"><b>Please Wait</b></td>
+                        </tr>
+                        <tr>
+                            <td valign="center" align="center"><img src="{!HTMLENCODE($Resource.loadingImage)}" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>   
+    <div class="bootstrap-sf1">
+        <apex:form >
+            <div class="container-fluid">
+                <apex:outputpanel id="notProcessed" rendered="{!NOT(InvoiceHeader.Payment_Requested__c)}" >
+                    <div class="row" width="100%">
+                        <div class="col-sm-12">
+                            
+                                <div style="float: right;" class="btn-group" role="group">
+                                    <apex:commandbutton styleclass="btn btn-primary" value="Mark as Paid" action="{!markASPaid}" oncomplete="returntoInv();" status="stat" rerender="err" />
+                                    <!--<apex:commandbutton styleclass="btn btn-primary" value="Return to invoice" onclick="returntoInv();" status="stat" rerender="err"/>-->
+                                </div>
+                            
+                        </div>
+                    </div>
+                    <div class="row" width="100%">
+                        
+                            
+                        <div class="col-md-12" style="text-align:left;height:1800px">
+                            <apex:iframe height="100%" scrolling="false" frameborder="false" src="{!currentPayNowURL}" />
+                        </div>
+                                            
+                    </div>
+                </apex:outputpanel>
+                
+            </div>
+            <apex:actionfunction name="rti" action="{!returnToInvoice}" rerender="err,selection"  status="stat" />
+        </apex:form>
+    </div>
+    <script>
+    function returntoInv ()
+    {
+        if ( (typeof window.sforce != 'undefined') && (window.sforce!=null) ) {
+          sforce.one.navigateToURL('/{!URLENCODE(Invoice_Header__c.id)}');
+        }
+        else {
+          rti();
+        }
+    }
+ </script>
+</apex:page>

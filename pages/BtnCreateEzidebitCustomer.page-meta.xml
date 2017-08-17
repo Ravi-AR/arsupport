@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>32.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>This page decides whether the user needs to send an EDDR or whether it can just set the account up in ezidebit.</description>
+    <label>BtnCreateEzidebitCustomer</label>
+</ApexPage>

@@ -1,0 +1,226 @@
+<apex:page standardcontroller="Invoice_Header__c" recordSetVar="inv" extensions="InvoiceHeaderExtension">
+    <head>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <apex:includescript value="{!HTMLENCODE(URLFOR($Resource.jquery))}" />
+        <apex:stylesheet value="{!HTMLENCODE(URLFOR($Resource.bootstrapsf1, 'bootstrapsf1/dist/css/bootstrap-namespaced.css'))}" />
+        <apex:includescript value="{!HTMLENCODE(URLFOR($Resource.Bootstrap,'bootstrap-3.3.4-dist/js/bootstrap.min.js'))}" />
+        
+        <style>
+            /* This is for the full screen DIV */
+            .popupBackground {
+                /* Background color */
+                background-color:black;
+                opacity: 0.20;
+                filter: alpha(opacity = 20);
+             
+                /* Dimensions */
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 998;
+                position: absolute;
+                 
+                /* Mouse */
+                cursor:wait;
+            }
+          
+            /* This is for the message DIV */
+            .PopupPanel {
+                /* Background color */
+                border: solid 2px #ffba1a;
+                background-color: white;
+          
+                /* Dimensions */
+                left: 50%;
+                width: 200px;
+                margin-left: -100px;
+                top: 50%;
+                height: 75px;
+                margin-top: -25px;
+                z-index: 999;
+                position: fixed;
+                /* Mouse */
+                cursor:pointer;
+            }
+            .bootstrap-sf1 {                
+                background-color: white;
+            }
+            .dateFormat
+            {
+                display:none;
+            }
+       </style>
+        
+    </head>
+    <apex:pagemessages Id="err" />
+    <apex:actionStatus id="stat" stopText="">
+        <apex:facet name="start">
+            <div>
+                <div class="popupBackground" />
+                <div class="PopupPanel">
+                    <table border="0" bordercolor="red" width="100%" height="100%">
+                        <tr>
+                            <td align="center"><b>Please Wait</b></td>
+                        </tr>
+                        <tr>
+                            <td valign="center" align="center"><img src="{!HTMLENCODE($Resource.loadingImage)}" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>   
+    <div class="bootstrap-sf1">
+        <apex:form >
+            <div class="container-fluid">
+                <div class="row" width="100%">
+                    <div class="col-sm-12">
+                        <div class="page-header page-header-compact">
+                            <apex:image url="{!HTMLENCODE(URLFOR($Resource.iconscolor,'96-color/money_transfer-96.png'))}" style="float:left; margin-right:10px; margin-bottom:5px;" width="50" height="50"></apex:image>
+                            <h1 align="left" style="font-weight:normal; font-size:1.5em; color:#4c4c4c; font-family:'Helvetica'">Choose the Payment plan details to apply to all invoices selected</h1>
+                            <p align="left" style="font-weight:normal; font-size:1.0em; color:#000000; font-family:'Helvetica'">This page applies a payment plan to all selected invoices.  </p>
+                            <p style="overflow: auto;opacity:1;">
+                                <apex:outputpanel id="returnButton">
+                                    <!--<apex:commandbutton style="float: right;overflow: hidden;" styleclass="btn btn-primary" value="Return to invoice" onclick="returntoInv()" />-->
+                                </apex:outputpanel>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" width="100%">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body" align="center">
+                                <apex:outputpanel id="selection">
+                                    <apex:outputpanel >
+                                        <div class="row">
+                                            <div class="col-md-2" style="text-align:left;">
+                                                <apex:outputlabel >Payment Frequency</apex:outputlabel>
+                                            </div>
+                                            <div class="col-md-2" style="text-align:left;">
+                                                <apex:selectlist label="Program" onchange="checkFields();" styleclass="form-control" size="1" id="program" value="{!template.Payment_Frequency__c}">
+                                                    <apex:selectoptions value="{!paymentFreq}"></apex:selectoptions>
+                                                </apex:selectlist>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2" style="text-align:left;">
+                                            <br/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2" style="text-align:left;">
+                                                <apex:outputlabel >Number of Payments</apex:outputlabel>
+                                            </div>
+                                            <div class="col-md-2" style="text-align:left;">
+                                                <apex:inputField styleclass="form-control" value="{!template.Number_of_Payments__c}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2" style="text-align:left;">
+                                            <br/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2" style="text-align:left;">
+                                                <apex:outputlabel >Start Date</apex:outputlabel>
+                                            </div>
+                                            <div class="col-md-2" style="text-align:left;">
+                                                <apex:inputField styleclass="form-control" value="{!template.Start_Date__c}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2" style="text-align:left;">
+                                            <br/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2" style="text-align:left;">
+                                               <apex:outputlabel >Status</apex:outputlabel>
+                                            </div>
+                                            <div class="col-md-2" style="text-align:left;">
+                                               <apex:selectlist label="Status" styleclass="form-control" size="1" id="st" value="{!template.Status__c}">
+                                                        <apex:selectoptions value="{!status}"></apex:selectoptions>
+                                                    </apex:selectlist>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2" style="text-align:left;">
+                                            <br/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputPanel rendered="{!template.Payment_Frequency__c == 'Monthly'}">
+                                                <div class="col-md-2" style="text-align:left;">
+                                                    <apex:outputlabel >Day of Month (1-31)</apex:outputlabel>
+                                                </div>
+                                                <div class="col-md-2" style="text-align:left;">
+                                                    <apex:selectlist label="Day of Month" styleclass="form-control" size="1" id="dom" value="{!template.Day_of_Month__c}">
+                                                        <apex:selectoptions value="{!dom}"></apex:selectoptions>
+                                                    </apex:selectlist>
+                                                </div>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!template.Payment_Frequency__c == 'Weekly' || template.Payment_Frequency__c == '4 Weekly' || template.Payment_Frequency__c == 'Fortnightly'}">
+                                                <div class="col-md-2" style="text-align:left;">
+                                                    <apex:outputlabel >Day of Week</apex:outputlabel>
+                                                </div>
+                                                <div class="col-md-2" style="text-align:left;">
+                                                    <apex:selectlist label="Day of Week" styleclass="form-control" size="1" id="dow" value="{!template.Day_of_Week__c}">
+                                                        <apex:selectoptions value="{!dayOfWk}"></apex:selectoptions>
+                                                    </apex:selectlist>
+                                                </div>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!NOT(template.Payment_Frequency__c == 'Weekly' || template.Payment_Frequency__c == '4 Weekly' || template.Payment_Frequency__c == 'Fortnightly' || template.Payment_Frequency__c == 'Monthly')}">
+                                                <div class="col-md-2" style="text-align:left;">
+                                                    
+                                                </div>
+                                                <div class="col-md-2" style="text-align:left;">
+                                                    
+                                                </div>
+                                            </apex:outputPanel>
+                                            
+                                        </div>
+                                        <div class="row">  
+                                            <div class="col-md-4">
+                                                <br/>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">  
+                                            <div class="col-md-2" >
+                                                <apex:commandbutton styleclass="btn btn-primary" value="Create Payment Plans" rerender="err" action="{!CreatePlans}" status="stat" />
+                                            </div>
+                                             <div class="col-md-2" >                                              
+                                                 <apex:commandbutton styleclass="btn btn-primary" value="Return to Invoice List" onclick="returntoInv()" rerender="err" status="stat"></apex:commandbutton>
+                                            </div>
+                                        </div>
+                                    </apex:outputpanel>
+                                </apex:outputpanel>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <apex:actionfunction name="rti" action="{!returnToInvoiceList}" rerender="err,selection"  status="stat" />
+            <apex:actionfunction name="checkFld" rerender="selection"  status="stat" />
+        </apex:form>
+    </div>
+    <script>
+    function returntoInv ()
+    {
+        if ( (typeof window.sforce != 'undefined') && (window.sforce!=null) ) {
+              sforce.one.navigateToURL('{!listId}');
+              
+            }
+            else {
+              rti();
+            }
+    }
+    function checkFields()
+    {
+        checkFld();
+    }
+ </script>
+</apex:page>

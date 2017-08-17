@@ -1,0 +1,137 @@
+<apex:page standardController="Billing_Account__c" extensions="BillingAccountExtension"  >
+    <head>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <apex:includeScript value="{!URLFOR($Resource.jquery)}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.bootstrapsf1, 'bootstrapsf1/dist/css/bootstrap-namespaced.css')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.Bootstrap,'bootstrap-3.3.4-dist/js/bootstrap.min.js')}"/>
+        <style>
+            /* This is for the full screen DIV */
+            .popupBackground {
+                /* Background color */
+                background-color:black;
+                opacity: 0.20;
+                filter: alpha(opacity = 20);
+             
+                /* Dimensions */
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 998;
+                position: absolute;
+                 
+                /* Mouse */
+                cursor:wait;
+            }
+          
+            /* This is for the message DIV */
+            .PopupPanel {
+                /* Background color */
+                border: solid 2px #ffba1a;
+                background-color: white;
+          
+                /* Dimensions */
+                left: 50%;
+                width: 200px;
+                margin-left: -100px;
+                top: 50%;
+                height: 75px;
+                margin-top: -25px;
+                z-index: 999;
+                position: fixed;
+                /* Mouse */
+                cursor:pointer;
+            }
+            .bootstrap-sf1 {                
+                background-color: white;
+            }
+       </style>
+        
+    </head>
+    <apex:pagemessages Id="err" />
+    <apex:actionStatus id="stat" stopText="">
+        <apex:facet name="start">
+            <div>
+                <div class="popupBackground" />
+                <div class="PopupPanel">
+                    <table border="0" bordercolor="red" width="100%" height="100%">
+                        <tr>
+                            <td align="center"><b>Please Wait</b></td>
+                        </tr>
+                        <tr>
+                            <td valign="center" align="center"><img src="{!HTMLENCODE($Resource.loadingImage)}" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>   
+    <div class="bootstrap-sf1">
+        <apex:form >
+            <div class="container-fluid">
+                <div class="row" width="100%">
+                    <div class="col-sm-12">
+                        <div class="page-header page-header-compact">
+                            <apex:image url="{!URLFOR($Resource.iconscolor,'96-color/money_transfer-96.png')}" style="float:left; margin-right:10px; margin-bottom:5px;" width="50" height="50"></apex:image>
+                            <h1 align="left" style="font-weight:normal; font-size:1.5em; color:#4c4c4c; font-family:'Helvetica'">Create Ezidebit Customer</h1>
+                            <p align="left" style="font-weight:normal; font-size:1.0em; color:#000000; font-family:'Helvetica'">This page determines whether or not there is a Direct Debit Authorite held for the customer already.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" width="100%">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body" align="center" >
+                                <div class="row">
+                                    <apex:outputPanel Id="info">
+                                        <apex:outputPanel rendered="{!dataFine}">
+                                            <div class="col-md-6" style="text-align:left;">
+                                                <apex:outputLabel for="alreadyheld"> Do you already have a Direct Debit Authority for this customer.  
+                                                    If you do, answer yes.  If not answer no and an electronic 
+                                                    version of the Direct Debit Authority will be emailed to the customer, prefilled with their details.  Once this is returned they will be set up in the system.
+                                                </apex:outputLabel>
+                                                <apex:selectRadio style="height:67px;padding 15px 1px;border:none;text-align:center;" borderVisible="false" layout="pageDirection" label="Do you already have a Direct Debit Authority for this customer. If you do, anwser yes.  If not answer no and an electronic version of the Direct Debit Authority will be emailed to the customer, prefilled with their details.  Once this is returned they will be set up in the system."  styleClass="form-control" value="{!DDARadioAlreadyHeld }"  >
+                                                    <apex:selectOptions value="{!items}"/>
+                                                     <apex:actionSupport event="onchange" rerender="createButtonContainer"/>
+                                                </apex:selectRadio>
+                                            </div>
+                                        </apex:outputPanel>
+                                    </apex:outputPanel>
+                                    <div class="col-md-6">
+                                        <apex:outputPanel >
+                                            <apex:outputPanel Id="createButtonContainer" rendered="{!dataFine}">
+                                                <div class="btn-group" role="group">
+                                                    <apex:commandButton styleClass="btn btn-primary" Id="createButton" rerender="err" status="stat" action="{!callCustmerInterface}" value="{!if(DDARadioAlreadyHeld =='Yes', "Create Customer", "Send Email")}"/>
+                                                    <apex:commandButton styleClass="btn btn-primary" rerender="err" status="stat" Id="Return" onclick="returntoAcc()" value="Return to Billing Account"/>
+                                                </div>
+                                            </apex:outputPanel>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel Id="returnButton">
+                                            <apex:outputPanel Id="returnButtonContainer" rendered="{!NOT(dataFine)}">
+                                                <apex:commandButton styleClass="btn btn-primary" Id="ReturnFail" rerender="err" status="stat" onclick="returntoAcc()" value="Return to Billing Account"/>
+                                            </apex:outputPanel>
+                                        </apex:outputPanel>
+                                    </div>
+                                    <!--<div class="col-md-5">
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <apex:actionfunction name="rta" action="{!returnToBAccount}" rerender="err,selection"  status="stat" />
+        </apex:form>
+    </div>
+    <script>
+    function returntoAcc ()
+    {
+        if ( (typeof window.sforce != 'undefined') && (window.sforce!=null) ) {
+          sforce.one.navigateToURL('/{!URLENCODE(Billing_Account__c.id)}');
+        }
+        else {
+          rta();
+        }
+    }
+ </script>
+</apex:page>
