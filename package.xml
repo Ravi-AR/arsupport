@@ -70,6 +70,7 @@
         <members>Account.Industry</members>
         <members>Account.IsExcludedFromRealign</members>
         <members>Account.Jigsaw</members>
+        <members>Account.MergeIssue__c</members>
         <members>Account.NaicsCode</members>
         <members>Account.NaicsDesc</members>
         <members>Account.Name</members>
