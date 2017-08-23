@@ -206,6 +206,7 @@
         <members>Case.SuppliedPhone</members>
         <members>Case.Type</members>
         <members>CaseContactRole.Role</members>
+        <members>CommitTest__c.CommitCheck__c</members>
         <members>Contact.AccountId</members>
         <members>Contact.AssistantName</members>
         <members>Contact.AssistantPhone</members>
