@@ -1,0 +1,164 @@
+<apex:component controller="LPDCR_SecondaryEventPlanningController" allowDML="true">
+
+
+    <apex:attribute name="componentKey" 
+                    type="String" 
+                    assignTo="{!key}" 
+                    description="The key given to this component so the page can easily get access to it" />
+
+    <apex:attribute name="thisPageController" 
+                    type="LPDCR_SecondaryPageBaseController" 
+                    assignTo="{!pageController}" 
+                    required="true" 
+                    description="The controller for the page." />
+    
+    <apex:attribute name="speciesFilter" 
+                    description="Set of selected spcecies to filter results" 
+                    type="String[]"
+                    assignTo="{!species_filter}"
+                    required="false"/>
+                    
+    <apex:attribute name="fileFilter" 
+                    description="Set of selected file types to filter results" 
+                    type="String[]"
+                    assignTo="{!files_filter}"
+                    required="false"/>
+                    
+    <apex:attribute name="sortBy" 
+                    description="The selected Sort By option" 
+                    type="String"
+                    assignTo="{!sort_filter}"
+                    required="false"/>
+                    
+    <input type="hidden" value="{!sort_filter}" class="sortfield" />
+    <apex:repeat value="{!species_filter}" var="sp">
+        <input type="hidden" value="{!sp}" class="speciesfield" />
+    </apex:repeat>
+    <apex:repeat value="{!files_filter}" var="ft">
+        <input type="hidden" value="{!ft}" class="filetype" />
+    </apex:repeat>
+                          
+  <div class="col-sm-12">
+  <apex:actionFunction action="{!showDocumentList}" name="displayDocuments" rerender="filterContainerPanel,containerPanel,fileTypePanel" status="loader">
+        <apex:param name="docType" assignTo="{!document_type}" value="" />
+    </apex:actionFunction>
+    <apex:actionFunction action="{!hideDocumentList}" name="hideDocuments" rerender="filterContainerPanel,containerPanel" status="loader"/>
+    
+    <apex:outputPanel id="containerPanel">
+    
+    <apex:outputPanel id="eventsPlanning" rendered="{!showEventsList}">
+      <div class="col-sm-6">
+          <span class="fnt20 clr_blk">{!$Label.LPDCR_Local_Event_Planner}</span>
+        <div class="clear pad_btm5"></div>   
+        <div class="col-sm-3 pad_top10 pad_lft0">                                                 
+            <img src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/u2118.svg')}" width="60"/>                                             
+        </div>
+        <div class="col-sm-9 pad_top10">
+            <p class="">{!$Label.LPDCR_Local_Event_Planner_Message}
+                <a href="#" id="downplanner" onclick="displayDocuments('{!$Label.LPDCR_Local_Event_Planner}');" class="col-sm-12 pad_lft_rgt fnt12 pad_top10 visit pad_lft0">{!$Label.LPDCR_Local_Event_Planner_URL}</a>
+            </p>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <span class="fnt20 clr_blk">{!$Label.LPDCR_Local_Event_Checklists}</span>
+        <div class="clear pad_btm5"></div>   
+        <div class="col-sm-3 pad_top10 pad_lft0">                                                 
+            <img src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/u2114.svg')}" width="60"/>                                             
+        </div>
+        <div class="col-sm-9 pad_top10">
+            <p class="">{!$Label.LPDCR_Local_Event_Checklists_Message}
+                <a href="#" id="downchklst" onclick="displayDocuments('{!$Label.LPDCR_Local_Event_Checklists}');" class="col-sm-12 pad_lft_rgt fnt12 pad_top10 visit pad_lft0 cursor">{!$Label.LPDCR_Local_Event_Checklists_URL}</a>
+            </p>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="col-sm-6">
+        <span class="fnt20 clr_blk">{!$Label.LPDCR_Local_Event_Idea_Library}</span>
+        <div class="clear pad_btm5"></div>   
+        <div class="col-sm-3 pad_top10 pad_lft0">                                                 
+            <img src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/u4727.svg')}" width="60"/>                                             
+        </div>
+        <div class="col-sm-9 pad_top10">
+            <p class="">{!$Label.LPDCR_Local_Event_Idea_Library_Message}
+                <a href="#" id="downidealbry" onclick="displayDocuments('{!$Label.LPDCR_Local_Event_Idea_Library}');" class="col-sm-12 pad_lft_rgt fnt12 pad_top10 visit pad_lft0 cursor">{!$Label.LPDCR_Local_Event_Idea_Library_URL}</a>
+            </p>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <span class="fnt20 clr_blk">{!$Label.LPDCR_Event_Resources}</span>
+        <div class="clear pad_btm5"></div>   
+        <div class="col-sm-3 pad_top10 pad_lft0">                                                 
+            <img src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/u4729.svg')}" width="60"/>                                             
+        </div>
+        <div class="col-sm-9 pad_top10">
+            <p class="">{!$Label.LPDCR_Event_Resources_Message}
+                <a href="#" id="downidealbry" onclick="displayDocuments('{!$Label.LPDCR_Event_Resources}');" class="col-sm-12 pad_lft_rgt fnt12 pad_top10 visit pad_lft0 cursor">{!$Label.LPDCR_Event_Resources_URL}</a>
+            </p>
+        </div>
+    </div>
+    <div class="clear"></div>
+    </apex:outputPanel>
+    
+    
+    
+    
+     <!-- SHOW PANEL WITH COMPONENT TO DISPLAY THE LIST OF DOCUMENT RECORDS FOR THE SELECTED TYPE -->
+     <apex:outputPanel id="documentList" rendered="{!showDocumentList}">
+        <a href="#" onclick="hideDocuments();" class="col-sm-2 pull-right fnt14 text-right"><i class="glyphicon glyphicon-arrow-left"></i> Back</a>        
+        <div class="col-xs-12">
+           <table class="dataTable table tablehead" id="ThirdTable">
+                <thead>
+                <tr>
+                <th title="Title" class="sorting"></th>
+                </tr>
+                </thead>
+                <tbody>
+                   <apex:repeat id="ThirdTable1" value="{!documentList}" var="allObj">
+                         <tr>
+                              <td>
+                             
+                              <div class="row mrg_btm20 pad_btm20">
+                                    
+                                    <apex:outputPanel styleClass="col-xs-12 col-sm-3 pull-left" layout="block">
+                                        <apex:image styleClass="img-responsive" url="{!allObj.URLLink}" width="200" rendered="{!allObj.IsWebVisibleFile}"/>
+                                        <!-- REPLACE THE BELOW outputText tag with the default preview image once it's available -->
+                                       <!-- <apex:outputText value="Invalid Image Type {!allObj.FileType}" rendered="{!!allObj.IsWebVisibleFile}" />-->
+                                        <apex:image styleClass="im-responsive" url="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/Image_not_available.png')}" width="150" rendered="{!!allObj.IsWebVisibleFile}"/>
+                                    </apex:outputPanel>
+                                    
+                                    <apex:outputPanel styleClass="col-xs-12 col-sm-6" layout="block">
+                                      <p class="mrg_btm5"><label class="clr7"><apex:outputText value="{!allObj.DocumentName}" escape="false"/></label><span class="flt_rgt clr_gry text-right"></span></p>
+                                      <p class="mrg_btm20"><apex:outputText value="{!allObj.DocumentShortDescription}" escape="false"/></p>
+                                      <p class="mrg_btm20"><a target="_blank" href="{!allObj.URLLink}" download="{!allObj.URLLink}">Download as {!allObj.FileType}</a></p>
+                                    </apex:outputPanel>
+                               </div>
+                               
+                            </td>
+                         </tr>
+                     </apex:repeat>
+                 </tbody>
+            </table>
+        </div>
+        <script>
+            $('#ThirdTable').on( 'init.dt', function () {
+                    } ).DataTable({"searching":true, "bPaginate":true, "bInfo":true,
+                            "dom": "<'row mrg_btm20 '<'col-sm-12 pad_lft0 pad_rgt0'f>>" +
+                        "<'row'<'col-sm-6 mrg_btm20 pad_lft0'i><'col-sm-6 text-right mrg_btm20 hidden-xs'l>>" +
+                        "<'row'<'col-sm-12 pad_lft0 pad_rgt0'tr>>" +
+                        "<'row'<'col-sm-12 pad_lft0 pad_rgt0'p>>", "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                        language: {
+                                search: '<i class="glyphicon glyphicon-search sch_Icon"></i> _INPUT_',
+                                searchPlaceholder: "Search This Section"
+                            },
+                           "aaSorting": [ ] 
+                        }); 
+        </script>
+    </apex:outputPanel>
+    <!-- /END DOCUMENT LIST PANEL -->
+    
+    </apex:outputPanel>
+  </div>
+  
+  
+  
+</apex:component>

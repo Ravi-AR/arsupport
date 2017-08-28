@@ -1,0 +1,4 @@
+A new feeding trial record has been created.
+
+Account: {!Feeding_Trial__c.Account__c}
+Link to Feeding Trial: {!Feeding_Trial__c.Link}

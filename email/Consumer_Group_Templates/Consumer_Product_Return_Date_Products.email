@@ -1,0 +1,35 @@
+<messaging:emailTemplate subject="Requesting Approval of Product Return" recipientType="Contact" relatedToType="Case">
+    <messaging:plainTextEmailBody >
+
+        Hello {!recipient.Name}, 
+
+        {!relatedTo.Contact.Name} contacted us about a product purchased from your store. As part of our 100% satisfaction guarantee, we have advised {!relatedTo.Contact.Name} to return the product to your store for a full refund. Upon receiving that return, please notify our Customer Care department and refer to Service Request Number {!relatedTo.CaseNumber}. Customer Care will advise on the disposition of the product and issue credit. 
+
+        Customer Care can be reached at 800-522-3354 or by emailing CustomerCare@landolakes.com 
+
+        Thank you for your business and for partnering to ensure our customers are 100% satisfied. 
+
+        Sincerely, 
+        {!$User.FirstName} {!$User.LastName}
+        
+    </messaging:plainTextEmailBody>
+    <messaging:htmlEmailBody >
+    
+        <font size="3">
+        <p>Dear {!recipient.name},</p>
+                 
+        <p>{!relatedTo.Contact.Name} contacted us about <apex:repeat var="product" value="{!relatedTo.Service_Request_Products__r}" rows="1">
+        {!product.Product__r.Name}</apex:repeat>. As part of our 100% satisfaction guarantee, we have advised {!relatedTo.Contact.Name} 
+        to return the product to your store for a full refund. Upon receiving that return, please notify our Customer Care department and 
+        refer to Service Request Number {!relatedTo.CaseNumber}. Customer Care will advise on the disposition of the product and issue credit.</p>
+                               
+        <p>Customer Care can be reached at 800-522-3354 or by emailing CustomerCare@landolakes.com.</p>
+        
+        <p>Thank you for your business and for partnering to ensure our customers are 100% satisfied.</p>
+        
+        <p>Sincerely,<br></br> 
+        {!$User.FirstName}</p>
+        </font>
+        
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

@@ -1,0 +1,31 @@
+<apex:page controller="VIP_Select_Opportunity_Controller" >
+    --Select the opportunity -- 
+    
+    <apex:pageBlock >
+    	<apex:form >
+    		<apex:pageBlockTable id="vip_table" value="{!opportunities}" var="opp">
+ 
+    			<apex:column headerValue="">
+    				<apex:commandLink value="Select" action="{!selectOpp}" >
+    					<apex:param name="tempid" value="{!opp.id}" assignTo="{!tempid}" />
+    				</apex:commandLink>
+    			</apex:column>
+
+    			<apex:column headerValue="Opportunity Name">
+                    <apex:outputField value="{!opp.Name}" />
+    			</apex:column>
+
+    			<apex:column headerValue="Anticipated Close Date">
+                    <apex:outputField value="{!opp.CloseDate}" />
+    			</apex:column>
+
+    			<apex:column headerValue="Stage">
+                    <apex:outputField value="{!opp.StageName}" />
+    			</apex:column>
+
+    		</apex:pageBlockTable>
+
+    	</apex:form>
+    </apex:pageBlock> 
+    
+</apex:page>

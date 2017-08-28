@@ -1,0 +1,234 @@
+<apex:component controller="LPDCR_SecondaryReportController" allowDML="true">
+
+     <apex:outputText rendered="{!init}" />
+     <apex:attribute name="componentKey"  
+                 type="String" 
+                 assignTo="{!key}" 
+                 description="The key given to this component so the page can easily get access to it" />
+     <apex:attribute name="thisPageController"  
+                 type="LPDCR_SecondaryPageBaseController"  
+                 assignTo="{!pageController}"  
+                 required="true" 
+                 description="The controller for the page." />
+                 
+     <apex:attribute name="speciesFilter" 
+                    description="Set of selected spcecies to filter results" 
+                    type="String[]"
+                    assignTo="{!species_filter}"
+                    required="false"/>
+                    
+     <apex:attribute name="fileFilter" 
+                    description="Set of selected file types to filter results" 
+                    type="String[]"
+                    assignTo="{!files_filter}"
+                    required="false"/>
+                    
+     <apex:attribute name="sortBy" 
+                    description="The selected Sort By option" 
+                    type="String"
+                    assignTo="{!sort_filter}"
+                    required="false"/>
+    
+    <!-- HIDDEN VARIABLES USED TO RETAIN AND HIGHLIGHT THE FILTER OPTIONS -->
+    <input type="hidden" value="{!sort_filter}" class="sortfield" />
+    <apex:repeat value="{!species_filter}" var="sp">
+        <input type="hidden" value="{!sp}" class="speciesfield" />
+    </apex:repeat>
+    <apex:repeat value="{!files_filter}" var="ft">
+         <input type="hidden" value="{!ft}" class="filetype" />
+    </apex:repeat> 
+    
+     <apex:actionFunction action="{!showDocumentList}" name="displayDocuments" rerender="filterContainerPanel,containerPanel,fileTypePanel" oncomplete="changeColor()" status="loader">
+        <apex:param name="docType" assignTo="{!document_type}" value="" />
+    </apex:actionFunction>
+    <apex:actionFunction action="{!getAccountPointsSummary}" name="getSummaryReport" status="SummaryReportStatus" rerender="ReportPanel"/>
+
+     <apex:actionFunction action="{!hideDocumentList}" name="hideDocuments" rerender="filterContainerPanel,containerPanel" status="loader"/>
+     <apex:actionFunction action="{!showPointsDetailReport}" name="showPointsReport" rerender="filterContainerPanel,containerPanel" status="loader"/>
+     
+     <!--<apex:actionFunction action="{!showMSRPDocumentList}" name="displayMSRPDocuments" rerender="filterContainerPanel,containerPanel,fileTypePanel" oncomplete="changeColor()" >
+        <apex:param name="docType" assignTo="{!document_type}" value="" />
+    </apex:actionFunction>-->
+    
+<apex:outputPanel id="containerPanel">
+    
+    <apex:outputPanel id="ReportListID" rendered="{!showReportList}">
+
+        <div class="col-sm-11">
+           
+            <div class="col-sm-6">
+                <span class="fnt20 clr_blk">{!$Label.LPDCR_Tons_and_VIP_Points_Component_Name}</span>
+                <div class="clear pad_btm5"></div>   
+                <div class="col-sm-3 pad_top10 pad_lft0">                                                 
+                    <img src="{!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_ICON_VIP)}" width="60"/>                                             
+                </div>
+                <div class="col-sm-9 pad_top10">
+                    <p>{!$Label.LPDCR_Tons_and_VIP_Points_Component_Message}</p><p class="dis_inlineblock">
+                        <apex:outputLink styleClass="col-xs-12 col-sm-12 pad_lft_rgt fnt12 pad_top10 pad_lft0 clickLeftMenuHide"
+                                         id="downplanner"
+                                         value="{!URLFOR($Page.LPDCR_DealerVIPPointsTonsReportDetail)}"
+                                         rendered="{! IF(ISPICKVAL($User.UserType,'STANDARD'),FALSE,TRUE)}">{!$Label.LPDCR_Tons_and_VIP_Points_Component_URL}</apex:outputLink>
+                       
+                        <!--<apex:outputLink styleClass="col-xs-12 col-sm-12 pad_lft_rgt fnt12 pad_top10 pad_lft0 clickLeftMenuHide"
+                                         id="downplannerInternal"
+                                         value="{!URLFOR($Page.LPDCR_InternalVIPPointsTonsReportDetail)}"
+                                         rendered="{! IF(ISPICKVAL($User.UserType,'STANDARD'),TRUE,FALSE)}">{!$Label.LPDCR_Tons_and_VIP_Points_Component_URL}</apex:outputLink>-->
+                                        
+                        <apex:outputLink styleClass="col-xs-12 col-sm-12 pad_lft_rgt fnt12 pad_top10 pad_lft0 clickLeftMenuHide"
+                                         id="downplannerInternal"
+                                         value="{!URLFOR($Page.LPDCR_InternalVIPPointsTonsReportDetail)}"
+                                         rendered="{! IF(ISPICKVAL($User.UserType,'STANDARD'),TRUE,FALSE)}">{!$Label.LPDCR_Tons_and_VIP_Points_Component_URL}</apex:outputLink> 
+                        
+                        <apex:outputLink styleClass="col-xs-12 col-sm-12 pad_lft_rgt fnt12 pad_top10 pad_lft0" id="vipresource" value="#" onclick="displayDocuments('{!$Label.LPDCR_Tons_and_VIP_Points_Component_Name}');">{!$Label.LPDCR_Tons_and_VIP_Points_Resource_Subtab_Name}</apex:outputLink>
+                    
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+               <span class="fnt20 clr_blk">CHC</span>
+                <div class="clear pad_btm5"></div>   
+                <div class="col-sm-3 pad_top10 pad_lft0">                                                 
+                    <img src="{!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_ICON_CHC)}" width="60"/>                                             
+                </div>
+                <div class="col-sm-9 pad_top10">
+                    <p>{!$Label.LPDCR_CHC_Component_Message}</p><p class="dis_inlineblock">
+                        <apex:outputPanel rendered="{! IF(ISPICKVAL($User.UserType,'STANDARD') && (chcDocument[0].URLLink != '' && chcDocument[0].URLLink != null),FALSE,TRUE)}">
+                            <a class="col-sm-12 pad_lft_rgt fnt12 pad_top10 visit pad_lft0" href="{!chcDocument[0].URLLink}" target='_blank' id="downplanner">More about CHC</a>
+                        </apex:outputPanel>
+                        <!--<apex:outputPanel rendered="{! IF(ISPICKVAL($User.UserType,'STANDARD'),TRUE,FALSE)}">
+                            <a class="col-sm-12 pad_lft_rgt fnt12 pad_top10 visit pad_lft0" id="downplanner" target='_blank' href="{!chcInternalUserURL}">More about CHC</a>
+                        </apex:outputPanel>-->
+                        <apex:outputPanel rendered="{! IF(ISPICKVAL($User.UserType,'STANDARD') && (chcInternalUserURL != null),TRUE,FALSE)}">
+                            <a class="col-sm-12 pad_lft_rgt fnt12 pad_top10 visit pad_lft0" id="downplanner" target='_blank' href="{!chcInternalUserURL}">Salesforce Purina</a>
+                        </apex:outputPanel>
+                    </p>
+                </div>
+            </div>
+            <div class="clear"></div>
+            
+                <div class="col-sm-6">
+                    <span class="fnt20 clr_blk">{!$Label.LPDCR_Price_Lists_Component_Name}</span>
+                    <div class="clear pad_btm5"></div>   
+                    <div class="col-sm-3 pad_top10 pad_lft0">                                                 
+                        <img src="{!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_ICON_PriceList)}" width="60"/>                                             
+                    </div>
+                    <div class="col-sm-9 pad_top10">
+                        <p>{!$Label.LPDCR_Price_Lists_Component_Message}.</p><p class="dis_inlineblock">
+                            <apex:outputPanel rendered="{!IF(priceListURL == null || priceListURL == '', false, true)}">
+                                <a class="col-xs-12 col-sm-12 pad_lft_rgt fnt12 pad_top10 pad_lft0" target='_blank' href="{!priceListURL}" id="downplanner">{!$Label.LPDCR_Price_Lists_Component_URL}</a>
+                            </apex:outputPanel>
+                            <apex:outputLink styleClass="col-xs-12 col-sm-12 pad_lft_rgt fnt12 pad_top10 pad_lft0" id="price" value="#" onclick="displayDocuments('{!$Label.LPDCR_Price_Lists_Component_Name}');">{!$Label.LPDCR_Price_Lists_Resource_Subtab_Name}</apex:outputLink>
+                        </p>
+                    </div>
+                </div>
+            
+            <div class="col-sm-6">
+                <span class="fnt20 clr_blk">{!$Label.LPDCR_Performance_Profile_Component_Name}</span>
+                <div class="clear pad_btm5"></div>   
+                <div class="col-sm-3 pad_top10 pad_lft0">                                                 
+                    <img src="{!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_ICON_Performance)}" width="60"/>                                             
+                </div>
+                <div class="col-sm-9 pad_top10">
+                    <p>{!$Label.LPDCR_Performance_Profile_Component_Message}</p><p class="dis_inlineblock">
+                        <apex:outputPanel rendered="{!IF(reportURL == null || reportURL == '', false, true)}">
+                            <a class="col-xs-12 col-sm-12 pad_lft_rgt fnt12 pad_top10 pad_lft0" target='_blank' href="{!reportURL}" id="downplanner">{!$Label.LPDCR_Performance_Profile_Component_URL}</a>
+                        </apex:outputPanel>
+                        <apex:outputLink styleClass="col-xs-12 col-sm-12 pad_lft_rgt fnt12 pad_top10 pad_lft0" id="perfor" value="#" onclick="displayDocuments('{!$Label.LPDCR_Performance_Profile_Component_Name}');">{!$Label.LPDCR_Performance_Profile_Resource_Subtab_Name}</apex:outputLink>
+                    </p>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="col-sm-6">
+                <span class="fnt20 clr_blk">MSRP / MAP</span>
+                <div class="clear pad_btm5"></div>   
+                <div class="col-sm-3 pad_top10 pad_lft0">                                                 
+                    <img src="{!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_ICON_MSRP)}" width="60"/>                                             
+                </div>
+                <div class="col-sm-9 pad_top10">
+                    <p>{!$Label.LPDCR_MSRP_Component_Message}</p><p class="dis_inlineblock">                    
+                        <a href='#' onclick="displayDocuments('{!$Label.LPDCR_MSRP_Component_Name}');" class="col-sm-12 pad_lft_rgt fnt12 pad_top10 visit pad_lft0" id="downplanner">{!$Label.LPDCR_MSRP_Component_URL}</a>
+                    </p>
+                </div>
+            </div>
+            
+            
+        </div>
+    </apex:outputPanel>
+
+    <apex:outputPanel id="documentList" rendered="{!showDocumentList}">
+        <div class="col-sm-11 pad_rgt0"><a href="#" onclick="hideDocuments();" class="col-sm-12 pad_rgt0 pull-right fnt14 text-right"><i class="glyphicon glyphicon-arrow-left"></i> Back</a></div>
+        <div class="col-xs-11">
+           <table class="dataTable table tablehead" id="ThirdTable">
+                <thead>
+                <tr>
+                <th title="Title" class="sorting"></th>
+                </tr>
+                </thead>
+                <tbody>
+                   <apex:repeat id="ThirdTable1" value="{!documentList}" var="allObj">
+                   
+                       <tr><td>
+                         <p class="mrg_btm10"><a target="_blank" href="{!allObj.URLLink}" class="wid70">
+                            <label class="clr_red cursor wid70">{!allObj.DocumentName}</label></a>
+                                                       
+                            <span class="flt_rgt clr_gry text-right wid30">
+                                <apex:outputText value="{0,date,MMM' 'd',' YYYY}">
+                                    <apex:param value="{!allObj.DocumentsLastModified}" /> 
+                                </apex:outputText>
+                            </span>
+                         </p>
+                       </td>
+                    </tr>
+                         
+                     </apex:repeat>
+                 </tbody>
+            </table>
+        </div>
+        <script>
+            $('#ThirdTable').on( 'init.dt', function () {
+                    } ).DataTable({"searching":true, "bPaginate":true, "bInfo":true,
+                            "dom": "<'row mrg_btm20 '<'col-sm-11 pad_lft0 pad_rgt0'f>>" +
+                        "<'row'<'col-sm-6 mrg_btm20 pad_lft0'i><'col-sm-6 text-right pad_rgt0 mrg_btm20 hidden-xs'l>>" +
+                        "<'row'<'col-sm-12 pad_lft0 pad_rgt0'tr>>" +
+                        "<'row'<'col-sm-12 pad_lft0 pad_rgt0'p>>", "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                        language: {
+                                search: '<i class="glyphicon glyphicon-search sch_Icon"></i> _INPUT_',
+                                searchPlaceholder: "Search This Section"
+                            },
+                           "aaSorting": [ ] 
+                        }); 
+        </script>
+    </apex:outputPanel>
+
+
+    <!-- THE DETAIL REPORT HAS BEEN MOVED TO IT'S OWN VF PAGE 
+    <apex:outputPanel id="pointsReportDetail" rendered="{!showPointsDetail}">
+        <a href="#" onClick="hideDocumentList();" class="hide_rpt flt_rgt">Back</a>
+        <c:LPDCR_AccountPointsDetailReport />
+    </apex:outputPanel> 
+    -->
+
+</apex:outputPanel><!-- /END ContainerPanel -->
+
+<script>
+    $(document).ready(function() {
+        // getSummaryReport();
+        
+        /*
+        $('.clickLeftMenuHide').click(function(){
+            $('.leftMenu_hide').hide();
+            $('.rpt_Pannel').addClass('wid100 pad_lft00');
+        });
+        */
+        
+        $('.hide_rpt').click(function(){
+            //alert('dd');
+            $('.leftMenu_hide').show();
+            $('.rpt_Pannel').removeClass('wid100 pad_lft00');
+        });
+        
+        
+    });
+</script>
+
+</apex:component>

@@ -1,0 +1,240 @@
+<apex:component controller="LPDCR_SecondaryReportController" allowDML="true">
+<apex:outputText rendered="{!init}"/>
+    <apex:attribute name="bgColor"
+                    type="String"
+                    description="The style class for the background color of the component"
+                    required="false"
+                    default="bg_wht" />
+                    
+<script>
+    function barChart(){
+        $('.bar-chart').find('.item-progress').each(function(){
+            var itemProgress = $(this),
+            itemProgressWidth = $(this).parent().width() * ($(this).data('percent') / 100);
+            itemProgress.css('width', itemProgressWidth);
+        });
+        $('.bar-chart').find('.item-progress1').each(function(){
+            var itemProgress = $(this),
+            itemProgressWidth = $(this).parent().width() * ($(this).data('percent') / 100);
+            itemProgress.css('width', itemProgressWidth);
+        });
+        $('.bar-chart').find('.item-progress2').each(function(){
+            var itemProgress = $(this),
+            itemProgressWidth = $(this).parent().width() * ($(this).data('percent') / 100);
+            itemProgress.css('width', itemProgressWidth);
+        });
+         $('.bar-chart').find('.item-progress3').each(function(){
+            var itemProgress = $(this),
+            itemProgressWidth = $(this).parent().width() * ($(this).data('percent') / 100);
+            itemProgress.css('width', itemProgressWidth);
+        });
+         $('.bar-chart').find('.item-progress4').each(function(){
+            var itemProgress = $(this),
+            itemProgressWidth = $(this).parent().width() * ($(this).data('percent') / 100);
+            itemProgress.css('width', itemProgressWidth);
+        });
+        $('.bar-chart').find('.item-progress5').each(function(){
+            var itemProgress = $(this),
+            itemProgressWidth = $(this).parent().width() * ($(this).data('percent') / 100);
+            itemProgress.css('width', itemProgressWidth);
+        });
+    };
+
+  </script>
+                    
+    <div class="col-sm-12 {!bgColor}">
+        <h3 class="section_title"><a href="{!URLFOR($Page.LPDCR_CC_Business_Management)}">{!$Label.LPDCR_Business_Management_Component_Name}</a>
+            <div class="tooltip1">
+                 <span class="flt_rgt icon_exmty"></span>              
+                 <p class="tooltiptext mytools">{!$Label.LPDCR_Business_Management_Component_Message}
+                  <br/>
+                   <a class="btn_ent" href="{!URLFOR($Page.LPDCR_CC_Business_Management)}">ENTER</a><span class="btn_cls dis_inlineblock txt_center">CLOSE</span>  
+                  </p>
+            </div>
+        </h3>         
+        <div class="col-sm-12 pad_lft_rgt fnt12 pos_rel min_hgt">
+        
+             
+                    
+                    
+            <apex:outputPanel id="ReportPanel" >
+                <apex:actionStatus startText="Loading Report..." id="SummaryReportStatus" />
+                <apex:pageMessages />
+                <apex:outputPanel id="ReportData" rendered="{!IF(summary_report != null && summary_report.success, true, false)}">
+                    
+                   
+                    
+             <label class="flt_lft clr0 mrg_btm0">Tons</label><span class="pad_lft5">(<apex:outputText value="{0,date,MMM}"><apex:param value="{!TODAY()}" /></apex:outputText>)</span>
+             <div class="col-sm-12 pad_lft_rgt fnt12">
+                <!--<span class="flt_lft"><apex:outputText value="{0, number, ###,##0.0#}"><apex:param value="{!l_summary_row.shipped_tons_ytd}"/></apex:outputText></span><span class="flt_rgt"><apex:outputText value="{0, number, ###,##0.0#}"><apex:param value="{!l_summary_row.shipped_tons_py}"/></apex:outputText></span>-->
+                <div class="bar-chart">
+                    <div class="chart clearfix">
+                        <div class="item hgt56 mrg_btm5">
+                            <div class="wid12 flt_lft">
+                                <div class="cy">YTD</div><div class="clear"></div>
+                                <div class="py">PYTD</div><div class="clear"></div>
+                                <div class="gpy">PY</div>
+                            </div>                       
+                            <div class="bar flt_rgt">
+                                <div class="item-progress hht33_33 cy_color" data-percent="{!tonsCYTDPercent}"><apex:outputText value="{0, number, ###,##0.0#}" ><apex:param value="{!l_summary_row.shipped_tons_ytd}"/></apex:outputText></div><div class="clear"></div>                          
+                                <div class="item-progress1 hht33_33 top20 pytd_color" data-percent="{!tonsPYTDPercent}"><apex:outputText value="{0, number, ###,##0.0#}"><apex:param value="{!l_summary_row.shipped_tons_pytd}"/></apex:outputText></div><div class="clear"></div> 
+                                <div class="item-progress2 hht33_33 py_color" data-percent="{!tonsPYPercent}"><apex:outputText value="{0, number, ###,##0.0#}"><apex:param value="{!l_summary_row.shipped_tons_py}"/></apex:outputText></div>
+                            </div>
+                        </div>
+                        <!--<span class="flt_lft pad_btm10">{!summary_report.shipped_tons_py}</span>-->
+                    </div>              
+                </div>
+             </div>
+             
+             <div class="clear"></div>
+             <label class="clr0">VIP Points</label> <span class="pad_lft5">(<apex:outputText value="{0,date,MMM}"><apex:param value="{!TODAY()}" /></apex:outputText>)</span>
+             <div class="col-sm-12 pad_lft_rgt fnt12">                
+                <!--<span class="flt_lft"><apex:outputText value="{0, number, ###,##0.0#}" ><apex:param value="{!l_summary_row.vip_points_ytd}"/></apex:outputText></span><span class="flt_rgt"><apex:outputText value="{0, number, ###,##0.0#}"><apex:param value="{!l_summary_row.vip_points_py}"/></apex:outputText></span>-->
+                <div class="bar-chart">
+                    <div class="chart clearfix">
+                        <div class="item hgt56"> 
+                            <div class="wid12 flt_lft">
+                                <div class="cy">YTD</div><div class="clear"></div>
+                                <div class="py">PYTD</div><div class="clear"></div>
+                                <div class="gpy">PY</div>
+                            </div>                     
+                            <div class="bar flt_rgt">
+                                <div class="item-progress hht33_33 cy_color" data-percent="{!pointsCYTDPercent}"><apex:outputText value="{0, number, ###,##0.0#}"><apex:param value="{!l_summary_row.vip_points_ytd}"/></apex:outputText></div><div class="clear"></div>                     
+                                <div class="item-progress1 hht33_33 top20 pytd_color" data-percent="{!pointsPYTDPercent}"><apex:outputText value="{0, number, ###,##0.0#}"><apex:param value="{!l_summary_row.vip_points_pytd}"/></apex:outputText></div><div class="clear"></div>
+                                <div class="item-progress2 hht33_33 py_color" data-percent="{!pointsPYPercent}"><apex:outputText value="{0, number, ###,##0.0#}"><apex:param value="{!l_summary_row.vip_points_py}"/></apex:outputText></div>
+                            </div>
+                        </div>
+                        <!--<span class="flt_lft pad_btm10">{!summary_report.vip_points_py}</span>-->
+                    </div>              
+                </div>
+                 
+             </div>
+             <div class="clear"></div>
+                    
+                </apex:outputPanel>
+            </apex:outputPanel>            
+            <apex:actionFunction action="{!getAccountPointsSummary}" oncomplete="barChart()" name="getSummaryReport" status="SummaryReportStatus" rerender="ReportPanel" />            
+             <div class="pos_bottom_fixed">
+              
+              <apex:outputPanel rendered="{! IF((ISPICKVAL($User.UserType,'STANDARD') || chcLastModified == null),FALSE,TRUE)}">
+                 <label class="clr0 mrg_btm0">CHC*</label>
+                
+                 <!--<span class="brozne tri-right btm-right">{!chcLevel}&nbsp; <apex:outputText value="{0, number, ###,##0}"><apex:param value="{!chcLevelPoints}"/></apex:outputText> </span>-->
+                 
+                 <div class="col-sm-12 z0 pad_lft_rgt fnt12">
+                    <div class="bar-chart"> 
+                        <div class="chart clearfix">                    
+                            <div class="item hgt56 mrg_btm5">                            
+                                <div class="wid12 flt_lft"> 
+                                    <div class="cy">Base</div><div class="clear"></div>
+                                    <div class="py left">Activity</div><div class="clear"></div>
+                                    <div class="gpy">Speed</div> 
+                                </div>                   
+                                <div class="bar flt_rgt">
+                                    <div class="item-progress cy_color" data-percent="{!chcBasePercent}"><apex:outputText value="{0, number, ###,##0}"><apex:param value="{!chcBase}"/></apex:outputText></div> <div class="clear"></div>                        
+                                    <div class="item-progress1 py1_color" data-percent="{!chcActivityPercent}"><apex:outputText value="{0, number, ###,##0}"><apex:param value="{!chcActivity}"/></apex:outputText></div><div class="clear"></div>
+                                    
+                                   
+                                      <div class="item-progress3 hht33_33 py_color clr_backblk80 {!IF(chcLevel!=null,'none','')}" data-percent="{!chcSpeedPercent}">
+                                          <apex:outputText value="{0, number, ###,##0}" rendered="{!IF(chcLevel==null,true,false)}">
+                                              <apex:param value="{!chcSpeed}"/><span class="Tlft">{!chcLevel}</span>
+                                         </apex:outputText> 
+                                         
+                                       </div>
+                                     
+                                  
+                                  
+                                     
+                                         <div class="item-progress3 hht33_33 py_color {!IF(chcLevel!='SILVER','none','')}" data-percent="{!chcSpeedPercent}">
+                                            <apex:outputText value="{0, number, ###,##0}" rendered="{!IF(chcLevel=='SILVER',true,false)}">
+                                          <apex:param value="{!chcSpeed}"/>
+                                          <span class="Tlft">{!chcLevel}</span> 
+                                           </apex:outputText>
+                                       </div>
+                                      
+                                    
+                                     
+                                        <div class="item-progress4 hht33_33 py_color {!IF(chcLevel!='BRONZE','none','')}" data-percent="{!chcSpeedPercent}">
+                                        <apex:outputText value="{0, number, ###,##0}"  rendered="{!IF(chcLevel=='BRONZE',true,false)}">
+                                        <apex:param value="{!chcSpeed}"/>
+                                        <span class="Tlft">{!chcLevel}</span>
+                                        </apex:outputText>
+                                        </div>
+                                     
+                                     
+                                         <div class="item-progress5 hht33_33 py_color {!IF(chcLevel!='GOLD','none','')}" data-percent="{!chcSpeedPercent}">
+                                         <apex:outputText value="{0, number, ###,##0}" rendered="{!IF(chcLevel=='GOLD',true,false)}" >
+                                         <apex:param value="{!chcSpeed}"/>
+                                        <span class="Tlft">{!chcLevel}</span>
+                                        </apex:outputText>
+                                       </div>
+                                     
+                                   
+                                       <div class="item-progress5 hht33_33 py_color {!IF(chcLevel!='DOUBLE GOLD','none','')}" data-percent="{!chcSpeedPercent}">
+                                          <apex:outputText value="{0, number, ###,##0}" rendered="{!IF(chcLevel=='DOUBLE GOLD',true,false)}">
+                                              <apex:param value="{!chcSpeed}"/>
+                                             
+                                              <span class="Tlft">{!chcLevel}</span>
+                                          
+                                          </apex:outputText> 
+                                      </div> 
+                                   
+                                   
+                                   <div class="item-progress5 hht33_33 py_color {!IF(chcLevel!='TOTAL PTS GOLD','none','')}" data-percent="{!chcSpeedPercent}">
+                                    <apex:outputText value="{0, number, ###,##0}" rendered="{!IF(chcLevel=='TOTAL PTS GOLD',true,false)}">
+                                        <apex:param value="{!chcSpeed}"/>
+                                        <span class=" Tlft">{!chcLevel}</span>
+                                    </apex:outputText>
+                                   </div>
+                                   
+                                    
+                                </div>
+                            </div>
+                           <span class="flt_lft fntB"><apex:outputText value="*Based on {0,date,MM/dd/yy} Report">
+                            <apex:param value="{!chcSummaryDate}" /> </apex:outputText> </span>
+                            <apex:outputPanel rendered="{!IF(chcDocument != null && chcDocument[0].URLLink != '' && chcDocument[0].URLLink != null,true,false)}">
+                                <a class="flt_rgt fntB" href="{!chcDocument[0].URLLink}" target="_blank">More About CHC</a>
+                            </apex:outputPanel>
+                        </div>              
+                    </div>
+                 </div>
+             </apex:outputPanel>
+             
+             <apex:outputPanel rendered="{! IF(ISPICKVAL($User.UserType,'STANDARD') && (chcInternalUserURL != null),TRUE,FALSE)}">
+                   <a class="flt_rgt fntB" target='_blank' href="{!chcInternalUserURL}">Salesforce Purina</a>
+             </apex:outputPanel>
+             </div>
+         </div>
+    </div>
+    
+    <script>
+        $(document).ready(function() {
+            getSummaryReport();
+        });
+    </script>  
+   
+   <style>
+   .cy_color{
+       text-shadow: 1px 1px 3px #41acae;
+       font-weight: bold;
+   }
+   .pytd_color{
+       text-shadow: 1px 1px 3px #d7bd30;
+       font-weight: bold;
+   }
+   .py_color{
+       text-shadow: 1px 1px 3px #909090;
+       font-weight: bold;
+   }
+   .py1_color{
+       text-shadow: 1px 1px 3px #d7bd30;
+       font-weight: bold;
+   }
+   .none{display:none}
+   .block{display:blcok}
+   .bar-chart > .chart > .item{color:#000 !important}
+   .Tlft{float:left !important;position: absolute;   left: 70px;   top: 2px; width:110px;}
+   
+   </style>
+   
+</apex:component>

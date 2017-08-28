@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>Custom Settings for LPDCR_ReimbursementRequestNotification</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Config_Setting__c</fullName>
+        <description>Enter the setting based on how the Config type was entered.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If you used &quot;Status&quot; for Config Type, then put in a status value such as &quot;In Progress&quot; 
+If you used &quot;Profile&quot; for Config Type, then put in a profile value such as &quot;Sales Operations&quot; 
+If you used &quot;TestMode&quot; for Config Type, then put in a User ID</inlineHelpText>
+        <label>Config Setting</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Config_Type__c</fullName>
+        <description>Enter &quot;Status&quot; if you want to add an entry for an approval status to filter for 
+Enter &quot;Profile&quot; if you want to add an entry for a user profile that will receive the summary version of the email 
+Enter &quot;TestMode&quot; if you want to put the system in test mode which means all emails will be sent the User ID that is placed in the Config Setting value.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>What is the configuration type for this entry? 
+Available entries are &quot;Status&quot;, &quot;Profile&quot;, or &quot;TestMode&quot;</inlineHelpText>
+        <label>Config Type</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Is_Active_Setting__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Is this setting &quot;Active&quot;? If it is, then it will be used, be careful with TestMode as you will want the entry, but in general it should NOT be active.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Is this setting &quot;Active&quot;? If it is, then it will be used, be careful with TestMode as you will want the entry, but in general it should NOT be active.</inlineHelpText>
+        <label>Is Active Setting</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>LPDCR_ReimbursementRequestNotification_C</label>
+    <visibility>Protected</visibility>
+</CustomObject>

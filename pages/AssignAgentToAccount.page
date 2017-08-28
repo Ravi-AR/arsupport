@@ -1,0 +1,121 @@
+<!-- AssignAgentToAccountController
+     Controller for the AssignAgentToAccount VS Page used to search for
+     accounts and update the corresponding Dedicated Agent.
+     ------------------------------------------------------------------
+     Author              	Date         	Description
+     ------------------------------------------------------------------
+     Mark Purick			09/08/2016		Created
+-->
+<apex:page controller="AssignAgentToAccountController" showHeader="false">
+   <apex:form > 
+      <apex:pageBlock >
+         <apex:actionFunction name="selectAll" status="checkStatus" action="{!selectAll}" rerender="chkColumn"/>
+         <apex:pageBlockButtons location="top">
+            <apex:commandButton value="Search records" action="{!search}"/> 
+            <apex:commandButton value="Update records" action="{!updateSelected}" />
+         </apex:pageBlockButtons>
+            <apex:pageMessages ></apex:pageMessages>
+         <apex:pageblockSection >
+         <apex:panelGrid columns="4">
+            <apex:panelGrid >
+               <apex:facet name="header">Account Name</apex:facet>
+               <apex:inputText value="{!searchAccount.Name}" />
+            </apex:panelGrid>
+            <apex:panelGrid >
+               <apex:facet name="header">Parent Account</apex:facet>
+               <apex:inputText value="{!parentAcctName}" />
+            </apex:panelGrid>
+            <apex:panelGrid >
+			   <apex:facet name="header">Dedicated COR</apex:facet>
+               <apex:selectList id="cors" value="{!dedicatedCOR.Id}" size="1" title="DedicatedCOR">
+			  	  <apex:selectOptions value="{!dedicatedCORs}"></apex:selectOptions>
+		 	   </apex:selectList>
+            </apex:panelGrid>
+            <apex:panelGrid >
+               <apex:facet name="header">Customer Ops Region</apex:facet>
+               <apex:inputField value="{!dedicatedCOR.Customer_Ops_Region__c}"/>
+            </apex:panelGrid>
+            <apex:panelGrid >
+               <apex:facet name="header">Primary Plant</apex:facet>
+               <apex:selectList id="plants" value="{!primaryPlant.plantId}" size="1" title="PrimaryPlant">
+				  <apex:selectOptions value="{!primaryPlants}"></apex:selectOptions>
+			   </apex:selectList>
+            </apex:panelGrid>
+            <apex:panelGrid >
+               <apex:facet name="header">Top 25 Account</apex:facet>
+               <apex:inputField value="{!searchAccount.Top_25_Account__c}" />
+            </apex:panelGrid>
+            <apex:panelGrid >
+               <apex:facet name="header">Shipping City</apex:facet>
+               <apex:inputText value="{!searchAccount.ShippingCity}" />
+            </apex:panelGrid>
+            <apex:panelGrid >
+               <apex:facet name="header">Shipping State</apex:facet>
+               <apex:inputField value="{!searchAccount.ShippingStateCode}"/>
+            </apex:panelGrid>
+            <apex:panelGrid >
+               <apex:inputField value="{!searchAccount.ShippingCountryCode}" style="visibility: hidden;" />
+            </apex:panelGrid>
+         </apex:panelGrid>
+      </apex:pageblockSection>
+         <apex:pageblockSection >
+            <apex:pageBlockSectionItem dataStyle="width: 100%">
+               <apex:panelGrid columns="3" style="margin: 0 auto; width: 100%">
+                  <apex:panelGrid columns="1">
+			         <apex:facet name="header">Update records with this Dedicated COR</apex:facet>
+                     <apex:selectList id="newCors" value="{!newDedicatedCOR.Id}" size="1" title="NewDedicatedCOR">
+				        <apex:selectOptions value="{!dedicatedCORs}"></apex:selectOptions>
+			         </apex:selectList>
+                  </apex:panelGrid>
+                  <apex:panelGrid >
+                     <apex:actionStatus id="checkStatus" style="align:center;">      
+                        <apex:facet name="start">
+                           <apex:outputLabel value="Processing..." />
+                        </apex:facet>
+                        <apex:facet name="stop"></apex:facet>
+                     </apex:actionStatus>
+                  </apex:panelGrid>
+    	          <apex:panelGrid columns="5" style="float:right">
+    		         <apex:commandButton action="{!first}" value=" | < " />
+    		         <apex:commandButton action="{!previous}" rendered="{!hasPrevious}" value=" < " />
+    		         <apex:commandButton action="{!next}" rendered="{!hasNext}" value=" > " />
+    		         <apex:commandButton action="{!last}" value=" > | " />
+                     <apex:outputLabel value="({!pageStart} - {!pageEnd}) of {!totalRecs}" style="vertical-align:middle"></apex:outputLabel>
+    	          </apex:panelGrid>
+               </apex:panelGrid>
+            </apex:pageBlockSectionItem>
+         </apex:pageblockSection>
+         <apex:pageBlockTable id="searchResults" value="{!wrappedAccounts}" var="a" >
+            <apex:column id="chkColumn">
+               <apex:facet name="header">
+                  <apex:outputPanel layout="none">
+                     <apex:inputCheckbox onclick="selectAll()" value="{!checked}" />
+                  </apex:outputPanel>
+               </apex:facet>
+                <!-- <apex:inputCheckbox onchange="addRemove('{!a.acct.id}','{!a.isSelected}');" value="{!a.isSelected}"> -->
+                <apex:inputCheckbox value="{!a.isSelected}">
+                   <!-- <apex:actionSupport event="onchange" action="{!addRemoveSelectedIds}" rerender="chkColumn" status="checkStatus">
+                      <apex:param name="selectedAcct" value="{!a.acct.Id}" assignTo="{!acctID}"/>
+                      <apex:param name="selectedChk" value="{!a.isSelected}" assignTo="{!checked}"/>
+                   </apex:actionSupport> -->
+                </apex:inputCheckbox>
+            </apex:column>
+            <apex:column headerValue="Account Name">
+               <apex:outputLink value="{!a.acct.Id}" >{!a.acct.Name}</apex:outputLink>
+            </apex:column>
+            <apex:column value="{!a.acct.ParentId}"/>
+            <apex:column value="{!a.acct.Dedicated_Customer_Op_Rep__c}"/>
+            <apex:column value="{!dedicatedCOR.Customer_Ops_Region__c}" />
+            <apex:column value="{!a.acct.ShippingCity}" />
+            <apex:column value="{!a.acct.ShippingState}" />
+            <apex:column value="{!a.acct.Primary_Plant_Lookup__c}" />
+            <apex:column value="{!a.acct.Top_25_Account__c}" />
+         </apex:pageBlockTable>
+      </apex:pageBlock>
+    </apex:form>
+    <script>
+    //function addRemove(a, b) {
+    //      alert("acct: " + a + " and selected: " + b);   
+    //   }
+    </script>
+</apex:page>

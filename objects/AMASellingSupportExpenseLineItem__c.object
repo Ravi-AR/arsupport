@@ -1,0 +1,1392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <content>LPDCR_ReimbursementLineItem</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <content>LPDCR_ReimbursementLineItem</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>Default</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Default</fullName>
+        <fields>Name</fields>
+        <fields>Expense__c</fields>
+        <fields>Approval_Status__c</fields>
+        <label>Default</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Expense Line Items. Child to the Expense object.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Amount_Reimbursed__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>The amount that is determined by the expense sub category. This amount is rolled up to the parent expense.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The amount that is determined by the expense sub category. This amount is rolled up to the parent expense.</inlineHelpText>
+        <label>Amount Reimbursed ($)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Approval_Status__c</fullName>
+        <description>Expense line item approval status</description>
+        <externalId>false</externalId>
+        <label>Line Item Approval Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Saved</fullName>
+                    <default>true</default>
+                    <label>Saved</label>
+                </value>
+                <value>
+                    <fullName>Submitted for Approval</fullName>
+                    <default>false</default>
+                    <label>Submitted for Approval</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Rework</fullName>
+                    <default>false</default>
+                    <label>Rework</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Area_Sales_Manager__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Area Sales Manager (BB Approver)</description>
+        <externalId>false</externalId>
+        <label>Area Sales Manager (BB Approver)</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>AMA_Selling_Support_Expense_Line_Item</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>BB_Approver_Sales_Specialist__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>BB Approver Sales Specialist (via Account)</description>
+        <externalId>false</externalId>
+        <label>Sales Specialist (BB Approver)</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>AMA_Selling_Support_Expense_Line_Item1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>BB_Description__c</fullName>
+        <description>Taking Description from Custom Setting BusinessBuilderRules</description>
+        <externalId>false</externalId>
+        <label>BB Description</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CloneExpensefromCreatedByUser__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Clone Expense from Created By User</description>
+        <externalId>false</externalId>
+        <label>Clone Expense from Created By User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Reimbursement_Request_Line_Items</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Cloned_Expense_Line_From__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>This field will store the old Expense Line Item Id.</description>
+        <externalId>false</externalId>
+        <label>Cloned Expense Line From</label>
+        <referenceTo>AMASellingSupportExpenseLineItem__c</referenceTo>
+        <relationshipLabel>Reimbursement Request Line Items</relationshipLabel>
+        <relationshipName>Reimbursement_Request_Line_Items</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Date__c</fullName>
+        <description>Date expense was incurred.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date expense was incurred.</inlineHelpText>
+        <label>(delete) Date of Expense</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>DealerFacingReasonforReworkMessage__c</fullName>
+        <description>Message that is displayed to the Dealer for Rework line items</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Message that is displayed to the Dealer for Rework line items</inlineHelpText>
+        <label>Dealer Facing Reason for Rework Message</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <description>Description of Reimbursement Line Item</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of Reimbursement Line Item</inlineHelpText>
+        <label>Description</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>ExpenseAmount__c</fullName>
+        <description>Amount Reimbursed</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Amount Reimbursed (Reimbursable Amount is calculated upon saving this line item)</inlineHelpText>
+        <label>Reimbursement Amount ($)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Expense__c</fullName>
+        <description>Parent reimbursement request record that is submitted for approval for reimbursement.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Parent reimbursement request record that is submitted for approval for reimbursement.</inlineHelpText>
+        <label>Reimbursement</label>
+        <referenceTo>AMASellingSupportExpense__c</referenceTo>
+        <relationshipLabel>Reimbursement Request Line Items</relationshipLabel>
+        <relationshipName>Expense_Line_Item</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Image__c</fullName>
+        <description>Line Item Image</description>
+        <externalId>false</externalId>
+        <label>Image</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>JDEPARTNUMBER__c</fullName>
+        <description>Part number based on expense SubCategory</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Part number based on expense SubCategory</inlineHelpText>
+        <label>JDE PART NUMBER</label>
+        <length>25</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Max_Reimbursement__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Max Reimbursement</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Quantity_Multiplier__c</fullName>
+        <description>Number of same line items when reimbursement is calculated by quantity x&apos;s $ dollar amount instead of %  (originally used for Checkpoint)   Relates to sub categories.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of same line items when reimbursement is calculated by quantity x&apos;s $ dollar amount instead of %</inlineHelpText>
+        <label>Quantity Multiplier</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReasonforRework__c</fullName>
+        <description>Reject reason, based on the Line Item Approval Status</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Reject reason, based on the Line Item Approval Status</inlineHelpText>
+        <label>Reason for Rework</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Approval_Status__c</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Expense Does Not Qualify</fullName>
+                    <default>false</default>
+                    <label>Expense Does Not Qualify</label>
+                </value>
+                <value>
+                    <fullName>Incorrect Receipt(s)</fullName>
+                    <default>false</default>
+                    <label>Incorrect Receipt(s)</label>
+                </value>
+                <value>
+                    <fullName>Incorrect Subcategory</fullName>
+                    <default>false</default>
+                    <label>Incorrect Subcategory</label>
+                </value>
+                <value>
+                    <fullName>Missing Receipt(s)</fullName>
+                    <default>false</default>
+                    <label>Missing Receipt(s)</label>
+                </value>
+                <value>
+                    <fullName>Previously Submitted</fullName>
+                    <default>false</default>
+                    <label>Previously Submitted</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Rework</controllingFieldValue>
+                <valueName>Expense Does Not Qualify</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Rework</controllingFieldValue>
+                <valueName>Incorrect Receipt(s)</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Rework</controllingFieldValue>
+                <valueName>Incorrect Subcategory</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Rework</controllingFieldValue>
+                <valueName>Missing Receipt(s)</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Rework</controllingFieldValue>
+                <valueName>Previously Submitted</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Reimbursement_Category__c</fullName>
+        <description>Reimbursement Category (related controlling field to subcategory)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The category for the Reimbursement Request Line Item</inlineHelpText>
+        <label>Reimbursement Category</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Education and Training</fullName>
+                    <default>false</default>
+                    <label>Education and Training</label>
+                </value>
+                <value>
+                    <fullName>Events and Marketing</fullName>
+                    <default>false</default>
+                    <label>Events and Marketing</label>
+                </value>
+                <value>
+                    <fullName>Feeding Trial</fullName>
+                    <default>false</default>
+                    <label>Feeding Trial</label>
+                </value>
+                <value>
+                    <fullName>Pet Food</fullName>
+                    <default>false</default>
+                    <label>Pet Food</label>
+                </value>
+                <value>
+                    <fullName>Loyalty Program</fullName>
+                    <default>false</default>
+                    <label>Loyalty Program</label>
+                </value>
+                <value>
+                    <fullName>Balance Adjustment</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Balance Adjustment</label>
+                </value>
+                <value>
+                    <fullName>Trials</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Trials</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Reimbursement_Percentage__c</fullName>
+        <description>Calculated based on subcategory</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Calculated based on subcategory</inlineHelpText>
+        <label>Reimbursment Percentage</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Reimbursement_Sub_category__c</fullName>
+        <description>Subcategory for Reimbursement Request (related to Category field)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Reimbursement Request Line Item</inlineHelpText>
+        <label>Reimbursement Sub-category</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Reimbursement_Category__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Adv and Mktg Agency Fees 2017</fullName>
+                    <default>false</default>
+                    <label>Adv and Mktg Agency Fees 2017</label>
+                </value>
+                <value>
+                    <fullName>Advertising</fullName>
+                    <default>false</default>
+                    <label>Advertising</label>
+                </value>
+                <value>
+                    <fullName>Advertising and Marketing Agency Fees</fullName>
+                    <default>false</default>
+                    <label>Advertising and Marketing Agency Fees</label>
+                </value>
+                <value>
+                    <fullName>Animal Care Workshop</fullName>
+                    <default>false</default>
+                    <label>Animal Care Workshop</label>
+                </value>
+                <value>
+                    <fullName>Branded Wearables and Premiums</fullName>
+                    <default>false</default>
+                    <label>Branded Wearables and Premiums</label>
+                </value>
+                <value>
+                    <fullName>Branded Wearables and Premiums 2017</fullName>
+                    <default>false</default>
+                    <label>Branded Wearables and Premiums 2017</label>
+                </value>
+                <value>
+                    <fullName>Calf and Heifer VIP</fullName>
+                    <default>false</default>
+                    <label>Calf and Heifer VIP</label>
+                </value>
+                <value>
+                    <fullName>Cattle Mineral Meeting</fullName>
+                    <default>false</default>
+                    <label>Cattle Mineral Meeting</label>
+                </value>
+                <value>
+                    <fullName>Check-R-Board Days</fullName>
+                    <default>false</default>
+                    <label>Check-R-Board Days</label>
+                </value>
+                <value>
+                    <fullName>Chick Days</fullName>
+                    <default>false</default>
+                    <label>Chick Days</label>
+                </value>
+                <value>
+                    <fullName>Customer Appreciation Event</fullName>
+                    <default>false</default>
+                    <label>Customer Appreciation Event</label>
+                </value>
+                <value>
+                    <fullName>Dairy/Beef Cattle Vet Conference</fullName>
+                    <default>false</default>
+                    <label>Dairy/Beef Cattle Vet Conference</label>
+                </value>
+                <value>
+                    <fullName>Dealer Differentiation Conference</fullName>
+                    <default>false</default>
+                    <label>Dealer Differentiation Conference</label>
+                </value>
+                <value>
+                    <fullName>Dealer Signage</fullName>
+                    <default>false</default>
+                    <label>Dealer Signage</label>
+                </value>
+                <value>
+                    <fullName>eStore Merchandising</fullName>
+                    <default>false</default>
+                    <label>eStore Merchandising</label>
+                </value>
+                <value>
+                    <fullName>Farm/Ranch Selling Events</fullName>
+                    <default>false</default>
+                    <label>Farm/Ranch Selling Events</label>
+                </value>
+                <value>
+                    <fullName>FEED/HERD Sales Training</fullName>
+                    <default>false</default>
+                    <label>FEED/HERD Sales Training</label>
+                </value>
+                <value>
+                    <fullName>Feeding Trial</fullName>
+                    <default>false</default>
+                    <label>Feeding Trial</label>
+                </value>
+                <value>
+                    <fullName>Feedlot Cattle VIP</fullName>
+                    <default>false</default>
+                    <label>Feedlot Cattle VIP</label>
+                </value>
+                <value>
+                    <fullName>Flocktober</fullName>
+                    <default>false</default>
+                    <label>Flocktober</label>
+                </value>
+                <value>
+                    <fullName>Genetic Supplier VIP</fullName>
+                    <default>false</default>
+                    <label>Genetic Supplier VIP</label>
+                </value>
+                <value>
+                    <fullName>Great Starts</fullName>
+                    <default>false</default>
+                    <label>Great Starts</label>
+                </value>
+                <value>
+                    <fullName>Horse VIP</fullName>
+                    <default>false</default>
+                    <label>Horse VIP</label>
+                </value>
+                <value>
+                    <fullName>HOW Horse Owners Workshop</fullName>
+                    <default>false</default>
+                    <label>HOW Horse Owners Workshop</label>
+                </value>
+                <value>
+                    <fullName>Local Training</fullName>
+                    <default>false</default>
+                    <label>Local Training</label>
+                </value>
+                <value>
+                    <fullName>Loyalty Cattle</fullName>
+                    <default>false</default>
+                    <label>Loyalty Cattle</label>
+                </value>
+                <value>
+                    <fullName>Loyalty Deer</fullName>
+                    <default>false</default>
+                    <label>Loyalty Deer</label>
+                </value>
+                <value>
+                    <fullName>Loyalty Honor Show Chow</fullName>
+                    <default>false</default>
+                    <label>Loyalty Honor Show Chow</label>
+                </value>
+                <value>
+                    <fullName>Loyalty Horse</fullName>
+                    <default>false</default>
+                    <label>Loyalty Horse</label>
+                </value>
+                <value>
+                    <fullName>Loyalty Poultry</fullName>
+                    <default>false</default>
+                    <label>Loyalty Poultry</label>
+                </value>
+                <value>
+                    <fullName>Loyalty Rabbit</fullName>
+                    <default>false</default>
+                    <label>Loyalty Rabbit</label>
+                </value>
+                <value>
+                    <fullName>Loyalty Swine</fullName>
+                    <default>false</default>
+                    <label>Loyalty Swine</label>
+                </value>
+                <value>
+                    <fullName>Mega Calf and Heifer VIP</fullName>
+                    <default>false</default>
+                    <label>Mega Calf and Heifer VIP</label>
+                </value>
+                <value>
+                    <fullName>Mega Cattle VIP</fullName>
+                    <default>false</default>
+                    <label>Mega Cattle VIP</label>
+                </value>
+                <value>
+                    <fullName>Pet Employee Feed Trial</fullName>
+                    <default>false</default>
+                    <label>Pet Employee Feed Trial</label>
+                </value>
+                <value>
+                    <fullName>Pet Food Samples</fullName>
+                    <default>false</default>
+                    <label>Pet Food Samples</label>
+                </value>
+                <value>
+                    <fullName>PMI Employee Incentive</fullName>
+                    <default>false</default>
+                    <label>PMI Employee Incentive</label>
+                </value>
+                <value>
+                    <fullName>PMI Employee Training</fullName>
+                    <default>false</default>
+                    <label>PMI Employee Training</label>
+                </value>
+                <value>
+                    <fullName>PMI Nutrition Frequent Purchase Card</fullName>
+                    <default>false</default>
+                    <label>PMI Nutrition Frequent Purchase Card</label>
+                </value>
+                <value>
+                    <fullName>Poultry Owners Workshop</fullName>
+                    <default>false</default>
+                    <label>Poultry Owners Workshop</label>
+                </value>
+                <value>
+                    <fullName>Professional Beef Sales Training</fullName>
+                    <default>false</default>
+                    <label>Professional Beef Sales Training</label>
+                </value>
+                <value>
+                    <fullName>Purina eStore Merchandising kits</fullName>
+                    <default>false</default>
+                    <label>Purina eStore Merchandising kits</label>
+                </value>
+                <value>
+                    <fullName>Purina Product Launch</fullName>
+                    <default>false</default>
+                    <label>Purina Product Launch</label>
+                </value>
+                <value>
+                    <fullName>Purina University</fullName>
+                    <default>false</default>
+                    <label>Purina University</label>
+                </value>
+                <value>
+                    <fullName>Range Cattle VIP</fullName>
+                    <default>false</default>
+                    <label>Range Cattle VIP</label>
+                </value>
+                <value>
+                    <fullName>Show VIP</fullName>
+                    <default>false</default>
+                    <label>Show VIP</label>
+                </value>
+                <value>
+                    <fullName>Sponsorships</fullName>
+                    <default>false</default>
+                    <label>Sponsorships</label>
+                </value>
+                <value>
+                    <fullName>Summer Horse Feeding Trial Event</fullName>
+                    <default>false</default>
+                    <label>Summer Horse Feeding Trial Event</label>
+                </value>
+                <value>
+                    <fullName>Swine VIP</fullName>
+                    <default>false</default>
+                    <label>Swine VIP</label>
+                </value>
+                <value>
+                    <fullName>Top Dealer Meeting</fullName>
+                    <default>false</default>
+                    <label>Top Dealer Meeting</label>
+                </value>
+                <value>
+                    <fullName>Yellow Pages</fullName>
+                    <default>false</default>
+                    <label>Yellow Pages</label>
+                </value>
+                <value>
+                    <fullName>Yellow Pages 2017</fullName>
+                    <default>false</default>
+                    <label>Yellow Pages 2017</label>
+                </value>
+                <value>
+                    <fullName>Balance Adjustment</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Balance Adjustment</label>
+                </value>
+                <value>
+                    <fullName>Calf &amp; Heifer VIP</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Calf &amp; Heifer VIP</label>
+                </value>
+                <value>
+                    <fullName>CheckPoint</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>CheckPoint</label>
+                </value>
+                <value>
+                    <fullName>Loyalty Cards</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Loyalty Cards</label>
+                </value>
+                <value>
+                    <fullName>Mega Calf &amp; Heifer VIP</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Mega Calf &amp; Heifer VIP</label>
+                </value>
+                <value>
+                    <fullName>TBD</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>TBD</label>
+                </value>
+                <value>
+                    <fullName>Top Dealer Meetings</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Top Dealer Meetings</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Education and Training</controllingFieldValue>
+                <valueName>Animal Care Workshop</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Education and Training</controllingFieldValue>
+                <valueName>Calf and Heifer VIP</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Education and Training</controllingFieldValue>
+                <valueName>Dairy/Beef Cattle Vet Conference</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Education and Training</controllingFieldValue>
+                <valueName>Dealer Differentiation Conference</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Education and Training</controllingFieldValue>
+                <valueName>FEED/HERD Sales Training</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Education and Training</controllingFieldValue>
+                <valueName>Feedlot Cattle VIP</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Education and Training</controllingFieldValue>
+                <valueName>Genetic Supplier VIP</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Education and Training</controllingFieldValue>
+                <valueName>Horse VIP</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Education and Training</controllingFieldValue>
+                <valueName>Local Training</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Education and Training</controllingFieldValue>
+                <valueName>Mega Calf and Heifer VIP</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Education and Training</controllingFieldValue>
+                <valueName>Mega Cattle VIP</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Education and Training</controllingFieldValue>
+                <valueName>Professional Beef Sales Training</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Education and Training</controllingFieldValue>
+                <valueName>Purina Product Launch</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Education and Training</controllingFieldValue>
+                <valueName>Purina University</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Education and Training</controllingFieldValue>
+                <valueName>Range Cattle VIP</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Education and Training</controllingFieldValue>
+                <valueName>Show VIP</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Education and Training</controllingFieldValue>
+                <valueName>Swine VIP</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Adv and Mktg Agency Fees 2017</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Advertising</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Advertising and Marketing Agency Fees</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Branded Wearables and Premiums</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Branded Wearables and Premiums 2017</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Cattle Mineral Meeting</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Check-R-Board Days</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Chick Days</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Customer Appreciation Event</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Dealer Signage</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Farm/Ranch Selling Events</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Flocktober</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Great Starts</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>HOW Horse Owners Workshop</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Poultry Owners Workshop</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Purina eStore Merchandising kits</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Sponsorships</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Summer Horse Feeding Trial Event</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Top Dealer Meeting</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Yellow Pages</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Events and Marketing</controllingFieldValue>
+                <valueName>Yellow Pages 2017</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pet Food</controllingFieldValue>
+                <valueName>eStore Merchandising</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pet Food</controllingFieldValue>
+                <valueName>Pet Employee Feed Trial</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pet Food</controllingFieldValue>
+                <valueName>Pet Food Samples</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pet Food</controllingFieldValue>
+                <valueName>PMI Employee Incentive</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pet Food</controllingFieldValue>
+                <valueName>PMI Employee Training</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pet Food</controllingFieldValue>
+                <valueName>PMI Nutrition Frequent Purchase Card</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feeding Trial</controllingFieldValue>
+                <valueName>Feeding Trial</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Loyalty Program</controllingFieldValue>
+                <valueName>Loyalty Cattle</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Loyalty Program</controllingFieldValue>
+                <valueName>Loyalty Deer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Loyalty Program</controllingFieldValue>
+                <valueName>Loyalty Honor Show Chow</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Loyalty Program</controllingFieldValue>
+                <valueName>Loyalty Horse</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Loyalty Program</controllingFieldValue>
+                <valueName>Loyalty Poultry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Loyalty Program</controllingFieldValue>
+                <valueName>Loyalty Rabbit</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Loyalty Program</controllingFieldValue>
+                <valueName>Loyalty Swine</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Total_Spend__c</fullName>
+        <defaultValue>0.00</defaultValue>
+        <description>Reimbursement Amount Before % applied</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Reimbursement Amount Before % applied</inlineHelpText>
+        <label>Request Amount</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <label>Reimbursement Request Line Item</label>
+    <nameField>
+        <displayFormat>RLI{0000}</displayFormat>
+        <label>Reimbursement Line Item Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Reimbursement Request Line Items</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Standard</fullName>
+        <active>true</active>
+        <description>Standard Expense Line Item</description>
+        <label>Standard</label>
+        <picklistValues>
+            <picklist>Approval_Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rework</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Saved</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Submitted for Approval</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ReasonforRework__c</picklist>
+            <values>
+                <fullName>Expense Does Not Qualify</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incorrect Receipt%28s%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incorrect Subcategory</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Missing Receipt%28s%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Previously Submitted</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Reimbursement_Category__c</picklist>
+            <values>
+                <fullName>Education and Training</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Events and Marketing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feeding Trial</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Loyalty Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pet Food</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Reimbursement_Sub_category__c</picklist>
+            <values>
+                <fullName>Adv and Mktg Agency Fees 2017</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Advertising</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Advertising and Marketing Agency Fees</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Animal Care Workshop</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Branded Wearables and Premiums</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Branded Wearables and Premiums 2017</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Calf and Heifer VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Mineral Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Check-R-Board Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chick Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Customer Appreciation Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy%2FBeef Cattle Vet Conference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dealer Differentiation Conference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dealer Signage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FEED%2FHERD Sales Training</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Farm%2FRanch Selling Events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feeding Trial</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feedlot Cattle VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flocktober</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Genetic Supplier VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Great Starts</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HOW Horse Owners Workshop</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Local Training</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Loyalty Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Loyalty Deer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Loyalty Honor Show Chow</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Loyalty Horse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Loyalty Poultry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Loyalty Rabbit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Loyalty Swine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mega Calf and Heifer VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mega Cattle VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PMI Employee Incentive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PMI Employee Training</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PMI Nutrition Frequent Purchase Card</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pet Employee Feed Trial</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pet Food Samples</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Poultry Owners Workshop</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Professional Beef Sales Training</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purina Product Launch</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purina University</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purina eStore Merchandising kits</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Range Cattle VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sponsorships</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Summer Horse Feeding Trial Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Top Dealer Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yellow Pages</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yellow Pages 2017</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>eStore Merchandising</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>ASM_and_SS_Request_Amount</fullName>
+        <active>true</active>
+        <description>Sales Specialist and Area Sales Managers cannot update the Request Amount</description>
+        <errorConditionFormula>AND(
+RecordType.Name = &quot;Standard&quot;,
+OR(
+$Profile.Name = &quot;Sales Specialist&quot;,
+$Profile.Name = &quot;Area Sales Manager&quot;,
+$Profile.Name = &quot;Inside Sales User&quot;),
+ISCHANGED(Total_Spend__c))</errorConditionFormula>
+        <errorDisplayField>Total_Spend__c</errorDisplayField>
+        <errorMessage>Unable to update Request Amount</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>ASM_and_SS_Status</fullName>
+        <active>true</active>
+        <description>Sales Specialist and Area Sales Managers can only select &apos;In Progress&apos; or &apos;Rework&apos; for the Line Approval Status</description>
+        <errorConditionFormula>AND(
+RecordType.Name = &quot;Standard&quot;,
+OR(
+$Profile.Name = &quot;Sales Specialist&quot;,
+$Profile.Name = &quot;Area Sales Manager&quot;,
+$Profile.Name = &quot;Insides Sales User&quot;),
+NOT(ISPICKVAL(Approval_Status__c, &apos;In Progress&apos;)),
+NOT(ISPICKVAL(Approval_Status__c, &apos;Rework&apos;)))</errorConditionFormula>
+        <errorDisplayField>Approval_Status__c</errorDisplayField>
+        <errorMessage>Invalid Status. Select either &apos;In Progress&apos; or &apos;Rework&apos;</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Balance_Adjustment_Line_Edit_Validation</fullName>
+        <active>true</active>
+        <description>Only System Admins and Sales Ops users can edit Balance Adjustments Line Items.</description>
+        <errorConditionFormula>Expense__r.RecordType.DeveloperName = &apos;Balance_Adjustment&apos; &amp;&amp; 
+$Profile.Name != &apos;Sales Operations&apos; &amp;&amp; 
+$Profile.Name != &apos;System Administrator&apos;</errorConditionFormula>
+        <errorMessage>Only Approved Users can edit Balance Adjustment Line Items</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>ReWork_Reason_Required</fullName>
+        <active>true</active>
+        <description>If line item status is &apos;Rework&apos;, reason code is required.</description>
+        <errorConditionFormula>ISPICKVAL( Approval_Status__c , &apos;Rework&apos;) &amp;&amp;
+ ISPICKVAL( ReasonforRework__c , &apos;&apos;)</errorConditionFormula>
+        <errorMessage>Rejection reason required for Rework line item</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>RequestAmountMoreThanAvailableBalance</fullName>
+        <active>false</active>
+        <description>Total Reimbursement Amount can not exceed Available Balance</description>
+        <errorConditionFormula>ExpenseAmount__c &gt; Expense__r.Selling_Support_Program_Year__r.Available_Balance__c</errorConditionFormula>
+        <errorMessage>Total Reimbursement Amount can not exceed Available Balance</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+    <webLinks>
+        <fullName>ApproveLineItem</fullName>
+        <availability>online</availability>
+        <description>Sets the line item status to &apos;Approved&apos;</description>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Approve Item</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/37.0/connection.js&quot;)}  
+ var records = {!GETRECORDIDS($ObjectType.AMASellingSupportExpenseLineItem__c)};   
+ var updateRecords = [];   
+ if (records[0] == null)   
+ {   
+  alert(&quot;Please select at least one Reimbursement Line Item&quot;)   
+ }   
+ else   
+ {   
+  for (var i=0; i&lt;records.length; i++)   
+  {   
+   var li = new sforce.SObject(&quot;AMASellingSupportExpenseLineItem__c&quot;);   
+   li.id = records[i];   
+   li.Approval_Status__c = &quot;In Progress&quot;;   
+   updateRecords.push(li);   
+  }   
+  result = sforce.connection.update(updateRecords);   
+  location.reload(true); 
+ }</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Back_to_Reimbursement_Request</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>&lt;&lt; Back to Reimbursement Request</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/{!AMASellingSupportExpenseLineItem__c.ExpenseId__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>RejectItem</fullName>
+        <availability>online</availability>
+        <description>Sets the line item status to &apos;Rejected&apos;</description>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Set As Rework Item</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/37.0/connection.js&quot;)} 
+var records = {!GETRECORDIDS($ObjectType.AMASellingSupportExpenseLineItem__c)}; 
+var updateRecords = []; 
+if (records[0] == null) 
+{ 
+alert(&quot;Please select at least one Reimbursement Line Item&quot;) 
+} 
+else 
+{ 
+for (var i=0; i&lt;records.length; i++) 
+{ 
+var li = new sforce.SObject(&quot;AMASellingSupportExpenseLineItem__c&quot;); 
+li.id = records[i]; 
+li.Approval_Status__c = &quot;Rework&quot;; 
+updateRecords.push(li); 
+} 
+result = sforce.connection.update(updateRecords); 
+location.reload(true); 
+}</url>
+    </webLinks>
+</CustomObject>

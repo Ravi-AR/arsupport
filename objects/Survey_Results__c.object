@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object used to house survey results of the questions and answers for digigraph surveys</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Animal_Count_Update__c</fullName>
+        <externalId>false</externalId>
+        <formula>Question_Answer_ID__r.Animal_Count_Update__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Animal Count Update?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Animal_Type_Decode__c</fullName>
+        <description>Inserts and Animal Type when one is not identified.  Example:  If he Animal = General in Digigraph, decode to the proper animal type.</description>
+        <externalId>false</externalId>
+        <formula>If(
+ Question_Answer_ID__r.Name  =&quot;Q-0013&quot;,&quot;Horse&quot;,
+If(
+ Question_Answer_ID__r.Name  =&quot;Q-0060&quot;,&quot;Horse&quot;,
+If(
+ Question_Answer_ID__r.Name =&quot;Q-0014&quot;,&quot;Cattle&quot;,
+if(
+ Question_Answer_ID__r.Name  =&quot;Q-0015&quot;,&quot;Dairy&quot;,
+if(
+ Question_Answer_ID__r.Name  =&quot;Q-0016&quot;,&quot;Swine&quot;,
+Text(Question_Answer_ID__r.Animal_Type__c ))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Animal Type (Decode)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Animal_Type_Indicator__c</fullName>
+        <description>Indicator which identifies which questions from the Survey Results table should be inserted into the Survey Results Summary Table.</description>
+        <externalId>false</externalId>
+        <formula>if( 
+Question_Answer_ID__r.Name =&quot;Q-0040&quot;,&quot;Yes&quot;, 
+if( 
+Question_Answer_ID__r.Name =&quot;Q-0041&quot;,&quot;Yes&quot;, 
+if( 
+Question_Answer_ID__r.Name =&quot;Q-0042&quot;,&quot;Yes&quot;,  
+If( 
+Question_Answer_ID__r.Name =&quot;Q-0078&quot;,&quot;Yes&quot;, 
+if( 
+Question_Answer_ID__r.Name =&quot;Q-0015&quot;,&quot;Yes&quot;, 
+if( 
+Question_Answer_ID__r.Name =&quot;Q-0016&quot;,&quot;Yes&quot;, 
+if( 
+Question_Answer_ID__r.Name =&quot;Q-0059&quot;,&quot;Yes&quot;, 
+if( 
+Question_Answer_ID__r.Name =&quot;Q-0060&quot;,&quot;Yes&quot;, 
+if( 
+Question_Answer_ID__r.Name =&quot;Q-0070&quot;,&quot;Yes&quot;, 
+if( 
+Question_Answer_ID__r.Name =&quot;Q-0077&quot;,&quot;Yes&quot;,
+&quot;No&quot; ))))))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Animal Type Indicator</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Animal_Type__c</fullName>
+        <description>Animal Type of the Question related to the Survey Result</description>
+        <externalId>false</externalId>
+        <formula>TEXT( Question_Answer_ID__r.Animal_Type__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Animal Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Answer_Lookup__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup to the Answer record that survey respondent chose to answer the related Question</description>
+        <externalId>false</externalId>
+        <label>Answer Lookup</label>
+        <referenceTo>Answer__c</referenceTo>
+        <relationshipLabel>Survey Results</relationshipLabel>
+        <relationshipName>Survey_Results</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Answer_Option_Formula__c</fullName>
+        <description>Pull in the Answer Option text from the related Answer record</description>
+        <externalId>false</externalId>
+        <formula>Answer_Lookup__r.Answer_Option__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Answer Option Formula</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Answer__c</fullName>
+        <description>Answer from contact/lead related to Question asked from survey</description>
+        <externalId>false</externalId>
+        <label>Answer</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Cattle_Question_Indicator__c</fullName>
+        <description>Used in Process Builder</description>
+        <externalId>false</externalId>
+        <formula>if( 
+Question_Answer_ID__r.Name =&quot;Q-0051&quot;,&quot;Yes&quot;, &quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Cattle Question Indicator</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Contact that answered the Survey questions and provided answers</description>
+        <externalId>false</externalId>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Survey Results</relationshipLabel>
+        <relationshipName>Survey_Results</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Contact_is_Null_Indicator__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(IsBlank(Contact__c),&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact is Null Indicator</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Event_Name_Text__c</fullName>
+        <externalId>false</externalId>
+        <formula>Customer_Event__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Customer Event Name (Text)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Event_Sub_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(Customer_Event__r.Sub_type__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Customer Event Sub-Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Event__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Customer Event where Question and Answer were received</description>
+        <externalId>false</externalId>
+        <label>Customer Event</label>
+        <referenceTo>Campaign</referenceTo>
+        <relationshipLabel>Survey Results</relationshipLabel>
+        <relationshipName>Survey_Results</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Digigraph_Unique_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Order_Sequence__c) &amp;Question_Answer_ID__c &amp; TEXT(LastModifiedDate)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Digigraph Unique ID</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lead_Record_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead__r.RecordType.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Lead Record Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lead__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lead that provided answers to the Questions from the survey</description>
+        <externalId>false</externalId>
+        <label>Lead</label>
+        <referenceTo>Lead</referenceTo>
+        <relationshipLabel>Survey Results</relationshipLabel>
+        <relationshipName>Survey_Results</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Order_Sequence__c</fullName>
+        <description>Order Sequence of Survey Result (based on order sequence of Question &amp; Answer record)</description>
+        <externalId>false</externalId>
+        <formula>Question_Answer_ID__r.Order_Sequence__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Order Sequence</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Question_Answer_ID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>ID of Question &amp; Answer Record</description>
+        <externalId>false</externalId>
+        <label>Question ID</label>
+        <referenceTo>Question__c</referenceTo>
+        <relationshipLabel>Survey Results</relationshipLabel>
+        <relationshipName>Survey_Results</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Question__c</fullName>
+        <description>Question asked on Survey</description>
+        <externalId>false</externalId>
+        <formula>Question_Answer_ID__r.Question__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Question</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Segmentation__c</fullName>
+        <externalId>false</externalId>
+        <label>Segmentation</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Direct</fullName>
+                    <default>true</default>
+                    <label>Direct</label>
+                </value>
+                <value>
+                    <fullName>Dealer</fullName>
+                    <default>false</default>
+                    <label>Dealer</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>X18_Digit_Customer_Event_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>Customer_Event__r.X18_Digit_Customer_Event_ID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>18 Digit Customer Event ID</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X18_Digit_Lead_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead__r.X18_Digit_Lead_ID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>18 Digit Lead ID</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X18_Digit_Survey_Results_ID__c</fullName>
+        <description>Case Safe Record ID</description>
+        <externalId>false</externalId>
+        <formula>CASESAFEID(Id)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>18 Digit Survey Results ID</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Survey Results</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Order_Sequence__c</columns>
+        <columns>Animal_Type__c</columns>
+        <columns>Question__c</columns>
+        <columns>Answer__c</columns>
+        <columns>Contact__c</columns>
+        <columns>Lead__c</columns>
+        <columns>Customer_Event__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>SR-{0000}</displayFormat>
+        <label>Survey Result Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Survey Results</pluralLabel>
+    <recordTypes>
+        <fullName>Digigraph_Survey_Results</fullName>
+        <active>true</active>
+        <description>Results related to Digigraph Surveys</description>
+        <label>Digigraph Survey Results</label>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>Animal_Type__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Order_Sequence__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Question__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Answer__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Contact__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Lead__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Customer_Event__c</customTabListAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

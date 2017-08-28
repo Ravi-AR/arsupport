@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>LULING AND HARWOOD FRM AND FEED LLC DBA-554193 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>LULING AND HARWOOD FRM AND FEED LLC DBA-554193 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>LULINGANDHARWOODFRMANDFEEDLLCDBA554193PartnerManager</parentRole>
+</Role>

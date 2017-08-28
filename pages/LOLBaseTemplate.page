@@ -1,0 +1,33 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false">
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><apex:insert name="pageTitle" /> | LOL</title>
+<link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.LOLBaseTemplate, 'css/bootstrap.min.css')}" />
+<link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.LOLBaseTemplate, 'css/bootstrap-theme.min.css')}" />
+<link rel="stylesheet" type="text/css" href="{!$Page.LOLStyle}" />
+<link rel="stylesheet" href="{!URLFOR($Resource.LOLBaseTemplate, 'css/ui-lightness/jquery-ui-1.9.2.custom.min.css')}" />
+
+<script type="text/javascript" src="{!URLFOR($Resource.LOLBaseTemplate, 'js/jquery-1.11.1.min.js')}"></script>
+<script type="text/javascript" src="{!URLFOR($Resource.LOLBaseTemplate, 'js/bootstrap.min.js')}"></script>
+<script src="{!URLFOR($Resource.LOLBaseTemplate, 'js/jquery-ui-1.9.2.custom.min.js')}"></script>
+
+</head> 
+<body class="{!LOWER($CurrentPage.Name)}">
+        <div class="header_wrapper">
+            <div class="header"> 
+                <c:LOLHeader />
+            </div>    
+        </div>
+    
+        <div class="container-fluid">        
+        <div class="container content {!LOWER($CurrentPage.Name)}">
+                <apex:insert name="body" />
+        </div> 
+        <c:LOLFooter />
+    </div>
+</body>
+</html>
+</apex:page>

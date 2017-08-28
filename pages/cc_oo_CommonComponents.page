@@ -1,0 +1,22 @@
+<!--<Page Name: cc_oo_CommonComponents> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Shrivaths                                 9/19/2016                                    US:OO - 244 Hide prices for Prebook flow
+Rajesh W                                  10/4/2016                                    US:OO-212 Hide Product Search footer for prebook
+-->
+<apex:page docType="html-5.0" sidebar="false" showHeader="false" standardStylesheets="false" applyHtmlTag="false">
+     
+    <!-- OO-244 -->
+    <c:cc_oo_MiniCartDetailsRD />
+    <c:cc_oo_Header />    
+    <c:cc_oo_NavigationBar />  
+    <!-- OO - 339 -->
+    <c:cc_oo_CategoryTreeRD />
+    <!-- US:OO-212  Hide Footer for Prebook-->
+    <c:cc_oo_ProductSearchWidgetNavRD />
+    <c:cc_oo_MiniWishList />
+    <c:cc_oo_MiniQuickOrderRD />
+    <c:cc_oo_FooterComponent />
+</apex:page>

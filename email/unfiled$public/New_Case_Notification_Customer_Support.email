@@ -1,0 +1,37 @@
+<messaging:emailTemplate subject="New Case Notification: {!relatedTo.Subject}" recipientType="User" relatedToType="Case">
+<messaging:plainTextEmailBody >
+
+Please enter the following Service Request:
+
+Salesforce SR: {!relatedTo.X18_Digit_Case_ID__c}
+Case Type: {!relatedTo.Type} 
+Description: {!relatedTo.Description} 
+
+Shipping Plant: {!relatedTo.Shipping_Plant__c} 
+Estimated Ship Date: {!relatedTo.Estimated_Ship_Date__c}  
+Item Number: {!relatedTo.Item_Number__c} 
+Lot Number: {!relatedTo.Lot_Number__c}  
+Sales Order: {!relatedTo.Sales_Order__c} 
+Invoice Number: {!relatedTo.Invoice__c}  
+
+Related to: 
+Account Number: {!relatedTo.Account_Number__c} 
+Account Name: {!relatedTo.Account.Name} 
+Account Mailing Name: {!relatedTo.Account.Mailing_Name__c} 
+Account Phone: {!relatedTo.Account.Phone} 
+
+
+Contact Name: {!relatedTo.Contact.Name} 
+Contact Role: {!relatedTo.Contact_Role__c} 
+Contact Type: {!relatedTo.Contact.Contact_Type__c} 
+Contact Phone: {!relatedTo.Contact.Phone} 
+Contact Mobile Phone: {!relatedTo.Contact.MobilePhone} 
+
+Please contact me with any questions regarding this request.
+Thank you, 
+{!relatedTo.Owner.Name}
+<!-- {!relatedTo.OwnerFullName} -->
+
+
+</messaging:plainTextEmailBody>
+</messaging:emailTemplate>

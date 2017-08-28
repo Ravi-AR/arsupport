@@ -1,0 +1,7 @@
+<apex:page >
+<table>
+
+<tr><td valign="top" halign="center"><apex:image url="/servlet/servlet.FileDownload?file=015j0000000LjUv"   width="300" height="92.5"/></td></tr>
+
+</table>
+</apex:page>

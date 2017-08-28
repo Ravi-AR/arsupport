@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Lead$Name</field>
+    </columns>
+    <columns>
+        <field>Lead.Survey_Results__r$Animal_Type__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Survey_Results__r$Question__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Survey_Results__r$Answer_Option_Formula__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Lead_Reviewer__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Lead.Survey_Results__r$Customer_Event__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>NCBA National Cattlemen&apos;s Beef Assoc</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>2016 NCBA National Cattlemen - Digigraph</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Leads_with_survey_resulys__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>Lead$ConvertedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

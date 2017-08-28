@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Notification to Sales Admin when rejected by Sales Operations</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Purina_Swine_App_Letterhead</letterhead>
+    <name>Sales Admin Rework Notification</name>
+    <style>freeForm</style>
+    <subject>Action Required - Reimbursement Request Record Returned for Editing</subject>
+    <textOnly>Purina Reimbursement Request—Action Required
+
+Dear Sales Team Member:
+
+A Reimbursement Request Record has been returned to you by the Sales Operations team for correction(s) due to a submission error.
+
+Reimbursement Request Record#: {!AMASellingSupportExpense__c.Name}
+Account #: {!AMASellingSupportExpense__c.Account_Number__c}
+Record Link #: {!AMASellingSupportExpense__c.Link}
+
+Please make the changes and resubmit the reimbursement for approval.
+
+If you have additional questions, please contact Iris Collins in Purina Sales Operations at ilcollins@landolakes.com or 636-742-6264.
+
+Thank you!</textOnly>
+    <type>html</type>
+</EmailTemplate>

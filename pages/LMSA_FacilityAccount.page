@@ -1,0 +1,16 @@
+<!--
+/**
+* Visualforce page used by global action for Creating Facility Checklist from sf1 account
+* 
+* @Date: 11.06.2015
+* @Author: Adeel Ahmad (Magnet 360)
+* 
+* @Updates:
+*/
+-->
+<apex:page showHeader="true" sidebar="true" standardController="Account">
+	<img src="{!URLFOR($Resource.LMSA_Assets, 'images/ajax-loader.gif')}" style="margin-top:40%;margin-left:40%;" />
+	<script>
+		sforce.one.navigateToURL('/apex/LMSA_CreateFacilityWalkThru?accountId={!$CurrentPage.parameters.id}');
+	</script>
+</apex:page>

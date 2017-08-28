@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>SIOUX NATION OF FT PIERRE LLC-240798 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>SIOUX NATION OF FT PIERRE LLC-240798 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>SIOUXNATIONOFFTPIERRELLC240798PartnerManager</parentRole>
+</Role>

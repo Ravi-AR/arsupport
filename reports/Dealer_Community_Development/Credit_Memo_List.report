@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Account$Account_External_ID_JDE__c</field>
+    </columns>
+    <columns>
+        <field>Account$Name</field>
+    </columns>
+    <columns>
+        <field>Account.Selling_Support_Program_Years__r$Id</field>
+    </columns>
+    <columns>
+        <field>Account.Selling_Support_Program_Years__r$Name</field>
+    </columns>
+    <columns>
+        <field>Account.Selling_Support_Program_Years__r$BusinessBuilderProgramYear__c.BBPYExternal_ID__c</field>
+    </columns>
+    <columns>
+        <field>Account$AccountNumber</field>
+    </columns>
+    <columns>
+        <field>Account.Selling_Support_Program_Years__r.Reimbursement_Requests__r$Id</field>
+    </columns>
+    <columns>
+        <field>Account.Selling_Support_Program_Years__r.Reimbursement_Requests__r$Name</field>
+    </columns>
+    <columns>
+        <field>Account.Selling_Support_Program_Years__r.Reimbursement_Requests__r$Internal_Status__c</field>
+    </columns>
+    <columns>
+        <field>Account.Selling_Support_Program_Years__r.Reimbursement_Requests__r.Expense_Line_Item__r$Reimbursement_Category__c</field>
+    </columns>
+    <columns>
+        <field>Account.Selling_Support_Program_Years__r.Reimbursement_Requests__r.Expense_Line_Item__r$Reimbursement_Sub_category__c</field>
+    </columns>
+    <columns>
+        <field>Account.Selling_Support_Program_Years__r.Reimbursement_Requests__r$CreditMemo__c</field>
+    </columns>
+    <description>Reimbursement Requests without Credit Memo  LPDCR 834</description>
+    <filter>
+        <criteriaItems>
+            <column>Account.Selling_Support_Program_Years__r.Reimbursement_Requests__r$Internal_Status__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Complete - Paid in Full,Complete - Partially Paid</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Selling_Support_Program_Years__r.Reimbursement_Requests__r$CreditMemo__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value></value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Credit Memo List - LPDCR 834</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Accounts_with_Selling_Support_Program_Years_with_Reimbursement_Requests_with_R__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>Account$Account_Load_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

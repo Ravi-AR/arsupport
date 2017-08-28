@@ -1,0 +1,289 @@
+<!-- The component is to make the Billing Address and Shipping Address non-editable in the Contact information screen-->
+<!--<Component Name: cc_oo_CheckoutUserInfoRD> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Piyali                                                                                  Billing Address and Shipping Address non-editable
+Nishant                                    9/22/2016                                    US:OO-311 To redirect user to order review page on click of submit for prebook.
+Rajesh W                                   10/18/2016                                   US:OO-50    Make user info, address info and billing info section readonly.
+----------------------------------------------------------------------------------------------------------------------
+-->
+
+<apex:component >
+    <script id="oo-UserInfo-Mobile" type="text/template">
+        <div class="checkout_container">
+            <h2 class="title">{{pageLabelMap 'CheckOut_InfoStep'}}</h2>
+            <div class="checkout_detail">
+                <div class="checkout_detail_item">
+                    <div id="accordion" class="accordion clear">
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a href="#collapseOne" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">{{pageLabelMap 'CheckOut_ContactInformation'}}</a>
+                            </div>
+                            <div class="accordion-body in collapse" id="collapseOne">
+                                <div class="accordion-inner">
+                                    <form id="mainform">
+                                        <div class="alert alert-error main-messagingSection-Error" style="display: none"></div>
+                                        <input type="text" placeholder="{{pageLabelMap 'CheckOut_FirstName'}}" class="checkout_wide contactInput" name="buyerFirstName" value="{{this.buyerFirstName}}">
+                                        <input type="text" placeholder="{{pageLabelMap 'CheckOut_LastName'}}" class="checkout_wide contactInput" name="buyerLastName" value="{{this.buyerLastName}}">
+                                        <input type="email" placeholder="{{pageLabelMap 'CheckOut_Email'}}" class="checkout_wide contactInput" name="buyerEmail" value="{{this.buyerEmail}}">
+                                        <input type="text" placeholder="{{pageLabelMap 'CheckOut_PrimaryPhone'}}" class="checkout_wide contactInput" name="buyerPhone" value="{{this.buyerPhone}}">
+                                        <div class="button_large_container_steps">
+                                           <a href="#billingSection" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">
+                                                <button automation-id="CheckOut_MobileGotoBilling" type="button" class="btn-primary large_grey_button">{{pageLabelMap 'CheckOut_MobileGotoBilling'}}</button>
+                                            </a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                               <a href="#billingSection" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">{{pageLabelMap 'CheckOut_BillingAddress'}}</a> 
+                            </div>
+                            <div class="accordion-body collapse billingSection" id="billingSection">
+                                <div class="accordion-inner">
+                                    <div class="alert alert-error main-messagingSection-Error" style="display: none"></div>
+                                  {{> addressSelection this.billingAddress}} 
+                                    <div class="button_large_container_steps">
+                                        <a href="#shippingSection" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle processUserInfoPhone">                     
+                                            <button name="" automation-id="CheckOut_MobileGotoShipping" type="button" class="btn-primary large_grey_button">{{pageLabelMap 'CheckOut_MobileGotoShipping'}}</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a href="#shippingSection" data-parent="#accordion" data-toggle="collapse"  class="accordion-toggle">{{pageLabelMap 'CheckOut_ShippingAddress'}}</a>
+                            </div>
+                            <div class="accordion-body collapse shippingSection" id="shippingSection">
+                                <div class="accordion-inner">
+                                    <div class="alert alert-error main-messagingSection-Error" style="display: none"></div>
+                                    {{> addressSelection this.shippingAddress}}
+                                    <div class="button_large_container_steps">
+                                        <a href="#ccEMailSection" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">
+                                        {{#ifDisplay 'Dspl.CCEmail'}}
+                                            <input name="" automation-id="CheckOut_MobileGotoCCEmail" type="button" value="{{pageLabelMap 'CheckOut_MobileGotoCCEmail'}}" class="large_grey_button processUserInfo "/>
+                                        {{else}}
+                                            <button name="" automation-id="CheckOut_MobileGotoShipDetails" type="button" class="btn-primary processUserInfo large_grey_button">{{pageLabelMap 'CheckOut_MobileGotoShipDetails'}}</button>
+                                        {{/ifDisplay}}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{#ifDisplay 'Dspl.CCEmail'}}
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a href="#ccEMailSection" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">{{pageLabelMap 'CheckOut_ccEmailAddress'}}</a>
+                                </div>
+                                <div class="accordion-body collapse ccEMailSection" id="ccEMailSection">
+                                    <div class="accordion-inner">
+                                        <form id="ccEmailForm">
+                                            <input type="text" placeholder="{{pageLabelMap 'CheckOut_ccEmailAddress'}}" class="checkout_wide contactInput ccemail" name="ccEmailAddresses" value="{{this.ccEmailAddresses}}" />
+                                        </form>
+                                        <div class="button_large_container_steps">
+                                            <a href="#shipDetailsSection" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle processUserInfoPhone">
+                                            <input name="" automation-id="CheckOut_MobileGotoShipDetails" type="button" value="{{pageLabelMap 'CheckOut_MobileGotoShipDetails'}}" class="processUserInfo large_grey_button"/>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {{/ifDisplay}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <!-- User story OO-1720: For hiding Contact information page -->
+    <script id="oo-UserInfoBlank-Mobile" type="text/template">
+    <!-- This is for a blank script for Mobile view -->
+    </script>
+    <script id="oo-UserInfoBlank-Desktop" type="text/template">
+	<!-- This is for a blank script for Desktop view-->
+    </script>
+    <script id="cc_oo_UserInfoBlank-AddressEdit-Desktop" type="text/template">
+    <!--  This is a blank script for Address Edit Desktop view -->
+    </script>
+    <!-- End of user story OO-1720 -->
+    <script id="oo-UserInfo-Desktop" type="text/template">
+        <form id="mainform" class="horizontal_form cc_userInfo_new">
+            <div class="alert alert-error main-messagingSection-Error" style="display: none"></div>
+            <fieldset>
+                <legend>{{pageLabelMap 'CheckOut_ContactInformation'}}</legend>
+                <label>{{pageLabelMap 'CheckOut_FirstName'}}
+                    <input id="firstNameField" class="contactInput wide" name="buyerFirstName" value="{{this.buyerFirstName}}" readonly />
+                </label>
+                <label>{{pageLabelMap 'CheckOut_LastName'}}
+                    <input id="lastNameField" class="contactInput wide" name="buyerLastName" value="{{this.buyerLastName}}" />
+                </label>
+                <div class="clear"></div>
+                <label>{{pageLabelMap 'CheckOut_PrimaryPhone'}}
+                    <input id="homePhoneField" class="contactInput wide" name="buyerPhone" value="{{this.buyerPhone}}" />
+                </label>
+                <label>{{pageLabelMap 'CheckOut_Email'}}
+                    <input id="emailField" class="contactInput wide" name="buyerEmail" value="{{this.buyerEmail}}" />
+                </label>
+                <div class="clear"></div>
+            </fieldset>
+        </form>
+        {{> addressEntry this.billingAddress}}
+        {{> addressEntry this.shippingAddress}}
+        {{#ifDisplay 'Dspl.CCEmail'}}
+        <form id="ccEmailForm" class="horizontal_form cc_ccemail_new">
+            <div class="alert alert-error ccemail-messagingSection-Error" style="display: none"></div>
+            <fieldset>
+                <legend>{{pageLabelMap 'CheckOut_ccEmailAddress'}}</legend>
+                <p>{{{pageLabelMap 'CheckOut_ccEmailAddressHelpText'}}}</p>
+                <label>{{pageLabelMap 'CheckOut_ccEmailAddress'}}
+                    <input id="ccEmailAddress" class="contactInput wide ccemail" name="ccEmailAddresses" value="{{this.ccEmailAddresses}}" />
+                </label>
+            </fieldset>
+        </form>
+        {{/ifDisplay}}
+
+        <form class="margin_form buttonForm userInformation">
+            <p>{{{pageLabelMap 'Required_Fields'}}}</p>
+            <p class="link_button">
+                <button type="button" class="btn btn-secondary processBack">{{pageLabelMap 'Back'}}</input>
+                <button  type="button" class="btn btn-primary processUserInfo" value="">{{pageLabelMap 'CheckOut_Continue'}}</button>
+            </p>
+        </form>
+    </script>
+    <script id="cc_oo_UserInfo-AddressEdit-Desktop" type="text/template">
+        <form id="{{classPrefix}}AddressForm" class="horizontal_form addressForm">
+            <div class="alert alert-error {{classPrefix}}-messagingSection-Error" style="display: none"></div>
+            <fieldset class="user-info">
+                <legend>{{pageLabelMap sectionLabel}}</legend>
+                {{#ifEquals classPrefix 'shipping'}}
+                <!--    <a class="copyAddress">{{pageLabelMap 'Checkout_UseBillingAddress'}}</a> -->
+                {{/ifEquals}}
+                <div class="change_address">
+             <!--   <a href="#modal_{{classPrefix}}" data-toggle="modal">{{pageLabelMap 'UserInfo_AddressBook'}}</a> -->
+
+                </div>  
+
+                <div class="clear"></div>
+                {{#ifDisplay 'SO.DsplAddrName'}}
+                    <label>{{pageLabelMap 'CheckOut_FirstName'}}
+                        <input class="{{classPrefix}}firstNameField {{classPrefix}}Field wide" name="{{classPrefix}}Address.firstName" value="{{this.firstName}}" />
+                    </label>
+                    <label>{{pageLabelMap 'CheckOut_LastName'}}
+                        <input class="{{classPrefix}}lastNameField {{classPrefix}}Field wide" name="{{classPrefix}}Address.lastName" value="{{this.lastName}}" />
+                    </label>
+                    <div class="clear"></div>
+                {{/ifDisplay}}
+                {{#ifDisplay 'SO.DsplAddrCompany'}}
+                    <label>{{pageLabelMap 'Profile_CompanyName'}}
+                        <input class="{{classPrefix}}companyField {{classPrefix}}Field wide" name="{{classPrefix}}Address.companyName" value="{{this.companyName}}" />
+                    </label>
+                    <div class="clear"></div>
+                {{/ifDisplay}}
+                <input type="hidden" class="{{classPrefix}}acctIdField {{classPrefix}}Field" name="{{classPrefix}}Address.partnerId" value="{{this.partnerId}}" />
+                <label class="address1">{{pageLabelMap 'Profile_Address'}}
+                    <input name="{{classPrefix}}Address.address1" class="addresswide {{classPrefix}}Address1 {{classPrefix}}Field" value="{{this.address1}}" maxlength="40" /></label>
+                <label class="address2"><input name="{{classPrefix}}Address.address2" class="addresswide {{classPrefix}}Address2 {{classPrefix}}Field" value="{{this.address2}}" maxlength="40" /></label>
+                <label class="address2"><input name="{{classPrefix}}Address.address3" class="addresswide {{classPrefix}}Address3 {{classPrefix}}Field" value="{{this.address3}}" maxlength="40" /></label>
+
+                <div class="clear"></div>
+                <label>{{pageLabelMap 'CheckOut_State'}}
+                    <div class="stateSection"></div>
+                </label>
+                <label>{{pageLabelMap 'CheckOut_City'}}
+                    <input name="{{classPrefix}}Address.city" class="{{classPrefix}}City {{classPrefix}}Field wide" value="{{this.city}}" />
+                </label>
+                <label>{{pageLabelMap 'CheckOut_Country'}}
+                    {{{selectGeo 'country' this.countryList this.countryCode 'countryListing wide' this.classPrefix}}}
+                </label>
+                
+                <!--<div class="clear"></div>
+                <label>{{pageLabelMap 'CheckOut_City'}}
+                    <input name="{{classPrefix}}Address.city" class="{{classPrefix}}City {{classPrefix}}Field wide" value="{{this.city}}" />
+                </label>-->
+                <label>{{pageLabelMap 'CheckOut_PostalCode'}}
+                    <input name="{{classPrefix}}Address.postalCode" class="{{classPrefix}}PostalCode {{classPrefix}}Field wide" value="{{this.postalCode}}" />
+                </label>
+                
+            </fieldset>
+
+        </form>
+        <div id="modal_{{classPrefix}}" class="modal hide fade in">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+               <h3>{{pageLabelMap 'UserInfo_AddressBookModal'}}</h3> 
+            </div>
+            <div class="modal-body">
+                {{#each this.addressList}}
+                    <div class="billing_shipping_info">
+                        <div class="personal_info">
+                            {{> addressDisplay}}
+                        </div>
+                        <div class="select">
+                            <input name="" type="button" value="{{pageLabelMap 'UserInfo_selectAddress'}}" class="large_red_button {{../classPrefix}}Field selectAddress" data-id="{{this.sfid}}"/>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </script>
+        
+    
+     <script>
+      
+        jQuery(function($){
+            
+            //CCRZ.uiProperties.UserInfoView.partial.addressEntry =   '#cc_oo_UserInfo-AddressEdit-Desktop';
+            //CCRZ.uiProperties.UserInfoView.desktop.tmpl         =   'oo-UserInfo-Desktop';
+            //CCRZ.uiProperties.UserInfoView.phone.tmpl           =   'oo-UserInfo-Mobile';
+            CCRZ.uiProperties.UserInfoView.partial.addressEntry =   '#cc_oo_UserInfoBlank-AddressEdit-Desktop';
+            CCRZ.uiProperties.UserInfoView.desktop.tmpl         =   'oo-UserInfoBlank-Desktop';
+            CCRZ.uiProperties.UserInfoView.phone.tmpl           =   'oo-UserInfoBlank-Mobile';
+            var orderType = $.urlParam('orderType');
+            
+            
+            CCRZ.pubSub.on('view:AddressListing:refresh', function(theView) {
+                CCRZ.views.ShippingView.prototype.events["click .processShippingInfo"] = null;
+                $("#billingAddressForm select").attr("readonly", "readonly");
+                $("#billingAddressForm input").attr("readonly", "readonly");
+                $("#shippingAddressForm select").attr("readonly", "readonly");
+                $("#shippingAddressForm input").attr("readonly", "readonly");
+                $("form.cc_userInfo_new input").attr("readonly", "readonly");
+                $("#billingAddressForm select option:not(:selected)").attr('disabled', true);
+                $("#shippingAddressForm select option:not(:selected)").attr('disabled', true);
+                $("#shippingAddressForm select").attr("readonly", "readonly");
+                //OO-1712
+                $(".change_address a" ).hide();
+                
+                CCRZ.cartCheckoutModel.attributes.preventBillingEdit    = true;
+                CCRZ.cartCheckoutModel.attributes.preventContactEdit    = true;
+                CCRZ.cartCheckoutModel.attributes.preventShippingEdit     = true; 
+                
+                if(orderType && orderType.toLowerCase() === ('preBook').toLowerCase()) {
+                
+                    CCRZ.cartCheckoutView.goToPosition(2);
+                }                
+                // User story: OO-1720 To skip the Contact Information step and redirecting to Shipping screen on click of checkout button
+                else{
+                    CCRZ.cartCheckoutView.goToPosition(1);
+                }
+                
+            }); 
+            
+            
+            $(document).on('keydown', '#mainform input, #billingAddressForm input', function(e) {
+               e.preventDefault();
+               return false;
+           });
+            
+            
+        });
+        
+    </script>
+
+    <c:cc_oo_NavigationBar ></c:cc_oo_NavigationBar>
+    </apex:component>

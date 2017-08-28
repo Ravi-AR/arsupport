@@ -1,0 +1,51 @@
+<!-- 
+    <Component cc_oo_MyAccountNavRD
+    <Summary>
+    ------------------------------------------------------------------
+    US:OO-312 Hide My Invoices for prebook
+    ------------------------------------------------------------------
+    Rajesh Walawalkar       10/5/2016       Created
+ ------------------------------------------------------------------
+    US:OO-777 Hide My Subscriptions 
+    ------------------------------------------------------------------
+   Gurleen Kaur                 10/15/2016       Modified
+
+   US:OO-772 Hide Change Password 
+    ------------------------------------------------------------------
+   Gurleen Kaur                 10/15/2016       Modified
+
+-->
+
+<apex:component allowDML="true">
+  
+    <script id="oo-MyAccount-Nav-Desktop" type="text/template">
+        <ul class="side_navigation_dropdown" id="side_nav">
+            <h2 class="title">{{pageLabelMap 'Component_SiteHeader_MyAccount'}}</h2>
+            {{#each this}}
+             {{#if (compare this.title )}}
+                <li class="acctStep{{this.index}} acctStepNav"><a href="#" class="gotoSection" data-index="{{this.index}}">{{pageLabelMap this.title}}</a></li>
+             {{/if}}
+            {{/each}}
+        </ul>
+    </script>
+    <script id="oo-MyAccount-Nav-Tablet" type="text/template">
+        <ul class="account_steps">
+            {{#each this}}
+              {{#if (compare this.title)}}
+                <li class="acctStep{{this.index}} acctStepNav"><a href="#" class="gotoSection" data-index="{{this.index}}">{{pageLabelMap this.title}}</a></li>
+              {{/if}}
+            {{/each}}
+        </ul>
+    </script>
+
+    <script>
+        jQuery(function($) {
+            
+            CCRZ.uiProperties.myAccountNavView.desktop.tmpl='oo-MyAccount-Nav-Desktop';
+            CCRZ.uiProperties.myAccountNavView.tablet.tmpl='oo-MyAccount-Nav-Tablet';
+            
+        });
+        
+
+    </script>
+</apex:component>

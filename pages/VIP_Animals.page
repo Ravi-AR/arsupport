@@ -1,0 +1,34 @@
+<apex:page standardController="Farm_VIP_Registration__c" extensions="VIP_Animals_Controller" >
+    
+    <apex:pageBlock >
+<!--        <apex:pageBlockSection>-->
+            <apex:pageBlockTable value="{!animals}" var="ann">
+                
+                <apex:column headerValue="Count/Lifestages ID" >
+                    <apex:outputField value="{!ann.Name}" />
+                </apex:column>
+
+                
+                <apex:column headerValue="Animal Type" >
+                    <apex:outputField value="{!ann.Animal_Type__c}" />
+                </apex:column>
+                
+                <apex:column headerValue="Animal Lifestage" >
+                    <apex:outputField value="{!ann.Lifestage__c}" />
+                </apex:column>
+                
+                 <apex:column headerValue="Animal Count" >
+                    <apex:outputField value="{!ann.Animal_Count__c}" />
+                </apex:column>
+                
+                 <apex:column headerValue="Animals Fed" >
+                    <apex:outputField value="{!ann.Animals_Served__c}" />
+                </apex:column>
+                
+            </apex:pageBlockTable>
+<!--        </apex:pageBlockSection> -->
+    
+    </apex:pageBlock>
+    
+    
+</apex:page>

@@ -1,0 +1,5 @@
+<apex:page controller="LPDCR_Community_HomeCntrlr" action="{!navigateToCommunity}">
+    
+    <apex:pageMessages />
+    
+</apex:page>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>Read</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>Great Lakes Lifestyle</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>Northeast-Great Lakes Lifestyle-SS-Scarbrough</name>
+    <opportunityAccessLevel>Edit</opportunityAccessLevel>
+    <parentRole>Northeast_Great_Lakes_Lifestyle_ASM</parentRole>
+</Role>

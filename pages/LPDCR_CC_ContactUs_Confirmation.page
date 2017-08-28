@@ -1,0 +1,54 @@
+<!-- 
+*********************************************************************************
+Author: Govinda Prasad P S
+Email: govinda.prasad@magnet360.com
+Created Date    : 03/15/2017
+Function    :  Visualforce page Contact Us Confirmation
+Version     : 1.0 
+*********************************************************************************
+--> 
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="LPDCR_ContactUsController">
+ <apex:form id="form">
+    <apex:composition template="LPDCR_CC_BaseTemplate" >
+    <apex:define name="PageTitle">Contact Us -Confirmation</apex:define>
+    <apex:define name="body">
+        
+    <div class="wrapper">    
+       <div class="col-sm-12 pad_lft_rgt pad_top20">
+              <div class="row">
+                  <div class="col-sm-12 mrg_btm20 mob_pad">
+                      <c:LPDCR_SecondaryPageHeader title="Contact Us" />
+                   </div>
+              </div>
+              <div class="row mrg_all0">
+                <div class="well backgroundcolor mrg_topNeg30">
+                    <p>&nbsp;</p>
+                    <p class="confirmtext">Thank you for contacting us!</p>
+                    <p class="confirmtext">Our Customer Service will get in touch with you shortly.</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    
+                </div>
+             </div>
+        </div>
+    </div>
+    </apex:define>
+    </apex:composition>
+ </apex:form>
+ <style>
+     .confirmtext{
+         color:#333;
+         font-style:italic;
+     }
+ </style>
+ <style>.media{background:url({!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_Header_Contact)}); width:100%; height:133px;background-repeat: no-repeat;
+    background-size: contain;}</style>
+</apex:page>

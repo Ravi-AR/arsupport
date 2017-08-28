@@ -1,0 +1,2620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ComposeGmail</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>LogCall</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>MailMerge</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>RequestUpdate</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SendEmail</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ViewAll</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>ANI__c</fullName>
+        <description>Number that called in regarding this activity</description>
+        <externalId>false</externalId>
+        <label>ANI</label>
+        <required>false</required>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Activity_Count_Assigned_To_LPS_SS__c</fullName>
+        <description>If the activity is assigned to a Sales Specialist or Technical Sales Specialist, then 1 else 0 for the current year.</description>
+        <externalId>false</externalId>
+        <formula>If(text(Owner:User.Function__c )= &quot;Sales Specialist&quot;  || text(Owner:User.Function__c) = &quot;Technical Sales Spec&quot; &amp;&amp; Text(YEAR(ActivityDate))= text(Year(today())),1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Activity Count Curr Yr || Assigned to SS</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Activity_Count_Curr_Yr_Assigned_LPS__c</fullName>
+        <description>If the activity count is assigned an LPS, then 1 else 0.</description>
+        <externalId>false</externalId>
+        <formula>IF( Text( Owner:User.Function__c ) =&quot;LPS&quot;  &amp;&amp; Text(YEAR(ActivityDate))= text(Year(today())),1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Activity Count Curr Yr || Assigned  LPS</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Activity_Count_Curr_Yr__c</fullName>
+        <description>Activity count is based on the date of the activity.</description>
+        <externalId>false</externalId>
+        <formula>If(Text(YEAR(ActivityDate ))=text(Year(today())),1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Activity Count Curr Yr</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Activity_Count_Prev_Yr_Assigned_To_SS__c</fullName>
+        <description>If the activity is assigned to a Sales Specialist or a Technical Sales Spec and the activity date is in the previous year, then 1 else 0.</description>
+        <externalId>false</externalId>
+        <formula>If(text(Owner:User.Function__c )= &quot;Sales Specialist&quot;  || text(Owner:User.Function__c) = &quot;Technical Sales Spec&quot; &amp;&amp; Text(YEAR(ActivityDate))= text(Year(today())-1),1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Activity Count Prev Yr || Assigned to SS</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Activity_Count_Prev_Yr_Assigned_to_LPS__c</fullName>
+        <description>If the activity owner is an LPS and the activity date is in the previous year, then 1 else 0.</description>
+        <externalId>false</externalId>
+        <formula>IF( Text(Owner:User.Function__c) =&quot;LPS&quot;  &amp;&amp; Text(YEAR(ActivityDate))= text(Year(today())-1),1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Activity Count Prev Yr || Assigned LPS</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Activity_Count_Prev_Yr_YTD__c</fullName>
+        <description>Counts that activities from prev year YTD so comparisons can be made through same time period this year.</description>
+        <externalId>false</externalId>
+        <formula>If(
+ActivityDate &gt;= DATE(Year(Today())-1, 1, 1)  &amp;&amp; 
+ActivityDate &lt;=  DATE(Year(Today())-1, Month(Today()), Day(today())),1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Activity Count || Prev Yr YTD</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Activity_Count_Prev_Yr__c</fullName>
+        <description>The activity count for the previous year is based on the date of the activity.</description>
+        <externalId>false</externalId>
+        <formula>If(Text(YEAR(ActivityDate ))=text(Year(today())-1),1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Activity Count Prev Yr</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Activity_Count__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(isblank( Id ),0,1)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Activity Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Activity_Indicator__c</fullName>
+        <description>This field is a formula from the Activity Indicator on the user record.  It is used in the process builder.</description>
+        <externalId>false</externalId>
+        <formula>text(Owner:User.Activity_Indicator__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Activity Indicator</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Activity_Owner_18_Digit_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner:User.X18_Digit_User_ID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Activity Owner 18 Digit ID</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Activity_Owner_Email__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner:User.Email</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Activity Owner Email</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Activity_Owner_First_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner:User.FirstName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Activity Owner First Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Activity_Owner_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner:User.FirstName&amp;&quot; &quot;&amp; Owner:User.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Activity Owner Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Activity_Points__c</fullName>
+        <defaultValue>1</defaultValue>
+        <externalId>false</externalId>
+        <label>Activity Points</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Activity_Reason__c</fullName>
+        <externalId>false</externalId>
+        <label>Activity Reason</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Activity_Sub_Type__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Allergy</fullName>
+                    <default>false</default>
+                    <label>Allergy</label>
+                </value>
+                <value>
+                    <fullName>Animal Appearance</fullName>
+                    <default>false</default>
+                    <label>Animal Appearance</label>
+                </value>
+                <value>
+                    <fullName>Animal Longevity</fullName>
+                    <default>false</default>
+                    <label>Animal Longevity</label>
+                </value>
+                <value>
+                    <fullName>Animal Performance</fullName>
+                    <default>false</default>
+                    <label>Animal Performance</label>
+                </value>
+                <value>
+                    <fullName>Animal Rescues</fullName>
+                    <default>false</default>
+                    <label>Animal Rescues</label>
+                </value>
+                <value>
+                    <fullName>Animal Shows (Horse, HSC, etc.)</fullName>
+                    <default>false</default>
+                    <label>Animal Shows (Horse, HSC, etc.)</label>
+                </value>
+                <value>
+                    <fullName>Availability</fullName>
+                    <default>false</default>
+                    <label>Availability</label>
+                </value>
+                <value>
+                    <fullName>Bag or Tag Issue</fullName>
+                    <default>false</default>
+                    <label>Bag or Tag Issue</label>
+                </value>
+                <value>
+                    <fullName>Bulk/discount</fullName>
+                    <default>false</default>
+                    <label>Bulk/discount</label>
+                </value>
+                <value>
+                    <fullName>Call Drop</fullName>
+                    <default>false</default>
+                    <label>Call Drop</label>
+                </value>
+                <value>
+                    <fullName>Calorie content</fullName>
+                    <default>false</default>
+                    <label>Calorie content</label>
+                </value>
+                <value>
+                    <fullName>Cancel/change order</fullName>
+                    <default>false</default>
+                    <label>Cancel/change order</label>
+                </value>
+                <value>
+                    <fullName>Cannot Print</fullName>
+                    <default>false</default>
+                    <label>Cannot Print</label>
+                </value>
+                <value>
+                    <fullName>Can you Freeze Feed?</fullName>
+                    <default>false</default>
+                    <label>Can you Freeze Feed?</label>
+                </value>
+                <value>
+                    <fullName>Can you Order Feed Over the Phone?</fullName>
+                    <default>false</default>
+                    <label>Can you Order Feed Over the Phone?</label>
+                </value>
+                <value>
+                    <fullName>Cat</fullName>
+                    <default>false</default>
+                    <label>Cat</label>
+                </value>
+                <value>
+                    <fullName>Choke</fullName>
+                    <default>false</default>
+                    <label>Choke</label>
+                </value>
+                <value>
+                    <fullName>College</fullName>
+                    <default>false</default>
+                    <label>College</label>
+                </value>
+                <value>
+                    <fullName>Confirmation Info</fullName>
+                    <default>false</default>
+                    <label>Confirmation Info</label>
+                </value>
+                <value>
+                    <fullName>Contamination</fullName>
+                    <default>false</default>
+                    <label>Contamination</label>
+                </value>
+                <value>
+                    <fullName>Cost of Product</fullName>
+                    <default>false</default>
+                    <label>Cost of Product</label>
+                </value>
+                <value>
+                    <fullName>Date Code</fullName>
+                    <default>false</default>
+                    <label>Date Code</label>
+                </value>
+                <value>
+                    <fullName>Dealer/Sales Praise</fullName>
+                    <default>false</default>
+                    <label>Dealer/Sales Praise</label>
+                </value>
+                <value>
+                    <fullName>Dealer/Seller Issue</fullName>
+                    <default>false</default>
+                    <label>Dealer/Seller Issue</label>
+                </value>
+                <value>
+                    <fullName>Delivery Schedule</fullName>
+                    <default>false</default>
+                    <label>Delivery Schedule</label>
+                </value>
+                <value>
+                    <fullName>Did Not Receive Coupon</fullName>
+                    <default>false</default>
+                    <label>Did Not Receive Coupon</label>
+                </value>
+                <value>
+                    <fullName>Diet and Digestion</fullName>
+                    <default>false</default>
+                    <label>Diet and Digestion</label>
+                </value>
+                <value>
+                    <fullName>Dog</fullName>
+                    <default>false</default>
+                    <label>Dog</label>
+                </value>
+                <value>
+                    <fullName>Donation Request</fullName>
+                    <default>false</default>
+                    <label>Donation Request</label>
+                </value>
+                <value>
+                    <fullName>Do you Have Coupons Available</fullName>
+                    <default>false</default>
+                    <label>Do you Have Coupons Available</label>
+                </value>
+                <value>
+                    <fullName>DuMOR/PP Complaint</fullName>
+                    <default>false</default>
+                    <label>DuMOR/PP Complaint</label>
+                </value>
+                <value>
+                    <fullName>DuMOR/PP Compliment</fullName>
+                    <default>false</default>
+                    <label>DuMOR/PP Compliment</label>
+                </value>
+                <value>
+                    <fullName>DuMOR/PP Inquiry</fullName>
+                    <default>false</default>
+                    <label>DuMOR/PP Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Equipment Inquiry or Request</fullName>
+                    <default>false</default>
+                    <label>Equipment Inquiry or Request</label>
+                </value>
+                <value>
+                    <fullName>Excessive Fines</fullName>
+                    <default>false</default>
+                    <label>Excessive Fines</label>
+                </value>
+                <value>
+                    <fullName>Feed Quality</fullName>
+                    <default>false</default>
+                    <label>Feed Quality</label>
+                </value>
+                <value>
+                    <fullName>Feed Sample for Analysis Available</fullName>
+                    <default>false</default>
+                    <label>Feed Sample for Analysis Available</label>
+                </value>
+                <value>
+                    <fullName>Feed Tag Inquiry</fullName>
+                    <default>false</default>
+                    <label>Feed Tag Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Flowability/Bricking</fullName>
+                    <default>false</default>
+                    <label>Flowability/Bricking</label>
+                </value>
+                <value>
+                    <fullName>GMO/Organic</fullName>
+                    <default>false</default>
+                    <label>GMO/Organic</label>
+                </value>
+                <value>
+                    <fullName>Hay and Pasture</fullName>
+                    <default>false</default>
+                    <label>Hay and Pasture</label>
+                </value>
+                <value>
+                    <fullName>Health Concern</fullName>
+                    <default>false</default>
+                    <label>Health Concern</label>
+                </value>
+                <value>
+                    <fullName>Incorrect Feed Sent</fullName>
+                    <default>false</default>
+                    <label>Incorrect Feed Sent</label>
+                </value>
+                <value>
+                    <fullName>Infestation</fullName>
+                    <default>false</default>
+                    <label>Infestation</label>
+                </value>
+                <value>
+                    <fullName>Info Inquiry</fullName>
+                    <default>false</default>
+                    <label>Info Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Ingredient Inquiry</fullName>
+                    <default>false</default>
+                    <label>Ingredient Inquiry</label>
+                </value>
+                <value>
+                    <fullName>International Inquiry</fullName>
+                    <default>false</default>
+                    <label>International Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Internship</fullName>
+                    <default>false</default>
+                    <label>Internship</label>
+                </value>
+                <value>
+                    <fullName>Job Postings</fullName>
+                    <default>false</default>
+                    <label>Job Postings</label>
+                </value>
+                <value>
+                    <fullName>Liability/ Service Request</fullName>
+                    <default>false</default>
+                    <label>Liability/ Service Request</label>
+                </value>
+                <value>
+                    <fullName>Liquid Application</fullName>
+                    <default>false</default>
+                    <label>Liquid Application</label>
+                </value>
+                <value>
+                    <fullName>Manufacturing Inquiry</fullName>
+                    <default>false</default>
+                    <label>Manufacturing Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Moldy/Feed Odor</fullName>
+                    <default>false</default>
+                    <label>Moldy/Feed Odor</label>
+                </value>
+                <value>
+                    <fullName>Navigation</fullName>
+                    <default>false</default>
+                    <label>Navigation</label>
+                </value>
+                <value>
+                    <fullName>Nearest Dealer</fullName>
+                    <default>false</default>
+                    <label>Nearest Dealer</label>
+                </value>
+                <value>
+                    <fullName>Online Ordering Assistance</fullName>
+                    <default>false</default>
+                    <label>Online Ordering Assistance</label>
+                </value>
+                <value>
+                    <fullName>Order Feed on the Phone</fullName>
+                    <default>false</default>
+                    <label>Order Feed on the Phone</label>
+                </value>
+                <value>
+                    <fullName>Outdated Product</fullName>
+                    <default>false</default>
+                    <label>Outdated Product</label>
+                </value>
+                <value>
+                    <fullName>Packaging Inquiry</fullName>
+                    <default>false</default>
+                    <label>Packaging Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Palatability</fullName>
+                    <default>false</default>
+                    <label>Palatability</label>
+                </value>
+                <value>
+                    <fullName>Password Reset</fullName>
+                    <default>false</default>
+                    <label>Password Reset</label>
+                </value>
+                <value>
+                    <fullName>Pellet Color - Light/Dark</fullName>
+                    <default>false</default>
+                    <label>Pellet Color - Light/Dark</label>
+                </value>
+                <value>
+                    <fullName>Pellet Size</fullName>
+                    <default>false</default>
+                    <label>Pellet Size</label>
+                </value>
+                <value>
+                    <fullName>Portion Inquiry</fullName>
+                    <default>false</default>
+                    <label>Portion Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Pricing Concern</fullName>
+                    <default>false</default>
+                    <label>Pricing Concern</label>
+                </value>
+                <value>
+                    <fullName>Registration</fullName>
+                    <default>false</default>
+                    <label>Registration</label>
+                </value>
+                <value>
+                    <fullName>Rodeo Sponsorships</fullName>
+                    <default>false</default>
+                    <label>Rodeo Sponsorships</label>
+                </value>
+                <value>
+                    <fullName>Sales Rep</fullName>
+                    <default>false</default>
+                    <label>Sales Rep</label>
+                </value>
+                <value>
+                    <fullName>Sample of Feed to Try</fullName>
+                    <default>false</default>
+                    <label>Sample of Feed to Try</label>
+                </value>
+                <value>
+                    <fullName>Scholarship</fullName>
+                    <default>false</default>
+                    <label>Scholarship</label>
+                </value>
+                <value>
+                    <fullName>Shelf Life Inquiry</fullName>
+                    <default>false</default>
+                    <label>Shelf Life Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Shipping Cost</fullName>
+                    <default>false</default>
+                    <label>Shipping Cost</label>
+                </value>
+                <value>
+                    <fullName>Shipping Time</fullName>
+                    <default>false</default>
+                    <label>Shipping Time</label>
+                </value>
+                <value>
+                    <fullName>Starch/Sugar Percentage</fullName>
+                    <default>false</default>
+                    <label>Starch/Sugar Percentage</label>
+                </value>
+                <value>
+                    <fullName>Switching/ Withdrawal Time</fullName>
+                    <default>false</default>
+                    <label>Switching/ Withdrawal Time</label>
+                </value>
+                <value>
+                    <fullName>Tax Exempt</fullName>
+                    <default>false</default>
+                    <label>Tax Exempt</label>
+                </value>
+                <value>
+                    <fullName>Technical Difficulties</fullName>
+                    <default>false</default>
+                    <label>Technical Difficulties</label>
+                </value>
+                <value>
+                    <fullName>UPS Tracking info</fullName>
+                    <default>false</default>
+                    <label>UPS Tracking info</label>
+                </value>
+                <value>
+                    <fullName>Weight Gain</fullName>
+                    <default>false</default>
+                    <label>Weight Gain</label>
+                </value>
+                <value>
+                    <fullName>Weight Loss</fullName>
+                    <default>false</default>
+                    <label>Weight Loss</label>
+                </value>
+                <value>
+                    <fullName>Wrong Address</fullName>
+                    <default>false</default>
+                    <label>Wrong Address</label>
+                </value>
+                <value>
+                    <fullName>Wrong Amount of Feed</fullName>
+                    <default>false</default>
+                    <label>Wrong Amount of Feed</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Purchase Inquiry</controllingFieldValue>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Availability</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Purchase Inquiry</controllingFieldValue>
+                <valueName>Manufacturing Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Purchase Inquiry</controllingFieldValue>
+                <valueName>Nearest Dealer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Purchase Inquiry</controllingFieldValue>
+                <valueName>Packaging Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Purchase Inquiry</controllingFieldValue>
+                <valueName>Shelf Life Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Purchase Inquiry</controllingFieldValue>
+                <controllingFieldValue>Rate of Application</controllingFieldValue>
+                <controllingFieldValue>Career Opportunities</controllingFieldValue>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <controllingFieldValue>Compliment</controllingFieldValue>
+                <controllingFieldValue>Sponsorship</controllingFieldValue>
+                <controllingFieldValue>Coupon Inquiry</controllingFieldValue>
+                <controllingFieldValue>Active TSC Inquiry</controllingFieldValue>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Other</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Rate of Application</controllingFieldValue>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Date Code</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Rate of Application</controllingFieldValue>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Ingredient Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Rate of Application</controllingFieldValue>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Portion Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Career Opportunities</controllingFieldValue>
+                <valueName>Internship</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Career Opportunities</controllingFieldValue>
+                <valueName>Job Postings</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Career Opportunities</controllingFieldValue>
+                <valueName>Scholarship</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <controllingFieldValue>Compliment</controllingFieldValue>
+                <valueName>Animal Performance</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Bag or Tag Issue</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Choke</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Contamination</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Dealer/Seller Issue</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Excessive Fines</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Feed Sample for Analysis Available</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Flowability/Bricking</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Infestation</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Liability/ Service Request</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Liquid Application</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Outdated Product</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Palatability</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Pellet Color - Light/Dark</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Pellet Size</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Pricing Concern</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Sales Rep</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Weight Gain</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complaint</controllingFieldValue>
+                <valueName>Weight Loss</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Compliment</controllingFieldValue>
+                <valueName>Animal Appearance</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Compliment</controllingFieldValue>
+                <valueName>Animal Longevity</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Compliment</controllingFieldValue>
+                <valueName>Dealer/Sales Praise</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Compliment</controllingFieldValue>
+                <valueName>Feed Quality</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sponsorship</controllingFieldValue>
+                <valueName>Animal Rescues</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sponsorship</controllingFieldValue>
+                <valueName>Animal Shows (Horse, HSC, etc.)</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sponsorship</controllingFieldValue>
+                <valueName>College</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sponsorship</controllingFieldValue>
+                <valueName>Rodeo Sponsorships</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Coupon Inquiry</controllingFieldValue>
+                <valueName>Cannot Print</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Coupon Inquiry</controllingFieldValue>
+                <valueName>Delivery Schedule</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Coupon Inquiry</controllingFieldValue>
+                <valueName>Did Not Receive Coupon</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Coupon Inquiry</controllingFieldValue>
+                <valueName>Do you Have Coupons Available</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Coupon Inquiry</controllingFieldValue>
+                <valueName>Info Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Coupon Inquiry</controllingFieldValue>
+                <valueName>Navigation</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Coupon Inquiry</controllingFieldValue>
+                <valueName>Registration</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Coupon Inquiry</controllingFieldValue>
+                <valueName>Technical Difficulties</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Active TSC Inquiry</controllingFieldValue>
+                <valueName>DuMOR/PP Complaint</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Active TSC Inquiry</controllingFieldValue>
+                <valueName>DuMOR/PP Compliment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Active TSC Inquiry</controllingFieldValue>
+                <valueName>DuMOR/PP Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Allergy</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Bulk/discount</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Calorie content</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Can you Freeze Feed?</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Can you Order Feed Over the Phone?</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Cost of Product</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Feed Tag Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>GMO/Organic</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Hay and Pasture</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Health Concern</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>International Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Order Feed on the Phone</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Sample of Feed to Try</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Shipping Cost</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Shipping Time</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Starch/Sugar Percentage</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Feed Inquiry</controllingFieldValue>
+                <valueName>Switching/ Withdrawal Time</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order Accuracy</controllingFieldValue>
+                <valueName>Incorrect Feed Sent</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order Accuracy</controllingFieldValue>
+                <valueName>Password Reset</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order Accuracy</controllingFieldValue>
+                <valueName>Tax Exempt</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order Accuracy</controllingFieldValue>
+                <valueName>Wrong Address</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order Accuracy</controllingFieldValue>
+                <valueName>Wrong Amount of Feed</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Activity_Sub_Type__c</fullName>
+        <description>Activity Sub-Type for the Task for Customer Operations</description>
+        <externalId>false</externalId>
+        <label>Activity Sub-Type</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Activity_Type__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Active Dealer Inquiry</fullName>
+                    <default>false</default>
+                    <label>Active Dealer Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Active TSC Inquiry</fullName>
+                    <default>false</default>
+                    <label>Active TSC Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Add-on (before cut-off)</fullName>
+                    <default>false</default>
+                    <label>Add-on (before cut-off)</label>
+                </value>
+                <value>
+                    <fullName>Advertisement</fullName>
+                    <default>false</default>
+                    <label>Advertisement</label>
+                </value>
+                <value>
+                    <fullName>Apparel Inquiry</fullName>
+                    <default>false</default>
+                    <label>Apparel Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Availability</fullName>
+                    <default>false</default>
+                    <label>Availability</label>
+                </value>
+                <value>
+                    <fullName>Bulk Discount</fullName>
+                    <default>false</default>
+                    <label>Bulk Discount</label>
+                </value>
+                <value>
+                    <fullName>Buy Direct from the Plant</fullName>
+                    <default>false</default>
+                    <label>Buy Direct from the Plant</label>
+                </value>
+                <value>
+                    <fullName>Call Drop</fullName>
+                    <default>false</default>
+                    <label>Call Drop</label>
+                </value>
+                <value>
+                    <fullName>Career Opportunities</fullName>
+                    <default>false</default>
+                    <label>Career Opportunities</label>
+                </value>
+                <value>
+                    <fullName>Claims</fullName>
+                    <default>false</default>
+                    <label>Claims</label>
+                </value>
+                <value>
+                    <fullName>Comments about the driver</fullName>
+                    <default>false</default>
+                    <label>Comments about the driver</label>
+                </value>
+                <value>
+                    <fullName>Complaint</fullName>
+                    <default>false</default>
+                    <label>Complaint</label>
+                </value>
+                <value>
+                    <fullName>Compliment</fullName>
+                    <default>false</default>
+                    <label>Compliment</label>
+                </value>
+                <value>
+                    <fullName>Contract Inquiry</fullName>
+                    <default>false</default>
+                    <label>Contract Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Coupon Inquiry</fullName>
+                    <default>false</default>
+                    <label>Coupon Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Dealer Complaint - Not Specie</fullName>
+                    <default>false</default>
+                    <label>Dealer Complaint - Not Specie</label>
+                </value>
+                <value>
+                    <fullName>Dealer Locator</fullName>
+                    <default>false</default>
+                    <label>Dealer Locator</label>
+                </value>
+                <value>
+                    <fullName>Delivery Inquiry</fullName>
+                    <default>false</default>
+                    <label>Delivery Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Directions Inquiry</fullName>
+                    <default>false</default>
+                    <label>Directions Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Donation Request</fullName>
+                    <default>false</default>
+                    <label>Donation Request</label>
+                </value>
+                <value>
+                    <fullName>Estimated Time of Arrival</fullName>
+                    <default>false</default>
+                    <label>Estimated Time of Arrival</label>
+                </value>
+                <value>
+                    <fullName>Feed Inquiry</fullName>
+                    <default>false</default>
+                    <label>Feed Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Feed Tag Request or Inquiry</fullName>
+                    <default>false</default>
+                    <label>Feed Tag Request or Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Final Delivery Comments</fullName>
+                    <default>false</default>
+                    <label>Final Delivery Comments</label>
+                </value>
+                <value>
+                    <fullName>Freight Rate</fullName>
+                    <default>false</default>
+                    <label>Freight Rate</label>
+                </value>
+                <value>
+                    <fullName>Interest in Becoming a Dealer</fullName>
+                    <default>false</default>
+                    <label>Interest in Becoming a Dealer</label>
+                </value>
+                <value>
+                    <fullName>International Inquiry</fullName>
+                    <default>false</default>
+                    <label>International Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Invoice Request or Inquiry</fullName>
+                    <default>false</default>
+                    <label>Invoice Request or Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Late Add-on (after cut-off)</fullName>
+                    <default>false</default>
+                    <label>Late Add-on (after cut-off)</label>
+                </value>
+                <value>
+                    <fullName>Late Order (after cut-off)</fullName>
+                    <default>false</default>
+                    <label>Late Order (after cut-off)</label>
+                </value>
+                <value>
+                    <fullName>Lead Time</fullName>
+                    <default>false</default>
+                    <label>Lead Time</label>
+                </value>
+                <value>
+                    <fullName>Loading Error</fullName>
+                    <default>false</default>
+                    <label>Loading Error</label>
+                </value>
+                <value>
+                    <fullName>Logistics</fullName>
+                    <default>false</default>
+                    <label>Logistics</label>
+                </value>
+                <value>
+                    <fullName>Nearest Dealer Location</fullName>
+                    <default>false</default>
+                    <label>Nearest Dealer Location</label>
+                </value>
+                <value>
+                    <fullName>Nestle Purina</fullName>
+                    <default>false</default>
+                    <label>Nestle Purina</label>
+                </value>
+                <value>
+                    <fullName>New Order (before cut-off)</fullName>
+                    <default>false</default>
+                    <label>New Order (before cut-off)</label>
+                </value>
+                <value>
+                    <fullName>No Answer</fullName>
+                    <default>false</default>
+                    <label>No Answer</label>
+                </value>
+                <value>
+                    <fullName>Online Order Inquiry</fullName>
+                    <default>false</default>
+                    <label>Online Order Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Order Accuracy</fullName>
+                    <default>false</default>
+                    <label>Order Accuracy</label>
+                </value>
+                <value>
+                    <fullName>Order Changes</fullName>
+                    <default>false</default>
+                    <label>Order Changes</label>
+                </value>
+                <value>
+                    <fullName>Order Confirmation</fullName>
+                    <default>false</default>
+                    <label>Order Confirmation</label>
+                </value>
+                <value>
+                    <fullName>Order Inquiry</fullName>
+                    <default>false</default>
+                    <label>Order Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Price Inquiry</fullName>
+                    <default>false</default>
+                    <label>Price Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Product Replacement</fullName>
+                    <default>false</default>
+                    <label>Product Replacement</label>
+                </value>
+                <value>
+                    <fullName>Product Retrieval/Recall</fullName>
+                    <default>false</default>
+                    <label>Product Retrieval/Recall</label>
+                </value>
+                <value>
+                    <fullName>Product Set-Up</fullName>
+                    <default>false</default>
+                    <label>Product Set-Up</label>
+                </value>
+                <value>
+                    <fullName>Purchase Inquiry</fullName>
+                    <default>false</default>
+                    <label>Purchase Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Rate of Application</fullName>
+                    <default>false</default>
+                    <label>Rate of Application</label>
+                </value>
+                <value>
+                    <fullName>Recommendations</fullName>
+                    <default>false</default>
+                    <label>Recommendations</label>
+                </value>
+                <value>
+                    <fullName>Recycling</fullName>
+                    <default>false</default>
+                    <label>Recycling</label>
+                </value>
+                <value>
+                    <fullName>Reminder</fullName>
+                    <default>false</default>
+                    <label>Reminder</label>
+                </value>
+                <value>
+                    <fullName>Shipping Inquiry</fullName>
+                    <default>false</default>
+                    <label>Shipping Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Shortage</fullName>
+                    <default>false</default>
+                    <label>Shortage</label>
+                </value>
+                <value>
+                    <fullName>Specialty INTL Order</fullName>
+                    <default>false</default>
+                    <label>Specialty INTL Order</label>
+                </value>
+                <value>
+                    <fullName>Specialty Order (RICH RITD)</fullName>
+                    <default>false</default>
+                    <label>Specialty Order (RICH RITD)</label>
+                </value>
+                <value>
+                    <fullName>Sponsorship</fullName>
+                    <default>false</default>
+                    <label>Sponsorship</label>
+                </value>
+                <value>
+                    <fullName>Transfer</fullName>
+                    <default>false</default>
+                    <label>Transfer</label>
+                </value>
+                <value>
+                    <fullName>TSC Complaint - non Specie</fullName>
+                    <default>false</default>
+                    <label>TSC Complaint - non Specie</label>
+                </value>
+                <value>
+                    <fullName>Tub Order (FREM FRTB)</fullName>
+                    <default>false</default>
+                    <label>Tub Order (FREM FRTB)</label>
+                </value>
+                <value>
+                    <fullName>Voicemail-Request call back</fullName>
+                    <default>false</default>
+                    <label>Voicemail-Request call back</label>
+                </value>
+                <value>
+                    <fullName>Web Order Inquiry</fullName>
+                    <default>false</default>
+                    <label>Web Order Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Wrong Number</fullName>
+                    <default>false</default>
+                    <label>Wrong Number</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Small Animal</controllingFieldValue>
+                <controllingFieldValue>Swine</controllingFieldValue>
+                <controllingFieldValue>Test Diet</controllingFieldValue>
+                <controllingFieldValue>Wild Bird</controllingFieldValue>
+                <controllingFieldValue>Wildlife (Deer/Wild Hog)</controllingFieldValue>
+                <controllingFieldValue>Pet Companion Animal</controllingFieldValue>
+                <controllingFieldValue>Poultry</controllingFieldValue>
+                <controllingFieldValue>Rabbit</controllingFieldValue>
+                <controllingFieldValue>Beef</controllingFieldValue>
+                <controllingFieldValue>Dealer Inquiry</controllingFieldValue>
+                <controllingFieldValue>Equine</controllingFieldValue>
+                <controllingFieldValue>Fish and Aquatics</controllingFieldValue>
+                <controllingFieldValue>Game Bird</controllingFieldValue>
+                <controllingFieldValue>Goat</controllingFieldValue>
+                <controllingFieldValue>Honor Show Chow</controllingFieldValue>
+                <controllingFieldValue>Sheep</controllingFieldValue>
+                <valueName>Active TSC Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Small Animal</controllingFieldValue>
+                <controllingFieldValue>Swine</controllingFieldValue>
+                <controllingFieldValue>Test Diet</controllingFieldValue>
+                <controllingFieldValue>Wild Bird</controllingFieldValue>
+                <controllingFieldValue>Wildlife (Deer/Wild Hog)</controllingFieldValue>
+                <controllingFieldValue>Mazuri</controllingFieldValue>
+                <controllingFieldValue>Milk ReplacerAM</controllingFieldValue>
+                <controllingFieldValue>Pet Companion Animal</controllingFieldValue>
+                <controllingFieldValue>Poultry</controllingFieldValue>
+                <controllingFieldValue>Rabbit</controllingFieldValue>
+                <controllingFieldValue>Beef</controllingFieldValue>
+                <controllingFieldValue>Dairy</controllingFieldValue>
+                <controllingFieldValue>Equine</controllingFieldValue>
+                <controllingFieldValue>Fish and Aquatics</controllingFieldValue>
+                <controllingFieldValue>Game Bird</controllingFieldValue>
+                <controllingFieldValue>Goat</controllingFieldValue>
+                <controllingFieldValue>Honor Show Chow</controllingFieldValue>
+                <controllingFieldValue>Lab Diet</controllingFieldValue>
+                <controllingFieldValue>Sheep</controllingFieldValue>
+                <valueName>Complaint</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Small Animal</controllingFieldValue>
+                <controllingFieldValue>Swine</controllingFieldValue>
+                <controllingFieldValue>Test Diet</controllingFieldValue>
+                <controllingFieldValue>Wild Bird</controllingFieldValue>
+                <controllingFieldValue>Wildlife (Deer/Wild Hog)</controllingFieldValue>
+                <controllingFieldValue>Mazuri</controllingFieldValue>
+                <controllingFieldValue>Milk ReplacerAM</controllingFieldValue>
+                <controllingFieldValue>Pet Companion Animal</controllingFieldValue>
+                <controllingFieldValue>Poultry</controllingFieldValue>
+                <controllingFieldValue>Rabbit</controllingFieldValue>
+                <controllingFieldValue>Beef</controllingFieldValue>
+                <controllingFieldValue>Dairy</controllingFieldValue>
+                <controllingFieldValue>Equine</controllingFieldValue>
+                <controllingFieldValue>Fish and Aquatics</controllingFieldValue>
+                <controllingFieldValue>Game Bird</controllingFieldValue>
+                <controllingFieldValue>Goat</controllingFieldValue>
+                <controllingFieldValue>Honor Show Chow</controllingFieldValue>
+                <controllingFieldValue>Lab Diet</controllingFieldValue>
+                <controllingFieldValue>Sheep</controllingFieldValue>
+                <valueName>Compliment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Small Animal</controllingFieldValue>
+                <controllingFieldValue>Swine</controllingFieldValue>
+                <controllingFieldValue>Test Diet</controllingFieldValue>
+                <controllingFieldValue>Wild Bird</controllingFieldValue>
+                <controllingFieldValue>Wildlife (Deer/Wild Hog)</controllingFieldValue>
+                <controllingFieldValue>Mazuri</controllingFieldValue>
+                <controllingFieldValue>Milk ReplacerAM</controllingFieldValue>
+                <controllingFieldValue>Pet Companion Animal</controllingFieldValue>
+                <controllingFieldValue>Poultry</controllingFieldValue>
+                <controllingFieldValue>Rabbit</controllingFieldValue>
+                <controllingFieldValue>Beef</controllingFieldValue>
+                <controllingFieldValue>Dairy</controllingFieldValue>
+                <controllingFieldValue>Equine</controllingFieldValue>
+                <controllingFieldValue>Fish and Aquatics</controllingFieldValue>
+                <controllingFieldValue>Game Bird</controllingFieldValue>
+                <controllingFieldValue>Goat</controllingFieldValue>
+                <controllingFieldValue>Honor Show Chow</controllingFieldValue>
+                <controllingFieldValue>Lab Diet</controllingFieldValue>
+                <controllingFieldValue>Sheep</controllingFieldValue>
+                <valueName>Coupon Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Small Animal</controllingFieldValue>
+                <controllingFieldValue>Swine</controllingFieldValue>
+                <controllingFieldValue>Test Diet</controllingFieldValue>
+                <controllingFieldValue>Wild Bird</controllingFieldValue>
+                <controllingFieldValue>Wildlife (Deer/Wild Hog)</controllingFieldValue>
+                <controllingFieldValue>Mazuri</controllingFieldValue>
+                <controllingFieldValue>Milk ReplacerAM</controllingFieldValue>
+                <controllingFieldValue>Pet Companion Animal</controllingFieldValue>
+                <controllingFieldValue>Poultry</controllingFieldValue>
+                <controllingFieldValue>Rabbit</controllingFieldValue>
+                <controllingFieldValue>Beef</controllingFieldValue>
+                <controllingFieldValue>Dairy</controllingFieldValue>
+                <controllingFieldValue>Equine</controllingFieldValue>
+                <controllingFieldValue>Fish and Aquatics</controllingFieldValue>
+                <controllingFieldValue>Game Bird</controllingFieldValue>
+                <controllingFieldValue>Goat</controllingFieldValue>
+                <controllingFieldValue>Honor Show Chow</controllingFieldValue>
+                <controllingFieldValue>Lab Diet</controllingFieldValue>
+                <controllingFieldValue>Sheep</controllingFieldValue>
+                <valueName>Feed Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Small Animal</controllingFieldValue>
+                <controllingFieldValue>Swine</controllingFieldValue>
+                <controllingFieldValue>Transportation</controllingFieldValue>
+                <controllingFieldValue>Test Diet</controllingFieldValue>
+                <controllingFieldValue>Wild Bird</controllingFieldValue>
+                <controllingFieldValue>Wildlife (Deer/Wild Hog)</controllingFieldValue>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <controllingFieldValue>Mazuri</controllingFieldValue>
+                <controllingFieldValue>Milk ReplacerAM</controllingFieldValue>
+                <controllingFieldValue>Miscellaneous</controllingFieldValue>
+                <controllingFieldValue>No Answer</controllingFieldValue>
+                <controllingFieldValue>Order</controllingFieldValue>
+                <controllingFieldValue>Pet Companion Animal</controllingFieldValue>
+                <controllingFieldValue>Poultry</controllingFieldValue>
+                <controllingFieldValue>Product Inquiry</controllingFieldValue>
+                <controllingFieldValue>Pricing/Billing</controllingFieldValue>
+                <controllingFieldValue>Rabbit</controllingFieldValue>
+                <controllingFieldValue>Beef</controllingFieldValue>
+                <controllingFieldValue>Dairy</controllingFieldValue>
+                <controllingFieldValue>Dealer Inquiry</controllingFieldValue>
+                <controllingFieldValue>Equine</controllingFieldValue>
+                <controllingFieldValue>Fish and Aquatics</controllingFieldValue>
+                <controllingFieldValue>Game Bird</controllingFieldValue>
+                <controllingFieldValue>Goat</controllingFieldValue>
+                <controllingFieldValue>Honor Show Chow</controllingFieldValue>
+                <controllingFieldValue>Lab Diet</controllingFieldValue>
+                <controllingFieldValue>Service Request</controllingFieldValue>
+                <controllingFieldValue>Sheep</controllingFieldValue>
+                <valueName>Other</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Small Animal</controllingFieldValue>
+                <controllingFieldValue>Swine</controllingFieldValue>
+                <controllingFieldValue>Test Diet</controllingFieldValue>
+                <controllingFieldValue>Wild Bird</controllingFieldValue>
+                <controllingFieldValue>Wildlife (Deer/Wild Hog)</controllingFieldValue>
+                <controllingFieldValue>Mazuri</controllingFieldValue>
+                <controllingFieldValue>Milk ReplacerAM</controllingFieldValue>
+                <controllingFieldValue>Pet Companion Animal</controllingFieldValue>
+                <controllingFieldValue>Poultry</controllingFieldValue>
+                <controllingFieldValue>Rabbit</controllingFieldValue>
+                <controllingFieldValue>Beef</controllingFieldValue>
+                <controllingFieldValue>Dairy</controllingFieldValue>
+                <controllingFieldValue>Equine</controllingFieldValue>
+                <controllingFieldValue>Fish and Aquatics</controllingFieldValue>
+                <controllingFieldValue>Game Bird</controllingFieldValue>
+                <controllingFieldValue>Goat</controllingFieldValue>
+                <controllingFieldValue>Honor Show Chow</controllingFieldValue>
+                <controllingFieldValue>Lab Diet</controllingFieldValue>
+                <controllingFieldValue>Sheep</controllingFieldValue>
+                <valueName>Product Retrieval/Recall</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Transfer</controllingFieldValue>
+                <controllingFieldValue>Miscellaneous</controllingFieldValue>
+                <valueName>Transfer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Transportation</controllingFieldValue>
+                <valueName>Claims</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Transportation</controllingFieldValue>
+                <valueName>Comments about the driver</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Transportation</controllingFieldValue>
+                <valueName>Directions Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Transportation</controllingFieldValue>
+                <valueName>Estimated Time of Arrival</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Transportation</controllingFieldValue>
+                <valueName>Final Delivery Comments</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Transportation</controllingFieldValue>
+                <valueName>Freight Rate</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Transportation</controllingFieldValue>
+                <valueName>Shipping Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>Voicemail-Request call back</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <controllingFieldValue>Miscellaneous</controllingFieldValue>
+                <valueName>Wrong Number</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Mazuri</controllingFieldValue>
+                <valueName>Order Accuracy</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Miscellaneous</controllingFieldValue>
+                <valueName>Advertisement</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Miscellaneous</controllingFieldValue>
+                <valueName>Apparel Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Miscellaneous</controllingFieldValue>
+                <valueName>Bulk Discount</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Miscellaneous</controllingFieldValue>
+                <valueName>Buy Direct from the Plant</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Miscellaneous</controllingFieldValue>
+                <valueName>Call Drop</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Miscellaneous</controllingFieldValue>
+                <valueName>Career Opportunities</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Miscellaneous</controllingFieldValue>
+                <valueName>Donation Request</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Miscellaneous</controllingFieldValue>
+                <valueName>International Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Miscellaneous</controllingFieldValue>
+                <valueName>Logistics</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Miscellaneous</controllingFieldValue>
+                <valueName>Nestle Purina</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Miscellaneous</controllingFieldValue>
+                <valueName>Recycling</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Miscellaneous</controllingFieldValue>
+                <valueName>Sponsorship</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>No Answer</controllingFieldValue>
+                <valueName>No Answer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order</controllingFieldValue>
+                <valueName>Add-on (before cut-off)</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order</controllingFieldValue>
+                <valueName>Delivery Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order</controllingFieldValue>
+                <valueName>Late Add-on (after cut-off)</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order</controllingFieldValue>
+                <valueName>Late Order (after cut-off)</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order</controllingFieldValue>
+                <valueName>New Order (before cut-off)</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order</controllingFieldValue>
+                <valueName>Order Changes</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order</controllingFieldValue>
+                <valueName>Order Confirmation</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order</controllingFieldValue>
+                <valueName>Order Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order</controllingFieldValue>
+                <valueName>Reminder</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order</controllingFieldValue>
+                <valueName>Shortage</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order</controllingFieldValue>
+                <valueName>Specialty INTL Order</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order</controllingFieldValue>
+                <valueName>Specialty Order (RICH RITD)</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order</controllingFieldValue>
+                <valueName>Tub Order (FREM FRTB)</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Order</controllingFieldValue>
+                <valueName>Web Order Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Product Inquiry</controllingFieldValue>
+                <valueName>Availability</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Product Inquiry</controllingFieldValue>
+                <valueName>Feed Tag Request or Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Product Inquiry</controllingFieldValue>
+                <valueName>Lead Time</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Product Inquiry</controllingFieldValue>
+                <valueName>Product Replacement</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Product Inquiry</controllingFieldValue>
+                <valueName>Product Set-Up</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Product Inquiry</controllingFieldValue>
+                <valueName>Recommendations</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pricing/Billing</controllingFieldValue>
+                <valueName>Contract Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pricing/Billing</controllingFieldValue>
+                <valueName>Invoice Request or Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pricing/Billing</controllingFieldValue>
+                <valueName>Price Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Dealer Inquiry</controllingFieldValue>
+                <valueName>Active Dealer Inquiry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Dealer Inquiry</controllingFieldValue>
+                <valueName>Dealer Complaint - Not Specie</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Dealer Inquiry</controllingFieldValue>
+                <valueName>Interest in Becoming a Dealer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Dealer Inquiry</controllingFieldValue>
+                <valueName>Nearest Dealer Location</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Dealer Inquiry</controllingFieldValue>
+                <valueName>TSC Complaint - non Specie</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Activity_Type__c</fullName>
+        <description>Type of Activity for the Task for Customer Operations</description>
+        <externalId>false</externalId>
+        <label>Activity Type</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Beef</fullName>
+                    <default>false</default>
+                    <label>Beef</label>
+                </value>
+                <value>
+                    <fullName>Dairy</fullName>
+                    <default>false</default>
+                    <label>Dairy</label>
+                </value>
+                <value>
+                    <fullName>Dealer Inquiry</fullName>
+                    <default>false</default>
+                    <label>Dealer Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Equine</fullName>
+                    <default>false</default>
+                    <label>Equine</label>
+                </value>
+                <value>
+                    <fullName>Fish and Aquatics</fullName>
+                    <default>false</default>
+                    <label>Fish and Aquatics</label>
+                </value>
+                <value>
+                    <fullName>Game Bird</fullName>
+                    <default>false</default>
+                    <label>Game Bird</label>
+                </value>
+                <value>
+                    <fullName>Goat</fullName>
+                    <default>false</default>
+                    <label>Goat</label>
+                </value>
+                <value>
+                    <fullName>Honor Show Chow</fullName>
+                    <default>false</default>
+                    <label>Honor Show Chow</label>
+                </value>
+                <value>
+                    <fullName>Lab Diet</fullName>
+                    <default>false</default>
+                    <label>Lab Diet</label>
+                </value>
+                <value>
+                    <fullName>Mazuri</fullName>
+                    <default>false</default>
+                    <label>Mazuri</label>
+                </value>
+                <value>
+                    <fullName>Milk ReplacerAM</fullName>
+                    <default>false</default>
+                    <label>Milk ReplacerAM</label>
+                </value>
+                <value>
+                    <fullName>Miscellaneous</fullName>
+                    <default>false</default>
+                    <label>Miscellaneous</label>
+                </value>
+                <value>
+                    <fullName>No Answer</fullName>
+                    <default>false</default>
+                    <label>No Answer</label>
+                </value>
+                <value>
+                    <fullName>Order</fullName>
+                    <default>false</default>
+                    <label>Order</label>
+                </value>
+                <value>
+                    <fullName>Pet Companion Animal</fullName>
+                    <default>false</default>
+                    <label>Pet Companion Animal</label>
+                </value>
+                <value>
+                    <fullName>Poultry</fullName>
+                    <default>false</default>
+                    <label>Poultry</label>
+                </value>
+                <value>
+                    <fullName>Product Inquiry</fullName>
+                    <default>false</default>
+                    <label>Product Inquiry</label>
+                </value>
+                <value>
+                    <fullName>Pricing/Billing</fullName>
+                    <default>false</default>
+                    <label>Pricing/Billing</label>
+                </value>
+                <value>
+                    <fullName>Rabbit</fullName>
+                    <default>false</default>
+                    <label>Rabbit</label>
+                </value>
+                <value>
+                    <fullName>Service Request</fullName>
+                    <default>false</default>
+                    <label>Service Request</label>
+                </value>
+                <value>
+                    <fullName>Sheep</fullName>
+                    <default>false</default>
+                    <label>Sheep</label>
+                </value>
+                <value>
+                    <fullName>Small Animal</fullName>
+                    <default>false</default>
+                    <label>Small Animal</label>
+                </value>
+                <value>
+                    <fullName>Swine</fullName>
+                    <default>false</default>
+                    <label>Swine</label>
+                </value>
+                <value>
+                    <fullName>Transfer</fullName>
+                    <default>false</default>
+                    <label>Transfer</label>
+                </value>
+                <value>
+                    <fullName>Transportation</fullName>
+                    <default>false</default>
+                    <label>Transportation</label>
+                </value>
+                <value>
+                    <fullName>Test Diet</fullName>
+                    <default>false</default>
+                    <label>Test Diet</label>
+                </value>
+                <value>
+                    <fullName>Wild Bird</fullName>
+                    <default>false</default>
+                    <label>Wild Bird</label>
+                </value>
+                <value>
+                    <fullName>Wildlife (Deer/Wild Hog)</fullName>
+                    <default>false</default>
+                    <label>Wildlife (Deer/Wild Hog)</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Activity__c</fullName>
+        <defaultValue>if(CONTAINS($Profile.Name, &quot;Inside Sales&quot;),&quot;Phone&quot;, 
+if(CONTAINS($Profile.Name, &quot;Sales Specialist&quot;),&quot;Farmgate&quot;, 
+if(CONTAINS($Profile.Name, &quot;LPS&quot;),&quot;Farmgate&quot;, 
+if(CONTAINS($Profile.Name, &quot;Area Sales Manager&quot;),&quot;Farmgate&quot;, 
+if(CONTAINS($Profile.Name, &quot;Regional Director&quot;),&quot;Farmgate&quot;, 
+&quot;&quot;)))))</defaultValue>
+        <externalId>false</externalId>
+        <label>Activity</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Type2__c</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Phone</fullName>
+                    <default>false</default>
+                    <label>Phone</label>
+                </value>
+                <value>
+                    <fullName>Farmgate</fullName>
+                    <default>false</default>
+                    <label>Farmgate</label>
+                </value>
+                <value>
+                    <fullName>Meeting with Dealer</fullName>
+                    <default>false</default>
+                    <label>Meeting with Dealer</label>
+                </value>
+                <value>
+                    <fullName>Training</fullName>
+                    <default>false</default>
+                    <label>Training</label>
+                </value>
+                <value>
+                    <fullName>Quality/Service Issue</fullName>
+                    <default>false</default>
+                    <label>Quality/Service Issue</label>
+                </value>
+                <value>
+                    <fullName>FARM VIP</fullName>
+                    <default>false</default>
+                    <label>FARM VIP</label>
+                </value>
+                <value>
+                    <fullName>Event at Dealer</fullName>
+                    <default>false</default>
+                    <label>Event at Dealer</label>
+                </value>
+                <value>
+                    <fullName>Event at Producer</fullName>
+                    <default>false</default>
+                    <label>Event at Producer</label>
+                </value>
+                <value>
+                    <fullName>Tradeshow</fullName>
+                    <default>false</default>
+                    <label>Tradeshow</label>
+                </value>
+                <value>
+                    <fullName>Email</fullName>
+                    <default>false</default>
+                    <label>Email</label>
+                </value>
+                <value>
+                    <fullName>Text</fullName>
+                    <default>false</default>
+                    <label>Text</label>
+                </value>
+                <value>
+                    <fullName>Postage</fullName>
+                    <default>false</default>
+                    <label>Postage</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Sales Call</controllingFieldValue>
+                <controllingFieldValue>Support Call</controllingFieldValue>
+                <valueName>Phone</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sales Call</controllingFieldValue>
+                <controllingFieldValue>Support Call</controllingFieldValue>
+                <valueName>Farmgate</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sales Call</controllingFieldValue>
+                <controllingFieldValue>Support Call</controllingFieldValue>
+                <valueName>Meeting with Dealer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sales Call</controllingFieldValue>
+                <controllingFieldValue>Support Call</controllingFieldValue>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>Training</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sales Call</controllingFieldValue>
+                <controllingFieldValue>Support Call</controllingFieldValue>
+                <valueName>Email</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sales Call</controllingFieldValue>
+                <controllingFieldValue>Support Call</controllingFieldValue>
+                <valueName>Text</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sales Call</controllingFieldValue>
+                <controllingFieldValue>Support Call</controllingFieldValue>
+                <valueName>Postage</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Support Call</controllingFieldValue>
+                <valueName>Quality/Service Issue</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>FARM VIP</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Event at Dealer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Event at Producer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Tradeshow</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>Other</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Area_Sales_Manager__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(Owner:User.Area_Sales_Manager__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Area Sales Manager</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assigned_To_Function__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text(Owner:User.Function__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned To Function</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assigned_To_Indicator__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(  Owner:User.X18_Digit_User_ID__c =   $User.X18_Digit_User_ID__c ,&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned To Indicator</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assigned_to_Active_Status__c</fullName>
+        <description>Formula to determine if the &quot;Assigned To&quot; on the activity is active or not.</description>
+        <externalId>false</externalId>
+        <formula>Owner:User.Status_Current__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned to Active Status</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assigned_to_Partner_Indicator__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(Owner:User.Partner_User__c = &quot;Yes&quot;,&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned to Partner Indicator</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assigned_to_Profile__c</fullName>
+        <description>The profile of the &quot;Assigned To&quot;</description>
+        <externalId>false</externalId>
+        <formula>Owner:User.Profile.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned to Profile</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assigned_to_Region__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text(Owner:User.Sales_Region__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned to Region</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assigned_to_Sales_Division__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text( Owner:User.Sales_Division__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned to Sales Division</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assigned_to_Sales_Team_Id__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner:User.Sales_Team_ID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned to Sales Team Id</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Call_Recording__c</fullName>
+        <description>Used for Customer Ops to link to call recording on FTP</description>
+        <externalId>false</externalId>
+        <label>Call Recording</label>
+        <required>false</required>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Commentsx__c</fullName>
+        <externalId>false</externalId>
+        <label>Commentsx</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Counselor_Selling__c</fullName>
+        <externalId>false</externalId>
+        <label>Counselor Selling Stage</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Relating</fullName>
+                    <default>false</default>
+                    <label>Relating</label>
+                </value>
+                <value>
+                    <fullName>Discovering</fullName>
+                    <default>false</default>
+                    <label>Discovering</label>
+                </value>
+                <value>
+                    <fullName>Advocating</fullName>
+                    <default>false</default>
+                    <label>Advocating</label>
+                </value>
+                <value>
+                    <fullName>Supporting</fullName>
+                    <default>false</default>
+                    <label>Supporting</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Create_Date_Month_Year__c</fullName>
+        <description>Transformed the Create Date to a month and year.  Example:  January  1, 2016 will be represented as 1-2016</description>
+        <externalId>false</externalId>
+        <formula>Text(MONTH(DateValue(CreatedDate)))&amp;&quot;-&quot;&amp;Text(YEAR(DateValue(CreatedDate)))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Create Date (Month &amp; Year)</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Create_Date_Year__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text(YEAR(DateValue(CreatedDate)))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Create Date (Year)</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Created_By_Active_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>CreatedBy.Status_Current__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Created By Active Status</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Created_By_Region__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text( CreatedBy.Sales_Region__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Created By Region</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Created_By_Sales_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>CreatedBy.Sales_Team_ID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Created By Sales Team ID</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Created_by_Function__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text(CreatedBy.Function__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Created by Function</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Created_by_Sales_Division__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text(CreatedBy.Sales_Division__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Created by Sales Division</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DNIS__c</fullName>
+        <description>DNIS field for customer operations</description>
+        <externalId>false</externalId>
+        <label>DNIS</label>
+        <required>false</required>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Employee__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>This field should be filled in when the activity is related to another Purina Sales Employee.</inlineHelpText>
+        <label>Purina Sales Employee</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Activities</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Event_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Event ID</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>First_Day_2_Weeks_Ago__c</fullName>
+        <description>The date of the first day of the week from two weeks ago.</description>
+        <externalId>false</externalId>
+        <formula>(TODAY()- 7) - 
+CASE( 
+MOD((TODAY()-7) - DATE( 1900, 1, 7 ), 7 ), 
+0,7, 
+1,8, 
+2,9, 
+3,10, 
+4,11, 
+5,12, 
+13)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>First Day 2 Weeks Ago</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>First_Day_of_Last_Week__c</fullName>
+        <externalId>false</externalId>
+        <formula>TODAY() - 
+CASE( 
+ MOD(TODAY() - DATE( 1900, 1, 7 ), 7 ), 
+ 0,7, 
+ 1,8, 
+ 2,9, 
+ 3,10, 
+ 4,11, 
+ 5,12, 
+13)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>First Day of Last Week</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Historical_Activity_ID__c</fullName>
+        <description>External ID for historical Activities migrated from Oracle CRM</description>
+        <externalId>true</externalId>
+        <label>Historical Activity ID</label>
+        <length>50</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Initiative__c</fullName>
+        <description>Initiative</description>
+        <externalId>false</externalId>
+        <label>Initiative</label>
+        <required>false</required>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Equine Veterinarian Kit</fullName>
+                    <default>false</default>
+                    <label>Equine Veterinarian Kit</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Internal_Only__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Permission of this field is granted through a Permission Set.  Prevents the task from being shared with the Local Hires Community - if this is not selected, the task will be displayed to the Local Hires</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select this option if you do not want to display this activity to Dealer/Coop Partners - If this is not selected, the activity will be displayed to Dealer/Coop Partners</inlineHelpText>
+        <label>Internal Only</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Last_Day_2_Weeks_Ago__c</fullName>
+        <description>The date of the last day of the week from two days ago.</description>
+        <externalId>false</externalId>
+        <formula>(TODAY()- 7 ) - 
+CASE( 
+MOD((TODAY()-7) - DATE( 1900, 1, 7 ), 7 ), 
+0,1, 
+1,2, 
+2,3, 
+3,4, 
+4,5, 
+5,6, 
+7)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Last Day 2 Weeks Ago</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Last_Week_This_Week_Ind__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(
+And(
+ActivityDate &gt;= First_Day_of_Last_Week__c, 
+ActivityDate &lt;= First_Day_of_Last_Week__c + 13), &quot;Yes&quot;, &quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Last Week &amp; This Week Ind</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Marquee__c</fullName>
+        <description>Used by Customer Ops to define how the inbound call came in (i.e. Direct ANI match, Area Code Search)</description>
+        <externalId>false</externalId>
+        <label>Marquee</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>My_Task_Indicator__c</fullName>
+        <externalId>false</externalId>
+        <formula>if( $User.X18_Digit_User_ID__c =  Activity_Owner_18_Digit_ID__c ,&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>My Task Indicator</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_People_Trained__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of People Trained</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Order__c</fullName>
+        <externalId>true</externalId>
+        <label>Order #</label>
+        <length>50</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Partner_Account_Number__c</fullName>
+        <description>This field is populated via process Builder`</description>
+        <externalId>false</externalId>
+        <label>Partner Account Number</label>
+        <length>25</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Call_Count__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(text( Type2__c ) = &quot;Sales Call&quot;,1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Call Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Skill_Name__c</fullName>
+        <description>Skill name for Customer Operations call routing</description>
+        <externalId>false</externalId>
+        <label>Skill Name</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Support_Call_Count__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(text( Type2__c ) = &quot;Support Call&quot;,1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Support Call Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Trainer__c</fullName>
+        <externalId>false</externalId>
+        <label>Trainer</label>
+        <required>false</required>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Nic Autry</fullName>
+                    <default>false</default>
+                    <label>Nic Autry</label>
+                </value>
+                <value>
+                    <fullName>Garrett Robertson</fullName>
+                    <default>false</default>
+                    <label>Garrett Robertson</label>
+                </value>
+                <value>
+                    <fullName>Rhonda Thode</fullName>
+                    <default>false</default>
+                    <label>Rhonda Thode</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Two_Weeks_Ago_Ind__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(and(
+ActivityDate  &gt;=  First_Day_2_Weeks_Ago__c,
+ActivityDate  &lt;=   Last_Day_2_Weeks_Ago__c ),
+&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Two Weeks Ago Ind</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Type2__c</fullName>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Sales Call</fullName>
+                    <color>#0B6FCE</color>
+                    <default>false</default>
+                    <label>Sales Call</label>
+                </value>
+                <value>
+                    <fullName>Support Call</fullName>
+                    <color>#FF6666</color>
+                    <default>false</default>
+                    <label>Support Call</label>
+                </value>
+                <value>
+                    <fullName>Event</fullName>
+                    <color>#FFCC66</color>
+                    <default>false</default>
+                    <label>Event</label>
+                </value>
+                <value>
+                    <fullName>To Do</fullName>
+                    <color>#A845DC</color>
+                    <default>false</default>
+                    <label>To Do</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <color>#BBBBBB</color>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Type_Grouped__c</fullName>
+        <description>Groups the &quot;Type&quot; of activities into Sales Call, Service Call or Other</description>
+        <externalId>false</externalId>
+        <formula>If( text(Type2__c) = &quot;To Do&quot;  || text(Type2__c)=&quot;Other&quot; ,&quot;Other&quot;,text(Type2__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Type (Grouped)</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Visibility_Indicator__c</fullName>
+        <description>If  the user is a partner user and the &quot;internal only&quot; checkbox is checked on the actrivity, then &quot;Yes&quot; else &quot;No&quot;.  This is used in reports so the correct activities will display to our partners.</description>
+        <externalId>false</externalId>
+        <formula>If(
+Not(Contains($User.Profile_Current__c ,&quot;Partner&quot;)) ,&quot;Yes&quot;,
+
+if(
+Subject=&quot;Re-submit Farm VIP Nomination&quot;,&quot;No&quot;,
+
+If(
+Contains($User.Profile_Current__c ,&quot;Partner&quot;) &amp;&amp;   IsVisibleInSelfService  = True, &quot;Yes&quot;, &quot;No&quot;
+
+)))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Visibility Indicator</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X18_Digit_Activity_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASESAFEID(Id)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>18 Digit Activity ID</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>inContact_Contact_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Used for Customer Ops</description>
+        <externalId>true</externalId>
+        <label>inContact Contact ID</label>
+        <length>11</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>of_Attendees__c</fullName>
+        <externalId>false</externalId>
+        <label># of Attendees</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>pi__pardot_source_id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <description>Identifies the Pardot record that caused this activity to be created.</description>
+        <externalId>true</externalId>
+        <label>Pardot Source Id</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <listViews>
+        <fullName>Last_Week_s_Activities</fullName>
+        <columns>TASK.SUBJECT</columns>
+        <columns>TASK.WHO_NAME</columns>
+        <columns>TASK.WHAT_NAME</columns>
+        <columns>TASK.DUE_DATE</columns>
+        <columns>TASK.STATUS</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <columns>Type2__c</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>TASK.DUE_DATE</field>
+            <operation>equals</operation>
+            <value>LAST_WEEK</value>
+        </filters>
+        <label>My Activities Last Week</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>Sales_VP</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>MyActivities</fullName>
+        <filterScope>Mine</filterScope>
+        <label>My Activities</label>
+    </listViews>
+    <listViews>
+        <fullName>MyDelegatedActivities</fullName>
+        <filterScope>Delegated</filterScope>
+        <label>My Delegated Activities</label>
+    </listViews>
+    <listViews>
+        <fullName>MyTeamsActivities</fullName>
+        <filterScope>Team</filterScope>
+        <label>My Team&apos;s Activities</label>
+    </listViews>
+    <listViews>
+        <fullName>TodaysTasks</fullName>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>TASK.CLOSED</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>ACTIVITY.TASK</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>TASK.DUE_DATE</field>
+            <operation>lessThan</operation>
+            <value>TOMORROW</value>
+        </filters>
+        <label>Today&apos;s Tasks</label>
+    </listViews>
+    <listViews>
+        <fullName>UpcomingEvents</fullName>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>ACTIVITY.TASK</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>TASK.DUE_DATE</field>
+            <operation>greaterThan</operation>
+            <value>YESTERDAY</value>
+        </filters>
+        <label>Upcoming Events</label>
+    </listViews>
+    <searchLayouts>
+        <searchResultsAdditionalFields>TASK.SUBJECT</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>TASK.WHO_NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>TASK.WHAT_NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>TASK.DUE_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

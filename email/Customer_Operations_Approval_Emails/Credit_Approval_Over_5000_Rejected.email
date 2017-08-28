@@ -1,0 +1,9 @@
+A credit request for over $5,000 for Service Request {!Case.CaseNumber}- {!Case.Subject} has been rejected. 
+
+Service Request Number: {!Case.CaseNumber}
+Service Request Subject: {!Case.Subject}
+Credit Amount Range: {!Case.Credit_Amount_Range__c}
+Comments: 
+{!ApprovalRequest.Comments}
+
+Service Request Link: {!Case.Link}

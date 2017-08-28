@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>With back-up and no credit: Plant confirms product shipped</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Plant Confirms Product Shipped</name>
+    <style>none</style>
+    <subject>Verification of Product Shipped</subject>
+    <type>text</type>
+</EmailTemplate>

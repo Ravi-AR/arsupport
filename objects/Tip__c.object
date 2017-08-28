@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Custom object to store Tips (Mobile &amp; Management) for various combinations of Facility Walkthrough questions &amp; answers.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Field is used on ManagementTips page, just to select contact to which email will be sent to</description>
+        <externalId>false</externalId>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Tips</relationshipLabel>
+        <relationshipName>Tips</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Facility_Answer__c</fullName>
+        <description>The Answer to the Facility Walkthrough Question this Tip is associated with.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Answer to the Facility Walkthrough Question this Tip is associated with.</inlineHelpText>
+        <label>Facility Answer</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Facility_Question__c</fullName>
+        <description>The Facility Walkthrough Question this Tip is associated with.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Facility Walkthrough Question this Tip is associated with.</inlineHelpText>
+        <label>Facility Question</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Producer_Facility__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Field that connects the Management Tips to the Producer Facility Account</description>
+        <externalId>false</externalId>
+        <label>Producer Facility</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Tips</relationshipLabel>
+        <relationshipName>Tips</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Tip__c</fullName>
+        <description>The Tip (Mobile or Management) displayed to the User.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Tip (Mobile or Management) displayed to the User.</inlineHelpText>
+        <label>Tip</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Tip</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Management_Tips</fullName>
+        <columns>NAME</columns>
+        <columns>Facility_Question__c</columns>
+        <columns>Facility_Answer__c</columns>
+        <columns>Tip__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Tip__c.Management</value>
+        </filters>
+        <label>Management Tips</label>
+        <sharedTo>
+            <group>Matthew_Hareldson</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Mobile_Tips</fullName>
+        <columns>NAME</columns>
+        <columns>Facility_Question__c</columns>
+        <columns>Facility_Answer__c</columns>
+        <columns>Tip__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Tip__c.Mobile</value>
+        </filters>
+        <label>Mobile Tips</label>
+        <sharedTo>
+            <group>Matthew_Hareldson</group>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <label>Tip Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Tips</pluralLabel>
+    <recordTypes>
+        <fullName>Management</fullName>
+        <active>true</active>
+        <description>Record Type for Management Tips</description>
+        <label>Management</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Mobile</fullName>
+        <active>true</active>
+        <description>Record Type for Mobile Tips</description>
+        <label>Mobile</label>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Facility_Answer__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Facility_Question__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATEDBY_USER</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATED_DATE</customTabListAdditionalFields>
+        <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Facility_Question__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Facility_Answer__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Tip__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATEDBY_USER</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

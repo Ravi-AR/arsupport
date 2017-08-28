@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>LEES ACE HARDWARE AND RENTAL INC-523240 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>LEES ACE HARDWARE AND RENTAL INC-523240 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>LEESACEHARDWAREANDRENTALINC523240PartnerManager</parentRole>
+</Role>

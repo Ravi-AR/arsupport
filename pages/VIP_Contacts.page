@@ -1,0 +1,30 @@
+<apex:page standardController="Farm_VIP_Registration__c" extensions="VIP_Contacts_Control" >
+	
+	<apex:form >
+	<apex:pageBlock rendered="{!consExist}">
+
+		<apex:pageBlockTable value="{!rel_cons}" var="con">
+                
+            <apex:column headerValue="Name" >
+            	<apex:commandLink action="{!gotoContact}" value="{!con.Name}" target="_blank" >
+            		<apex:param assignTo="{!conClick}" name="conClick" value="{!con.id}" />
+            	</apex:commandLink>
+            </apex:column>
+            
+            <apex:column headerValue="Email" >
+                <apex:outputField value="{!con.Email}" />
+            </apex:column>
+            
+            <apex:column headerValue="Phone" >
+                <apex:outputField value="{!con.Phone}" />
+            </apex:column>
+                
+            <apex:column headerValue="Role" >
+            	<apex:outputField value="{!con.Role__c}" />
+            </apex:column>
+        </apex:pageBlockTable>
+
+	</apex:pageBlock>
+	</apex:form>
+
+</apex:page>

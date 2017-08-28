@@ -1,0 +1,175 @@
+<!--<Component Name: cc_oo_CartItemDetail> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Shrivaths                                9/19/2016                                    US:OO - 244 Hide prices for Prebook flow
+-->
+<apex:component allowDML="true">
+    
+    <script id="OO-CartItemDetail-View-Mobile" type="text/template">
+        {{#with this.attributes}}
+            {{#ifEquals itemStatus 'Invalid'}}
+                <div class="alert alert-error">
+                    <div class="cart_1_row_medium_viewport">
+                        {{#if isPreBook}}
+                            <a href="#">{{{displayImage mediaWrapper 'cart'}}}</a>
+                        {{else}}
+                            {{{displayImage mediaWrapper 'cart'}}}
+                        {{/if}}
+                    </div>
+                    ------{{{ productName mockProduct }}}
+					<div class="oo_E2Description" data-id="{{this.mockProduct.sku}}"></div>
+                    <p>SKU: {{mockProduct.sku}}</p>
+                    <div class="clear"></div>
+                    <button type="button" class="btn btn-secondary remove removeItemButton" data-id="{{itemID}}">{{pageLabelMap 'Action_Delete'}}</button>
+                </div>
+            {{else}}
+                {{#ifNotEquals cartItemType 'Coupon'}}
+                    <div class="cart_1_row_medium_viewport">
+                        {{#if isPreBook}}
+                            <a href="#">{{{displayImage mediaWrapper 'cart'}}}</a>
+                        {{else}}
+                            {{{displayImage mediaWrapper 'cart'}}}
+                        {{/if}}
+                    </div>
+                {{/ifNotEquals}}
+                {{{ productName mockProduct }}}
+				<div class="oo_E2Description" data-id="{{this.mockProduct.sku}}"></div>
+                {{#ifNotEquals cartItemType 'Coupon'}}
+					
+                    <p>SKU: {{mockProduct.sku}}</p>
+                    <p class="included_items">
+                        {{#if showIncludedItems }}
+                            <a href="#included_items{{itemID}}" class="includedItemsLink" id="includedItemsLink{{itemID}}" data-desktop="false" data-toggle="modal" data-id="{{itemID}}">{{pageLabelMap 'CartInc_IncludedItems'}}</a>
+                            {{#ifDisplay 'C.DsplAddtInfo'}} |{{/ifDisplay}}
+                        {{/if}}
+                        {{#ifDisplay 'C.DsplAddtInfo'}}
+                            <a class="included_items" href="#additional_info{{itemID}}" id="additionalInfoLink" data-toggle="modal">{{pageLabelMap 'AdditionalInfo'}}</a>
+                            {{#ifDisplay 'C.DsplComments'}} |{{/ifDisplay}}
+                        {{/ifDisplay}}
+                        {{#ifDisplay 'C.DsplComments'}}
+                            <a href="#comments_{{itemID}}" id="commentsLink" data-toggle="modal">{{pageLabelMap 'CartLineCommentLabel'}}</a>
+                        {{/ifDisplay}}  
+                        {{#if showIncludedItems }}
+                            {{> includedDisplay}}
+                        {{/if}}
+                        {{#ifDisplay 'C.DsplAddtInfo'}}
+                            {{> cartItemAdditional}}
+                        {{/ifDisplay}}
+                        {{#ifDisplay 'C.DsplComments'}}
+                            {{> cartItemComment}}
+                        {{/ifDisplay}}
+                {{/ifNotEquals}}
+                {{#if showSubProdTerm}}
+                    <p><label class="subscriptionSummary">{{insertTokens cartDisplayName displayName (price price) (price SubAmount) (price recurringPrice) (price recurringPriceSubAmount) (pageLabelPrefixMap 'Subscriptions_Frequency_' orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' installmentFrequencyUOM) orderFrequency installmentFrequency installmentCount orderCount}}</span></label></p>
+                {{else}}
+                    {{#if this.isSubscription}}
+                       <p class="subscriptionSummary">{{subscriptionSummary 'Cart_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                    {{/if}}
+                {{/if}}
+                {{#each minorLines}}
+                    {{#if showSubProdTerm}}
+                        <p><label class="subscriptionSummary">{{insertTokens cartDisplayName displayName (price price) (price SubAmount) (price recurringPrice) (price recurringPriceSubAmount) (pageLabelPrefixMap 'Subscriptions_Frequency_' orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' installmentFrequencyUOM) orderFrequency installmentFrequency installmentCount orderCount}}</span></label></p>
+                    {{else}}
+                        {{#if this.isSubscription}}
+                            <p class="subscriptionSummary">{{subscriptionSummary 'Cart_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                        {{/if}}
+                    {{/if}}
+                {{/each}}
+                <div class="clear"></div>
+                {{#if isPreBook}}
+                    <div class="cart_figures">
+                        {{#ifNotEquals cartItemType 'Coupon'}}                      
+                            <div class="section1">{{pageLabelMap 'CartInc_Price'}}:</div>
+                            <div class="section2">{{pageLabelMap 'YouSave'}}:</div>
+                        {{/ifNotEquals}}
+                        <div class="section3">{{pageLabelMap 'CartInc_Total'}}:</div>
+                        {{#ifNotEquals cartItemType 'Coupon'}}                      
+                            <div class="section1">
+                                <strong>{{price price}}</strong>
+                            </div>
+                            <div class="section2">
+                                <strong>{{price absoluteDiscount}}</strong>
+                            </div>
+                        {{/ifNotEquals}}
+                        <div class="section3 totalAmount">
+                            <strong class="price">{{price itemTotal}}</strong>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                {{/if}}
+                {{#ifNotEquals cartItemType 'Coupon'}}                      
+                    <div class="section2 plus_minus" data-id="{{itemID}}">
+                        {{> cartItemsQty}}
+                        <button type="button" class="btn btn-secondary remove removeItemButton" data-id="{{itemID}}">{{pageLabelMap 'Action_Delete'}}</button>
+                    </div>
+                                {{#unless showSubProdTerm}}
+                        <div class=" wishFinder" data-sku="{{mockProduct.sku}}">
+                            <div class="sectionWide wishButtons"></div>
+                        </div>
+                                {{/unless}}
+                {{/ifNotEquals}}
+                <div class="alert alert-error messagingSection-{{itemID}}-Error" style="display: none"></div>
+                <div class="alert alert-info messagingSection-{{itemID}}-Info" style="display: none"></div>
+            {{/ifEquals}}
+        {{/with}}
+    </script>
+    <script type="text/javascript">
+        jQuery(function($) {
+            CCRZ.uiProperties.CartDetailView.partials.cartItemsMobile = '#OO-CartItemDetail-View-Mobile';
+            // User story : 372 To add E2 description on the cart page
+            CCRZ.pubSub.on('view:CartDetailView:refresh', function(theView) {
+                // Creating and getting the Product List Data
+                var cartId = CCRZ.cartDetailView.model.attributes.sfid;
+                console.log('cartId-->' + cartId);
+    
+                var remoteData;
+                // Remote Action function call starts from here
+                callProducts = function(){
+                    // Calling the controller class 'cc_oo_CartIncRD2Controller' and the method 'getProductsDetails' having the parameter 'productIds'
+                    var remoteActionCallForProducts = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_CartIncRD2Controller'});
+                    remoteActionCallForProducts.invokeCtx(
+                                'getProductsDetails',
+                                cartId,
+                                function(resp){
+                                    if(resp && resp.data){
+    
+                                        if(resp.success){
+                                            remoteData = resp.data;
+                                            // Adding long description in div 'oo_longDesc'
+                                            $('.oo_longDesc').each( function(){
+                                                // Passing data-id which contains the SKU Id
+                                                var productSKU = $(this).attr('data-id');
+                                                var productLongDescription = resp.data[productSKU];                                            
+                                                // Showing Long description on the additional information popup window
+                                                $(this).html(productLongDescription);
+                                            });
+                                            $('.oo_E2Description').each( function(){
+                                                var productSKU = $(this).attr('data-id');
+                                                console.log("productSKU: "+productSKU)
+                                                //var productLongDescription = resp.data[productSKU];
+                                                //alert('Resp data: '+remoteData[productSKU].ccrz__Product__r.cc_oo_Second_Description__c);
+                                                var E2Description = remoteData[productSKU].ccrz__Product__r.cc_oo_Second_Description__c;
+                                                console.log('--->' + E2Description);
+                                                // Showing the value of long Description on the pop up window
+                                                //$(this).html(productLongDescription);
+                                                console.log("E2"+E2Description)
+                                                console.log($(this))
+                                                $(this).html(E2Description);
+                                            });
+                                        }
+                                    }
+                                },
+                                {buffer:false,escape:false,nmsp:false}
+                    );
+                }
+                // Calling the function call Products() method
+                callProducts();
+            });    
+        
+           //End of user story 372 adding e2 description.   
+        });
+        
+    </script>
+</apex:component>

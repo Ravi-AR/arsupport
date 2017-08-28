@@ -1,0 +1,37 @@
+<messaging:emailTemplate subject="Management Tips" recipientType="Contact" relatedToType="Tip__c">
+<messaging:htmlEmailBody >       
+        <html>
+            <head>
+                <style>
+                    *{
+                        margin:0px;
+                        padding:0px;
+                     }
+                </style>
+            </head>
+            <body>
+            
+            <table style="width:100%; font-size:14px;">
+                 <tr>
+                     <td><img src="{!$Setup.Org_Settings__c.Purina_Logo_URL__c}" width="174" height="49" alt="Purina" /></td>
+                 </tr>
+                 <tr>
+                     <td style="height:5px;"></td>
+                 </tr>   
+                 <tr>
+                     <td>Attached are Purina Management Tips for your review.</td>
+                 </tr>
+                 
+                 <tr>
+                     <td>Management Tips:</td>
+                 </tr>
+                
+                 <tr>
+                     <td><c:LMSA_SelectedManagementTips /></td>
+                 </tr>
+                 
+                 </table>
+            </body>
+       </html>
+</messaging:htmlEmailBody>            
+</messaging:emailTemplate>

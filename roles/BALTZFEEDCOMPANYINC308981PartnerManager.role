@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>BALTZ FEED COMPANY INC-308981 Partner Manager</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>BALTZ FEED COMPANY INC-308981 Partner Manager</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>System_Administrator</parentRole>
+</Role>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>SANTA YNEZ FEED AND MILLING-311435 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>SANTA YNEZ FEED AND MILLING-311435 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>SANTAYNEZFEEDANDMILLING311435PartnerManager</parentRole>
+</Role>

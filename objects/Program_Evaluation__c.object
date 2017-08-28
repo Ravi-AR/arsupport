@@ -1,0 +1,1097 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <content>LMSA_ProgramEvaluation</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Custom Object to house records and detail to calculate Purina Program ROI Evaluation.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Contact that is associated with the Program Evaluation</description>
+        <externalId>false</externalId>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Program Evaluations</relationshipLabel>
+        <relationshipName>Program_Evaluations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Curren_Program_Total_Gain__c</fullName>
+        <description>Field to calculate the average weight gain for the Current Program</description>
+        <externalId>false</externalId>
+        <formula>avg_wt_out__c -  avg_wt_in__c</formula>
+        <label>Current Program Total Gain</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Current_Program_ADG__c</fullName>
+        <description>Field that calculates the Average Daily Gain of the current program</description>
+        <externalId>false</externalId>
+        <formula>Curren_Program_Total_Gain__c /  days_on_feed__c</formula>
+        <label>Current Program ADG</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Current_Program_Feed_Gain__c</fullName>
+        <description>Field that calculates the total feed lbs by the total gain of the current program</description>
+        <externalId>false</externalId>
+        <formula>Current_Program_Total_Feed_Lbs__c /  Curren_Program_Total_Gain__c</formula>
+        <label>Current Program Feed/Gain</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Current_Program_Total_Feed_Dollar__c</fullName>
+        <description>Field that calculates the total cost of feed of the current program</description>
+        <externalId>false</externalId>
+        <formula>dollar_pig_fed_1__c +  dollar_pig_fed_2__c +  dollar_pig_fed_3__c + dollar_pig_fed_4__c + dollar_pig_fed_5__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Current Program Total Feed $</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Current_Program_Total_Feed_Lbs__c</fullName>
+        <description>Field that calculates the total lbs of feed of the current program</description>
+        <externalId>false</externalId>
+        <formula>Lbs_1__c +  Lbs_2__c + Lbs_3__c + Lbs_4__c + Lbs_5__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Current Program Total Feed Lbs</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Current_Program_lb_gain__c</fullName>
+        <description>Field that calculates the total feed $s by the total gain of the current program</description>
+        <externalId>false</externalId>
+        <formula>ROUND(Current_Program_Total_Feed_Dollar__c /  Curren_Program_Total_Gain__c, 2)</formula>
+        <label>Current Program $/lb gain</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Diet_Name_1__c</fullName>
+        <description>Field to capture the first Diet Name</description>
+        <externalId>false</externalId>
+        <label>Diet Name 1</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Diet_Name_2__c</fullName>
+        <description>Field to capture the second Diet Name</description>
+        <externalId>false</externalId>
+        <label>Diet Name 2</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Diet_Name_3__c</fullName>
+        <description>Field to capture the third Diet Name</description>
+        <externalId>false</externalId>
+        <label>Diet Name 3</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Diet_Name_4__c</fullName>
+        <description>Field to capture the fourth Diet Name</description>
+        <externalId>false</externalId>
+        <label>Diet Name 4</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Diet_Name_5__c</fullName>
+        <description>Field to capture the fifth Diet Name</description>
+        <externalId>false</externalId>
+        <label>Diet Name 5</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Diff_ADG_Input__c</fullName>
+        <description>Field to input in the Diff ADG %</description>
+        <externalId>false</externalId>
+        <label>Diff ADG % Input</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Diff_ADG__c</fullName>
+        <description>Field that calculates the the different in ADG between the current program and UltraCare Program</description>
+        <externalId>false</externalId>
+        <formula>((  UltraCare_ADG__c /Current_Program_ADG__c)-1)*100</formula>
+        <label>Diff ADG, %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Feed_Gain_Difference__c</fullName>
+        <description>Field that calculates the total feed/gain of the UltraCare Program minus the Current Program.</description>
+        <externalId>false</externalId>
+        <formula>(UltraCare_Feed_Gain__c/Current_Program_Feed_Gain__c)-1</formula>
+        <label>Feed/Gain Difference</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Lb_Gain_Difference__c</fullName>
+        <description>Field that calculates the total $/lb gain of the UltraCare Program minus the Current Program.</description>
+        <externalId>false</externalId>
+        <formula>UltraCare_Program_lb_gain__c -  Current_Program_lb_gain__c</formula>
+        <label>$/Lb Gain Difference</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Lbs_1__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the first lbs field for Current Feed Program</description>
+        <externalId>false</externalId>
+        <label>Lbs 1</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lbs_2__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the second lbs field for Current Feed Program</description>
+        <externalId>false</externalId>
+        <label>Lbs 2</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lbs_3__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the third lbs field for Current Feed Program</description>
+        <externalId>false</externalId>
+        <label>Lbs 3</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lbs_4__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the fourth lbs field for Current Feed Program</description>
+        <externalId>false</externalId>
+        <label>Lbs 4</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lbs_5__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the fifth lbs field for Current Feed Program</description>
+        <externalId>false</externalId>
+        <label>Lbs 5</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Percent_Full_Value__c</fullName>
+        <description>Field that calculates the % of Full Value of the current program.</description>
+        <externalId>false</externalId>
+        <formula>1- percent_dead__c</formula>
+        <label>% Full Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Producer_Facility__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Field that connects the Program Evaluation to the Producer Facility Account</description>
+        <externalId>false</externalId>
+        <label>Producer Facility</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Program Evaluations</relationshipLabel>
+        <relationshipName>Program_Evaluations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Total_Feed_Cost_Ultracare__c</fullName>
+        <description>Field that calculates the total cost of feed of the UltraCare program</description>
+        <externalId>false</externalId>
+        <formula>UC_dollar_pig_fed_1__c +  UC_dollar_pig_fed_2__c +  UC_dollar_pig_fed_3__c + UC_dollar_pig_fed_4__c + UC_dollar_pig_fed_5__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>UltraCare Total Feed $</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UC_Avg_Wt_Out_Result_Field__c</fullName>
+        <description>Field to calculate the avg wt out for the UltraCare Program if the Diff ADG, % is entered.</description>
+        <externalId>false</externalId>
+        <formula>UC_Total_Gain_ADG_Input__c  +  UC_avg_wt_in__c</formula>
+        <label>UC Avg Wt Out Result Field</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_Diet_Name_1__c</fullName>
+        <description>Field to capture the first UltraCare Diet Name</description>
+        <externalId>false</externalId>
+        <label>UC Diet Name 1</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_Diet_Name_2__c</fullName>
+        <description>Field to capture the second UltraCare Diet Name</description>
+        <externalId>false</externalId>
+        <label>UC Diet Name 2</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_Diet_Name_3__c</fullName>
+        <description>Field to capture the third UltraCare Diet Name</description>
+        <externalId>false</externalId>
+        <label>UC Diet Name 3</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_Diet_Name_4__c</fullName>
+        <description>Field to capture the fourth UltraCare Diet Name</description>
+        <externalId>false</externalId>
+        <label>UC Diet Name 4</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_Diet_Name_5__c</fullName>
+        <description>Field to capture the fifth UltraCare Diet Name</description>
+        <externalId>false</externalId>
+        <label>UC Diet Name 5</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_Lbs_2__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the second lbs field for UltraCare Feed Program</description>
+        <externalId>false</externalId>
+        <label>UC Lbs 2</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_Lbs_4__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the fourth lbs field for UltraCare Feed Program</description>
+        <externalId>false</externalId>
+        <label>UC Lbs 4</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_Lbs_5__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the fifth lbs field for UltraCare Feed Program</description>
+        <externalId>false</externalId>
+        <label>UC Lbs 5</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_Percent_Full_Value__c</fullName>
+        <description>Field that calculates the % of Full Value of the UltraCare program.</description>
+        <externalId>false</externalId>
+        <formula>1- UC_percent_dead__c</formula>
+        <label>UC % Full Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>UC_Total_Gain_ADG_Input__c</fullName>
+        <description>Field to calculate the UC total gain if the Diff ADG % Input field has been populated.</description>
+        <externalId>false</externalId>
+        <formula>UltraCare_ADG__c *  UC_days_on_feed__c</formula>
+        <label>UC Total Gain ADG Input</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_Total_Gain__c</fullName>
+        <description>Field to calculate the average weight gain for the UltraCare Program</description>
+        <externalId>false</externalId>
+        <formula>UC_avg_wt_out__c -  UC_avg_wt_in__c</formula>
+        <label>UC Total Gain</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_avg_wt_in__c</fullName>
+        <description>Field to capture the avg wt in for the UltraCare Program</description>
+        <externalId>false</externalId>
+        <label>UC avg wt in</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_avg_wt_out__c</fullName>
+        <description>Field to capture the avg wt out for the UltraCare Program</description>
+        <externalId>false</externalId>
+        <label>UC avg wt out</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_days_on_feed__c</fullName>
+        <description>Field to capture the days on feed for the UltraCare Program</description>
+        <externalId>false</externalId>
+        <label>UC days on feed</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_dollar_pig_fed_1__c</fullName>
+        <description>Field that calculates the total cost of feed for the first line of the UltraCare program</description>
+        <externalId>false</externalId>
+        <formula>UC_lbs_1__c *  UC_lb_diet_1__c</formula>
+        <label>UC $/pig fed 1</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UC_dollar_pig_fed_2__c</fullName>
+        <description>Field that calculates the total cost of feed for the second line of the UltraCare program</description>
+        <externalId>false</externalId>
+        <formula>UC_Lbs_2__c * UC_lb_diet_2__c</formula>
+        <label>UC $/pig fed 2</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UC_dollar_pig_fed_3__c</fullName>
+        <description>Field that calculates the total cost of feed for the third line of the UltraCare program</description>
+        <externalId>false</externalId>
+        <formula>UC_lbs_3__c * UC_lb_diet_3__c</formula>
+        <label>UC $/pig fed 3</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UC_dollar_pig_fed_4__c</fullName>
+        <description>Field that calculates the total cost of feed for the fourth line of the UltraCare program</description>
+        <externalId>false</externalId>
+        <formula>UC_Lbs_4__c * UC_lb_diet_4__c</formula>
+        <label>UC $/pig fed 4</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UC_dollar_pig_fed_5__c</fullName>
+        <description>Field that calculates the total cost of feed for the fifth line of the UltraCare program</description>
+        <externalId>false</externalId>
+        <formula>UC_Lbs_5__c * UC_lb_diet_5__c</formula>
+        <label>UC $/pig fed 5</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UC_lb_diet_1__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the first $/lb diet for UltraCare Feed Program</description>
+        <externalId>false</externalId>
+        <label>UC $/lb diet 1</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UC_lb_diet_2__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the second $/lb diet for UltraCare Feed Program</description>
+        <externalId>false</externalId>
+        <label>UC $/lb diet 2</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UC_lb_diet_3__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the third $/lb diet for UltraCare Feed Program</description>
+        <externalId>false</externalId>
+        <label>UC $/lb diet 3</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UC_lb_diet_4__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the fourth $/lb diet for UltraCare Feed Program</description>
+        <externalId>false</externalId>
+        <label>UC $/lb diet 4</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UC_lb_diet_5__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the fifth $/lb diet for UltraCare Feed Program</description>
+        <externalId>false</externalId>
+        <label>UC $/lb diet 5</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UC_lbs_1__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the first lbs field for UltraCare Feed Program</description>
+        <externalId>false</externalId>
+        <label>UC Lbs 1</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_lbs_3__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the third lbs field for UltraCare Feed Program</description>
+        <externalId>false</externalId>
+        <label>UC Lbs 3</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_number_dead__c</fullName>
+        <description>Field to calculate the number dead for the UltraCare Program</description>
+        <externalId>false</externalId>
+        <formula>UC_pigs_in__c-UC_pigs_out__c</formula>
+        <label>UC # dead</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_percent_dead__c</fullName>
+        <description>Field that calculates the percentage of decrease for UltraCare Program</description>
+        <externalId>false</externalId>
+        <formula>( UC_pigs_in__c -  UC_pigs_out__c )/UC_pigs_in__c</formula>
+        <label>UC % dead</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>UC_pigs_in__c</fullName>
+        <description>Field to capture the # of pigs in for the UltraCare Program.</description>
+        <externalId>false</externalId>
+        <label>UC # pigs in</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UC_pigs_out__c</fullName>
+        <description>Field to capture the # pigs out for the UltraCare Program</description>
+        <externalId>false</externalId>
+        <label>UC # pigs out</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UltraCare_ADG__c</fullName>
+        <description>Field that calculates the Average Daily Gain of the UltraCare program</description>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK( Diff_ADG_Input__c ),(UC_Total_Gain__c /  UC_days_on_feed__c), ((Diff_ADG_Input__c/100)+1)* Current_Program_ADG__c )</formula>
+        <label>UltraCare ADG</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UltraCare_Feed_Gain__c</fullName>
+        <description>Field that calculates the total feed lbs by the total gain of the UltraCare program</description>
+        <externalId>false</externalId>
+        <formula>Ultracare_Total_Feed_Lbs__c /  UC_Total_Gain__c</formula>
+        <label>UltraCare Feed/Gain</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UltraCare_Program_lb_gain__c</fullName>
+        <description>Field that calculates the total feed $s by the total gain of the UltraCare program</description>
+        <externalId>false</externalId>
+        <formula>ROUND(Total_Feed_Cost_Ultracare__c / UC_Total_Gain__c,2)</formula>
+        <label>UltraCare Program $/lb gain</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Ultracare_Total_Feed_Lbs__c</fullName>
+        <description>Field that calculates the total lbs of feed of the UltraCare program</description>
+        <externalId>false</externalId>
+        <formula>UC_lbs_1__c +  UC_Lbs_2__c + UC_lbs_3__c + UC_Lbs_4__c + UC_Lbs_5__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>UltraCare Total Feed Lbs</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>avg_wt_in__c</fullName>
+        <description>Field to capture the avg wt in for the Current Program</description>
+        <externalId>false</externalId>
+        <label>avg wt in</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>avg_wt_out__c</fullName>
+        <description>Field to capture the avg wt out for the Current Program</description>
+        <externalId>false</externalId>
+        <label>avg wt out</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>days_on_feed__c</fullName>
+        <description>Field to capture the days on feed for the Current Program</description>
+        <externalId>false</externalId>
+        <label>days on feed</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>dollar_pig_fed_1__c</fullName>
+        <description>Field that calculates the total cost of feed for the first line of the current program</description>
+        <externalId>false</externalId>
+        <formula>Lbs_1__c *  lb_diet_1__c</formula>
+        <label>$/pig fed 1</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>dollar_pig_fed_2__c</fullName>
+        <description>Field that calculates the total cost of feed for the second line of the current program</description>
+        <externalId>false</externalId>
+        <formula>Lbs_2__c * lb_diet_2__c</formula>
+        <label>$/pig fed 2</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>dollar_pig_fed_3__c</fullName>
+        <description>Field that calculates the total cost of feed for the third line of the current program</description>
+        <externalId>false</externalId>
+        <formula>Lbs_3__c * lb_diet_3__c</formula>
+        <label>$/pig fed 3</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>dollar_pig_fed_4__c</fullName>
+        <description>Field that calculates the total cost of feed for the fourth line of the current program</description>
+        <externalId>false</externalId>
+        <formula>Lbs_4__c * lb_diet_4__c</formula>
+        <label>$/pig fed 4</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>dollar_pig_fed_5__c</fullName>
+        <description>Field that calculates the total cost of feed for the fifth line of the current program</description>
+        <externalId>false</externalId>
+        <formula>Lbs_5__c * lb_diet_5__c</formula>
+        <label>$/pig fed 5</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>lb_diet_1__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the first $/lb diet for Current Feed Program</description>
+        <externalId>false</externalId>
+        <label>$/lb diet 1</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>lb_diet_2__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the second $/lb diet for Current Feed Program</description>
+        <externalId>false</externalId>
+        <label>$/lb diet 2</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>lb_diet_3__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the third $/lb diet for Current Feed Program</description>
+        <externalId>false</externalId>
+        <label>$/lb diet 3</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>lb_diet_4__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the fourth $/lb diet for Current Feed Program</description>
+        <externalId>false</externalId>
+        <label>$/lb diet 4</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>lb_diet_5__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field to capture the fifth $/lb diet for Current Feed Program</description>
+        <externalId>false</externalId>
+        <label>$/lb diet 5</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>number_dead__c</fullName>
+        <description>Field to calculate the number dead for the Current Program</description>
+        <externalId>false</externalId>
+        <formula>pigs_in__c -  pigs_out_currentprogram__c</formula>
+        <label># dead</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>percent_dead__c</fullName>
+        <description>Field that calculates the percentage of decrease.</description>
+        <externalId>false</externalId>
+        <formula>( pigs_in__c -  pigs_out_currentprogram__c )/ pigs_in__c</formula>
+        <label>% dead</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>pigs_in__c</fullName>
+        <description>Field to capture the # of pigs in for the Current Program</description>
+        <externalId>false</externalId>
+        <label># pigs in</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>pigs_out_currentprogram__c</fullName>
+        <description>Field to capture the # pigs out for the Current Program</description>
+        <externalId>false</externalId>
+        <label># pigs out</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Program Evaluation</label>
+    <nameField>
+        <displayFormat>PE-{00000000}</displayFormat>
+        <label>Program Evaluation Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Program Evaluations</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Swine_Program_Evaluation</fullName>
+        <active>true</active>
+        <description>Record Type for Swine Program Evaluation</description>
+        <label>Swine Program Evaluation</label>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>Producer_Facility__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Contact__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Feed_Gain_Difference__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Lb_Gain_Difference__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Diff_ADG__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATED_DATE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATEDBY_USER</customTabListAdditionalFields>
+        <searchResultsAdditionalFields>Producer_Facility__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Contact__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Lb_Gain_Difference__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Diff_ADG__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Feed_Gain_Difference__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATEDBY_USER</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

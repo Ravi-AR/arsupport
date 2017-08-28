@@ -1,0 +1,492 @@
+<!-- 
+*********************************************************************************
+Author: Govinda Prasad P S
+Email: govinda.prasad@magnet360.com
+Created Date    : 02/16/2017
+Function    :  Visualforce page to display BALANCE & USE SUMMARY REPORT.
+Version     : 1.0 
+*********************************************************************************
+--> 
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="LPDCR_BalanceAndSummaryController" action="{!initialize}">
+    <apex:form id="form">
+    <apex:composition template="LPDCR_CC_BaseTemplate" >
+    <apex:define name="PageTitle">BALANCE and USE SUMMARY REPORT</apex:define>
+    <apex:define name="body">  
+        
+        <div class="title_wrapper">
+          <div class="container-fluid">
+              <h3 class="page_title titlepadding">Balance and Use Summary Report</h3>
+          </div>
+         </div>
+         <div class="row detailbanner">
+         
+           <!--  <div class="account">
+                <div class="col-xs-6 colwidth">
+                    <apex:outputPanel id="accname">
+                        <p class="accounttext"><span class="pull-left accountspan" id="selectedAccountName">{!selectedAcc.Name}</span></p> 
+                    </apex:outputPanel>
+                </div>
+                <div class="col-xs-6 changeaccount-print">
+                    <apex:outputPanel >
+                        <span class="changeaccount" style="text-decoration:none;"> | </span>
+                    </apex:outputPanel>
+                
+                    <div class="btn-group">
+                        <apex:outputPanel >
+                            <button type="button" class="btn btn-link dropdown-toggle pull-right btnpadding" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="changeaccount">Change Account</span>
+                            </button>
+                
+                         <div class="dropdown-menu accountdropdown ">
+                            <ul class="accountitems">
+                                <p class="chooseaccount">Choose an Account <span><button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button></span></p>
+                            <apex:repeat value="{!accLst}" var="acc"> 
+                                <li>
+                                   <apex:outputPanel rendered="{!IF(selectedAcc.Name==acc.Name,true,false)}">
+                                        <input type="radio" class="radioinput" name="account" value="{!acc.Id}" id="accountOpt" checked="checked">{!acc.Name}</input>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!IF(selectedAcc.Name!=acc.Name && acc.BusinessBuilderProgramStatus__c != 'Ineligible' ,true,false)}">
+                                        <input type="radio" class="radioinput" name="account" value="{!acc.Id}" id="accountOpt">{!acc.Name}</input>
+                                    </apex:outputPanel>
+                                </li>
+                            </apex:repeat>
+                            </ul>
+                <div class="dropdown-divider"></div>
+                    <input type="button" class="btn btn-block secodary-btn" onclick="GetselectedAccount()" value="Apply"/>
+                </div> 
+                </apex:outputPanel>   
+                
+                </div><!--btngrup--
+                </div><!--col--
+                </div><!--account-- 
+                -->
+                <div class="col-xs-12">
+                    <h5><label class="pull-left accountspan" id="selectedAccountName">{!selectedAcc.Name}</label></h5> 
+                <br/>
+                    <h5><label>Program Year : {!BBProgYear.Name}</label></h5>
+                </div>
+                <apex:repeat value="{!AccVsYearDetails}" var="acc" >
+                <apex:outputPanel id="year" rendered="{!acc.showAccount}">
+                <div class="col-xs-12">
+                                <div class="col-xs-6 col-sm-offset-2 col-sm-3 text-left">Beginning Balance</div>
+                                <div class="col-sm-5 col-xs-6 text-right">
+                                  <b>  <apex:outputText value="{0, Number, Currency}">
+                                                                   <apex:param value="{!ssProgYearRec.Program_Year_Allocation__c}" />
+                                                    </apex:outputText>  </b>
+
+                                </div>
+                </div>
+                <div class="col-xs-12">
+                                <div class="col-xs-6 col-sm-offset-2 col-sm-3 text-left">Approved Requests</div>
+                                <div class="col-sm-5 col-xs-6 text-right">
+                                                <b><apex:outputText rendered="{!IF(acc.ssPYRec!=null,true,false)}" value="{0, Number, Currency}">
+                                                                <apex:param value="{!acc.ssPYRec.Total_Approved_Requests__c}" />
+                                                </apex:outputText>
+                                                <apex:outputText rendered="{!IF(acc.ssPYRec==null,true,false)}" value="{0, Number, Currency}">
+                                                                <apex:param value="{!0}" />
+                                                </apex:outputText></b>
+                                </div>
+                </div>
+                 <div class="col-xs-12">
+                                <div class="col-xs-6 col-sm-offset-2 col-sm-3 text-left">Adjustments</div>
+                                <div class="col-sm-5 col-xs-6 text-right">
+                                                <b><apex:outputText rendered="{!IF(acc.ssPYRec!=null,true,false)}" value="{0, Number, Currency}">
+                                                                <apex:param value="{!acc.ssPYRec.Total_Balance_Adjustments__c}" />
+                                                </apex:outputText></b>
+                                </div>
+                </div>
+                <div class="col-xs-12">
+                                <div class="col-xs-6 col-sm-offset-2 col-sm-3 text-left">Available Balance</div>
+                                <div class="col-sm-5 col-xs-6 text-right">
+                                  <b> <apex:outputText rendered="{!IF(acc.ssPYRec!=null,true,false)}" value="{0, Number, Currency}">
+                                                                <apex:param value="{!acc.availableBalance}" />
+                                                </apex:outputText>
+                                                
+                                                <apex:outputText rendered="{!IF(acc.ssPYRec==null,true,false)}" value="{0, Number, Currency}">
+                                                                <apex:param value="{!0}" />
+                                                </apex:outputText> </b>
+
+                                </div>
+                </div>
+              
+                <div class="col-xs-12">
+                                <div class="col-xs-6 col-sm-offset-2 col-sm-3 text-left">Pending Requests</div>
+                                <div class="col-sm-5 col-xs-6 text-right">
+                                                <b><apex:outputText rendered="{!IF(acc.ssPYRec!=null,true,false)}" value="{0, Number, Currency}">
+                                                                <apex:param value="{!acc.ssPYRec.Total_Pending_Requests__c}" />
+                                                </apex:outputText>
+                                                <apex:outputText rendered="{!IF(acc.ssPYRec==null,true,false)}" value="{0, Number, Currency}">
+                                                                <apex:param value="{!0}" />
+                                                </apex:outputText></b>
+                                </div>
+                </div>
+                
+                
+                <div class="col-xs-12"><hr/>
+                                <div class="col-xs-6 col-sm-offset-2 col-sm-3 text-left">Projected Balance</div>
+                                <div class="col-sm-5 col-xs-6 text-right">
+                                                <h3 class="top-buffer-0"><b><apex:outputText rendered="{!IF(acc.ssPYRec!=null,true,false)}" value="{0, Number, Currency}">
+                                                                <apex:param value="{!acc.ssPYRec.Available_Balance__c}" />
+                                                </apex:outputText>
+                                                <apex:outputText rendered="{!IF(acc.ssPYRec==null,true,false)}" value="{0, Number, Currency}">
+                                                                <apex:param value="{!0}" />
+                                                </apex:outputText></b></h3>
+                                </div>
+                </div>
+                  
+            </apex:outputPanel>
+            </apex:repeat>
+
+          <h5 class="col-xs-12"><label>View By</label></h5>
+          <br/>
+            <div id="exTab2" class="col-xs-12"> 
+                <ul class="nav nav-tabs nav1 col-xs-12">
+                            <li class="active"><a  href="#1" data-toggle="tab">Request</a>
+                            </li>
+                            <li><a href="#2" data-toggle="tab">Use</a>
+                            </li>
+                        </ul>
+                            
+                            <div class="tab-content ">
+                                  <div class="tab-pane active" id="1">
+                                      <div class="well well1 margin-top">
+                                      <br/>
+                                          <div class="col-xs-6 col-sm-offset-2 col-sm-3 text-left"><b>Beginning Balance</b></div>
+                                            <div class="col-sm-5 col-xs-6 text-right">
+                                                        <apex:outputText value="{0, Number, Currency}">
+                                                                   <apex:param value="{!ssProgYearRec.Program_Year_Allocation__c}" />
+                                                    </apex:outputText>   
+                                            </div>
+                                       </div><!--well-->
+                                       <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" id="headingOne" role="tab">
+                                                    <h4 class="panel-title">
+                                                        <a aria-controls="collapseOne" aria-expanded="false" data-parent="#accordion" data-toggle="collapse" href="#collapseOne" role="button" class="collapsed">
+                                                         Adjustments <span class="glyphicon glyphicon-minus pull-right"></span><span class="pull-right"><apex:outputText value="{0, Number, Currency}">
+                                                                   <apex:param value="{!ssProgYearRec.Total_Balance_Adjustments__c}" />
+                                                    </apex:outputText>&nbsp;&nbsp;</span>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div aria-labelledby="headingOne" class="panel-collapse collapse in" id="collapseOne" role="tabpanel" aria-expanded="false">
+                                                    <div class="panel-body"> 
+                                                    
+                                
+                                                       
+                                                       <apex:repeat value="{!expBalRecList}" var="balanceadjust" >
+                                                          <div class="col-xs-6 col-sm-offset-2 col-sm-3 text-left"><b><a href="{!$Page.LPDCR_ExpenseDetail}?ExpenseId={!balanceadjust.Id}&AccountId={!account.Id}&BBYear={!BBProgYear.id}" id="{!expenseId}" target="_blank"><u>{!balanceadjust.Name}</u></a></b></div>
+                                                            <div class="col-sm-5 col-xs-6 text-right">
+                                                                        <apex:outputText value="{0, Number, Currency}">
+                                                                                    <apex:param value="{!balanceadjust.SalesOperationsBalanceAdjustment__c}" />
+                                                                    </apex:outputText>   
+                                                            </div><!--item1-->
+                                                        </apex:repeat>
+                                                       
+                                                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!--colapse-->
+                                       
+                                       <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" id="headingOne" role="tab">
+                                                    <h4 class="panel-title">
+                                                        <a aria-controls="collapseOne2" aria-expanded="false" data-parent="#accordion" data-toggle="collapse" href="#collapseOne2" role="button" class="collapsed">
+                                                         Pending Requests <span class="glyphicon glyphicon-minus pull-right"></span><span class="pull-right"><apex:outputText value="{0, Number, Currency}">
+                                                                   <apex:param value="{!ssProgYearRec.Total_Pending_Requests__c}" />
+                                                    </apex:outputText>&nbsp;&nbsp;</span>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div aria-labelledby="headingOne" class="panel-collapse collapse in" id="collapseOne2" role="tabpanel" aria-expanded="false">
+                                                    <div class="panel-body"> 
+                                                      
+                                                     <apex:repeat value="{!expPendingList}" var="pending" >
+                                                          <div class="col-xs-6 col-sm-offset-2 col-sm-3 text-left"><b><a href="{!$Page.LPDCR_ExpenseDetail}?ExpenseId={!pending.Id}&AccountId={!account.Id}&BBYear={!BBProgYear.id}" id="{!expenseId}" target="_blank"><u>{!pending.Name}</u></a></b></div>
+                                                            <div class="col-sm-5 col-xs-6 text-right">
+                                                                        <apex:outputText value="{0, Number, Currency}">
+                                                                                    <apex:param value="{!pending.Total_Pending__c}" />
+                                                                    </apex:outputText>   
+                                                            </div><!--item1-->
+                                                        </apex:repeat>
+                                                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!--colapse-->
+                                        
+                                         <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" id="headingOne" role="tab">
+                                                    <h4 class="panel-title">
+                                                        <a aria-controls="collapseOne3" aria-expanded="false" data-parent="#accordion" data-toggle="collapse" href="#collapseOne3" role="button" class="collapsed">
+                                                         Approved Requests <span class="glyphicon glyphicon-minus pull-right"></span><span class="pull-right"><apex:outputText value="{0, Number, Currency}">
+                                                                   <apex:param value="{!ssProgYearRec.Total_Approved_Requests__c}" />
+                                                    </apex:outputText>&nbsp;&nbsp;</span>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div aria-labelledby="headingOne" class="panel-collapse collapse in" id="collapseOne3" role="tabpanel" aria-expanded="false">
+                                                    <div class="panel-body"> 
+                                                      
+                                                      <apex:repeat value="{!expApprovedList}" var="approved" >
+                                                          <div class="col-xs-6 col-sm-offset-2 col-sm-3 text-left"><b><a href="{!$Page.LPDCR_ExpenseDetail}?ExpenseId={!approved.Id}&AccountId={!account.Id}&BBYear={!BBProgYear.id}" id="{!expenseId}" target="_blank"><u>{!approved.Name}</u></a></b></div>
+                                                            <div class="col-sm-5 col-xs-6 text-right">
+                                                                        <apex:outputText value="{0, Number, Currency}">
+                                                                                    <apex:param value="{!approved.Total__c}" />
+                                                                    </apex:outputText>   
+                                                            </div><!--item1-->
+                                                        </apex:repeat>
+                                                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!--colapse-->
+                                        <div class="well well1">
+                                          <div class="col-xs-6 col-sm-offset-2 col-sm-3 text-left"><b>Projected Balance</b></div>
+                                            <div class="col-sm-5 col-xs-6 text-right">
+                                                        <apex:outputText value="{0, Number, Currency}">
+                                                                   <apex:param value="{!ssProgYearRec.Available_Balance__c}" />
+                                                    </apex:outputText>  
+                                            </div>
+                                       </div><!--well-->
+                                       <div class="col-xs-12 hidden-print">
+                                          <center> <span class="glyphicon glyphicon-download-alt downloadicon" aria-hidden="true"></span>&nbsp;&nbsp;<a href="{!URLFOR($Action.Attachment.Download, expenseRep.Id)}"><u>Download Details (CSV)</u></a>
+                                          <div class="margin-top margin-bottom"> <span  class="fa fa-file-pdf-o downloadicon"></span>&nbsp;&nbsp;<a href="#" onclick="window.print();"><u>Printable Version (PDF)</u></a></div>
+                                           </center>
+                                       </div>
+                                       
+                                  </div><!--tab1-->
+                                          <!--by USE-->
+                                  <div class="tab-pane" id="2">
+                                      <div class="well well1 margin-top">
+                                          <br/>
+                                            <div class="col-xs-6 col-sm-offset-2 col-sm-3 text-left"><b>Beginning Balance</b></div>
+                                            <div class="col-sm-5 col-xs-6 text-right">
+                                                        <apex:outputText value="{0, Number, Currency}">
+                                                                   <apex:param value="{!ssProgYearRec.Program_Year_Allocation__c}" />
+                                                    </apex:outputText>   
+                                            </div>
+                                      </div><!--well-->
+                                      <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" id="headingOne" role="tab">
+                                                    <h4 class="panel-title">
+                                                        <a aria-controls="collapseOne4" aria-expanded="false" data-parent="#accordion" data-toggle="collapse" href="#collapseOne4" role="button" class="collapsed">
+                                                         Adjustments <span class="glyphicon glyphicon-minus pull-right"></span><span class="pull-right"><apex:outputText value="{0, Number, Currency}">
+                                                                   <apex:param value="{!ssProgYearRec.Total_Balance_Adjustments__c}" />
+                                                    </apex:outputText>&nbsp;&nbsp;</span>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div aria-labelledby="headingOne" class="panel-collapse collapse in" id="collapseOne4" role="tabpanel" aria-expanded="false">
+                                                    <div class="panel-body"> 
+                                                      
+                                                      <apex:repeat value="{!expBalRecList}" var="balanceadjust" >
+                                                          <div class="col-xs-6 col-sm-offset-2 col-sm-3 text-left"><b><a href="{!$Page.LPDCR_ExpenseDetail}?ExpenseId={!balanceadjust.Id}&AccountId={!account.Id}&BBYear={!BBProgYear.id}" id="{!expenseId}" target="_blank"><u>{!balanceadjust.Name}</u></a></b></div>
+                                                            <div class="col-sm-5 col-xs-6 text-right">
+                                                                        <apex:outputText value="{0, Number, Currency}">
+                                                                                    <apex:param value="{!balanceadjust.SalesOperationsBalanceAdjustment__c}" />
+                                                                    </apex:outputText>   
+                                                            </div><!--item1-->
+                                                       </apex:repeat>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!--colapse-->
+                                       
+                                                   
+                                       <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" id="headingOne" role="tab">
+                                                    <h4 class="panel-title">
+                                                        <a aria-controls="collapseOne5" aria-expanded="false" data-parent="#accordion" data-toggle="collapse" href="#collapseOne5" role="button" class="collapsed">
+                                                         Pending Requests <span class="glyphicon glyphicon-minus pull-right"></span><span class="pull-right"><apex:outputText value="{0, Number, Currency}">
+                                                                   <apex:param value="{!ssProgYearRec.Total_Pending_Requests__c}" />
+                                                    </apex:outputText>&nbsp;&nbsp;</span>
+                                                    
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div aria-labelledby="headingOne" class="panel-collapse collapse in" id="collapseOne5" role="tabpanel" aria-expanded="false">
+                                                    <div class="panel-body"> 
+                                                    
+                                                      <!-- Inner Collapse-->
+                                                     <apex:repeat value="{!grpPendCatList}" var="cat">
+                                                     <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading" id="headingOne" role="tab">
+                                                                <h4 class="panel-title">
+                                                                    <a aria-controls="{!cat.totalCount}" aria-expanded="false" data-parent="#accordion" data-toggle="collapse" href="#{!cat.totalCount}12" role="button" class="collapsed">
+                                                                     {!cat.category} <span class="glyphicon glyphicon-minus pull-right"></span><span class="pull-right"><apex:outputText value="{0, Number, Currency}">
+                                                                               <apex:param value="{!cat.totalAmount}" />
+                                                                </apex:outputText>&nbsp;&nbsp;</span>
+                                                                    </a>
+                                                                </h4>
+                                                            </div>
+                                                            <div aria-labelledby="headingOne" class="panel-collapse collapse in" id="{!cat.totalCount}12" role="tabpanel" aria-expanded="false">
+                                                                <div class="panel-body"> 
+                                                                   <apex:repeat value="{!grpPendSubCatList}" var="subCat" >
+                                                                   <apex:outputPanel rendered="{!IF(cat.category==subCat.categoryName,true,false)}">
+                                                                       <table class="table table-striped table-inverse btable">
+                                                                           <tr>
+                                                                               <td class="text-left"><b>{!subCat.subcategory}</b></td>
+                                                                               <td class="text-right"><apex:outputText value="{0, Number, Currency}">
+                                                                                                <apex:param value="{!subCat.subCategoryTotalAmount}" />
+                                                                                </apex:outputText>  
+                                                                                </td>
+                                                                           </tr>
+                                                                       </table>
+                                                                       </apex:outputPanel>
+                                                                        </apex:repeat>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div><!--/colapse inner-->
+                                                    </apex:repeat>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div><!--colapse-->
+                                        
+                                         <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" id="headingOne" role="tab">
+                                                    <h4 class="panel-title">
+                                                        <a aria-controls="collapseOne6" aria-expanded="false" data-parent="#accordion" data-toggle="collapse" href="#collapseOne6" role="button" class="collapsed">
+                                                         Approved Requests <span class="glyphicon glyphicon-minus pull-right"></span><span class="pull-right"><apex:outputText value="{0, Number, Currency}">
+                                                                   <apex:param value="{!ssProgYearRec.Total_Approved_Requests__c}" />
+                                                    </apex:outputText>&nbsp;&nbsp;</span>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div aria-labelledby="headingOne" class="panel-collapse collapse in" id="collapseOne6" role="tabpanel" aria-expanded="false">
+                                                    <div class="panel-body"> 
+                                                      
+                                                      <!-- Inner Collapse-->
+                                                     <apex:repeat value="{!grpApprCatList}" var="cat">
+                                                     <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading" id="headingOne" role="tab">
+                                                                <h4 class="panel-title">
+                                                                    <a aria-controls="collapseOne10" aria-expanded="false" data-parent="#accordion" data-toggle="collapse" href="#{!cat.totalCount}13" role="button" class="collapsed">
+                                                                     {!cat.category} <span class="glyphicon glyphicon-minus pull-right"></span><span class="pull-right"><apex:outputText value="{0, Number, Currency}">
+                                                                               <apex:param value="{!cat.totalAmount}" />
+                                                                </apex:outputText>&nbsp;&nbsp;</span>
+                                                                    </a>
+                                                                </h4>
+                                                            </div>
+                                                            <div aria-labelledby="headingOne" class="panel-collapse collapse in" id="{!cat.totalCount}13" role="tabpanel" aria-expanded="false">
+                                                                <div class="panel-body"> 
+                                                                  <apex:repeat value="{!grpApprSubCatList}" var="subCat" >
+                                                                   <apex:outputPanel rendered="{!IF(cat.category==subCat.categoryName,true,false)}">
+                                                                       <table class="table table-striped table-inverse btable">
+                                                                           <tr>
+                                                                               <td class="text-left"><b>{!subCat.subcategory}</b></td>
+                                                                               <td class="text-right"><apex:outputText value="{0, Number, Currency}">
+                                                                                                <apex:param value="{!subCat.subCategoryTotalAmount}" />
+                                                                                </apex:outputText>  
+                                                                                </td>
+                                                                           </tr>
+                                                                       </table>
+                                                                       </apex:outputPanel>
+                                                                       </apex:repeat>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div><!--/colapse inner-->
+                                                    </apex:repeat>
+                                                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!--colapse-->
+                                        <div class="well well1">
+                                          <div class="col-xs-6 col-sm-offset-2 col-sm-3 text-left"><b>Projected Balance</b></div>
+                                            <div class="col-sm-5 col-xs-6 text-right">
+                                                        <apex:outputText value="{0, Number, Currency}">
+                                                                   <apex:param value="{!ssProgYearRec.Available_Balance__c}" />
+                                                    </apex:outputText>  
+                                            </div>
+                                       </div><!--well-->
+                                       <div class="col-xs-12 hidden-print">
+                                          <center> <span class="glyphicon glyphicon-download-alt downloadicon" aria-hidden="true"></span>&nbsp;&nbsp;<a href="{!URLFOR($Action.Attachment.Download, expenseRep.Id)}"><u>Download Details (CSV)</u></a>
+                                          <div class="margin-top margin-bottom"> <span  class="fa fa-file-pdf-o downloadicon"></span>&nbsp;&nbsp;<a href="#" onclick="window.print();"><u>Printable Version (PDF)</u></a></div>
+                                          
+                                          </center>
+                                       </div>
+                                         
+                                      
+                                      
+                                  </div><!--tab2-->
+                              </div>
+                           </div>
+               
+                            <hr></hr>
+                
+    
+
+
+
+             </div>
+    
+    
+    
+    
+    
+    
+    
+    
+<script type="text/javascript">
+   
+   function GetselectedAccount(){
+        //alert('$value--'+$("input[name='account']:checked").attr('value'));
+        var selectedAccId = $("input[name='account']:checked").attr('value');
+        //alert(selectedAccId);
+        
+        var urlString = '{!$Site.BaseUrl}/';
+        window.location = urlString+'LPDCR_BalanceAndSummary?selectedAccountId='+selectedAccId+'&BBYear={!BBProgYear.Id}';
+        
+        //changeAccount($("input[name='account']:checked").attr('value'));
+    }
+    
+</script>
+         </apex:define>
+    </apex:composition>
+    </apex:form>
+    <script>
+        $('.collapse').on('shown.bs.collapse', function(){
+        $(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+        }).on('hidden.bs.collapse', function(){
+        $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+        });
+            
+    </script>
+    <script>
+         $(document).ready(function(){
+          $('#bb').addClass("myactive");
+          $('#mbb').addClass("mobactive");
+        });
+     </script>
+    <style>#selectedAccountName{width:100%}
+    @media print
+   {
+      body{
+      padding-top:0px !important;
+      }
+      .titlepadding{
+          padding-left:20px !important;
+      }
+   }
+    @media only screen and (max-width: 767px)
+    {
+    .mob_expeseclass {
+        display: none;
+        }
+    }
+    </style>
+</apex:page>

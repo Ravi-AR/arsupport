@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>ACCOUNT_NUMBER</field>
+    </columns>
+    <columns>
+        <field>Account.Parent_Account_Number__c</field>
+    </columns>
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <field>Account.Billing_Address_Type_JDE__c</field>
+    </columns>
+    <columns>
+        <field>Account.BillTo_Flag__c</field>
+    </columns>
+    <columns>
+        <field>Account.ASM_BB_Approver__c</field>
+    </columns>
+    <columns>
+        <field>Account.Business_Builder_Reimbursement_Approver__c</field>
+    </columns>
+    <columns>
+        <field>Account_Team__c.Account_Team_Member__c</field>
+    </columns>
+    <columns>
+        <field>Account_Team__c.Sales__c</field>
+    </columns>
+    <description>A list of sold to accounts and related teams to see which ones have approvers and which don&apos;t</description>
+    <filter>
+        <criteriaItems>
+            <column>Account.BillTo_Flag__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Sold To Accounts and Account Teams</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>AccountCustomEntity$Account_Team__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <sortColumn>ACCOUNT_NUMBER</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>DUE_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

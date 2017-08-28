@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>The Plant approved the request to return the product.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Product Return to Plant Approved</name>
+    <style>none</style>
+    <subject>Service Request {!Case.CaseNumber}: RGA Approval</subject>
+    <type>text</type>
+</EmailTemplate>

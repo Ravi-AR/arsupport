@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>New Business Builder Registration with Enrollment Amount</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Purina_Swine_App_Letterhead</letterhead>
+    <name>Business Builder Enrollment Amount</name>
+    <style>freeForm</style>
+    <subject>Business Builder Program Balance for {!SellingSupportProgramYear__c.BusinessBuilderProgramYear__c}</subject>
+    <textOnly>{!AMASellingSupportExpense__c.DealerAccount__c},
+
+Credit has been applied for Reimbursement Request #{!AMASellingSupportExpense__c.Name}.
+
+
+Credit Memo #{!AMASellingSupportExpense__c.CreditMemo__c}
+Status:{!AMASellingSupportExpense__c.ApprovalStatus__c}
+{!AMASellingSupportExpense__c.Total__c}
+
+Thank you for your business. You are important to Purina.</textOnly>
+    <type>html</type>
+</EmailTemplate>

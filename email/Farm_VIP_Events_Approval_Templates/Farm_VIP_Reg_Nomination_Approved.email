@@ -1,0 +1,6 @@
+<table height="400" width="550" cellpadding="5" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="0" aEditID="c1r1" >
+<![CDATA[We are pleased to inform you that {!Farm_VIP_Registration__c.Registrant__c} from&nbsp;{!Farm_VIP_Registration__c.Customer_Name__c} has been <b>approved</b> to attend the&nbsp;{!Farm_VIP_Registration__c.Farm_VIP_Event__c}.&nbsp;<span style="font-size: 12pt;">&nbsp;</span><div><br></div><div>Link to record:&nbsp;{!Farm_VIP_Registration__c.Link}</div><div><br></div><div>Thank you,&nbsp;</div><div><br></div><div>Farm VIP Events Team</div>]]></td>
+</tr>
+</table>

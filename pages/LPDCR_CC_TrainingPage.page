@@ -1,0 +1,137 @@
+<apex:page controller="LPDCR_CC_TrainingPageController" action="{!initCachedData}" docType="html-5.0" showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" >
+ <apex:form id="form">
+      <apex:composition template="LPDCR_CC_BaseTemplate" >
+        <apex:define name="PageTitle">Training</apex:define>
+        <apex:define name="body">
+            <div class="wrapper">
+                <div class="equalHgt">
+                    <div class="col-sm-12 pad_all">
+                        <div class="wrapper cc_homepage pagenation_promation">
+                            <div class="row">
+                               <div class="col-sm-12 mob_pads">
+                                   <c:LPDCR_SecondaryPageHeader title="{!JSENCODE(page_title)}" id="pageTitleText" />
+                               </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 mob_pads">
+                                    <div class="panel with-nav-tabs panel-default">
+                                         <div class="panel-heading col-sm-3" id="cLft">
+                                           <ul class="nav nav-tabs lft_menu">
+                                                <li class="wid100 {!IF($CurrentPage.parameters.subtab == 'TT30' || $CurrentPage.parameters.subtab == '', 'active','')}"><a href="#tabsm1default" onClick="setTitle('TT30');" data-toggle="tab" class="lia txt_upper">{!JSENCODE($Label.LPDCR_Targeted_Training_Subtab_Name)}</a></li>
+                                                <li class="wid100 "><a href="#tabsm2default" onClick="setTitle('PurinaUniversity');" data-toggle="tab" class="lia txt_upper">{!JSENCODE($Label.LPDCR_Purina_University_Subtab_Name)}</a></li>
+                                                <li class="wid100 "><a href="#tabsm3default" onClick="setTitle('TalentLink');" data-toggle="tab" class="lia txt_upper">{!JSENCODE($Label.LPDCR_Talentlink_Subtab_Name)}</a></li>
+                                                <li class="wid100 {!IF($CurrentPage.parameters.subtab == 'PurinaTV', 'active','')}"><a href="#tabsm4default" onClick="setTitle('PurinaTV');" data-toggle="tab" class="lia txt_upper">{!JSENCODE($Label.LPDCR_PurinaMills_TV_Subtab_Name)}</a></li>                                                
+                                            </ul>
+                                            <apex:actionFunction action="{!setPageTitle}" name="setTitle" rerender="pageTitleText,filterPanel,componentPanel" status="loader">
+                                                <apex:param name="title" assignTo="{!selected_title}" value="" />
+                                            </apex:actionFunction>
+                                            
+                                            <apex:outputPanel layout="block" id="filterPanel" >
+                                               <c:LPDCR_SecondaryPageFilters componentKey="filtersComponent" thisPageController="{!this}"
+                                                  rerenderList="componentPanel"
+                                                  compName="{!page_title}"/>
+                                            </apex:outputPanel>
+                                         </div>
+                                         
+                                         <div class="panel-body col-sm-9 pad_lft10 zeroPad mob_pad">
+                                            <div class="tab-content bgWht flt_lft wid100" id="cRgt">  
+                                              <apex:outputPanel id="componentPanel">                                           
+                                                <div class="tab-pane fade {!IF(page_title == $Label.LPDCR_Targeted_Training_Subtab_Name || $CurrentPage.parameters.subtab == 'TT30' || $CurrentPage.parameters.subtab == '', 'active in','')}" id="tabsm1default">
+                                                    <apex:outputPanel id="tt30Panel" rendered="{!IF(page_title == $Label.LPDCR_Targeted_Training_Subtab_Name,true,false)}">
+                                                        <c:LPDCR_SecondaryTT30Body componentKey="tt30Component" thisPageController="{!this}" speciesFilter="{!SpecieList}" sortBy="{!SortBy}" internalOnly="{!InternalUserCheck}"/>
+                                                    </apex:outputPanel>
+                                                </div>
+                                                <div class="tab-pane fade {!IF(page_title == $Label.LPDCR_Purina_University_Subtab_Name, 'active in','')}" id="tabsm2default">
+                                                    <apex:outputPanel id="purinaUnivPanel" rendered="{!IF(page_title == $Label.LPDCR_Purina_University_Subtab_Name,true,false)}">
+                                                        <c:LPDCR_SecondaryPurinaUniversityPage componentKey="puComponent" thisPageController="{!this}" speciesFilter="{!SpecieList}" sortBy="{!SortBy}" internalOnly="{!InternalUserCheck}"/>
+                                                    </apex:outputPanel>
+                                                </div>
+                                                <div class="tab-pane fade {!IF(page_title == $Label.LPDCR_Talentlink_Subtab_Name, 'active in','')}" id="tabsm3default">
+                                                    <apex:outputPanel id="learningCenterPanel" rendered="{!IF(page_title == $Label.LPDCR_Talentlink_Subtab_Name,true,false)}">
+                                                        <c:LPDCR_SecondaryLearningCenterPage componentKey="learningCenterComponent" 
+                                                                                                    thisPageController="{!this}"
+                                                                                                    speciesFilter="{!SpecieList}"
+                                                                                                    fileFilter="{!FileTypeFilter}"
+                                                                                                    sortBy="{!SortBy}"
+                                                                                                    internalOnly="{!InternalUserCheck}"/>
+                                                        
+                                                        
+                                                    </apex:outputPanel>
+                                                </div>
+                                                <div class="tab-pane fade {!IF(page_title == $Label.LPDCR_PurinaMills_TV_Subtab_Name || $CurrentPage.parameters.subtab == 'PurinaTV', 'active in','')}" id="tabsm4default">
+                                                    <apex:outputPanel id="purinaTVPanel" rendered="{!IF(page_title == $Label.LPDCR_PurinaMills_TV_Subtab_Name,true,false)}">
+                                                        <c:LPDCR_SecondaryPurinaTVPage componentKey="purinaTVComponent" thisPageController="{!this}" speciesFilter="{!SpecieList}" sortBy="{!SortBy}" />
+                                                    </apex:outputPanel>
+                                                </div>
+                                                </apex:outputPanel>
+                                            </div>
+                                        </div>
+                                                    
+                                    </div>
+                                    
+                                    
+                                    
+                                </div>
+                            </div>
+                                      
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Loader code starts here -->
+                <apex:actionStatus id="loader">
+                    <apex:facet name="start">
+                        <div class="loadercover">
+                        </div>
+                        <div class="loaderfirst">
+                            <div class="loadersec">
+                                <img src="/img/loading32.gif" class="loaderimage" />
+                            </div>
+                        </div>   
+                    </apex:facet>
+                </apex:actionStatus>
+            <!-- Loader code ends here-->
+        </apex:define>
+
+    
+      </apex:composition> 
+ </apex:form>
+ 
+ 
+ <script src="{!URLFOR($Resource.LPDCR_CC_Assets, 'js/datable.js')}"></script> 
+ <script src="{!URLFOR($Resource.LPDCR_CC_Assets, 'js/bootstrap_datable.js')}"></script> 
+ 
+ <!--<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>-->
+
+    <script>
+         $(document).ready(function(){
+          $('#tr').addClass("myactive");
+          $('#mtr').addClass("mobactive");
+        });
+     </script>
+      <script type="text/javascript">
+                   
+                   function GetselectedAccount(){
+                        //alert('$value--'+$("input[name='account']:checked").attr('value'));
+                        var selectedAccId = $("input[name='account']:checked").attr('value');
+                        //alert(selectedAccId);
+                        
+                        var urlString = '{!$Site.BaseUrl}/';
+                        window.location = urlString+'LPDCR_CC_TrainingPage?selectedAccountId='+selectedAccId;
+                        
+                        //changeAccount($("input[name='account']:checked").attr('value'));
+                    }
+                    
+                    
+                    //var offsetHeight = document.getElementById('cLft').offsetHeight;
+                    //document.getElementById('cRgt').style.height = offsetHeight+'px';
+                    
+                    //console.log("leftHgt:" + offsetHeight)
+                    
+         </script>
+         <style>.media{background:url({!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_Header_Training)}); width:100%; height:133px; background-repeat: no-repeat;
+    background-size: contain;}</style>
+</apex:page>

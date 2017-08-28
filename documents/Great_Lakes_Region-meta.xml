@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DocumentFolder xmlns="http://soap.sforce.com/2006/04/metadata">
+    <accessType>Shared</accessType>
+    <name>Great Lakes Region</name>
+    <publicFolderAccess>ReadOnly</publicFolderAccess>
+    <sharedTo>
+        <group>GLR_Large_Heard_Initiative</group>
+    </sharedTo>
+</DocumentFolder>

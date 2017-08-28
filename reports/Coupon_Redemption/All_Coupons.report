@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>Coupon__c.Coupon_Value__c</field>
+    </columns>
+    <columns>
+        <field>Coupon__c.Description__c</field>
+    </columns>
+    <columns>
+        <field>Coupon__c.Description_Long__c</field>
+    </columns>
+    <columns>
+        <field>Coupon__c.Expiration_Date__c</field>
+    </columns>
+    <columns>
+        <field>Coupon__c.Postmark_Date__c</field>
+    </columns>
+    <columns>
+        <field>Coupon__c.Previous_Expiration_Date__c</field>
+    </columns>
+    <columns>
+        <field>CUST_CREATED_DATE</field>
+    </columns>
+    <description>All Coupons</description>
+    <format>Tabular</format>
+    <name>All Coupons</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Coupon__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>Coupon__c.Expiration_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

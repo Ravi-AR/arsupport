@@ -1,0 +1,6 @@
+<design:component >
+    <design:attribute name="objectName" label="Object Name" description="API Name of Custom or Standard Object" required="true"/>
+    <design:attribute name="relationshipName" label="Relationship Field (Optional)" description="If Related List set this to the relationship lookup field API name from the primary Object to display only related data" />
+    <design:attribute name="viewID" label="View Id (Optional)" description="If existing view set to always load specified view" />
+	<design:attribute name="height" label="Height (in Pixels)" description="Height of ActionGrid in Pixels" default="600" min="400"/>
+</design:component>

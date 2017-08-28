@@ -1,0 +1,8 @@
+<apex:page sidebar="false" docType="html-4.01-strict">
+<c:Grid objectName="Account"/>
+<c:BatchAdd />
+<c:DrillUp />
+<c:FollowRecords />
+<c:SecureMassUpdate />
+<c:AWMerge />
+</apex:page>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>CC_Portal_Sign_Up_URL_Non_SSO_User__c</fullName>
+        <description>URI behind the Sign-up button that appears on the Campaign Detail page on the Dealer Portal, for the Non-SSO User.</description>
+        <externalId>false</externalId>
+        <label>CC Portal Sign Up URL (Non-SSO User)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CC_Portal_Sign_Up_URL_SSO__c</fullName>
+        <description>URI behind the Sign-up button that appears on the Campaign Detail page on the Dealer Portal, for the SSO User.</description>
+        <externalId>false</externalId>
+        <label>CC Portal Sign Up URL (SSO User)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>DealerCommunity_BaseURL__c</fullName>
+        <description>base url of the MyPurinaMills community</description>
+        <externalId>false</externalId>
+        <label>DealerCommunity_BaseURL</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Dealer_Community_Logout_URL__c</fullName>
+        <description>The destination users are taken to when they click Logout</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The destination users are taken to when they click Logout</inlineHelpText>
+        <label>Dealer Community Logout URL</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Enable_Web_Service_Caching__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Controlling flag to enable caching of web service calls to Kentico. When it is disabled, no caching will occur either at the Session or Org cache level, and a new web service call will be made each time.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Controlling flag to enable caching of web service calls to Kentico. When it is disabled, no caching will occur either at the Session or Org cache level, and a new web service call will be made each time.</inlineHelpText>
+        <label>Enable Web Service Caching</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Kentico_Resource_URL_Prefix__c</fullName>
+        <description>The URL that is prepended to resource source URLs returned from Kentico web services</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The URL that is prepended to resource source URLs returned from Kentico web services</inlineHelpText>
+        <label>Kentico Resource URL Prefix</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Online_Order_Community_Base_URL__c</fullName>
+        <description>The base URL of the online order community to connect to this orgs Dealer Community</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The base URL of the online order community to connect to this orgs Dealer Community</inlineHelpText>
+        <label>Online Order Community Base URL</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <label>LPDCR Org Settings</label>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssignmentRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignmentRule>
+        <fullName>Case Assignment</fullName>
+        <active>true</active>
+        <ruleEntry>
+            <assignedTo>Liability_Group</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>ISPICKVAL(Status, &quot;Liability Follow-up Pending&quot;)</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>CRM_Support</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>AND(OR(RecordType.Name = &quot;Backlog&quot;, RecordType.Name = &quot;New User Request&quot;, RecordType.Name = &quot;Support Case&quot;),CreatedBy.Alias &lt;&gt; &quot;nautry&quot;,CreatedBy.Alias &lt;&gt; &quot;rthode&quot;,CreatedBy.Alias &lt;&gt; &quot;grobe&quot;,
+ISNEW())</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Customer_Marketing</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>AND(RecordType.DeveloperName = &apos;Email2Case&apos;, ISPICKVAL(Origin, &quot;purinacustomermarketing@landolakes.com&quot;),ISNEW() )</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Customer_Care</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>AND(RecordType.DeveloperName = &apos;Email2Case&apos;, ISPICKVAL(Origin, &apos;customercare@landolakes.com&apos;),ISNEW() )</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND(RecordType.DeveloperName = &apos;Email2Case&apos;, ISPICKVAL(Origin, &quot;customercare@landolakes.com&quot;))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>West_Coast_Region</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>OR(AND(RecordType.DeveloperName = &apos;Customer_Care&apos;, ISPICKVAL(Shipping_Plant_Lookup__r.Customer_Ops_Region__c, &quot;West Coast&quot;)), AND(RecordType.DeveloperName = &apos;Email2Case&apos;, ISNEW(), ISPICKVAL(Origin, &quot;PortlandCustomerServiceGroup@landolakes.com&quot;)))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND(RecordType.DeveloperName = &apos;Email2Case&apos;, ISPICKVAL(Origin, &quot;PortlandCustomerServiceGroup@landolakes.com&quot;))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Southwest_Region</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>OR(AND(RecordType.DeveloperName = &apos;Customer_Care&apos;, ISPICKVAL(Shipping_Plant_Lookup__r.Customer_Ops_Region__c, &quot;Southwest&quot;)),AND(RecordType.DeveloperName = &apos;Email2Case&apos;,  ISNEW(), ISPICKVAL(Origin, &quot;SWCustomerOperations@landolakes.com&quot;)))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND(RecordType.DeveloperName = &apos;Email2Case&apos;,ISPICKVAL(Origin, &quot;SWCustomerOperations@landolakes.com&quot;))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Southeast_Region</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>OR(AND(RecordType.DeveloperName = &apos;Customer_Care&apos;, ISPICKVAL(Shipping_Plant_Lookup__r.Customer_Ops_Region__c, &quot;Southeast&quot;)), AND(RecordType.DeveloperName = &apos;Email2Case&apos;, ISNEW(), ISPICKVAL(Origin, &quot;SouthEastCustomerService@landolakes.com&quot;)))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND(RecordType.DeveloperName = &apos;Email2Case&apos;, ISPICKVAL(Origin, &quot;SouthEastCustomerService@landolakes.com&quot;))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>South_Central_Region</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>OR(AND(RecordType.DeveloperName = &apos;Customer_Care&apos;, ISPICKVAL(Shipping_Plant_Lookup__r.Customer_Ops_Region__c, &quot;South Central&quot;)), AND(RecordType.DeveloperName = &apos;Email2Case&apos;,  ISNEW(), ISPICKVAL(Origin, &quot;SouthCentralCustomerService@landolakes.com&quot;)))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND(RecordType.DeveloperName = &apos;Email2Case&apos;, ISPICKVAL(Origin, &quot;SouthCentralCustomerService@landolakes.com&quot;))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Great_East_Region</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>OR(AND(RecordType.DeveloperName = &apos;Customer_Care&apos;, ISPICKVAL(Shipping_Plant_Lookup__r.Customer_Ops_Region__c, &quot;Great East&quot;)), AND(RecordType.DeveloperName = &apos;Email2Case&apos;,  ISNEW(), ISPICKVAL(Origin, &quot;GreatEastCustomerService@landolakes.com&quot;)))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND(RecordType.DeveloperName = &apos;Email2Case&apos;, ISPICKVAL(Origin, &quot;GreatEastCustomerService@landolakes.com&quot;))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Great_West_Region</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>OR(AND(RecordType.DeveloperName = &apos;Customer_Care&apos;, ISPICKVAL(Shipping_Plant_Lookup__r.Customer_Ops_Region__c, &quot;Great West&quot;)), AND(RecordType.DeveloperName = &apos;Email2Case&apos;,  ISNEW(), ISPICKVAL(Origin, &quot;GreatWestCustomerService@landolakes.com&quot;)))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND(RecordType.DeveloperName = &apos;Email2Case&apos;, ISPICKVAL(Origin, &quot;GreatWestCustomerService@landolakes.com&quot;))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Upper_Midwest_Region</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>OR(AND(RecordType.DeveloperName = &apos;Customer_Care&apos;, ISPICKVAL( Shipping_Plant_Lookup__r.Customer_Ops_Region__c, &quot;Upper Midwest&quot;)),  AND(RecordType.DeveloperName = &apos;Email2Case&apos;, ISNEW(), ISPICKVAL(Origin, &quot;umwcsc@landolakes.com&quot;)))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND(RecordType.DeveloperName = &apos;Email2Case&apos;, ISPICKVAL(Origin, &quot;umwcsc@landolakes.com&quot;))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Unknown_Shipping_Plant</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>AND(RecordType.DeveloperName = &apos;Customer_Care&apos;, ISBLANK(Shipping_Plant_Lookup__c), Shipping_Plant_Unknown__c = TRUE)</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Co_Man</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>AND(RecordType.DeveloperName = &apos;Customer_Care&apos;, ISPICKVAL(Shipping_Plant_Lookup__r.Customer_Ops_Region__c, &quot;Co-Man&quot;))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Out_of_Scope</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>AND(RecordType.DeveloperName = &apos;Customer_Care&apos;, ISNEW(),  ISPICKVAL( Shipping_Plant_Lookup__r.Customer_Ops_Region__c, &quot;Out of Scope&quot;))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND(RecordType.DeveloperName = &apos;Customer_Care&apos;,  ISPICKVAL( Shipping_Plant_Lookup__r.Customer_Ops_Region__c, &quot;Out of Scope&quot;))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Consumer</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>OR(RecordType.DeveloperName = &apos;Consumer&apos;, AND(RecordType.DeveloperName = &apos;Email2Case&apos;,ISNEW(), OR(ISPICKVAL(Origin,&apos;info@mazuri.com&apos;), ISPICKVAL(Origin,&apos;purinarewardscoupons@landolakes.com&apos;), ISPICKVAL(Origin,&apos;pmiweb@landolakes.com&apos;),ISPICKVAL(Origin,&apos;feedgreatness@purinamills.com&apos;), ISPICKVAL(Origin,&apos;graysummitcs@landolakes.com&apos;),ISPICKVAL(Origin,&apos;info@nutrazu.com&apos;))))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND(RecordType.DeveloperName = &apos;Email2Case&apos;, OR(ISPICKVAL(Origin,&apos;info@mazuri.com&apos;), ISPICKVAL(Origin,&apos;purinarewardscoupons@landolakes.com&apos;), ISPICKVAL(Origin,&apos;pmiweb@landolakes.com&apos;),ISPICKVAL(Origin,&apos;feedgreatness@purinamills.com&apos;), ISPICKVAL(Origin,&apos;graysummitcs@landolakes.com&apos;),ISPICKVAL(Origin,&apos;info@nutrazu.com&apos;)))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Business_Link</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>AND(RecordType.DeveloperName = &apos;Email2Case&apos;,ISNEW(),OR(ISPICKVAL(Origin, &quot;BusinessLink@landolakes.com&quot;), ISPICKVAL(Origin, &quot;PurinaCustomerCommunity@LandOLakes.com&quot;)))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND(RecordType.DeveloperName = &apos;Email2Case&apos;, ISPICKVAL(Origin, &quot;BusinessLink@landolakes.com&quot;), ISPICKVAL(Origin, &quot;PurinaCustomerCommunity@LandOLakes.com&quot;) )</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Willmar</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>AND(RecordType.DeveloperName = &apos;Email2Case&apos;, ISPICKVAL(Origin, &quot;WillmarCS@landolakes.com&quot;),ISNEW())</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND(RecordType.DeveloperName = &apos;Email2Case&apos;, ISPICKVAL(Origin, &quot;WillmarCS@landolakes.com&quot;))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Farm_Ranch</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>AND(RecordType.DeveloperName = &apos;Email2Case&apos;, ISPICKVAL(Origin, &quot;purinafarmranchcustsvc@landolakes.com&quot;),ISNEW())</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND(RecordType.DeveloperName = &apos;Email2Case&apos;, ISPICKVAL(Origin, &quot;purinafarmranchcustsvc@landolakes.com&quot;))</formula>
+        </ruleEntry>
+        <ruleEntry>
+            <formula>AND(OR(RecordType.Name = &quot;Backlog&quot;, RecordType.Name = &quot;New User Request&quot;, RecordType.Name = &quot;Support Case&quot;),Or(CreatedBy.Alias = &quot;nautry&quot;,CreatedBy.Alias = &quot;rthode&quot;,CreatedBy.Alias = &quot;grobe&quot;),
+ISNEW())</formula>
+        </ruleEntry>
+    </assignmentRule>
+</AssignmentRules>

@@ -1,0 +1,10 @@
+<apex:page standardController="Facility_Checklist__c" >
+    <script type="text/javascript" >
+    if( (typeof sforce != 'undefined') && sforce != null) {
+        sforce.one.navigateToURL('/apex/LMSA_CreateFacilityWalkThru?id={!Facility_Checklist__c.Id}');
+    }
+    else {
+        window.location.href = '/{!Facility_Checklist__c.Id}?nooverride=1';
+    }
+    </script>
+</apex:page>

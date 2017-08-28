@@ -1,0 +1,20 @@
+<apex:component controller="LPDCR_PromotionListController">
+  <div class="panel panel-default promotionlist col-lg-12" id="panel1">      
+  <div class="col-lg-6 col-lg-offset-3">         
+      <!-- Table -->
+      <table class="table campainlist">
+    
+          <apex:repeat value="{!Campaigns}" var="camObj">       
+              <tr>
+                  <td>
+                  <a href="{!$Site.BaseUrl}/apex/LPDCR_PromotionsDetail?Id={!camObj.Id}">{!camObj.Name}</a></td>
+                   <td class="date"><apex:outputText rendered="{!IF((camObj.Promotion_Start_Date__c != null && camObj.Promotion_End_Date__c != null), true,false)}" value="Event: {!camObj.Date_Range__c}"> 
+                        </apex:outputText> <br/>
+                        <apex:outputText rendered="{!IF((camObj.Pre_Book_Start_Date__c != null && camObj.Pre_Book_End_Date__c != null), true,false)}" value="Pre-book: {!camObj.Pre_Book_Date_Range__c}"> 
+                        </apex:outputText></td>
+              </tr>                           
+          </apex:repeat>
+      </table>
+    </div>
+  </div> 
+</apex:component>

@@ -1,0 +1,783 @@
+<apex:page controller="LPDCR_InternalVIPPointsTonsReportCntrlr" showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false">
+ 
+<apex:form id="form">
+<apex:composition template="LPDCR_CC_BaseTemplate">
+    <apex:define name="body">
+   
+    <div class="content container-fluid">
+        <div class="wrapper">
+            <div class="col-sm-12 pad_all bg">                         
+                <div class="cc_homepage pagenation_promation">
+                    <div class="row">
+                        <div class="col-sm-12 mob_pads1">
+                            <c:LPDCR_SecondaryPageHeader title="VIP Points & Tons Report" id="pageTitleText" />
+                        </div>
+                    </div>
+                    <div class="row wht_bg mrg_top20">
+                           <div class="col-sm-6 pad_lft0">
+                            <h3 class="mrg_btm20 clr7 flt_lft mrg_top0">Split Tons and VIP Points</h3><div class="clear"></div>
+                            
+                         
+                            
+                            <p class="clr0 fnt14 fntB mrg_btm20 pad_btm20 flt_lft"><apex:outputText value="{0, date, MMMM '-' yyyy}">
+                                                                                               <apex:param value="{!now()}" /> 
+                                                                                               </apex:outputText></p></div>
+                                                                                               
+                           
+                            <div class="col-sm-6 pad_rgt0">
+                             <a class="col-sm-12 pad_rgt0 pull-right fnt14 text-right" href="{!URLFOR($Page.LPDCR_CC_Business_Management, null, [subtab='Reports'])}"><i class="glyphicon glyphicon-arrow-left"></i> Back</a><div class="clear"></div>
+                           <!-- <a href="#" target="_blank" class="btn btn-primary widA flt_rgt mrg_top20">REQUEST FULL REPORT</a>-->
+                            <apex:commandButton styleClass="btn btn-primary widA flt_rgt mrg_top20 requestfullreportbtn" action="{!getInternalFullReport}" value="REQUEST FULL REPORT" status="loader" reRender="noresponse"/>
+                            </div>
+                            <div class="clear"></div>
+                            
+                            <div class="container wid100 pad_lft0 pad_rgt0">            
+                                <ul class="nav nav-tabs mrg_btm20 brd_btm">
+                                    <li class="active fnt14 txt_upper"><a href="#home" class="fnt14"> Split Shipped Tons</a></li>
+                                    <li class="fnt14 txt_upper"><a href="#menu1" class="fnt14"> Split VIP Points</a></li>
+                                </ul>
+                                <!-- Tons starts here -->
+                                <apex:pageMessages id="noresponse" escape="false" ></apex:pageMessages>
+                                <style>
+                                .messageText{
+                                    color: #a94442;
+                                    background-color: #f2dede;
+                                    border-color: #ebccd1;
+                                    padding:0px 5px 5px 5px;
+                                    margin-bottom: 5px;
+                                    border: 1px solid transparent;
+                                    border-radius: 3px;
+                                }
+                                </style>
+                                <div class="tab-content pad_top20">
+                                   
+                                    <div id="home" class="tab-pane fade active in">
+                                        <!-- mobile summary -->
+                                           <div class="well hidden-sm hidden-md hidden-lg">
+                                           <p class="fnt16 fntB">
+                                            {!territoryReport.row[0].employee_name}<br/><span class="fnt12">{!territoryReport.row[0].employee_number}</span>
+                                           </p>
+                                           <hr/>
+                                           <div class="dis_inlineblock txt_center">
+                                                <span class="flt_lft clr0 fnt12 pad_lft10 pad_rgt10 pad_top10 pad_btm10">CYM <br/>
+                                                    <apex:outputText value="{0, number, ###,##0.00}">
+                                                  <apex:param value="{!territoryReport.row[0].shipped_tons_cm}" />
+                                                </apex:outputText>
+                                                </span>
+                                                <span class="flt_lft clr0 fnt12 pad_lft10 pad_rgt10 pad_top10 pad_btm10">PYM<br/>
+                                                <apex:outputText value="{0, number, ###,##0.00}">
+                                                  <apex:param value="{!territoryReport.row[0].shipped_tons_pym}" />
+                                                </apex:outputText>
+                                                </span>
+                                                <span class="flt_lft clr0 fnt12 pad_lft10 pad_rgt10 pad_top10 pad_btm10">Variance CYM vs PYM<br/>
+                                                <apex:outputText value="{0, number, ###,##0.00}">
+                                                  <apex:param value="{!territoryReport.row[0].shipped_tons_month_variance}" />
+                                                </apex:outputText>
+                                                </span>
+                                                <span class="flt_lft clr0 fnt12 pad_lft10 pad_rgt10 pad_top10 pad_btm10">YTD<br/>
+                                                <apex:outputText value="{0, number, ###,##0.00}">
+                                                  <apex:param value="{!territoryReport.row[0].shipped_tons_ytd}" />
+                                                </apex:outputText>
+                                                </span>
+                                                <span class="flt_lft clr0 fnt12 pad_lft10 pad_rgt10 pad_top10 pad_btm10">PYTD<br/>
+                                                <apex:outputText value="{0, number, ###,##0.00}">
+                                                  <apex:param value="{!territoryReport.row[0].shipped_tons_pytd}" />
+                                                </apex:outputText>
+                                                </span>
+                                                <span class="flt_lft clr0 fnt12 pad_lft10 pad_rgt10 pad_top10 pad_btm10">Variance YTD vs PYTD<br/>
+                                                <apex:outputText value="{0, number, ###,##0.00}">
+                                                  <apex:param value="{!territoryReport.row[0].shipped_tons_ytd_variance}" />
+                                                </apex:outputText>
+                                                </span>
+                                                <span class="flt_lft clr0 fnt12 pad_lft10 pad_rgt10 pad_top10 pad_btm10">PY<br/>
+                                                <apex:outputText value="{0, number, ###,##0.00}">
+                                                  <apex:param value="{!territoryReport.row[0].shipped_tons_py}" />
+                                                </apex:outputText>
+                                                </span>
+                                           </div>
+                                           </div>
+                                           
+                                        <!-- mobile summary -->
+                                   
+                                    
+                                         <table class="wid100 rpTble hidden-xs">
+                                            <thead>
+                                                <tr class="brd_btm2">
+                                                  <th class="wid3"></th>
+                                                  <th class="wid22 brd_dased"></th>
+                                                  <th class="pad_lft10 wid10">Split CYM</th>
+                                                  <th class="pad_lft10 wid10">Split PYM</th>
+                                                  <th class="wid12 brd_dased">Split Variance<br/>CYM vs PYM</th>
+                                                  <th class="pad_lft10 wid10">Split YTD</th>
+                                                  <th class="pad_lft10 wid10">Split PYTD</th>
+                                                  <th class="wid12 brd_dased">Split Variance<br/>YTD vs PYTD</th>
+                                                  <th class="pad_lft10 wid9">Split PY</th>
+                                                </tr>
+                                           </thead>
+                                           <tbody> 
+                                          
+                                              
+                                                <tr data-toggle="collapse" data-target=".order1" class="child1">
+                                                  <td class="wid3"><!--<span class="pull-right glyphicon glyphicon-menu-down txt_none glf_icon i_lft pad_rgt10 pad_lft10"></span>-->
+                                                  	<apex:commandLink action="{!getInternalAccountList}" styleClass="pull-right glyphicon glyphicon-menu-down txt_none glf_icon i_lft pad_rgt10 pad_lft10" reRender="TONES,noresponse" status="loader">
+                                                 		<apex:param name="territory_id" value="{!territoryReport.row[0].sales_territory_id}" assignTo="{!territory_id}"/>
+                                                 	</apex:commandLink>
+                                                  </td>
+                                                  <td class="wid22 fnt16 fntB brd_dased">{!territoryReport.row[0].employee_name}<br/><span class="fnt12">{!territoryReport.row[0].employee_number}</span></td>
+                                                  <td class="pad_lft10 wid10">
+                                                  	<apex:outputText value="{0, number, ###,##0.00}">
+                                                  		<apex:param value="{!territoryReport.row[0].shipped_tons_cm}" />
+                                                	</apex:outputText>
+                                                  </td>
+                                                  <td class="pad_lft10 wid10">
+                                                  	<apex:outputText value="{0, number, ###,##0.00}">
+                                                  		<apex:param value="{!territoryReport.row[0].shipped_tons_pym}" />
+                                                    </apex:outputText>
+                                                  </td>
+                                                  <td class="wid12 brd_dased">
+                                                  	<apex:outputText value="{0, number, ###,##0.00}">
+                                                  		<apex:param value="{!territoryReport.row[0].shipped_tons_month_variance}" />
+                                                	</apex:outputText>
+                                                  </td>
+                                                  <td class="pad_lft10 wid10">
+                                                  	<apex:outputText value="{0, number, ###,##0.00}">
+                                                  		<apex:param value="{!territoryReport.row[0].shipped_tons_ytd}" />
+                                                	</apex:outputText>
+                                                  </td>
+                                                  <td class="pad_lft10 wid10">
+                                                  	<apex:outputText value="{0, number, ###,##0.00}">
+                                                  		<apex:param value="{!territoryReport.row[0].shipped_tons_pytd}" />
+                                                	</apex:outputText>
+                                                  </td>
+                                                  <td class="wid12 brd_dased">
+                                                  	<apex:outputText value="{0, number, ###,##0.00}">
+                                                  		<apex:param value="{!territoryReport.row[0].shipped_tons_ytd_variance}" />
+                                                	</apex:outputText>
+                                                  </td>
+                                                  <td class="pad_lft10 wid9">
+                                                  	<apex:outputText value="{0, number, ###,##0.00}">
+                                                  		<apex:param value="{!territoryReport.row[0].shipped_tons_py}" />
+                                                	</apex:outputText>
+                                                  </td>
+                                                 
+                                                 
+                                                </tr>
+                                             </tbody>             
+                                        </table>
+                                            
+                                            <!-- 2nd child -->
+                                             <apex:outputPanel id="TONES" styleClass="">
+                                            <div class="collapse in order1 wid100">
+                                            <apex:repeat value="{!accountReport.row}" var="account">
+                                              
+                                                     <div class="cover" data-toggle="collapse" data-target=".order2{!account.ar_customer_number}">
+                                                       <div class="wid3"><apex:commandLink action="{!getInternalLevel3List}" styleClass="pull-right glyphicon glyphicon-menu-down txt_none glf_icon i_lft pad_rgt10 pad_lft10" reRender="TONES,noresponse" status="loader">
+                                                         <apex:param name="customer_number" value="{!account.ar_customer_number}" assignTo="{!customer_number}"/>
+                                                         </apex:commandLink>
+                                                         </div>
+                                                        <div class="flt_lft wid225 brd_dased padtopbtm">
+                                                            <span class="clr0 fnt10 ">{!account.fd1_customer_name}<br/>{!account.fd1_customer_number}&nbsp;<apex:outputLink value="{!URLFOR($Page.LPDCR_DealerVIPPointsTonsReportDetail, null, [dlrAccountId=account.ar_customer_number])}" styleClass="pad_rgt5 pull-right fnt10 text-right" target="_blank">VIEW ACCOUNT REPORT</apex:outputLink></span>
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm padleft">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                          <apex:param value="{!account.shipped_tons_cm}" />
+                                                         </apex:outputText>
+                                                             
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                          <apex:param value="{!account.shipped_tons_pym}" />
+                                                         </apex:outputText>
+                                                            
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid13 brd_dased padtopbtm">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                          <apex:param value="{!account.shipped_tons_month_variance}" />
+                                                         </apex:outputText>
+                                                           
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm padleft">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                          <apex:param value="{!account.shipped_tons_ytd}" />
+                                                         </apex:outputText>
+                                                           
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                          <apex:param value="{!account.shipped_tons_pytd}" />
+                                                         </apex:outputText>
+                                                            
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid13 brd_dased padtopbtm">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                          <apex:param value="{!account.shipped_tons_ytd_variance }" />
+                                                         </apex:outputText>
+                                                            
+                                                         </div>
+                                                         <div class="flt_lft wid8 padtopbtm padleft">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                          <apex:param value="{!account.shipped_tons_py}" />
+                                                         </apex:outputText>
+                                                           
+                                                         </div>
+                                                       </div><!--cover--->  
+                                                       <div class="clear"></div>
+                                                       
+                                                       
+                                           <apex:outputPanel id="LEVE3" styleClass="">
+                                                
+                                                 <!--collapse 3rd-->
+                                                 
+                                            <div class="collapse in order2{!account.ar_customer_number}">
+                                            
+                                            <apex:repeat value="{!level3Report.row}" var="leve3">
+                                              
+                                                     <div class="cover backcolor" data-toggle="collapse" data-target=".order3{!leve3.level_3_id}" >
+                                                     
+                                                       <apex:outputPanel layout="block" rendered="{!IF(account.fd1_customer_number == leve3.fd1_customer_number,true,false)}" >
+                                                       
+                                                       <div class="wid3">
+                                                         <apex:commandLink action="{!getInternalProductList }" styleClass="pull-right glyphicon glyphicon-menu-down txt_none glf_icon i_lft pad_rgt10 pad_lft10" reRender="LEVE3,noresponse" status="loader">
+                                                           <apex:param name="level3_id" value="{!leve3.level_3_id}" assignTo="{!level3_id}"/>
+                                                         </apex:commandLink>
+                                                       </div>
+                                                         <div class="flt_lft wid225 brd_dased padtopbtm">
+                                                            <span class="clr0 fnt10 ">{!leve3.level_3_name}<br/>{!leve3.level_3_id}</span>
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm padleft">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                          <apex:param value="{!leve3.shipped_tons_cm}" />
+                                                         </apex:outputText>
+                                                             
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                          <apex:param value="{!leve3.shipped_tons_pym}" />
+                                                         </apex:outputText>
+                                                            
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid13 brd_dased padtopbtm">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                          <apex:param value="{!leve3.shipped_tons_month_variance}" />
+                                                         </apex:outputText>
+                                                             
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm padleft">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                          <apex:param value="{!leve3.shipped_tons_ytd}" />
+                                                         </apex:outputText>
+                                                           
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                          <apex:param value="{!leve3.shipped_tons_pytd}" />
+                                                         </apex:outputText>
+                                                            
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid13 brd_dased padtopbtm">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                          <apex:param value="{!leve3.shipped_tons_ytd_variance}" />
+                                                         </apex:outputText>
+                                                            
+                                                         </div>
+                                                         <div class="flt_lft wid8 padtopbtm padleft">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                          <apex:param value="{!leve3.shipped_tons_py}" />
+                                                         </apex:outputText>
+                                                            
+                                                         </div>
+                                                         </apex:outputPanel>
+                                                       </div><!--cover--> 
+                                                       <div class="clear"></div>
+                                                       
+                                                       <!--collapse 4th-->
+                                                            <div class="collapse in order3{!leve3.level_3_id}">
+                                                            
+                                                            <apex:repeat value="{!productReport.row}" var="product">
+                                                              
+                                                                     <div class="cover">
+                                                                     
+                                                                       <apex:outputPanel layout="block" rendered="{!IF(leve3.level_3_name == product.level_3_name,true,false)}" >
+                                                                       <div style="float: left; width:4%;">
+                                                                       	<span class="clr0 fnt10 ">&nbsp;</span>
+                                                                       </div>
+                                                                         <div class="flt_lft wid22 brd_dased padtopbtm padleft">
+                                                                            <span class="clr0 fnt10 ">{!product.product_name}<br/>{!product.product_id}</span>
+                                                                         </div>
+                                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm padleft">
+                                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                                          <apex:param value="{!product.shipped_tons_cm}" />
+                                                                         </apex:outputText>
+                                                                            
+                                                                         </div>
+                                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm">
+                                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                                          <apex:param value="{!product.shipped_tons_pym}" />
+                                                                         </apex:outputText>
+                                                                            
+                                                                         </div>
+                                                                         <div class="flt_lft pad_lft10 wid13 brd_dased padtopbtm">
+                                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                                          <apex:param value="{!product.shipped_tons_month_variance}" />
+                                                                         </apex:outputText>
+                                                                            
+                                                                         </div>
+                                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm padleft">
+                                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                                          <apex:param value="{!product.shipped_tons_ytd}" />
+                                                                         </apex:outputText>
+                                                                            
+                                                                         </div>
+                                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm">
+                                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                                          <apex:param value="{!product.shipped_tons_pytd}" />
+                                                                         </apex:outputText>
+                                                                            
+                                                                         </div>
+                                                                         <div class="flt_lft pad_lft10 wid13 brd_dased padtopbtm">
+                                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                                          <apex:param value="{!product.shipped_tons_ytd_variance}" />
+                                                                         </apex:outputText>
+                                                                            
+                                                                         </div>
+                                                                         <div class="flt_lft wid8 padtopbtm padleft">
+                                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10">
+                                                                          <apex:param value="{!product.shipped_tons_py}" />
+                                                                         </apex:outputText>
+                                                                            
+                                                                         </div>
+                                                                         </apex:outputPanel>
+                                                                       </div><!--cover--> 
+                                                                       <div class="clear"></div>
+                                                               </apex:repeat>
+                                                             </div><!--COLLAPSE 4th-->
+                                                       
+                                               </apex:repeat>
+                                             </div><!--COLLAPSE 3rd-->
+                                            </apex:outputPanel><!--LEVE3-->
+                                       </apex:repeat> 
+                                  </div><!--COLLAPSE-->
+                                </apex:outputPanel>
+                            </div>
+                            
+                        <!-- Tons ends here -->
+                        
+                        <!-- VIP Pointes starts here --->
+                        
+                         <div id="menu1" class="tab-pane fade">
+                                        <!-- mobile summary -->
+                                           <div class="well hidden-sm hidden-md hidden-lg">
+                                           <p class="fnt16 fntB">
+                                            {!territoryReport.row[0].employee_name}<br/><span class="fnt12">{!territoryReport.row[0].employee_number}</span>
+                                           </p>
+                                           <hr/>
+                                           <div class="dis_inlineblock txt_center">
+                                                <span class="flt_lft clr0 fnt12 pad_lft10 pad_rgt10 pad_top10 pad_btm10">CYM <br/>
+                                                <apex:outputText value="{0, number, ###,##0.00}">
+                                                    <apex:param value="{!territoryReport.row[0].vip_points_cm}" />
+                                                </apex:outputText>
+                                                </span>
+                                                <span class="flt_lft clr0 fnt12 pad_lft10 pad_rgt10 pad_top10 pad_btm10">PYM<br/>
+                                                <apex:outputText value="{0, number, ###,##0.00}">
+                                                    <apex:param value="{!territoryReport.row[0].vip_points_pym}" />
+                                                </apex:outputText>
+                                                </span>
+                                                <span class="flt_lft clr0 fnt12 pad_lft10 pad_rgt10 pad_top10 pad_btm10">Variance CYM vs PYM<br/>
+                                                <apex:outputText value="{0, number, ###,##0.00}">
+                                                    <apex:param value="{!territoryReport.row[0].vip_points_month_variance}" />
+                                                </apex:outputText>
+                                                </span>
+                                                <span class="flt_lft clr0 fnt12 pad_lft10 pad_rgt10 pad_top10 pad_btm10">YTD<br/>
+                                                <apex:outputText value="{0, number, ###,##0.00}">
+                                                    <apex:param value="{!territoryReport.row[0].vip_points_ytd}" />
+                                                </apex:outputText>
+                                                </span>
+                                                <span class="flt_lft clr0 fnt12 pad_lft10 pad_rgt10 pad_top10 pad_btm10">PYTD<br/>
+                                                <apex:outputText value="{0, number, ###,##0.00}">
+                                                    <apex:param value="{!territoryReport.row[0].vip_points_pytd }" />
+                                                </apex:outputText>
+                                                </span>
+                                                <span class="flt_lft clr0 fnt12 pad_lft10 pad_rgt10 pad_top10 pad_btm10">Variance YTD vs PYTD<br/>
+                                                <apex:outputText value="{0, number, ###,##0.00}">
+                                                    <apex:param value="{!territoryReport.row[0].vip_points_pytd_variance }" />
+                                                </apex:outputText>
+                                                </span>
+                                                <span class="flt_lft clr0 fnt12 pad_lft10 pad_rgt10 pad_top10 pad_btm10">PY<br/>
+                                                <apex:outputText value="{0, number, ###,##0.00}">
+                                                    <apex:param value="{!territoryReport.row[0].vip_points_py}" />
+                                                </apex:outputText>
+                                                </span>
+                                           </div>
+                                           </div>
+                                           
+                                        <!-- mobile summary -->
+                                   
+                                    
+                                         <table class="wid100 rpTble hidden-xs">
+                                            <thead>
+                                                <tr class="brd_btm2">
+                                                  <th class="wid3"></th>
+                                                  <th class="wid22 brd_dased"></th>
+                                                  <th class="pad_lft10 wid10">Split CYM</th>
+                                                  <th class="pad_lft10 wid10">Split PYM</th>
+                                                  <th class="wid12 brd_dased">Split Variance<br/>CYM vs PYM</th>
+                                                  <th class="pad_lft10 wid10">Split YTD</th>
+                                                  <th class="pad_lft10 wid10">Split PYTD</th>
+                                                  <th class="wid12 brd_dased">Split Variance<br/>YTD vs PYTD</th>
+                                                  <th class="pad_lft10 wid9">Split PY</th>
+                                                </tr>
+                                           </thead>
+                                           <tbody> 
+                                          
+                                              
+                                                <tr data-toggle="collapse" data-target=".order11" class="child1">
+                                                  <td class="wid3"><!--<span class="pull-right glyphicon glyphicon-menu-down txt_none glf_icon i_lft pad_rgt10 pad_lft10"></span>-->
+                                                  <apex:commandLink action="{!getInternalAccountList}" styleClass="pull-right glyphicon glyphicon-menu-down txt_none glf_icon i_lft pad_rgt10 pad_lft10" reRender="TONES1,noresponse" status="loader">
+                                                 <apex:param name="territory_id" value="{!territoryReport.row[0].sales_territory_id}" assignTo="{!territory_id}"/>
+                                                 </apex:commandLink>
+                                                  </td>
+                                                  <td class="wid22 fnt16 fntB brd_dased">{!territoryReport.row[0].employee_name}<br/><span class="fnt12">{!territoryReport.row[0].employee_number}</span></td>
+                                                  <td class="pad_lft10 wid10">
+                                                  <apex:outputText value="{0, number, ###,##0.00}">
+                                                    <apex:param value="{!territoryReport.row[0].vip_points_cm}" />
+                                                  </apex:outputText>
+                                                  </td>
+                                                  <td class="pad_lft10 wid10">
+                                                  <apex:outputText value="{0, number, ###,##0.00}">
+                                                    <apex:param value="{!territoryReport.row[0].vip_points_pym}" />
+                                                  </apex:outputText>
+                                                  </td>
+                                                  <td class="brd_dased wid12">
+                                                  <apex:outputText value="{0, number, ###,##0.00}">
+                                                    <apex:param value="{!territoryReport.row[0].vip_points_month_variance}" />
+                                                  </apex:outputText>
+                                                  </td>
+                                                  <td class="pad_lft10 wid10">
+                                                  <apex:outputText value="{0, number, ###,##0.00}">
+                                                    <apex:param value="{!territoryReport.row[0].vip_points_ytd}" />
+                                                  </apex:outputText>
+                                                  </td>
+                                                  <td class="pad_lft10 wid10">
+                                                  <apex:outputText value="{0, number, ###,##0.00}">
+                                                    <apex:param value="{!territoryReport.row[0].vip_points_pytd }" />
+                                                  </apex:outputText>
+                                                  </td>
+                                                  <td class="brd_dased wid12">
+                                                  <apex:outputText value="{0, number, ###,##0.00}">
+                                                    <apex:param value="{!territoryReport.row[0].vip_points_pytd_variance }" />
+                                                  </apex:outputText>
+                                                  </td>
+                                                  <td class="pad_lft10 wid9">
+                                                  <apex:outputText value="{0, number, ###,##0.00}">
+                                                    <apex:param value="{!territoryReport.row[0].vip_points_py}" />
+                                                  </apex:outputText>
+                                                  </td>
+                                                 
+                                                 
+                                                </tr>
+                                             </tbody>             
+                                        </table>
+                                            
+                                            <!-- 2nd child -->
+                                             <apex:outputPanel id="TONES1" styleClass="">
+                                            <div class="collapse in order11">
+                                            <apex:repeat value="{!accountReport.row}" var="account">
+                                              
+                                                     <div class="cover" data-toggle="collapse" data-target=".order23{!account.ar_customer_number}">
+                                                       <div class="wid3"><apex:commandLink action="{!getInternalLevel3List}" styleClass="pull-right glyphicon glyphicon-menu-down txt_none glf_icon i_lft pad_rgt10 pad_lft10" reRender="TONES1,noresponse" status="loader">
+                                                         <apex:param name="customer_number" value="{!account.ar_customer_number}" assignTo="{!customer_number}"/>
+                                                         </apex:commandLink>
+                                                         </div>
+                                                        <div class="flt_lft wid225 brd_dased padtopbtm">
+                                                            <span class="clr0 fnt10 ">{!account.fd1_customer_name}<br/>{!account.fd1_customer_number}&nbsp;<apex:outputLink value="{!URLFOR($Page.LPDCR_DealerVIPPointsTonsReportDetail, null, [dlrAccountId=account.ar_customer_number])}" styleClass="pad_rgt5 pull-right fnt10 text-right" target="_blank">VIEW ACCOUNT REPORT</apex:outputLink></span>
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm padleft">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                            <apex:param value="{!account.vip_points_cm}" />
+                                                          </apex:outputText>
+                                                             
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                            <apex:param value="{!account.vip_points_pym}" />
+                                                          </apex:outputText>
+                                                            
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid13 brd_dased padtopbtm">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                            <apex:param value="{!account.vip_points_month_variance}" />
+                                                          </apex:outputText>
+                                                            
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm padleft">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                            <apex:param value="{!account.vip_points_ytd}" />
+                                                          </apex:outputText>
+                                                             
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                            <apex:param value="{!account.vip_points_pytd  }" />
+                                                          </apex:outputText>
+                                                            
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid13 brd_dased padtopbtm">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                            <apex:param value="{!account.vip_points_pytd_variance  }" />
+                                                          </apex:outputText>
+                                                            
+                                                         </div>
+                                                         <div class="flt_lft wid8 padtopbtm padleft">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                            <apex:param value="{!account.vip_points_py}" />
+                                                          </apex:outputText>
+                                                            
+                                                         </div>
+                                                       </div><!--cover--->  
+                                                       <div class="clear"></div>
+                                                       
+                                                       
+                                           <apex:outputPanel id="LEVE31" styleClass="">
+                                                
+                                                 <!--collapse 3rd-->
+                                                 
+                                            <div class="collapse in order23{!account.ar_customer_number}">
+                                            
+                                            <apex:repeat value="{!level3Report.row}" var="leve3">
+                                              
+                                                     <div class="cover backcolor" data-toggle="collapse" data-target=".order34{!leve3.level_3_id}" >
+                                                     
+                                                       <apex:outputPanel layout="block" rendered="{!IF(account.fd1_customer_number == leve3.fd1_customer_number,true,false)}" >
+                                                       
+                                                         <div class="wid3">
+                                                             <apex:commandLink action="{!getInternalProductList }" styleClass="pull-right glyphicon glyphicon-menu-down txt_none glf_icon i_lft pad_rgt10 pad_lft10" reRender="LEVE31,noresponse" status="loader">
+                                                               <apex:param name="level3_id" value="{!leve3.level_3_id}" assignTo="{!level3_id}"/>
+                                                             </apex:commandLink>
+                                                         </div>
+                                                         <div class="flt_lft wid225 brd_dased padtopbtm">
+                                                            <span class="clr0 fnt10 ">{!leve3.level_3_name}<br/>{!leve3.level_3_id}</span>
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm padleft">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                            <apex:param value="{!leve3.vip_points_cm}" />
+                                                          </apex:outputText>
+                                                            
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                            <apex:param value="{!leve3.vip_points_pym}" />
+                                                          </apex:outputText>
+                                                             
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid13 brd_dased padtopbtm">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                            <apex:param value="{!leve3.vip_points_month_variance}" />
+                                                          </apex:outputText>
+                                                            
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm padleft">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                            <apex:param value="{!leve3.vip_points_ytd}" />
+                                                          </apex:outputText>
+                                                             
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                            <apex:param value="{!leve3.vip_points_pytd }" />
+                                                          </apex:outputText>
+                                                             
+                                                         </div>
+                                                         <div class="flt_lft pad_lft10 wid13 brd_dased padtopbtm">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                            <apex:param value="{!leve3.vip_points_pytd_variance }" />
+                                                          </apex:outputText>
+                                                             
+                                                         </div>
+                                                         <div class="flt_lft wid8 padtopbtm padleft">
+                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                            <apex:param value="{!leve3.vip_points_py}" />
+                                                          </apex:outputText>
+                                                           
+                                                         </div>
+                                                         </apex:outputPanel>
+                                                       </div><!--cover--> 
+                                                       <div class="clear"></div>
+                                                       
+                                                       <!--collapse 4th-->
+                                                            <div class="collapse in order34{!leve3.level_3_id}">
+                                                            
+                                                            <apex:repeat value="{!productReport.row}" var="product">
+                                                              
+                                                                     <div class="cover">
+                                                                     
+                                                                       <apex:outputPanel layout="block" rendered="{!IF(leve3.level_3_name == product.level_3_name,true,false)}" >
+                                                                       <div style="float: left; width:4%;">
+                                                                         <span class="clr0 fnt10 ">&nbsp;</span>
+                                                                       </div>
+                                                                         <div class="flt_lft wid22 brd_dased padtopbtm">
+                                                                            <span class="clr0 fnt10 ">{!product.product_name}<br/>{!product.product_id}</span>
+                                                                         </div>
+                                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm padleft">
+                                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                                            <apex:param value="{!product.vip_points_cm}" />
+                                                                          </apex:outputText>
+                                                                            <span class="clr0 fnt10 "></span>
+                                                                         </div>
+                                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm">
+                                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                                            <apex:param value="{!product.vip_points_pym}" />
+                                                                          </apex:outputText>
+                                                                             
+                                                                         </div>
+                                                                         <div class="flt_lft pad_lft10 wid13 brd_dased padtopbtm">
+                                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                                            <apex:param value="{!product.vip_points_month_variance}" />
+                                                                          </apex:outputText>
+                                                                             
+                                                                         </div>
+                                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm padleft">
+                                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                                            <apex:param value="{!product.vip_points_ytd}" />
+                                                                          </apex:outputText>
+                                                                             
+                                                                         </div>
+                                                                         <div class="flt_lft pad_lft10 wid10 padtopbtm">
+                                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                                                <apex:param value="{!product.vip_points_pytd }" />
+                                                                            </apex:outputText>
+                                                                             
+                                                                         </div>
+                                                                         <div class="flt_lft pad_lft10 wid13 brd_dased padtopbtm">
+                                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                                                <apex:param value="{!product.vip_points_pytd_variance }" />
+                                                                            </apex:outputText>
+                                                                            
+                                                                         </div>
+                                                                         <div class="flt_lft wid8 padtopbtm padleft">
+                                                                         <apex:outputText value="{0, number, ###,##0.00}" styleClass="clr0 fnt10 ">
+                                                                                <apex:param value="{!product.vip_points_py}" />
+                                                                            </apex:outputText>
+                                                                             
+                                                                         </div>
+                                                                         </apex:outputPanel>
+                                                                       </div><!--cover--> 
+                                                                       <div class="clear"></div>
+                                                               </apex:repeat>
+                                                             </div><!--COLLAPSE 4th-->
+                                                       
+                                               </apex:repeat>
+                                             </div><!--COLLAPSE 3rd-->
+                                            </apex:outputPanel><!--LEVE3-->
+                                       </apex:repeat> 
+                                  </div><!--COLLAPSE-->
+                                </apex:outputPanel>
+                            </div>
+                       
+                        
+                        
+                        <!-- VIP Pointes ends here --->
+                                    
+                                    
+                                   
+                                    
+                            </div>          
+                            
+                        </div>
+                    </div><!-- /END class="row" -->
+                </div><!-- /END class="cc_homepage pagenation_promation" -->
+            </div><!-- /END class="col-sm-12 pad_all" -->
+        </div><!-- /END class="wrapper" -->
+    </div><!-- /END class="content container-fluid" -->
+   
+    <!-- Loader code starts here -->
+        <apex:actionStatus id="loader">
+            <apex:facet name="start">
+                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 1000; background-color: black;">
+                 </div>
+                 <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%">
+                     <div style="display: inline-block; border-radius:50px; background-color: #fff;">
+                    <img src="/img/loading32.gif" style="float: left; margin: 8px;" />
+                    </div>
+                </div>   
+            </apex:facet>
+        </apex:actionStatus>
+    <!-- Loader code ends here-->
+   
+    </apex:define>
+    </apex:composition>
+    
+    
+</apex:form>
+<style>.media{background:url({!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_Header_BusinessMgt)}); width:100%; height:133px; background-repeat: no-repeat;
+    background-size: contain;}</style> 
+
+<script>
+    $(document).ready(function(){
+        $(".nav-tabs a").click(function(){
+            $(this).tab('show');
+        });    
+    });
+
+    $('.collapse').on('shown.bs.collapse', function(){
+        $(this).parent().find(".glyphicon-menu-down").removeClass("glyphicon-menu-down").addClass("glyphicon-menu-up");
+        }).on('hidden.bs.collapse', function(){
+        $(this).parent().find(".glyphicon-menu-up").removeClass("glyphicon-menu-up").addClass("glyphicon-menu-down");
+    });
+    
+    
+    $('.requestfullreportbtn').click(function(){
+        
+            $(this).attr('value', 'Request Completed');
+           
+            $(this).attr('disabled','disabled');    
+           
+            
+        });
+</script>
+
+<style>
+
+    .cover{display:inline-block;
+    width:100%;
+    
+   }
+   
+   .wid22{
+width:22%;
+}
+.wid13{
+width:13.0%;
+} 
+.wid10{
+width:10%;
+}
+.padtopbtm{
+
+padding:10px 0px;}
+
+.padleft{
+padding-left:12px !important;
+}
+.wid12{
+width:12.3%;
+}
+.wid9{
+width:8%;
+}
+.wid225{
+    width: 22.5%;
+} 
+.backcolor{
+    background-color: #f1f1f1;
+}
+@media only screen and (max-width: 767px)
+    {
+    .mob_expeseclass {
+        display: none;
+        }
+    }
+
+</style>
+
+
+</apex:page>

@@ -1,0 +1,82 @@
+<messaging:emailTemplate subject="New Potential Product Liability Service Request Notification {!relatedTo.Service_Request__r.CaseNumber} {!relatedTo.Service_Request__r.Subject}" recipientType="User" relatedToType="Service_Request_Product__c">
+    <messaging:plainTextEmailBody >
+        The following Potential Product Liability Service Request has been created, please provide assistance: 
+        
+        Service Request Subject: {!relatedTo.Service_Request__r.Subject}
+        
+        Service Request Type: {!relatedTo.Service_Request__r.Type} 
+        Service Request Category: {!relatedTo.Service_Request__r.Issue_Category__c} 
+        Service Request Sub-Category: {!relatedTo.Service_Request__r.Issue_Sub_Category__c} 
+        
+        Description: {!relatedTo.Service_Request__r.Description} 
+        
+        Related to: 
+        Account Number: {!relatedTo.Service_Request__r.Account_Number__c} 
+        Account Name: {!relatedTo.Service_Request__r.Account.Name} 
+        Account Mailing Name: {!relatedTo.Service_Request__r.Account_Mailing_Name__c}
+        Account Phone: {!relatedTo.Service_Request__r.Account_Phone__c}
+        
+        Contact Name: {!relatedTo.Service_Request__r.Contact.Name} 
+        Contact Role: {!relatedTo.Service_Request__r.Contact_Role__c} 
+        Contact Type: {!relatedTo.Service_Request__r.Contact_Type__c} 
+        Contact Phone: {!relatedTo.Service_Request__r.Contact_Phone__c} 
+        Contact Mobile Phone: {!relatedTo.Service_Request__r.Contact_Mobile_Phone__c}   
+        
+        Thank You.      
+    </messaging:plainTextEmailBody>
+    <messaging:htmlEmailBody >
+        <p>The following Potential Product Liability Service Request has been created, please provide assistance:</p>  
+        
+        <p><b>Service Request Subject: {!relatedTo.Service_Request__r.Subject}</b></p>     
+        
+        <b>Service Request Type: {!relatedTo.Service_Request__r.Type}</b><br />
+        Service Request Category: {!relatedTo.Service_Request__r.Issue_Category__c}<br /> 
+        Service Request Sub-Category: {!relatedTo.Service_Request__r.Issue_Sub_Category__c}<br /> 
+        
+        <p><b>Description: {!relatedTo.Service_Request__r.Description}</b></p>   
+        
+        <p>
+            <apex:outputLink value="{!LEFT($Api.Partner_Server_URL_270,FIND('.com',$Api.Partner_Server_URL_270)+4)+relatedTo.Service_Request__r.id}">
+                Service Request #: {!relatedTo.Service_Request__r.CaseNumber}
+            </apex:outputLink>
+        </p>  
+        
+        <b>Related to:</b><br />
+        Account Number: {!relatedTo.Service_Request__r.Account_Number__c}<br /> 
+        Account Name: {!relatedTo.Service_Request__r.Account.Name}<br />
+        Account Mailing Name: {!relatedTo.Service_Request__r.Account_Mailing_Name__c}<br />
+        Account Phone: {!relatedTo.Service_Request__r.Account_Phone__c}<br /><br />    
+        
+        Contact Name: {!relatedTo.Service_Request__r.Contact.Name}<br /> 
+        Contact Role: {!relatedTo.Service_Request__r.Contact_Role__c}<br /> 
+        Contact Type: {!relatedTo.Service_Request__r.Contact_Type__c}<br /> 
+        Contact Phone: {!relatedTo.Service_Request__r.Contact_Phone__c}<br /> 
+        Contact Mobile Phone: {!relatedTo.Service_Request__r.Contact_Mobile_Phone__c}<br /><br />       
+        
+        <h3><u>Related Products</u></h3>
+       <table border="1">
+            <tr>
+                 <th>Product Name</th>
+                 <th>Item Number</th>
+                 <th>Quantity</th>
+                 <th>Lot Code</th>
+            </tr>
+            <apex:repeat var="product" value="{!relatedTo}" rows="1">
+                <tr>
+                    <td>
+                        <apex:outputlink value="{!LEFT($Api.Partner_Server_URL_270,FIND('.com',$Api.Partner_Server_URL_270)+4)+product.id}">
+                        {!product.Product__r.Name}</apex:outputlink>
+                    </td>
+                    <td>{!product.Item_Number__c}</td>
+                    <td><apex:outputText value="{0, number, integer}">
+                        <apex:param value="{!product.Quantity__c}" />
+                    </apex:outputText></td>
+                    <td>{!product.Lot_Code__c}</td>
+                </tr>
+            </apex:repeat>
+        </table>        
+        <br />  
+        Thank you.                        
+                 
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

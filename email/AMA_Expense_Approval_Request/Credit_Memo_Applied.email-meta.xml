@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Credit Memo Applied</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Purina_Swine_App_Letterhead</letterhead>
+    <name>Credit_Memo_Applied</name>
+    <style>freeForm</style>
+    <subject>Business Builder Reimbursement Request - Credit Applied</subject>
+    <textOnly>Dear Purina Customer:
+
+Thank you for participating in the Purina Business Builder Program.
+
+A credit has been applied to your Purina account:
+
+Reimbursement Request #: {!AMASellingSupportExpense__c.Name}
+
+Credit Memo #: {!AMASellingSupportExpense__c.CreditMemo__c}
+
+Credit Memo Amount: {!AMASellingSupportExpense__c.Total__c}
+
+Thank you for your business.  It is important to us.
+
+If you have additional questions, please contact customer service at businessbuildersupport@landolakes.com or 1-855-333-3565</textOnly>
+    <type>html</type>
+</EmailTemplate>

@@ -1,0 +1,15 @@
+<!--
+*********************************************************************************
+Author		: 	Adeel Ahmad
+Email		: 	adeel.ahmad@magnet360.com
+Created Date:  	009/01/2016
+Function    : 	Main Javascript/jQuery page, By using javascript remoting it made the calls 
+				to server to get the prefix, labels, etc
+Version     : 	1.0 
+*********************************************************************************
+-->
+<apex:page showHeader="false" sidebar="false" contentType="text/javascript">
+$(document).ready(function(){
+
+});
+</apex:page>

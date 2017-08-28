@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>SOUTHEAST COOPERATIVE SERVICE COMPANY-412215 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>SOUTHEAST COOPERATIVE SERVICE COMPANY-412215 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>SOUTHEASTCOOPERATIVESERVICECOMPANY412215PartnerManager</parentRole>
+</Role>

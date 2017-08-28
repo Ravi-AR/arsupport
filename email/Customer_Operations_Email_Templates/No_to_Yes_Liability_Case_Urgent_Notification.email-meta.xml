@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email template used when Potential Liability goes from No to Yes</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Purina_Letterhead_Template</letterhead>
+    <name>No to Yes Liability Case Urgent Notification</name>
+    <style>freeForm</style>
+    <subject>Urgent Notification - Liability changed from No to Yes - Service Request Notification: {!Case.CaseNumber} {!Case.Subject}</subject>
+    <textOnly>The following Service Request has been changed for Potential Product Liability from No to Yes.
+
+Please visit the Service Request for full details: {!Case.Link}
+
+Service Request Subject: {!Case.Subject}
+
+Service Request Information:
+Service Request Category: {!Case.Issue_Category__c}
+Service Request Sub-Category: {!Case.Issue_Sub_Category__c}
+Service Request Type: {!Case.RecordType}
+
+Description: {!Case.Description}
+
+
+Related to:
+Account Number: {!Case.Account_Number__c}
+Account Name: {!Case.Account}
+Account Mailing Name: {!Account.Mailing_Name__c}
+Account Phone: {!Account.Phone}
+If, Service Request originate as Consumer type, Dealer: {!Case.Dealer__c}
+
+Contact Name: {!Case.Contact}
+Contact Role: {!Case.Contact_Role__c}
+Contact Type: {!Case.Contact_Type__c}
+Contact Phone: {!Case.Contact_Phone__c}
+Contact Mobile Phone: {!Case.Contact_Mobile_Phone__c}
+If Service Request originates as a Customer Care Type, Consumer Contact: {!Case.Consumer_Contact__c}
+
+
+Thank you,
+{!Case.OwnerFullName}</textOnly>
+    <type>html</type>
+</EmailTemplate>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>GAYLORD FEED MILL, INC.-304199 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>GAYLORD FEED MILL, INC.-304199 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>GAYLORDFEEDMILLINC304199PartnerManager</parentRole>
+</Role>

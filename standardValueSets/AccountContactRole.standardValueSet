@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Accountant</fullName>
+        <default>false</default>
+        <label>Accountant</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Ag Teacher</fullName>
+        <default>false</default>
+        <label>Ag Teacher</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Assigned CSR</fullName>
+        <default>false</default>
+        <label>Assigned CSR</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Banker</fullName>
+        <default>false</default>
+        <label>Banker</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Buyer</fullName>
+        <default>false</default>
+        <label>Buyer</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Extension Agent</fullName>
+        <default>false</default>
+        <label>Extension Agent</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Farm Consultant</fullName>
+        <default>false</default>
+        <label>Farm Consultant</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Farm Hand</fullName>
+        <default>false</default>
+        <label>Farm Hand</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Farm Manager/Decision Maker</fullName>
+        <default>false</default>
+        <label>Farm Manager/Decision Maker</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Herd Consultant</fullName>
+        <default>false</default>
+        <label>Herd Consultant</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Influencer</fullName>
+        <default>false</default>
+        <label>Influencer</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Manager</fullName>
+        <default>false</default>
+        <label>Manager</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Nutritionist</fullName>
+        <default>false</default>
+        <label>Nutritionist</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Owner</fullName>
+        <default>false</default>
+        <label>Owner</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Spouse</fullName>
+        <default>false</default>
+        <label>Spouse</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Technical Buyer</fullName>
+        <default>false</default>
+        <label>Technical Buyer</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Trainer</fullName>
+        <default>false</default>
+        <label>Trainer</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Vet</fullName>
+        <default>false</default>
+        <label>Vet</label>
+    </standardValue>
+</StandardValueSet>

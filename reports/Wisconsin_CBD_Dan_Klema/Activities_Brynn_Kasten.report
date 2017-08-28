@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>Account.Account_Count__c:SUM</calculatedFormula>
+        <datatype>number</datatype>
+        <developerName>FORMULA1</developerName>
+        <downGroupingContext>Account$Name</downGroupingContext>
+        <isActive>true</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Account Count</masterLabel>
+        <scale>0</scale>
+    </aggregates>
+    <columns>
+        <field>Account.Activities$Subject</field>
+    </columns>
+    <columns>
+        <field>Account$Description</field>
+    </columns>
+    <columns>
+        <field>Account.Activities$Activity__c</field>
+    </columns>
+    <columns>
+        <field>Account.Activities$Type2__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Activities$Activity_Count__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Account$Owner</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Brynn Kasten</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account$Associated_Dealer_Account_Number__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>583477</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Activities$Activity_Owner_Name__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Brynn Kasten</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Month</dateGranularity>
+        <field>Account.Activities$ActivityTimeOnly</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Integrity Feed Activities || Kasten</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Accounts_with_and_without_Activity__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <timeFrameFilter>
+        <dateColumn>Account$Account_Load_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

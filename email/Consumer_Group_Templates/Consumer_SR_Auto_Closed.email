@@ -1,0 +1,5 @@
+Greetings, 
+
+Consumer service request # {!Case.CaseNumber} has been awaiting a response from you since {!Case.LastModifiedDate}. This service request is now closed due to no response. 
+
+Thank you.

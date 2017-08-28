@@ -1,0 +1,34 @@
+<apex:component controller="LPDCR_CC_Training_Controller" allowDML="true">
+    <apex:attribute name="bgColor"
+                    type="String"
+                    description="The style class for the background color of the component"
+                    required="false"
+                    default="bg_wht" />
+
+<apex:outputText rendered="{!init}" />
+ 
+     <div class="col-sm-12 {!bgColor}">
+         <h3 class="section_title"><a href="{!$Page.LPDCR_CC_TrainingPage}">{!$Label.LPDCR_Training_Component_Name}</a>
+             <div class="tooltip1">
+                 <span class="flt_rgt icon_exmty"></span>                
+                 <p class="tooltiptext">{!$Label.LPDCR_Training_Component_Message}
+                  <br/>
+                    <a class="btn_ent" href="{!URLFOR($Page.LPDCR_CC_TrainingPage)}">ENTER</a> <span class="btn_cls dis_inlineblock txt_center">CLOSE</span>
+                  </p>
+            </div>
+         </h3>         
+         <div class="col-sm-12 pad_top10 fnt12">
+            <apex:outputPanel rendered="{!IF(training_doc != null,true,false)}" layout="block" styleClass="col-sm-12 txt_center pad_btm20">
+                <!--<img src="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/u192.svg')}" width="50" class="flt_lft"/>-->
+                <img src="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/u190.svg')}" width="50" class="flt_lft"/>
+                <a href="{!URLFOR($Page.LPDCR_CC_TrainingPage, null, [subtab='PurinaTV'])}" class="clr_red block flt_lft pad_lft15 txt_lft wid70"><apex:outputText escape="false" value="{!training_doc.DocumentName}" /></a>
+            </apex:outputPanel>
+            <div class="clear mrg_btm20"></div>
+            <apex:outputPanel rendered="{!IF(training_video != null,true,false)}" layout="block" styleClass="col-sm-12 txt_center pad_top0">
+                <img src="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/u190.svg')}" width="50" class="flt_lft"/>
+                <a href="{!URLFOR($Page.LPDCR_CC_TrainingPage, null, [subtab='TT30'])}"  class="clr_red block pad_top5 flt_lft pad_lft15 txt_lft wid70"><apex:outputText escape="false" value="{!training_video.DocumentName}" /></a>
+            </apex:outputPanel>            
+         </div>
+     </div>
+
+</apex:component>

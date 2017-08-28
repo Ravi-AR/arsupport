@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Determines the Year, Start Date and End Date for Business Builder year planning.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>BBPYExternal_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Business Builder Program Year Object External ID</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Business Builder Program Year Object External ID</inlineHelpText>
+        <label>BBPY_External ID</label>
+        <length>4</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>EndDate__c</fullName>
+        <description>End Date for the Program Year</description>
+        <externalId>false</externalId>
+        <label>Program Year End Date</label>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>EnrollmentEndDate__c</fullName>
+        <description>Enrollment End Date for the Business Builder Program Year</description>
+        <externalId>false</externalId>
+        <label>Enrollment End Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>EnrollmentStartDate__c</fullName>
+        <description>Enrollment Start Date for the Business Builder Program Year</description>
+        <externalId>false</externalId>
+        <label>Enrollment Start Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>JDESUBLEDGER__c</fullName>
+        <description>JDE Subledger</description>
+        <externalId>false</externalId>
+        <label>JDE SUBLEDGER</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>JDE_ACCOUNT__c</fullName>
+        <description>JDE Account</description>
+        <externalId>false</externalId>
+        <label>JDE ACCOUNT</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>JDE_DEPT__c</fullName>
+        <description>JDE Dept.</description>
+        <externalId>false</externalId>
+        <label>JDE DEPT</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>JDE_DIV__c</fullName>
+        <description>JDE Div</description>
+        <externalId>false</externalId>
+        <label>JDE DIV</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>JDE_ItemDesc__c</fullName>
+        <description>JDE Item Desc</description>
+        <externalId>false</externalId>
+        <label>JDE Item Desc</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>JDE_LOC__c</fullName>
+        <description>JDE Loc</description>
+        <externalId>false</externalId>
+        <label>JDE LOC</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>JDE_PROD__c</fullName>
+        <description>JDE Prod</description>
+        <externalId>false</externalId>
+        <label>JDE PROD</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StartDate__c</fullName>
+        <description>Start Date for the Program Year</description>
+        <externalId>false</externalId>
+        <label>Program Year Start Date</label>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>TermsandConditionsforProgramYear__c</fullName>
+        <description>Terms and Conditions for this program year.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Terms and Conditions for this program year.</inlineHelpText>
+        <label>Terms and Conditions for Program Year</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <label>Business Builder Program Year</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>StartDate__c</columns>
+        <columns>EndDate__c</columns>
+        <columns>EnrollmentStartDate__c</columns>
+        <columns>EnrollmentEndDate__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All1</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Business Builder Year</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Business Builder Program Years</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>EndDate__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>StartDate__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>EnrollmentEndDate__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>EnrollmentStartDate__c</customTabListAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,227 @@
+<!--<Component Name: cc_oo_CartIncRD2> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Shrivaths                                9/15/2016                                    US:OO - 244 Hide prices on products in the online ordering 
+                                                                                              system for pre orders
+Piyali                                   9/15/2016                                    US:OO - 261 Disable the ability to manually enter promotions 
+                                                                                              in the online ordering system when placing a pre book order
+                                                                                              s
+Nishant                                  9/22/2016                                    US:OO - 311 Validation for minimum order weight.
+
+Piyali                                   9/28/2016                                    US:OO - 475 Modify the text of the error message for the US 261                                                                                            
+Rajesh W                                 10/4/2016                                    US:OO-212 - Back to community portal link
+Rajeev choudhary                         10/18/2016                                   US:00-335- restrict the text area to 60 characters in 
+                                                                                                 the comments section for an item in the shopping cart.
+Rajeev Choudhary                         10/21/2016                                   US:00-62- A customer shall not have the ability to request a quote for a cart.        
+
+Rajeev Choudhary                         10/25/2016                                   US:OO-334-The customer needs the ability to see the total weight of the items in the shopping cart page.                                                                                         
+controller to be used cc_oo_CartIncRDController
+Shrivaths                                11/17/2016                                    US:OO-333 Minimum order messages on Cart Page
+-->
+<apex:component allowDML="true" controller="cc_oo_CartIncRDController">
+    
+    <script id="cc_oo_CartDetail-ActionTotals-View" type="text/template">
+    {{#if (isNotPreBook)}}
+        <!-- OO-796(333) -->
+        <div class="container row-fluid">
+            <div class="span12 minimum-weight-msg hide"></div>
+            
+                <div class="span12 checkout total-weight-msg">
+                    <span class="span6 pull-right">
+                        <strong class="span9">{{pageLabelMap 'Order_Weight'}}</strong>
+                        <strong class="totalWeight1 span3"></strong>
+                    </span>
+                </div>
+            
+            </div>
+        
+        <div class="span12 clear checkout clear_right">
+
+            {{#if (isNotPreBook)}}
+                {{#if subTotal}}
+                    <div class="span12 clear">
+                        <span class="span6 pull-right grand_total">
+                            <strong class="span9">{{pageLabelMap 'CartInc_Total'}}</strong>
+                            <strong class="span3">{{{price subTotal}}}</strong>
+                        </span>
+                    </div>
+                {{/if}}
+                {{#if this.totalInfo}}
+                    <div class="span12 clear">
+                        <span class="span6 pull-right cart_total_amount">
+                            <strong class="span9">{{pageLabelMap 'CartInc_Total'}}</strong>
+                            <strong class="span3">{{this.totalInfo}}</strong>
+                        </span>
+                    </div>
+                {{/if}}
+            {{/if}}
+            <!--<li class="totalsmessagingSection"></li>-->
+            
+        </div>
+		<div class="span12 clear global-error hide alert alert-error no-margin-left check-out-2-cart">{{pageLabelMap 'Checkoutcart2'}}</div>		
+		<div class="span12 clear global-info hide alert alert-error no-margin-left" id="splitCartMsg">{{pageLabelMap 'Cart_SplitOrderMsg'}}</div>		
+        <div class="span12 no-margin-left">
+            <br/><br/>
+            {{#if this.cartItems}}
+                {{#ifNotEquals this.cartItems.length 0}}
+                    {{#if this.allowCheckout}}
+                        {{#ifEquals this.preventCheckout false}}
+                            
+
+                                {{#if (isNotPreBook)}}
+                                    <button type="button" class="btn btn-primary medium-btn wide check-out-btn pull-right tab">{{pageLabelMap 'CartInc_Checkout'}}</button>
+
+                                {{ else }}
+                                    <button type="button" class="btn btn-primary medium-btn wide submit-button pull-right tab">{{pageLabelMap 'CartInc_CheckoutPrebook'}}</button>
+
+                                {{/if}}
+                            
+                        {{/ifEquals}}
+                    {{/if}}
+                {{/ifNotEquals}}
+            {{/if}}
+            <button class="btn btn-secondary medium-btn update-cart-button pull-right tab" name="" type="button" >{{pageLabelMap 'CartInc_UpdateAll'}}</button>
+            <button type="button" class="btn btn-secondary medium-btn cancel-shopping hide" data-dismiss="modal" aria-hidden="true" name="" type="button" >{{pageLabelMap 'Cancel'}}</button>
+			<button type="button" class="btn btn-secondary medium-btn continue-shopping continueShoppingButton" >{{pageLabelMap 'CartInc_ContinueShopping'}}</button>
+        </div>
+        
+    {{else}}
+
+        <!-- OO-796(333) -->
+        <ul class="shopping_cart">
+            <!-- US:OO - 212 Back to community portal link -->
+            <!-- {{#if (isNotPreBook)}}
+             
+             {{else}}
+                <li><button class="btn slim commPortalLink" onclick="location.href='{!commPortalLink}';">{{pageLabelMap 'CartInc_CommPortalLink'}}</button></li>
+             {{/if}}-->
+            <li><button class="btn btn-secondary continue-shopping" name="" type="button" >{{pageLabelMap 'CartInc_ContinueShopping'}}</button></li>
+            {{#if {!ISPICKVAL($User.UserType, 'Guest')} }}
+            {{ else }}
+                {{#ifStoreSetting 'AutoCalcPriceAdjust__c'}}
+                {{else}} 
+                    <li><button class="btn btn-secondary getExtPricingButton" type="button" >{{pageLabelMap 'CartInc_ApplyDiscounts'}}</button></li>
+                {{/ifStoreSetting}}
+                {{#if (isNotPreBook)}}
+                <li><button class="btn btn-secondary" data-toggle="modal" data-target="#wishMod" name="" type="button" >{{pageLabelMap 'Create_Cart_Wishlist'}}</button></li>
+                {{/if}}
+            {{/if}}
+            <li><button class="btn btn-secondary update-cart-button" name="" type="button" >{{pageLabelMap 'CartInc_Update'}}</button></li>
+            {{#if (isNotPreBook)}}
+              {{#if {!ISPICKVAL($User.UserType, 'Guest')}}}
+                {{#ifDisplay 'C.EmailAnon'}}
+                    <li><a href="#emailModal" id="emailCartLink" data-toggle="modal"><button class="btn btn-secondary remove" type="button" >{{pageLabelMap 'CartOrderEmailer_Header'}}</button></a></li>
+                {{/ifDisplay}}
+              {{else}}
+                {{#ifDisplay 'C.EnableEmailCart'}}
+                    <li><a href="#emailModal" id="emailCartLink" data-toggle="modal"><button class="btn btn-secondary remove" type="button" >{{pageLabelMap 'CartOrderEmailer_Header'}}</button></a></li>
+                {{/ifDisplay}}
+              {{/if}}
+            
+                <!-- rfq button -->
+                {{#if {!ISPICKVAL($User.UserType, 'Guest')} }}
+                    {{#ifDisplay 'rfq.GuestUser'}}
+                        <li><a href="#rfqModal" id="rfqLink" data-toggle="modal"><button class="btn btn-secondary remove" type="button" >{{pageLabelMap 'CartRFQForm_Header'}}</button></a></li>
+                    {{/ifDisplay}}
+                {{else}}
+                    {{#ifDisplay 'rfq.LoggedIn'}}
+                        <li><a href="#rfqModal" id="rfqLink" data-toggle="modal"><button class="btn btn-secondary remove" type="button" >{{pageLabelMap 'CartRFQForm_Header'}}</button></a></li>
+                    {{/ifDisplay}}
+                {{/if}}
+                <!-- rfq button -->
+            {{/if}}
+        </ul>
+        <ul class="checkout clear_right">
+            {{#if (isNotPreBook)}}
+                {{#if subTotal}}
+                    <li class="grand_total">{{pageLabelMap 'CartInc_Subtotal'}}: {{{price subTotal}}}</li>
+                {{/if}}
+                {{#if this.totalInfo}}
+                    <li class="cart_total_amount">{{this.totalInfo}}</li>
+                {{/if}}
+            {{/if}}
+            <li class="totalsmessagingSection"></li>
+            
+                                   
+            {{#if this.cartItems}}
+                {{#ifNotEquals this.cartItems.length 0}}
+                    {{#if this.allowCheckout}}
+                        {{#ifEquals this.preventCheckout false}}
+                            <li>
+                            {{#if isNotPreBook}}
+                                <button type="button" class="btn btn-primary wide check-out-btn">{{pageLabelMap 'CartInc_Checkout'}}</button>
+                                
+                            {{ else }}
+
+                                <button type="button" class="btn btn-primary wide submit-button">{{pageLabelMap 'CartInc_CheckoutPrebook'}}</button>
+                            {{/if}}
+                            </li>
+                        {{/ifEquals}}
+                    {{/if}}
+                {{/ifNotEquals}}
+            {{/if}}
+        </ul>
+        
+        {{#ifStoreSetting 'Display_Cart_Coupon__c'}}
+            {{#if (isNotPreBook)}}
+                <div class="discount_code_container">
+                {{#if this.hasCoupon}}
+                    <form id="couponClearForm">
+                    <h2 class="title">{{pageLabelMap 'CartInc_discountCodes'}}</h2>
+                    <div class="discount_code">
+                            <p>{{pageLabelMap 'CartInc_AppliedCoupon'}} {{this.couponName}}</p>
+                            <p><button id="clearCouponBtn" type="button">{{pageLabelMap 'CartInc_ClearCoupon'}}</button></p>
+                        </div>
+                    </form>
+                {{else}}
+                    <form id="couponAddForm">
+                        <h2 class="title">{{pageLabelMap 'CartInc_discountCodes'}}</h2>
+                        <div class="discount_code">
+                            <p id="couponAddError"></p>
+                        <p>{{pageLabelMap 'CartInc_EntercouponCode'}}</p>
+                            <p><input type="text" id="addCouponId" name="couponId" /></p>
+                            <div class="couponMessagingSection-Error"></div>
+                            <p><button id="addCouponBtn" type="button">{{pageLabelMap 'CartInc_ApplyCoupon'}}</button></p>
+                    </div>
+                    </form>
+                {{/if}}
+                </div>
+            {{/if}}
+        {{/ifStoreSetting}}
+            
+    {{/if}}
+   </script>
+
+	<!-- US:00-335- restrict the text area to 60 characters in  the comments section for an item in the shopping cart. -->
+                                                                                               
+   <script id="cc_oo_CartItemDetail-Comments-View" type="text/template">
+       <div id="comments_{{itemID}}" class="info-modal-layout modal hide fade in add-note-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header"> 
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-id="{{itemID}}">×</button>
+                 <h3 id="myModalLabel">{{displayProductName 'Aggregate_Display' displayProductBean.name mockProduct.name }}</h3>
+            </div>
+			<div class="modal-body">
+       			<form id="commentsForm{{itemID}}" class="modal-body">
+           			<textarea placeholder="{{pageLabelMap 'Field_Notes'}}" name="note" maxlength="60" class="global-textarea commentField commentField{{itemID}}">{{comments}}</textarea><br/>
+       			</form>
+			</div>
+       		<div class="modal-footer">
+				<button type="button" class="pull-right btn-primary saveComment" data-id="{{itemID}}">{{pageLabelMap 'Save'}}</button>
+			</div>
+       </div>
+   </script>
+      
+    
+    
+    
+    <!-- OO-244 Logic hide the Price on the cart if cart if of Pre-Book-->
+    <script>
+        jQuery(function($) {
+            CCRZ.uiProperties.CartDetailView.partials.actionsTotals = '#cc_oo_CartDetail-ActionTotals-View';
+            CCRZ.uiProperties.CartDetailView.partials.cartItemComment = '#cc_oo_CartItemDetail-Comments-View';
+        });
+        
+    </script>
+</apex:component>

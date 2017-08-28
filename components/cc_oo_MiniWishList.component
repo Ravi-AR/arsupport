@@ -1,0 +1,187 @@
+<!-- Component : - cc_oo_MiniWishList -->
+<!-- Author                 Date                     Description -->
+<!-- Piyali Mukherjee       10/28/2016               US 339 The system will not allow user to add two types of product in cart. -->
+
+
+<apex:component allowDML="true" controller="cc_oo_MiniWishListController">
+ 
+    <script type="text/javascript">
+        CCRZ.uiProperties.quickWishDetailsView.desktop.tmpl = 'cc_oo_QuickOrder-WishlistItems-Desktop';
+        CCRZ.uiProperties.quickWishDetailsView.phone.tmpl = 'cc_oo_QuickOrder-WishlistItems-Mobile';
+    </script>
+ 
+ 	<script id="cc_oo_QuickOrder-WishlistItems-Desktop" type="text/template">
+ 
+	</script>
+
+
+  	<script id="cc_oo_QuickOrder-WishlistItems-Mobile" type="text/template">
+   
+	 </script>
+  
+  
+  <script type="text/javascript">
+        jQuery(function($) {
+            // Defect OO-313 Adding long description for Wishlist
+            
+            var checkForView = function(){
+            	window.clearTimeout(fn);
+            	var fn = window.setTimeout(function() {
+	            	if(CCRZ.views.quickWishDetailsView){
+		            	overrideFunction();
+			    	} else {
+			    		checkForView();	
+			    	}
+	            }, 2000);
+            };
+             var uniqueId=getSessionValue('contactId');
+            var selectedShipTo=uniqueId+'selectedShipTo',selectedPlant=uniqueId+'selectedPlant',shipDate=uniqueId+'shipDate'; 
+            var overrideFunction = function() {
+            	CCRZ.views.quickWishDetailsView.prototype.render = function() {
+	            	var v = this;
+	            	if(v.wishlistItemData) {
+		      			v.wishlistItemData.itemData = v.wishlistItemData.toJSON();
+		
+		      			if (CCRZ.display.isPhone()) {
+							v.$el.html('');
+					       	v.setElement($(CCRZ.uiProperties.quickWishDetailsView.phone.selector));
+					       	// CCRZ-2117 : QuickWishlistView crashes when there is no wishlist records-3.7.4
+					       	if(v.dataSet != null) {
+					        	v.$el.html(v.templatePhone(v.wishlistItemData));
+					      	}
+						} else {
+					    	v.$el.html('');
+					       	v.setElement($(CCRZ.uiProperties.quickWishDetailsView.desktop.selector));
+					       	// CCRZ-2117 : QuickWishlistView crashes when there is no wishlist records-3.7.4
+					       	if(v.dataSet != null) {
+					        	v.$el.html(v.templateDesktop(v.wishlistItemData));
+					       	}
+						}
+					    v.trigger('pagination:host:rendered', this, {
+					       hostView : this.viewName
+					    });
+					    CCRZ.pubSub.trigger("view:"+this.viewName+":refresh", this);
+				    }
+	            }
+            };
+            
+            
+            checkForView();
+            
+            var productIds = [];
+              
+            // The function should be called after the quickOrderView  is refreshed
+            CCRZ.pubSub.on('view:quickWishDetailsView:refresh', function(theView){
+            $('.oo_longDesc').each(function(evt){              
+                    var productId =$(this).attr('data-id'); 
+                    productIds.push(productId);                  
+                    console.log("hi"+productIds);
+                });
+                // Remote Invocation function call and calling the controller and method
+                var remoteData;
+                callProducts = function(){
+                var remoteActionCallForProducts = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_MiniWishListController'});
+                remoteActionCallForProducts.invokeCtx(
+                    'getProductsDetails',productIds, function(resp){
+                        if(resp && resp.data){
+                            console.log('resp.success-->'+ resp.success);
+                            if(resp.success){
+                                remoteData = resp.data;
+                                console.log('resp data: ' + resp.data);
+                                /*var temp = resp.data['0041943'];
+                                console.log('temp--->' + temp);*/
+                                // Adding the long description on the pop up window
+                                $('.oo_longDesc').each( function(){
+                                    var productSKU = $(this).attr('data-id');
+                                   // alert('Product SKU: '+productSKU);
+                                    //alert('Resp data: '+remoteData[productSKU]);
+                                    //var productLongDescription = remoteData[productSKU].ccrz__LongDesc__c;
+                                    var productLongDescription = remoteData[productSKU];
+                                    //var productLongDescription = resp.data[productSKU[0].ccrz__LongDesc__c];
+                                    console.log('long desc:' + productLongDescription);
+                                    //alert('Long desc: '+productLongDescription); 
+                                    // Showing the value of long Description on the pop up window
+                                    $(this).html(productLongDescription);
+                                   
+                                });
+                            }
+                        }
+                    },{buffer:false,escape:false,nmsp:false}
+            )};
+            callProducts();
+            //US - 339 - modify addtocart button fucntionality
+            $(document).off('click','.oo-add-to-cartwish').on("click",".oo-add-to-cartwish", function(e) {
+                var sku = new Array();
+                var quantity = new Array();
+                $('.productName.prodLink').each(function(){
+                    //alert('Hi 1',$(this).val());
+                    sku.push($(this).data('id')); 
+                    });
+                //alert('Hi SKU' + sku);   
+                $('.qty-inputwish').each(function(){
+                    quantity.push($(this).val()); 
+                    });
+                    
+                alert('Hi qty' + quantity);
+                    var productDetailMap = {};
+                    var skuQuantityMap = {};
+                    //var sku = $(this).attr('sku');
+                    //alert('Hi' + sku);
+                    var cartId = CCRZ.pagevars.queryParams.cartID ? CCRZ.pagevars.queryParams.cartID  : CCRZ.pagevars.queryParams.cartId;                   
+                    var sid = getSessionValue(selectedPlant);
+                    var shipTo = getSessionValue(selectedShipTo);
+                    //var quantity = $(this).attr('qty');
+                    //alert('Hi quantity' + quantity);
+                    
+                    for (var i=0; i < sku.length; i++){
+                        if(sku[i] != null && sku[i] != '') {
+                            skuQuantityMap[sku[i]] = quantity[i]; 
+                            //alert('SKU' + sku[i]);
+                            //alert('Quantity' + quantity[i]);
+                        }
+                    }
+                    
+                     
+                   
+                    productDetailMap['CartId'] = cartId;
+                    productDetailMap['sid'] = sid;
+                    productDetailMap['shipTo'] = shipTo;
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_MiniWishListController'});
+                    remoteCall.invokeCtx(
+                        'addToCartOO', productDetailMap,skuQuantityMap,CCRZ.pagevars.sid, 
+                        function(resp){
+                            if(resp){
+                                // OO-49 Show error message if quantity is below minimum quantity for any product
+                                // if(resp.data['errorMsg'] != null && resp.data['errorMsg'] != '') {
+                                //     $('.errorMsg').html(resp.data['errorMsg']);
+                                // }else{
+                                //     $('.errorMsg').html('');
+                                // }
+                                
+                                
+                                if(resp.data['cartId'] != null && resp.data['cartId'] != '') {
+                                    //alert('cart Change');
+                                    CCRZ.pubSub.trigger('cartChange', resp.data['cartId']);
+                                    var skuIdList = resp.data['filteredSkuList'];
+                                    if(skuIdList != null && skuIdList != '') {
+                                        var message = CCRZ.pagevars.pageLabels['OO_AddToCartSucess'] + ' ' + skuIdList ;
+                                        $('.quickWishlist_container').append(message);
+                                    }
+                                }
+                            
+                                if(resp.data['productType'] != null && resp.data['productType'] != '') {
+                                    var productType = resp.data['productType'];
+                                    var message = '<fieldset class="confirmOrder"><p>'+ CCRZ.pagevars.pageLabels['OO_AddToCart_Validate'] +'</p></fieldset>';
+                                    //var message = '<fieldset class="confirmOrder"><p>'+'A '+productType+ ' '+ CCRZ.pagevars.pageLabels['OO_AddToCart_Validate'] +'</p></fieldset>';
+                                    //alert(message);
+                                    $('.quickWishlist_container').append(message);
+                                }
+                             }
+                        },{buffer:false,escape:false,nmsp:false}                  
+                    ); 
+                   });               
+               });
+          }); 
+     </script>
+
+</apex:component>

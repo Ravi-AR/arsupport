@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Used during the Approval Process for Farm VIP Nominations to notify host of Approval</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Purina_Letterhead_Template</letterhead>
+    <name>Farm VIP Reg: Nomination Approved</name>
+    <style>freeForm</style>
+    <subject>Nomination for {!Farm_VIP_Registration__c.Registrant__c} to {!Farm_VIP_Registration__c.Farm_VIP_Event__c} Approved</subject>
+    <textOnly>Thank you for nominating {!Farm_VIP_Registration__c.Registrant__c} from {!Farm_VIP_Registration__c.Customer_Name__c} for the {!Farm_VIP_Registration__c.Farm_VIP_Event__c}.
+
+You will be notified of approval or rejection shortly.
+
+Link to record: {!Farm_VIP_Registration__c.Link}
+
+Thank you,
+
+Farm VIP Events Team</textOnly>
+    <type>html</type>
+</EmailTemplate>

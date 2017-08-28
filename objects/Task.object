@@ -1,0 +1,1604 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Close</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>DeleteSeries</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>NewTask</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>true</enableFeeds>
+    <fieldSets>
+        <fullName>CRMC_PP__Batch_Add</fullName>
+        <description>Batch Add</description>
+        <displayedFields>
+            <field>AccountId</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>OwnerId</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Subject</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>ActivityDate</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Status</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Priority</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Description</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Batch Add</label>
+    </fieldSets>
+    <fields>
+        <fullName>ActivityDate</fullName>
+        <inlineHelpText>Date Activity occurred  - or is expected to occur</inlineHelpText>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>CallDisposition</fullName>
+    </fields>
+    <fields>
+        <fullName>CallDurationInSeconds</fullName>
+    </fields>
+    <fields>
+        <fullName>CallObject</fullName>
+        <inlineHelpText>ANI that dialed in via inContact</inlineHelpText>
+    </fields>
+    <fields>
+        <fullName>CallType</fullName>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Email</fullName>
+    </fields>
+    <fields>
+        <fullName>IsRecurrence</fullName>
+    </fields>
+    <fields>
+        <fullName>IsVisibleInSelfService</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>OwnerId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Phone</fullName>
+    </fields>
+    <fields>
+        <fullName>Priority</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>RecurrenceInterval</fullName>
+    </fields>
+    <fields>
+        <fullName>RecurrenceRegeneratedType</fullName>
+    </fields>
+    <fields>
+        <fullName>Status</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Subject</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>TaskSubtype</fullName>
+    </fields>
+    <fields>
+        <fullName>Type</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>WhatId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>WhoId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Lookup</type>
+    </fields>
+    <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
+    <recordTypes>
+        <fullName>Consumer_Task</fullName>
+        <active>true</active>
+        <description>Default task for the Consumer Group</description>
+        <label>Consumer Task</label>
+        <picklistValues>
+            <picklist>Activity_Reason__c</picklist>
+            <values>
+                <fullName>Allergy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Animal Appearance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Animal Longevity</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Animal Performance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Animal Rescues</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Animal Shows %28Horse%2C HSC%2C etc%2E%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Availability</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bag or Tag Issue</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bulk%2Fdiscount</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Call Drop</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Calorie content</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Can you Freeze Feed%3F</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Can you Order Feed Over the Phone%3F</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancel%2Fchange order</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cannot Print</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cat</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Choke</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>College</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Confirmation Info</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Contamination</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cost of Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Date Code</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dealer%2FSales Praise</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dealer%2FSeller Issue</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Delivery Schedule</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Did Not Receive Coupon</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Diet and Digestion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Do you Have Coupons Available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dog</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Donation Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DuMOR%2FPP Complaint</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DuMOR%2FPP Compliment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DuMOR%2FPP Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Equipment Inquiry or Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Excessive Fines</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feed Quality</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feed Sample for Analysis Available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feed Tag Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flowability%2FBricking</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GMO%2FOrganic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hay and Pasture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incorrect Feed Sent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Infestation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Info Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ingredient Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>International Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internship</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Job Postings</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Liability%2F Service Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Liquid Application</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manufacturing Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Moldy%2FFeed Odor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Navigation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nearest Dealer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Online Ordering Assistance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Order Feed on the Phone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Outdated Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Packaging Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Palatability</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Password Reset</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pellet Color - Light%2FDark</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pellet Size</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Portion Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pricing Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Registration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rodeo Sponsorships</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sales Rep</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sample of Feed to Try</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scholarship</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shelf Life Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping Cost</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Starch%2FSugar Percentage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Switching%2F Withdrawal Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tax Exempt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Technical Difficulties</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>UPS Tracking info</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weight Gain</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weight Loss</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wrong Address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wrong Amount of Feed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Activity_Sub_Type__c</picklist>
+            <values>
+                <fullName>Active Dealer Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Active TSC Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Advertisement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Apparel Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bulk Discount</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Buy Direct from the Plant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Call Drop</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Career Opportunities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Complaint</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Compliment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Coupon Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dealer Complaint - Not Specie</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dealer Locator</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Donation Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feed Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Interest in Becoming a Dealer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>International Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Logistics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nearest Dealer Location</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nestle Purina</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Online Order Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Order Accuracy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product Retrieval%2FRecall</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purchase Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rate of Application</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recycling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sponsorship</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TSC Complaint - non Specie</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transfer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wrong Number</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Activity_Type__c</picklist>
+            <values>
+                <fullName>Beef</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dealer Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Equine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fish and Aquatics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Game Bird</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Goat</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Honor Show Chow</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lab Diet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mazuri</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Milk ReplacerAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Miscellaneous</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pet Companion Animal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Poultry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rabbit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sheep</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Small Animal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Test Diet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wild Bird</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wildlife %28Deer%2FWild Hog%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Activity__c</picklist>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Event at Dealer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Event at Producer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FARM VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Farmgate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Meeting with Dealer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Postage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quality%2FService Issue</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Text</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tradeshow</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Training</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Counselor_Selling__c</picklist>
+            <values>
+                <fullName>Advocating</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discovering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relating</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Supporting</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Initiative__c</picklist>
+            <values>
+                <fullName>Equine Veterinarian Kit</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Priority</picklist>
+            <values>
+                <fullName>High</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Normal</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deferred</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Started</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Waiting on someone else</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Call outside InContact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fax</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Walk-In</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Trainer__c</picklist>
+            <values>
+                <fullName>Garrett Robertson</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nic Autry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rhonda Thode</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fax</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>USPS Mail</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type2__c</picklist>
+            <values>
+                <fullName>Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sales Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Support Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To Do</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Customer_Ops_Task</fullName>
+        <active>true</active>
+        <description>Task Record Type for Customer Operations</description>
+        <label>Customer Ops Task</label>
+        <picklistValues>
+            <picklist>Activity_Reason__c</picklist>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Activity_Sub_Type__c</picklist>
+            <values>
+                <fullName>Add-on %28before cut-off%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Availability</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Claims</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Comments about the driver</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Contract Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Delivery Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Directions Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Estimated Time of Arrival</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feed Tag Request or Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Final Delivery Comments</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Freight Rate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Invoice Request or Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Late Add-on %28after cut-off%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Late Order %28after cut-off%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lead Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Loading Error</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Order %28before cut-off%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Answer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Order Changes</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Order Confirmation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Order Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Price Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product Replacement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recommendations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shortage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Specialty INTL Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Specialty Order %28RICH RITD%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transfer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tub Order %28FREM FRTB%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voicemail-Request call back</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web Order Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wrong Number</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Activity_Type__c</picklist>
+            <values>
+                <fullName>No Answer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pricing%2FBilling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transfer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transportation</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Activity__c</picklist>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Event at Dealer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Event at Producer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FARM VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Farmgate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Meeting with Dealer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Postage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quality%2FService Issue</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Text</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tradeshow</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Training</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Counselor_Selling__c</picklist>
+            <values>
+                <fullName>Advocating</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discovering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relating</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Supporting</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Initiative__c</picklist>
+            <values>
+                <fullName>Equine Veterinarian Kit</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Priority</picklist>
+            <values>
+                <fullName>High</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Normal</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deferred</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Started</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Waiting on someone else</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Call outside InContact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fax</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Walk-In</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Trainer__c</picklist>
+            <values>
+                <fullName>Garrett Robertson</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nic Autry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rhonda Thode</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sales Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Support Call</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type2__c</picklist>
+            <values>
+                <fullName>Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sales Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Support Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To Do</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Task</fullName>
+        <active>true</active>
+        <description>Select Task to log your daily activities.</description>
+        <label>Task</label>
+        <picklistValues>
+            <picklist>Activity__c</picklist>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Event at Dealer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Event at Producer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FARM VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Farmgate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Meeting with Dealer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Postage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quality%2FService Issue</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Text</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tradeshow</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Training</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Counselor_Selling__c</picklist>
+            <values>
+                <fullName>Advocating</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discovering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relating</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Supporting</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Initiative__c</picklist>
+            <values>
+                <fullName>Equine Veterinarian Kit</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Priority</picklist>
+            <values>
+                <fullName>High</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Normal</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deferred</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Started</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Waiting on someone else</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Send Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Send Quote</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Trainer__c</picklist>
+            <values>
+                <fullName>Garrett Robertson</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nic Autry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rhonda Thode</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sales Call</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Support Call</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type2__c</picklist>
+            <values>
+                <fullName>Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sales Call</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Support Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To Do</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Activity_Required_on_Task_Record_Type</fullName>
+        <active>false</active>
+        <description>When the Record Type is &quot;Task&quot;, the Activity field is required to be populated.</description>
+        <errorConditionFormula>RecordType.Name = &apos;Task&apos; &amp;&amp; text(Type2__c) &lt;&gt; &quot;To Do&quot; &amp;&amp;
+ISBLANK( Text(Activity__c))</errorConditionFormula>
+        <errorDisplayField>Activity__c</errorDisplayField>
+        <errorMessage>Please indicated the &quot;Activity&quot;.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Due_Date_Required_on_Task_Record_Type</fullName>
+        <active>false</active>
+        <description>When the Record Type is &quot;Task&quot;, the Due Date is required to be populated.</description>
+        <errorConditionFormula>RecordType.Name = &apos;Task&apos; 
+&amp;&amp;  ISBLANK(  ActivityDate )</errorConditionFormula>
+        <errorDisplayField>ActivityDate</errorDisplayField>
+        <errorMessage>Please indicated the &quot;Due Date&quot;.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Internal_Only_Assigned_to_Partner_User</fullName>
+        <active>true</active>
+        <description>Prevents an Activity from being assigned to a Partner User if the Activity is Marked as Internal Only</description>
+        <errorConditionFormula>RecordType.Name = &apos;Task&apos;
+&amp;&amp;
+contains(Owner:User.Profile.Name,&quot;Partner&quot;)
+&amp;&amp;
+Not(contains($User.Profile_Current__c ,&quot;Partner&quot;))
+&amp;&amp;
+Internal_Only__c = TRUE</errorConditionFormula>
+        <errorDisplayField>OwnerId</errorDisplayField>
+        <errorMessage>Unable to assign to Partner User if the Activity is marked as Internal Only.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Type_is_Required_on_Task_Record_Type</fullName>
+        <active>false</active>
+        <description>When the Record Type is &quot;Task&quot;, the activity is required.</description>
+        <errorConditionFormula>AND(
+RecordType.Name = &apos;Task&apos;,
+ISBLANK(Text( Type2__c ))
+)</errorConditionFormula>
+        <errorDisplayField>Type2__c</errorDisplayField>
+        <errorMessage>Please identify the Type</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Email_Activity_Owner</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Email Activity Owner</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>https://composer.congamerge.com
+?sessionId={!API.Session_ID} 
+&amp;serverUrl={!API.Partner_Server_URL_290}
+&amp;id={!Task.Id}
+&amp;ReportId=00Oj0000004K8qK?pv0={!Task.X18_Digit_Activity_ID__c}
+&amp;CongaEmailTemplateID=a0Fj00000031Zat
+&amp;EmailAdditionalTo={!Task.Activity_Owner_Email__c}
+&amp;BML=Generating+Activity+Email
+&amp;OFN=Activity+Email
+&amp;LG3=2
+&amp;DS7=2</url>
+    </webLinks>
+    <webLinks>
+        <fullName>New_Activity</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>New Activity</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>/00T/e? 
+&amp;what_id={!Account.Id} 
+&amp;retURL=%2F{!Account.Id} 
+&amp;00Nj0000002iAJr={!Account.Counselor_Selling_Stage__c} 
+&amp;RecordType=012j0000000Z0Gt 
+&amp;ent=Task</url>
+    </webLinks>
+    <webLinks>
+        <fullName>New_Activity_Opp</fullName>
+        <availability>online</availability>
+        <description>List Button on opportunity</description>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>New Activity</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!URLFOR( 
+    $Action.Task.NewTask , null, 
+    [what_id=Opportunity.Id, retURL=URLFOR( &apos;/&apos; &amp; Opportunity.Id )])}
+&amp;00Nj0000002iAJr={!Opportunity.Account_Counselor_Stage__c}</url>
+    </webLinks>
+</CustomObject>

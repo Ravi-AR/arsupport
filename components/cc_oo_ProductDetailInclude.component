@@ -1,0 +1,2024 @@
+<!-- 
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Rajesh W                                10/14/2016                                   US:OO-535 The JDE ""2nd description"" shall be displayed under or appended to the product label name.
+Murtaza B                               10/25/2016                                   US:OO-59  The vfd flag shall be visible for vfd flagged product.
+Piyali M                                10/26/2016                                   US:OO-339 The system will not allow the user to add two types of products to cart.
+Rajeev Choudhary                        11/02/2016                                   US:OO-140 Display number of bags in Pallet
+Shivani Singh                           11/04/2016                                   US:OO-317 Need the online order system to recognize when a product is superseded with a new product.
+Gurleen Kaur                            11/07/2016                                   US:OO-144 Disable Add to Cart button for Discontinued/Unavailable products 
+Shivani Singh                           01/25/2017                                   US:OO-2042 View details in seasonal (related) and replacement (discontinued) products
+-->
+
+<apex:component allowDML="true" controller="cc_oo_ProductDetailController">
+
+    <script id="oo-ProductDetail-Desktop" type="text/template">
+        <a class="row-fluid back-to-search-results-container hide">
+            <div class="font16px pull-left icon-icons_previous"></div>
+            <div class="tag pull-left spacing-left">Back to Search Results</div>
+        </a>
+        <div class="product_detail_container product_type_standard phoneProductItem row-fluid" oo-prod-id="{{this.product.prodBean.id}}" >
+            <div class="row clear product-desc lipstick">
+                <div class="span12 product-title">
+                    <h3>{{this.product.prodBean.name}}</h3>
+                </div>
+                <div class="span12">
+                    <div class="span7 product-title oo_E2Description">{!e2Description}</div>
+                    <div class="span5 hide hidden-vfd vfd-icon pull-right no-margin-left">
+                        <div class="icon-icons_vfd_regulated_feed pull-left" title="CAUTION: Federal law restricts medicated feed containing this veterinary feed directive (VFD) drug to use by or on the order of a licensed veterinarian." href="#" data-id="{{this.prodBean.id}}"></div>
+                        <label class="pull-left">{{pageLabelMap 'VFDRegulatedFeed'}}</label>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="product_detail span12">
+                <div class="global-error alert alert-error messagingSection-Error modal-message" style="display: none"></div>
+                <div class="global-error alert alert-info messagingAction-Info" style="display: none">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                </div>
+                <div class="prod_media span3">
+                    {{#if this.mediaWrappers.[SVG Interactive Diagram]}}
+                        {{#each this.mediaWrappers.[SVG Interactive Diagram]}}
+                            <div class="interactive">{{displaySVG this 'mainProdImage prodDetail'}}</div>
+                        {{/each}}
+                    {{/if}}
+                    <div id="altImageModal" class="modal hide fade in" tabindex="-1" role="dialog">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;       </button>
+                            <h4 class="modal-title" id="myModalLabel"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <img class="modalImg" src=""/>
+                            <p class="modalText"></p>
+                        </div>
+                    </div>
+                    {{#if this.product.mediaWrapper }}
+                        <div class="product_detail_viewport span12" id="photoContainer">
+                            <div>{{displayImage this.product.mediaWrapper 'mainProdImage prodDetail'}}</div>
+                            {{#if this.mediaWrappers.[Alternate Images]}}
+                                <div class="altImages">
+                                    <img class="alternate" src="{{productImage ../product.mediaWrapper}}" data-id="{{../product.mediaWrapper.altMessage}}"/>
+                                    {{#each this.mediaWrappers.[Alternate Images]}}
+                                        <img class="alternate" src="{{productImage this}}" data-id="{{this.altMessage}}"/>
+                                    {{/each}}
+                                </div>
+                            {{/if}}
+                        </div>
+                    {{else}}
+                        {{#if this.mediaWrappers.[SVG Interactive Diagram]}}
+                        {{else}}
+                            <div class="product_detail_viewport span12" id="photoContainer">
+                                {{displayImage this.product.mediaWrapper 'mainProdImage prodDetail'}}
+                            </div>
+                        {{/if}}
+                    {{/if}}
+                </div>
+                
+                <div class="wishFinder span8 product-desc" data-sku="{{this.product.prodBean.sku}}" oo-prod-id="{{this.product.prodBean.id}}">
+                    {{#ifDisplay 'PD.DsplSDesc'}}
+                        {{#if this.product.prodBean.shortDesc}}
+							<div class="shortDesc span12">
+                            	<div class="pblock span12">{{{this.product.prodBean.shortDesc}}}</div>
+                        	</div>
+						{{/if}}
+                    {{/ifDisplay}}
+                    {{#ifDisplay 'PD.DsplSku'}}
+                        <div class="sku span12">
+                            <label>{{pageLabelMap 'ProductDetailsInc_SKU'}}:</label>
+                            <strong class="value tab">{{this.product.prodBean.sku}}</strong>
+                        </div>
+                    {{/ifDisplay}}
+                    <div class="uom span12" um-data="{{this.product.prodBean.ummeasure}}">
+                        <label>{{pageLabelMap 'ProductDetails_UnitOfMeasure'}}:</label>
+                        <strong class="value tab"></strong>
+                    </div>
+                    <div class="lead-time span12">
+                        <label>{{pageLabelMap 'LeadTime'}}:</label>
+                        <strong class="value tab">{!LeadTime} {{pageLabelMap 'LeadTimeMeasure'}}</strong>
+                    </div> 
+                    <div class="bag-pallet span12 hide">
+                        <label>{{pageLabelMap 'FullPallet'}}:</label>
+                        <strong class="value tab"></strong>
+                    </div>                                
+                    <!--
+                    {{#ifDisplay 'PR.Enabled'}}
+                        <div id="avgRating" class="rateit" data-rateit-value="{{this.product.avgRating}}" data-rateit-ispreset="true" data-rateit-readonly="true">
+                            <strong class="label">{{pageLabelMap 'NumberofReviews' this.numberOfReviews }}</strong>
+                        </div>
+                    {{/ifDisplay}}
+                    {{#if this.product.showPricing}}
+                        {{#ifDisplay 'PD.DsplPrc'}}
+                            {{#if this.product.price}}
+                                <div class="price_block span12">
+                                    {{#ifDisplay 'PD.DsplListPrc'}}
+                                        {{#if this.product.basePrice}}
+                                            <div class="baseprice">
+                                                <label class="span4">{{pageLabelMap 'ProductDetails_ListPrice'}}</label>
+                                                <strong class="value span8">{{price this.product.basePrice}}</strong>
+                                            </div>
+                                        {{/if}}
+                                    {{/ifDisplay}}
+                                    <div class="price">
+                                        <label class="span4">{{pageLabelMap 'Price'}}</label>
+                                        <strong class="value span8">{{price this.product.price}}</strong>
+                                    </div>
+                                    {{#ifDisplay 'PD.DsplSvPrc'}}
+                                        {{#if this.product.savings}}
+                                            <div class="savings">
+                                                <label class="span4">{{pageLabelMap 'YouSave'}}</label>
+                                                <strong class="value span8">{{price this.product.savings}}</strong>
+                                            </div>
+                                        {{/if}}
+                                    {{/ifDisplay}}
+                                </div>
+                            {{/if}}
+                        {{/ifDisplay}}
+                    {{/if}}
+                    -->                                      
+                    
+                    <!--{{#if this.product.canAddtoCart}} -->
+                        <div class="quantity_block span12">
+                            <div class="span5">
+                                <label>{{pageLabelMap 'Quantity'}}:</label>
+                                <!-- Display number of bags in Pallet -->
+                                <div id="palletSize" class="font-size-10px pallet-size minimum-qty hide">
+                                </div> 
+                            </div>
+                            <div class="span7 tab center">
+                                {{#if this.product.qtySkipIncrement}}
+                                    <input type="button" value="{{pageLabelMap 'Prod_QtyDecrFF'}}" class="plus_minus minusFF">
+                                {{/if}}
+                                <!--{{#ifNotEquals this.product.qtySingleIncrement 1}} --> 
+                                    <input type="button" value="{{pageLabelMap 'Prod_QtyDecrSingle'}}" class="plus_minus minus-button btn btn-primary" data-id="{{this.product.prodBean.id}}" data-minQty="" disabled="disabled">
+                                    <input type="text" name="qty" value="0" class="entry plus_minus" maxlength="6" data-id="{{this.product.prodBean.id}}" />
+                                    <input type="button" value="{{pageLabelMap 'Prod_QtyIncrSingle'}}" class="plus_minus plus-button btn btn-primary" data-id="{{this.product.prodBean.id}}" data-minQty="">
+                                <!-- {{else}}
+                                    <div class="label">{{pageLabelMap 'Qty'}}</div><input type="text" id="qty" name="qty" value="1" class="input-text entry plus_minus" maxlength="6" data-id="{{this.product.prodBean.id}}"/>
+                                {{/ifNotEquals}} -->
+                                {{#if this.product.qtySkipIncrement}}
+                                    <input type="button" value="{{pageLabelMap 'Prod_QtyIncrFF'}}" class="plus_minus plusFF">
+                                {{/if}}
+                                <input type="hidden" name="qtyIncrement" value="{{this.product.qtySingleIncrement}}" class="item_qtyIncrement" />
+                                <input type="hidden" name="qtySkipIncrement" value="{{this.product.qtySkipIncrement}}" class="item_qtySkipIncrement" />
+                                <div class="span12 unit-of-measure lipstick center"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="span12 custom-price clear"><span class="retrieve-price-msg"></span></div>
+
+                        <!--{{#unless this.showNewSubscriptionSelection}}
+                            {{#if this.product.prodBean.showSubscriptionSelection}}
+                                <div class="subscriptionSelectionDiv">
+                                    <p class="subscription_selection"><span class="subscriptionLabel">{{pageLabelMap 'Subscribe_And_Save_Label'}}</span>
+                                    <select class="subscriptionFrequencySelection" data-subscription="{{this.product.prodBean.sku}}">
+                                    {{#each this.product.prodBean.subscriptionFrequencies}}
+                                        <option value="{{safeQuote this}}">{{pageLabelMapMultiString 'Subscribe_And_Save_' this}}</option>
+                                    {{/each}}
+                                    </select>
+                                    </p>
+                                </div>
+                            {{/if}}
+                            <div class="wishButtons plus_minus"></div>                            
+                        {{/unless}} -->
+                        <!-- Min quantity message -->
+                        <div class="span12 inline-error alert alert-error min-qty-error hide"></div>
+                        <div class="span12 inline-error modal-message invalid-quantity hide">
+                                    <strong>{{ this.product.prodBean.sku }}</strong>
+                         </div>
+                        
+                        <div class="clear span12 modal-message hide global-error cart-validate error-border">{{ pageLabelMap 'OO_AddToCart_Validate'}}</div>
+                        {{#ifDisplay 'PD.DsplAvlb'}}
+                            {{#ifStoreSetting 'InventoryCheckFlag__c'}}
+                                <div class="inline-error clear alert alert-error modal-message product-discontinued show">{{this.product.inventory}}</div>
+                            {{else}}    
+                                <div class="inline-error clear alert alert-error modal-message product-discontinued hide padding-none"></div>
+                            {{/ifStoreSetting}}                         
+                        {{/ifDisplay}}
+                        <!--<div class="inline-error clear alert alert-error modal-message product-discontinued hide padding-none">{{pageLabelMap 'ProductDiscontinued'}}</div>-->
+                        <div class="">
+                            <!-- US- 339 - addtocart button modfication -->
+                            <button disabled="disabled" type="button" class="oo-add-to-cart btn btn-primary medium-btn" data-sku="{{this.product.prodBean.sku}}" data-seller="{{this.product.sellerID}}">{{pageLabelMap 'Component_MiniwishList_AddToCart'}}</button>
+                        </div>
+                        <!-- 2495 -->
+                        <div class="span12 lipstick checkConfirmMsg hide"> 
+                            <!--<div class="icon-icons_check_incircle larger pull-left"/>-->
+                            <div class="inline-info spacing-left confirm-addToCart pull-left"></div>
+                        </div>
+                        <!-- 2495 -->                       
+                    <!--{{/if}} -->                 
+                </div>
+            </div>
+
+            {{#if this.showNewSubscriptionSelection}}
+                {{#if this.product.canAddtoCart}}
+                    <div class="subscriptionSelectionDiv clearfix">
+                        <h2>{{pageLabelMap 'Subscribe_And_Save_Label'}}</h2>
+                        {{#each this.subProdTerms}}
+                            {{#if this.CC_NO_SUBSCRIPTION}}
+                                <div class="item_container">
+                                    <div class="control">
+                                        <label class="radio name">
+                                        <input value="nosuboption" data-nme="nosuboption" type="radio" name="subOptionGuider{{this.productSKU}}" {{this.checked}}/>                                 
+                                        {{pageLabelMap 'Prod_NoSubscriptionOption' (price this.productPrice)}}</label>
+                                </div>
+                            </div>
+                            {{else}}
+                                <div class="item_container">
+                                    <div class="control">
+                                        <label class="radio name">
+                                        <input value="{{this.sfid}}" data-nme="{{this.name}}" type="radio" name="subOptionGuider{{this.productSKU}}" {{this.checked}}/>                 
+                                        {{#if this.modifierSubscriptions}}
+                                            {{insertTokens this.pdpDisplayName this.displayName (price this.productPrice) (price this.subscriptionPrice) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.installmentFrequencyUOM) this.orderFrequency this.installmentFrequency this.installmentCount this.orderCount (price this.modifierSubscriptions.[0].productPrice) (price this.modifierSubscriptions.[0].subscriptionPrice) this.modifierSubscriptions.[0].orderCount this.modifierSubscriptions.[0].installmentCount}}
+                                        {{else}}
+                                            {{insertTokens this.pdpDisplayName this.displayName (price this.productPrice) (price this.subscriptionPrice) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.installmentFrequencyUOM) this.orderFrequency this.installmentFrequency this.installmentCount this.orderCount}}
+                                        {{/if}}
+                                        </span></label>
+                                    </div>
+                                </div>
+                            {{/if}}
+                        {{/each}}   
+                        <div class="">
+                        <!-- US- 339 - addtocart button modfication -->
+                            <!-- <button type="button" class="btn btn-primary addItem" data-sku="{{this.product.prodBean.sku}}">{{pageLabelMap 'Component_MiniwishList_AddToCart'}}</button> -->
+                            <button disabled="disabled" type="button" class="oo-add-to-cart btn btn-primary medium-btn" data-sku="{{this.product.prodBean.sku}}" data-seller="{{this.product.sellerID}}">{{pageLabelMap 'Component_MiniwishList_AddToCart'}}</button>
+                        </div>
+                        <!-- 2495 -->
+                        <div class="span12 lipstick checkConfirmMsg hide"> 
+                            <!--<div class="icon-icons_check_incircle larger pull-left"/>-->
+                            <div class="inline-info spacing-left confirm-addToCart pull-left"></div>
+                        </div>
+                        <!--2495 -->                   
+                    </div>
+                {{/if}}
+            {{/if}}
+        </div>
+
+        <div class="tabSection"></div>
+        <div class="widgetSection"></div>
+    </script>
+
+    <script id="oo-ProductDetail-Mobile" type="text/template">
+        <div class="product_detail_container product_type_standard_phone" oo-prod-id="{{this.product.prodBean.id}}">
+            <!--<div class="span5 hide hidden-vfd pull-right" href="#">{{pageLabelMap 'VFDRegulatedFeed'}}</div>-->
+            <a class="row-fluid back-to-search-results-container hide">
+                <span class="font16px pull-left icon-icons_previous"></span>
+                <span class="pallet-size black spacing-left">{{pageLabelMap 'Back-to-search-results'}}</span>
+            </a>
+            
+            <h2 class="title cart-mobile-title row clear product-desc">
+                <div class="span12 font18px">
+                    <strong>{{this.product.prodBean.name}}</strong>
+                </div>
+                <div class="span12">
+                    <span class="span8">
+                        <span class="oo_E2Description">{!e2Description}</span>
+                    </span>
+                    <div class="span4 hide hidden-vfd icon-icons_vfd_regulated_feed pull-right" title="CAUTION: Federal law restricts medicated feed containing this veterinary feed directive (VFD) drug to use by or on the order of a licensed veterinarian." href="#" data-id="{{this.mockProduct.id}}"></div>
+                </div>
+            </h2>
+            <div class="product_detail">
+                <div class="global-error alert alert-error messagingSection-Error" style="display: none"></div>
+                <div class="global-error alert alert-info messagingAction-Info" style="display: none"></div>
+                <div class="phoneProductItem wishFinder span12" data-sku="{{this.product.prodBean.sku}}">
+                    <div class="product_detail_viewport" id="photoContainer">
+                        <div class="pull-left">{{displayImage this.product.mediaWrapper 'mainProdImage prodDetail'}}</div>
+                    </div>
+                    <div class="product-desc span12">
+                        {{#ifDisplay 'PD.DsplSDesc'}}
+							{{#if this.product.prodBean.shortDesc}}
+                            	<div class="shortDesc span12">
+                                	<div class="pblock span12">{{{this.product.prodBean.shortDesc}}}</div>
+                            	</div>
+							{{/if}}
+                        {{/ifDisplay}}
+                        {{#ifDisplay 'PD.DsplSku'}}
+                            <div class="span12 clear">
+                                <label class="span4">{{pageLabelMap 'SKU'}}</label>
+                                <strong id="product_detail_sku" class="span8 value">{{this.product.prodBean.sku}}</strong>
+                            </div>
+                        {{/ifDisplay}}
+                        
+                        <div class="uom span12 clear" um-data="{{this.product.prodBean.ummeasure}}">
+                            <label class="span4">{{pageLabelMap 'ProductDetails_UnitOfMeasure'}}</label>
+                            <!--{{#ifDisplay 'PD.DsplUOM'}}-->
+                                <strong class="value tab span8"></strong>
+                            <!--{{/ifDisplay}}-->
+                        </div>
+                        
+                        <div class="lead-time span12 clear">
+                            <label class="span4">{{pageLabelMap 'LeadTime'}}</label>
+                            <strong class="value span8">{!LeadTime} {{pageLabelMap 'LeadTimeMeasure'}}</strong>
+                        </div>
+                        <div class="bag-pallet span12 clear hide">
+                            <label class="span4">{{pageLabelMap 'FullPallet'}}</label>
+                            <strong class="value span8"></strong>
+                        </div>
+                        
+                        <!--
+                        {{#ifDisplay 'PD.DsplAvlb'}}
+                            <p class="spacer">
+                                <span>
+                                    {{#ifStoreSetting 'InventoryCheckFlag__c'}}
+                                        <strong>{{pageLabelMap 'ProductDetails_Availability'}}</strong>&nbsp;{{this.product.inventory}}
+                                    {{else}}    
+                                        <strong>{{pageLabelMap 'ProductDetails_Availability'}}</strong>&nbsp;{{pageLabelMap this.product.availMsg}}
+                                    {{/ifStoreSetting}}
+                                </span>
+                            </p>
+                        {{/ifDisplay}}
+                        {{#if this.product.showPricing}}
+                            {{#ifDisplay 'PD.DsplPrc'}}
+                                {{#if this.product.price}}
+                                    <p><span>
+                                        {{#ifDisplay 'PD.DsplListPrc'}}
+                                            {{#if this.product.basePrice}}
+                                                <del>{{price this.product.basePrice}}</del>&nbsp;
+                                            {{/if}}
+                                        {{/ifDisplay}}
+                                        <strong class="price">{{price this.product.price}}</strong>
+                                    </span></p>
+                                {{/if}}
+                            {{/ifDisplay}}
+                            {{#ifDisplay 'PD.DsplSvPrc'}}
+                                {{#if this.product.savings}}
+                                    <p><span><strong>{{pageLabelMap 'YouSave'}}:</strong>{{price this.product.savings}}</span><p>
+                                {{/if}}
+                            {{/ifDisplay}}
+                        {{/if}}
+                        {{#ifDisplay 'PR.Enabled'}}
+                            <div id="avgRating" class="rateit" data-rateit-value="{{this.product.avgRating}}" data-rateit-ispreset="true" data-rateit-readonly="true">
+                                {{pageLabelMap 'NumberofReviews' this.numberOfReviews }}
+                            </div>
+                        {{/ifDisplay}}
+                        -->
+                    <!-- {{#if this.product.canAddtoCart}} -->
+                        {{#ifDisplay 'PD.DsplAddCart' }}
+                            <div class="quantity_block span12 clear">
+                                <div class="span4">
+                                    <label>{{pageLabelMap 'Quantity'}}</label>
+                                    <!-- Display number of bags in Pallet -->
+                                    <div id="palletSize" class="pallet-size minimum-qty hide">
+                                    </div>
+                                </div>
+                                
+                                
+                                <div class="span8 value">
+                                    {{#if this.product.qtySkipIncrement}}
+                                        <input type="button" value="{{pageLabelMap 'Prod_QtyDecrFF'}}" class="plus_minus minusFF">
+                                    {{/if}}
+                                    <!--{{#ifNotEquals this.product.qtySingleIncrement 1}} --> 
+                                    <input type="button" value="{{pageLabelMap 'Prod_QtyDecrSingle'}}" class="plus_minus minus-button btn btn-primary" data-id="{{this.product.prodBean.id}}" data-minQty="" disabled="disabled">
+                                    <input type="text" name="qty" value="0" class="entry plus_minus"  maxlength="6" data-id="{{this.product.prodBean.id}}" />
+                                    <input type="button" value="{{pageLabelMap 'Prod_QtyIncrSingle'}}" class="plus_minus plus-button btn btn-primary" data-id="{{this.product.prodBean.id}}" data-minQty="">
+                                <!-- {{else}}
+                                    <div class="label">{{pageLabelMap 'Qty'}}</div><input type="text" id="qty" name="qty" value="1" class="input-text entry plus_minus" maxlength="6" data-id="{{this.product.prodBean.id}}"/>
+                                {{/ifNotEquals}} -->
+                                {{#if this.product.qtySkipIncrement}}
+                                    <input type="button" value="{{pageLabelMap 'Prod_QtyIncrFF'}}" class="plus_minus plusFF">
+                                {{/if}}
+                                    <input type="hidden" name="qtyIncrement" value="{{this.product.qtySingleIncrement}}" class="item_qtyIncrement" />
+                                    <input type="hidden" name="qtySkipIncrement" value="{{this.product.qtySkipIncrement}}" class="item_qtySkipIncrement" />
+                                    <div class="span12 unit-of-measure lipstick center"></div>
+                                </div>
+                            </div>
+                                <!-- {{#unless this.showNewSubscriptionSelection}}
+                                {{#if this.product.prodBean.showSubscriptionSelection}}
+                                    <p class="subscription_selection">{{pageLabelMap 'Subscribe_And_Save_Label'}}
+                                        <select class="subscriptionFrequencySelection" data-subscription="{{this.product.prodBean.sku}}">
+                                            {{#each this.product.prodBean.subscriptionFrequencies}}
+                                            <option value="{{safeQuote this}}">{{pageLabelMapMultiString 'Subscribe_And_Save_' this}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </p>
+                                {{/if}}
+                                
+                                {{/unless}} -->
+                                <div class="span12 clear custom-price"><span class="retrieve-price-msg"></span></div>
+                                <div class="inline-error span12 alert alert-error min-qty-error hide"></div>
+                                <div class="inline-error span12 modal-message invalid-quantity hide">
+                                    <strong>{{ this.product.prodBean.sku }}</strong>
+                                </div>
+                                        
+                                {{#ifDisplay 'PD.DsplAvlb'}}
+                                    {{#ifStoreSetting 'InventoryCheckFlag__c'}}
+                                        <div class="inline-error clear alert alert-error modal-message product-discontinued">{{this.product.inventory}}</div>
+                                    {{else}}    
+                                        <div class="inline-error clear alert alert-error modal-message product-discontinued hide padding-none">{{pageLabelMap this.product.availMsg}}</div>
+                                    {{/ifStoreSetting}}                         
+                                {{/ifDisplay}}
+                                <!--<div class="clear alert alert-error modal-message product-discontinued hide">{{pageLabelMap 'ProductDiscontinued'}}</div>-->
+                                <div class="global-error clear span12 modal-message hide cart-validate error-border">{{ pageLabelMap 'OO_AddToCart_Validate'}}</div>
+                                <div class="span12 action-buttons clear center">
+                                    <!-- US- 339 - addtocart button modfication -->
+                                    <br/>
+                                    <button disabled="disabled" type="button" class="oo-add-to-cart btn btn-primary wide-btn" data-sku="{{this.product.prodBean.sku}}" data-seller="{{this.product.sellerID}}">{{pageLabelMap 'Component_MiniwishList_AddToCart'}}</button>
+                                </div>
+                                <!-- 2495 -->
+                                <div class="span12 lipstick checkConfirmMsg hide"> 
+                                    <!--<div class="icon-icons_check_incircle larger pull-left"/>-->
+                                    <div class="inline-info spacing-left confirm-addToCart pull-left"></div>
+                                </div>
+                                <!-- 2495 -->
+                                {{#if this.showNewSubscriptionSelection}}
+                                    {{#if this.product.canAddtoCart}}
+                                        <div class="subscriptionSelectionDiv clearfix">
+                                            <h2>{{pageLabelMap 'Subscribe_And_Save_Label'}}</h2>
+                                                {{#each this.subProdTerms}}
+                                                    {{#if this.CC_NO_SUBSCRIPTION}}
+                                                        <div class="item_container">
+                                                            <div class="control">
+                                                                <label class="radio name">
+                                                                    <input value="nosuboption" data-nme="nosuboption" type="radio" name="subOptionGuider{{this.productSKU}}" {{this.checked}}/>                                 
+                                                                    {{pageLabelMap 'Prod_NoSubscriptionOption' (price this.productPrice)}}</label>
+                                                            </div>
+                                                        </div>
+                                                    {{else}}
+                                                        <div class="item_container">
+                                                            <div class="control">
+                                                                <label class="radio name">
+                                                                    <input value="{{this.sfid}}" data-nme="{{this.name}}" type="radio" name="subOptionGuider{{this.productSKU}}" {{this.checked}}/>                 
+                                                                        {{#if this.modifierSubscriptions}}
+                                                                            {{insertTokens this.pdpDisplayName this.displayName (price this.productPrice) (price this.subscriptionPrice) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.installmentFrequencyUOM) this.orderFrequency this.installmentFrequency this.installmentCount this.orderCount (price this.modifierSubscriptions.[0].productPrice) (price this.modifierSubscriptions.[0].subscriptionPrice) this.modifierSubscriptions.[0].orderCount this.modifierSubscriptions.[0].installmentCount}}
+                                                                        {{else}}
+                                                                            {{insertTokens this.pdpDisplayName this.displayName (price this.productPrice) (price this.subscriptionPrice) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.installmentFrequencyUOM) this.orderFrequency this.installmentFrequency this.installmentCount this.orderCount}}
+                                                                        {{/if}}
+                                                                </span></label>
+                                                           </div>
+                                                      </div>
+                                                   {{/if}}
+                                            {{/each}}   
+                                        <p>
+                                        <!-- US- 339 - addtocart button modfication -->
+                                            <!-- <button type="button" class="btn btn-primary addItem" data-sku="{{this.product.prodBean.sku}}">{{pageLabelMap 'Component_MiniwishList_AddToCart'}}</button> -->
+                                        <button disabled="disabled" type="button" class="oo-add-to-cart btn btn-primary" data-sku="{{this.product.prodBean.sku}}" data-seller="{{this.product.sellerID}}">{{pageLabelMap 'Component_MiniwishList_AddToCart'}}</button>
+                                        <p>                         
+                                    </div>
+                                    <!-- 2495 -->
+                                    <div class="span12 lipstick checkConfirmMsg hide center"> 
+                                        <div class="icon-icons_check_incircle larger"/>
+                                        <div class="spacing-left confirm-addToCart"></div>
+                                    </div>
+                                    <!-- 2495 -->
+                                {{/if}}
+                            {{/if}}
+                        {{/ifDisplay}}
+                        <!--{{/if}} -->
+                        <!-- {{#unless this.showNewSubscriptionSelection}}
+                        <div class="wishFinder" data-sku="{{this.product.prodBean.sku}}">
+                            <p class="wishButtons"></p>
+                        </div>
+                        {{/unless}} -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tabSection"></div>
+        <div class="widgetSection"></div>
+    </script>
+    
+    <script id="OO-ProductDetail-AdditionalProducts-Desktop" type="text/x-handlebars-template">
+        {{#each this.relatedProducts}}
+            {{#ifEquals this.relatedProductsType 'Alternate'}}
+                <div class="widget_container secRelatedAlternate_container">
+                    <h2 class="title">{{pageLabelMap 'Head_RelatedCompetitive'}}</h2>
+                    <div class="widget_column">
+                        <div class="secRelatedAlternate">
+            {{/ifEquals}}
+            {{#ifEquals this.relatedProductsType 'Seasonal'}}
+                <div class="widget_container secRelatedSeasonal_container">
+                    <h2 class="title">{{pageLabelMap 'Component_RelatedItemsWidget_RelatedProducts'}}</h2>
+                    <div class="widget_column">
+                        <div class="secRelatedSeasonal">
+            {{/ifEquals}}
+            {{#ifEquals this.relatedProductsType 'Replaced'}}
+                <div class="widget_container secRelatedReplaced_container">
+                    <h2 class="title">{{pageLabelMap 'Head_RelatedReplaced'}}</h2>
+                    <div class="widget_column">
+                        <div class="secRelatedReplaced">
+            {{/ifEquals}}
+                            <div class="quick_wishlist row-fluid">
+                                {{#each this.relprddataList}}
+                                    <div class="row quick_wishlist_item relatedProducts" data-id="{{this.skuId}}">
+                                        <div class="span12 clear product-desc lipstick">
+                                           {{#if this.isVFD }}
+                                                <span class="span7">
+                                                    <strong><a href="javascript:void(0);" class="prodLink productName detailLink" data-id="{{this.skuId}}">{{this.name}}</a></strong>
+                                                    {{#if this.secondDesc}}
+                                                        <div class="oo_E2Description" data-id="{{this.skuId}}">{{{this.secondDesc}}}</div>
+                                                    {{/if}}
+                                                </span>
+                                                <div class="span5 hide hidden-vfd vfd-icon pull-right">
+                                                    <div class="icon-icons_vfd_regulated_feed pull-left" title="CAUTION: Federal law restricts medicated feed containing this veterinary feed directive (VFD) drug to use by or on the order of a licensed veterinarian." href="#" data-id="{{this.prodBean.id}}"></div>
+                                                    <label class="pull-left">{{pageLabelMap 'VFDRegulatedFeed'}}</label>
+                                                </div>
+                                           {{else}}
+                                                <span class="span12">
+                                                    <strong><a href="javascript:void(0);" class="productName detailLink prodLink" data-id="{{this.skuId}}" data-sku="{{this.skuId}}">{{this.name}}</a></strong>
+                                                    {{#if this.secondDesc}}
+                                                        <div class="oo_E2Description" data-id="{{this.skuId}}">{{this.secondDesc}}</div>
+                                                    {{/if}}
+                                                </span>
+                                           {{/if}}
+                                        </div>
+                                        <div class="span12 clear no-margin-left">
+                                            <div class="span4 cart_item_viewport">
+                                                <a href="javascript:void(0);"  class="productName pull-left" data-sku="{{this.skuId}}" data-id="{{this.skuId}}">
+                                                    {{#if this.mediaWrapper}}
+                                                        <img src="{{this.mediaWrapper}}" class="detailLink prodDetRel" dataId="{{this.skuId}}" />
+                                                    {{else}}
+                                                        <img class="detailLink prodDetRel noimg" dataId="{{this.skuId}}" />
+                                                    {{/if}}
+                                                </a>                        
+                                            </div>
+                                            <div class="span8 product-desc">
+                                                
+                                                    {{#if this.shortDesc}}
+                                                        <div class = "span12">{{{this.shortDesc}}}</div><br/><br/>
+                                                    {{/if}}
+													{{#if this.longdescription}}
+														<p class="description span12 no-margin-left">
+                                                    	<strong><a class="included_items" href="#additional_info{{this.skuId}}" id="additionalInfoLink" data-toggle="modal">{{pageLabelMap 'AdditionalInfo'}}</a></strong>
+                                                    	<br/>                           
+                                                    	<div id="additional_info{{this.skuId}}" class="modal hide fade in info-modal-layout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        	<div class="modal-header">
+                                                            	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                            	<h3 id="myModalLabel">{{this.name}} {{pageLabelMap 'ProductsInc_MiscDetails'}}</h3>
+                                                        	</div>
+                                                        	<div class="modal-body" style="padding: 15px;">
+                                                            	<strong>{{pageLabelMap 'SKU'}}:</strong>&nbsp;{{this.skuId}}<br/><br/>
+                                                            	<div class="oo_longDesc" data-id="{{this.skuId}}">
+                                                    	        	{{{this.longdescription}}}<br/><br/>
+                                                            	</div>        
+                                                        	</div>
+                                                    	</div> 
+														</p>
+													{{/if}} 
+                                                
+                                                {{#if this.skuId}}
+                                                    <div class="span12 skuDisp clear">
+                                                        <label>{{pageLabelMap 'SKU'}}:</label>
+                                                        <strong class="value">{{this.skuId}}</strong>
+                                                    </div>
+                                                {{/if}}
+
+                                                {{#if this.uOMDesc}}
+                                                    <div class="span12 uomDisp clear"  data-id="{{this.skuId}}">
+                                                        <label>{{pageLabelMap 'ProductDetails_UnitOfMeasure'}}: </label>
+                                                        <strong class="value uomDisplay" data-id="{{this.uOMDesc}}">{{this.uOMDesc}}</strong>
+                                                    </div>
+                                                {{/if}}
+                                                {{#if this.leadTime}}
+                                                    <div class="span12 leadTime clear" data-id="{{this.skuId}}">
+                                                        <label>{{pageLabelMap 'LeadTime'}}:</label>
+                                                        <strong class="value oo_leadTime" data-id="{{this.skuId}}">{{this.leadTime}}  {{pageLabelMap 'LeadTimeMeasure'}}</strong>    
+                                                    </div>
+                                                {{/if}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        {{/each}}
+    </script>
+    
+    <script id="OO-ProductDetail-AdditionalProducts-Mobile" type="text/x-handlebars-template">
+        {{#each this.relatedProducts}}
+            {{#ifEquals this.relatedProductsType 'Alternate'}}
+                <div class="widget_container secRelatedAlternate_container">
+                    <h2 class="title">{{pageLabelMap 'Head_RelatedCompetitive'}}</h2>
+                    <div class="widget_column">
+                        <div class="secRelatedAlternate">
+            {{/ifEquals}}
+            {{#ifEquals this.relatedProductsType 'Seasonal'}}
+                <div class="widget_container secRelatedSeasonal_container">
+                    <h2 class="title">{{pageLabelMap 'Component_RelatedItemsWidget_RelatedProducts'}}</h2>
+                    <div class="widget_column">
+                        <div class="secRelatedSeasonal">
+            {{/ifEquals}}
+            {{#ifEquals this.relatedProductsType 'Replaced'}}
+                <div class="widget_container secRelatedReplaced_container">
+                    <h2 class="title">{{pageLabelMap 'Head_RelatedReplaced'}}</h2>
+                    <div class="widget_column">
+                        <div class="secRelatedReplaced">
+            {{/ifEquals}}
+                            <div class="products_1_row_medium row-fluid">
+                                {{#each this.relprddataList}}
+                                    <div class="row products_1_row_medium_item relatedProducts" data-id="{{this.skuId}}">
+                                        <h2 class="title cart-mobile-title span12 clear product-desc">
+                                           {{#if this.isVFD }}
+                                                <span class="span8">
+                                                    <strong><a href="javascript:void(0);" class="prodLink productName detailLink" data-id="{{this.skuId}}" data-sku="{{this.skuId}}">{{this.name}}</a></strong>
+                                                    {{#if this.secondDesc}}
+                                                        <div class="oo_E2Description" data-id="{{this.skuId}}">{{{this.secondDesc}}}</div>
+                                                    {{/if}}
+                                                </span>
+                                                <div class="span4 hide hidden-vfd icon-icons_vfd_regulated_feed pull-right" title="CAUTION: Federal law restricts medicated feed containing this veterinary feed directive (VFD) drug to use by or on the order of a licensed veterinarian." href="#" data-id="{{this.prodBean.id}}"></div>
+                                           {{else}}
+                                                <span class="span12">
+                                                    <strong><a href="javascript:void(0);" class="prodLink productName detailLink" data-id="{{this.skuId}}" data-sku="{{this.skuId}}">{{this.name}}</a></strong>
+                                                    {{#if this.secondDesc}}
+                                                        <div class="oo_E2Description" data-id="{{this.skuId}}">{{{this.secondDesc}}}</div>
+                                                    {{/if}}
+                                                </span>
+                                           {{/if}}
+                                        </h2>
+                                        <div class="span12 clear no-margin-left cart_item_viewport">
+                                            <a href="javascript:void(0);"  class="productName pull-left" data-sku="{{this.skuId}}">
+                                                {{#if this.mediaWrapper}}
+                                                    <img src="{{this.mediaWrapper}}" class="detailLink prodDetRel" dataId="{{this.skuId}}" />
+                                                {{else}}
+                                                    <img class="detailLink prodDetRel noimg" dataId="{{this.skuId}}" />
+                                                {{/if}}
+                                            </a>                        
+                                        </div>
+                                        <div class="span12 clear no-margin-left product-desc">
+                                                
+                                                    {{#if this.shortDesc}}
+                                                        <div class="span12">{{{this.shortDesc}}}</div>
+                                                    {{/if}}
+													{{#if this.longdescription}}
+														<p class="description span12 no-margin-left">
+                                                    	<strong><a class="included_items" href="#additional_info{{this.skuId}}" id="additionalInfoLink" data-toggle="modal">{{pageLabelMap 'AdditionalInfo'}}</a></strong>
+                                                    	<br/>                           
+                                                    	<div id="additional_info{{this.skuId}}" class="modal hide fade in info-modal-layout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        	<div class="modal-header">
+                                                            	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                            	<h3 id="myModalLabel">{{this.name}} {{pageLabelMap 'ProductsInc_MiscDetails'}}</h3>
+                                                        	</div>
+                                                        	<div class="modal-body" style="padding: 15px;">
+                                                            	<strong>{{pageLabelMap 'SKU'}}:</strong>&nbsp;{{this.skuId}}<br/><br/>
+                                                                <div class="oo_longDesc" data-id="{{this.skuId}}">
+                                                                    {{{this.longdescription}}}<br/><br/>
+                                                                </div>
+                                                        	</div>
+                                                    	</div>
+														</p>  
+													{{/if}}
+                                                {{#if this.skuId}}
+                                                    <div class="span12 skuDisp clear">
+                                                        <label class="span4">{{pageLabelMap 'SKU'}}</label>
+                                                        <strong class="value span8">{{this.skuId}}</strong>
+                                                    </div>
+                                                {{/if}}
+
+                                                {{#if this.uOMDesc}}
+                                                    <div class="span12 uomDisp clear"  data-id="{{this.skuId}}">
+                                                        <label class="span4">{{pageLabelMap 'ProductDetails_UnitOfMeasure'}}</label>
+                                                        <strong class="value span8 uomDisplay" data-id="{{this.uOMDesc}}">{{this.uOMDesc}}</strong>  
+                                                    </div>
+                                                {{/if}}
+                                                {{#if this.leadTime}}
+                                                    <div class="span12 leadTime clear" data-id="{{this.skuId}}">
+                                                        <label class="span4">{{pageLabelMap 'LeadTime'}}</label>
+                                                        <strong class="value span8 oo_leadTime" data-id="{{this.skuId}}">{{this.leadTime}}</strong>    
+                                                    </div>
+                                                {{/if}}
+                                            
+                                        </div>
+                                    </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        {{/each}}
+    </script>
+    
+    
+    
+    <script id="OO-ProductDetail-ProductsSection-Desktop" type="text/template">
+        <div class="quick_wishlist">
+            {{#each this.pageData}}
+                <div class="quick_wishlist_item relatedProducts" data-id="{{this.prodBean.sku}}">
+                    <div class="cart_item_viewport">
+                        <a href="javascript:void(0);">
+                            {{{displayImage this.mediaWrapper 'detailLink prodDetRel' alt=this.prodBean.name dataId=this.prodBean.sku}}}
+                        </a>
+                    </div>
+                    <p class="leftside">
+                        <a href="javascript:void(0);" class="productName detailLink" data-id="{{this.prodBean.sku}}">{{this.prodBean.name}}</a><br>
+                        <span>{{pageLabelMap 'ProductDetailsInc_SKU'}}:</span>
+                        <strong class="value">{{this.prodBean.sku}}</strong>
+                    </p>
+                    <p class="rightside">
+                        <input type="hidden" name="qtyIncrement" value="{{this.qtySingleIncrement}}" class="item_qtyIncrement" />
+                        <input type="hidden" name="qtySkipIncrement" value="{{this.qtySkipIncrement}}" class="item_qtySkipIncrement" />
+                        {{#ifDisplay 'PD.DsplPrc' }}
+                            {{#if this.showNewSubscriptionSelection}}
+                                <p class="price priceSubscription">
+                                    <strong>{{pageLabelMap 'Prod_SubsAlternatePrice' (price this.price) (price this.minSubPrice) (price this.maxSubPrice)}}</strong>
+                                </p>
+                            {{else}}
+                                {{#if this.displayPrice}}
+                                    <p class="price displayPrice">
+                                        {{pageLabelPrefixMap 'DisplayPrice_' this.displayPrice}}
+                                    </p>
+                                {{else}}
+                                    {{#if this.showPricing}}
+                                        {{#if this.price}}
+                                            <p><span><strong class="price">{{price this.price}}</strong>&nbsp;</span></p>
+                                        {{/if}}
+                                    {{/if}}
+                                {{/if}}
+                            {{/if}}
+                        {{/ifDisplay}}
+                    </p>
+                </div>
+            {{/each}}
+        </div>
+    </script>
+    
+    <script id="oo-ProductDetail-ProductsSection-Mobile"
+        type="text/template">
+        <div class="products_1_row_medium">
+            {{#each this.pageData}}
+                    <div class="products_1_row_medium_item relatedProducts" data-id="{{this.prodBean.sku}}">                    <div class="product_listing_viewport">
+                        <a href="javascript:void(0);" class="productName" data-sku="{{this.prodBean.sku}}">
+                            {{{displayImage this.mediaWrapper 'detailLink prodDetRel' alt=this.prodBean.name dataId=this.prodBean.sku}}}
+                        </a>
+                    </div>
+                    <p>
+                        <a href="javascript:void(0);" class="productName detailLink" data-id="{{this.prodBean.sku}}">{{this.prodBean.name}}</a><br/>
+                        <label class="black">{{pageLabelMap 'ProductDetailsInc_SKU'}}:</label>
+                        <strong class="value black">{{this.prodBean.sku}}</strong>
+                    </p>
+                    {{#ifDisplay 'PD.DsplPrc' }}
+                        {{#if this.showNewSubscriptionSelection}}
+                            <p class="price priceSubscription">
+                                <strong>{{pageLabelMap 'Prod_SubsAlternatePrice' (price this.price) (price this.minSubPrice) (price this.maxSubPrice)}}</strong>
+                            </p>
+                        {{else}}
+                            {{#if this.displayPrice}}
+                                <p class="price displayPrice">
+                                    {{pageLabelPrefixMap 'DisplayPrice_' this.displayPrice}}
+                                </p>
+                            {{else}}
+                                {{#if this.showPricing}}
+                                    {{#if this.price}}
+                                        <p><span><strong class="price">{{price this.price}}</strong>&nbsp;</span></p>
+                                    {{/if}}
+                                {{/if}}
+                            {{/if}}
+                        {{/if}}
+                    {{/ifDisplay}}
+                </div>
+            {{/each}}
+        </div>
+    </script>
+    
+    <script type="text/x-handlebars-template" id="OO-Custom-pricing">
+        {{#if this.listPrice.jDEPrice}}
+            <div class="inline-error">{{this.listPrice.jDEPrice}}</div>
+        {{else}}
+        {{#if this.contractPrice.length }}
+                <label class="span12">{{pageLabelMap 'PriceOptions'}}</label>
+        {{else}}
+                <label class="span12">{{pageLabelMap 'Price'}}</label>
+        {{/if}}
+        <div class="span12 price-list clear">
+            <div class="row list-price">
+                <div class="span12">
+                    <!--<div class="span1">-->
+                        {{#if this.contractPrice.length }}
+                            {{#if this.listPrice.isChecked}}
+                                <input name="price" type="radio" value="list-price" id="list-price" checked="checked">
+                            {{else}}
+                                <input name="price" type="radio" value="list-price" id="list-price">
+                            {{/if}}
+                            <strong class="custom-pricing" for="list-price">
+                                <span>
+                                    <span></span>
+                                </span>
+                                {{pageLabelMap 'ProductDetails_ListPrice'}}
+                            </strong>
+                        {{ else }}
+                            <!--<div class="span1"></div>-->
+                            <strong class="span10 custom-pricing">{{pageLabelMap 'ProductDetails_ListPrice'}}</strong>
+                        {{/if}}
+                    <!--</div> -->                      
+                </div>
+                <!-- {{#with this.listPrice}} -->
+                    <!-- {{#unless this.listPrice.onlyPallet }} -->
+                        <div class="span12">
+                            {{#if this.contractPrice.length }}
+                                <div class="span1"></div>
+                            {{/if}}
+                            <div class="span10 custom-pricing">
+                                <div class="span8"><label>{{pageLabelMap 'Price'}}</label>
+                                    {{#if this.listPrice.isfreightincluded}}
+                                        <label class="pull-right inline-info price-state">{{pageLabelMap 'Contract_Freight_DLV'}}</label>
+                                    {{else}}
+                                        <label class="pull-right inline-info price-state">{{pageLabelMap 'Contract_Freight_FOB'}}</label>
+                                    {{/if}}
+                                </div>
+								<div class="span4 price-value">
+                                    <strong>${{this.listPrice.price}}</strong>
+                                    <strong class="span12 clear per-bag uomdesc">per {{this.listPrice.uomDesc}}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- {{/unless}} -->
+                    {{#if this.listPrice.palletPrice }}
+                        <div class="span12">
+                            {{#if this.contractPrice.length }}
+                                <div class="span1"></div>
+                            {{/if}}
+                            <div class="span10 custom-pricing">
+                                <div class="span8">
+                                    <label>{{pageLabelMap 'PalletPrice'}}</label>
+                                    <div class="span12 pallet-size">
+                                          <span><strong>{{this.listPrice.palletQuantity}}&nbsp;{{this.listPrice.uomDesc}}</strong>&nbsp; {{pageLabelMap 'perPallet'}}</span>
+                                    </div>                          
+                                </div>
+                                <div class="span4 price-value">
+                                    <strong>${{ this.listPrice.palletPrice }}</strong>
+                                    <strong class="span12 clear per-bag uomdesc">per {{this.listPrice.uomDesc}}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    {{/if}}
+                <!-- {{/with}} -->
+            </div>          
+        	
+            {{#each this.contractPrice }}
+				<div class="row clear contract-price">
+                    <div class="span12 clear">
+                        <!--<div class="span1">-->
+                        {{#if this.disableContract }}
+                            <input name="price" type="radio" value="{{this.contractId}}" id="{{this.contractId}}" disabled="disabled">
+                            <strong class="custom-pricing disabled-radio" for="{{this.contractId}}">
+                                <span>
+                                    <span></span>
+                                </span>
+                                {{pageLabelMap 'CartInc_ContractPrice'}}
+                            </strong>
+                        {{else}}
+                            {{#if this.isChecked}}
+                                <input name="price" type="radio" value="{{this.contractId}}" id="{{this.contractId}}" checked="checked">
+                            {{else}}
+                                <input name="price" type="radio" value="{{this.contractId}}" id="{{this.contractId}}">
+                            {{/if}}
+                            <strong class="custom-pricing" for="{{this.contractId}}">
+                                <span>
+                                    <span></span>
+                                </span>
+                                {{pageLabelMap 'CartInc_ContractPrice'}}
+                            </strong>
+                        {{/if}}
+                        <!--</div> -->
+                        
+                    </div>
+                    <div class="span12 clear">
+                        <div class="span1"></div>
+                        <div class="span10 custom-pricing">
+                            <div class="span8">
+                                <span class="clear per-bag">{{this.contractId}}</span>
+								{{#if this.contractDetails.isfreightincluded}}
+                                    <label class="pull-right price-state inline-info">{{pageLabelMap 'Contract_Freight_DLV'}}</label>
+                                {{else}}
+                                    <label class="pull-right price-state inline-info">{{pageLabelMap 'Contract_Freight_FOB'}}</label>
+                                {{/if}}
+                                <div class="clear pallet-size"><span>{{pageLabelMap 'Expires'}}: {{this.expiryDate}}</span></div>
+                                {{#if (isEndUser this.contractDetails.jdeEndUser)}}
+                                    <span class="clear pallet-size">{{pageLabelMap 'EndUser'}}: {{this.contractDetails.jdeEndUser}}</span>
+                                {{/if}}
+                            </div>
+                            <div class="span4 price-value">
+                                <strong>${{this.contractPrice}}</strong>
+                                <strong class="span12 clear per-bag contract-uom"></strong>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- US - 1773 -->
+                    
+					<!--{{#if this.contractDetails.isfreightincluded}}
+                    	<div class="span12 clear checkcontractMsg">
+                        	<div class="span1"></div>
+                            <div class="span10">
+                            	<span class="inline-info font12px pallet-size contract-freight pull-left">{{pageLabelMap 'Contract_Freight'}}</span>
+                            </div>
+						</div>
+                    {{/if}}-->
+                        <!-- US - 1773 --> 
+                    <div class="span12 clear">
+                        <div class="span1"></div>
+                        <a  class="span10 contract-details" data-id="{{this.contractId}}" >
+                            <strong>{{pageLabelMap 'ViewContractDetails'}}</strong>
+                        </a>
+                    </div>
+                </div>
+            {{/each}}
+			
+            <div class="contract-details-container"></div>
+            <div class="clearfix"></div>
+        </div>
+
+        {{/if}}
+
+    </script>
+    
+    <script id="contract-details-modal-template" type="text/template">
+        <div id="contract-details-modal" class="info-modal-layout modal hide container-fluid" aria-labelledby="contract-details-modal-label" aria-hidden="true">
+            
+            <div class="modal-header">
+                <button type="button" class="close btn-cancel" aria-hidden="true">&times;</button>
+                <h3 class="modal-title">{{pageLabelMap 'ContractDetails'}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row-fluid">
+    
+                    <div class="row contract-details-section">
+                        <div class="span12">
+                            <label class="span4">{{pageLabelMap 'Contract'}}</label>
+                            <strong class="span8 CtrId">{{ this.contractId }}</strong>
+                        </div>
+                        <div class="span12 clear">
+                            <label class="span4">{{pageLabelMap 'EffectiveDate'}}</label>
+                            <strong class="span8 contractEffectiveDate">{{ this.contractDetails.effectiveDate }}</strong>
+                        </div>
+                        <div class="span12 clear">
+                            <label class="span4">{{pageLabelMap 'ExpirationDate'}}</label>
+                            <strong class="span8 contractExpirationDate">{{ this.expiryDate }}</strong>
+                        </div>
+                        
+                        {{#if this.contractDetails.jdeEndUser }}
+                         <div class="span12 clear">
+                            <label class="span4">{{pageLabelMap 'EndUser'}}</label>
+                            <strong class="span8 contractJdeEndUser">{{ this.contractDetails.jdeEndUser }}</strong>
+                        </div>
+                        {{/if}}
+
+                        <!-- US - 1773 -->
+                        <!--{{#if this.contractDetails.isfreightincluded}}
+                        	<div class="span12 clear checkcontractMsg"> 
+                            	<div class="inline-info font12px spacing-left pallet-size contract-freight pull-left">{{pageLabelMap "Contract_Freight"}}</div>   
+                            </div>
+                        {{/if}}-->
+                        <!-- US - 1773 -->
+    
+                        <div class="span12 clear">
+    
+                            <div class="span4">
+                                <label>{{pageLabelMap 'ContractBalance'}}</label>
+                                <div class="last-updated grey">{{pageLabelMap 'LastUpdated'}}</div>
+                            </div>
+                            
+                            <div class="span8"> <!-- 2377 -->
+                                 <strong class="contractquantityAvailable"> 
+                                	{{#if this.contractDetails.availableBalance }} <!--US-2377-->
+                                        {{ this.contractDetails.availableBalance }} {{this.contractDetails.productUOMDesc}} 
+                                    {{/if}}
+									
+									{{#if this.contractDetails.AvailabilityQtyUoMContract}}
+										({{this.contractDetails.AvailabilityQtyUoMContract}} {{this.contractDetails.contractUom}})
+									{{/if}}
+								</strong>
+								<div class="contract-last-updated">{{ this.contractDetails.lastModifiedDate }}&nbsp;{{pageLabelMap 'CSTTimeZone'}}</div>    
+                            </div>
+                        </div>
+                        
+                    </div>
+    
+                </div>
+            </div>
+            
+        </div>
+    </script>
+    
+    
+    <!-- US - 1171 - Creating Modal pop-up for contract quantity error message -->
+    
+    <script id="ProductDetailContract-Dialog" type="text/template">
+        <div id="prod-contract-modal" class="modal cancel-modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close btn-cancel" aria-hidden="true">x</button>
+                <h3 id="myModalLabels" class="modal-title">&nbsp;</h3>
+            </div>
+            <div class="modal-body">
+                <p class="contract-selection"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary btn-cancel">Cancel</button>
+                <button class="btn btn-primary btn-split">Split</button>
+            </div>
+        </div>
+    </script>
+    
+    <script id="OO-breadCrumbBrowser" type="text/template">
+ <div class="breadcrumbs">
+  <div class="breadcrumbs_container">
+   <a href="{{this.home.attributes.href}}" title="{{this.home.attributes.title}}">{{this.home.attributes.label}}</a>
+
+   {{#each this.categoryList.models}}
+    {{../separator}}&#160;
+    <a href="{{this.attributes.href}}" class="categoryLink" title="{{this.attributes.title}}">{{this.attributes.label}}</a>
+   {{/each}}
+
+   {{#if this.displayCategoryBreadCrumb}}
+    {{#if this.product.attributes.label}}
+     {{this.separator}}&#160;
+
+     <a href="{{this.product.attributes.href}}" title="{{this.product.attributes.title}}">{{this.product.attributes.label}}</a>
+    {{/if}}
+   {{/if}}
+
+   {{#if this.displaySearchBreadCrumb}} 
+    {{this.separator}}&#160;
+    <a href="#">{{this.searchResultsLabel}}</a>
+  
+    {{this.separator}}&#160;
+    {{this.product.attributes.label}}
+   {{/if}}
+
+   {{#if this.displaySearchBreadCrumbWithoutLink}}
+    {{this.separator}}&#160;
+    {{this.search.attributes.label}}
+   {{/if}}
+  </div>
+ </div
+</script>
+
+    <script type="text/javascript">
+        var secPrdQty=0;//defect OO-2471,OO-2470
+        var secondaryData;//defect-OO-2720
+        var storeData = {};
+        var isDisabled = false, listPriceObj, prodSkuQty;//Performance check
+        jQuery(function($) {        
+            CCRZ.uiProperties.productDetailView.desktop.tmpl    =   'oo-ProductDetail-Desktop';
+            CCRZ.uiProperties.productDetailView.phone.tmpl      =   'oo-ProductDetail-Mobile';
+            CCRZ.uiProperties.prodSectionView.phone.tmpl      =   'oo-ProductDetail-ProductsSection-Mobile';
+            CCRZ.uiProperties.prodSectionView.desktop.main.tmpl      =   'OO-ProductDetail-ProductsSection-Desktop';
+            CCRZ.uiProperties.breadcrumbView.desktop.tmpl = 'OO-breadCrumbBrowser';
+            var prodSku,  priCartId, productSku, isNotRefreshed = true, currentView;
+            var uniqueId=getSessionValue('contactId');
+            var selectedShipTo=uniqueId+'selectedShipTo',selectedPlant=uniqueId+'selectedPlant',shipDate=uniqueId+'shipDate';
+            Handlebars.registerPartial('contractDetailsModal' , $("#contract-details-modal-template").html());
+            var isContractDetailsModalOpened = false, contractDetailsModel;
+            CCRZ.pubSub.on('view:productDetailView:refresh', function(theView) { 
+                
+                /* Performance check */
+                setPricing();
+                /* Performance check */
+                
+                if(isNotRefreshed || currentView !== CCRZ.display.currentView) {
+                    currentView = CCRZ.display.currentView;
+                    isNotRefreshed = false;
+                    var productId=$('.product_detail_container').attr('oo-prod-id');
+                    var prodIds = [];
+                    prodIds.push(productId);
+                    setProductViewData(CCRZ.models.ProductDetailModel.prototype, CCRZ.views.productDetailView.prototype, prodIds);
+                    if(CCRZ.display.isPhone()) {
+                    	theView.setElement($(CCRZ.uiProperties.productDetailView.phone.selector));
+                    } else {
+                    	theView.setElement($(CCRZ.uiProperties.productDetailView.desktop.main.selector));
+                    }
+                }
+                                            
+                if(sessionStorage.getItem('operation') === "quickSearch") {
+                    $('.back-to-search-results-container').show();
+                } else {
+                    $('.back-to-search-results-container').hide();
+                }
+                
+                if(isContractDetailsModalOpened) {
+                	$('.modal-backdrop').remove();
+                	openContractDetailsModal();
+                }
+			});
+			
+			/*$(document).off("hidden", "#contract-details-modal").on("hidden", "#contract-details-modal", function(){
+				isContractDetailsModalOpened = false;
+			});*/
+			var setProductViewData = function(prodDetailModel, prodDetailView, prodIds) {
+	            var relatedProducts=CCRZ.detailData.relatedData;
+	            var minQty,palletSize, isFullPalletRequired = false, priCartId=CCRZ.pagevars.currentCartID, productSku = CCRZ.pagevars.queryParams.sku;//isDisabled = false,listPriceObj, - performance change
+	            
+	            prodDetailModel.controllerName = 'cc_oo_ProductDetailController';
+	            
+	            /**
+	             * Remote Call for getting product details
+	             * @param callback : function Callback function to be executed as soon as we receive response from server.
+	            **/
+	            prodDetailModel.getProductDetails = function(callback){
+	                var remoteCall = _.extend(CCRZ.RemoteInvocation,{className: prodDetailModel.controllerName});
+	                var psfid=CCRZ.productDetailModel.attributes.product.prodBean.id;
+	                remoteCall.invokeCtx('getProductDetails', psfid, CCRZ.pagevars.sid, function(resp){
+	                    callback(resp);
+	                }, {buffer:false,escape:false,nmsp:false});
+	            };
+	            
+	            /**
+	             * Remote Call for adding products to cart
+	             * @param callback : function Callback function to be executed as soon as we receive response from server.
+	            **/
+	            prodDetailModel.addToCart = function(productDetailMap, obj, callback){
+	                var remoteCall = _.extend(CCRZ.RemoteInvocation,{className:prodDetailModel.controllerName});
+	                remoteCall.invokeCtx( 'addToCartOO', productDetailMap, obj, function(resp) {
+	                    callback(resp); 
+	                }, {buffer:false,escape:false,nmsp:false});
+	            };
+	            
+	            /**
+	             * Remote Call for getting secondary cart details
+	             * @param callback : function Callback function to be executed as soon as we receive response from server.
+	            **/
+	            prodDetailModel.checkSecondaryCart = function(priCartId, callback) {
+	                var remoteCall = _.extend(CCRZ.RemoteInvocation,{className: prodDetailModel.controllerName});
+	                remoteCall.invokeCtx('getSecondaryCartProductQtyDetails',priCartId, function(resp){
+	                    callback(resp);
+	                }, {buffer:false,escape:false,nmsp:false});
+	            };
+	            
+	            /**
+	             * Remote Call for getting VFD flag details
+	             * @param callback : function Callback function to be executed as soon as we receive response from server.
+	            **/
+	            prodDetailModel.getVfdFlag = function(callback) {
+	                var remoteCallVfd = _.extend(CCRZ.RemoteInvocation,{className: prodDetailModel.controllerName});
+	                remoteCallVfd.invokeCtx( 'getVfdFlag',prodIds, function(resp){
+	                    callback(resp);
+	                }, {buffer:false,escape:false,nmsp:false});
+	            };
+	            
+	            /**
+	             * Remote Call for getting pricing details
+	             * @param callback : function Callback function to be executed as soon as we receive response from server.
+	            **/
+	            prodDetailModel.getProductPricing = function(callback) {
+	                var cartId = CCRZ.pagevars.queryParams.cartID || CCRZ.pagevars.queryParams.cartId;
+	                var selectedShipToId = getSessionValue(selectedShipTo);
+	                var shipDate1 = getSessionValue(shipDate);
+	                var productId = prodIds[0];
+	                var remoteCallPricing = _.extend(CCRZ.RemoteInvocation,{className: prodDetailModel.controllerName});
+	                remoteCallPricing.invokeCtx(
+	                    'getProductPricing',productId, CCRZ.pagevars.sid,cartId, selectedShipToId,shipDate1,
+	                    function(resp){
+	                        callback(resp); 
+	                    }, {buffer:false,escape:false,nmsp:false});
+	            };
+	            
+	            /**
+	             * Remote Call for checking product pricing.
+	             * @param callback : function Callback function to be executed as soon as we receive response from server.
+	            **/
+	            prodDetailModel.checkProductPricing = function(callback) {
+	                var selectedShipToId = getSessionValue(selectedShipTo);
+	                var productId = CCRZ.pagevars.queryParams.sku;
+	                var remoteCallPricing = _.extend(CCRZ.RemoteInvocation,{className: prodDetailModel.controllerName});
+	                remoteCallPricing.invokeCtx(
+	                    'checkProductPricing',productId, CCRZ.pagevars.sid,selectedShipToId, 
+	                    function(resp) {
+	                        callback(resp);
+	                    }, {buffer:false,escape:false,nmsp:false});                 
+	            };
+	            
+	            /**
+	             * Returns product details info.
+	            **/
+	            prodDetailView.getProductDetails = function() {
+	                prodDetailModel.getProductDetails(function(resp) {
+	                    if(resp && resp.success) {
+	                        prodDetailModel.respData = resp.data;
+	                        palletSize= resp.data['PalletSize'];
+	                        var status=resp.data['Status'];
+	                        var msg = '';
+	                        if(status) {
+	                            status = status.toLowerCase();
+	                            switch(status) {
+	                                case 'replaced':
+	                                    msg = CCRZ.pagevars.pageLabels["ProductDetail_ReplacedProduct"];
+	                                    break;
+	                                case 'out of season':
+	                                    msg = CCRZ.pagevars.pageLabels["ProductDetail_SeasonalProduct"];
+	                                    break;
+	                                case 'unavailable':
+	                                    msg = CCRZ.pagevars.pageLabels["ProductDetail_AlternateProduct"];
+	                                    break;
+	                                case 'discontinued':
+	                                    msg = CCRZ.pagevars.pageLabels["Product_DiscontinuedProduct"];
+	                                    break;
+	                                default:
+	                                    msg = "";
+	                            }
+	                        }
+	                        minQty = parseInt(resp.data['MinOrder']);
+	                        if(typeof minQty !== "number" || isNaN(minQty)){
+	                             minQty=1;
+	                        }
+	                        var productSku = CCRZ.pagevars.queryParams.sku;
+	                        var minValue= parseInt(resp.data['MinQuantity']);                               
+	                        uom=resp.data['UOMDesc']; //US-2008-display UOMdescription
+	                        $('.unit-of-measure').html(uom);
+	                        $('.uom.span12').find('.value.tab').html(uom);
+	                       
+	                        if(!uom){
+	                            uom='UOM';
+	                        }
+	                        var typeOfProduct=resp.data['TypeOfProduct'];
+	                        var fullPalletReq=resp.data['fullPalletReq'];
+	                        var pluralUOM=resp.data['pluralUOM']; 
+	                        if(typeof minValue !== "number"  || isNaN(minValue)){
+	                             minValue=0;
+	                        }
+	                        
+	                        var informationLabel=minRequirements(fullPalletReq,palletSize,typeOfProduct,minValue,productSku,false,0,pluralUOM);
+	                        if(informationLabel){
+	                            $('.minimum-qty').html(informationLabel).show();
+	                            if((!fullPalletReq) && minValue==1){
+	                            	$('.minimum-qty').hide();
+	                            }
+	                        }
+	                        if(typeOfProduct.toUpperCase()==='BAG' && palletSize ){
+	                            $('.bag-pallet').show();
+	                            $('.bag-pallet.span12').find('.value').html(palletSize+' '+pluralUOM+' ').show();
+	                        }
+	                        /*if(minValue!=null && !(isNaN(minValue)) && minValue!=undefined){
+	                            $('.minimum-qty').show();
+	                            $('.min-qty').text(+minValue+' '+ uom);
+	                          }*/
+	                        $('.entry.plus_minus').val(minQty);
+	                        
+	                         
+	                
+	                        var qty=parseInt($('.entry.plus_minus').val());                
+	                        if(!isItemPresent){
+	                            if(qty<=minQty){
+	                                $('.minus-button').attr('disabled','disabled');
+	                            }else if(qty>minQty){
+	                                $('.minus-button').removeAttr('disabled');
+	                            }
+	                        }else if(isItemPresent) {
+	                            if(fullPalletReq && qty<=palletSize){
+	                                $('.minus-button').attr('disabled','disabled');
+	                                  }
+	                                  else if(qty <=1) {
+	                                          $('.minus-button').attr('disabled','disabled');
+	                                  }else if(fullPalletReq && qty>palletSize){ 
+	                                          $('.minus-button').removeAttr('disabled');
+	                                  }else if(qty>1){
+	                                      $('.minus-button').removeAttr('disabled');
+	                                  }
+	                        }
+	                               // }
+	                        if(msg){
+	                            $('.product-discontinued').html(msg);
+	                        }
+	                        if(status !='available'){
+	                            $('.oo-add-to-cart').hide();
+	                            $('.quantity_block').hide();
+	                            $('.lead-time').hide();
+	                            $('.price_block').hide();
+	                            $('.product-discontinued').show();
+	                        }
+	                        isFullPalletRequired = JSON.parse(resp.data['fullPalletReq']);
+	                        
+	                        /*if(isFullPalletRequired) {
+	                            minQty = parseInt(resp.data["PalletSize"]);
+	                            $('.minimum-qty').hide();
+	                            $('.min-pallet').show();
+	                        }*/
+	                        var qty = sessionStorage.getItem('quantity');
+	                        if(qty) {
+	                            qty = parseInt(qty);
+	                            sessionStorage.setItem('quantity', "");
+	                            $('.entry.plus_minus').val(qty);
+	                        } else {
+	                            $('.entry.plus_minus').val(minQty);
+	                        }
+	                        $('.plus_minus').each(function() {
+	                            this.dataset["minQty"] = minQty;
+	                        });
+	                        if(storeData) {
+	                            if(storeData.quantity){
+	                                $('.entry.plus_minus').val(storeData.quantity);
+	                            }   
+	                        }  
+	                    }
+	                });   
+	            };
+	            
+	            /**
+	             * Add to cart click handler.
+	            **/
+	            prodDetailView.addToCartHandler = function(ele) {
+	            	var sku = ele.data('sku');
+	                var cartId = CCRZ.pagevars.queryParams.cartID ? CCRZ.pagevars.queryParams.cartID  : CCRZ.pagevars.queryParams.cartId;                   
+	                var sid = getSessionValue(selectedPlant);
+	                var shipTo = getSessionValue(selectedShipTo);
+	                var inputTextField = $('.entry.plus_minus');
+	                var quantity = parseInt(inputTextField.val());
+	                var minQtyError = $('.min-qty-error');
+	                var invalidQty = $('.invalid-quantity');
+	                var respData = prodDetailModel.respData;
+	                var uom=respData['UOM'];
+	                var pUOM=respData['pluralUOM'];
+	                var reg = new RegExp('^(0|[1-9][0-9]*)$'); 
+	                //OO-1954,OO-2017
+	                minQtyError.hide();
+	                invalidQty.hide();
+	                var prodsku = CCRZ.pagevars.queryParams.sku;
+	                var minValue= parseInt(respData['MinQuantity']);
+	                var uomDesc=respData['UOMDesc'];
+	                if(!uomDesc==null){
+	                    uomDesc='UOM';
+	                }
+	                var palletSize= respData['PalletSize'];
+	                var typeOfProduct=respData['TypeOfProduct'];
+	                var fullPalletReq=respData['fullPalletReq'];
+	                if(isNaN(minValue) || typeof minValue !=="number"){
+	                    minValue=0;
+	                }
+	                if(!(isItemPresent)){ 
+	                    var informationLabel=minRequirements(fullPalletReq,palletSize,typeOfProduct,minValue,prodsku,true,quantity,pUOM);
+	                    if(informationLabel){
+	                        minQtyError.html(informationLabel).show();
+	                        return;
+	                    }
+	                }else{
+	                    var cartQty= prodSkuQty  ? prodSkuQty[prodsku] : 0;
+	                    //defect-OO-2720
+	                    if(secondaryData!= undefined || secondaryData!=null ){
+	                        secPrdQty=Number(secondaryData[prodsku]);
+	                    }
+	                    if(secPrdQty==null || secPrdQty=='undefined' || isNaN(secPrdQty)){
+	                        secPrdQty=0;
+	                    }
+	                    if(isNaN(cartQty) || typeof cartQty !== "number" ){
+	                        cartQty=0;
+	                    }
+	                    var totalQty=Number(quantity)+Number(cartQty)+Number(secPrdQty);
+	                    var informationLabel=minRequirements(fullPalletReq,palletSize,typeOfProduct,minValue,prodsku,true,totalQty,pUOM);
+	                    if(informationLabel){
+	                        minQtyError.html(informationLabel).show();
+	                        return;
+	                    }
+	                }
+	                if((quantity<1 || !(reg.test(quantity)))){ //Defect - OO-1994
+	                    invalidQty.text(CCRZ.pagevars.pageLabels["OO_Invalid_qty"]).show();
+	                    return;
+	                }
+	                var obj = {};
+	                //$('.entry.plus_minus').val(minQty);
+	                var selectedRadioItem = $('input[name="price"]:checked');
+	                if(listPriceObj){
+	                    obj = {
+	                        "type": "list-price",
+	                        //"price": JSON.parse(listPriceObj.listPrice.onlyPallet) ? listPriceObj.listPrice.palletPrice : listPriceObj.listPrice.price,
+	                        "price": listPriceObj.listPrice.price,
+	                        "contractId": null,
+	                        "palletPrice": listPriceObj.listPrice.palletPrice,
+	                        "onlyPallet": listPriceObj.listPrice.onlyPallet,
+	                        "palletQuantity": listPriceObj.listPrice.palletQuantity
+	                    };
+	                    if( listPriceObj.contractPrice.length ) {
+	                        var value = selectedRadioItem.val();
+	                        if(!value)
+	                            return;
+	                        if (value !== "list-price"){
+	                            var selectedObj = _.findWhere(listPriceObj.contractPrice, {"contractId": value});
+	                            obj["type"] = "contract-price";
+	                            obj["price"] = selectedObj.contractPrice;
+	                            obj["contractId"] = selectedObj.contractId;
+	                            obj["palletPrice"] = null;
+	                            obj["isfreightincluded"]=selectedObj.contractDetails.isfreightincluded;
+	                        }
+	                    } 
+	                }
+	                if(!isItemPresent) {
+	                    if(quantity<=minQty){
+	                        $('.minus-button').attr('disabled','disabled');
+	                    }else if(quantity>minQty){
+	                            $('.minus-button').removeAttr('disabled');
+	                    }
+	                }else if(isItemPresent) {
+		                if(fullPalletReq && quantity<=palletSize){
+		                        $('.minus-button').attr('disabled','disabled');
+		                }
+		                else if(quantity <=1) {
+		                        $('.minus-button').attr('disabled','disabled');
+		                }else if(fullPalletReq && quantity>palletSize){ 
+		                        $('.minus-button').removeAttr('disabled');
+		                }else if(quantity>1){
+		                        $('.minus-button').removeAttr('disabled');
+		                }
+	                }
+	                var shipDate1 = getSessionValue(shipDate);
+	                var productDetailMap = {
+	                    'sku': sku,
+	                    'quantity': quantity,
+	                    'cartId': cartId,
+	                    'sid': sid,
+	                    'shipTo': shipTo,
+	                    'shipDate': shipDate1
+	                };
+	                if(obj && !$.isEmptyObject(obj)) {
+	                    productDetailMap['selectedPrice'] = obj;
+	                    if(obj.type==='list-price'){
+	                    	productDetailMap['isfreightIncluded']=listPriceObj.listPrice.isfreightincluded;                    	
+	                    }
+	                    else{
+	                    	productDetailMap['isfreightIncluded']=obj.isfreightincluded;
+	                    }
+	                }
+	                var self = this;
+	                ele.attr("disabled", "disabled");
+	                //productDetailMap['isSplit'] = flag; 1891
+	                prodDetailModel.addToCart(productDetailMap, obj, function(resp){
+	                    if(resp) {
+	                        if(resp.success) {
+	                            $('.cart-validate').hide();
+	                            CCRZ.pagevars.currentCartID = resp.data['cartId'];
+	                            CCRZ.pagevars.queryParams.cartId = resp.data['cartId'];
+	                            CCRZ.pubSub.trigger('cartChange', resp.data['cartId']);
+	                            //2495
+	                            var confirmMsg = CCRZ.pagevars.pageLabels["Shopping_cart_msg"];
+	                            confirmMsg = resp.data['quantity'] +' '+ resp.data['pUOM']+' '+ confirmMsg +' '+ resp.data['cartType'];
+	                            if(confirmMsg) {
+	                                $('.checkConfirmMsg').show();
+	                                $('.confirm-addToCart').html(confirmMsg);
+	                                //defect-OO-5212
+	                                if(resp.data['quantity'] > 1){
+	                                	$('.minus-button').removeAttr('disabled');
+	                                }
+	                            }
+	                            //2495
+	                            //1891
+	                            /*if(resp.data["disableContract"]){
+	                                selectedRadioItem.attr('disabled', 'disabled');
+	                                selectedRadioItem.siblings('strong').addClass('disabled-radio');
+	                                $('.oo-add-to-cart').attr('disabled', 'disabled');
+	                                isDisabled = true;
+	                            }*/
+	                            /*if(typeof (resp.data["remainingQuantity"]) === "number" ) {
+	                               if(resp.data["remainingQuantity"]!=0){
+	                                   inputTextField.val(resp.data["remainingQuantity"]);
+	                               }    
+	                            }*/
+	                            /*if(resp.data['isInvalid']) {
+	                                if(!$('#prod-contract-modal')[0]) {
+	                                    var isContractInvalid = $($('#ProductDetailContract-Dialog').html());
+	                                    isContractInvalid.find('.btn-split').attr('data-sku', sku);
+	                                    isContractInvalid.find('.contract-selection').text(CCRZ.pagevars.pageLabels['Contract_Selection']);
+	                                    $(isContractInvalid).appendTo($('body'));                                           
+	                                }
+	                                $('#prod-contract-modal').modal('show');                                        
+	                            }*/
+	                            var priCartId=CCRZ.pagevars.currentCartID;
+	                            var productSku = CCRZ.pagevars.queryParams.sku;
+	                            if(priCartId) {
+	                                self.getSecondaryCartDetails(priCartId,productSku); 
+	                           	}
+	                           	ele.removeAttr("disabled");
+	                           	getCartDetailsData();
+	                        } else {
+	                            $('.cart-validate').show();
+	                        }
+	                    }
+	                });
+	            };
+	            
+	            /**
+	             * Returns secondary cart details info.
+	            **/
+	            prodDetailView.getSecondaryCartDetails = function(priCartId,psku) {
+	                prodDetailModel.checkSecondaryCart(priCartId, function(resp){
+	                    if(resp && resp.success) {
+	                        secondaryData = resp.data;
+	                         if(secondaryData!= undefined || secondaryData!=null ){
+		                        if(psku in secondaryData){ 
+		                        	isItemPresent=true;
+		                        }
+		                    }
+	                    }
+	                });
+	            };
+	            
+	            /**
+	             * Returns VFD flg status.
+	            **/
+	            prodDetailView.getVfdFlag = function() {
+	                prodDetailModel.getVfdFlag( function(resp){
+	                    if(resp && resp.success) { 
+	                        var pid=$('.product_detail_container').attr('oo-prod-id');
+	                        var respData = resp.data;
+	                        if(respData) {
+	                            var dataflag = respData[pid];
+	                            if(dataflag) {     
+	                                $('.hidden-vfd').show();         
+	                            }    
+	                        }                       
+	                    }                   
+	                });
+	            };
+	            
+	            /**
+	             * Returns product pricing info.
+	            **/
+	            prodDetailView.getProductPricing = function() {
+	                prodDetailModel.getProductPricing( function(resp) {
+	                    if(resp && resp.success) { 
+	                        var data = resp.data;
+	                        if(data && !$.isEmptyObject(data)){
+	                            listPriceObj = resp.data;
+	                            var source = $('#OO-Custom-pricing').html();
+	                            
+	                            if(listPriceObj.contractPrice){
+	                                if(storeData.selectedPrice =='list-price'){
+	                                    data.listPrice.isChecked = true;
+	                                }
+	                                if(storeData.selectedPrice != 'list-price'){
+	                                    var selectedContractPrice = _.findWhere(data.contractPrice,{"contractId":storeData.selectedPrice});
+	                                    if(selectedContractPrice){
+	                                        selectedContractPrice.isChecked = true
+	                                    }
+	                                }
+	                            }
+	                            insertData(source, '.custom-price' , data);
+	                            var addToCartBtn = $('.oo-add-to-cart');
+	                            
+	                            //OO-324 - JDE Price Integration - Starts
+	                            if(listPriceObj && !$.isEmptyObject(listPriceObj)) {
+	                            
+	                                if(!listPriceObj.listPrice.price && !listPriceObj.listPrice.palletPrice && !storeData.selectedPrice){//&& listPriceObj.listPrice.onlyPallet == false){//OO-2515
+	                                    addToCartBtn.attr('disabled', 'disabled');
+	                                } else{
+	                                    addToCartBtn.removeAttr('disabled');
+	                                }
+	                                if( listPriceObj.contractPrice.length) {
+	                                var typeofprd=listPriceObj.listPrice.producttype;
+	                                     if(typeofprd.toLowerCase()===('BULK').toLowerCase()|| typeofprd.toLowerCase()===('LIQUID').toLowerCase()){
+	                                	$('.contract-uom').text('per TON');
+	                                }else{
+	                                    $('.contract-uom').text('per '+listPriceObj.listPrice.uomDesc);
+	                                }
+	                                    if(!storeData.selectedPrice) {
+	                                        addToCartBtn.attr('disabled', 'disabled');
+	                                        isDisabled = true;
+	                                    }
+	                                    
+	                                    var contractMsg = CCRZ.pagevars.pageLabels["Contract_Freight"];
+	                                    if(contractMsg) {
+	                                        $('.checkcontractMsg').show();
+	                                        $('.contract-freight').html(contractMsg);
+	                                    }
+	                                }
+	                                
+	                            }//OO-324 - JDE Price Integration - Ends
+	                        }
+	                    }                   
+	                });
+	            };
+	            
+	            //OO-1883 - to check the pricing value
+	            /**
+	             * Checks product pricing info.
+	            **/
+	            prodDetailView.checkProductPricing = function() {
+	                prodDetailModel.checkProductPricing( function(resp) {
+	                    if(resp && resp.success && !resp.data) { 
+	                        $('.retrieve-price-msg').empty().html(CCRZ.pagevars.pageLabels["RetrievingPrice"]);
+	                    }
+	                });
+	            };//OO-1883 - to check the pricing value -  Ends
+	            
+	            /**
+	             * Enables Add to cart button.
+	            **/
+	            prodDetailView.enableButton = function(e) {
+	                e.stopPropagation();
+	                if(isDisabled){
+	                    $('.oo-add-to-cart').removeAttr('disabled');
+	                    isDisabled = false;
+	                }
+	                storeData.selectedPrice = $(e.target).attr("id");
+	            };
+	            
+	            /**
+	             * Plus icon click handler.
+	            **/
+	            prodDetailView.incrementHandler = function(e) {
+	                e.preventDefault();
+	                var prodId = e.currentTarget.dataset['id'];
+	                var inputField = $('.entry.plus_minus');
+	                var value = parseInt(inputField.val());
+	                if(isFullPalletRequired){
+	                    value +=Number(palletSize);
+	                } else {
+	                    value +=1;
+	                }
+	                //OO-1954
+	                if(isNaN(value)){
+	                    if(isItemPresent){
+	                        value=1;
+	                    }else{
+	                        value = minQty;
+	                    }
+	                }
+	                if(value > minQty || isItemPresent) {
+	                     $('.minus-button').removeAttr('disabled');
+	                }else{
+	                     $('.minus-button').attr('disabled','disabled');
+	                }
+	                inputField.val(value);
+	                $('.invalid-quantity').hide();
+	                if(storeData.quantity !== value)
+	                    storeData.quantity = value;
+	                
+	            };
+	            
+	            /**
+	             * Minus icon click handler.
+	            **/
+	            prodDetailView.decrementHandler = function(e) {
+	                e.preventDefault();
+	                var prodId = e.currentTarget.dataset['id'];
+	                var inputField = $('.entry.plus_minus');
+	                var value = parseInt(inputField.val());
+	                var currElement = $(e.currentTarget);
+	                if(isFullPalletRequired){
+	                    value -=Number(palletSize);
+	                } else {
+	                    value -=1;
+	                }
+	                //1954
+	                if(isNaN(value)){
+	                    if(isItemPresent){
+	                        value=1;
+	                    }else{
+	                        value = minQty;
+	                    }
+	                }
+	                if( value <= minQty && !(isItemPresent)) {
+	                    currElement.attr('disabled','disabled');
+	                    value = minQty;
+	                } else if(isItemPresent) {
+	                    if(isFullPalletRequired && value<=palletSize){
+	                        currElement.attr('disabled','disabled');
+	                    } else if(value <=1) {
+	                        currElement.attr('disabled','disabled');
+	                        value = 1;
+	                    }
+	                } else {
+	                    currElement.removeAttr('disabled');
+	                }
+	                inputField.val(value);
+	                $('.invalid-quantity').hide();
+	                if(storeData.quantity !== value)
+	                    storeData.quantity = value;
+	            };
+	            
+	            /**
+	             * Navigation to product details click handler.
+	            **/
+	            prodDetailView.navigateToProdDetails = function(e) {
+	                productDetails(e.currentTarget.dataset["sku"]);
+	            };
+	            
+	            /**
+	             * Textbox key up handler.
+	            **/
+	            prodDetailView.keyUpHandler = function(e) {
+	                var reg = new RegExp('^(0|[1-9][0-9]*)$');
+	                var invalidQty = $('.invalid-quantity');
+	                var currentEle = $(e.currentTarget);
+	                var quantity = currentEle.val();
+	                if((!reg.test(quantity)) || quantity==0 ) {
+	                    $('.min-qty-error').hide();//Defect#OO-3787
+	                    invalidQty.text(CCRZ.pagevars.pageLabels["OO_Invalid_qty"]).show();
+	                    currentEle.val('');
+	                } else {
+	                    invalidQty.hide();
+	                }
+	                //OO-1994
+	                quantity = parseInt(quantity);
+	                if(quantity) {
+	                    if(storeData.quantity != quantity)
+	                        storeData.quantity = quantity;
+	                }
+	                var minusButton = $('.minus-button');
+	                if(!isItemPresent){
+	                    if(quantity<=minQty){
+	                         minusButton.attr('disabled','disabled');
+	                    }else if(quantity>minQty){
+	                        minusButton.removeAttr('disabled');
+	                    }
+	                } else if(isItemPresent) {
+	                    if((isFullPalletRequired && quantity<=palletSize) || quantity <=1) {
+	                        minusButton.attr('disabled','disabled');
+	                    } else if( (isFullPalletRequired && quantity>palletSize) || quantity>1) {
+	                        minusButton.removeAttr('disabled');
+	                    }
+	                }
+	            };
+	            
+	            /**
+	             * Contract details link click handler.
+	            **/
+	            prodDetailView.contractDetailsPopup = function(e) {
+	                var contractDtlId = e.currentTarget.dataset["id"];
+	                var contractDetails = _.findWhere(listPriceObj.contractPrice, {"contractId": contractDtlId});
+	                contractDetailsModel = new CCRZ.models.contractDetailModel(contractDetails);
+	                openContractDetailsModal();
+	            };
+	            
+	            var events = prodDetailView.events;
+	            events["click .oo-add-to-cart"] = function(e) {
+	                e.preventDefault();
+	                prodDetailView.addToCartHandler($(e.currentTarget));
+	            };
+	            
+	            events["click input[type='radio']"] = "enableButton";
+	            events["click .plus-button"] = "incrementHandler";
+	            events["click .minus-button"] = "decrementHandler";
+	            events["click .widget_column .cart_item_viewport a"] =  "navigateToProdDetails";
+	            events["keyup .entry.plus_minus"] = "keyUpHandler";
+	            events["click .back-to-search-results-container"] = function() {
+	                history.go(-1);
+	            };
+	            events["click .contract-details"] = "contractDetailsPopup" 
+	            events["click .btn-split"] = function(e) {
+	                e.preventDefault();
+	                prodDetailView.addToCartHandler(e.currentTarget.dataset['sku'], true);
+	                $('#prod-contract-modal').modal('hide');
+	            };
+	            
+	            events["click .btn-cancel"] = function(e) {
+	                e.preventDefault();
+	                $('#prod-contract-modal').modal('hide');
+	            };
+	            
+	            //prodDetailView.checkProductPricing();
+	            if(priCartId) {
+	                prodDetailView.getSecondaryCartDetails(priCartId,productSku);
+	            }
+	            
+	            var globalProductId = prodIds[0];
+	            prodDetailView.getVfdFlag();
+	            if( globalProductId ) {
+	                prodDetailView.getProductDetails();
+	                //prodDetailView.getProductPricing();
+	            }
+	        };             
+            
+            var setPricing = function() {
+                if('{!dataMapProductString}' != '') {
+                    var dataProd = JSON.parse('{!dataMapProductString}');
+                    var addToCartBtn = $('.oo-add-to-cart');
+                    addToCartBtn.attr('disabled', 'disabled');
+
+                    if(dataProd.listPrice){
+                        if(dataProd.listPrice.price){
+                            processAndSetPrice(dataProd);
+                        }else{
+                            //Make JDE Callout -  Starts
+                            $('.retrieve-price-msg').empty().html(CCRZ.pagevars.pageLabels["RetrievingPrice"]);
+                            var jdeData = JSON.stringify(dataProd.jdePriceObject);
+                            var remoteCall = _.extend(CCRZ.RemoteInvocation,{className: 'cc_oo_ProductDetailController'});
+                            remoteCall.invokeCtx('getJDEPrice', jdeData , function(resp){
+                                if(resp && resp.data){
+                                    if(resp.data.price){
+                                        dataProd.listPrice.price = resp.data.price;
+                                        dataProd.listPrice.isfreightincluded = resp.data.isfreightincluded;
+                                    }
+                                    if(resp.data.jDEPrice){
+                                        dataProd.listPrice.jDEPrice = resp.data.jDEPrice;
+                                    }
+                                    processAndSetPrice(dataProd);
+                                }else{//OO-5222
+                                    var errMsg = CCRZ.pagevars.pageLabels["JDEDownPirceMessage"];
+                                    var data = {'listPrice': {'jDEPrice': errMsg }};
+                                    processAndSetPrice(data);//OO-5222
+                                }
+                            }, {buffer:false,escape:false,nmsp:false,timeout: 120000});//OO-5222
+                            //Make JDE Callout -  Ends
+                        }
+                    }
+                    
+                }
+            }
+
+            var processAndSetPrice = function (dataProd){
+
+                if(dataProd.listPrice){
+                    //var dataLogs = JSON.parse(JSON.stringify(logData));
+                    var source = $('#OO-Custom-pricing').html();
+                    listPriceObj = dataProd;
+                    if(dataProd.contractPrice){
+                        if(storeData.selectedPrice =='list-price'){
+                            dataProd.listPrice.isChecked = true;
+                        }
+                        if(storeData.selectedPrice != 'list-price'){
+                            var selectedContractPrice = _.findWhere(dataProd.contractPrice,{"contractId":storeData.selectedPrice});
+                            if(selectedContractPrice){
+                                selectedContractPrice.isChecked = true
+                            }
+                        }
+                    }
+                    insertData(source, '.custom-price' , dataProd);
+                    var addToCartBtn = $('.oo-add-to-cart');
+                    
+                    //OO-324 - JDE Price Integration - Starts
+                    if(dataProd && !$.isEmptyObject(dataProd)) {
+                        
+                        if(!dataProd.listPrice.price && !dataProd.listPrice.palletPrice && !storeData.selectedPrice){
+                            addToCartBtn.attr('disabled', 'disabled');
+                        } else{
+                            addToCartBtn.removeAttr('disabled');
+                        }
+                        
+                        if( dataProd.contractPrice && dataProd.contractPrice.length ) { //OO-5222
+                            var typeofprd=dataProd.listPrice.producttype;
+                            if(typeofprd.toLowerCase()===('BULK').toLowerCase()|| typeofprd.toLowerCase()===('LIQUID').toLowerCase()){
+                                $('.contract-uom').text('per TON');
+                            }else{
+                                $('.contract-uom').text('per '+dataProd.listPrice.uomDesc);
+                            }
+                            if(!storeData.selectedPrice) {
+                                addToCartBtn.attr('disabled', 'disabled');
+                                isDisabled = true;
+                            }
+                            
+                            var contractMsg = CCRZ.pagevars.pageLabels["Contract_Freight"];
+                            if(contractMsg) {
+                                $('.checkcontractMsg').show();
+                                $('.contract-freight').html(contractMsg);
+                            }
+                        }//OO-324 - JDE Price Integration - Ends
+                    }
+                }
+            }
+            
+            CCRZ.pubSub.on('view:breadCrumbView:refresh', function(theView) {               
+                // OO-47 begins here
+                if(sessionStorage.getItem('operation') === 'quickSearch') {
+                    $('.back-to-search-results-container').show();
+                }
+                // OO-47 ends here
+            });
+            
+            CCRZ.models.contractDetailModel = CCRZ.CloudCrazeModel.extend();
+            
+            CCRZ.views.contractDetailView = CCRZ.CloudCrazeView.extend({
+                viewName : "contractDetailView",
+                templateBoth : CCRZ.util.template('contract-details-modal-template'),
+                initialize: function(modelData, callback) {
+                    this.render(modelData, callback);
+                },
+                events : {
+                    "click .btn-cancel": "cancelClick",
+                },
+                render : function(modelData, callback) {
+                    this.dataSet = modelData;
+                    this.setElement($(".contract-details-container"));
+                    var v = this;
+                    v.$el.html(v.templateBoth(this.dataSet.toJSON()));
+                    callback();
+                    CCRZ.pubSub.trigger("view:"+this.viewName+":refresh", this);
+                },
+                cancelClick : function(e) {
+                    $('#contract-details-modal').modal('hide');
+                	isContractDetailsModalOpened = false;
+                }                
+            });
+            
+            var openContractDetailsModal = function() {
+            	var contractModal = new CCRZ.views.contractDetailView(contractDetailsModel, function() {            	
+                	$('#contract-details-modal').modal({
+                        backdrop: 'static',
+                        keyboard: false,
+                        show: true
+                    });
+                	isContractDetailsModalOpened = true;
+                });
+            };
+            
+        });
+        var isItemPresent=false;
+        Handlebars.registerHelper('isfreightContract', function (contractFreight) {
+            if(contractFreight) {
+                return true;
+            }
+            return false;                   
+        });
+        Handlebars.registerHelper('isEndUser', function (endUser) {
+            if(endUser == '' || endUser == null) {
+                return false;
+            }
+            return true;                   
+        });           
+            
+        
+        var isWidgetSectionNotRefreshed = true, currentWidgetView;
+        <!-- US- 317 - Hiding related product widget for products not present in pricelist  -->
+        CCRZ.pubSub.on('view:widgetSectionView:refresh', function(theView) {
+            if(isWidgetSectionNotRefreshed || currentWidgetView !== CCRZ.display.currentView) {
+            	isWidgetSectionNotRefreshed = false;
+            	currentWidgetView = CCRZ.display.currentView;
+            	var remoteCall = _.extend(CCRZ.RemoteInvocation,{className: 'cc_oo_ProductDetailController'});
+            	var sku = CCRZ.pagevars.queryParams.sku;
+            	remoteCall.invokeCtx( 'getProducts',CCRZ.pagevars.sid,sku, function(resp) {
+            	    if(resp && resp.success) {
+	                    var respData = resp.data;
+	                    var sourceRelatedProducts, destinationRelatedProducts;
+	                    if(CCRZ.display.isPhone()) {
+	                        sourceRelatedProducts = $("#OO-ProductDetail-AdditionalProducts-Mobile").html();
+	                        destinationRelatedProducts = $('.phone_center_column .widgetSection');
+	                    } else {
+	                        sourceRelatedProducts = $("#OO-ProductDetail-AdditionalProducts-Desktop").html();
+	                        destinationRelatedProducts = $('.prodDetailContainer .widgetSection');
+	                    }
+	                     
+	                    var htmlRelatedProducts = compileHandler(sourceRelatedProducts, respData);
+	                    insertContent(destinationRelatedProducts, htmlRelatedProducts ); 
+	                    
+	                    var alternateProd = false;
+	                    var replacedProd = false;
+	                    var seasonalProd = false;
+	                    var relatedProducts=respData['relatedProducts'];
+	                    if(respData['skuIds'].length){
+	                        $('.relatedProducts').each(function() {
+	                            var prodId = $(this).attr("data-id");
+	                            var found = $.inArray(prodId, respData['skuIds']) > -1;
+	                            if(found) {
+	                                if(!replacedProd){
+	                                    replacedProd = $(this).parent().parent().hasClass('secRelatedReplaced');
+	                                }
+	                                if(!alternateProd){
+	                                    alternateProd = $(this).parent().parent().hasClass('secRelatedAlternate');
+	                                }
+	                                if(!seasonalProd){
+	                                    seasonalProd = $(this).parent().parent().hasClass('secRelatedSeasonal');
+	                                }
+	                                $(this).show();
+	                                if(replacedProd){
+	                                    $('.secRelatedReplaced').parent().parent().show();
+	                                }
+	                                if(alternateProd){
+	                                    $('.secRelatedAlternate').parent().parent().show();
+	                                }
+	                                if(seasonalProd){
+	                                    $('.secRelatedSeasonal').parent().parent().show();
+	                                }      
+	                            }
+	                            else {
+	                                $(this).hide();  
+	                            }
+	                       });
+	                    } else {
+	                        $('.relatedProducts').hide();
+	                        $('.widget_container').hide();                              
+	                    }
+	                }
+	            }, {buffer:false,escape:false,nmsp:false});
+	            var alternateSize, seasonalSize, replacedSize;
+	            if(CCRZ.detailData.relatedData && !$.isEmptyObject(CCRZ.detailData.relatedData ) ) {
+	                if( CCRZ.detailData.relatedData["Alternate"] ) {
+	                    alternateSize =CCRZ.detailData.relatedData["Alternate"].length;
+	                }
+	                if( CCRZ.detailData.relatedData["Seasonal"] ) {
+	                    seasonalSize=CCRZ.detailData.relatedData["Seasonal"].length;
+	                }
+	                if( CCRZ.detailData.relatedData["Replaced"] ) {
+	                    replacedSize=CCRZ.detailData.relatedData["Replaced"].length;
+	                }
+	            }
+	            if(!alternateSize){
+	                $('.secRelatedAlternate_container').hide();
+	            }
+	            if(!seasonalSize){
+	                $('.secRelatedSeasonal_container').hide();  
+	            }  
+	            if(!replacedSize){
+	                $('.secRelatedReplaced_container').hide();  
+	            }		            
+            }
+        });
+        
+        CCRZ.pubSub.on('view:cartView:refresh', function(theView) {
+            prodSku =$('.wishFinder').attr('data-sku');
+            prodSkuQty={}; 
+            var cartItems=CCRZ.cartView.cartmodel.attributes.cartItems;
+            if(CCRZ.cartView.cartmodel.attributes.cartItemCount > 0) {
+                for(var i=0;i<cartItems.length;i++) {
+                    if(cartItems[i].mockProduct.sku == prodSku) { 
+                        isItemPresent=true;
+                        if(!(cartItems[i].mockProduct.sku in prodSkuQty)){
+                            prodSkuQty[cartItems[i].mockProduct.sku]=Number(cartItems[i].quantity);
+                        } else {
+                            var prevQty = Number(prodSkuQty[cartItems[i].mockProduct.sku]);
+                            var qty=Number(cartItems[i].quantity);
+                            var totalQty = Number(prevQty) + Number(qty);
+                            prodSkuQty[cartItems[i].mockProduct.sku]=Number(totalQty);
+                        }
+                    }
+                }
+            }
+        });
+        
+    </script>
+</apex:component>

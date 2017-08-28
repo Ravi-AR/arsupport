@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email Template for Program Evaluation Results</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Purina_Swine_App_Letterhead</letterhead>
+    <name>Program Evaluation Results Email Template</name>
+    <style>freeForm</style>
+    <subject>{!Program_Evaluation__c.Producer_Facility__c} - Purina Program Evaluation</subject>
+    <textOnly>Below are the results of the Program Evaluation that we walked through on {!Program_Evaluation__c.CreatedDate}.
+
+Facility Name: {!Program_Evaluation__c.Producer_Facility__c}
+Farm Production Consultant: {!Program_Evaluation__c.OwnerFullName}
+
+Current Program Summary:
+Current Program ADG: {!Program_Evaluation__c.Current_Program_ADG__c}
+Current Program Total Feed Lbs: {!Program_Evaluation__c.Current_Program_Total_Feed_Lbs__c}
+Current Program Total Feed $: {!Program_Evaluation__c.Current_Program_Total_Feed_Dollar__c}
+Current Program Feed/Gain: {!Program_Evaluation__c.Current_Program_Feed_Gain__c}
+Current Program $/lb gain: {!Program_Evaluation__c.Current_Program_lb_gain__c}
+
+UltraCare Program Summary:
+UltraCare Program ADG: {!Program_Evaluation__c.UltraCare_ADG__c}
+UltraCare Program Total Feed Lbs: {!Program_Evaluation__c.Ultracare_Total_Feed_Lbs__c}
+UltraCare Program Total Feed $: {!Program_Evaluation__c.Total_Feed_Cost_Ultracare__c}
+UltraCare Program Feed/Gain: {!Program_Evaluation__c.UltraCare_Feed_Gain__c}
+UltraCare Program $/lb gain: {!Program_Evaluation__c.UltraCare_Program_lb_gain__c}
+
+Results Summary:
+ADG % Difference: {!Program_Evaluation__c.Diff_ADG__c}
+Feed/Gain Difference: {!Program_Evaluation__c.Feed_Gain_Difference__c}
+$/Lb Gain Difference: {!Program_Evaluation__c.Lb_Gain_Difference__c}</textOnly>
+    <type>html</type>
+</EmailTemplate>

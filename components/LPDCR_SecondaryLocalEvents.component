@@ -1,0 +1,53 @@
+<!--Component created to display list of National Events -->
+<apex:component controller="LPDCR_SecondaryNationalEventsController" allowDML="true">
+
+<apex:attribute name="componentKey" 
+                    type="String" 
+                    assignTo="{!key}" 
+                    description="The key given to this component so the page can easily get access to it" />
+
+    <apex:attribute name="thisPageController" 
+                    type="LPDCR_SecondaryPageBaseController" 
+                    assignTo="{!pageController}" 
+                    required="true" 
+                    description="The controller for the page." />
+    
+    <apex:attribute name="speciesFilter" 
+                    description="Set of selected spcecies to filter results" 
+                    type="String[]"
+                    assignTo="{!species_filter}"
+                    required="false"/>
+
+    <apex:attribute name="searchTerm" 
+                    description="The search term to filter the results" 
+                    type="String"
+                    assignTo="{!search_term}"
+                    required="false"/>
+
+ 
+<apex:outputPanel id="pagenationVip">
+    <div class="col-sm-11">
+        <table class="dataTable table tablehead" id="LocalEventTable">
+            <thead>
+            <tr>
+            <th title="Title" class="sorting"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <apex:repeat id="LocalTable" value="{!campList_nationalevent}" var="eventObj">
+                     
+                         <tr>
+                            <td>
+                                <p class="mrg_btm5"><label class="clr_red">{!eventObj.Name}</label><span class="flt_rgt clr_gry text-right">{!eventObj.Event_Date_Range__c}<br/>{!eventObj.Event_Location__c}</span></p>
+                                
+                                <p class="mrg_btm20">{!eventObj.Short_Description__c}</p>
+                                
+                            </td>
+                         </tr>
+                     
+                 </apex:repeat>
+             </tbody>
+        </table>
+    </div>
+</apex:outputPanel>
+</apex:component>

@@ -1,0 +1,245 @@
+<!--
+*********************************************************************************
+Author: Adeel Ahmad
+Email: adeel.ahmad@magnet360.com
+Created Date    : 09/09/2016
+Function    :  Visualforce page to display create/update expense record
+Version     : 1.0
+*********************************************************************************
+-->
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false"
+standardController="AMASellingSupportExpense__c"
+extensions="LPDCR_ExpenseEditController"
+>
+<apex:composition template="LPDCR_CC_BaseTemplate">
+<apex:define name="PageTitle">Selling Support - Edit Request</apex:define>
+<apex:define name="body">
+<style>
+.detailbanner {
+    margin-top: 38px;
+}
+.accountlabel {
+    margin-top: 30px;
+}
+.content{padding:0 15px !important; background:#fff !important}
+</style>
+         
+<div ng-app="app"  ng-controller="expenseController as expense">
+    <div class="title_wrapper">
+          <div class="container-fluid">
+              <h3 class="page_title titlepadding">Reimbursement Request <button  ng-click="expense.backButton()" class=" btn btn-link download">
+               <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
+               <b><span class="show-xs"> Back</span>
+               <span class="hidden-xs">to Business Builder Program</span></b>
+               </button></h3>
+          </div>
+    </div> 
+   
+
+  <div ng-if="expense.service.callsInProgress>0" class="fa-overlay">
+  <!-- <i class="fa fa-circle-o-notch fa-5x fa-spin " aria-hidden="true"></i>-->
+          
+                        <!-- Loader code starts here -->
+                 <div class="loadercover">
+                         </div>
+                         <div class="loaderfirst">
+                             <div class="loadersec">
+                            <img src="/img/loading32.gif" class="loaderimage" />
+                         </div>
+                        </div> 
+            <!-- Loader code ends here-->
+  
+  
+ </div>
+  <div class="row ">
+  <div class="col-xs-12 detailbanner bag_clr_white">
+      <label class="accountlabel">{!account.Name}</label> 
+  </div>
+</div>
+
+<div ui-view="root">
+</div>
+<!-- <link href="{!URLFOR($Resource.DropZone, 'DropZoneCSS.css')}" rel="stylesheet" />-->
+
+<script src="{!URLFOR($Resource.LPDCR_CC_Assets, 'js/jquery_v310.js')}"></script> 
+<!--<script src="{!URLFOR($Resource.LPDCR_Assets, 'libs/bootstrap/js/bootstrap.min.js')}"></script>-->
+<script src="{!URLFOR($Resource.LPDCR_Assets, 'libs/angular.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_Assets, 'libs/angular-sanitize.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_Assets, 'libs/ui-bootstrap-tpls-2.1.3.min.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_Assets, 'libs/angular-ui-router.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_Assets, 'libs/ng-input-currency.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets, 'app/app.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets, 'app/services/vf-remote.factory.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets, 'app/controllers/expense.controller.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets, 'app/controllers/expenseEdit.controller.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets, 'app/controllers/expenseReview.controller.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets, 'app/controllers/expenseConfirmation.controller.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets, 'app/controllers/accountSelect.controller.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets, 'app/controllers/expenseLineItem.controller.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets, 'app/controllers/editLineItem.controller.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets, 'app/controllers/attachReceipt.controller.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets, 'app/controllers/reviewReceipt.controller.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets, 'app/controllers/confirm.controller.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets, 'app/controllers/error.controller.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets, 'app/services/expense.service.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets, 'app/services/fileUpload.service.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets, 'app/directives/fileRead.js')}"></script>
+<script src="{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets, 'app/directives/onFocus.js')}"></script>
+  <!--<script src="{!URLFOR($Resource.DropZone, 'DropZone.js')}"></script>-->
+
+
+
+
+<script type="text/javascript">
+
+  var $m360 = {
+    expenseEditBase: '{!URLFOR($Resource.LPDCR_ExpenseReimbursement_Assets)}/',
+    expenseTypes: '{!expenseTypes}',
+    pageLinks:{
+      LPDCR_Homepage: '{!URLFOR($Page.LPDCR_CC_HomePage)}',
+      LPDCR_Expenses: '{!URLFOR($Page.LPDCR_BBPLandingMember)}',
+      
+    /*  LPDCR_Expenses: '{!$Site.BaseUrl}/LPDCR_Expenses?AccountId={!account.Id}',*/
+      AttachmentDownload: '{!SUBSTITUTE(URLFOR($Page.LPDCR_Expenses), "LPDCR_Expenses", "servlet/servlet.FileDownload?file=")}'
+    },
+    controllers: {
+      LPDCR_ExpenseEditController: {
+        getAllCategories: '{!$RemoteAction.LPDCR_ExpenseEditController.getAllCategories}',
+        getSubCategories: '{!$RemoteAction.LPDCR_ExpenseEditController.getSubCategories}',
+        getAmountBySubCategories: '{!$RemoteAction.LPDCR_ExpenseEditController.getAmountBySubCategories}',
+        saveExpense: '{!$RemoteAction.LPDCR_ExpenseEditController.saveExpense}',
+        getParentAccount: '{!$RemoteAction.LPDCR_ExpenseEditController.getParentAccount}',
+        getExpenseDetail: '{!$RemoteAction.LPDCR_ExpenseEditController.getExpenseDetail}',
+        saveLineItem: '{!$RemoteAction.LPDCR_ExpenseEditController.upsertLineItem}',
+        deleteLineItem: '{!$RemoteAction.LPDCR_ExpenseEditController.deleteLineItem}',
+        deleteExpense: '{!$RemoteAction.LPDCR_ExpenseEditController.deleteExpense}',
+        submitForApproval: '{!$RemoteAction.LPDCR_ExpenseEditController.submitForApproval}',
+        uploadAttachment: '{!$RemoteAction.LPDCR_ExpenseEditController.uploadAttachment}',
+        getProgramYears: '{!$RemoteAction.LPDCR_ExpenseEditController.getProgramYears}',
+        deleteAttachment: '{!$RemoteAction.LPDCR_ExpenseEditController.deleteAttachment}',
+
+      }
+    }
+  };
+
+
+  angular.module('constants', [])
+  .constant('m360', $m360);
+
+</script>
+
+<script>
+  // Production steps of ECMA-262, Edition 5, 15.4.4.18
+// Reference: http://es5.github.io/#x15.4.4.18
+if (!Array.prototype.forEach) {
+
+  Array.prototype.forEach = function(callback, thisArg) {
+
+    var T, k;
+
+    if (this === null) {
+      throw new TypeError(' this is null or not defined');
+    }
+
+    // 1. Let O be the result of calling toObject() passing the
+    // |this| value as the argument.
+    var O = Object(this);
+
+    // 2. Let lenValue be the result of calling the Get() internal
+    // method of O with the argument "length".
+    // 3. Let len be toUint32(lenValue).
+    var len = O.length >>> 0;
+
+    // 4. If isCallable(callback) is false, throw a TypeError exception.
+    // See: http://es5.github.com/#x9.11
+    if (typeof callback !== "function") {
+      throw new TypeError(callback + ' is not a function');
+    }
+
+    // 5. If thisArg was supplied, let T be thisArg; else let
+    // T be undefined.
+    if (arguments.length > 1) {
+      T = thisArg;
+    }
+
+    // 6. Let k be 0
+    k = 0;
+
+    // 7. Repeat, while k < len
+    while (k < len) {
+
+      var kValue;
+
+      // a. Let Pk be ToString(k).
+      //    This is implicit for LHS operands of the in operator
+      // b. Let kPresent be the result of calling the HasProperty
+      //    internal method of O with argument Pk.
+      //    This step can be combined with c
+      // c. If kPresent is true, then
+      if (k in O) {
+
+        // i. Let kValue be the result of calling the Get internal
+        // method of O with argument Pk.
+        kValue = O[k];
+
+        // ii. Call the Call internal method of callback with T as
+        // the this value and argument list containing kValue, k, and O.
+        callback.call(T, kValue, k, O);
+      }
+      // d. Increase k by 1.
+      k++;
+    }
+    // 8. return undefined
+  };
+}
+
+//array.find 
+if (!Array.prototype.find) {
+  Object.defineProperty(Array.prototype, 'find', {
+    value: function(predicate) {
+     'use strict';
+     if (this == null) {
+       throw new TypeError('Array.prototype.find called on null or undefined');
+     }
+     if (typeof predicate !== 'function') {
+       throw new TypeError('predicate must be a function');
+     }
+     var list = Object(this);
+     var length = list.length >>> 0;
+     var thisArg = arguments[1];
+     var value;
+
+     for (var i = 0; i < length; i++) {
+       value = list[i];
+       if (predicate.call(thisArg, value, i, list)) {
+         return value;
+       }
+     }
+     return undefined;
+    }
+  });
+}
+</script>
+<style>
+    body{padding-right:0px !important}
+    
+@media only screen and (max-width: 767px)
+    {
+    .mob_expeseclass {
+        display: none;
+        }
+    }
+</style>
+<script>
+ $(document).ready(function(){
+  $('#bb').addClass("myactive");
+  $('#mbb').addClass("mobactive");
+});
+</script>
+
+</div>
+
+
+</apex:define>
+</apex:composition>
+</apex:page>

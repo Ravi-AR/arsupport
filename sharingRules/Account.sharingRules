@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>CBD_Top_200_Dairies</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>Edit</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>Share the Top 200 Dairies as identified by the National CBD Team.</description>
+        <label>CBD || Top 200 Dairies</label>
+        <sharedTo>
+            <group>CBD_Top_200_Dairies</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Top_200_Dairy_Indicator__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Customer_Ops_Account_Access</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>Edit</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>None</opportunityAccessLevel>
+        </accountSettings>
+        <description>Gives Customer Ops Read access to Accounts with determined record types</description>
+        <label>Customer Ops Account Access</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>Customer_Ops_Director</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Direct Producer Account.,Retail Producer Account.,Retail Producer Account,Other Account,Direct Producer Account,Dealer-Coop Account,National Account</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Dealer_Coops_to_Customer_Community_Support</fullName>
+        <accessLevel>Read</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Read</contactAccessLevel>
+            <opportunityAccessLevel>None</opportunityAccessLevel>
+        </accountSettings>
+        <description>Gives Customer Community Support role access to Dealer Coops</description>
+        <label>Dealer Coops to Customer Community Support</label>
+        <sharedTo>
+            <role>Customer_Community_Support</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Dealer-Coop Account</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Jeff_Buccello_Account_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>This sharing rule gives Jeff Buccello (LPS) access to Wilco Child Accounts</description>
+        <label>Jeff Buccello Account Sharing</label>
+        <sharedTo>
+            <group>LPS_Child_Account_Sharing_for_Wilco</group>
+        </sharedTo>
+        <booleanFilter>1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12</booleanFilter>
+        <criteriaItems>
+            <field>Partner_Account_Sharing__c</field>
+            <operation>equals</operation>
+            <value>510882</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Partner_Account_Sharing__c</field>
+            <operation>equals</operation>
+            <value>533042</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Partner_Account_Sharing__c</field>
+            <operation>equals</operation>
+            <value>586034</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Partner_Account_Sharing__c</field>
+            <operation>equals</operation>
+            <value>377262</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Partner_Account_Sharing__c</field>
+            <operation>equals</operation>
+            <value>536162</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Partner_Account_Sharing__c</field>
+            <operation>equals</operation>
+            <value>392137</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Partner_Account_Sharing__c</field>
+            <operation>equals</operation>
+            <value>392191</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Partner_Account_Sharing__c</field>
+            <operation>equals</operation>
+            <value>392135</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Partner_Account_Sharing__c</field>
+            <operation>equals</operation>
+            <value>392134</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Partner_Account_Sharing__c</field>
+            <operation>equals</operation>
+            <value>287281</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Partner_Account_Sharing__c</field>
+            <operation>equals</operation>
+            <value>458657</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Partner_Account_Sharing__c</field>
+            <operation>equals</operation>
+            <value>392131</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Large_Herd_Initiative_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>Edit</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>This sharing rule is to share accounts that have the initiative of Large Herd Dairy with the public group of Large Herd Dairy,</description>
+        <label>Large Herd Initiative Sharing</label>
+        <sharedTo>
+            <group>GLR_Large_Heard_Initiative</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Large_Herd_Initiative_Indicator__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Michael_Olearnick_Account_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>Read</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>Michael does not have an employee number, so the ETL job will not assign him accounts systematically.</description>
+        <label>Michael Olearnick Account Sharing</label>
+        <sharedTo>
+            <group>Michael_Olearnick_Sharing_Rule</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>AccountNumber</field>
+            <operation>equals</operation>
+            <value>305710,311869,311872,311996,312006,312074,312079,312095,318917,458592,537822,537823,564151</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>New_York_Dairy_Account_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>Edit</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>Sharing rule to share accounts with the New York Dairy Team if a member of the account team is aligned to New York Dairy or the Account Owner is aligned to New York Dairy.</description>
+        <label>New York Dairy Account Sharing</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>CBD_New_York_Dairy_ASM</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>New_York_Dairy_Indicator__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Partner_Account_Sharing_CSF_248637</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>Shares the correct accounts with Central Farm Service-#248637</description>
+        <label>Partner Account Sharing || CSF-248637</label>
+        <sharedTo>
+            <group>Partner_Sharing_CFS_248637</group>
+        </sharedTo>
+        <booleanFilter>1 or 2</booleanFilter>
+        <criteriaItems>
+            <field>Partner_Account_Sharing__c</field>
+            <operation>equals</operation>
+            <value>248637</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>AccountNumber</field>
+            <operation>equals</operation>
+            <value>248637</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Partner_Sharing_Town_Country_111176</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>Shares the correct accounts with Town &amp; Country #111176</description>
+        <label>Partner Sharing || Town &amp; Country 111176</label>
+        <sharedTo>
+            <group>Partner_Sharing_Centerra_Coop_111176</group>
+        </sharedTo>
+        <booleanFilter>1 or 2</booleanFilter>
+        <criteriaItems>
+            <field>Partner_Account_Sharing__c</field>
+            <operation>equals</operation>
+            <value>111176</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>AccountNumber</field>
+            <operation>equals</operation>
+            <value>111176</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Partner_Sharing_Tyler_Johnson_Enterprises_525802</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>Shares the correct accounts with Tyler Johnson Enterprises #525802</description>
+        <label>Partner Sharing || Tyler Johnson Enterprises 525802</label>
+        <sharedTo>
+            <group>Partner_Sharing_Tyler_Johnson</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>Partner_Account_Sharing__c</field>
+            <operation>equals</operation>
+            <value>525802</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>AccountNumber</field>
+            <operation>equals</operation>
+            <value>525802</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Partner_Sharing_W_Reservie_111960</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>Shares the correct accounts with Western Reserve 111690</description>
+        <label>Partner Sharing || W Reservie 111690</label>
+        <sharedTo>
+            <group>Partner_Sharing_W_Reserve_111690</group>
+        </sharedTo>
+        <booleanFilter>1 or 2</booleanFilter>
+        <criteriaItems>
+            <field>Partner_Account_Sharing__c</field>
+            <operation>equals</operation>
+            <value>111690</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>AccountNumber</field>
+            <operation>equals</operation>
+            <value>111690</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>All_Account_Visibility</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>Read</caseAccessLevel>
+            <contactAccessLevel>Edit</contactAccessLevel>
+            <opportunityAccessLevel>Edit</opportunityAccessLevel>
+        </accountSettings>
+        <description>This sharing rule gives visibility to all accounts.</description>
+        <label>All Account Visibility</label>
+        <sharedTo>
+            <group>Account_Visibility</group>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinates>System_Administrator</roleAndSubordinates>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

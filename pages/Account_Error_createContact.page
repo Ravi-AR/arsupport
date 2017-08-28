@@ -1,0 +1,39 @@
+<apex:page standardcontroller="Contact" extensions="Account_Error_CreateNewContactController" >
+<!--extensions="Account_Error_CreateNewContactController" -->
+    <script type="text/javascript">
+
+	    function hideCreateContact(){
+	    	$('[id$=createContact]').hide();
+	    	$('.toggleContact').show();
+	    	return false;
+	    }
+    
+    	var ret_url = window.location.href;
+    
+        function redirectBack(){
+            //            window.location.href = '/' + ret_url;
+            //			window.location.href = window.location.pathname;
+            window.location = window.location.href;
+            //return ret_url;
+        }
+
+    </script>
+
+    <apex:form id="createContact">
+      <apex:pageblock >    
+          <apex:pageBlockSection title="Contact detail">
+             <apex:repeat value="{!$ObjectType.Contact.fieldsets.createContactFieldSet}" var="fieldValue">
+                 <apex:Inputfield value="{!Contact[fieldValue]}"/>
+             </apex:repeat>
+             <apex:inputHidden value="{!Contact.AccountId}" />
+          </apex:pageBlockSection>
+
+          <apex:commandButton value="Save" action="{!save}" oncomplete="redirectBack();"  />
+<!-- onclick=" return hideCreateContact()" -->
+      </apex:pageblock>
+    </apex:form>
+    
+</apex:page>
+
+
+<!-- createOpportunityFieldSet -->

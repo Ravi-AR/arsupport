@@ -1,0 +1,12 @@
+Hi {!Case.CreatedBy},
+
+Your request for Salesforce.com access for {!Case.Name_of_New_User__c} has been received.
+
+You will be notified when {!Case.Name_of_New_User__c}'s access has been granted.  
+
+Feel free to contact me with any questions.
+
+Thank you!!
+
+Purina Support Team
+purinacrmsupport@landolakes.com

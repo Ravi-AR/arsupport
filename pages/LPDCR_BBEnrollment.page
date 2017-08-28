@@ -1,0 +1,193 @@
+<!-- 
+*********************************************************************************
+Author: Govinda Prasad P S
+Email: govinda.prasad@magnet360.com
+Created Date    : 11/10/2016
+Function    :  Visualforce page for BUSINESS BUILDER PROGRAM - Enrollment Submitted.
+Version     : 1.0 
+*********************************************************************************
+--> 
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="LPDCR_BBEnrollmentController">
+    <apex:form id="form">
+    <apex:composition template="LPDCR_CC_BaseTemplate">
+        
+        <apex:define name="PageTitle">BUSINESS BUILDER PROGRAM - ENROLLMENT</apex:define>
+        <apex:define name="body">        
+        <div class="title_wrapper">
+          <div class="container-fluid">
+              <h3 class="page_title">Business Builder Enrollment</h3>
+          </div>
+          </div>    
+          <div class="">
+            <div class="row detailbanner">
+                <div class="col-lg-12">
+                
+                <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
+                  <div class="panel panel-default">
+                    <div class="panel-heading" id="headingOne" role="tab">
+                      <h4 class="panel-title">
+                          <a target="_blank" class="bbslink" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file={!documentObj.Id}"><u>View Dealer Levels</u></a>
+                      
+                       <!-- <a aria-controls="collapseOne" aria-expanded="false" data-parent="#accordion" data-toggle="collapse" href="#collapseOne" role="button" class="collapsed">
+                         View Dealer Levels    <span class="glyphicon glyphicon-plus pull-right"></span>
+
+                        </a>-->
+                      </h4>
+                    </div>
+                    
+                  </div>
+                  
+                </div>                
+                
+                </div>
+                 <div class="col-xs-12">
+                   <p>Complete the following information to apply for the Business Builder Program</p>
+                 </div> 
+                 <div class="col-xs-12">
+                     <p>*Required Fields</p>
+                     <p><b>* Parent Account :{!dealerAccount.Name}</b></p><br/>
+                      <p></p>
+                    <p>* We have an <b>LPS (Livestock Production Specialist) who works a minimum of 100 Farm Gate Days</b> (2.5 days per week) annually.</p>
+                    <div class="btn-group col-xs-12 ">
+                           <center>
+                         <label class="switch">
+                            <apex:inputCheckbox styleClass="switch-input Sw1" value="{!ssprgmYearObj.LPSworkingmin100FieldDays__c}"/>
+                                <span class="switch-label" data-on="Yes" data-off="No"></span> 
+                                <span class="switch-handle"></span> 
+                            </label>
+                            
+                          </center>
+                     </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-xs-9 control-label">* Projected number of Farm Gate Days annually</label>
+                        <div class="col-xs-3">
+                              <!--<input type="text" class="form-control" value="{!ssprgmYearObj.LPSProjectNumberofFieldDays__c}"></input>-->
+                              <apex:inputText value="{!ssprgmYearObj.LPSProjectNumberofFieldDays__c}" styleClass="form-control readonly" maxlength="3" />
+                            </div>
+                            <p>&nbsp;<hr/></p>
+                      </div>
+                      <p>* We have our own <b>salesperson, on our payroll, who works a minimum of 100 Farm Gate Days</b> (2.5 days per week) annually.</p>
+                    <div class="btn-group col-xs-12 " >
+                          <center>
+                          <label class="switch">
+                                <apex:inputCheckbox styleClass="switch-input Sw2" value="{!ssprgmYearObj.Salespersonworkingmin100fielddays__c}"/>
+
+                                <span class="switch-label" data-on="Yes" data-off="No"></span> 
+                                <span class="switch-handle"></span> 
+                            </label>
+                          </center>
+                     </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-xs-9 control-label">* Projected number of Farm Gate Days annually</label>
+                        <div class="col-xs-3">
+                        <apex:inputText value="{!ssprgmYearObj.SalespersonNumberofFieldDays__c}" styleClass="form-control readonly1" maxlength="3"/>
+                        </div>
+                            <p>&nbsp;<hr/></p>
+                      </div>
+                    <div>
+                        <h5><b>Business Builder Terms And Conditions</b></h5>
+                        <p>{!bbprgmYear.TermsandConditionsforProgramYear__c}</p>                          
+                          <apex:inputCheckbox value="{!ssprgmYearObj.TermsandConditionsAccepted__c}" required="true"/>
+                          <b>* I accept the Terms and Conditions</b>
+                    </div><br/>
+                    <div class=""><!--<a href="#" class="btn btn-primary btn-block" onclick="updateSSProgYear()">Submit</a>-->
+                    <center> <apex:pageMessages /></center>
+                    <center><label class="errmsg messageText">Only allow numbers</label></center>
+                    <apex:commandLink styleClass="btn btn-primary btn-block btnenroll btn_SubEn" value="Submit" action="{!updateSSProgYear}"></apex:commandLink>
+                     <center><a href="{!$Site.BaseUrl}/LPDCR_BBPLandingMember" class="link"><u>Cancel</u></a></center><br/>
+                   
+                </div>        
+                </div>
+                 </div><!--end row--> 
+                   
+            </div><!--End:Container-->
+            
+           
+        </apex:define>
+    </apex:composition>
+    </apex:form>
+    
+     <script>
+            $('.collapse').on('shown.bs.collapse', function(){
+            $(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+            }).on('hidden.bs.collapse', function(){
+            $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+            });
+            
+             $('.btn[data-radio-name]').click(function() {
+                $('.btn[data-radio-name="'+$(this).data('radioName')+'"]').removeClass('active');
+                $('input[name="'+$(this).data('radioName')+'"]').val(
+                    $(this).text()
+                );
+            });
+            
+            $('.btn[data-checkbox-name]').click(function() {
+                $('input[name="'+$(this).data('checkboxName')+'"]').val(
+                    $(this).hasClass('active') ? 0 : 1
+                );
+            });
+            
+           
+
+            </script>
+            
+<style>
+    .messageText{
+        color:#cc262c;
+        font-size:18px;
+        margin-bottom:10px;
+    }
+    .btn_SubEn{margin: 0 auto 10px; }
+    .errmsg{text-align: center; margin: 0px auto 10px; font-weight:normal}
+</style>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+    $(document).ready(function($) {
+         
+          $(".Sw1").click(function(){
+               if ($(this).is(':checked')) {               
+                    $('.readonly').prop('readonly', false);                
+                 }               
+               else if ($(this).not(':checked')) {   
+                   $('.readonly').prop('readonly', true); 
+                    $('.readonly').val(0);                      
+               }           
+         });  
+         
+         
+        
+          $(".Sw2").click(function(){
+               if ($(this).is(':checked')) {               
+                    $('.readonly1').prop('readonly', false); 
+                                 
+                 }               
+               else if ($(this).not(':checked')) {   
+                   $('.readonly1').prop('readonly', true); 
+                    $('.readonly1').val(0);                     
+               }           
+         }); 
+         
+         $('.errmsg').hide();
+         $('.errmsg1').hide();
+         
+         $(".readonly, .readonly1").keypress(function (e) {            
+             if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {               
+                $(".errmsg").show().fadeOut(10000);
+                       return false;
+            }
+       });  
+       
+       
+    });
+    
+    
+</script>
+
+     <script>
+     $(document).ready(function(){
+      $('#bb').addClass("myactive");
+      $('#mbb').addClass("mobactive");
+    });
+ </script>       
+            
+</apex:page>

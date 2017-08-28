@@ -1,0 +1,406 @@
+<apex:page standardController="Farm_VIP_Registration__c" extensions="VIP_Event_Register_Controller">
+<!-- --VIP Event Register Page-- -->
+
+<!-- onsubmit="addContacts();" -->
+<apex:form rendered="{!IF(invite_contacts = false, 'true', 'false')}">
+
+	<!-- Contact, account and opportunity information  -->
+	<apex:pageBlock title="Farm VIP Registration" >
+
+		<apex:pageBlockSection >
+			<apex:outputField value="{!cur_event.Name}" />
+		</apex:pageBlockSection>
+
+		<!-- ACCOUNT RECORD TYPE -->
+		<apex:pageBlockSection title="Account Info" >
+			<apex:outputField id="a_rec_type" value="{!cur_account.RecordTypeId}" />
+			<!-- ACCOUNT NAME  -->
+			<apex:outputField id="a_name" value="{!cur_account.Name}" />
+			<!-- ACCOUNT NUMBER -->
+			<apex:outputField id="a_number" value="{!cur_Account.AccountNumber}" />
+		</apex:pageBlockSection>
+
+
+<!-- HOST INFO (user info) -->
+		<apex:pageBlockSection columns="2" id="host_info" title="Nominating Salesperson Info">
+				<apex:outputField value="{!cur_user.FirstName}" />
+				<apex:outputField value="{!cur_user.LastName}" />
+				<apex:outputField value="{!cur_user.MobilePhone}" />
+				<apex:outputField value="{!cur_user.Email}" />
+				<apex:outputField value="{!cur_user.Sales_Division__c}" />
+				<apex:inputField required="{!req_fields.Farm_Host_attending__c}" value="{!cur_reg.Host_will_be_attending__c}" />
+			</apex:pageBlockSection>
+
+	<!-- CONTACT INFO  -->
+		<!-- NEED THIS TO GET PICKLIST FOR STATES. -->
+		<div style="display:none">
+			<apex:inputfield value="{!cur_contact.MailingCountryCode}" />
+		</div>
+
+		<apex:pageBlockSection title="Contact Info" id="contactInfoSection" >
+			
+			<apex:inputField required="{!req_fields.Contact_Salutation__c}" value="{!cur_contact.Salutation}" />
+			<apex:inputField required="{!req_fields.Contact_First_Name__c}" value="{!cur_contact.FirstName}" />
+			<apex:inputField required="{!req_fields.Contact_Last_Name__c}" value="{!cur_contact.LastName}" />
+			<apex:inputField required="{!req_fields.Contact_Title__c}" label="Suffix" value="{!cur_contact.Title}" />
+			
+			<apex:inputField required="{!req_fields.Contact_MailingStreet__c}" value="{!cur_contact.MailingStreet}" />
+			<apex:inputField required="{!req_fields.Contact_MailingCity__c}" value="{!cur_contact.MailingCity}" />		
+			<apex:inputField required="{!req_fields.Contact_MailingState__c}" value="{!cur_contact.MailingStateCode}" />
+			<apex:inputField required="{!req_fields.Contact_MailingPostalCode__c}" value="{!cur_contact.MailingPostalCode}" />
+			
+			<!-- OVERRIDE PHONE -->
+			<apex:pageBlockSection columns="2" id="overridephonenumber" >
+				<apex:inputField styleClass="form-control input phone" required="{!req_fields.Contact_MobilePhone__c && cur_contact.Override_Phone__c = false}" value="{!cur_contact.MobilePhone}" />
+				<apex:actionRegion >
+				<!-- ENTER PHONE # -->
+					<span class="labelCol vfLabelColTextWrap"> No Phone </span>
+					<apex:inputCheckbox value="{!cur_contact.Override_Phone__c}">
+						<apex:actionSupport event="onclick" action="{!overridePhonepop}" reRender="overridephonenumber"  />
+					</apex:inputCheckbox>
+				</apex:actionRegion>
+				<!-- REASON WHY NO PHONE NUMBER -->
+				
+				<apex:inputField value="{!cur_contact.Reason_No_Phone__c}" rendered="{!cur_contact.Override_Phone__c}" required="{!cur_contact.Override_Phone__c}" />
+					<!-- <apex:inputHidden rendered="{!cur_contact.Override_Phone__c}" /> -->
+			</apex:pageBlockSection>
+
+			<!-- ENTER EMIAL -->
+			<apex:pageBlockSection columns="2" id="overrideemail" >
+				<apex:inputField required="{!req_fields.Contact_Email__c && cur_contact.Override_Email__c = false}" value="{!cur_contact.Email}" />
+				<!-- OVERRIDE EMAIL -->
+				<apex:actionRegion >
+					<span class="labelCol vfLabelColTextWrap"> No Email</span>
+					<apex:inputCheckbox value="{!cur_contact.Override_Email__c}" >
+						<apex:actionSupport event="onclick" action="{!overridePhonepop}" reRender="overrideemail" />
+					</apex:inputCheckbox>
+				</apex:actionRegion>
+
+			<!-- REASON NO EMAIL ADDRESS ENTERED -->
+				<apex:inputField value="{!cur_contact.Reason_No_Email__c}" rendered="{!cur_contact.Override_Email__c}" required="{!cur_contact.Override_Email__c}" />
+			</apex:pageBlockSection>
+			
+			<apex:inputField id="ctype" onchange="checkInfluencer();" required="{!req_fields.Contact_Contact_Type_c__c}" value="{!cur_contact.Contact_Type__c}" />
+			
+			<apex:inputField required="{!req_fields.Contact_Role_c__c}" value="{!cur_contact.Role__c}" />
+			<!-- Apex action region for showing / hiding the influencer -- need to use apex to change values in constructor -->
+			<apex:actionRegion >
+				<apex:actionFunction name="setInfluencer" action="{!MakeInfluencer}" reRender="farmVIPinfo" />
+				<apex:actionFunction name="unsetInfluencer" action="{!unMakeInfluencer}" reRender="farmVIPinfo" />
+			</apex:actionRegion>
+
+		</apex:pageBlockSection>
+
+	<!-- FARM VIP Registration traveling INFO  -->
+		<apex:pageBlockSection title="Farm VIP Info" id="farmVIPinfo">
+			<apex:inputField value="{!cur_reg.Traveling_Via__c}" required="{!req_fields.Farm_Traveling_Via_c__c}"/>
+			<apex:inputField value="{!cur_reg.Room_With__c}"	 required="{!req_fields.Farm_Room_With_c__c}" />
+			<apex:inputField value="{!cur_reg.Notes__c}" 		 required="{!req_fields.Farm_Notes_c__c}"/>
+			<apex:inputField value="{!cur_reg.Wearable_Size_if_applicable__c}" required="{!req_fields.Wearable_Size_if_applicable__c}"/>
+
+			<apex:inputField rendered="{!influencerContact}" value="{!cur_reg.Animals_Influenced__c}" required="{!influencerContact}"/>
+
+		</apex:pageBlockSection>
+	</apex:pageBlock>
+
+	<apex:commandButton value="Submit"  action="{!showAddContacts}" /> 
+</apex:form>
+
+<!-- onclick="addContacts();" -->
+
+<!-- SECTION TO DISPLAY AFTER SUBMIT REGISTRATION RECORD. -->
+
+<apex:pageBlock rendered="{!invite_contacts}" >
+	<apex:outputText >{!$Label.Add_Contacts}</apex:outputText>
+	<br/>
+	<apex:form rendered="{!IF(relatedcontacts == null, 'true', 'false')}">
+		<apex:commandButton id="NoSubmit" value="No - Submit" action="{!overrideSave}" />
+		<apex:commandButton id="Yes" value="Yes" onclick="displayAddRelatedCons(); return false;" />
+	</apex:form>
+
+
+	<apex:pageBlockTable id="relatedContacts" value="{!relatedcontacts}" var="con">
+		<apex:column headerValue="Name">
+			<apex:outputText >{!con.FirstName} {!con.LastName}</apex:outputText>
+		</apex:column>
+		<apex:column headerValue="Phone">
+			<apex:outputField value="{!con.Phone}" />
+		</apex:column>
+		<apex:column headerValue="Email">
+			<apex:outputField value="{!con.Email}" />
+		</apex:column>
+		<apex:column headerValue="Type">
+			<apex:outputField value="{!con.Contact_Type__c}" />
+		</apex:column>
+		<apex:column headerValue="Role">
+			<apex:outputField value="{!con.Role__c}" />
+		</apex:column>
+	</apex:pageBlockTable>
+
+	<!-- FORM FOR RELATING CONTACTS TO THE REGISTRATION RECORD -->
+	<apex:form >
+		<apex:outputPanel rendered="{!IF(relatedcontacts != null, 'true', 'false')}" >
+		<input id="searchContactbtn" type="button" class="btn" value="Add Existing" onclick="AddExistingContact();"/>
+		<input id="createContactbtn" type="button" class="btn" value="Create New" onclick="CreateNewContact();" />
+		</apex:outputPanel>
+	</apex:form>
+	<!-- SECTION FOR CREATING / ADDING CONTCTS -->
+	<div id="addContactsSection" style="display:none;" >
+	<apex:form id="insertContact">
+		<apex:outputPanel rendered="{!IF(relatedcontacts != null, 'false', 'true')}">
+		<input id="searchContactbtn" type="button" class="btn" value="Add Existing" onclick="AddExistingContact();"/>
+		<input id="createContactbtn" type="button" class="btn" value="Create New" onclick="CreateNewContact();"/>
+		</apex:outputPanel>
+
+		<div id="createNewDiv" style="display:none;">
+			<!-- fields needed are first name, last name, phone, email, contact type (producer) and contact role -->
+			<apex:pageBlockSection >
+	            <apex:inputField required="true" id="cfn" value="{!temp_con.FirstName}"/>
+	            <apex:inputField required="true" id="cln" value="{!temp_con.LastName}"/>
+				<apex:inputField required="true" id="cro" value="{!temp_con.Role__c}" />
+				<apex:outputField value="{!temp_con.Contact_Type__c}" />
+				
+				<!-- PHONE # INPUT  -->
+	            <apex:pageBlockSection columns="2" id="overridephonenumber" >
+	            	<!-- custom settings to determine if field is required -->
+					<apex:inputField styleClass="form-control input phone" id="cph" required="{!req_fields.Contact_MobilePhone__c && temp_con.Override_Phone__c = false}" value="{!temp_con.MobilePhone}" />
+					<apex:actionRegion >
+					<!-- ENTER PHONE # -->
+						<span class="labelCol vfLabelColTextWrap"> No Phone </span>
+						<apex:inputCheckbox id="ophone" value="{!temp_con.Override_Phone__c}">
+							<apex:actionSupport event="onclick" action="{!overridePhonepop}" reRender="overridephonenumber"  />
+						</apex:inputCheckbox>
+					</apex:actionRegion>
+					<apex:inputField value="{!temp_con.Reason_No_Phone__c}" id="rphone" rendered="{!temp_con.Override_Phone__c}" required="{!temp_con.Override_Phone__c}" />
+				</apex:pageBlockSection>
+				<!-- <apex:inputField required="true" id="cph" value="{!temp_con.Phone}" styleClass="form-control input phone" /> -->
+				<!-- EMAIL INPUT -->
+				<apex:inputHidden /> 
+				<apex:pageBlockSection columns="2" id="overrideemail" >
+					<!-- custom settings to determine if field is required -->
+					<apex:inputField id="cem" required="{!req_fields.Contact_Email__c && temp_con.Override_Email__c = false}" value="{!temp_con.Email}" />
+					<!-- OVERRIDE EMAIL -->
+					<apex:actionRegion >
+						<span class="labelCol vfLabelColTextWrap"> No Email</span>
+						<apex:inputCheckbox id="oemail" value="{!temp_con.Override_Email__c}" >
+							<apex:actionSupport event="onclick" action="{!overridePhonepop}" reRender="overrideemail" />
+						</apex:inputCheckbox>
+					</apex:actionRegion>
+					<!-- REASON NO EMAIL ADDRESS ENTERED -->
+					<apex:inputField id="remail" value="{!temp_con.Reason_No_Email__c}" rendered="{!temp_con.Override_Email__c}" required="{!temp_con.Override_Email__c}" />
+				</apex:pageBlockSection>
+				<apex:inputHidden />
+				<div id="errMsg" style="color:red; font-size:14px;"></div>
+
+				<input type="button" class="btn" value="Add Contact" onclick="return validateCon();" />
+				<input type="button" class="btn" value="Cancel" onclick="hideCreate();" />
+				<apex:actionFunction name="renTable" action="{!createRelatedContact}" reRender="relatedContacts" />
+
+			</apex:pageBlockSection>
+		</div>
+	</apex:form>
+
+
+	<apex:form >
+		<!-- ADD Existing contact from the contact block -->
+		<div id="AddExistingDiv" style="display:none;">
+			<apex:pageBlockTable value="{!cons_related_account}" var="conn" >
+			<!-- cons_related_account -->
+				<apex:column headerValue="Action">
+					<apex:commandLink action="{!addContacttoList}" value="Select" rendered="{!IF(cur_contact.id != conn.id, 'true', 'false')}" >
+						<apex:param assignTo="{!sel_conid}" name="sel_conid" value="{!conn.id}" />
+					</apex:commandLink>
+					<!-- send parameter with id with the form so we know what id to send to it.  -->
+					<apex:outputText rendered="{!IF(cur_contact.id = conn.id, 'true', 'false')}" > </apex:outputText>
+				</apex:column>
+				<apex:column headerValue="Name">
+					<apex:outputField value="{!conn.Name}" />
+				</apex:column>
+				<apex:column headerValue="Phone">
+					<apex:outputField value="{!conn.Phone}" />
+				</apex:column>
+				<apex:column headerValue="Email">
+					<apex:outputField value="{!conn.Email}" />
+				</apex:column>
+				<apex:column headerValue="Contact Type">
+					<apex:outputField value="{!conn.Contact_Type__c}" />
+				</apex:column>
+				<apex:column headerValue="Role">
+					<apex:outputField value="{!conn.Role__c}" />
+				</apex:column>
+
+			</apex:pageBlockTable>
+			<input type="button" class="btn" value="Cancel" onclick="hideExisting();" />
+		</div>	<!--END  ADD Existing contact from the contact block -->
+		</apex:form>
+	</div>	<!-- END add / create contact section. -->
+<apex:form >
+	<apex:commandButton value="Submit" action="{!overrideSave}" />
+</apex:form>
+
+</apex:pageBlock>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" />
+
+<script type="text/javascript" >
+// function called when the Contact type is changed -- manipulates the Animals influenced field via apex.
+	function checkInfluencer(){
+		if($('[id$=ctype]').val() == 'Influencer'){
+			setInfluencer();
+		}else{
+			unsetInfluencer();
+		}
+	}
+//function used for masking the javascript correctly (Used for formatting phone number.)
+!function(a){"function"==typeof define&&define.amd?define(["jquery"],a):a("object"==typeof exports?require("jquery"):jQuery)}(function(a){var b,c=navigator.userAgent,d=/iphone/i.test(c),e=/chrome/i.test(c),f=/android/i.test(c);a.mask={definitions:{9:"[0-9]",a:"[A-Za-z]","*":"[A-Za-z0-9]"},autoclear:!0,dataName:"rawMaskFn",placeholder:"_"},a.fn.extend({caret:function(a,b){var c;if(0!==this.length&&!this.is(":hidden"))return"number"==typeof a?(b="number"==typeof b?b:a,this.each(function(){this.setSelectionRange?this.setSelectionRange(a,b):this.createTextRange&&(c=this.createTextRange(),c.collapse(!0),c.moveEnd("character",b),c.moveStart("character",a),c.select())})):(this[0].setSelectionRange?(a=this[0].selectionStart,b=this[0].selectionEnd):document.selection&&document.selection.createRange&&(c=document.selection.createRange(),a=0-c.duplicate().moveStart("character",-1e5),b=a+c.text.length),{begin:a,end:b})},unmask:function(){return this.trigger("unmask")},mask:function(c,g){var h,i,j,k,l,m,n,o;if(!c&&this.length>0){h=a(this[0]);var p=h.data(a.mask.dataName);return p?p():void 0}return g=a.extend({autoclear:a.mask.autoclear,placeholder:a.mask.placeholder,completed:null},g),i=a.mask.definitions,j=[],k=n=c.length,l=null,a.each(c.split(""),function(a,b){"?"==b?(n--,k=a):i[b]?(j.push(new RegExp(i[b])),null===l&&(l=j.length-1),k>a&&(m=j.length-1)):j.push(null)}),this.trigger("unmask").each(function(){function h(){if(g.completed){for(var a=l;m>=a;a++)if(j[a]&&C[a]===p(a))return;g.completed.call(B)}}function p(a){return g.placeholder.charAt(a<g.placeholder.length?a:0)}function q(a){for(;++a<n&&!j[a];);return a}function r(a){for(;--a>=0&&!j[a];);return a}function s(a,b){var c,d;if(!(0>a)){for(c=a,d=q(b);n>c;c++)if(j[c]){if(!(n>d&&j[c].test(C[d])))break;C[c]=C[d],C[d]=p(d),d=q(d)}z(),B.caret(Math.max(l,a))}}function t(a){var b,c,d,e;for(b=a,c=p(a);n>b;b++)if(j[b]){if(d=q(b),e=C[b],C[b]=c,!(n>d&&j[d].test(e)))break;c=e}}function u(){var a=B.val(),b=B.caret();if(a.length<o.length){for(A(!0);b.begin>0&&!j[b.begin-1];)b.begin--;if(0===b.begin)for(;b.begin<l&&!j[b.begin];)b.begin++;B.caret(b.begin,b.begin)}else{for(A(!0);b.begin<n&&!j[b.begin];)b.begin++;B.caret(b.begin,b.begin)}h()}function v(){A(),B.val()!=E&&B.change()}function w(a){if(!B.prop("readonly")){var b,c,e,f=a.which||a.keyCode;o=B.val(),8===f||46===f||d&&127===f?(b=B.caret(),c=b.begin,e=b.end,e-c===0&&(c=46!==f?r(c):e=q(c-1),e=46===f?q(e):e),y(c,e),s(c,e-1),a.preventDefault()):13===f?v.call(this,a):27===f&&(B.val(E),B.caret(0,A()),a.preventDefault())}}function x(b){if(!B.prop("readonly")){var c,d,e,g=b.which||b.keyCode,i=B.caret();if(!(b.ctrlKey||b.altKey||b.metaKey||32>g)&&g&&13!==g){if(i.end-i.begin!==0&&(y(i.begin,i.end),s(i.begin,i.end-1)),c=q(i.begin-1),n>c&&(d=String.fromCharCode(g),j[c].test(d))){if(t(c),C[c]=d,z(),e=q(c),f){var k=function(){a.proxy(a.fn.caret,B,e)()};setTimeout(k,0)}else B.caret(e);i.begin<=m&&h()}b.preventDefault()}}}function y(a,b){var c;for(c=a;b>c&&n>c;c++)j[c]&&(C[c]=p(c))}function z(){B.val(C.join(""))}function A(a){var b,c,d,e=B.val(),f=-1;for(b=0,d=0;n>b;b++)if(j[b]){for(C[b]=p(b);d++<e.length;)if(c=e.charAt(d-1),j[b].test(c)){C[b]=c,f=b;break}if(d>e.length){y(b+1,n);break}}else C[b]===e.charAt(d)&&d++,k>b&&(f=b);return a?z():k>f+1?g.autoclear||C.join("")===D?(B.val()&&B.val(""),y(0,n)):z():(z(),B.val(B.val().substring(0,f+1))),k?b:l}var B=a(this),C=a.map(c.split(""),function(a,b){return"?"!=a?i[a]?p(b):a:void 0}),D=C.join(""),E=B.val();B.data(a.mask.dataName,function(){return a.map(C,function(a,b){return j[b]&&a!=p(b)?a:null}).join("")}),B.one("unmask",function(){B.off(".mask").removeData(a.mask.dataName)}).on("focus.mask",function(){if(!B.prop("readonly")){clearTimeout(b);var a;E=B.val(),a=A(),b=setTimeout(function(){z(),a==c.replace("?","").length?B.caret(0,a):B.caret(a)},10)}}).on("blur.mask",v).on("keydown.mask",w).on("keypress.mask",x).on("input.mask paste.mask",function(){B.prop("readonly")||setTimeout(function(){var a=A(!0);B.caret(a),h()},0)}),e&&f&&B.off("input.mask").on("input.mask",u),A()})}})});
+
+
+	// mask the phone number - make sure it is in the proper format.
+	$(document).ready(function(){
+		$('.phone').each(function(){
+			$(this).mask("999-999-9999", { placeholder: " " } );
+		});
+	});
+	// funciton used for creating new contacts.
+	function CreateNewContact(){
+		$('[id$=createNewDiv]').show();
+		$('[id$=addContactsSection]').show();
+		$('[id$=createContactbtn]').hide();
+		$('[id$=searchContactbtn]').hide();
+		// document.getElementById("inputaddress").value = '';
+		$('[id$=cfn]').val('');
+		$('[id$=cln]').val('');
+		$('[id$=cph]').val('');
+		$('[id$=cem]').val('');
+		$('[id$=cro]').val('');
+	}
+
+	function AddExistingContact(){
+		$('[id$=AddExistingDiv]').show();
+		$('[id$=addContactsSection]').show();
+		$('[id$=createContactbtn]').hide();
+		$('[id$=searchContactbtn]').hide();
+	}
+
+	function displayAddRelatedCons(){
+		$('[id$=addContactsSection]').show();
+		$('[id$=NoSubmit]').hide();
+		$('[id$=Yes]').hide();
+	}
+
+	function hideCreate(){
+		$('[id$=addContactsSection]').show();
+		$('[id$=createNewDiv]').hide();
+		$('[id$=searchContactbtn]').show();
+		$('[id$=createContactbtn]').show();
+	}
+
+	function hideExisting(){
+		$('[id$=addContactsSection]').show();
+		$('[id$=AddExistingDiv]').hide();
+		$('[id$=searchContactbtn]').show();
+		$('[id$=createContactbtn]').show();
+	}
+
+	$('.errorMsg').each(function(){
+		// console.log('this is current errror: ' + $(this));
+		$('[id$=createNewDiv]').show();
+		$('[id$=createContactbtn]').hide();
+		$('[id$=searchContactbtn]').hide();
+
+		$('[id$=addContactsSection]').show();
+		$('[id$=NoSubmit]').hide();
+		$('[id$=Yes]').hide();
+
+	});
+
+	function callApex(){
+		renTable();
+		$('[id$=createNewDiv]').hide();
+		$('[id$=createContactbtn]').show();
+		$('[id$=searchContactbtn]').show();
+
+	}
+
+	function validateCon(){
+		var fn    = $('[id$=cfn]').val();
+		var ln    = $('[id$=cln]').val();
+		var phone = $('[id$=cph]').val();
+		var email = $('[id$=cem]').val();
+		var role  = $('[id$=cro]').val();
+		var reasonPhone = $('[id$=rphone]').val();
+		var reasonEmail = $('[id$=remail]').val();
+		var overridephone = $('[id$=ophone]').attr('checked');
+		var overrideemail = $('[id$=oemail]').attr('checked');
+
+		console.log('this is reason no email -- ' + reasonEmail);
+		console.log('this is reason no phone -- ' + reasonPhone);
+		console.log('override phone ' + overrideemail);
+		console.log('override phone ' + overridephone);
+
+		var errormsg = 'Error: ';
+		var missingFields = '';
+		var ret = true;
+		if(fn == null || fn == undefined || fn == ''){
+			ret = false;
+			missingFields += ' *First Name';
+		}
+		if(ln == null || ln == undefined || ln == ''){
+			ret = false;
+			missingFields += ' *Last Name';
+		}
+		// CHECK Phone / override phone
+		if(overridephone != undefined){
+			if(reasonPhone == null || reasonPhone == undefined || reasonPhone == ''){
+				ret = false;
+				missingFields += ' *Reason no phone'
+			}
+		}else{
+			if(phone == null || phone == undefined || phone == ''){
+				ret = false;
+				missingFields += ' *Phone';
+			}
+		}
+		// CHECK Email / override email 
+		if(overrideemail != undefined){
+			if(reasonEmail == null || reasonEmail == undefined || reasonEmail == ''){
+				ret = false;
+				missingFields += ' *Reason no email';
+			}
+		}else{
+			if(email == null || email == undefined || email == ''){
+				ret = false;
+				missingFields += ' *Email';
+			}
+			var pat = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i;
+			var out = pat.test(email);
+			if(out == false){
+				errormsg += ' **Email: Invalid Format';
+				ret = false;
+			}
+		}
+		if(role == null || role == undefined || role == ''){
+			ret = false;
+			missingFields += ' *Role';
+		}
+		if(missingFields != ''){
+			var temp = 'Required: ' + missingFields;
+			errormsg += ' ' + temp;
+		}
+
+		if(errormsg != 'Error: '){
+			document.getElementById("errMsg").innerHTML = errormsg;
+		}else{
+			document.getElementById("errMsg").innerHTML = '';
+			ret = true;
+			callApex();
+		}
+		return ret;
+
+	}
+
+
+</script>
+
+</apex:page>

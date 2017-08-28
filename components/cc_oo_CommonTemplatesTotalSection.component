@@ -1,0 +1,49 @@
+<!--<Component Name:cc_oo_CommonTemplatesTotalSection> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+
+Shrivaths Kulkarni                         9/21/2016                                   US-244 hide price                                                              
+-->
+<apex:component allowDML="true">
+	<script id="OO-TotalSection" type="text/template">
+		{{#if (isNotPreBook)}}
+		<div class="total">
+			<!--<p class="totals_subTotal_line">{{pageLabelMap 'CartInc_Subtotal'}}: {{price this.subTotal this.currencyCode}}</p>
+			{{#ifStoreSetting 'Skip_Tax_Calculation__c'}}
+				&nbsp;
+			{{else}}
+				
+				{{#if this.tax }}
+					<p class="totals_tax_line">{{pageLabelMap 'CheckOut_EstimatedTax'}}: {{price this.tax this.currencyCode}}</p>
+				{{/if}}
+			{{/ifStoreSetting}}
+			{{#ifStoreSetting 'Skip_Shipping_Calculation__c'}}
+				&nbsp;
+			{{else}}
+				<!--<p class="totals_shipping_line">{{pageLabelMap 'CartInc_Shipping'}}: {{price this.shippingCharge this.currencyCode}}</p>
+			{{/ifStoreSetting}}
+			{{#ifDisplay 'OR.ShowTotalSurcharge' }}
+				{{#if this.surchargeAmount }}
+					<p class="totals_surcharge_line">{{pageLabelMap 'CartInc_Surcharge'}}: {{price this.surchargeAmount this.currencyCode}}</p>
+				{{/if}}
+			{{/ifDisplay}}-->
+			
+			<p class="order_weight">
+				<strong>{{pageLabelMap 'Order_Weight'}}:&nbsp;</strong>
+				<strong class="value"></strong>
+			</p>
+			<p class="totals_total_line"><strong>{{pageLabelMap 'CartInc_Total'}}: {{sum this.subTotal this.tax this.shippingCharge this.adjustment this.surchargeAmount this.currencyCode}}</strong></p>
+		</div>
+		{{/if}}
+	</script>
+
+	<script type="text/javascript">
+		jQuery(function($) {
+            CCRZ.uiProperties.OrderDetailView.partial.totalsSection = '#OO-TotalSection';   
+            CCRZ.uiProperties.OrderReviewView.partial.totalsSection = '#OO-TotalSection';        
+        });
+        
+	</script>
+</apex:component>

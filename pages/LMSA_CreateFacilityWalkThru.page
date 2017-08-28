@@ -1,0 +1,301 @@
+<!--
+/**
+* Visualforce page to Create facility walk thru (LMSA-44)
+* 
+* @Date: 10.08.2015
+* @Author: Adeel Ahmad (Magnet 360)
+* 
+* @Updates:
+*/
+-->
+<apex:page applyBodyTag="false" applyHtmlTag="false" showHeader="false" standardStylesheets="false" controller="LMSA_CreateFacilityWalkThruController" sidebar="false" docType="html-5.0" cache="true" expires="600">     
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.LMSA_FontAwesome, 'css/font-awesome.min.css')}" />
+    <link rel="stylesheet" type="text/css" href="{!$Page.LMSA_Style}" /> 
+    <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.LMSA_Assets, 'css/bootstrap.min.css')}" />
+    <style>
+	.lookupInput img {
+		display: none;
+	}   
+    </style>
+</head>
+<body>
+    <apex:form Id="form" onsubmit="return validateRequiredFields();"> 
+        <div class="container-fluid">
+            <div class="row facility_header">
+                <div class="col-xs-6">
+                    <input type="button" class="btn btn-default btn-cancel" value="Cancel" onclick="cancel();" />
+                </div>
+                <div class="col-xs-6 text-right">
+                    <apex:commandButton onclick="validateRequiredFields();" styleClass="btn btn-primary btn-save"
+                                        status="status" title="Save" value="Save" action="{!saveRecord}"
+                                        reRender="msgs" rendered="{!NOT(FacilityChecklist.Confirmed__c)}"
+                                        oncomplete="wrapErrorMessage();" />
+                    <input type="button" class="btn btn-primary btn-email" value="Email" data-toggle="modal" data-target="#confirmModal" />
+                </div>
+            </div>    
+            <div  class="row">
+                <div class="col-xs-12">
+	                <apex:pageMessages id="msgs" />                    
+                </div>
+                <div class="col-xs-12">
+                    <div  id="err" class="error-msgs-wrapper">
+                    </div>
+                </div>
+            </div> <!-- @Ends error-row -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="accordion">
+                        <apex:repeat value="{!allFieldSetNames}" var="fieldSetName">
+                            <li class="parent_li">
+                                <a class="toggle" href="javascript:void(0);">
+                                	<span class="parentstep">{!fieldSetName}</span>
+                                </a>
+                                <ul class="inner show">
+                                    <li>
+                                        <apex:variable value="{!1}" var="field_Counter" />
+                                        <apex:repeat value="{!sectionToSubSecToFSMembersMap[fieldSetName]}" var="fs">
+                                            <apex:outputPanel layout="none">
+                                                <a href="javascript:void(0);" class="toggle">
+                                                	<span class="stepno">{!fs.subClassSectionName}</span>
+                                                </a>
+                                            </apex:outputPanel>
+                                            <ul class="inner show steps_ul">
+                                                <apex:repeat value="{!fs.fieldSetMembers}" var="fa">
+                                                    <li>
+                                                        <span class="question">
+                                                            {!fa.Label}
+                                                            <apex:outputPanel layout="none" rendered="{!fa.Required}" style="color:red;padding-left:5px;">*</apex:outputPanel>
+                                                        </span>
+                                                        <span class="question_option {!fa.Type}">
+                                                            <apex:outputPanel layout="none" rendered="true">
+                                                                <apex:repeat value="{!questionToTipMap[fa.Label]}" var="tip" >
+                                                                <input type="hidden" class="tip_info"  id="field{!field_Counter}" value="{!IF(ISNULL(tip.Id), '' ,tip.Facility_Answer__c)}" 
+                                                                   data-name="{!IF(ISNULL(tip.Id), '' ,tip.Name)}"
+                                                                   data-title="{!IF(ISNULL(tip.Id), '' ,tip.Facility_Question__c)}"
+                                                                   data-tip="{!IF(ISNULL(tip.Id), '' ,tip.Tip__c)}"
+                                                                   data-tipId="{!IF(ISNULL(tip.Id), '' ,tip.Id)}"
+                                                                   data-tipRecordType="{!IF(ISNULL(tip.Id), '' ,tip.RecordType.DeveloperName)}"
+                                                                   data-tipRecord-display-order="{!IF((tip.RecordType.DeveloperName == 'Mobile'), '1' ,'2')}"
+                                                                   data-donotshow="{!0}"
+                                                                   />
+                                                                </apex:repeat>
+                                                            </apex:outputPanel>
+                                                            <!-- 
+                                                            <apex:outputPanel layout="none" styleClass="picklists_tips" html-data-label="{!fa.Label}" rendered="{!fa.Type == 'picklist'}">
+                                                                <input type="text" class="tip_info" value="{!IF(ISNULL(questionToTipMap[fa.Label].Id), '' ,questionToTipMap[fa.Label].Facility_Answer__c)}" />
+                                                            </apex:outputPanel> -->
+                                                            
+                                                            <apex:outputPanel layout="none" rendered="{!AND(fa.Type != 'picklist', fa.Type != 'multipicklist', fa.Type != 'reference')}" >
+                                                                <apex:inputField value="{!FacilityChecklist[fa.fieldPath]}" 
+                                                                                 styleClass="form-control {!IF(fa.required, 'required', '')} {!fa.Type}"  />
+                                                            </apex:outputPanel> <!-- @Ends default fields -->  
+                                                            
+                                                            <!-- AutoComplete component replaces Lookup fields (fields of Type 'reference') -->
+                                                            <apex:outputPanel layout="none" rendered="{!fa.Type == 'reference'}">
+                                                                <apex:outputPanel layout="none" rendered="{!fa == 'Producer_Facility__c'}">
+	                                                                <apex:inputField value="{!FacilityChecklist[fa.fieldPath]}" id="producer_facility" styleClass="form-control">
+						                                                <c:LMSA_AutoComplete objectname="Account" autocomplete_textbox="{!$Component.producer_facility}" dependentField=".dependent-contact" />
+						                                            </apex:inputField>
+						                                        </apex:outputPanel>
+						                                        <apex:outputPanel layout="none" rendered="{!fa == 'Contact_1__c'}">
+	                                                                <apex:inputField value="{!FacilityChecklist[fa.fieldPath]}" id="contact1" styleClass="form-control dependent-contact">
+						                                                <c:LMSA_AutoComplete objectname="Contact" autocomplete_textbox="{!$Component.contact1}" filterField="{!$Component.producer_facility}" />
+						                                            </apex:inputField>
+						                                        </apex:outputPanel>
+						                                        <apex:outputPanel layout="none" rendered="{!fa == 'Contact_2__c'}">
+	                                                                <apex:inputField value="{!FacilityChecklist[fa.fieldPath]}" id="contact2" styleClass="form-control dependent-contact">
+						                                                <c:LMSA_AutoComplete objectname="Contact" autocomplete_textbox="{!$Component.contact2}" filterField="{!$Component.producer_facility}" />
+						                                            </apex:inputField>
+						                                        </apex:outputPanel>
+						                                        <apex:outputPanel layout="none" rendered="{!fa == 'Contact_3__c'}">
+	                                                                <apex:inputField value="{!FacilityChecklist[fa.fieldPath]}" id="contact3" styleClass="form-control dependent-contact">
+						                                                <c:LMSA_AutoComplete objectname="Contact" autocomplete_textbox="{!$Component.contact3}" filterField="{!$Component.producer_facility}" />
+						                                            </apex:inputField>
+						                                        </apex:outputPanel>
+                                                            </apex:outputPanel>
+                                                            <apex:outputPanel layout="none" rendered="{!fa.Type == 'picklist'}" >
+                                                                
+                                                                <apex:selectRadio value="{!FacilityChecklist[fa.fieldPath]}" layout="pageDirection" styleClass="{!IF(fa.required, 'required', '')} {!fa.Type}">
+                                                                    <apex:selectOptions value="{!fieldNameToPicklistValues[fa.fieldPath]}"/>
+                                                                </apex:selectRadio>
+                                                            </apex:outputPanel> <!-- @Ends radio button input -->
+                                                            <apex:outputPanel layout="none" rendered="{!fa.Type == 'multipicklist'}" styleClass="{!IF(fa.required, 'required', '')} {!fa.Type}" >
+                                                                <apex:variable value="{!0}" var="counter" />
+                                                                <apex:repeat value="{!fieldNameToMultiPicklistValues[fa.fieldPath]}" var="pValue" >
+                                                                    <apex:outputPanel layout="none" rendered="{!AND(NOT(ISNULL(FacilityChecklist[fa.fieldPath])) ,
+                                                                                                              CONTAINS( FacilityChecklist[fa.fieldPath] , pValue ))}">
+                                                                        <input type="checkbox" name="{!fa.fieldPath}_{!counter}" value="{!pValue}" checked="checked" />{!pValue}<br/>
+                                                                    </apex:outputPanel>
+                                                                    <apex:outputPanel layout="none" rendered="{!OR(ISNULL(FacilityChecklist[fa.fieldPath]) ,
+                                                                                                              NOT(CONTAINS( FacilityChecklist[fa.fieldPath] , pValue )))}">
+                                                                        <input type="checkbox" name="{!fa.fieldPath}_{!counter}" value="{!pValue}"  />{!pValue}
+                                                                    </apex:outputPanel>
+                                                                    <apex:variable value="{!counter+1}" var="counter" />
+                                                                </apex:repeat>
+                                                            </apex:outputPanel> <!-- @Ends checkboxes input -->
+                                                        </span> <!-- @Ends question answer -->
+                                                    </li>               
+                                                    <apex:variable value="{!field_Counter+1}" var="field_Counter" />
+                                                </apex:repeat>
+                                            </ul>      
+                                        </apex:repeat>
+                                    </li>
+                                </ul>
+                            </li>
+                        </apex:repeat>
+                        <li class="parent_li">
+                            <a href="javascript:void(0);" class="toggle">
+                            	<span class="parentstep">Email Templates &amp; Attachments </span>
+                            </a>
+                            <ul class="inner show">
+                                <li>
+                                    <a href="javascript:void(0);" class="toggle">
+                                    	<span class="stepno">Email Template</span>
+                                    </a>
+                                    <ul class="inner show steps_ul">
+                                        <li>
+                                            <span class="question">Choose Email Template</span>
+                                            <span class="question_option picklist">
+                                                <apex:outputPanel layout="none" >
+                                                    <apex:selectRadio value="{!selectedEmailTemplated}" layout="pageDirection" >
+                                                        <apex:selectOptions value="{!emailTemplates}"/>
+                                                    </apex:selectRadio>
+                                                </apex:outputPanel> <!-- @Ends radio button input -->
+                                            </span> 
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" class="toggle">
+                                    	<span class="stepno">Attachments</span>
+                                    </a>
+                                    <apex:outputPanel layout="none" id="tipAtt">
+                                        <ul class="inner show steps_ul attachments_ul">
+                                            <apex:outputPanel layout="inline" rendered="{!tipAttachmentsWrapList.size > 0}" id="tip_attachments">
+                                                <apex:repeat var="tip" value="{!tipAttachmentsWrapList}">
+                                                    <li>
+                                                        <span class="question_option attachment">
+                                                            <label><input type="checkbox" checked="checked" value="{!tip.isSelected}" /> {!tip.tipAttachment.Name}</label>
+                                                            <div class="tip_title">{!tip.tipAttachment.Facility_Question__c}</div>
+                                                            <div class="tip_desc">{!tip.tipAttachment.Tip__c}</div>
+                                                        </span> 
+                                                    </li>                                           
+                                                </apex:repeat>
+                                            </apex:outputPanel>
+                                            
+                                            <apex:outputPanel layout="inline" rendered="{!tipAttachments.size == 0}" id="no_attachments">
+                                                <li>
+                                                    <span class="question_option">
+                                                        No Attachments
+                                                    </span>
+                                                </li>
+                                            </apex:outputPanel>
+                                        </ul>
+                                    </apex:outputPanel>
+                                </li>
+                            </ul>
+                        </li> <!-- @Ends email templates -->
+                    </ul>
+                </div> <!-- @Ends accordian -->
+            </div>
+            <div class="row facility_header">
+                <div class="col-xs-6">
+                    <input type="button" class="btn btn-default btn-cancel" value="Cancel" onclick="cancel();" />
+                </div>
+                <div class="col-xs-6 text-right">
+                    <apex:commandButton onclick="validateRequiredFields();document.body.scrollTop = 0;" styleClass="btn btn-primary btn-save"
+                                        status="status" title="Save" value="Save" action="{!saveRecord}"
+                                        reRender="msgs" rendered="{!NOT(FacilityChecklist.Confirmed__c)}"
+                                        oncomplete="wrapErrorMessage();" />
+                    <input type="button" class="btn btn-primary btn-email" value="Email" data-toggle="modal" data-target="#confirmModal" />
+                </div>
+            </div>
+        </div>
+        <!-- Confirm Modal -->
+        <div class="modal fade confirmModal" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header"></div>
+                    <div class="modal-footer text-center">
+                        <h4 class="modal-title padding5">Are you sure you want to send this?</h4>
+                        <apex:commandButton styleClass="btn1 btn-primary" status="status" 
+                                            title="Yes" value="Yes" action="{!SendEmail}" reRender="msgs" 
+                                            rendered="{!NOT(FacilityChecklist.Confirmed__c)}" 
+                                            onComplete="$('#confirmModal').modal('hide');wrapErrorMessage();document.body.scrollTop = 0;" />
+                        <button type="button" class="btn1 btn-default" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Tip Modal -->
+        <div id="tipModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close tip_modal_close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <div class="tip_header">
+                            <i class="fa fa-lightbulb-o fa-5x"></i>
+                            <span>Mobile Tip #5</span>
+                        </div>
+                        <div class="tip_content">
+                            <h1 class="brder"></h1>
+                            <h5></h5>
+                        </div>
+                        <div class="tip_btns">
+                            <button type="button" id="add_checklist" class="btn1 btn-block closebtn" data-dismiss="modal" onClick="insertTipAttachment();">Add to Checklist</button>
+                            <input type="hidden" value="" id="tipId" />
+                            <button type="button" id="close_tip_modal" class="btn1 btn-block closebtn" data-dismiss="modal">Close</button>
+                        </div>
+                        <div class="divcheckbx">
+                            <input type="checkbox" name="dnt_shw_dialg" id ="dnt_shw_dialg"  /> Don't show me again....
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- @Ends modal -->
+    </apex:form>
+    <apex:form id="form2">
+        <apex:actionFunction name="addAttachToChecklist" action="{!addAttachToChecklist}" reRender="tip_attachments,no_attachments,tipAtt">
+            <apex:param assignTo="{!selectedTipId}" name="selectedTipId" value=""/>
+        </apex:actionFunction>
+    </apex:form>
+    <!-- Form to populate on cancel button click -->
+    <apex:form >
+        <apex:actionFunction name="cancel" action="{!Cancel}">
+        </apex:actionFunction>
+    </apex:form>
+    <apex:actionstatus id="status">
+        <apex:facet name="start">
+            <div class="search_loading">
+                <div class="waitingSearchDiv" id="el_loading">
+                    <div class="">
+                        <img class="waitingImage" src="/img/loading.gif" />
+                        <span class="waitingDescription">Loading....</span>
+                    </div>
+                </div>
+            </div>    
+        </apex:facet>
+    </apex:actionstatus>
+
+    <script type="text/javascript" src="{!URLFOR($Resource.LMSA_Assets, 'js/jquery-1.11.3.min.js')}"></script>
+    <script type="text/javascript" src="{!URLFOR($Resource.LMSA_Assets, 'js/bootstrap.min.js')}"></script>
+    <script type="text/javascript" src="{!URLFOR($Resource.LMSA_Assets, 'js/app.js')}"></script>
+    <script type="text/javascript">
+	    $(document).ready(function(){
+	        initJS();
+	        initNumberInput();
+	    });
+
+	    iosDoubleTapFix();
+	    iosPageJumpFix();
+     </script>
+</body>
+</html>
+</apex:page>

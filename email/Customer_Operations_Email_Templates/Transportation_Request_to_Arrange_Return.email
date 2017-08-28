@@ -1,0 +1,29 @@
+I have a product return which needs to be arranged. Please see below for details and provide remaining information when the return shipment is arranged. 
+ 
+{!Account.Name}
+{!Account.ShippingAddress}
+
+Customer Phone:  {!Account.Phone} or  {!Contact.Phone}
+
+Customer Fax:  {!Account.Fax}
+
+Return To Plant:  {!Case.Alternate_Return_Plant__c}
+
+Requested Pickup of Return:
+
+Bag or Bulk: 
+
+Weight of Return:  {!Case.Total_Weight__c}
+
+Number of Pallets: 
+
+Notes to Transportation: {!Case.Notes_to_Transportation__c}
+
+ 
+Please respond with the following:
+Expected Pick Up Date:
+Carrier Number:
+Shipment ID: 
+Cost of Return:
+
+Service Request Reference#: {!Case.CaseNumber}

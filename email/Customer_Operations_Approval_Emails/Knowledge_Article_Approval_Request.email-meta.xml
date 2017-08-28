@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>A notification that there are Knowledge Articles awaiting approval for publication</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Knowledge Article Approval Request</name>
+    <style>none</style>
+    <subject>Knowledge Article Approval Request</subject>
+    <type>text</type>
+</EmailTemplate>

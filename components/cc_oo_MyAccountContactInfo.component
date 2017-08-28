@@ -1,0 +1,408 @@
+<!--<Component Name: cc_oo_MyAccountContactInfo> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Samruddhi Gokhale                           10/17/2016                                    US:OO-771 Dev-the shipping address and corresponding billing address should appear in the contact information.
+-->
+<apex:component allowDML="true" layout="none" controller="cc_oo_MyAccountContactInfoController">
+    <style>
+        .my_account_information .myAccBillingAddr span{
+	        float:none;
+         }
+         .my_account_information .myAccShippingAddr span{
+        	float:none;
+        }
+        .my_account_information .myAccMailingAddr span{
+        	float:none;
+        }
+        .my_account_information .myAccOtherAddr span{
+        	float:none;
+        }
+    </style> 
+
+<script id="oo-MyAccount-ContactInformation-Desktop" type="text/template">
+<h2 class="title">{{pageLabelMap 'MyAccount_Profile'}}</h2>
+<div class="main_content_large_right_container">
+    {{#ifEquals this.commerceType "B2B"}}
+        <fieldset>
+            <legend>{{pageLabelMap 'MyAccount_Profile_Account_Information'}}</legend>
+            <div class="my_account_information">
+                <div class="row myAccProfileNote">{{pageLabelMap 'MyAccount_Profile_Note'}}</div>
+                {{#ifDisplay 'reg.addlInf'}}
+                <div class="row myAccProfileCompany">
+                    <label><strong>{{pageLabelMap 'MyAccount_Profile_Company'}}:</strong></label>
+                    <span>{{accountBean.name}}</span>
+                </div>
+                {{/ifDisplay}}
+                <div class="row myAccAccountGroup">
+                    <label><strong>{{pageLabelMap 'MyAccount_Profile_Account_Group'}}:</strong></label>
+                    <span>{{accountBean.accountGroupName}}</span>
+                </div>
+                <div class="row myAccProfilePhone">
+                    <label><strong>{{pageLabelMap 'MyAccount_Profile_Phone'}}:</strong></label>
+                    <span>{{accountBean.phone}}</span>
+                </div>
+                <div class="half">
+                    <div class="row myAccBillingAddr">
+                        <label><strong>{{pageLabelMap 'MyAccount_Profile_Account_Billing_Address'}}</strong><br /></label>
+                        {{> addressDisplayOO this.accountBean.billingAddress}}
+					
+                    </div>
+                </div>
+                <div class="half">
+                    <div class="row myAccShippingAddr">
+                        <label><strong>{{pageLabelMap 'MyAccount_Profile_Account_Shipping_Address'}}</strong><br /></label>
+                        <!--<span id="shipToNumber"></span><br/>-->
+                        {{> addressDisplayOO this.accountBean.shippingAddress}} 
+                      
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <br/>
+    <fieldset>
+        <legend>{{pageLabelMap 'MyAccount_Contact_Info'}}</legend>
+        <div class="my_account_information">
+            <div class="row myAccProfileName">
+                <label class="shortest"><strong>{{pageLabelMap 'MyAccount_Profile_Name'}}:</strong></label>
+                {{#if contactBean.firstName}}
+                    <span>{{contactBean.firstName}} {{contactBean.lastName}}</span>
+                {{else}}
+                    <span><i>No name stored.</i></span>
+                {{/if}}
+            </div>
+            <div class="row myAccProfilePhone">
+                <label class="shortest"><strong>{{pageLabelMap 'MyAccount_Profile_Phone'}}:</strong></label>
+                {{#if contactBean.phone}}
+                    <span>{{contactBean.phone}}</span>
+                {{else}}
+                    <span><i>No phone number stored.</i></span>
+                {{/if}}
+            </div>
+            <div class="half">
+                <div class="row myAccMailingAddr">
+                    <label><strong>{{pageLabelMap 'MyAccount_Profile_Contact_Mailing_Address'}}</strong><br /></label>
+                    {{> addressDisplayOO this.contactBean.mailingAddress}}
+                    
+                </div>
+            </div>
+            <div class="half">
+                <div class="row myAccOtherAddr">
+                    <label><strong>{{pageLabelMap 'MyAccount_Profile_Contact_Other_Address'}}</strong><br /></label>
+                    {{> addressDisplayOO this.contactBean.otherAddress}}
+                   
+                </div>
+            </div>
+			<div class="half">
+                    <div class="row myAccBillingAddr">
+                        <label><strong>{{pageLabelMap 'MyAccount_Profile_Account_Billing_Address'}}</strong><br /></label>
+                        {{> addressDisplayOO this.accountBean.billingAddress}}
+                       
+                    </div>
+            </div>
+        </div>
+    </fieldset>
+    <br/>
+    {{/ifEquals}}
+    <fieldset>
+        <legend>{{pageLabelMap 'MyAccount_Profile_User_Information'}}</legend>
+        <div class="my_account_information">
+            <div class="row myAccName">
+                <label class="shorter"><strong>{{pageLabelMap 'MyAccount_Profile_Name'}}:</strong></label>
+                <span>{{userFirstName}} {{userLastName}}</span>
+            </div>
+            <div class="row myAccPhone">
+                <label class="shorter"><strong>{{pageLabelMap 'MyAccount_Profile_Phone'}}:</strong></label>
+                <span>{{userPhone}}</span>
+            </div>            
+            <div class="row myAccEmailAddr">
+                <label class="shorter"><strong>{{pageLabelMap 'MyAccount_Profile_Email'}}:</strong></label>
+                <span>{{emailAddress}}</span>
+            </div>
+            <div class="row myAccLanguage">
+                <label class="shorter"><strong>{{pageLabelMap 'MyAccount_Profile_Language'}}:</strong></label>
+                <span>{{language}}</span>
+            </div>
+            <div class="row myAccCurrency">
+                <label class="shorter"><strong>{{pageLabelMap 'MyAccount_Profile_Currency'}}:</strong></label>
+                <span>{{pageLabelMap 'User_Currency'}}</span>
+            </div>
+            {{#ifDisplay 'reg.tmZn'}}
+            <div class="row myAccTimeZone">
+                <label class="shorter"><strong>{{pageLabelMap 'MyAccount_Profile_TimeZone'}}:</strong></label>
+                <span>{{timeZone}}</span>
+        </div>
+            {{/ifDisplay}}
+        </div>
+
+    </fieldset>
+    <br/>
+    {{#if hideEditProfile}} {{else}} 
+        <input type="button" class="gotoSectionContactInfoEdit button right" value="{{pageLabelMap 'MyAccount_EditProfile'}}" /><br/>
+    {{/if}}
+</div>
+</script>
+
+<script id="oo-MyAccount-ContactInformation-Mobile" type="text/template">
+<div class="checkout_container">
+    <h2 class="title">{{pageLabelMap 'MyAccount_MyProfile'}}</h2>
+    <div class="checkout_detail">
+        <div class="checkout_detail_item">
+            <div id="accordion" class="accordion clear">
+                {{#ifEquals this.commerceType "B2B"}}
+                <div class="accordion-group myAccProfileAccountInfo">
+                    <div class="accordion-heading">
+                        <a href="#collapseOne" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">{{pageLabelMap 'MyAccount_AccountInformation'}}</a>
+                    </div>
+                    <div class="accordion-body in collapse" id="collapseOne" style="height: auto;">
+                        <div class="accordion-inner">
+                            <p class="basic">
+                                <span class="myAccProfileCompany"><strong>{{pageLabelMap 'MyAccount_Company'}}:&nbsp;</strong>{{this.accountBean.name}}<br></span>
+                                <span class="myAccAccountGroup"><strong>{{pageLabelMap 'MyAccount_AccountGroup'}}:&nbsp;</strong>{{this.accountBean.accountGroupName}}<br></span>
+                                <span class="myAccProfilePhone"><strong>{{pageLabelMap 'MyAccount_Phone'}}:&nbsp;</strong>{{this.accountBean.phone}}</span></p>
+                            <p class="basic_half myAccBillingAddr">
+                                <strong>{{pageLabelMap 'MyAccount_ACBillingAddress'}}</strong><br/>
+                                {{> addressDisplayOO this.accountBean.billingAddress}}
+                            </p>
+                            <p class="basic_half myAccShippingAddr">
+                                <strong>{{pageLabelMap 'MyAccount_ACShippingAddress'}}</strong><br/>
+                                <!--<span id="shipToNumber"></span><br/>-->
+                                {{> addressDisplayOO this.accountBean.shippingAddress}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-group myAccProfileContactInfo">
+                    <div class="accordion-heading">
+                        <a href="#collapseTwo" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">{{pageLabelMap 'MyAccount_Contact_Info'}}</a>
+                    </div>
+                    <div class="accordion-body in collapse" id="collapseTwo" style="height: auto;">
+                        <div class="accordion-inner">
+                            <p class="basic myAccProfileName"><strong>Name:&nbsp;</strong>{{this.contactBean.firstName}} {{this.contactBean.lastName}}<br><strong>{{pageLabelMap 'MyAccount_Phone'}}:&nbsp;</strong>{{this.contactBean.phone}}
+                            <br>
+                            {{#if hideEditProfile}} {{else}}
+                                <a href="#edit_account" data-toggle="modal" class="edit_information icon-edit">{{pageLabelMap 'MyAccount_Edit'}}</a></p>
+                            {{/if}}
+                            <p class="basic_half myAccMailingAddr">
+                                <strong>{{pageLabelMap 'MyAccount_MailingAddress'}}</strong><br/>
+                                {{> addressDisplayOO this.contactBean.mailingAddress}}
+                                {{#if hideEditProfile}} {{else}}
+                                    <a href="#edit_address" data-type="Billing" data-toggle="modal" class="edit_information icon-edit editAddress">Edit</a>
+                                {{/if}}
+                            </p>
+                            <p class="basic_half myAccOtherAddr">
+                                <strong>{{pageLabelMap 'MyAccount_OtherAddress'}}</strong><br/>
+                                {{> addressDisplayOO this.contactBean.otherAddress}}
+                                {{#if hideEditProfile}} {{else}}
+                                    <a href="#edit_address" data-type="Shipping" data-toggle="modal" class="edit_information icon-edit editAddress">Edit</a>
+                                {{/if}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {{/ifEquals}}
+                <div class="accordion-group myAccProfileUserInfo">
+                    <div class="accordion-heading">
+                        <a href="#collapseThree" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">{{pageLabelMap 'MyAccount_UserInformation'}}</a>
+                    </div>
+                    <div class="accordion-body in collapse" id="collapseThree" style="height: auto;">
+                        <div class="accordion-inner">
+                            <p class="basic">
+                                <br></span>
+								<!-- Defect: OO-4856 starts-->
+                                <div class="row myAccName">
+                                    <label class="shorter"><strong>{{pageLabelMap 'MyAccount_Profile_Name'}}:</strong></label>
+                                    <span>{{userFirstName}} {{userLastName}}</span>
+                                </div>
+                                <!-- Defect: OO-4856 ends -->
+                                <span class="myAccUserPhone"><strong>{{pageLabelMap 'MyAccount_Profile_Phone'}}:</strong> {{this.userPhone}}
+                                <br></span>
+                                <span class="myAccUserName"><strong>{{pageLabelMap 'MyAccount_Profile_Username'}}:</strong> {{this.username}}
+                                <br></span>
+                                <span class="myAccEmailAddr"><strong>{{pageLabelMap 'MyAccount_Email'}}:</strong> {{this.emailAddress}}
+                                <br></span>
+                                <span class="myAccLanguage"><strong>{{pageLabelMap 'MyAccount_Language'}}:</strong> {{this.language}}
+                                <br></span>
+                                <span class="myAccCurrency"><strong>{{pageLabelMap 'MyAccount_Currency'}}:</strong> {{pageLabelMap 'User_Currency'}}
+                                <br></span>
+                                {{#ifDisplay 'reg.tmZn'}}
+                                    <span class="myAccTimeZone"<strong>{{pageLabelMap 'MyAccount_Profile_TimeZone'}}:</strong> {{this.timeZone}}
+                                    <br></span>
+                                {{/ifDisplay}}
+                                {{#if hideEditProfile}} {{else}}
+                                    <a href="#edit_user_information" data-toggle="modal" class="edit_information icon-edit">
+                                        {{pageLabelMap 'MyAccount_Edit'}}
+                                    </a>
+                                {{/if}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>  <!-- end accordion -->
+
+
+            {{#ifEquals this.commerceType "B2B"}}
+            <div id="edit_account" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">Edit Company Information</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="contactForm">
+                        <label>First Name</label>
+                        <input type="text" placeholder="First Name" name="firstName" value="{{this.contactBean.firstName}}" class="checkout_wide">
+                        <label>Last Name</label>
+                        <input type="text" placeholder="Last Name" name="lastName" value="{{this.contactBean.lastName}}" class="checkout_wide">
+                        <label>Phone</label>
+                        <input name="phone" placeholder="Phone" value="{{this.contactBean.phone}}" class="checkout_wide">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="updateContactBtn" class="btn btn-primary" data-sfid="{{this.contactBean.sfid}}">Update Information</button>
+                </div>
+            </div>
+            <div id="edit_address" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">Edit Address Information</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="addressForm"></form>
+                </div>
+                <div class="modal-footer">
+                    <button id="updateAddressBtn" class="btn btn-primary">Update Address Information</button>
+                </div>
+            </div>
+            {{/ifEquals}}
+
+            <div id="edit_user_information" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">Edit User Information</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="userInformationForm">
+                        <label>First Name</label><input type="text" placeholder="First" value="{{this.userFirstName}}" name="userFirstName" class="checkout_wide">
+                        <label>Last Name</label><input type="text" placeholder="Last" value="{{this.userLastName}}" name="userLastName" class="checkout_wide">
+                        <label>Phone</label><input type="text" placeholder="Phone" value="{{this.userPhone}}" name="userPhone" class="checkout_wide">
+                        <label>Username</label><input type="text" placeholder="Username" value="{{this.userName}}" name="userName" class="checkout_wide">
+                        <label>Email</label><input type="text" placeholder="Email" value="{{this.emailAddress}}" name="emailAddress" class="checkout_wide">
+                        <label>Language</label>
+                            <select name="language" class="checkout_wide" value="{{this.language}}">
+                                {{#each this.languageList}}
+                                    {{#ifEquals this.LanguageCode__c ../languageKey}}
+                                        <option value="{{this.value}}" selected>{{this.label}}</option>
+                                    {{else}}
+                                        <option value="{{this.value}}" selected>{{this.label}}</option>
+                                    {{/ifEquals}}
+                                {{/each}}
+                            </select>
+                        <label>Currency</label>
+                        <select name="currencyCode" value="{{this.currencyCode}}" class="checkout_wide">
+                            {{#each this.currencyList}}
+                                {{#ifEquals this.CurrencyISOCode ../currencyCode}}
+                                    <option value="{{this.value}}" selected>{{this.label}}</option>
+                                {{else}}
+                                    <option value="{{this.value}}">{{this.label}}</option>
+                                {{/ifEquals}}
+                            {{/each}}
+                        </select>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="updateUserInfoBtn">Update User Information</button>
+                </div>
+            </div>
+        </div>
+        {{#if this.myAccountEditProfileOverrideLink}}
+            <div class="modal-footer">
+                <button onclick="window.location='{{myAccountEditProfileOverrideLink}}';" class="btn btn-primary">{{pageLabelMap 'MyAccount_EditProfileOverrideButton'}}</button>
+            </div>
+        {{/if}}
+    </div>
+</div>
+</script>
+
+<script id="AddressDisplay" type="text/template">
+  <span class="address_selection_display">
+   {{#ifDisplay 'SO.DsplAddrName'}}
+    {{#if this.firstName}}<span class="addr_name">{{this.firstName}} {{this.lastName}}</span><br/>{{/if}}
+   {{/ifDisplay}}
+   {{#ifDisplay 'SO.DsplAddrCompany'}}
+    {{#if this.companyName}}<span class="addr_company">{{this.companyName}}</span><br/>{{/if}}
+   {{/ifDisplay}}
+   <span class="addr_line1 addr_line">{{this.address1}}</span><br/>
+   {{#if this.address2}}<span class="addr_line2 addr_line">{{this.address2}}</span><br/>{{/if}}
+   {{#if this.address3}}<span class="addr_line3 addr_line">{{this.address3}}</span><br/>{{/if}}
+   <span class="addr_city">{{this.city}}</span>
+   {{#if this.state}}<span class="addr_state"> {{this.state}}</span>
+   {{else}}
+        {{#if this.stateCode}}<span class="addr_state"> {{this.stateCode}}</span>
+        {{/if}}
+    {{/if}}</span>
+   
+   <span class="addr_country">{{this.country}} </span><br/>  
+   <span class="addr_postal">&#160;{{this.postalCode}}
+   <span class="addr_extId">{{this.partnerId}}</span>
+  </span>
+ </script>
+
+<script type="text/javascript">
+	jQuery(function($) {
+		CCRZ.uiProperties.contactInfoView.desktop.tmpl	=	'oo-MyAccount-ContactInformation-Desktop';
+		CCRZ.uiProperties.contactInfoView.phone.tmpl	=	'oo-MyAccount-ContactInformation-Mobile';
+		
+		// Added Handlebars for the sequence change for State and country display in My Orders/Contact Information page
+        Handlebars.registerPartial("addressDisplayOO", $("#AddressDisplay").html());
+        // end of sequence change handlebars
+         var uniqueId=getSessionValue('contactId');
+         var selectedShipTo=uniqueId+'selectedShipTo';
+		CCRZ.pubSub.on('view:contactInfoView:refresh', function(theView) {
+			var navItem = sessionStorage.getItem("navItem");
+			$('.nav-collapse .nav li').removeClass('active');
+            $('li[data-menuid='+ navItem+']').addClass('active');
+		    var shiptoId=getSessionValue(selectedShipTo);
+		    if(shiptoId) {		   
+		     	var remoteActionCallForMyAccountContactInfo = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_MyAccountContactInfoController'});
+             	remoteActionCallForMyAccountContactInfo.invokeCtx('getAddressFields', shiptoId, function(resp) {
+					if(resp && resp.success) {
+                    	resp.data.AccountNumber = resp.data.AccountNumber || "";
+                       	resp.data.ShippingStreet = resp.data.ShippingStreet || "";
+                       	resp.data.ShippingCity = resp.data.ShippingCity || "";
+                       	resp.data.ShippingState = resp.data.ShippingState || "";
+                       	resp.data.ShippingCountry = resp.data.ShippingCountry || "";
+                       	resp.data.ShippingPostalCode = resp.data.ShippingPostalCode || "";
+                       	resp.data.ShippingStateCode = resp.data.ShippingStateCode || "";
+                       	resp.data.Billing_Street__c = resp.data.Billing_Street__c || "";
+                       	resp.data.Billing_City__c = resp.data.Billing_City__c || "";
+                       	resp.data.Billing_State_Province__c = resp.data.Billing_State_Province__c || "";
+                       	resp.data.Billing_Country__c = resp.data.Billing_Country__c || "";
+                       	resp.data.Billing_Zip_Postal_Code__c = resp.data.Billing_Zip_Postal_Code__c || "";   
+                       	                                    	
+                     	//$('#shipToNumber').html(resp.data.AccountNumber); //OO-972
+                       	var shippingAddress = $('.myAccShippingAddr');
+                       	var billingAddress = $('.myAccBillingAddr');
+                       	
+                       	shippingAddress.find('.addr_line1.addr_line').html(resp.data.ShippingStreet);
+                       	shippingAddress.find('.addr_city').html(resp.data.ShippingCity);
+                       	shippingAddress.find('.addr_state').html(resp.data.ShippingState);
+                       	shippingAddress.find('.addr_country').html(resp.data.ShippingCountry);
+                      	shippingAddress.find('.addr_postal').html(resp.data.ShippingPostalCode);
+                      	shippingAddress.find('.addr_extId').html(resp.data.ShippingStateCode);
+                      	
+                       	billingAddress.find('.addr_line1.addr_line').html(resp.data.Billing_Street__c);
+                       	billingAddress.find('.addr_city').html(resp.data.Billing_City__c);
+                       	billingAddress.find('.addr_state').html(resp.data.Billing_State_Province__c);
+                       	billingAddress.find('.addr_country').html(resp.data.Billing_Country__c);
+                       	billingAddress.find('.addr_postal').html(resp.data.Billing_Zip_Postal_Code__c);
+					}
+					                    },
+					                    {buffer:false,escape:false,nmsp:false}
+					        );
+              }
+		});
+    });	
+    
+</script>
+</apex:component>

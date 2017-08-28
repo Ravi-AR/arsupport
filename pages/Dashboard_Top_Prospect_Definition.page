@@ -1,0 +1,12 @@
+<apex:page >
+<table>
+
+
+<tr><td valign="top"><b><i>*  Anticipated Close Date is during the current year</i></b></td></tr>
+<tr><td valign="top"><b><i>*  Key Opportunity checkbox is checked</i></b></td></tr>
+
+
+
+
+</table>
+</apex:page>

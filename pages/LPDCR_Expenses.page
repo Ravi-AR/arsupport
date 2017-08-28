@@ -1,0 +1,491 @@
+<!--
+*********************************************************************************
+Author: Adeel Ahmad
+Email: adeel.ahmad@magnet360.com
+Created Date    : 09/08/2016
+Function    :  Visualforce page to display expense record. (LPDCR-104)
+Version     : 1.0
+*********************************************************************************
+-->
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="LPDCR_ExpenseController">
+    <!--action="{!initialize}"-->
+    <apex:form >
+        <apex:composition template="LPDCR_CC_BaseTemplate">
+            <apex:define name="PageTitle">Selling Support Dollars</apex:define>
+
+            <apex:define name="body">
+                <apex:actionFunction name="getSublistAF" action="{!getSortSubItemList}" rerender="expensePanel,subItemList" status="loader" immediate="true">
+                    <apex:param name="sortPri" assignTo="{!sortItem}" value="" />
+                </apex:actionFunction>
+                <apex:actionFunction name="getSortedListAF" action="{!runQuery}" rerender="expensePanel" status="loader" immediate="true">
+                    <apex:param name="sortSec" assignTo="{!sortSubItem}" value="" />
+                </apex:actionFunction>
+                
+                <apex:actionFunction name="getFirstPage" action="{!Beginning}" reRender="expensePanel" immediate="true" status="loader" />
+                <apex:actionFunction name="getPrevPage" action="{!Previous}" reRender="expensePanel" immediate="true" status="loader" />
+                <apex:actionFunction name="getNextPage" action="{!Next}" reRender="expensePanel" immediate="true" status="loader" />
+                <apex:actionFunction name="getLastPage" action="{!End}" reRender="expensePanel" immediate="true" status="loader" />
+                <apex:actionFunction name="Getyear" action="{!doNothing}" rerender="year" status="loader" immediate="true">
+                    <apex:param name="selectyear" assignTo="{!selectedYear}" value="" />
+                </apex:actionFunction>
+                <div class="title_wrapper">
+                    <div class="container-fluid">
+                                <h3 class="page_title">Selling Support Summary <a target="_blank" href="{!URLFOR($Resource.LPDCR_Assets, '/doc/2016_Business_Builder_Navigator_Page_View.pdf')}" class="download"><i class="glyphicon glyphicon-save" aria-hidden="true"></i><span class="hidden-xs"> Download</span></a></h3>
+                    </div>
+                </div>
+                <div class="bag_clr_white dis_inlineblock wid100">
+                <!--Program year panel starts-->
+                <div class="row top-gap">
+                    <div class="col-xs-12">
+                        <div class="col-xs-6 col-sm-4">
+                        <p><b>Account Name: </b>{!accountName }</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-8">
+                        <apex:outputPanel rendered="{!IF(accountName==null,true,false)}">
+                          Account Not Available
+                       </apex:outputPanel>
+                       <apex:outputPanel rendered="{!IF(accountName!=null,true,false)}">
+                                <p><b>Program Year: </b>
+                                    <span>
+                                    <apex:outputText >{!BBProgYear.Name}</apex:outputText>
+                                        <!--<apex:selectList size="1" multiselect="false" onchange="Getselectedyear()" id="yearOpt">
+                                             <apex:selectOptions value="{!programYears}" />
+                                        </apex:selectList>-->
+                                </span></p>
+                        </apex:outputPanel>
+                        </div>
+                    </div>
+                </div>
+                <!--Program year panel ends-->
+
+                <!-- Form div starts-->
+                <div class="form">
+                    <!--Account Balance Panel starts-->
+                    <div class="row">
+                        <div class="form-group">
+                        
+                        <!--<apex:outputPanel rendered="{!IF(expenseLst.size<=0,true,false)}">
+                          Account Not Available
+                       </apex:outputPanel>-->
+                             <!--  <apex:outputPanel id="year" rendered="{!IF(accDetails!=null,true,false)}">
+                              <center>
+                              <br/>
+                              <table class="table amounttable">
+                                <tr>
+                                    <th>Available Balance </th>
+                                    <td>
+                                        <apex:variable value="{!accDetails.Available_Balance__c}" var="avlbal"/>
+                                    <apex:variable value="{!accDetails.Total_Pending_Requests__c}" var="penbal"/>
+                                        <apex:outputText rendered="{!IF(accDetails!=null,true,false)}" value="{0, Number, Currency}">
+                                            <apex:param value="{!avlbal + penbal}" />
+                                        </apex:outputText>
+
+
+                                        <apex:outputText rendered="{!IF(accDetails==null,true,false)}" value="{0, Number, Currency}">
+                                            <apex:param value="{!0}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Pending Requests </th>
+                                    <td>
+                                        <apex:outputText rendered="{!IF(accDetails!=null,true,false)}" value="{0, Number, Currency}">
+                                            <apex:param value="{!accDetails.Total_Pending_Requests__c}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Projected Balance </th>
+                                    <td>
+                                        <apex:outputText rendered="{!IF(accDetails!=null,true,false)}" value="{0, Number, Currency}">
+                                            <apex:param value="{!accDetails.Available_Balance__c}" />
+                                        </apex:outputText>
+                                        <apex:outputText rendered="{!IF(accDetails==null,true,false)}" value="{0, Number, Currency}">
+                                            <apex:param value="{!0}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </table>
+                            </center>
+                            <hr class="border-bottom col-xs-12 col-sm-10 col-sm-offset-1 top-buffer-0"/>
+                            </apex:outputPanel> -->
+                            
+                            
+                            
+                            <apex:outputPanel id="year" rendered="{!IF(accDetails!=null,true,false)}">
+                                <div class="col-xs-12"><br/>
+                                    <div class="col-xs-6 col-sm-5 col-sm-offset-1">Available Balance</div>
+                                    <div class="col-sm-5 col-xs-6 text-right">
+                                        <apex:variable value="{!accDetails.Available_Balance__c}" var="avlbal"/>
+                                        <apex:variable value="{!accDetails.Total_Pending_Requests__c}" var="penbal"/>
+                                        <apex:outputText rendered="{!IF(accDetails!=null,true,false)}" value="{0, Number, Currency}">
+                                            <apex:param value="{!avlbal + penbal}" />
+                                        </apex:outputText>
+
+
+                                        <apex:outputText rendered="{!IF(accDetails==null,true,false)}" value="{0, Number, Currency}">
+                                            <apex:param value="{!0}" />
+                                        </apex:outputText>
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="col-xs-6 col-sm-5 col-sm-offset-1">Pending Requests</div>
+                                    <div class="col-sm-5 col-xs-6 text-right">
+                                        <apex:outputText rendered="{!IF(accDetails!=null,true,false)}" value="{0, Number, Currency}">
+                                            <apex:param value="{!accDetails.Total_Pending_Requests__c}" />
+                                        </apex:outputText>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="col-xs-6 col-sm-5 col-sm-offset-1">Projected Balance</div>
+                                    <div class="col-sm-5 col-xs-6 text-right">
+                                        <apex:outputText rendered="{!IF(accDetails!=null,true,false)}" value="{0, Number, Currency}">
+                                            <apex:param value="{!accDetails.Available_Balance__c}" />
+                                        </apex:outputText>
+                                        <apex:outputText rendered="{!IF(accDetails==null,true,false)}" value="{0, Number, Currency}">
+                                            <apex:param value="{!0}" />
+                                        </apex:outputText>
+                                    </div>
+                                </div>
+                                    <hr class="border-bottom col-xs-12 col-sm-10 col-sm-offset-1 top-buffer-0" />
+                            </apex:outputPanel>
+
+                        </div>
+                    </div>
+                    <!--Account Balance Panel ends
+
+                    <!--Reimbursement Panel starts-->
+                    <div class="top-buffer">
+                        <div class="form-group">
+                            <div class="col-xs-12 col-md-4 col-md-offset-4">
+                            <apex:outputPanel rendered="{!IF(accDetails==null,true,false)}">
+                                <a class="btn btn-primary btn-block disabled">CREATE REIMBURSEMENT REQUEST</a>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!IF(accDetails!=null,true,false)}">
+                                <a class="btn btn-primary btn-block" href="{!$Site.BaseUrl}/LPDCR_ExpenseEdit?AccountId={!account.Id}&bbId={!BBProgYear.id}#/expense/{!account.Id}/{!BBProgYear.id}">CREATE REIMBURSEMENT REQUEST</a>
+                            </apex:outputPanel>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <h4 class=""><b>Account Requests</b></h4><br/>
+                            </div>
+                        </div>
+                        <!--Sorting Panel starts-->
+                        
+                        <div class="form-group">
+                            <h4 class="col-xs-3 text-right sortby">Sort By</h4>
+                            <div class="col-xs-9">                           
+                            <apex:selectList id="itemList" value="{!sortItem}" size="1" multiselect="false" onchange="getSubListJS();" styleClass="form-control">
+                                    <apex:selectOptions value="{!sortItemLst}" />
+                                </apex:selectList>
+                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-offset-3 col-xs-9">
+                                <apex:actionRegion >
+                                    <apex:selectList id="subItemList" value="{!sortSubItem}" size="1" multiselect="false" onchange="getSortedListJS();" styleClass="form-control expenseselect">
+                                        <apex:selectOptions value="{!sortSubItemLst}" />
+                                    </apex:selectList>
+                                   
+                                 <!-- Loader code starts here -->
+                                    <apex:actionStatus id="loader">
+                                        <apex:facet name="start">
+                                            <div class="loadercover">
+                                            </div>
+                                            <div class="loaderfirst">
+                                                <div class="loadersec">
+                                                    <img src="/img/loading32.gif" class="loaderimage" />
+                                                </div>
+                                            </div>   
+                                        </apex:facet>
+                                    </apex:actionStatus>
+                                <!-- Loader code ends here--> 
+                                    
+                                    
+                                </apex:actionRegion>
+                            </div>
+                        </div><br/>
+                       
+                        <!--Reimbursement Panel starts-->
+
+                        <!-- Expense List panel starts-->
+                        <apex:pageBlock id="pg">
+                        <!--<apex:outputPanel rendered="{!IF(expenseLst.size<=0,true,false)}">
+                          Account Not Available
+                       </apex:outputPanel>-->
+                        
+                            <apex:outputPanel id="expensePanel" rendered="{!IF(expenseLst!=null,true,false)}">
+                        <!-- Display output-->
+                        
+                        
+                        
+                                <div class="form-group">
+                                    <div class="col-xs-12" style="margin-top: 20px;">
+                                        <apex:repeat value="{!expenseLst}" var="expense">
+                                            <div class="well">
+                                                <table class="table no_border tabletd">
+                                                    <thead>
+                                                        <tr colspan="3">
+                                                            <th><b>REQUEST #</b></th>
+                                                            <th><b>ACCT #</b></th>
+                                                            <th>
+                                                             <apex:outputPanel rendered="{!IF(expense.Type__c!='Balance Adjustment',true,false)}">
+                                                                <b>REQUESTED AMOUNT</b>
+                                                             </apex:outputPanel>
+                                                             <apex:outputPanel rendered="{!IF(expense.Type__c=='Balance Adjustment',true,false)}">
+                                                                 <b>STATUS</b>
+                                                             </apex:outputPanel>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <apex:outputText >
+                                                                    <a href="{!$Page.LPDCR_ExpenseDetail}?ExpenseId={!expense.Id}&AccountId={!account.Id}&BBYear={!BBProgYear.id}" id="{!expense.Id}">{!expense.Name}</a>
+                                                                </apex:outputText>
+                                                            </td>
+                                                            <td>
+                                                                <apex:outputText >{!expense.DealerAccount__r.Name}</apex:outputText>
+                                                            </td>
+                                                            <td>
+                                                                 <apex:outputPanel rendered="{!IF(expense.Type__c!='Balance Adjustment',true,false)}">
+                                                                <apex:outputText value="{0, Number, Currency}">
+                                                                    <apex:param value="{!expense.Line_Item_Total__c}" />
+                                                                </apex:outputText>
+                                                             </apex:outputPanel>
+                                                                <apex:outputPanel rendered="{!IF(expense.Type__c=='Balance Adjustment',true,false)}">
+                                                                <apex:outputText >{!expense.ApprovalStatus__c}</apex:outputText>
+                                                             </apex:outputPanel>
+                                                              </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <thead>
+                                                        <tr>
+                                                            <th><b>REQUEST DESC.</b></th>
+                                                            <th>
+                                                             <apex:outputPanel rendered="{!IF(expense.Type__c!='Balance Adjustment',true,false)}">
+                                                               <b>STATUS</b>
+                                                             </apex:outputPanel>
+                                                             <apex:outputPanel rendered="{!IF(expense.Type__c=='Balance Adjustment',true,false)}">
+                                                                PROGRAM YEAR
+                                                             </apex:outputPanel>
+                                                            </th>
+                                                            <th>
+                                                             <apex:outputPanel rendered="{!IF(expense.Type__c!='Balance Adjustment',true,false)}">
+                                                               <b>SUBMIT DATE</b>
+                                                             </apex:outputPanel>
+                                                           
+                                                            <apex:outputPanel rendered="{!IF(expense.Type__c=='Balance Adjustment',true,false)}">
+                                                               <b>REIMBURSED AMOUNT</b>
+                                                             </apex:outputPanel>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <apex:outputText >{!expense.Description__c}</apex:outputText>
+                                                            </td>
+                                                            <td>
+                                                               <apex:outputPanel rendered="{!IF(expense.Type__c!='Balance Adjustment',true,false)}">
+                                                               <apex:outputText >{!expense.ApprovalStatus__c}</apex:outputText>
+                                                             </apex:outputPanel>
+                                                                <apex:outputPanel rendered="{!IF(expense.Type__c=='Balance Adjustment',true,false)}">
+                                                               <apex:outputText >{!expense.Selling_Support_Program_Year__r.Name}</apex:outputText>
+                                                             </apex:outputPanel>
+                                                               
+                                                            </td>
+                                                            <td>
+                                                                 <apex:outputPanel rendered="{!IF(expense.Type__c!='Balance Adjustment',true,false)}">
+                                                              <apex:outputText value="{0,date,MM/dd/yy}">
+                                                                    <!--<apex:param value="{!expense.CreatedDate}" /></apex:outputText>-->
+                                                                    <apex:param value="{!expense.Submitted_for_Approval_Date__c}" /></apex:outputText> <!--LPDCR-1525-->
+                                                             </apex:outputPanel>
+                                                             <apex:outputPanel rendered="{!IF(expense.Type__c=='Balance Adjustment',true,false)}">
+                                                                <apex:outputText value="{0, Number, Currency}">
+                                                                    <apex:param value="{!expense.SalesOperationsBalanceAdjustment__c}" />
+                                                                </apex:outputText>
+                                                             </apex:outputPanel>
+                                                            
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                        <thead>
+                                                        <tr>
+                                                            <th><apex:outputPanel rendered="{!IF(expense.Type__c!='Balance Adjustment',true,false)}">
+                                                               <b>PROGRAM YEAR</b>
+                                                             </apex:outputPanel>
+                                                             </th>
+                                                            <th><apex:outputPanel rendered="{!IF(expense.Type__c!='Balance Adjustment',true,false)}">
+                                                               <b>CREDIT MEMO #</b>
+                                                             </apex:outputPanel>
+                                                             </th>
+                                                            <th><apex:outputPanel rendered="{!IF(expense.Type__c!='Balance Adjustment',true,false)}">
+                                                               <b>REIMBURSED AMOUNT</b>
+                                                             </apex:outputPanel>
+                                                             </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                            <apex:outputPanel rendered="{!IF(expense.Type__c!='Balance Adjustment',true,false)}">
+                                                               <apex:outputText >{!expense.Selling_Support_Program_Year__r.Name}</apex:outputText>
+                                                             </apex:outputPanel>
+                                                               
+                                                            </td>
+                                                            <td>
+                                                            <apex:outputPanel rendered="{!IF(expense.Type__c!='Balance Adjustment',true,false)}">
+                                                              <apex:outputText >{!expense.CreditMemo__c}</apex:outputText>
+                                                             </apex:outputPanel>
+                                                                
+                                                            </td>
+                                                            <td>
+                                                            <apex:outputPanel rendered="{!IF(expense.Type__c!='Balance Adjustment' && expense.Total__c !=0 ,true,false)}">
+                                                              <apex:outputText value="{0, Number, Currency}">
+                                                                    <apex:param value="{!expense.Total__c}" />
+                                                                </apex:outputText>
+                                                             </apex:outputPanel>
+                                                           
+                                                            </td>
+                                                            
+                                                        </tr>
+                                                        <tr></tr>
+                                                        <tr colspan="3">
+                                                             <td>
+                                                                 <a href="{!$Page.LPDCR_ExpenseDetail}?ExpenseId={!expense.Cloned_Expense_From__c}&AccountId={!account.Id}&BBYear={!BBProgYear.id}">
+                                                                    <apex:outputText rendered="{!IF(expense.Cloned_Expense_From__c != null, true, false)}" value="View My Original Submission"> 
+                                                                    </apex:outputText>
+                                                                 </a>
+                                                             </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </apex:repeat>
+                                        <!--Navigation starts-->
+                                        <nav aria-label="Page navigation">
+                                            <div style="text-align: center;">
+                                                <ul class="pagination m-0">
+                                                    <li class="{!IF(disablePrevious, 'disabled', '')}">
+                                                        <a href="#" aria-label="First" class="page-first" onclick='getFirst()'>
+                                                            <span aria-hidden="true">&laquo;</span> First
+                                                        </a>
+                                                    </li>
+                                                    <li class="{!IF(disablePrevious, 'disabled', '')}">
+                                                        <a href="#" aria-label="Previous" class="page-prev" onclick='getPrevious()'>
+                                                            <span aria-hidden="true">&lt;</span> Prev
+                                                        </a>
+                                                    </li>
+                                                    <li class="{!IF(disableNext, 'disabled', '')}">
+                                                        <a href="#" aria-label="Next" class="page-next" onclick='getNext()'>
+                                            Next
+                                            <span aria-hidden="true">&gt;</span>
+                                        </a>
+                                                    </li>
+                                                    <li class="{!IF(disableNext, 'disabled', '')}">
+                                                        <a href="#" aria-label="Last" class="page-last" onclick='getLast()'>
+                                            Last
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </nav>
+                                        <!--Navigation ends-->
+                                    </div>
+                                </div>
+                            </apex:outputPanel>
+                        </apex:pageBlock>
+                        <!-- Expense List panel ends-->
+                    </div>
+                    <!--Reimbursement Panel ends-->
+
+                    <!--Script section starts-->
+                    <script type="text/javascript">
+                    function Getselectedyear(){
+                        Getyear($("select[id$='yearOpt'] :selected").attr('value'));
+                    }
+                    
+                    function getSubListJS(){
+                        getSublistAF($("select[id$='itemList'] :selected").attr('value'));
+                    }
+                    function getSortedListJS(){
+                        getSortedListAF($("select[id$='subItemList'] :selected").attr('value'));
+                    }
+                    function getNext(){
+                        getNextPage();
+                    }
+                    function getLast(){
+                        getLastPage();
+                    }
+                    function getPrevious(){
+                         getPrevPage();
+                    }
+                    function getFirst(){
+                        getFirstPage();
+                    }
+                    
+                    /*
+                    $(document).on("click", ".page-first", function(e){
+                        e.preventDefault();
+                        if ($(this).parent().hasClass('disabled')) {
+                        alert('hi');
+                        } else {
+                            getFirstPage();
+                        }
+                    });
+                    $(document).on("click", ".page-prev", function(e){
+                        e.preventDefault();
+                        if ($(this).parent().hasClass('disabled')) {
+                        alert('hi');
+                        } else {
+                            getPrevPage();
+                        }
+                    });
+                    $(document).on("click", ".page-next", function(e){
+                        e.preventDefault();
+                        if ($(this).parent().hasClass('disabled')) {
+                        } else {
+                            getNextPage();
+                        }
+                    });
+                    $(document).on("click", ".page-last", function(e){
+                        e.preventDefault();
+                        if ($(this).parent().hasClass('disabled')) {
+                        } else {
+                            getLastPage();
+                        }
+                    });*/
+                    
+                    </script>
+                    <!--Script section ends-->
+                    
+                     <script>
+                         $(document).ready(function(){
+                          $('#bb').addClass("myactive");
+                          $('#mbb').addClass("mobactive");
+                        });
+                     </script>
+
+                </div>
+                <!--Form div ends-->
+                </div>
+                  
+            </apex:define>
+        </apex:composition>
+    </apex:form>
+    <style>
+        @media only screen and (max-width: 767px)
+    {
+    .mob_expeseclass {
+        display: none;
+        }
+    }
+    </style>
+</apex:page>

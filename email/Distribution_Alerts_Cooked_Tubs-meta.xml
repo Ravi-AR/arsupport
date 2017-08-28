@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailFolder xmlns="http://soap.sforce.com/2006/04/metadata">
+    <accessType>Shared</accessType>
+    <name>Distribution Alerts || Cooked Tubs</name>
+    <publicFolderAccess>ReadOnly</publicFolderAccess>
+    <sharedTo>
+        <group>Area_Sales_Managers</group>
+        <group>Brian_Gier</group>
+        <group>Dealer_Business_Manager</group>
+        <group>Dealer_Business_Specialist</group>
+        <group>Distribution_Alerts_Cooked_Tubs</group>
+        <group>Inside_Sales_Manager</group>
+        <group>Inside_Sales_Users</group>
+        <group>Regional_Directors</group>
+        <group>Sales_Admins</group>
+        <group>Sales_Specialists_Tech_Sales_Spec</group>
+    </sharedTo>
+</EmailFolder>

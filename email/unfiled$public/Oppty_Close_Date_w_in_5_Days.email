@@ -1,0 +1,7 @@
+Dear {!Opportunity.OwnerFirstName},
+
+The Anticipated Close Date for {!Opportunity.Account} - {!Opportunity.Name} is set for {!Opportunity.CloseDate}.  Please update the Anticipated Close Date if this date is no longer accurate.  If this date is still accurate, you do not need to take any action.
+
+Opportunity Link: {!Opportunity.Link}
+
+Thank you.

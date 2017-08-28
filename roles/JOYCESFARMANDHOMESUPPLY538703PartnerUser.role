@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>JOYCES FARM AND HOME SUPPLY-538703 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>JOYCES FARM AND HOME SUPPLY-538703 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>JOYCESFARMANDHOMESUPPLY538703PartnerManager</parentRole>
+</Role>

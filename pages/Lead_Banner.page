@@ -1,0 +1,6 @@
+<apex:page standardController="Lead" showHeader="false"
+    sidebar="false">
+    <p style="font-family: arial; color: red; font-size: 17px"><i>
+        Remember to enter in your Animal Type, Lifestage and Animal Counts before converting your lead. This information will carry over to your opportunity.
+    </i></p>
+</apex:page>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>KISTLER&apos;S PRAIRIE MILL INC-300524 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>KISTLER&apos;S PRAIRIE MILL INC-300524 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>KISTLERSPRAIRIEMILLINC300524PartnerManager</parentRole>
+</Role>

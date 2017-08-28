@@ -1,0 +1,2864 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>AError_Success</fullName>
+        <categories>Success Message, Error message, Account Error page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Information Good</shortDescription>
+        <value>Account has all required information.  Proceed by clicking &quot;Nominate VIP&quot;</value>
+    </labels>
+    <labels>
+        <fullName>AError_no_both</fullName>
+        <categories>Error message, Account Error page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No opp and life stage</shortDescription>
+        <value>Please Review the Related Opp and Animal Count &amp; Lifestage Info.</value>
+    </labels>
+    <labels>
+        <fullName>AError_no_life</fullName>
+        <categories>Error message, Account Error page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No LifeStage records</shortDescription>
+        <value>Please Review the Related Animal Count &amp; Lifestage Information.</value>
+    </labels>
+    <labels>
+        <fullName>AError_no_opp</fullName>
+        <categories>Error message, Account Error page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Opportunities</shortDescription>
+        <value>Please Review the Related Opportunities Information.</value>
+    </labels>
+    <labels>
+        <fullName>ASM_Error_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ASM Error Message</shortDescription>
+        <value>Selected ASM is not a part of the Account Team</value>
+    </labels>
+    <labels>
+        <fullName>Add_Contacts</fullName>
+        <categories>Label, Farm VIP Registration,</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add Contacts</shortDescription>
+        <value>Will anyone be attending the event with you?</value>
+    </labels>
+    <labels>
+        <fullName>BB_Error_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BB Error Message</shortDescription>
+        <value>Selected Sales Specialist is not a part of the Account Team</value>
+    </labels>
+    <labels>
+        <fullName>DigigrapghEndPoint</fullName>
+        <categories>URL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DigigrapghEndPoint</shortDescription>
+        <value>https://crm.digigraph.me/1.0/</value>
+    </labels>
+    <labels>
+        <fullName>Direct_Producer_Account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Direct Producer Account</shortDescription>
+        <value>Direct Producer Account</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_AccountNo_For_VIP</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid AccountNo For VIP</shortDescription>
+        <value>Invalid Account Number for VIP Points &amp; Tons Report</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_APPROVAL_STATUS_API</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_APPROVAL_STATUS_API</shortDescription>
+        <value>ApprovalStatus__c</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Account_Points_Detail_Customer_Report</fullName>
+        <categories>LPDCR, Report</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Account Points Detail Customer Report</shortDescription>
+        <value>Account Points Detail-Customer</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Account_Points_Detail_Customer_Report_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Account Points Detail Customer Report Cache Key</shortDescription>
+        <value>Account Points Detail Customer Report</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Account_Points_Detail_Employee_Report</fullName>
+        <categories>LPDCR, Report</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Account Points Detail Employee Report</shortDescription>
+        <value>LPDCR Account Points Detail Employee Report</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Account_Points_Detail_Employee_Report_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Account Points Detail Employee Report Cache Key</shortDescription>
+        <value>LPDCR Account Points Detail Employee Report Cache Key</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Account_Points_Summary_Customer_Report</fullName>
+        <categories>LPDCR, Report</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Account Points Summary Customer Report</shortDescription>
+        <value>Account Points Summary-Customer</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Account_Points_Summary_Employee_Report</fullName>
+        <categories>LPDCR, Report</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Account Points Summary Employee Report</shortDescription>
+        <value>Account Points Summary-Employee</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Account_Points_Summary_Report</fullName>
+        <categories>LPDCR, Report</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Account Points Summary Report</shortDescription>
+        <value>Account Points Summary</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Account_Points_Summary_Report_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Account Points Summary Report Cache Key</shortDescription>
+        <value>Account Points Summary Report</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Accountid</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_Accountid</shortDescription>
+        <value>Accountid</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_AdBuilder_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR AdBuilder Component Message</shortDescription>
+        <value>Application that allows users to build and customize ads from predesigned templates for sales, events or products.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_AdBuilder_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR AdBuilder Component URL</shortDescription>
+        <value>Visit Online Ad Builder</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Ad_Slicks_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Ad Slicks Component Message</shortDescription>
+        <value>Predesigned Ad Slicks, camera ready ads of varying sizes designed to be used in print media such as newspapers and magazines but may also be suitable for use as flyers.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Ad_Slicks_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Ad Slicks Component Name</shortDescription>
+        <value>Ad Slicks</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Ad_Slicks_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Ad Slicks Component URL</shortDescription>
+        <value>Visit Ad Slicks</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Ad_Slicks_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Ad Slicks Service Cache Key</shortDescription>
+        <value>LPDCR Active Ad Slick</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Ad_Slicks_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Ad Slicks Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Ad Slick%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_All_Documents_Service_Cache_key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR All Documents Service Cache Key</shortDescription>
+        <value>LPDCR All Documents Service</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_All_Promotions</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR All Promotions</shortDescription>
+        <value>All Promotions</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Annual_Planning_Component_Document_Download</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Annual Planning Component Document Download</shortDescription>
+        <value>Download Document</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Annual_Planning_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Annual Planning Component Message</shortDescription>
+        <value>Access to an Annual Planning Document: Vision Statement as well as Strategy and Action Plans focused on Farm Gate Selling, Educational Selling Events, Displays and Merchandising, Sales Training to meet business objectives.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Annual_Planning_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Annual Planning Component Name</shortDescription>
+        <value>Annual Planning Document</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Annual_Planning_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Annual Planning Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Annual Planning%&apos;</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_BALANCE_ADJUSTMENT</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_BALANCE_ADJUSTMENT</shortDescription>
+        <value>Balance Adjustment</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_BBYear</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_BBYear</shortDescription>
+        <value>BBYear</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_BB_DOCUMENTS</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_BB_DOCUMENTS</shortDescription>
+        <value>BB_Documents</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_BUSINESS_BUILDER_PROMOTIONS</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_BUSINESS_BUILDER_PROMOTIONS</shortDescription>
+        <value>Business_Builder_Promotions</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_BeginningBalance</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_BeginningBalance</shortDescription>
+        <value>Beginning Balance</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Business_Builder_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Business Builder Component Message</shortDescription>
+        <value>Business Builder Selling Support Reimbursement Requests, Business Builder Program Enrollment and Information.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Business_Builder_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Business Builder Component Name</shortDescription>
+        <value>Business Builder</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Business_Builder_Ineligible_Account_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Business Builder Ineligible Account Message</shortDescription>
+        <value>This account is not eligible for Business Builder Reimbursement Requests.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Business_Builder_Permission_Set</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Business Builder Permission Set</shortDescription>
+        <value>Business Builder - External Users</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Business_Management_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Business Management Component Message</shortDescription>
+        <value>Access to Invoice Management, Coupon Redemption, Price Lists, Plant Order Sheets, Business Planning, Tons/VIP Point Reports, Performance Profile Reports, MSRP/MAP Report, CHC Info, Practices &amp; Policies, VFD Info, FSMS/Feed Safety Info, etc.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Business_Management_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Business Management Component Name</shortDescription>
+        <value>Business Management</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Business_Management_Permission_Set</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Business Management Permission Set</shortDescription>
+        <value>Business Management - External Users</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_CHC_AppCode</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR CHC AppCode</shortDescription>
+        <value>sfPurinaOrg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_CHC_Bronze_Level</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR CHC Bronze Level</shortDescription>
+        <value>Bronze</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_CHC_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR CHC Component Message</shortDescription>
+        <value>Access information about CHC (Chow Honor Council) – an 18 month incentive program based on growth.  All Independent Retailers and Cooperatives who have been in business longer than 6 months are eligible to participate.  Measurement of success is the amount of growth over previous time period or current total point accumulation.  The actual award and recognition is presented at different resort location for each program.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_CHC_Document_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR CHC Document Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%CHC Info%&apos; AND IsActive=&apos;true&apos;</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_CHC_Gold_Level</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR CHC Gold Level</shortDescription>
+        <value>Gold</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_CHC_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR CHC Service Cache Key</shortDescription>
+        <value>All Active CHC Document</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_CHC_Silver_Level</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR CHC Silver Level</shortDescription>
+        <value>Silver</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_CO</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_CO</shortDescription>
+        <value>CO</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_COMMUNITY_USER</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_COMMUNITY_USER</shortDescription>
+        <value>Dealer Community User</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_COOPERATIVE</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_COOPERATIVE</shortDescription>
+        <value>010-Cooperative</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_CREATED_DATE</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_CREATED_DATE</shortDescription>
+        <value>CreatedDate</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Carousel_Promotions_Dealer_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Carousel Promotions Dealer Service Cache Key</shortDescription>
+        <value>LPDCR TOP 5 Carousel Dealer Promotions</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Carousel_Promotions_Dealer_Where_Clause</fullName>
+        <categories>LPDCR, Homepage Component</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Carousel Promotions Dealer Where Clause</shortDescription>
+        <value>ShowInPromoImageCarousel=&apos;true&apos; AND IsActive=&apos;true&apos; AND InternalOnly = &apos;false&apos; AND StartDate &lt;= GETDATE() AND ExpirationDate &gt;= GETDATE()</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Carousel_Promotions_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Carousel Promotions Service Cache Key</shortDescription>
+        <value>LPDCR TOP 5 Carousel Promotions</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Carousel_Promotions_Where_Clause</fullName>
+        <categories>LPDCR, Homepage Component</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Carousel Promotions Where Clause</shortDescription>
+        <value>ShowInPromoImageCarousel=&apos;true&apos; AND IsActive=&apos;true&apos; AND StartDate &lt;= GETDATE() AND ExpirationDate &gt;= GETDATE()</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Carousel_Slide_Limit</fullName>
+        <categories>LPDCR, Homepage Component</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Carousel Slide Limit</shortDescription>
+        <value>7</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_CommunityName</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR CommunityName</shortDescription>
+        <value>My Purina Mills</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Contact_DefaultEmail</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Contact DefaultEmail</shortDescription>
+        <value>purinacustomercommunity@landolakes.com</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Contact_OtherEmail</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Contact OtherEmail</shortDescription>
+        <value>purinacustomercommunity@landolakes.com</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Contact_Regarding_OrderPricing</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Contact Regarding OrderPricing</shortDescription>
+        <value>Order / Pricing Related Questions</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Contact_Regarding_Other</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Contact Regarding Other</shortDescription>
+        <value>Other Inquiries</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ContentServiceUtil_OrgCacheLife</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR ContentServiceUtil Org Cache Life in seconds</shortDescription>
+        <value>9000</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Coupon_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Coupon Component Message</shortDescription>
+        <value>Access to a simple quick and easy to use web form to create the Coupon Reimbursement Request that can be printed and mailed with the physical coupons to the redemption center.  Users can also download a blank form if they chose to fill it out manually.  Other coupon information resources are available in this section.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Coupon_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Coupon Component Name</shortDescription>
+        <value>Coupons</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Coupon_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Coupon Component URL</shortDescription>
+        <value>Coupon Redemption Forms</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Coupon_Resource_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Coupon Resource Service Cache Key</shortDescription>
+        <value>All Active Coupon Resources</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Coupon_Resource_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Coupon Resource Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Coupons%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Coupon_Resource_Subtab_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Coupon Resource Subtab Name</shortDescription>
+        <value>View Coupon Resources</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_CreatedDate</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_CreatedDate</shortDescription>
+        <value>CreatedDate</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Current_Promotions</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_Current_Promotions</shortDescription>
+        <value>Current Promotions</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_DESC</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_DESC</shortDescription>
+        <value>DESC</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Dealer_Community_AppCode</fullName>
+        <categories>LPDCR, AppCode</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Dealer Community AppCode</shortDescription>
+        <value>sfPurinaDealerComm</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Display_Library_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Display Library Component Message</shortDescription>
+        <value>Access a library of displays to help foster creativity to make displays that will create awareness and allow you to make extra profit.  Endcaps, Power Displays, Cross Merchandising Displays, Demonstration Displays, Interactive Displays, Go-Anywhere Displays, and many more display examples.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Display_Library_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Display Library Component Name</shortDescription>
+        <value>Display Library</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Display_Library_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Display Library Component URL</shortDescription>
+        <value>Visit Display Library</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Display_Library_Service_Cache_Key</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Display Library Service Cache Key</shortDescription>
+        <value>LPDCR Active Library</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Display_Library_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Display Library Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Display Library%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Document_Order_By_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Document Order By Clause</shortDescription>
+        <value>DocumentsLastModified DESC</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Document_Type_Logo</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Document Type Logo</shortDescription>
+        <value>Logo</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Document_Type_Package_Images</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Document Type Package Images</shortDescription>
+        <value>Packaging</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ENROLLED</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ENROLLED</shortDescription>
+        <value>Enrolled</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ENROLLMENT_REQUESTED</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ENROLLMENT_REQUESTED</shortDescription>
+        <value>Enrollment Requested</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_EXPENSE</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_EXPENSE</shortDescription>
+        <value>Expense</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Event_Resources</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Event Resources</shortDescription>
+        <value>Event Resources</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Event_Resources_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Event Resources Cache Key</shortDescription>
+        <value>All Active Event Resources</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Event_Resources_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Event Resources Message</shortDescription>
+        <value>Access to a wide array of resources that can be utilized at events.  Also in this section the user will find various informational resources related to The Farm VIP, National Events, Ambassadors, and Local Events.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Event_Resources_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Event Resources URL</shortDescription>
+        <value>Visit the Library</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Event_Resources_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Event Resources Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Event Resources%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Events_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Events Component Message</shortDescription>
+        <value>The Farm VIP dates and information, National Events dates and information, Event Resources, Local Event Planning, Checklists, Local Event Idea Library.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Events_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Events Component Name</shortDescription>
+        <value>Events</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Events_and_Planning_Permission_Set</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Events and Planning Permission Set</shortDescription>
+        <value>Events and Planning - External Users</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_FARMVIPEVENTS</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_FARMVIPEVENTS</shortDescription>
+        <value>Farm_VIP_Event</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_FLM_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR FLM Service Cache Key</shortDescription>
+        <value>LPDCR FeedLicenceManufacturer</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_FLM_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR FLM Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Feed License Manufacturer%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_FLM_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR FLM Subtab Name</shortDescription>
+        <value>Feed License Manufacturer</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_FadBuilder_AppCode</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR FadBuilder AppCode</shortDescription>
+        <value>fadbuilder</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Farm_VIP_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Farm VIP Subtab Name</shortDescription>
+        <value>The Farm VIP</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_FeedManual_Desc</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR FeedManual Desc</shortDescription>
+        <value>Purina Feed Manuals is an application that provides product pages for all species (Dairy, Swine, Cattle, Horse, Lifestyle).</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_FeedManual_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR FeedManual Service Cache Key</shortDescription>
+        <value>LPDCR Active FeedManual</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_FeedManual_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR FeedManual Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Feed Manual%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Feed_Manuals_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Feed Manuals Subtab Name</shortDescription>
+        <value>Feed Manual Pages</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Feed_Safety_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Feed Safety Service Cache Key</shortDescription>
+        <value>All Active Feed Safety</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Feed_Safety_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Feed Safety Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Feed Safety%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Feed_Safety_Subtab_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Feed Safety Subtab Name</shortDescription>
+        <value>Feed Safety</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Header_BB</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Header BB</shortDescription>
+        <value>img/page_header/header-business_builder.jpg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Header_BusinessMgt</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Header BusinessMgt</shortDescription>
+        <value>img/page_header/header-business_management.jpg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Header_Contact</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Header Contact</shortDescription>
+        <value>img/page_header/header-contact.jpg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Header_Events</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Header Events</shortDescription>
+        <value>img/page_header/header-events.jpg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Header_Marketing</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Header Marketing</shortDescription>
+        <value>img/page_header/header-marketing.jpg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Header_ProductInfo</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Header ProductInfo</shortDescription>
+        <value>img/page_header/header-product_info.jpg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Header_SearchRes</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Header SearchRes</shortDescription>
+        <value>img/page_header/header-search_results.jpg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Header_Training</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Header Training</shortDescription>
+        <value>img/page_header/header-training.jpg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_AdBuilder</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_AdBuilder</shortDescription>
+        <value>/img/icon-online_ad-builder.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_AdSlicks</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_AdSlicks</shortDescription>
+        <value>/img/icon-ad_slicks.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_AnnualPlanning</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_AnnualPlanning</shortDescription>
+        <value>/img/u639.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_CHC</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_CHC</shortDescription>
+        <value>/img/u1198.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_Coupon</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_Coupon</shortDescription>
+        <value>/img/u335.png</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_DisplayLib</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_DisplayLib</shortDescription>
+        <value>/img/icon-display_library.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_Invoice</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_Invoice</shortDescription>
+        <value>/img/u311.png</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_Logos</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_Logos</shortDescription>
+        <value>/img/icon-logos.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_MSRP</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_MSRP</shortDescription>
+        <value>/img/u1204.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_PackageImage</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_PackageImage</shortDescription>
+        <value>/img/icon-package_images.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_Performance</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_Performance</shortDescription>
+        <value>/img/u1192.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_Planograms</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_Planograms</shortDescription>
+        <value>/img/icon-planograms.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_PriceList</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_PriceList</shortDescription>
+        <value>/img/u1196.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_PrintStore</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_PrintStore</shortDescription>
+        <value>/img/icon-print_estore.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_PromoStore</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_PromoStore</shortDescription>
+        <value>/img/icon-promotions_estore.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_Radio</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_Radio</shortDescription>
+        <value>/img/icon-Radio_script.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_SignTemplate</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_SignTemplate</shortDescription>
+        <value>/img/icon-sign_templates.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_Signs</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_Signs</shortDescription>
+        <value>/img/icon-signs.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_SocialMedia</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_SocialMedia</shortDescription>
+        <value>/img/icon-social_media.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_VIP</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_VIP</shortDescription>
+        <value>/img/u1194.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ICON_Video</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ICON_Video</shortDescription>
+        <value>/img/icon-video.svg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_IN</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_IN</shortDescription>
+        <value>IN</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_INDEPENDENT_RETAILER</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_INDEPENDENT_RETAILER</shortDescription>
+        <value>071-Independent Retailer</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_INELIGIBLE</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_INELIGIBLE</shortDescription>
+        <value>Ineligible</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ImageNotAvailable</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ImageNotAvailable</shortDescription>
+        <value>img/Image_not_available.png</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Invalid_Emploee_Number_For_VIP</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Invalid Emploee Number For VIP</shortDescription>
+        <value>No VIP Points and Tons report data is available for your profile.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Invoice_AppCode</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Invoice AppCode</shortDescription>
+        <value>btinvoicemgmt</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Invoice_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Invoice Component Message</shortDescription>
+        <value>Invoice Management is a secured web-based program that allows you to have on-line access to invoices, EFT draft notices, and month end statements. Invoice Management features include the ability to print documents, view up-to-date open invoice balances, and initiate payments online.
+To learn more about enhanced features, such as importing your invoice information directly into your accounting software, contact our Customer Financial Services team at 1-855-226-1232 or customerfinancialservices@landolakes.com</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Invoice_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Invoice Component Name</shortDescription>
+        <value>Invoices</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Invoice_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Invoice Component URL</shortDescription>
+        <value>Visit Invoice Management</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Invoice_Resource_Subtab_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Invoice Resource Subtab Name</shortDescription>
+        <value>Visit Invoice Resources</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Invoice_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Invoice Service Cache Key</shortDescription>
+        <value>All Active Invoice</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Invoice_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Invoice Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Invoice Management Resources%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_KenticoCMS_Named_Credentials</fullName>
+        <categories>LPDCR, Named Credentials</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Kentico CMS Named Credentials</shortDescription>
+        <value>Kentico_CMS</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Kentico_Documents_Table</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Kentico Documents Table</shortDescription>
+        <value>PurinaBusinessLink.Documents</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Kentico_Promotions_Table</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Kentico Promotions Table</shortDescription>
+        <value>PurinaBusinessLink.Promotions</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Kentico_Species_Table</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Kentico Species Table</shortDescription>
+        <value>PurinaBusinessLink.Species</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_LatestVideos</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_LatestVideos</shortDescription>
+        <value>Latest Videos</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_LearningCenter_Desc</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_LearningCenter Desc</shortDescription>
+        <value>The TalentLink Learning Center is a learning center for Land O&apos;Lakes employees and customers to take online courses, sign up for classroom events and more.**</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_LearningCenter_LinkText</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_LearningCenter LinkText</shortDescription>
+        <value>Connect to the TalentLink Learning Center</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_LearningCenter_LinkURL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_LearningCenter LinkURL</shortDescription>
+        <value>https://sso.landolakesinc.com/idp/startSSO.ping?PartnerSpId=https://www.successfactors.com</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Learning_Center_Resource_Subtab_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Learning Center Resource Subtab Name</shortDescription>
+        <value>Visit Learning Center Resources</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Learning_Center_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Learning Center Service Cache Key</shortDescription>
+        <value>All Active Leaning Center</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Learning_Center_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Learning Center Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Talent Link Resources%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Local_Event_Checklists</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Local Event Checklists</shortDescription>
+        <value>Local Event Checklists</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Local_Event_Checklists_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Local Event Checklists Cache Key</shortDescription>
+        <value>All Active Event CheckList</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Local_Event_Checklists_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Local Event Checklists Message</shortDescription>
+        <value>Access to local event checklists to help you get started in identifying all of the details you’ll need to consider as well as an indication of the timelines involved with your event planning process.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Local_Event_Checklists_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Local Event Checklists URL</shortDescription>
+        <value>Visit Checklists</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Local_Event_Checklists_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Local Event Checklists Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Local Event Checklist%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Local_Event_Idea_Library</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Local Event Idea Library</shortDescription>
+        <value>Local Event Idea Library</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Local_Event_Idea_Library_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Local Event Idea Library Cache Key</shortDescription>
+        <value>All Active Event Idea Library</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Local_Event_Idea_Library_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Local Event Idea Library Message</shortDescription>
+        <value>Access to a library of local events ideas to help foster creativity in developing successful events that increase sales.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Local_Event_Idea_Library_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Local Event Idea Library URL</shortDescription>
+        <value>Visit the Library</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Local_Event_Idea_Library_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Local Event Idea Library Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Local Event Idea Library%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Local_Event_Planner</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Local Event Planner</shortDescription>
+        <value>Local Event Planner</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Local_Event_Planner_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Local Event Planner Cache Key</shortDescription>
+        <value>All Active Event Planner</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Local_Event_Planner_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Local Event Planner Message</shortDescription>
+        <value>Every event, no matter how simple or intricate, requires advance planning and organization. Utilize this planning guide to help ensure your event is successful.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Local_Event_Planner_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Local Event Planner URL</shortDescription>
+        <value>Visit Planner</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Local_Event_Planner_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Local Event Planner Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Local Event Planner%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Local_Events_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Local Events Subtab Name</shortDescription>
+        <value>Local Events</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Logo_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Logo Component Message</shortDescription>
+        <value>Access to logos.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Logo_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Logo Component Name</shortDescription>
+        <value>Logos</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Logo_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Logo Component URL</shortDescription>
+        <value>Visit Logos</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Logo_FeedManual</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Logo FeedManual</shortDescription>
+        <value>/img/ProductManuals_logo_community.png</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Logos_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Logos Service Cache Key</shortDescription>
+        <value>LPDCR Active Logos</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Logos_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Logos Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Logo%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_MSRP_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR MSRP Component Message</shortDescription>
+        <value>Access to the Purina® MSRP (Manufacturer’s Suggested Retail Price) for selected products.
+Access to the Purina® Minimum Advertised Price (MAP) Policy information for selected products.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_MSRP_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR MSRP Component Name</shortDescription>
+        <value>MSRP / MAP</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_MSRP_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR MSRP Component URL</shortDescription>
+        <value>View MSRP / MAP</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_MSRP_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR MSRP Service Cache Key</shortDescription>
+        <value>All Active MSRP</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_MSRP_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR MSRP Service Where Clause</shortDescription>
+        <value>DocumentType = &apos;MSRP/MAP&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Marketing</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_Marketing</shortDescription>
+        <value>Marketing</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Marketing_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Marketing Component Message</shortDescription>
+        <value>PROMOTION Information (including Business Builder documents)                        
+MEDIA TOOLS: Logos, Package Images, Social Media content, Videos, Ad Slicks, Radio Scripts, Online Ad Builder, etc.                                                      
+MERCHANDISING TOOLS: Display Idea Library, Planograms, POS and Display Signs, Interior and Exterior Signs, Promotional Products E-STORE,                                          
+Print Materials E-STORE</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Marketing_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Marketing Component Name</shortDescription>
+        <value>Marketing</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Marketing_Permission_Set</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Marketing Permission Set</shortDescription>
+        <value>Marketing - External Users</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Media_Tools_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Media Tools Subtab Name</shortDescription>
+        <value>Media Tools</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Merchandising_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Merchandising Subtab Name</shortDescription>
+        <value>Merchandising</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_NationalEvent</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_NationalEvent</shortDescription>
+        <value>National_Regional_Events</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_National_Events_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR National Events Subtab Name</shortDescription>
+        <value>National Events</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_OBI_CMS_Named_Credentials</fullName>
+        <categories>LPDCR, Named Credentials</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR OBI CMS Named Credentials</shortDescription>
+        <value>OBI_Report</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_OnlineOrder_AppCode</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR OnlineOrder AppCode</shortDescription>
+        <value>FeedWOE</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Online_Order_Order_History_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Online Order Order History URL</shortDescription>
+        <value>ccrz__MyAccount?viewState=myOrders&amp;cclcl=en_US</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Online_Order_Permission_Set</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Online Order Permission Set</shortDescription>
+        <value>Online Order - External Users</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Orders_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Orders Component Message</shortDescription>
+        <value>Access to Online Ordering, Price Lists.
+
+NOTE: Plant Order Sheets are located in the Business Management section under Reports and Price List Resources</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Orders_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Orders Component Name</shortDescription>
+        <value>Orders</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Org_Cache_Timeout_In_Seconds</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Org Cache Timeout In Seconds</shortDescription>
+        <value>7200</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_POS_Sign_Templates_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR POS Sign Templates Component Message</shortDescription>
+        <value>Point of Sale and Display signs and templates – easy and quick to make but a powerful tool to increase sales. Also in this category will be artwork for use in creating banners, billboards, counter mats, etc.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_POS_Sign_Templates_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR POS Sign Templates Component Name</shortDescription>
+        <value>POS and Display Signs</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_POS_Sign_Templates_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR POS Sign Templates Component URL</shortDescription>
+        <value>Visit POS and Display Signs</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_POS_Sign_Templates_Service_Cache_Key</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR POS Sign Templates Service Cache Key</shortDescription>
+        <value>LPDCR  Active POS Sign Templates</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_POS_Sign_Templates_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR POS Sign Templates Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%POS Sign Template%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_PROMOTION_PREBOOKING</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_PROMOTION_PREBOOKING</shortDescription>
+        <value>PromotionsPrebooking</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Package_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Package Component Message</shortDescription>
+        <value>Access to packaging images – bags, tub, pails, jugs, etc.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Package_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Package Component Name</shortDescription>
+        <value>Package (bag, tub, pail) Images</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Package_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Package Component URL</shortDescription>
+        <value>Visit Package (bag, tub, pail) Images</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Package_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Package Service Cache Key</shortDescription>
+        <value>LPDCR Active Package Images</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Package_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Package Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Packaging%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Performance_Profile_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Performance Profile Component Message</shortDescription>
+        <value>The Performance Profile Status Report informs customers how to get to the next level of discount. 
+The Performance Profile Statement informs customers of their Performance Profile discount for the current and next program period.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Performance_Profile_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Performance Profile Component Name</shortDescription>
+        <value>Performance Profile</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Performance_Profile_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Performance Profile Component URL</shortDescription>
+        <value>View the Report</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Performance_Profile_Resource_Subtab_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Performance Profile Resource Subtab Name</shortDescription>
+        <value>Visit Performance Profile Resources</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Performance_Profile_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Performance Profile Service Cache Key</shortDescription>
+        <value>All Active Performance Profile</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Performance_Profile_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Performance Profile Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Performance Profile Resources%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Permission_Set</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Permission Set</shortDescription>
+        <value>Business Builder - External Users,Business Management - External Users,Events and Planning - External Users,Marketing - External Users,Online Order - External Users,Product Information - External Users,Training - External Users</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Planning_Resources_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Planning Resources Subtab Name</shortDescription>
+        <value>Event Resources</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Planograms_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Planograms Component Message</shortDescription>
+        <value>Diagrams that show how and where specific retail products should be placed on retail shelves or displays in order to increase customer purchases.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Planograms_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Planograms Component Name</shortDescription>
+        <value>Planograms</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Planograms_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Planograms Component URL</shortDescription>
+        <value>Visit Planograms</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Planograms_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Planograms Service Cache Key</shortDescription>
+        <value>LPDCR Active Planograms</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Planograms_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Planograms Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Planogram%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Platform_Cache_Partition</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Platform Cache Partition</shortDescription>
+        <value>DealerCommunity</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Prac_and_Policies_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Prac and Policies Service Cache Key</shortDescription>
+        <value>All Active Practices and Policies</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Prac_and_Policies_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Prac and Policies Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Practices and Policies%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Prac_and_Policies_Subtab_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Prac and Policies Subtab Name</shortDescription>
+        <value>Practices And Policies</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_PriceList_AppCode</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR PriceList AppCode</shortDescription>
+        <value>feedpricelists</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Price_Lists_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Price Lists Component Message</shortDescription>
+        <value>View, print, or download Feed price lists. 
+
+Plant Order Sheets are available in the View Price Lists Resources link below.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Price_Lists_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Price Lists Component Name</shortDescription>
+        <value>Price Lists</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Price_Lists_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Price Lists Component URL</shortDescription>
+        <value>Visit Price Lists</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Price_Lists_Resource_Subtab_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Price Lists Resource Subtab Name</shortDescription>
+        <value>Visit Price Lists Resources - Includes Plant Order Sheets</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Price_Lists_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Price Lists Service Cache Key</shortDescription>
+        <value>All Active Price Lists</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Price_Lists_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Price Lists Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Price List Resource%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Print_eStore_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Print eStore Component Message</shortDescription>
+        <value>Here you will find all available printed materials such as pet food frequent purchase cards, feed brochures, banners, promotion kits and more. Orders placed for items in inventory will ship by noon the same day. If you need additional help, click the “Contact Us” button.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Print_eStore_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Print eStore Component Name</shortDescription>
+        <value>Print Materials eStore</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Print_eStore_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Print eStore Component URL</shortDescription>
+        <value>Visit Print Materials eStore</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Print_eStore_Component_URL_Link</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Print eStore Component URL Link</shortDescription>
+        <value>https://sso.landolakesinc.com/idp/startSSO.ping?PartnerSpId=rrd.saml2.sp</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Print_eStore_Resource_Subtab_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Print eStore Resource Subtab Name</shortDescription>
+        <value>Visit Print eStore Resources</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Print_eStore_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Print eStore Service Cache Key</shortDescription>
+        <value>LPDCR Active Print eStore</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Print_eStore_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Print eStore Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Print E Store Resources%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ProductDetail_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR ProductDetail Subtab Name</shortDescription>
+        <value>Product Detail Pages</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ProductSalesTools_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR ProductSalesTools Subtab Name</shortDescription>
+        <value>Product Sales Tools</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Product_Detail_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Product Detail Subtab Name</shortDescription>
+        <value>Product Detail Pages</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Product_Information_Permission_Set</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Product Information Permission Set</shortDescription>
+        <value>Product Information - External Users</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Product_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Product Service Cache Key</shortDescription>
+        <value>LPDCR Active Products</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Product_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Product Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Product Brochure%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Products_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Products Component Message</shortDescription>
+        <value>Access to Product Detail Pages (includes UPC and other product characteristics), Product Feed Manual Pages, Sell Sheets, Tech Bulletins, Promotion information (including Business Builder documents), Product Sales Tools, etc.).</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Products_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Products Component Name</shortDescription>
+        <value>Product Info</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_ProjectedBalance</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_ProjectedBalance</shortDescription>
+        <value>Projected Balance</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Promo_eStore_Resource_Subtab_Name</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Promo eStore Resource Subtab Name</shortDescription>
+        <value>Visit Promo eStore Resources</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Promotion_Order_By_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Promotion Order By Clause</shortDescription>
+        <value>StartDate ASC</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Promotions_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Promotions Service Cache Key</shortDescription>
+        <value>LPDCR All Promotions</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Promotions_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Promotions Subtab Name</shortDescription>
+        <value>Promotions</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Promotions_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Promotions Where Clause</shortDescription>
+        <value>IsActive=&apos;true&apos; AND ExpirationDate &gt;= GETDATE()</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Promotions_eStore_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Promotions eStore Component Message</shortDescription>
+        <value>Staples provides promotional products such as Purina-branded apparel as well as promotional items such as coolers, pens and flash drives. Order checkerboard-branded items such as table runners, pennants, table cloths, etc.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Promotions_eStore_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Promotions eStore Component Name</shortDescription>
+        <value>Promotional Products eStore</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Promotions_eStore_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Promotions eStore Component URL</shortDescription>
+        <value>Visit Promotional Products eStore</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Promotions_eStore_Component_URL_Link</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Promotions eStore Component URL Link</shortDescription>
+        <value>https://sso.landolakesinc.com/idp/startSSO.ping?PartnerSpId=https://b2b.americanid.com/SAMLSP2/consumer.aspx</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Promotions_eStore_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Promotions eStore Service Cache Key</shortDescription>
+        <value>LPDCR Active Promotions eStore</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Promotions_eStore_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Promotions eStore Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Promo E Store Resources%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_PurinaCCEmailDisplayName</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_PurinaCCEmailDisplayName</shortDescription>
+        <value>Purina Customer Care</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_PurinaEmailServiceAddress</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_PurinaEmailServiceAddress</shortDescription>
+        <value>purinacustomercommunity@1-2z99s34ztj89uas26islc6i9vtwrxqbsri8jia8ws6972ch2j9.j-i9xqeas.na55.case.salesforce.com</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_PurinaMills_TV_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR PurinaMills TV Subtab Name</shortDescription>
+        <value>PurinaMills TV</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_PurinaOO_AppCode</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR PurinaOO AppCode</shortDescription>
+        <value>sfPurinaOnlineOrder</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_PurinaTV_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR PurinaTV Service Cache Key</shortDescription>
+        <value>LPDCR Active PurinaTV</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_PurinaTV_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR PurinaTV Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%PurinaTV%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_PurinaTV_SubscriptionText</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_PurinaTV SubscriptionText</shortDescription>
+        <value>SUBSCRIBE TO THIS CHANNEL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_PurinaTV_SubscriptionURL</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_PurinaTV SubscriptionURL</shortDescription>
+        <value>https://www.youtube.com/subscription_center?add_user= PurinaMillsTV</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_PurinaUniversity_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR PurinaUniversity Service Cache Key</shortDescription>
+        <value>LPDCR Active PurinaUniversity</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_PurinaUniversity_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR PurinaUniversity Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Purina University%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Purina_AppCode</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Purina AppCode</shortDescription>
+        <value>sfPurinaOrg</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Purina_University_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Purina University Subtab Name</shortDescription>
+        <value>Purina University</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_RE</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_RE</shortDescription>
+        <value>RE</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Radio_Scripts_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Radio Scripts Component Message</shortDescription>
+        <value>Radio advertising scripts and prerecorded radio advertising spots.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Radio_Scripts_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Radio Scripts Component Name</shortDescription>
+        <value>Radio Scripts</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Radio_Scripts_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Radio Scripts Component URL</shortDescription>
+        <value>Visit Radio Scripts</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Radio_Scripts_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Radio Scripts Service Cache Key</shortDescription>
+        <value>LPDCR Active Radio Script</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Radio_Scripts_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Radio Scripts Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Radio Script%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Report_AppCode</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Report AppCode</shortDescription>
+        <value>feedperfprofile</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Report_Error_Message</fullName>
+        <categories>LPDCR, Report</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Report Error Message</shortDescription>
+        <value>The requested information is too large to display. Use the button above to request the full report to be emailed to you.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Reports_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Reports Subtab Name</shortDescription>
+        <value>Reports</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_SAVED</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_SAVED</shortDescription>
+        <value>Saved</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_SELECTED_ACCID</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_SELECTED_ACCID</shortDescription>
+        <value>selectedAccountId</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_SSPY_API</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_SSPY_API</shortDescription>
+        <value>SellingSupportProgramYear__c</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_SSPY_NAME</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_SSPY_NAME</shortDescription>
+        <value>Selling_Support_Program_Year__r.Name</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_STANDARD</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_STANDARD</shortDescription>
+        <value>LPDCR_STANDARD</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_SalesSheets_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR SalesSheets Service Cache Key</shortDescription>
+        <value>LPDCR Active SalesSheets</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_SalesSheets_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR SalesSheets Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Sell Sheet%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_SalesTools_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR SalesTools Service Cache Key</shortDescription>
+        <value>LPDCR Active SalesTools</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_SalesTools_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR SalesTools Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Tool%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Sales_Resources_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Sales Resources Service Cache Key</shortDescription>
+        <value>All Active Sales Resources</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Sales_Resources_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Sales Resources Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Sales Resource%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Sales_Resources_Subtab_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Sales Resources Subtab Name</shortDescription>
+        <value>SALES RESOURCES</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Sales_Sheets_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Sales Sheets Subtab Name</shortDescription>
+        <value>Sell Sheets</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Search_Category_Document_Doc_Types</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Search Category Document Doc Types</shortDescription>
+        <value>Planogram,Press Release,Product Brochure,Promotions,Radio Script,Research Report,Sell Sheet,Tech Bulletin,Tool,Other,Program Brochure,Practices and Policies,Social Media,Display Library,POS Sign Template,Sign, Local Event Planner,Local Event Checklist,Local Event Idea Library,VFD,Feed Safety,Coupons,Feed License Manufacturer,CHC Info,Annual Planning,Invoice Management</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Search_Category_Feed_Manuals_Doc_Types</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Search Category Feed Manuals Doc Types</shortDescription>
+        <value>Feed Manual,Feed Manual Page</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Search_Category_Image_Files_Doc_Types</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Search Category Image Files Doc Types</shortDescription>
+        <value>Ad Slick,Packaging,Logo</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Search_Category_Sales_Resource_Doc_Types</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Search Category Sales Resource Doc Types</shortDescription>
+        <value>Sales Resource</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Search_Category_Videos_Doc_Types</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Search Category Videos Doc Types</shortDescription>
+        <value>Training,Video,Purina University,PurinaTV,TT30</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Signs_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Signs Component Message</shortDescription>
+        <value>Exterior and Interior Signage and other merchandising assets available through the OBA Group.  The OBA Group is an independently owned retail graphics and merchandising solutions company supporting Purina® Animal Nutrition LLC dealers and cooperatives across the continental United States, Hawaii and Alaska.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Signs_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Signs Component Name</shortDescription>
+        <value>Signs</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Signs_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Signs Component URL</shortDescription>
+        <value>Visit Signs</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Signs_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Signs Service Cache Key</shortDescription>
+        <value>LPDCR Active Signs</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Signs_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Signs Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Sign%&apos;  AND DocumentType NOT LIKE &apos;%POS Sign Template%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Social_Media_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Social Media Component Message</shortDescription>
+        <value>Access to predesigned Facebook content and other social media tools and assets.  Also includes News Releases.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Social_Media_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Social Media Component Name</shortDescription>
+        <value>Social Media</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Social_Media_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Social Media Component URL</shortDescription>
+        <value>Visit Social Media</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Social_Media_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Social Media Service Cache Key</shortDescription>
+        <value>LPDCR Active Social Media</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Social_Media_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Social Media Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Social Media%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_SouthWest_Plants</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR SouthWest Plants</shortDescription>
+        <value>Plants LIKE &apos;%Arizona%&apos; OR Plants LIKE &apos;%New Mexico%&apos;</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Species_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Species Service Cache Key</shortDescription>
+        <value>LPDCR Species List</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Talentlink_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Talentlink Subtab Name</shortDescription>
+        <value>Talentlink Learning Center</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Targeted_Training_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Targeted Training Subtab Name</shortDescription>
+        <value>Targeted Training (TT30)</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_TechBulletin_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR TechBulletin Service Cache Key</shortDescription>
+        <value>LPDCR Active TechBulletin</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_TechBulletin_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR TechBulletin Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Tech Bulletin%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Tech_Bulletins_Subtab_Name</fullName>
+        <categories>LPDCR, subtab</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Tech Bulletins Subtab Name</shortDescription>
+        <value>Research Reviews and Tech Bulletins</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Tons_and_VIP_Points_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Tons and VIP Points Component Message</shortDescription>
+        <value>Access to reporting showing shipped Tons and VIP points with drill down functionality to the Industry/Specie Group level and to the Product detail level.  Can be downloaded as a .csv file.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Tons_and_VIP_Points_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Tons and VIP Points Component Name</shortDescription>
+        <value>Tons and VIP Points</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Tons_and_VIP_Points_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Tons and VIP Points Component URL</shortDescription>
+        <value>View the Report</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Tons_and_VIP_Points_Resource_Subtab_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Tons and VIP Points Resource Subtab Name</shortDescription>
+        <value>Visit Tons and VIP Points Resources</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Tons_and_VIP_Points_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Tons and VIP Points Service Cache Key</shortDescription>
+        <value>All Active Tons and VIP Point</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Tons_and_VIP_Points_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Tons and VIP Points Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Tons &amp; VIP Points Report Resources%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Training_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Training Component Message</shortDescription>
+        <value>TT30 (Targeted Training), Purina University, TalentLink Learning Center, PurinaMills TV, etc.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Training_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Training Component Name</shortDescription>
+        <value>Training</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Training_Permission_Set</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Training Permission Set</shortDescription>
+        <value>Training - External Users</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Training_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Training Service Cache Key</shortDescription>
+        <value>LPDCR Active Trainings</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Training_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Training Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%TT30%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Upcoming_Promotions</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_Upcoming_Promotions</shortDescription>
+        <value>Upcoming Promotions</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_VFD_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR VFD Service Cache Key</shortDescription>
+        <value>All Active VFD</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_VFD_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR VFD Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%VFD%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_VFD_Subtab_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR VFD Subtab Name</shortDescription>
+        <value>Veterinary Feed Directive (VFD)</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Video_Component_Message</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Video Component Message</shortDescription>
+        <value>Access to videos that are suitable for instore viewing as well as other marketing methods.</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Video_Component_Name</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Video Component Name</shortDescription>
+        <value>Video</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Video_Component_URL</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Video Component URL</shortDescription>
+        <value>Visit Video</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Video_Service_Cache_Key</fullName>
+        <categories>LPDCR, Cache Key</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Video Service Cache Key</shortDescription>
+        <value>LPDCR Active Video</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Video_Service_Where_Clause</fullName>
+        <categories>LPDCR, Kentico Table</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Video Service Where Clause</shortDescription>
+        <value>DocumentType LIKE &apos;%Video%&apos; AND IsActive=&apos;true&apos; AND DocumentName IS NOT NULL</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_Web_Visible_File_Types</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR Web Visible File Types</shortDescription>
+        <value>.png, .jpg, .jpeg, .gif</value>
+    </labels>
+    <labels>
+        <fullName>LPDCR_expenseId</fullName>
+        <categories>LPDCR</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LPDCR_expenseId</shortDescription>
+        <value>expenseId</value>
+    </labels>
+    <labels>
+        <fullName>Must_select_Opportunity</fullName>
+        <categories>Error message, Account Error page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Must select Opportunity</shortDescription>
+        <value>You must select an Opportunity.</value>
+    </labels>
+    <labels>
+        <fullName>National_Account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>National Account</shortDescription>
+        <value>National Account</value>
+    </labels>
+    <labels>
+        <fullName>One_LifeStage_Req</fullName>
+        <categories>Error Message, Account Error Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LifeStage Required</shortDescription>
+        <value>LifeStage field is required on at least one opportunity.</value>
+    </labels>
+    <labels>
+        <fullName>Other_Account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Other Account</shortDescription>
+        <value>Other Account</value>
+    </labels>
+    <labels>
+        <fullName>cc_oo_DefaultTimeSlots</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>cc_oo_DefaultTimeSlots</shortDescription>
+        <value>08:00 AM;09:00 AM;10:00 AM;11:00 AM;12:00 PM;01:00 PM;02:00 PM;03:00 PM;04:00 PM;05:00 PM</value>
+    </labels>
+    <labels>
+        <fullName>cc_oo_FAQMenuEntry</fullName>
+        <categories>menu</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>cc_oo_FAQMenuEntry</shortDescription>
+        <value>FAQ</value>
+    </labels>
+    <labels>
+        <fullName>cc_oo_FlowTypeIndicator</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>cc_oo_FlowTypeIndicator</shortDescription>
+        <value>orderType</value>
+    </labels>
+    <labels>
+        <fullName>cc_oo_PickUpOrdMinWeightMsg</fullName>
+        <categories>333; 796</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>cc_oo_PickUpOrdMinWeightMsg</shortDescription>
+        <value>For pick-up orders, a minimum weight of __ lbs is required.</value>
+    </labels>
+    <labels>
+        <fullName>cc_oo_RouteTruckOrdMinWeightMsg</fullName>
+        <categories>333; 796</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>cc_oo_RouteTruckOrdMinWeightMsg</shortDescription>
+        <value>For delivery orders, a minimum weight of __ lbs is required.</value>
+    </labels>
+    <labels>
+        <fullName>cc_oo_RouteTruckOrdMinWeightMsgBag</fullName>
+        <categories>333; 796</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>cc_oo_RouteTruckOrdMinWeightMsgBag</shortDescription>
+        <value>For route truck deliveries, a minimum weight of __ lbs is required.</value>
+    </labels>
+    <labels>
+        <fullName>cc_oo_RouteTruckOrdSmallWeightMsgBag</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>cc_oo_RouteTruckOrdSmallWeightMsgBag</shortDescription>
+        <value>Shipments below __ lbs may incur a Small Shipment Surcharge.</value>
+    </labels>
+    <labels>
+        <fullName>cc_oo_iterator</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>cc_oo_iterator</shortDescription>
+        <value>10</value>
+    </labels>
+    <labels>
+        <fullName>cc_oo_minimumRowCount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Minimum Row count</shortDescription>
+        <value>15</value>
+    </labels>
+    <labels>
+        <fullName>cc_oo_pre_booklabel</fullName>
+        <categories>OO</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>cc_oo_pre_booklabel</shortDescription>
+        <value>prebook</value>
+    </labels>
+    <labels>
+        <fullName>cc_oo_quickOrderRowLimit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Quick Order Maximum Limit</shortDescription>
+        <value>100</value>
+    </labels>
+</CustomLabels>

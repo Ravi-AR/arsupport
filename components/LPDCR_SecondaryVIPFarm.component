@@ -1,0 +1,86 @@
+<!--Component created to display list of VIP events -->
+<apex:component controller="LPDCR_SecondaryVIPFarmController" allowDML="true">
+<apex:outputText rendered="{!init}"/>
+<apex:attribute name="componentKey" 
+                    type="String" 
+                    assignTo="{!key}" 
+                    description="The key given to this component so the page can easily get access to it" />
+
+    <apex:attribute name="thisPageController" 
+                    type="LPDCR_SecondaryPageBaseController" 
+                    assignTo="{!pageController}" 
+                    required="true" 
+                    description="The controller for the page." />
+    
+    <apex:attribute name="speciesFilter" 
+                    description="Set of selected spcecies to filter results" 
+                    type="String[]"
+                    assignTo="{!species_filter}"
+                    required="false"/>
+
+  <apex:attribute name="sortBy" 
+                    description="The selected Sort By option" 
+                    type="String"
+                    assignTo="{!sort_filter}"
+                    required="false"/>
+    <apex:attribute name="internalOnly" 
+                    description="Internal Only Check" 
+                    type="Boolean"
+                    assignTo="{!internal_only}"
+                    required="false"/>
+                    
+          
+    <input type="hidden" value="{!sort_filter}" class="sortfield" />
+    <apex:repeat value="{!species_filter}" var="sp">
+        <input type="hidden" value="{!sp}" class="speciesfield" />
+    </apex:repeat>
+    <input type="hidden" value="{!internal_only}" class="internalfield" />
+             
+<apex:outputPanel id="pagenationVip">
+
+    <div class="col-sm-11">
+        <table class="dataTable table tablehead" id="VIPfarmTable">
+            <thead>
+            <tr>
+            <th title="Title" class="sorting"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <apex:repeat id="FarmTable" value="{!campaignWrapperList}" var="camObj">
+                
+                         <tr>
+                            <td>
+                                <p class="mrg_btm5"><label class="clr_blk mrg_btm0">{!camObj.camp.Name}</label><span class="flt_rgt clr_gry text-right">{!camObj.camp.Event_Date_Range__c}<br/>{!camObj.camp.Event_Location__c}</span></p>
+                                
+                                <p class="mrg_btm20">{!camObj.camp.Short_Description__c}</p>
+                                    
+                                <apex:outputPanel id="attachments" rendered="{!IF(TEXT($User.UserType) == 'Standard', true, false)}" >
+                                    <apex:repeat id="docs" value="{!camObj.camp.Customer_Event_Metadata__r}" var="doc">
+                                        <span class="fa fa-file-pdf-o pdf mrg_btm20"></span>  <a href="/servlet/servlet.FileDownload?file={!vipDocumentsMap[doc.DocumentDeveloperName__c].Id}" target="_blank">{!doc.Document_Name__c}</a>
+                                    </apex:repeat>
+                                    <p class="mrg_btm20">&nbsp;</p>
+                                 </apex:outputPanel>
+                            </td>
+                         </tr>
+                 </apex:repeat>
+             </tbody>
+        </table>
+    </div>
+    <script>
+    $(document).ready(function(){ 
+    $('#VIPfarmTable').on( 'init.dt', function () {
+                    } ).DataTable({"searching":true, "bPaginate":true, "bInfo":true,
+            "dom": "<'row mrg_btm20 '<'col-sm-12 pad_lft0 pad_rgt0'f>>" +
+         "<'row'<'col-sm-6 mrg_btm20 pad_lft0'i><'col-sm-6 text-right mrg_btm20 hidden-xs'l>>" +
+        "<'row'<'col-sm-12 pad_lft0 pad_rgt0'tr>>" +
+        "<'row'<'col-sm-12 pad_lft0 pad_rgt0'p>>", "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        language: {
+        search: '<i class="glyphicon glyphicon-search sch_Icon"></i>   ',
+        searchPlaceholder: "Search The Farm VIP"
+    },        
+    "aaSorting": [ ]
+        }); 
+        });
+    </script>
+</apex:outputPanel>
+</apex:component>

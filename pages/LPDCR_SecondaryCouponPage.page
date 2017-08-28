@@ -1,0 +1,343 @@
+<apex:page controller="LPDCR_SecondaryCouponController"  showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false">
+    <apex:form id="form">
+    
+    <apex:composition template="LPDCR_CC_BaseTemplate" >
+    <apex:define name="body">
+    <apex:actionfunction action="{!getCouponNumber}" rerender="cerrormsg" name="searchAF" >
+        <apex:param name="couponName" value=""/>
+    </apex:actionfunction>
+
+    <apex:actionFunction action="{!calculateTotal}" rerender="cupdate,summaryTotal,btnadd,downloadpanel" name="calculateTotal" />
+    <apex:actionFunction action="{!upsertCouponRequest}" name="upsertCouponRequest" rerender="cupdate,summaryTotal"/>
+  
+    <div class="content container-fluid">
+        <div class="wrapper">
+        
+            <div class="col-sm-12 pad_all">                         
+                 <div class="cc_homepage pagenation_promation">
+                   <div class="row">
+                        <div class="col-sm-12 mob_pads1">
+                              <c:LPDCR_SecondaryPageHeader title="Coupons" />
+                         </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-12 mob_pads"> 
+                           <div class="panel-heading col-sm-3">
+                                <ul class="nav nav-tabs lft_menu">
+                                 <li class="wid100 active"><a href="#coupon" data-toggle="tab" class="lia txt_upper">Business Managment</a></li>
+                                 <li class="wid100"><a href="{!URLFOR($Page.LPDCR_CC_Business_Management, null, [subtab='Reports'])}" class="lia txt_upper">Reports</a></li> 
+                                 <li class="wid100"><a href="{!URLFOR($Page.LPDCR_CC_Business_Management, null, [subtab='Practices And Policies'])}" class="lia txt_upper">{!JSENCODE($Label.LPDCR_Prac_and_Policies_Subtab_Name)}</a></li>
+                                 <li class="wid100"><a href="{!URLFOR($Page.LPDCR_CC_Business_Management, null, [subtab='Veterinary Feed Directive'])}" class="lia txt_upper">{!JSENCODE($Label.LPDCR_VFD_Subtab_Name)}</a></li>    
+                                 <li class="wid100"><a href="{!URLFOR($Page.LPDCR_CC_Business_Management, null, [subtab='Feed Safety'])}" class="lia txt_upper">{!JSENCODE($Label.LPDCR_Feed_Safety_Subtab_Name)}</a></li>
+                                 <apex:outputPanel rendered="{!ISPICKVAL($User.UserType,'STANDARD')}">
+                                 <li class="wid100"><a href="{!URLFOR($Page.LPDCR_CC_Business_Management, null, [subtab='Sales Resources'])}" class="lia txt_upper">{!JSENCODE($Label.LPDCR_Sales_Resources_Subtab_Name)}</a></li>
+                                 </apex:outputPanel>
+                                <!-- <apex:outputPanel rendered="{!isFLMAccount}">
+                                     <li class="wid100"><a href="{!URLFOR($Page.LPDCR_CC_Business_Management, null, [subtab='FLM'])}" class="lia txt_upper">{!JSENCODE($Label.LPDCR_FLM_Subtab_Name)}</a></li>
+                                    </apex:outputPanel>-->
+                                 </ul>
+                            </div>
+                            
+                            <div class="panel-body col-sm-9 pad_lft10 zeroPad">
+                                <div class="tab-content bgWht flt_lft wid100">
+                                    
+                                    <div class="tab-pane fade active in " id="coupon">
+                                        <div class="col-sm-12 mrg_btm20">
+                                        <p class="fnt12">
+                                        <a class="col-sm-2 pull-right fnt14 text-right" href="{!URLFOR($Page.LPDCR_CC_Business_Management)}"><i class="glyphicon glyphicon-arrow-left"></i> Back</a><br/>
+                                        
+                                        </p>
+                                        <p class="fnt12 ">
+                                        
+                                        <a class="col-sm-4 pull-right fnt14 text-right" href="{!URLFOR($Page.LPDCR_SecondaryCouponResource)}">View Additional Resources</a>
+                                        </p>
+                                            <h3 class="clr7">Coupons</h3>
+                                            
+                                                
+
+                                            <p class="clr7 mrg_top20">Account Number: {!acc.AccountNumber} </p>
+                                            
+                                            <p class="clr7  mrg_top20">All Purina Feed coupons will be redeemed in the form of a check sent directly to you (the retailer). <br/>Please follow the instructions below.</p>
+                                            
+                                            <p class="clr7 pad_top20 mrg_top20"><b>1. Fill out the Coupon Redemption Form and download the form(s).</b></p>
+                                            
+                                           
+                                               
+                                               
+                                                <div class="col-sm-12 mrg_top20">
+                                                    <div class="row">
+                                                        <div class="col-sm-6  brd_btm pad_lft0">
+                                                            <p class="clr7">Invoice Number <apex:inputText styleClass="form-control couponinput" value="{!invoice}"/></p> 
+                                                        </div>
+                                                        <small class="tagline">(create your own or use the date)</small>
+                                                    </div>    
+                                                            
+                                                </div>
+                                                <apex:outputPanel id="accountDetails">
+                                                <div class="col-sm-12 mrg_top20">
+                                                     <div class="row">
+                                                            <div class="col-sm-10  brd_btm pad_lft0">
+                                                            
+                                                                <p class="clr7">Dealer Name <apex:OutputText styleClass="form-control couponinput" value="{!acc.Name}"/></p> 
+                                                            </div>
+                                                        </div>          
+                                                </div>
+                                                <div class="col-sm-12 mrg_top20">
+                                                     <div class="row">
+                                                            <div class="col-sm-10  brd_btm pad_lft0">
+                                                                <p class="clr7">Address <apex:inputText styleClass="form-control couponinput cwidth" value="{!acc.ShippingStreet}"/></p> 
+                                                            </div>
+                                                        </div>          
+                                                </div>
+                                                <div class="col-sm-12 mrg_top20">
+                                                     <div class="row">
+                                                            <div class="col-sm-3  brd_btm pad_lft0 couponmarginright">
+                                                                <p class="clr7">City <apex:inputText styleClass="form-control couponinput cwidth" value="{!acc.ShippingCity}"/></p> 
+                                                            </div>
+                                                            <div class="col-sm-3 pad_lft0 brd_btm couponmarginright couponpadding">
+                                                                <p class="clr7">State<apex:inputText styleClass="form-control couponinput cwidth" value="{!acc.ShippingState}"/></p> 
+                                                            </div>
+                                                            <div class="col-sm-3 pad_lft0 brd_btm couponpadding ">
+                                                                <p class="clr7">Zip<apex:inputText styleClass="form-control couponinput cwidth" value="{!acc.ShippingPostalCode}"/></p> 
+                                                            </div>
+                                                        </div>          
+                                                </div>
+                                                </apex:outputPanel>
+                                                <div class="col-sm-12 mrg_top20">
+                                                     <div class="row">
+                                                            <div class="col-sm-6  brd_btm pad_lft0 couponmarginright">
+                                                                <p class="clr7">Dealer Signature <apex:OutputText styleClass="form-control couponinput" /></p> 
+                                                            </div>
+                                                            <div class="col-sm-3 pad_lft0 brd_btm couponpadding">
+                                                                <p class="clr7">Date <apex:OutputText styleClass="form-control couponinput" value="{0,date,MMMM dd, yyyy}">
+                                                                <apex:param value="{!TODAY()}"/>
+                                                            </apex:OutputText> 
+                                                            </p>
+                                                            </div>
+                                                        </div>          
+                                                </div>
+                                                  
+                                             
+                                               
+                                            <div class="col-sm-12 mrg_top20">
+                                                <div class="row mrg_top20">
+                                                        <h5 class="clr7"><b>ADD COUPONS</b></h5>
+                                                 </div>
+                                                 
+                                                
+                                                
+                                                 <apex:outputPanel id="cupdate">
+                                                 <div class="row mrg_top20">
+                                                  
+                                                  <div class="col-sm-4 hidden-xs">
+                                                         <h6 class="clr7 text-center"><b>COUPON CPN#</b></h6>
+                                                  </div>
+                                                  <div class="col-sm-3 hidden-xs">
+                                                         <h6 class="clr7 text-center"><b># OF COUPONS</b></h6>
+                                                  </div>
+                                                  <div class="col-sm-4 hidden-xs">
+                                                         <h6 class="clr7 text-center"><b>EXTENDED VALUE</b></h6>
+                                                  </div>
+                                                    <div class="clear"></div>
+                                                 <apex:repeat value="{!couponReqWrapperList}" var="cpn">
+                                                    <div class="col-sm-12 pad_lft0 pad_rgt0 border-inmobile">
+                                                     <div class="col-sm-4">
+                                                         <h6 class="clr7 text-center hidden-sm hidden-lg hidden-md"><b>COUPON CPN#</b></h6>
+                                                         <span class="clr7 mrg_rgt10 hidden-xs">{!cpn.rowIndex}</span><p class="dis_inlineblock mrg_top10 brd_lft pad_top20 pad_btm10 pad_rgt5 pad_lft5 displayblock">
+                                                         <apex:inputText onblur="onInputBlur(this)" value="{!cpn.couponNumber}" styleClass="couponinputbox widthcnumber" disabled="{!IF(cpn.couponReqLineObj == null, false, true)}" id="cpnnumber"/>
+                                                          </p> 
+                                                                                                              
+                                                     </div>
+                                                     <div class="col-sm-3">
+                                                          <h6 class="clr7 text-center hidden-sm hidden-lg hidden-md"><b># OF COUPONS</b></h6>
+                                                          <p class="mrg_top20 brd_lft pad_top10 pad_btm10 pad_rgt10 pad_lft10">
+                                                          <apex:inputText id="couponQuantity"  value="{!cpn.couponQuantity}" styleClass="couponinputbox widthcno" onblur="calculateTotal();" />
+                                                          </p>                                                          
+                                                      </div>
+                                                     
+                                                       <div class="col-sm-4">
+                                                           <h6 class="clr7 text-center hidden-sm hidden-lg hidden-md"><b>EXTENDED VALUE</b></h6>
+                                                           <p class="mrg_top20 brd_lft brd_rgt pad_top10 pad_btm10 pad_rgt10 pad_lft10">                                                           
+                                                           <input id="extendedValue"  value="${!cpn.extendedValue}" class="couponinputbox widthcouponex" disabled="true" border= "0px"/>
+                                                           <!--<apex:inputtext id="extendedValue" label="${!cpn.extendedValue}" styleClass="couponinputbox widthcouponex" disabled="true">
+                                                             </apex:inputtext> -->
+                                                                                                                    
+                                                           </p>
+                                                       </div>   
+                                                       <div class="col-xs-offset-5 col-xs-1 col-sm-offset-0 col-sm-1 pad_lft0">
+                                                       </div>
+                                                       <p class="pad_top10 pad_btm10 dis_inlineblock">
+                                                       <apex:commandButton action="{!deleteItems}" styleClass="mrg_top20" reRender="cupdate,summaryTotal" style="background-color:#FFF;background-image:url({!URLFOR($Resource.LPDCR_CC_Assets, '/img/u881.png')});height:16px;width:17px;border-width:0px;background-repeat:no-repeat;cursor:pointer;">
+                                                        <apex:param name="rowIndex" value="{!cpn.rowIndex}" assignTo="{!indexToDelete}"/>
+                                                            
+                                                       </apex:commandButton>
+                                                       </p>
+                                                       </div>
+                                                        </apex:repeat>
+                                                 </div>
+
+                                                 </apex:outputPanel>
+                                                
+                                                
+                                                 <apex:pageMessages id="cerrormsg"/> 
+                                                
+                                                   
+                                                   <div class="row mrg_top20">
+                                                       <center><apex:commandButton styleClass="btn btn-coupon btn-secondary" action="{!upsertCouponRequest}" value="SAVE" rerender="accountDetails,summaryTotal,cupdate,cerrormsg"  status="loader"></apex:commandButton><br/>
+                                                      
+                                                       <apex:outputPanel id="btnadd">
+                                                                    <apex:commandButton styleClass="btn btn-coupon" action="{!addCoupon}" value="SAVE AND ADD MORE" rendered="{!IF(couponName!=null,true,false)}"></apex:commandButton>
+                                                      
+                                                       </apex:outputPanel>
+                                                       
+                                                      
+                                                       </center>
+                                                       
+                                                        <!-- Loader code starts here -->
+                                                        <apex:actionStatus id="loader">
+                                                            <apex:facet name="start">
+                                                                <div class="loadercover">
+                                                                </div>
+                                                                <div class="loaderfirst">
+                                                                    <div class="loadersec">
+                                                                        <img src="/img/loading32.gif" class="loaderimage" />
+                                                                    </div>
+                                                                </div>   
+                                                            </apex:facet>
+                                                        </apex:actionStatus>
+                                                        <!-- Loader code ends here-->
+                                                       
+                                                       
+                                                   </div>
+                                                   
+                                                   <apex:outputPanel styleClass="row mrg_top20" layout="block" id="summaryTotal">
+                                                  
+                                                       <table class=" col-xs-10 col-sm-5 col-sm-offset-3 coupontable">
+                                                       
+                                                           <tr>
+                                                               <td class="clr7">Sub Total Value</td><td>${!subTotal}</td>
+                                                           </tr>
+                                                           <tr>
+                                                               <td class="clr7">Total Coupon Count</td><td>{!totalCouponCount}</td>
+                                                           </tr>
+                                                           <tr>
+                                                               <td class="clr7">Postage Expense</td>
+                                                               <td>
+                                                               <apex:outputText value="${0,number,0.00}"><b><apex:param value="{!postageExpense}"/></b>
+                                                                </apex:outputText>
+                                                               </td>
+                                                           </tr>
+                                                           <tr>
+                                                               <td class="clr7"><b>Grand Total</b></td><td><b>${!grandTotal}</b></td>
+                                                           </tr>
+                                                           
+                                                       </table>  
+                                                   </apex:outputPanel>
+                                                   
+                                                    <div class="row mrg_top20"> 
+                                                    <apex:outputpanel id="downloadpanel">
+                                                       <center> 
+                                                       <apex:commandLink action="{!downloadCouponRequest}"  id="Download" style="text-decoration:none;" oncomplete="openNewTab('{!isOpenInNewTab}','{!pdfURL}')" rerender="cerrormsg">
+                                                       <apex:commandButton styleclass="btn btn-couponred" value="DOWNLOAD FORM(S)" rendered="{!IF(couponName!=null,true,false)}"/>
+                                                       </apex:commandLink>
+                                                      
+                                                       </center>
+                                                       </apex:outputpanel>
+                                                   </div>
+                                                   
+                                                   <div class="row mrg_top20">
+                                                       <p class="clr7 pad_top20 mrg_top20"><b>2. Place the actual coupons and completed redemption form and mail in as noted on the Coupon Redemption Form(s)</b></p>
+                                                        <p class="clr7 pad_top20 mrg_top20">Any coupon redemption questions or concerns can be addressed by calling Inmar Customer Service at 800.285-7602.</p>
+                                                         <p class="clr7 pad_top20 mrg_top20">You can also download blank forms and fill them out by hand.</p>
+                                                   </div>
+                                                   <div class="row mrg_top20">
+                                                       <center><a class="btn btn-coupon" href="{!URLFOR($Resource.LPDCR_CC_Assets, '/doc/LOL-Coupon_Redemption_Form-Purina-PMI.pdf')}" target="_blank">DOWNLOAD BLANK FORMS</a></center>
+                                                   </div>
+                                                   
+                                              </div>
+                                               
+                                        </div>
+                                    </div>
+                                     
+                                </div>
+                                   
+                          </div>
+                      </div>
+                  </div> 
+                   
+                 </div>
+              </div>
+        
+        </div>
+    </div>
+     
+    </apex:define>  
+    </apex:composition>
+  </apex:form>
+   
+    <script>
+         $(document).ready(function(){
+          $('#bm').addClass("myactive");
+          $('#mbm').addClass("mobactive");
+        });
+     </script>
+    <script type="text/javascript">
+                   
+                   function GetselectedAccount(){
+                       
+                        var selectedAccId = $("input[name='account']:checked").attr('value');
+                      
+                        
+                        var urlString = '{!$Site.BaseUrl}/';
+                        window.location = urlString+'LPDCR_SecondaryCouponPage?selectedAccountId='+selectedAccId;
+                        
+                       
+                    }
+                    
+         </script>
+        <script>
+        function openNewTab(flag,url){
+            console.log(flag);
+            console.log(url);
+            //$(element).attr('target', '_blank');
+            //return;
+            if(flag == "true"){
+                window.open("{!$Site.BaseUrl}"+url, "_blank");
+            }
+            return;
+        }
+        
+        
+        function onInputBlur(eId){
+            console.log(eId);
+            var cid = $(eId).attr('name') ;
+            var couponName = $("input[name='"+cid+"']").val().trim();
+            //alert(couponName);
+             if(couponName)
+             {
+                searchAF(couponName);
+             }
+        }
+       </script>     
+           
+         <style>         
+        .messageText{
+            color:#cc262c;
+            padding:10px;
+        }
+        button[disabled], html input[disabled]{
+            background-color:#fff !important;
+        }
+        @media only screen and (max-width: 767px) {
+        .border-inmobile{
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        }
+         </style>
+ <style>.media{background:url({!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_Header_BusinessMgt)}); width:100%; height:133px; background-repeat: no-repeat;
+    background-size: contain;}</style>
+   
+</apex:page>

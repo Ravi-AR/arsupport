@@ -1,0 +1,139 @@
+<apex:page standardController="Lead">
+
+
+
+<table border="0.5" style="width:100%">
+
+
+
+
+  <tr>  <td><b>Animal Type </b> </td> 
+        <td><b>Animal Count </b> </td>             
+        <td><b>Data Source  </b> </td> 
+        <td><b>Date Updated</b> </td>  
+
+        <td> &nbsp; </td> 
+        <td><b>Web Form</b> </td>
+        <td><b>Web Form Update</b> </td>
+         
+  </tr>
+  
+
+  <tr>  <td BGCOLOR="#fafafa"> Cattle </td>
+        <td BGCOLOR="#fafafa"> <Apex:outputField value="{!Lead.Cattle_Count__c}"/> </td>           
+        <td BGCOLOR="#fafafa"> <Apex:outputField value="{!Lead.Cattle_Data_Source__c}"/> </td>  
+        <td BGCOLOR="#fafafa"> <Apex:outputField value="{!Lead.Date_Cattle_Updated__c}"/> </td>
+
+        <td BGCOLOR="#fafafa"> &nbsp; </td>   
+        <td BGCOLOR="#fafafa"> <Apex:outputField value="{!Lead.Web_Form_Cattle__c}"/> </td> 
+        <td BGCOLOR="#fafafa"> <Apex:outputField value="{!Lead.Web_Form_Cattle_Update__c}"/> </td>    
+  </tr>
+ 
+
+
+ <tr>   <td BGCOLOR="#ffffcc"> Companion </td>
+        <td BGCOLOR="#ffffcc"><Apex:outputField value="{!Lead.Companion_Count__c}"/> </td>
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Companion_Data_Source__c}"/> </td>            
+        <td BGCOLOR="#ffffcc"><Apex:outputField value="{!Lead.Date_Companion_Updated__c}"/> </td> 
+
+        <td BGCOLOR="#ffffcc"> &nbsp; </td> 
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Web_Form_Companion__c}"/> </td> 
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Web_Form_Companion_Update__c}"/> </td>      
+         
+  </tr>
+
+
+
+
+ <tr>   <td BGCOLOR="#fafafa"> Dairy </td>
+        <td BGCOLOR="#fafafa"><Apex:outputField value="{!Lead.Dairy_Count__c}"/> </td>                 
+        <td BGCOLOR="#fafafa"> <Apex:outputField value="{!Lead.Dairy_Data_Source__c}"/> </td>  
+        <td BGCOLOR="#fafafa"><Apex:outputField value="{!Lead.Date_Dairy_Updated__c}"/> </td>  
+ 
+        <td BGCOLOR="#fafafa"> &nbsp; </td>   
+        <td BGCOLOR="#fafafa"> <Apex:outputField value="{!Lead.Web_Form_Dairy__c}"/> </td> 
+        <td BGCOLOR="#fafafa"> <Apex:outputField value="{!Lead.Web_Form_Dairy_Update__c}"/> </td>   
+  </tr>
+
+
+ <tr>   <td BGCOLOR="#ffffcc"> Deer </td>
+        <td BGCOLOR="#ffffcc"><Apex:outputField value="{!Lead.Deer_Count__c}"/> </td>               
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Deer_Data_Source__c}"/> </td>  
+        <td BGCOLOR="#ffffcc"><Apex:outputField value="{!Lead.Date_Deer_Updated__c}"/> </td>
+
+        <td BGCOLOR="#ffffcc"> &nbsp; </td> 
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Web_Form_Deer__c}"/> </td> 
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Web_Form_Deer_Update__c}"/> </td>     
+  </tr>
+  
+
+ <tr>   <td BGCOLOR="#fafafa"> Horse </td>
+        <td BGCOLOR="#fafafa"><Apex:outputField value="{!Lead.Horse_Count__c}"/>     </td>         
+        <td BGCOLOR="#fafafa"> <Apex:outputField value="{!Lead.Horse_Data_Source__c}"/> </td>  
+        <td BGCOLOR="#fafafa"><Apex:outputField value="{!Lead.Date_Horse_Updated__c}"/> </td> 
+ 
+        <td BGCOLOR="#fafafa"> &nbsp; </td>   
+        <td BGCOLOR="#fafafa"> <Apex:outputField value="{!Lead.Web_Form_Horse__c}"/> </td> 
+        <td BGCOLOR="#fafafa"> <Apex:outputField value="{!Lead.Web_Form_Horse_Update__c}"/> </td>  
+ </tr>
+
+
+ <tr>   <td BGCOLOR="#ffffcc"> Pet </td>
+  
+        <td BGCOLOR="#ffffcc"><Apex:outputField value="{!Lead.Pet_Count__c}"/> </td>                
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Pet_Data_Source__c}"/> </td> 
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Date_Pet_Updated__c}"/> </td> 
+
+        <td BGCOLOR="#ffffcc"> &nbsp; </td> 
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Web_Form_Pet__c}"/> </td> 
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Web_Form_Pet_Update__c}"/> </td> 
+ </tr>
+
+
+
+ <tr>   <td BGCOLOR="#fafafa"> Poultry </td>   
+        <td BGCOLOR="#fafafa"><Apex:outputField value="{!Lead.Poultry_Count__c}"/> </td>                
+        <td BGCOLOR="#fafafa"> <Apex:outputField value="{!Lead.Poultry_Data_Source__c}"/> </td> 
+        <td BGCOLOR="#fafafa"><Apex:outputField value="{!Lead.Date_Poultry_Updated__c}"/> </td> 
+
+        <td BGCOLOR="#fafafa"> &nbsp; </td>   
+        <td BGCOLOR="#fafafa"> <Apex:outputField value="{!Lead.Web_Form_Poultry__c}"/> </td> 
+        <td BGCOLOR="#fafafa"> <Apex:outputField value="{!Lead.Web_Form_Poultry_Update__c}"/> </td>  
+ </tr>
+ 
+
+<tr>    <td BGCOLOR="#ffffcc"> Show </td>
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Show_Count__c}"/> </td>                 
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Show_Data_Source__c}"/> </td>  
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Date_Show_Updated__c}"/> </td>
+
+        <td BGCOLOR="#ffffcc"> &nbsp; </td> 
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Web_Form_Show__c}"/> </td> 
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Web_Form_Show_Update__c}"/> </td>  
+ </tr>
+ 
+ 
+
+<tr>    <td BGCOLOR="#fafafa"> Swine </td> 
+        <td BGCOLOR="#fafafa"><Apex:outputField value="{!Lead.Swine_Count__c}"/> </td>                 
+        <td BGCOLOR="#fafafa"> <Apex:outputField value="{!Lead.Swine_Data_Source__c}"/> </td>  
+        <td BGCOLOR="#fafafa"><Apex:outputField value="{!Lead.Date_Swine_Updated__c}"/> </td> 
+
+        <td BGCOLOR="#fafafa"> &nbsp; </td>   
+        <td BGCOLOR="#fafafa"> <Apex:outputField value="{!Lead.Web_Form_Swine__c}"/> </td> 
+        <td BGCOLOR="#fafafa"> <Apex:outputField value="{!Lead.Web_Form_Swine_Update__c}"/> </td>  
+ </tr>
+ 
+ <tr>   <td BGCOLOR="#ffffcc"> Bee </td>
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Bee_Colony_Count__c}"/> </td>                 
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Bee_Data_Source__c}"/> </td>  
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Date_Bee_Updated__c}"/> </td>
+
+        <td BGCOLOR="#ffffcc"> &nbsp; </td> 
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Web_Form_Bee__c}"/> </td> 
+        <td BGCOLOR="#ffffcc"> <Apex:outputField value="{!Lead.Web_Form_Bee_Update__c}"/> </td>  
+ </tr>
+ 
+  
+</table>    
+</apex:page>

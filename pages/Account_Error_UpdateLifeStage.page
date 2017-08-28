@@ -1,0 +1,30 @@
+<apex:page standardController="Opportunity" extensions="Account_Error_Page_Controller">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" />
+    <script type="text/javascript">
+
+    function updateValues(){
+        updateOppLife();
+    }
+
+    </script>
+
+    <apex:form >
+        <apex:pageBlock >
+        	<apex:pageBlockTable rendered="{!NOT(ListHasLifeStage) && hasSelectedOpps}" value="{!cur_sOList}" var="o" >
+            	<apex:column headerValue="Opportunity Name">
+                    <apex:outputField value="{!o.Name}" />
+                </apex:column>
+                <apex:column headerValue="Animal Type">
+                    <apex:inputField value="{!o.Species__c}"/>
+                </apex:column>
+                <apex:column headerValue="Lifestage">
+                    <apex:inputField value="{!o.Life_Stage__c}" onchange="updateValues();"/>
+                </apex:column>
+                <apex:column headerValue="Total Head">
+                    <apex:inputField value="{!o.Total_Head__c}"/>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>   
+        <apex:actionFunction name="updateOppLife" action="{!updateOppLifestagesvalues}" /> 
+    </apex:form>
+</apex:page>

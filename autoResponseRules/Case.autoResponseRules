@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AutoResponseRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <autoResponseRule>
+        <fullName>Email2Case Auto-Response</fullName>
+        <active>true</active>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>feedgreatness@purinamills.com</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>feedgreatness@purinamills.com</replyToEmail>
+            <senderEmail>no-reply@landolakes.com</senderEmail>
+            <senderName>Purina Support</senderName>
+            <template>Customer_Operations_SR_Auto_Response/Consumer_Email2CaseResponse</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>GraySummitCS@landolakes.com</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>graysummitcs@landolakes.com</replyToEmail>
+            <senderEmail>no-reply@landolakes.com</senderEmail>
+            <senderName>Purina Support</senderName>
+            <template>Customer_Operations_SR_Auto_Response/Consumer_Email2CaseResponse</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>info@nutrazu.com</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>info@nutrazu.com</replyToEmail>
+            <senderEmail>no-reply@landolakes.com</senderEmail>
+            <senderName>Nutrazu Support</senderName>
+            <template>Customer_Operations_SR_Auto_Response/Consumer_Email2CaseResponse</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>pmiweb@landolakes.com</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>pmiweb@landolakes.com</replyToEmail>
+            <senderEmail>no-reply@landolakes.com</senderEmail>
+            <senderName>PMI Support</senderName>
+            <template>Customer_Operations_SR_Auto_Response/Consumer_Email2CaseResponse</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>purinarewardscoupons@landolakes.com</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>purinarewardscoupons@landolakes.com</replyToEmail>
+            <senderEmail>no-reply@landolakes.com</senderEmail>
+            <senderName>Purina Support</senderName>
+            <template>Customer_Operations_SR_Auto_Response/Consumer_Email2CaseResponse</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>BusinessLink@landolakes.com</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>businesslink@landolakes.com</replyToEmail>
+            <senderEmail>no-reply@landolakes.com</senderEmail>
+            <senderName>Purina Support</senderName>
+            <template>Customer_Operations_SR_Auto_Response/Customer_Care_Business_Link_Email2Case_Response</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>purinacrmsupport@landolakes.com</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>purinacrmsupport@landolakes.com</replyToEmail>
+            <senderEmail>no-reply@landolakes.com</senderEmail>
+            <senderName>Purina Support</senderName>
+            <template>Customer_Operations_SR_Auto_Response/Customer_Care_CRM_Support_Email2Case_Response</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>customercare@landolakes.com</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>customercare@landolakes.com</replyToEmail>
+            <senderEmail>no-reply@landolakes.com</senderEmail>
+            <senderName>Purina Customer Care</senderName>
+            <template>Customer_Operations_SR_Auto_Response/Customer_Care_Email2Case_Response</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>PurinaCustomerCommunity@LandOLakes.com</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>purinacustomercommunity@landolakes.com</replyToEmail>
+            <senderEmail>no-reply@landolakes.com</senderEmail>
+            <senderName>Purina Customer Community Support</senderName>
+            <template>Customer_Operations_SR_Auto_Response/Customer_Care_Business_Link_Email2Case_Response</template>
+        </ruleEntry>
+    </autoResponseRule>
+    <autoResponseRule>
+        <fullName>Send Customer Care response</fullName>
+        <active>false</active>
+    </autoResponseRule>
+</AutoResponseRules>

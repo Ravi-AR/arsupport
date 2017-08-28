@@ -1,0 +1,260 @@
+<apex:page controller="LPDCR_SearchOverviewController" docType="html-5.0" showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" >
+ <apex:form id="form">
+     <apex:composition template="LPDCR_CC_BaseTemplate" >
+         <apex:define name="PageTitle">Global Search</apex:define>
+             <apex:define name="body">
+                 <div class="wrapper">
+                     <div class="equalHgt">
+                         <div class="col-sm-12 pad_all">
+                             <div class="wrapper cc_homepage pagenation_promation">
+                                 <div class="row">
+                                   <div class="col-sm-12 mob_pads">
+                                       <c:LPDCR_SecondaryPageHeader title="Search Results" /> 
+                                   </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 mob_pads">
+                                        <div class="GsBg flt_lft wid100">
+                                            <p class="fnt12">Showing results for <b><apex:outputText value="'{!term}'" /></b></p>
+                                            
+                                            <apex:outputPanel id="pageMessagesPanel">
+                                                <apex:pageMessages />
+                                            </apex:outputPanel>
+                                            
+                                            <apex:outputPanel styleClass="col-sm-11 pad_lft0 pad_rgt0" id="salesResourceSection" layout="block" rendered="{!ISPICKVAL($User.UserType, 'STANDARD')}">
+                                                <h3 class="clr_gry">Sales Resources</h3>
+                                                <apex:outputText value="Searching..." rendered="{!sales_resources == null}" />
+                                                <apex:outputPanel rendered="{!sales_resources != null && sales_resources.size > 0}" >
+                                                    <div class="col-sm-12 pad_lft0 pad_rgt0 pad_top10">
+                                                        <apex:repeat value="{!sales_resources}" var="resource" rows="5">
+                                                           <p>
+                                                               <label class="clr_red mrg_btm0"><apex:outputLink value="{!resource.URLLink}" target="_blank"><apex:outputText value="{!resource.DocumentName}" escape="false" /></apex:outputLink></label>
+                                                               <span class="flt_rgt clr_gry">
+                                                                   <apex:outputText value="{0, date, MMM' 'd', 'yyyy}">
+                                                                       <apex:param value="{!resource.DocumentsLastModified}" /> 
+                                                                   </apex:outputText>
+                                                               </span>
+                                                           </p>
+                                                        </apex:repeat>
+                                                        <p class="btnView"><apex:commandButton action="{!goToSalesResourceSearchResults}" value="View More" styleClass="btn viewMre" id="salesResourceResultsLink" /></p>
+                                                    </div>
+                                                </apex:outputPanel>
+                                                <apex:outputPanel rendered="{!sales_resources != null && sales_resources.size == 0}" >
+                                                    No results found
+                                                </apex:outputPanel>
+                                            </apex:outputPanel>
+                                            
+                                            <apex:outputPanel styleClass="col-sm-11 pad_lft0 pad_rgt0 mrg_top20" id="documentSection" layout="block">
+                                                <h3 class="clr_gry">Documents</h3>
+                                                <apex:outputText value="Searching..." rendered="{!documents == null}" />
+                                                <apex:outputPanel rendered="{!documents != null && documents.size > 0}" >
+                                                    <div class="col-sm-12 pad_lft0 pad_rgt0 pad_top10">
+                                                        <apex:repeat value="{!documents}" var="doc" rows="5">
+                                                           <p>
+                                                               <label class="clr_red mrg_btm0"><apex:outputLink value="{!doc.URLLink}" target="_blank"><apex:outputText value="{!doc.DocumentName}" escape="false" /></apex:outputLink></label>
+                                                               <span class="flt_rgt clr_gry">
+                                                                   <apex:outputText value="{0, date, MMM' 'd', 'yyyy}">
+                                                                       <apex:param value="{!doc.DocumentsLastModified}" /> 
+                                                                   </apex:outputText>
+                                                               </span>
+                                                           </p>
+                                                        </apex:repeat>
+                                                        <p class="btnView"><apex:commandButton action="{!goToDocumentSearchResults}" value="View More" styleClass="btn viewMre" id="documentsResultsLink" /></p>
+                                                    </div>
+                                                </apex:outputPanel>
+                                                <apex:outputPanel rendered="{!documents != null && documents.size == 0}" >
+                                                    No results found
+                                                </apex:outputPanel>
+                                            </apex:outputPanel>
+                                            <!--  
+                                            <apex:outputPanel styleClass="col-sm-11 pad_lft0 pad_rgt0 mrg_top20" id="feedManualSection" layout="block">
+                                                <h3 class="clr_gry">Feed Manuals</h3>
+                                                <apex:outputText value="Searching..." rendered="{!feed_manuals == null}" />
+                                                <apex:outputPanel rendered="{!feed_manuals != null && feed_manuals.size > 0}" >
+                                                    <div class="col-sm-12 pad_lft0 pad_rgt0 pad_top10">
+                                                        <apex:repeat value="{!feed_manuals}" var="manual" rows="5">
+                                                           <p>
+                                                               <label class="clr_red mrg_btm0"><apex:outputLink value="{!manual.URLLink}" target="_blank"><apex:outputText value="{!manual.DocumentName}" escape="false" /></apex:outputLink></label>
+                                                               <span class="flt_rgt clr_gry">
+                                                                   <apex:outputText value="{0, date, MMM' 'd', 'yyyy}">
+                                                                       <apex:param value="{!manual.DocumentsLastModified}" /> 
+                                                                   </apex:outputText>
+                                                               </span>
+                                                           </p>
+                                                        </apex:repeat>
+                                                        <p class="btnView"><apex:commandButton action="{!goToFeedManualSearchResults}" value="View More" styleClass="btn viewMre" id="feedManualResultsLink" /></p>
+                                                    </div>
+                                                </apex:outputPanel>
+                                                <apex:outputPanel rendered="{!feed_manuals != null && feed_manuals.size == 0}" >
+                                                    No results found
+                                                </apex:outputPanel>
+                                            </apex:outputPanel>
+                                            -->
+                                            <apex:outputPanel styleClass="col-sm-11 pad_lft0 pad_rgt0 mrg_top20" id="imageSection" layout="block">
+                                                <h3 class="clr_gry">Image Files</h3>
+                                                <apex:outputText value="Searching..." rendered="{!images == null}" />
+                                                <apex:outputPanel rendered="{!images != null && images.size > 0}" >
+                                                    <div class="col-sm-12 pad_lft0 pad_rgt0 pad_top10">
+                                                        <apex:repeat value="{!images}" var="img" rows="5">
+                                                           <p>
+                                                               <apex:image url="{!img.URLLink}" width="150" height="100" rendered="{!img.IsWebVisibleFile}"/>
+                                                               <apex:image url="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/Image_not_available.png')}" width="150"  rendered="{!!img.IsWebVisibleFile}"/>
+                                                               <label class="clr_red mrg_btm0 pad_lft20"><apex:outputLink value="{!img.URLLink}" target="_blank"><apex:outputText value="{!img.DocumentName}" escape="false" /></apex:outputLink></label>
+                                                               <span class="flt_rgt clr_gry">
+                                                                   <apex:outputText value="{0, date, MMM' 'd', 'yyyy}">
+                                                                       <apex:param value="{!img.DocumentsLastModified}" /> 
+                                                                   </apex:outputText>
+                                                               </span>
+                                                           </p>
+                                                        </apex:repeat>
+                                                        <p class="btnView"><apex:commandButton action="{!goToImageSearchResults}" value="View More" styleClass="btn viewMre" id="imagesResultsLink"  /></p>
+                                                    </div>
+                                                </apex:outputPanel>
+                                                <apex:outputPanel rendered="{!images != null && images.size == 0}" >
+                                                    No results found
+                                                </apex:outputPanel>
+                                            </apex:outputPanel>
+                                            
+                                            <apex:outputPanel styleClass="col-sm-11 pad_lft0 pad_rgt0 mrg_top20" id="promotionSection" layout="block">
+                                                <h3 class="clr_gry">Promotions</h3>
+                                                <apex:outputText value="Searching..." rendered="{!promotions == null}" /> 
+                                                <div class="col-sm-12 pad_lft0 pad_rgt0 pad_top10">
+                                                    <apex:outputPanel rendered="{!promotions != null && promotions.size > 0}" >
+                                                        <apex:repeat value="{!promotions}" var="promotion" rows="5">                                    
+                                                             <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading" id="headingOne" role="tab">
+                                                                        <h4 class="panel-title">
+                                                                            <p aria-controls="123CP" aria-expanded="false" data-parent="#accordion" data-toggle="collapse" href="#{!promotion.PromotionsID}123CP" role="button" class="clrred collapsed">
+                                                                            <a class="wid60 flt_lft clr_blk80 txt_none fnt14"><span class="glyphicon glyphicon-plus pull-left mrg_rgt10"></span>{!promotion.Headline}</a>
+                                                                            <span class="pull-right text-right clrgreay wid40 pad_lft10">
+                                                                                <apex:outputText value="{0,date,MMM dd}">
+                                                                                    <apex:param value="{!promotion.StartDate}" /> 
+                                                                                </apex:outputText>
+                                                                                &nbsp; - &nbsp;
+                                                                                <apex:outputText value="{0,date,MMM dd}">
+                                                                                    <apex:param value="{!promotion.ExpirationDate}" /> 
+                                                                                </apex:outputText>
+                                                                            </span>
+                                                                            </p>
+                                                                            <div class="clear"></div>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div aria-labelledby="headingOne" class="panel-collapse collapse" id="{!promotion.PromotionsID}123CP" role="tabpanel" aria-expanded="false">
+                                                                        <div class="panel-body"> 
+                                                                         <apex:outputText value="{!promotion.WYSIWYG}" escape="false"></apex:outputText> 
+                                                                         
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div><!--  /END container -->
+                                                            <div class="clear"></div>
+                                                        </apex:repeat>
+                                                        <p class="btnView"><apex:commandButton action="{!goToPromotionSearchResults}" value="View More" styleClass="btn viewMre" id="promotionsResultsLink" /></p>
+                                                    </apex:outputPanel>
+                                                    <apex:outputPanel rendered="{!promotions != null && promotions.size == 0}" >
+                                                        No results found
+                                                    </apex:outputPanel>
+                                                </div>
+                                            </apex:outputPanel>
+                                            
+                                            <apex:outputPanel styleClass="col-sm-11 pad_lft0 pad_rgt0 mrg_top20" id="eventSection" layout="block">
+                                                <h3 class="clr_gry">Events</h3>
+                                                <!-- <apex:actionStatus startText="Searching..." id="myEventStatus" />-->
+                                                <apex:outputText value="Searching..." rendered="{!events == null}" />
+                                                
+                                                    <apex:outputPanel id="eventSectionPanel" rendered="{!events != null && events.size > 0}" >
+                                                    <div class="col-sm-12 pad_lft0 pad_rgt0 pad_top10">
+                                                        <apex:repeat value="{!events}" var="event" rows="5">                                    
+                                                            <p><label class="clr_red mrg_btm0"><apex:outputField value="{!event.Name}"/></label> 
+                                                            <span class="flt_rgt clr_gry"><apex:outputField value="{!event.Event_Date_Range__c}" /></span></p>
+                                                            <p class="col-sm-10 pad_lft0 txt_jfy">
+                                                                <apex:outputField value="{!event.Short_Description__c}" />                                                        
+                                                            </p>
+                                                            <div class="clear"></div>
+                                                        </apex:repeat>
+                                                        <p class="btnView"><apex:commandButton action="{!goToEventSearchResults}" value="View More" styleClass="btn viewMre" id="eventsResultsBtn" /></p>
+                                                      </div>  
+                                                    </apex:outputPanel>
+                                                    
+                                                    <apex:outputPanel rendered="{!events != null && events.size == 0}" >
+                                                        No results found.
+                                                    </apex:outputPanel>
+                                                
+                                            </apex:outputPanel>
+                                             
+                                            <apex:outputPanel styleClass="col-sm-11 pad_lft0 pad_rgt0 mrg_top20" id="videoSection" layout="block">
+                                                <h3 class="clr_gry">Videos</h3>
+                                                <apex:outputText value="Searching..." rendered="{!videos == null}" />
+                                                <div class="col-sm-12 pad_lft0 pad_rgt0 pad_top10">
+                                                    <apex:outputPanel rendered="{!videos != null && videos.size > 0}" >
+                                                        <apex:repeat value="{!videos}" var="vid" rows="5">                                    
+                                                            <p>
+                                                                <label class="clr_red mrg_btm0"><apex:outputLink value="{!vid.URLLink}" target="_blank"><apex:outputText value="{!vid.DocumentName}" escape="false" /></apex:outputLink></label>
+                                                                <span class="flt_rgt clr_gry">
+                                                                    <apex:outputText value="{0, date, MMM' 'd', 'yyyy}">
+                                                                        <apex:param value="{!vid.DocumentsLastModified}" /> 
+                                                                    </apex:outputText>
+                                                                </span>
+                                                            </p>
+                                                        </apex:repeat>
+                                                        <p class="btnView"><apex:commandButton action="{!goToVideosSearchResults}" value="View More" styleClass="btn viewMre" id="videosResultsLink" /></p>
+                                                    </apex:outputPanel>
+                                                    <apex:outputPanel rendered="{!videos != null && videos.size == 0}" >
+                                                        No results found.
+                                                    </apex:outputPanel>
+                                                </div>
+                                            </apex:outputPanel>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                             </div>
+                         </div>
+                    </div>
+                 </div>
+             </apex:define>
+     </apex:composition>
+
+     <apex:actionFunction action="{!searchEvents}" name="doEventSearch"  rerender="eventSection,eventsResultsBtn,eventSectionPanel,pageMessagesPanel" />
+     <apex:actionFunction action="{!searchContent}" oncomplete="oncompl()" name="doContentSearch" rerender="salesResourceSection,documentSection,feedManualSection,imageSection,promotionSection,videoSection,pageMessagesPanel" />
+     
+ </apex:form>
+     
+   <script>
+   $(document).ready(function () {
+   
+        doContentSearch();
+        
+    });
+        
+    function oncompl(){
+         doEventSearch(); 
+         
+        $('.collapse').on('shown.bs.collapse', function(){
+      
+        $(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+        }).on('hidden.bs.collapse', function(){
+        $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+        });
+    }
+    
+   
+    </script>
+    <script type="text/javascript">
+  function GetselectedAccount(){
+                        //alert('$value--'+$("input[name='account']:checked").attr('value'));
+                        var selectedAccId = $("input[name='account']:checked").attr('value');
+                        var term= $("#searchterm").val();
+                        //alert(selectedAccId);
+                        
+                        var urlString = '{!$Site.BaseUrl}/';
+                        window.location = urlString+'LPDCR_SearchOverview?term={!term}&selectedAccountId='+selectedAccId;//urlString+'LPDCR_SearchOverview?selectedAccountId='+selectedAccId'&term='+term; 
+                        
+                        //changeAccount($("input[name='account']:checked").attr('value'));
+                    }
+    </script> 
+     <style>.media{background:url({!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_Header_SearchRes)}); width:100%; height:133px; background-repeat: no-repeat;
+    background-size: contain;}</style>               
+</apex:page>

@@ -1,0 +1,340 @@
+<!--<Component Name: cc_oo_OrderItems> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Saloni Kale                                9/21/2016                                    US:OO-196 Diabling E1 description on Order Confirmation and
+                                                                                       Order Review page
+----------------------------------------------------------------------------------------------------------------------
+-->
+
+<apex:component allowDML="true" controller="cc_oo_OrderItemsController">
+ <script id="OO-OrderItems-Desktop" type="text/template">
+        <div id="cart_items_container orderdetailSection" class="">
+            <div class="cart_item_list">
+                {{#each this.orderItems}}
+                    <div class="cart_item {{this.itemID}}">
+                        <div class="price">
+                            {{#ifNotEquals ../isConfirmation true}} 
+                                {{pageLabelMap 'MyOrdersInc_Status'}}: {{pageLabelMap orderLineStatus}}<br/> 
+                            {{/ifNotEquals}}
+                            {{#ifNotEquals this.itemType 'Coupon'}}{{pageLabelMap 'CartInc_Qty'}}: {{this.quantity}}<br/>{{/ifNotEquals}}
+                            {{#if (isPreBook)}} <!--OO-244 -->
+                            <p class="price">
+                                {{#ifNotEquals this.itemType 'Coupon'}}
+                                {{#if this.price}}
+                                    {{pageLabelMap 'CartInc_Price'}}: {{{price this.price ../../../currencyCode}}}<br/>
+                                {{/if}}
+                                {{#if this.absoluteDiscount}}
+                                    {{#ifGreater this.absoluteDiscount 0}}
+                                        <span>{{pageLabelMap 'Checkout_YouSave'}}: {{{price this.absoluteDiscount ../../../../currencyCode}}}</span><br/>
+                                    {{/ifGreater}}
+                                    {{#ifLessThan this.absoluteDiscount 0}}
+                                        <span>{{pageLabelMap 'CartInc_Surcharge'}}: {{{priceAbs this.absoluteDiscount ../../../../currencyCode}}}</span><br/>
+                                    {{/ifLessThan}}
+                                {{/if}}
+                                {{/ifNotEquals}}
+                                <strong>{{pageLabelMap 'CartInc_Total'}}: {{{price this.SubAmount ../currencyCode}}}</strong>
+                            </p>
+                            {{/if}}<!--OO-244 -->
+                        </div>
+                        {{#ifNotEquals this.itemType 'Coupon'}}
+                        <div class="cart_item_viewport">
+                        {{#if isPreBook}}
+                            <a href="#" class="prodLink" data-id="{{this.mockProduct.sku}}">
+                                {{{displayImage this.mediaWrapper 'orderDetail'}}}
+                            </a>
+                        {{else}}
+                            {{{displayImage this.mediaWrapper 'orderDetail'}}}
+                        {{/if}}
+                        </div>
+                        {{{ productName this.mockProduct }}}
+                        <div class="oo_E2Description" data-id="{{this.mockProduct.sku}}">       
+                        </div>
+                        {{#if this.showSubProdTerm}}
+                            <p>
+                                <span>
+                                    {{insertTokens this.orderDisplayName this.displayName (price this.price) (price this.SubAmount) (price this.recurringPrice) (price this.recurringPriceSubAmount) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.installmentFrequencyUOM) this.orderFrequency this.installmentFrequency this.installmentCount this.orderCount}}
+                                </span>
+                            </p>
+                        {{/if}}  
+                        <p><span><strong>{{pageLabelMap 'Checkout_SKU'}}:</strong> {{this.mockProduct.sku}}</span></p>
+                        {{#if this.isSubscription}}
+                            <p class="subscriptionSummary">{{subscriptionSummary 'Order_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                            <p class="subscriptionNextDate">{{pageLabelMap 'Order_Subscription_Next_Payment'}} {{this.nextSubscriptionDateStr}}</p>
+                            {{#if this.isLimitedSubscription}}
+                                <p class="subscriptionSummary">{{pageLabelMap 'Order_Subscription_End_Date'}} {{this.subscriptionEndDateStr}}</p>
+                            {{/if}}
+                        {{/if}}
+                        {{#each minorLines}}
+                            {{#if this.isSubscription}}
+                                <p class="subscriptionSummary">{{subscriptionSummary 'Order_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                                <p class="subscriptionNextDate">{{pageLabelMap 'Order_Subscription_Next_Payment'}} {{this.nextSubscriptionDateStr}}</p>
+                                {{#if this.isLimitedSubscription}}
+                                    <p class="subscriptionEndDate">{{pageLabelMap 'Order_Subscription_End_Date'}} {{this.subscriptionEndDateStr}}</p>
+                                {{/if}}
+                            {{/if}}
+                        {{/each}}
+                        {{#if this.minorLines }}
+                            <p><a href="#included_items{{this.itemID}}" id="includedItemsLink" data-toggle="modal" data-id="{{this.itemID}}">{{pageLabelMap 'CheckOut_IncludedItems'}}</a></p>
+                            {{> includedDisplay}}
+                        {{/if}}
+                        {{/ifNotEquals}}
+                        {{#ifEquals this.itemType 'Coupon'}}
+                        <p class="item_title coupon_title">
+                            {{{this.mockProduct.name}}}
+                        </p>    
+                        {{/ifEquals}}
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class="clear"></div>
+    </script>
+    
+    <!-- Disabling E1 description for Mobile view -->
+    <script id="OO-OrderDetails-View-Mobile" type="text/template">
+        <div class="checkout_container">
+            <h2 class="title">{{pageLabelMap 'OrderConfirmation_Title'}}</h2>
+            <div class="checkout_detail">
+                <div class="checkout_detail_item">
+                    {{#if this.isConfirmation}}
+                        <p class="basic_large">{{pageLabelMap 'OrderConfirmation_PlacedOrder' this.name this.orderDateStr}}</p>
+                    {{/if}}
+                    <div id="accordion" class="accordion clear">
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a href="#collapseOne" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">{{pageLabelMap 'OrderInformation'}}</a>
+                            </div>
+                            <div class="accordion-body in collapse" id="collapseOne" style="height: auto;">
+                                <div class="accordion-inner">
+    
+                                    <!--<p class="basic"><strong>{{pageLabelMap 'OrderSummaryNew_OrderNumber'}}:</strong> {{this.name}}</p>-->
+                                    <p class="basic"><strong>{{pageLabelMap 'OrderView_PrebookCommitmentNumber'}}:</strong> {{this.name}}</p>
+                                    {{#ifDisplay 'OD.DsplExtOrderNumber'}} <p class="basic"><strong>{{pageLabelMap 'ExternalOrderID'}}:</strong> {{this.externalOrderId}}</p> {{/ifDisplay}}
+                                    <!--<p class="basic"><strong>{{pageLabelMap 'MyOrdersInc_OrderDate'}}:</strong> {{this.orderDateStr}}</p>-->
+                                    <p class="basic"><strong>{{pageLabelMap 'MyOrdersInc_Status'}}:</strong> {{pageLabelMap this.status}}</p>
+                                </div>
+                            </div>                  
+                        </div>
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a href="#collapseTwo" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">{{pageLabelMap 'UserInformation'}}</a>
+                            </div>
+                            <div class="accordion-body in collapse" id="collapseTwo" style="height: auto;">
+                                <div class="accordion-inner">                      
+                                    <p class="basic"><strong>{{pageLabelMap 'CheckOut_BuyerInformation'}}</strong><br>
+                                        {{this.buyerFirstName}} {{this.buyerLastName}}<br>
+                                        {{this.buyerPhone}}<br>
+                                        {{this.buyerEmail}}
+                                    </p>
+                                    <p class="basic_half"><strong>{{pageLabelMap 'CheckOut_BillingAddress'}}</strong><br/>
+                                        {{> addressDisplay this.billingAddress}}
+                                    </p>
+                                    <p class="basic_half"><strong>{{pageLabelMap 'CheckOut_ShippingAddress'}}</strong><br/>
+                                        {{> addressDisplay this.shippingAddress}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div> 
+
+                       <!-- <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a href="#collapseThree" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">{{pageLabelMap 'ShippingPaymentInformation'}}</a>
+                            </div>
+                            <div class="accordion-body in collapse" id="collapseThree" style="height: auto;">
+                                <div class="accordion-inner">                      
+                                    <p class="basic">
+                                        <strong>{{pageLabelMap 'CheckOut_ShippingInformation'}}</strong><br/>
+                                        {{#if this.shippingMethod}}
+                                            {{pageLabelMap 'CheckOut_ShippingMethod'}}: {{this.shippingMethod}}<br/>
+                                        {{/if}}
+                                        {{#if this.shippingInst}}
+                                            {{pageLabelMap 'CheckOut_ShippingNotes'}}: {{this.shippingInst}}<br/>
+                                        {{/if}}
+                                        {{#if this.requestedDate}}
+                                            {{pageLabelMap 'Checkout_RequestedDeliveryDt'}}: {{this.requestedDateStr}}<br/>
+                                        {{/if}}
+                                    </p>                   
+                                    <p class="basic"><strong>{{pageLabelMap 'CheckOut_PaymentInformationLeg'}}</strong><br/>
+                                        {{#each this.payments}}
+                                            {{#ifEquals paymentMethod "Credit Card"}}
+                                                {{cardType}} {{pageLabelMap 'CheckOut_CCCardNumber'}} #: {{cardNumber}}, {{pageLabelMap 'CheckOut_CCExpDate'}}:{{expMonth}}/{{expYear}}
+                                            {{else}}
+                                                {{pageLabelMap paymentMethod}}: {{accountNumber}}
+                                            {{/ifEquals}}
+                                            <br/>
+                                        {{/each}}-->
+                                        <!--<apex:outputPanel layout="none" rendered="{!widgetConfiguration[LOWER('CO.NewOrder')]}">
+                                          {{#each this.transactionPayments}}
+                                              {{pageLabelMapMultiString 'PaymentDisplay_' this.accountType this.accountType this.accountNumber this.subAccountNumber (pageLabelMapMultiString 'PaymentType_' this.paymentType) (pageLabelMapMultiString 'PaymentExpMonth_' this.expirationMonth) (pageLabelMap this.expirationYear)}}
+                                          {{/each}}
+                                       </apex:outputPanel>-->
+                                   <!-- </p>      
+                                    {{#if this.hasCoupon}}
+                                        <p class=" basic coupon_section"><strong>{{pageLabelMap 'CartInc_AppliedCoupon'}}</strong><br/>{{this.couponName}}</p>
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </div>-->
+
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                            <a href="#collapseFour" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">{{pageLabelMap 'CartDetails'}}</a>
+                        </div>
+                        <div class="accordion-body in collapse" id="collapseFour" style="height: auto;">
+                            <div class="accordion-inner">                      
+                                {{#each this.orderItems}}
+                                    <div class="cart_review_1_row">
+                                        <div class="cart_review_1_row_item">
+                                            {{#ifNotEquals this.itemType 'Coupon'}}                             
+                                            <!--<p><a href="#" class="prodLink" data-id="{{this.mockProduct.sku}}">{{{displayProductName 'Aggregate_Display' this.translatedParentProductName this.translatedProductName }}}</a></p>-->
+                                            {{{ productName this.mockProduct }}}
+                                            <div class="oo_E2Description" data-id="{{this.mockProduct.sku}}">       
+                                            </div>
+                                            {{#if this.showSubProdTerm}}
+                                                <p><label class="prodLink">{{insertTokens this.orderDisplayName this.displayName (price this.price) (price this.SubAmount) (price this.price) (price this.SubAmount) (price this.recurringPrice) (price this.recurringPriceSubAmount) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.installmentFrequencyUOM) this.orderFrequency this.installmentFrequency this.installmentCount this.orderCount}}</span></label></p>
+                                            {{/if}}
+                                            <p>{{pageLabelMap 'Checkout_SKU'}}: {{this.mockProduct.sku}}</p>
+                                            <p>{{pageLabelMap 'ProductDetails_UnitOfMeasure'}}: {{pageLabelPrefixMap 'UOM_' this.mockProduct.UnitOfMeasure}}</p>
+                                            {{#if this.isSubscription}}
+                                                <p class="subscriptionSummary">{{subscriptionSummary 'Order_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                                                 <p class="subscriptionNextDate">{{pageLabelMap 'Order_Subscription_Next_Payment'}} {{this.nextSubscriptionDateStr}}</p>
+                                                {{#if this.isLimitedSubscription}}
+                                                    <p class="subscriptionSummary">{{pageLabelMap 'Order_Subscription_End_Date'}} {{this.subscriptionEndDateStr}}</p>
+                                                {{/if}}
+                                            {{/if}}
+                                            {{#each minorLines}}
+                                                {{#if this.isSubscription}}
+                                                    <p class="subscriptionSummary">{{subscriptionSummary 'Order_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                                                    <p class="subscriptionNextDate">{{pageLabelMap 'Order_Subscription_Next_Payment'}} {{this.nextSubscriptionDateStr}}</p>
+                                                    {{#if this.isLimitedSubscription}}
+                                                        <p class="subscriptionEndDate">{{pageLabelMap 'Order_Subscription_End_Date'}} {{this.subscriptionEndDateStr}}</p>
+                                                    {{/if}}
+                                                {{/if}}
+                                            {{/each}}
+                                            {{#if this.minorLines }}
+                                                <p><a href="#included_items{{this.itemID}}" id="includedItemsLink" data-toggle="modal" data-id="{{this.itemID}}">{{pageLabelMap 'CheckOut_IncludedItems'}}</a></p>
+                                                {{> includedDisplay}}
+                                            {{/if}}
+                                            {{/ifNotEquals}}
+                                            {{#ifEquals this.itemType 'Coupon'}}
+                                            <p>{{{this.mockProduct.name}}}</p>
+                                            <div class="oo_E2Description" data-id="{{this.mockProduct.sku}}">       
+                                            </div>
+                                            {{/ifEquals}}
+                                            <div class="cart_figures">
+                                                {{#if isPreBook}}
+                                                <div class="section1">
+                                                    {{#ifNotEquals this.itemType 'Coupon'}}{{pageLabelMap 'CartInc_Price'}}:{{/ifNotEquals}}
+                                                    {{#ifEquals this.itemType 'Coupon'}}&nbsp;{{/ifEquals}}
+                                                </div>
+                                                {{/if}}
+                                                <div class="section2">
+                                                    {{#ifNotEquals this.itemType 'Coupon'}}{{pageLabelMap 'Qty'}}:{{/ifNotEquals}}
+                                                    {{#ifEquals this.itemType 'Coupon'}}&nbsp;{{/ifEquals}}
+                                                </div>
+                                                {{#if isPreBook}}
+                                                <div class="section3">{{pageLabelMap 'CartInc_Total'}}:</div>
+                                                {{/if}}
+                                                {{#if isPreBook}}
+                                                <div class="section1">
+                                                    {{#ifNotEquals this.itemType 'Coupon'}}
+                                                        {{#if price}}
+                                                            {{{price this.price ../../currencyCode}}}
+                                                        {{else}}
+                                                            &nbsp;
+                                                        {{/if}}
+                                                    {{/ifNotEquals}}
+                                                    {{#ifEquals this.itemType 'Coupon'}}&nbsp;{{/ifEquals}}
+                                                </div>
+                                                {{/if}}
+                                                <div class="section2">
+                                                {{#ifNotEquals this.itemType 'Coupon'}}{{this.quantity}}{{/ifNotEquals}}
+                                                {{#ifEquals this.itemType 'Coupon'}}&nbsp;{{/ifEquals}}
+                                                </div>
+                                                {{#if isPreBook}}
+                                                <div class="section3 totalAmount">
+                                                    <strong class="price">{{{price this.itemTotal ../currencyCode}}}</strong>
+                                                </div>
+                                                {{/if}}
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{/each}}
+                                {{> totalsSection}}                      
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    
+    <script type="text/javascript">
+    jQuery(function($) {
+        
+        CCRZ.uiProperties.OrderDetailView.partial.orderItemsDesktop = '#OO-OrderItems-Desktop';
+        CCRZ.uiProperties.OrderDetailView.phone.tmpl = 'OO-OrderDetails-View-Mobile';
+        Handlebars.registerPartial("orderItemsDesktop", $(CCRZ.uiProperties.OrderDetailView.partial.orderItemsDesktop).html()); 
+        
+        // Creating product list data
+                var productListData = CCRZ.plistData;
+                console.log('productListData -->' + productListData );
+                var productIds = [];
+                // Adding the product Ids
+                if(productListData){
+                    $.each( productListData.jsonProductEntryData, function( index, value ){
+                        productIds.push(value.sfid);
+                    });
+                }
+                console.log('productIds-->' + productIds);
+                var targetDiv = $('#realTimePricing');
+                var remoteData;
+                // Remote Invocation function call and calling the controller and method
+                callProducts = function(){
+                var remoteActionCallForProducts = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_OrderItemsController'});
+                    remoteActionCallForProducts.invokeCtx(
+                                'getProductsDetails',
+                                productIds,
+                                function(resp){
+                                    if(resp && resp.data){
+                                        console.log('resp.success-->'+ resp.success);
+                                        if(resp.success){
+                                            remoteData = resp.data;
+                                            console.log('resp data: ' + resp.data);
+                                            /*var temp = resp.data['0041943'];
+                                            console.log('temp--->' + temp);*/
+                                            // Adding the long description on the pop up window
+                                            $('.oo_longDesc').each( function(){
+                                                var productSKU = $(this).attr('data-id');
+                                                //alert('Product SKU: '+productSKU);
+                                                //alert('Resp data: '+remoteData[productSKU].ccrz__LongDesc__c);
+                                                var productLongDescription = remoteData[productSKU].ccrz__LongDesc__c;
+                                                console.log('--->' + productLongDescription);
+                                                // Showing the value of long Description on the pop up window
+                                                $(this).html(productLongDescription);
+                                            });
+                                            // Adding E2 dexcription
+                                            $('.oo_E2Description').each( function(){
+                                                var productSKU = $(this).attr('data-id');
+                                                //var productLongDescription = resp.data[productSKU];
+                                                alert('Resp data: '+remoteData[productSKU].cc_oo_Second_Description__c);
+                                                var E2Description = remoteData[productSKU].cc_oo_Second_Description__c;
+                                                console.log('--->' + E2Description);
+                                                // Showing the value of long Description on the pop up window
+                                                //$(this).html(productLongDescription);
+                                                $(this).html(E2Description);
+                                            });
+                                        }
+                                    }
+                                },
+                                {buffer:false,escape:false,nmsp:false}
+                    );
+                }
+                // Calling the function
+                callProducts();
+          });
+    </script>
+</apex:component>

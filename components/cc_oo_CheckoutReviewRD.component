@@ -1,0 +1,1085 @@
+<!--<Component Name: cc_oo_CheckoutReviewRD> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Piyali                                                                                The component is to remove the edit button for the Billing Address and Shipping Address on the Order Review Screen
+Shrivaths                                9/19/2016                                    US:OO - 244 Hide prices for Prebook flow
+Samruddhi                                9/29/2016                                    OO-211 Added email text box and submit button on review page
+Saloni                                   10/3/2016                                    OO-207 Added the code for linking from Order review to order confirmation page
+Rajesh W                                 10/18/2016                                   OO-50 MAke the Fields USer Info, Address Info read only. Use default header image for OO flow
+-->
+<apex:component allowDML="true" controller="cc_oo_OrderItemsController">
+  <script id="cc_oo_Review-Desktop" type="text/template">
+        <form enctype="multipart/form-data" class="margin_form cc_OrderReview_new">
+           <!-- <div class="alert alert-error global-error messagingSection-Error" style="display: none"></div>-->
+            <div class="alert alert-info global-info messagingSection-Info" style="display: none"></div>
+            <div class="alert alert-warning messagingSection-Warning" style="display: none"></div>
+            <fieldset class="grey">
+                <legend class="grey">{{pageLabelMap 'CheckOut_GeneralInformation'}}</legend>
+                <ul class="order_review">
+                    <li>
+                        <p>
+                            <strong>{{pageLabelMap 'CheckOut_BuyerInformation'}}</strong>
+                            <br/>
+                            <!--{{#if (isNotPreBook)}}
+                             <a id="edit_UserInfo" href="#edit_UserInfo" class="editAddressInfo">{{pageLabelMap 'CheckOut_edit'}}</a><br/>
+
+                            {{/if}}-->
+                            {{this.buyerFirstName}} {{this.buyerLastName}}<br/>
+                            {{#if this.buyerPhone}}
+                                {{this.buyerPhone}}<br/>
+                            {{/if}}
+                            {{this.buyerEmail}}
+                        </p>
+                        <!--US:OO-312 Hide Shipping information-->
+                        {{#if (isNotPreBook)}}
+                         <p>
+                        
+                            <strong>{{pageLabelMap 'Shipping Information'}}</strong>
+                            <!-- <a id="edit_Shipping" href="#edit_Shipping" class="editShippingInfo">{{pageLabelMap 'CheckOut_edit'}}</a>       --> 
+                            <br/>                                           
+                            {{#if this.shippingMethod}}
+                                <strong> {{pageLabelMap 'CheckOut_ShippingMethod'}}:&nbsp;</strong>
+                                <span>{{{shippingOptions this.shippingMethod}}}&nbsp;</span>
+                            {{/if}}
+                            <a id="edit_Shipping" href="#edit_Shipping" class="editShippingInfo processBack">{{pageLabelMap 'CheckOut_edit'}}</a><br/>
+                            
+                            <!--{{#if this.shippingInst}}
+                                {{pageLabelMap 'CheckOut_ShippingNotes'}}: {{this.shippingInst}}<br/>
+                            {{/if}}-->
+                            <!-- US:1643 Enabling EDIT for shopping cart in order review page. -->
+                            <!-- US:1643 Enabling EDIT for shopping cart in order review page. -->
+                            {{#if this.requestedDateStr}}
+                               {{#ifEquals (shippingOptions this.shippingMethod) 'Delivery'}}
+
+                                    <strong>{{pageLabelMap 'Checkout_RequestedDeliveryDt'}}: </strong>
+                                    <span>{{this.requestedDateStr}}&nbsp;</span> 
+                                    <a id="edit_Shipping_Date" class="editShippingDate lipstick">{{pageLabelMap 'CheckOut_edit'}}</a><br/>
+                                {{else}}
+                                    <strong>{{pageLabelMap 'PickupDate'}}: </strong>
+                                    <span>{{this.requestedDateStr}}&nbsp;<span>
+                                    <a id="edit_Shipping_Date" class="editShippingDate lipstick">{{pageLabelMap 'CheckOut_edit'}}</a><br/>
+                                    
+                                    <span class="pickupTime hide">
+                                        <strong>{{pageLabelMap 'PickupTime'}}: </strong>
+                                        <span class="pickupTime-value">{{this.pickupTime}}&nbsp;</span>
+                                        <a id="edit_Shipping" href="#edit_Shipping" class="editShippingInfo processBack lipstick">{{pageLabelMap 'CheckOut_edit'}}</a>
+                                    </span>
+                                    
+                                {{/ifEquals}}
+                                <div class="span8 pull-left no-margin-left oo_deliveryInstruction hide">
+                                      <strong class="pull-left">{{pageLabelMap 'Delivery Instructions'}}:&nbsp;</strong><span class="pull-left oo_deliveryInstructionValue"></span>
+                                </div>
+                                <div class="span8 pull-left no-margin-left oo_comments hide">
+                                    <strong class="pull-left">{{pageLabelMap 'Comments'}}:&nbsp;</strong><span class="pull-left oo_commentsValue"></span>
+                                </div>
+                            {{/if}}            
+                                
+                        </p>
+                       {{/if}}
+                    </li>
+                    <li>
+                        <p>
+                            <strong>{{pageLabelMap 'CheckOut_BillingAddress'}}</strong>
+                            <!-- Commenting the edit link to disable user from editing the billing address-->
+                            <!-- <a id="edit_UserInfo" href="#edit_UserInfo" class="editAddressInfo">{{pageLabelMap 'CheckOut_edit'}}</a> -->
+                            <br/>
+                            {{> addressDisplay this.billingAddress}}
+                        </p>
+                        <div class="oo_PONumber hide"><strong>{{pageLabelMap 'PO Number'}}:&nbsp;</strong><span class="oo_PONumberValue"></span></div>
+                        {{#if this.hasCoupon}}
+                            <p class="coupon_section"><strong>{{pageLabelMap 'CartInc_AppliedCoupon'}}</strong><br/>{{this.couponName}}</p>
+                        {{/if}}
+                    </li>
+                    <li>
+                        <p class="ship-address">
+                            <strong>{{pageLabelMap 'CheckOut_OrderReviewShippingAddress'}}</strong> 
+                            <!-- Commenting the edit link to disable user from editing the shipping address-->
+                            {{#if (isNotPreBook)}}
+                               <!-- <a id="edit_UserInfo" href="#edit_UserInfo" class="editAddressInfo">{{pageLabelMap 'CheckOut_edit'}}</a> -->                       
+
+                            {{/if}}
+                            <br/>
+                            {{> addressDisplay this.shippingAddress}}
+                        </p>
+                    </li>
+                    <div class="reviewPaymentSection pull-left clear">
+                        <span class="payment-terms"><strong>{{pageLabelMap 'CheckOut_PaymentTerms'}}:</strong></span>{!paymentTerms}
+                    </div>
+                </ul>
+                {{#unless (isNotPreBook) }}
+                    <div class="alt-email clear">
+                        <button class="btn btn-link" type="button" id="add-alt-email"><i class="fa fa-lg fa-plus"></i>Add Alternate Email Address</button>
+                        <div class="alt-email-container">
+                            <input type="text" id="alt-email" placeholder="Add Alternate Email Address" autocomplete="off"></input>
+                            <br>
+                            <button class="btn btn-secondary disabled" id="add-alt-email-btn" disabled type="button">Add Alternate Email</button>
+                        </div>
+                        <div id="alt-email-confirm">
+                            <i class="fa fa-lg fa-check-circle-o"></i>
+                            <span id="alt-email-ack"></span>
+                        </div>
+                    </div>
+                {{/unless}}
+            </fieldset>
+            <div class="reviewCartSection"></div>
+            <div class="clear"></div>
+            <!-- 1738 -->
+            <p class="link_button larger bold">
+                {{#if (isNotPreBook)}} 
+                    <input type="checkbox" class="terms-condition" value="T&C"/>
+                    {{pageLabelMap 'Term_&_Conditions1'}} 
+                    <strong><a id="terms-conditions-link">{{pageLabelMap 'Term_&_Conditions'}}</a></strong><br/>
+                    
+                    <span class="inline-error hide err_msg lipstick">{{pageLabelMap 'Error_msg_T&C'}}</span> 
+                    <br/><br/>
+                    <button class="btn-secondary processBack" type="button">{{pageLabelMap 'Back'}}</button>
+                    <button class="btn-primary right proceed custom-processReview" type="button">{{pageLabelMap 'CheckOut_MobileConfirmSubmit'}}</button>
+                {{ else }}
+                    <!-- US:OO-212 Add 'Back to Community portal' link -->
+                    <!--<input class="button commPortalLink" type="button" onclick="location.href='{!commPortalLink}';" value="{{pageLabelMap 'CheckOut_CommPortalLink'}}"  />--> 
+                
+                    <!--<input class="button right proceed processReview" type="button" value="{{pageLabelMap 'Confirm Order'}}" alt="{{pageLabelMap 'CheckOut_AcceptAndProceed'}}" />-->
+                    <button class="btn btn-primary right proceed custom-processReview" type="button" value="{{pageLabelMap 'CheckOut_ConfirmPreebook'}}" alt="{{pageLabelMap 'CheckOut_AcceptAndProceed'}}">{{pageLabelMap 'CheckOut_ConfirmPreebook'}}</button>
+                        
+                {{/if}}
+                <br/>
+            </p>
+            <div class="terms-conditions-link-selector"></div>
+        </form>
+    </script>
+    
+    <script id="cc_oo_Review-Mobile" type="text/template">
+        <div class="checkout_container">
+            <!--<div class="alert alert-error global-error messagingSection-Error" style="display: none"></div> -->
+            <div class="alert alert-info global-info messagingSection-Info" style="display: none"></div>
+            <div class="alert alert-warning messagingSection-Warning" style="display: none"></div>
+            {{#if (isNotPreBook)}}
+                <h2 class="title">{{pageLabelMap 'CheckOut_ReviewStep'}}</h2>
+            {{ else }}
+                <h2 class="title">{{pageLabelMap 'CheckOut_PrebookReview'}}</h2>
+            {{/if}}
+            <div class="checkout_detail">
+                <div class="checkout_detail_item">
+                    <div class="accordion clear" id="accordion">
+
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapseOne">{{pageLabelMap 'UserInformation'}}</a>
+                            </div>
+                            <div class="accordion-body in collapse" id="collapseOne">
+                                <div class="accordion-inner">
+                                    <p class="basic">
+                                        <strong>{{pageLabelMap 'CheckOut_BuyerInformation'}}</strong>
+                                        <!--{{#if (isNotPreBook)}}
+                                            <a id="edit_UserInfo" href="#edit_UserInfo" class="editAddressInfo lipstick">{{pageLabelMap 'CheckOut_edit'}}</a>
+                                         {{/if}}-->
+                                        <br/>
+                                        {{this.buyerFirstName}} {{this.buyerLastName}}<br/>
+                                        {{#if this.buyerPhone}}
+                                            {{this.buyerPhone}}<br/>
+                                        {{/if}}
+                                        {{this.buyerEmail}}
+                                    </p>
+                                    <p class="basic_half">
+                                        <strong>{{pageLabelMap 'CheckOut_BillingAddress'}}</strong>
+                                        <!-- Commenting the edit link to disable user from editing the billing address-->
+                                        <!-- <a id="edit_UserInfo" href="#edit_UserInfo" class="editAddressInfo">{{pageLabelMap 'CheckOut_edit'}}</a> -->
+                                        <br/>
+                                        {{> addressDisplay this.billingAddress}}
+                                    </p>
+                                    <p class="basic_half ship-address">
+                                        <strong>{{pageLabelMap 'CheckOut_OrderReviewShippingAddress'}}</strong>
+                                        <!-- Commenting the edit link to disable user from editing the billing address-->
+                                        <!-- <a id="edit_UserInfo" href="#edit_UserInfo" class="editAddressInfo">{{pageLabelMap 'CheckOut_edit'}}</a> -->
+                                        <br/>
+                                        {{> addressDisplay this.shippingAddress}}
+                                    </p>
+                                    {{#unless (isNotPreBook) }}
+                                        <p class="clear alt-email">
+                                            <button class="btn btn-link" type="button" id="add-alt-email"><i class="fa fa-lg fa-plus"></i>Add Alternate Email Address</button>
+                                            <div class="alt-email-container">
+                                                <input type="text" id="alt-email" placeholder="Add Alternate Email Address" autocomplete="off"></input>
+                                                <br>
+                                                <button class="btn btn-secondary disabled" id="add-alt-email-btn" disabled>Add Alternate Email</button>
+                                            </div>
+                                            <div id="alt-email-confirm">
+                                                <i class="fa fa-lg fa-check-circle-o"></i>
+                                                <span id="alt-email-ack"></span>
+                                            </div>
+                                        </p>
+                                    {{/unless}}
+                                </div>
+                                <div class="reviewPaymentSection pull-left">
+                                    <span class="payment-terms"><strong>{{pageLabelMap 'CheckOut_PaymentTerms'}}:</strong></span>{!paymentTerms}
+                                    <div class="oo_PONumber hide"><strong>{{pageLabelMap 'PO Number'}}: </strong><span class="oo_PONumberValue"></span></div>
+                                </div>
+                            </div>  
+                        </div>
+                        <!--US:OO-312 Hide Shipping information-->
+                        
+                        {{#if (isNotPreBook)}}
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                               <a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">{{pageLabelMap 'Shipping Information'}}</a>
+                            </div>
+                            <div class="accordion-body in collapse" id="collapseTwo">
+                                <div class="accordion-inner">
+                                    <p class="basic">
+                                            
+                                        {{#if this.shippingMethod}}
+                                            <strong>{{pageLabelMap 'CheckOut_ShippingMethod'}}:&nbsp;</strong>
+                                             <!--{{this.shippingMethod}}--> {{{shippingOptions this.shippingMethod}}}
+                                            <a id="edit_Shipping" href="#edit_Shipping" class="editShippingInfo processBack lipstick">{{pageLabelMap 'CheckOut_edit'}}</a><br/>
+                                        {{/if}} 
+                                        
+                                        <!--{{#if this.shippingInst}}
+                                            <strong>{{pageLabelMap 'CheckOut_ShippingNotes'}}</strong><br/>
+                                            {{this.shippingInst}}<br/>
+                                        {{/if}}-->
+                                        {{#if this.this.requestedDate}}
+                                            
+                                            {{#ifEquals (shippingOptions this.shippingMethod) 'Delivery'}}
+                                                <strong>{{pageLabelMap 'Checkout_RequestedDeliveryDt'}}: </strong>
+                                                <span>{{this.requestedDateStr}}&nbsp;</span> 
+                                                <a id="edit_Shipping_Date" class="editShippingDate lipstick">{{pageLabelMap 'CheckOut_edit'}}</a><br/>
+                                            {{else}}
+                                                <strong>{{pageLabelMap 'PickupDate'}}: </strong>
+                                                <span>{{this.requestedDateStr}}&nbsp;<span>
+                                                <a id="edit_Shipping_Date" class="editShippingDate lipstick">{{pageLabelMap 'CheckOut_edit'}}</a><br/>
+                                    
+                                                <span class="pickupTime hide">
+                                                    <strong>{{pageLabelMap 'PickupTime'}}: </strong>
+                                                    <span class="pickupTime-value">{{this.pickupTime}}&nbsp;</span>
+                                                    <a id="edit_Shipping" href="#edit_Shipping" class="editShippingInfo processBack lipstick">{{pageLabelMap 'CheckOut_edit'}}</a>
+                                                </span>
+                                                
+                                            {{/ifEquals}}
+                                            <div class="span8 pull-left no-margin-left oo_deliveryInstruction hide">
+                                                <strong class="pull-left">{{pageLabelMap 'Delivery Instructions'}}:&nbsp;</strong><span class="pull-left oo_deliveryInstructionValue"></span>
+                                            </div>
+                                            <div class="span8 pull-left no-margin-left oo_comments hide">
+                                                <strong class="pull-left">{{pageLabelMap 'Comments'}}:&nbsp;</strong><span class="pull-left oo_commentsValue"></span>
+                                            </div>
+                                        {{/if}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {{/if}}
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapseThree">{{pageLabelMap 'CartDetails'}}</a>
+                            </div>
+                            <div class="accordion-body in collapse" id="collapseThree" style="height: auto;">
+                                <div class="accordion-inner">
+                                    {{#if this.hasCoupon}}
+                                        <p class="coupon_section"><strong>{{pageLabelMap 'CartInc_AppliedCoupon'}}</strong> {{this.couponName}}</p>
+                                    {{/if}}
+                                    <div class="reviewCartSection"></div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="button_large_container">
+                        {{#if (isNotPreBook)}}
+                            <input type="checkbox" class="terms-condition" value="T&C"/>
+                            {{pageLabelMap 'Term_&_Conditions1'}} 
+                            <strong><a id="terms-conditions-link">{{pageLabelMap 'Term_&_Conditions'}}</a></strong><br/>
+                            <span class="inline-error font12px hide err_msg lipstick">{{pageLabelMap 'Error_msg_T&C'}}</span> 
+                            <br/><br/>
+                            <div class="span12 action-buttons center clear">
+                                <button class="btn-primary large_grey_button custom-processReview" name="" automation-id="CheckOut_MobileGotoPayment" type="button">{{pageLabelMap 'CheckOut_MobileConfirm'}}</button>
+                                <br/><br/>
+                                <button class="btn-secondary processBack" type="button">Back</button> <!-- Defect 4249-->
+                            </div>
+                        {{else}}
+                            <!-- US:OO-212 Add 'Back to Community portal' link -->  
+                            <!--<input class="large_grey_button commPortalLink" type="button" onclick="location.href='{!commPortalLink}';" value="{{pageLabelMap 'CheckOut_CommPortalLink'}}"  />-->
+                            <input class="btn btn-primary center custom-processReview" name="" data-id="CheckOut_MobileGotoPayment" type="button" value="{{pageLabelMap 'CheckOut_ConfirmPreebook'}}"/>
+                        {{/if}}
+                    </div>
+                    <div class="terms-conditions-link-selector"></div>
+                </div>
+            </div>
+        </div>
+    </script> 
+    
+    <script id="OO-Review-Cart-Desktop" type="text/template">
+
+        <div id="cart_items_container reviewSection" class="">
+            <div class="cart_item_list">
+                {{#each this.cartItems}}
+                    <div class="cart_item cart_item_order" data-id={{this.itemID}}>
+                        <div class="price">
+                            {{#ifNotEquals this.cartItemType 'Coupon'}}
+                                <p>
+                                    <span class="value">{{pageLabelMap 'MiniCart_Quantity'}}:&nbsp;{{this.quantity}}</span>
+                                    <span class="UOM_{{this.itemID}} value"></span>
+                                </p>
+                            {{/ifNotEquals}}
+                            {{#if (isNotPreBook)}}
+                            <p class="price">
+                                {{#ifNotEquals this.cartItemType 'Coupon'}}
+                                    {{#if this.price}}
+                                        <label class="inline-info price-freight price-state"></label>
+                                        <span class="price-type_{{this.itemID}} hide" data-id="{{this.mockProduct.sku}}"></span>: {{{price this.price}}}<br/>
+                                    {{/if}}
+                                    {{#if this.absoluteDiscount}}
+                                        {{#ifGreater this.absoluteDiscount 0}}
+                                            <span>{{pageLabelMap 'Checkout_YouSave'}}: {{{price this.absoluteDiscount}}}</span><br/>
+                                        {{/ifGreater}}
+                                        {{#ifLessThan this.absoluteDiscount 0}}
+                                            <span>{{pageLabelMap 'CartInc_Surcharge'}}: {{{priceAbs this.absoluteDiscount}}}</span><br/>
+                                        {{/ifLessThan}}
+                                    {{/if}}
+                                {{/ifNotEquals}}
+                                <strong>{{pageLabelMap 'CartInc_Total'}}: {{{price this.itemTotal}}}</strong>
+                            </p>
+                            {{/if}}
+                        </div>
+                        {{#ifNotEquals this.cartItemType 'Coupon'}}
+                            <div class="cart_item_viewport item-order">
+                                <a href="#" class="prodLink productName" data-id="{{this.mockProduct.sku}}">{{{displayImage this.mediaWrapper 'orderReview'}}}</a>
+                            </div>
+                           <div class="span8 no-margin-left">
+                                {{#if (isNotPreBook)}}
+                                    <div class="span4">
+                                        {{{productName mockProduct}}}
+                                    </div>
+                                {{ else }}
+                                    <h2>{{ mockProduct.name }}</h2>
+                                {{/if}}                         
+                                <div class="hide hidden-vfd vfd-icon lipstick span8" data-id="{{this.mockProduct.id}}">
+                                    <div class="icon-icons_vfd_regulated_feed pull-left" title="CAUTION: Federal law restricts medicated feed containing this veterinary feed directive (VFD) drug to use by or on the order of a licensed veterinarian." href="#"></div>
+                                    <label class="pull-left">{{pageLabelMap 'VFDRegulatedFeed'}}</label>
+                                </div>
+                            </div>
+                            <div class="oo_e2Description hide span8 no-margin-left" data-id="{{this.mockProduct.sku}}"></div>
+                            <p class="span8 no-margin-left product-no">
+                                <span><strong>{{pageLabelMap 'Checkout_SKU'}}:</strong> {{{getSKU this.mockProduct.sku}}}</span>
+                            </p>
+                            
+                            <p class="span8 no-margin-left leadTime hide">
+                                <strong>{{pageLabelMap 'LeadTime'}}:</strong>
+                                <span class="value oo_leadTime" data-id="{{this.mockProduct.id}}"></span>
+                                <span>{{pageLabelMap 'LeadTimeMeasure'}}</span>
+                            </p>
+                            {{#if this.comments}}
+                                <div class="span8 no-margin-left hidden-tablet"><a  href="#comments_{{this.itemID}}" id="commentsLink" data-toggle="modal">{{pageLabelMap 'CheckOut_Notes'}}</a></div>
+                                <div id="comments_{{this.itemID}}" class="info-modal-layout modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-header"> 
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h3 id="myModalLabel">{{displayProductName 'Aggregate_Display' displayProductBean.name mockProduct.name }}</h3>
+                                    </div>
+                                    <div id="commentsForm{{itemID}}" class="modal-body">
+                                        <div class="itemComment">{{this.comments}}</div>
+                                    </div>
+                                </div>
+                            {{/if}}
+                            
+                            <!--<a class="span8 no-margin-left" href="#comments_{{this.itemID}}" id="commentsLink" data-toggle="modal">{{pageLabelMap 'CheckOut_Notes'}}</a>
+                            <div id="comments_{{this.itemID}}" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header"> 
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h3 id="myModalLabel">{{displayProductName 'Aggregate_Display' displayProductBean.name mockProduct.name }}</h3>
+                                </div>
+                                <div id="commentsForm{{itemID}}" class="modal-body">
+                                    <div class="itemComment">{{this.comments}}</div>
+                                </div>
+                            </div>-->
+                            {{#if this.showSubProdTerm}}
+                                <p class="subscriptionSummary">
+                                    <span>
+                                        {{insertTokens this.orderDisplayName this.displayName (price this.price) (price this.SubAmount) (price this.recurringPrice) (price this.recurringPriceSubAmount) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.installmentFrequencyUOM) this.orderFrequency this.installmentFrequency this.installmentCount this.orderCount}}
+                                    </span>
+                                </p>
+                            {{else}}
+                                {{#if this.isSubscription}}
+                                    <p class="subscriptionSummary">{{subscriptionSummary 'Cart_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                                {{/if}}
+                            {{/if}}
+                            {{#each minorLines}}
+                                {{#if this.showSubProdTerm}}
+                                    <p class="subscriptionSummary">{{insertTokens this.orderDisplayName this.displayName (price this.price) (price this.SubAmount) (price this.price) (price this.SubAmount) (price this.recurringPrice) (price this.recurringPriceSubAmount) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.installmentFrequencyUOM) this.orderFrequency this.installmentFrequency this.installmentCount this.orderCount}}</p>
+                                {{else}}
+                                    {{#if this.isSubscription}}
+                                        <p class="subscriptionSummary">{{subscriptionSummary 'Cart_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                                    {{/if}}
+                                {{/if}}
+                            {{/each}}
+                            {{#if this.minorLines }}
+                                <p><a href="#included_items{{this.itemID}}" id="includedItemsLink" data-toggle="modal" data-id="{{this.itemID}}">{{pageLabelMap 'IncludedItems'}}</a></p>
+                                {{> includedDisplay}}
+                            {{/if}}
+                        {{/ifNotEquals}}
+                        {{#ifEquals this.cartItemType 'Coupon'}}
+                            <p class="item_title coupon_title" data-id="{{this.mockProduct.sku}}">
+                                <span class="couponReviewLabel">{{pageLabelMap 'CartInc_AppliedCoupon'}}</span> {{this.mockProduct.name}}
+                            </p>
+                        {{/ifEquals}}
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class="clear"></div>
+        {{> totalsSection}}
+    </script>
+    
+    <script id="OO-Review-Cart-Mobile" type="text/template">
+        {{#each this.cartItems}}
+            <div class="cart_review_1_row cart_item" data-id={{itemID}}>
+                <div class="cart_review_1_row_item">
+                    {{#ifNotEquals this.cartItemType 'Coupon'}}                     
+
+                    {{{productName mockProduct}}}<!-- OO-183 Defect fix {{displayProductName 'Aggregate_Display' displayProductBean.name mockProduct.name }}</p>-->
+                    <div class="hide hidden-vfd icon-icons_vfd_regulated_feed lipstick pull-right" title="CAUTION: Federal law restricts medicated feed containing this veterinary feed directive (VFD) drug to use by or on the order of a licensed veterinarian." href="#" data-id="{{this.mockProduct.id}}"></div>
+                    <div class="oo_e2Description hide" data-id="{{this.mockProduct.sku}}"> </div>
+                                    
+                    <p><strong>{{pageLabelMap 'CartInc_SKU'}}</strong> {{{getSKU this.mockProduct.sku}}}</p>
+                    
+                    <p class="leadTime hide">
+                        <strong>{{pageLabelMap 'LeadTime'}}:</strong>
+                        <span class="value oo_leadTime" data-id="{{this.mockProduct.id}}"></span>
+                        <span>{{pageLabelMap 'LeadTimeMeasure'}}</span>
+                    </p>
+                    <!--{{#if this.comments}}
+                        <div class="span8 no-margin-left hidden-tablet"><a  href="#comments_{{this.itemID}}" id="commentsLink" data-toggle="modal">{{pageLabelMap 'CheckOut_Notes'}}</a></div>
+                         <div id="comments_{{this.itemID}}" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                             <div class="modal-header"> 
+                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                 <h3 id="myModalLabel">{{displayProductName 'Aggregate_Display' displayProductBean.name mockProduct.name }}</h3>
+                             </div>
+                             <div id="commentsForm{{itemID}}" class="modal-body">
+                                   <div class="itemComment">{{this.comments}}</div>
+                             </div>
+                         </div>      
+                    {{/if}}-->
+                     <!--<div class="cart_figures">
+                       <span class="section2"> 
+                       {{pageLabelMap 'Qty'}}: {{this.quantity}}
+                           {{#ifNotEquals this.itemType 'Coupon'}}{{pageLabelMap 'MiniCart_Quantity'}}:{{/ifNotEquals}}
+                           {{#ifEquals this.itemType 'Coupon'}}&nbsp;{{/ifEquals}}
+                       </span>
+                       <span class="section2">
+                           {{#ifNotEquals this.itemType 'Coupon'}}{{this.quantity}}&nbsp;<span class="UOM_{{itemID}} value"></span>{{/ifNotEquals}}
+                           {{#ifEquals this.itemType 'Coupon'}}&nbsp;{{/ifEquals}}
+                       </span>
+                    </div>-->
+
+                    {{#if this.showSubProdTerm}}
+                        <p class="subscriptionSummary">{{insertTokens this.orderDisplayName this.displayName (price this.price) (price this.SubAmount) (price this.recurringPrice) (price this.recurringPriceSubAmount) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.installmentFrequencyUOM) this.orderFrequency this.installmentFrequency this.installmentCount this.orderCount}}</p>
+                    {{else}}
+                        {{#if this.isSubscription}}
+                            <p class="subscriptionSummary">{{subscriptionSummary 'Cart_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                        {{/if}}
+                    {{/if}}
+                    {{#each minorLines}}
+                        {{#if this.showSubProdTerm}}
+                            <p class="subscriptionSummary">{{insertTokens this.orderDisplayName this.displayName (price this.price) (price this.SubAmount) (price this.recurringPrice) (price this.recurringPriceSubAmount) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.installmentFrequencyUOM) this.orderFrequency this.installmentFrequency this.installmentCount this.orderCount}}</p>
+                        {{else}}
+                            {{#if this.isSubscription}}
+                                <p class="subscriptionSummary">{{subscriptionSummary 'Cart_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                            {{/if}}
+                        {{/if}}
+                    {{/each}}
+                    <p class="included_items">
+                        {{#if this.minorLines }}
+                            <a href="#included_items{{this.itemID}}" id="includedItemsLink" data-toggle="modal" data-id="{{this.itemID}}">{{pageLabelMap 'CheckOut_IncludedItems'}}</a>
+                            {{> includedDisplay}}
+                        {{/if}}
+                        {{#if this.miscMessage }}
+                            <a href="#additional_info{{this.itemID}}" id="additionalInfoLink" data-toggle="modal" data-id="{{this.itemID}}">{{pageLabelMap 'CheckOut_AdditionalInfo'}}</a>
+                            <div id="additional_info{{this.itemID}}" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h3 id="myModalLabel">
+                                        {{mockProduct.name}}<!-- OO-183 Defect fix {{displayProductName 'Aggregate_Display' displayProductBean.name mockProduct.name }}--> {{pageLabelMap 'CheckOut_AdditionalInfo'}}
+                                    </h3>
+                                </div>
+                                
+                                <div class="modal-body">
+                                    {{this.miscMessage}}
+                                </div>
+                            </div>
+                        {{/if}}
+                    </p>
+                    {{/ifNotEquals}}
+                    {{#ifEquals this.cartItemType 'Coupon'}}
+                        <p>{{this.mockProduct.name}}</p>
+                    {{/ifEquals}}
+                    {{#if (isNotPreBook)}}
+                    <div class="cart_figures">
+                        <div class="section1" data-id="{{this.mockProduct.sku}}">
+                            <label class="price-type_{{this.itemID}} hide">
+                                {{#ifNotEquals this.cartItemType 'Coupon'}}{{pageLabelMap 'CartInc_Price'}}:{{/ifNotEquals}}
+                                {{#ifEquals this.cartItemType 'Coupon'}}&nbsp;{{/ifEquals}}
+                            </label>
+                            <label class="inline-info price-freight price-state"></label>
+                        </div>
+                        
+                        <div class="section2">
+                            {{#ifNotEquals this.cartItemType 'Coupon'}}{{pageLabelMap 'MiniCart_Quantity'}}:{{/ifNotEquals}}
+                            {{#ifEquals this.cartItemType 'Coupon'}}&nbsp;{{/ifEquals}}
+                        </div>
+                        <div class="section3">{{pageLabelMap 'CartInc_Total'}}:</div>
+                        <div class="section1 clear">
+                            {{#ifNotEquals this.cartItemType 'Coupon'}}{{price this.price}}{{/ifNotEquals}}
+                            {{#ifEquals this.cartItemType 'Coupon'}}&nbsp;{{/ifEquals}}
+                        </div>
+                        <div class="section2">
+                            {{#ifNotEquals this.cartItemType 'Coupon'}}{{this.quantity}}&nbsp;<span class="UOM_{{itemID}} value"></span>{{/ifNotEquals}}
+                            {{#ifEquals this.cartItemType 'Coupon'}}&nbsp;{{/ifEquals}}
+                        </div>
+                        <div class="section3 totalAmount">
+                            <strong class="price">{{price this.itemTotal}}</strong>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+        {{/each}}
+        {{> totalsSection}}
+    </script>
+    <script id="OO-CheckoutHeader-Mobile" type="text/template">
+        {{#if (isNotPreBook) }}
+            <ul class="checkout_steps checkout_steps_mobile">
+                <li class="current step">
+                    <a href="#" class="goToTab" data-index="1"></a>{{pageLabelMap 'OrderInformation'}}
+                </li>
+                <!--<li class="current step">{{pageLabelMap 'Order Review'}}</li>-->
+                <li class="step"><a href="#" class="goToTab" data-index="1"></a>{{pageLabelMap 'Order Review'}}</li>
+                <li class="step">{{pageLabelMap 'Order Confirmation'}}</li>
+            </ul>
+        {{else}}
+            <ul class="checkout_steps pre-book-header">
+                <li class="current step">{{pageLabelMap 'Order Review'}}</li>
+                <li class="step">{{pageLabelMap 'Order Confirmation'}}</li>
+                
+            </ul>
+        {{/if}} 
+    </script>
+    <!-- 1738 -->
+    <script id="terms-conditions-dialog" type="text/template">         
+        <div id="terms-conditions-modal" class="info-modal-layout modal cancel-modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close btn-cancel" aria-hidden="true" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Terms & Conditions</h3>
+            </div>
+            <div class="modal-body">
+                <p class="tnc-warning">{{pageLabelMap 'Term_Condition'}}</p>               
+            </div>            
+        </div>
+    </script>
+    
+    <!--- Load the header image conditionally for prebook -->
+    <script id="OO-CheckoutHeader-Desktop" type="text/template">
+        <img src="{!URLFOR($Resource.CC_Purina_Theme_3, 'en_US/images/order_review_header_prebook.png')}" class="co_yinfo checkout"/>
+    </script>
+
+    <script type="text/javascript">
+        CCRZ.uiProperties.OrderReviewView.desktop.tmpl      =   'cc_oo_Review-Desktop';
+        CCRZ.uiProperties.OrderReviewView.phone.tmpl        =   'cc_oo_Review-Mobile';
+        CCRZ.uiProperties.CartOrderReviewView.desktop.tmpl  =   'OO-Review-Cart-Desktop'; 
+        CCRZ.uiProperties.CartOrderReviewView.phone.tmpl    =   'OO-Review-Cart-Mobile';
+        CCRZ.uiProperties.CheckoutNav.phone.tmpl =   'OO-CheckoutHeader-Mobile';
+    </script>
+
+    <script>
+        jQuery(function($){
+            var isCartCheckoutViewNotRefreshed = true, isOrderReviewNotRefreshed = true, currentView, globalOrderWeight;;
+            var currentViewName;
+            Handlebars.registerHelper("getSKU", function(SKU){
+                return SKU.replace("PAL", "").replace("BG","");
+            });
+            
+            <!-- User story OO-1720: Handlebar for hiding shipper from shipping method -->
+            Handlebars.registerHelper("shippingOptions",function(shippingOptionsData){
+                if($(shippingOptionsData).has(":contains('{{pageLabelMap 'nullValue'}}')"))
+                {
+                    var  hyphenIndex = shippingOptionsData.indexOf('-');
+                    if(hyphenIndex>0){
+                        var res = shippingOptionsData.substring(hyphenIndex+1);
+                        return $.trim(res);
+                    } 
+                    else{
+                        return shippingOptionsData;
+                    }
+                }
+                else
+                    return shippingOptionsData;
+            });
+            
+            // For going to Order Review to Order Confirmation page
+            CCRZ.pubSub.on('view:cartCheckoutView:awaitingSubViewInit',function(theView){
+                
+                var orderType = $.urlParam('orderType');
+                CCRZ.views.ShippingView.prototype.events["click .processShippingInfo"] = null;
+                if(orderType == undefined || orderType.toLowerCase() != 'prebook' ) {
+                    if(CCRZ.Checkout.userInfo){
+                        CCRZ.Checkout.userInfo.register(theView);
+
+                    } 
+                    if(CCRZ.Checkout.shipping){
+                        CCRZ.Checkout.shipping.register(theView);
+
+                    } 
+                }
+                if(CCRZ.Checkout.review){
+                    CCRZ.Checkout.review.register(theView);
+                }
+                if(CCRZ.Checkout.payment){
+                    CCRZ.Checkout.payment.register(theView);
+                }            
+                CCRZ.pubSub.trigger('view:cartCheckoutView:subViewInit');
+
+            });
+                // end of the linking to order review to order confirmation page
+            // Defect: OO-4249 starts
+            CCRZ.pubSub.on('view:OrderReviewView:refresh',function(theView){
+                var prodids=[];
+                var cartItems=CCRZ.cartCheckoutModel.attributes.cartItems,prodids=[];
+                currentViewName = CCRZ.views.OrderReviewView.prototype.viewName;
+                if(sessionStorage.getItem('PickupTime')){
+                    $('.pickupTime').show();
+                    //$('.pickupTime-value').text(sessionStorage.getItem('PickupTime')+' ('+sessionStorage.getItem('TimeZoneFormat')+')');
+                    if(sessionStorage.getItem('TimeZoneFormat')){
+                        $('.pickupTime-value').text(sessionStorage.getItem('PickupTime')+ ' ' +sessionStorage.getItem('TimeZoneFormat')); // Defect: OO-4479 Fixed
+                    }
+                    else{
+                        $('.pickupTime-value').text(sessionStorage.getItem('PickupTime'));
+                    }
+                }
+                for(var i=0;i<cartItems.length;i++){
+                     prodids.push(cartItems[i].mockProduct.id);
+                }
+                        if(isOrderReviewNotRefreshed){
+                            isOrderReviewNotRefreshed = false;
+                            setCartCheckoutViewData(CCRZ.models.CartCheckout.prototype, CCRZ.views.cartCheckoutView.prototype, prodids);
+                            theView.setElement(theView.$el.find(".reviewCartSection"));
+                            theView.setElement(theView.$el.find(".button_large_container"));
+                    }
+                    setOrderReviewViewData(CCRZ.models.CartCheckout.prototype, CCRZ.views.OrderReviewView.prototype,prodids);
+                    
+            });
+            // Defect: OO-4249 ends
+            // Defect: OO-2066
+            CCRZ.pubSub.on('view:cartCheckoutView:refresh',function(theView){
+                if(sessionStorage.getItem('PickupTime')){
+                    $('.pickupTime').show();
+                    //$('.pickupTime-value').text(sessionStorage.getItem('PickupTime')+' ('+sessionStorage.getItem('TimeZoneFormat')+')');
+                    $('.pickupTime-value').text(sessionStorage.getItem('PickupTime')+ ' ' +sessionStorage.getItem('TimeZoneFormat')); // Defect: OO-4479 Fixed
+                }
+                    
+             var cartItems=CCRZ.cartCheckoutModel.attributes.cartItems,prodids=[];
+             for(var i=0;i<cartItems.length;i++){
+                    prodids.push(cartItems[i].mockProduct.id);
+                }
+                if(isCartCheckoutViewNotRefreshed) {
+                    isCartCheckoutViewNotRefreshed = false;
+                    
+                    setCartCheckoutViewData(CCRZ.models.CartCheckout.prototype, CCRZ.views.cartCheckoutView.prototype, prodids);
+                    theView.setElement(theView.$el.find(".reviewCartSection"));
+                }
+                if(currentViewName == 'OrderReviewView'){
+                    var li = $('.checkout_steps_mobile li');
+                    li.eq(0).removeClass('current');
+                    li.eq(1).addClass('current');
+                    currentViewName = '';
+                }
+            });
+            
+            // end of defect OO-2066
+
+            var setOrderReviewViewData = function(orderReviewModel, orderReviewView,prodids) {
+            
+                orderReviewModel.controllerName = 'cc_oo_OrderItemsController';
+                var cartId = CCRZ.cartCheckoutView.model.attributes.sfid;
+                var orderType = $.urlParam('orderType');
+                var uniqueId = getSessionValue('contactId');
+                var selectedShipTo=uniqueId+'selectedShipTo', selectedPlant=uniqueId+'selectedPlant', shipDate=uniqueId+'shipDate'; 
+                var shipToId = getSessionValue(selectedShipTo);
+                orderReviewModel.getVfdFlag = function(prodids,callback) {
+                    var remoteCallVfd = _.extend(CCRZ.RemoteInvocation,{className: orderReviewModel.controllerName});
+                    remoteCallVfd.invokeCtx( 'getVfdFlag',prodids, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+
+                orderReviewModel.getProductsLeadTime = function(callback) {
+                    var remoteCallProductsLeadTime = _.extend(CCRZ.RemoteInvocation,{className: orderReviewModel.controllerName});
+                    remoteCallProductsLeadTime.invokeCtx( 'getOrderReViewLeadTimeDetails',prodids, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+
+                orderReviewModel.getOrderReviewDetails = function(callback) {
+                    var remoteCallOrderReviewDetails = _.extend(CCRZ.RemoteInvocation,{className: orderReviewModel.controllerName});
+                    remoteCallOrderReviewDetails.invokeCtx( 'getOrderReViewDetails',cartId, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+
+                orderReviewModel.callProducts = function(callback) {
+                    var remoteActionCallForProducts = _.extend(CCRZ.RemoteInvocation,{className: orderReviewModel.controllerName});
+                    remoteActionCallForProducts.invokeCtx( 'getProductsDetailsCheckout',cartId, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+
+
+                orderReviewModel.saveAlternateEmail = function(callback) {
+                    var remoteActionCallForEmail = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_OrderItemsController'});
+                    remoteActionCallForEmail.invokeCtx('saveAlternateEmail', cartId, $('#alt-email').val(), function(resp) {
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+
+                orderReviewModel.getOrderComments = function(callback) {
+                    var remoteActionCallForOrderComments = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_OrderItemsController'});
+                    remoteActionCallForOrderComments.invokeCtx('getCommentsFromOrderInfo', cartId, function(resp) {
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+                orderReviewModel.getDeliveryInstructions = function(shipToId,callback) {
+                    var remoteCallForDeliveryInstructions = _.extend(CCRZ.RemoteInvocation,{className: 'cc_oo_OrderItemsController'});
+                    remoteCallForDeliveryInstructions.invokeCtx( 'getDeliveryInstructions',shipToId, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+                orderReviewView.getOrderComments = function() {
+                    orderReviewModel.getOrderComments(function(resp) {
+                        if(resp && resp.success) {
+                            var commentsData = resp.data;
+                            if(commentsData){
+                                $('.oo_commentsValue').text(commentsData);
+                                $('.oo_comments').show();
+                            }
+                        }
+                    });
+
+                };
+                orderReviewView.getDeliveryInstructions = function() {
+                    orderReviewModel.getDeliveryInstructions(shipToId,function(resp) {
+                        if(resp && resp.success) {
+                            deliveryinstData = resp.data;
+                            deliveryInstructions = deliveryinstData['DeliveryInstructions'];
+                            if(deliveryInstructions){
+                                $('.oo_deliveryInstructionValue').text(deliveryInstructions);
+                                $('.oo_deliveryInstruction').show();
+                            }
+                        }
+                    });
+
+                };
+                orderReviewView.getOrderComments = function() {
+                    orderReviewModel.getOrderComments(function(resp) {
+                        if(resp && resp.success) {
+                            var commentsData = resp.data;
+                            if(commentsData){
+                                $('.oo_commentsValue').text(commentsData);
+                                $('.oo_comments').show();
+                            }
+                        }
+                    });
+
+                };
+
+                orderReviewView.saveAlternateEmail = function() {
+                    orderReviewModel.saveAlternateEmail(function(resp) {
+                        if(resp && resp.success) {}
+                    });
+
+                }; 
+
+
+                orderReviewView.callProducts = function() {
+                    orderReviewModel.callProducts(function(resp){
+                        if(resp && resp.success) { 
+                            if(resp.data) {
+                                var remoteData = resp.data;
+                                // Adding long description in div 'oo_longDesc'
+                                $('.oo_longDesc').each( function(){
+                                    // Passing data-id which contains the SKU Id
+                                    var productSKU = $(this).attr('data-id');
+                                    var productLongDescription = resp.data[productSKU].ccrz__Product__r.ccrz__LongDesc__c;                                            
+                                    // Showing Long description on the additional information popup window
+                                    $(this).html(productLongDescription);
+                                });
+                                // for adding E2 description on the product list page in div 'oo_e2Description'
+                                $('.oo_e2Description').each( function(){
+                                    var productSKU = $(this).attr('data-id');
+                                    var E2Description = remoteData[productSKU].ccrz__Product__r.cc_oo_Second_Description__c;
+                                    // Showing the value of long Description on the pop up window
+                                    if(E2Description){
+                                        $(this).show();
+                                        $(this).html(E2Description);
+                                    }
+                                });
+                                $('.cart_item').each( function(){
+                                    var cartItemId=$(this).attr('data-id');
+                                    if(resp.data[cartItemId]){
+                                        $(this).find('.price-freight').html(CCRZ.pagevars.pageLabels["Contract_Freight_DLV"]);
+                                    }
+                                    else{
+                                        $(this).find('.price-freight').html(CCRZ.pagevars.pageLabels["Contract_Freight_FOB"]);
+                                    }
+                                });
+                            }                       
+                        }                   
+                    });
+                };
+
+
+                orderReviewView.getOrderReviewDetails = function() {
+                    orderReviewModel.getOrderReviewDetails(function(resp){
+                        if(resp && resp.success) {
+                            var respData = resp.data;
+                            if (respData.OrderViewData && respData.OrderViewData[0]) {
+                                if(respData.OrderViewData[0].ccrz__Cart__r) {
+                                    //oo_PONumberValue
+                                    var poNumber = respData.OrderViewData[0].ccrz__Cart__r.ccrz__PONumber__c || '';
+                                    if(poNumber) {
+                                        $('.oo_PONumberValue').text(poNumber);
+                                        $('.oo_PONumber').show();
+                                    }
+                                   /* var pickup_Time = respData.OrderViewData[0].ccrz__Cart__r.cc_oo_PickUpTime__c || '';
+                                    if(pickup_Time) {
+                                       // $('.pickupTime-value').text(pickup_Time);
+                                        // Defect 4205 start
+                                        var pickupTimeZone = $('.pickupTime-value').text().split(':')[0];
+                                        if(pickupTimeZone > 12){
+                                            var addTime = pickupTimeZone - 12;
+                                            addTime = '0'+addTime+":"+$('.pickupTime-value').text().split(':')[1] + ' ' +'PM';
+                                        }
+                                        else if(pickupTimeZone <= 12){
+                                            var addTime = pickupTimeZone;
+                                            addTime = addTime + ":" + $('.pickupTime-value').text().split(':')[1] +' '+ 'AM';
+                                        }
+                                        $('.pickupTime-value').text(addTime);
+                                        $('.pickupTime').show();
+                                        // Defect 4205 end
+                                    }*/
+                                    
+                                }
+                                _.each(respData.OrderViewData, function(cartItem) {
+                                    if(cartItem.ccrz__Product__r && cartItem.ccrz__Product__r.cc_oo_UoMDesc__c) {
+                                        $('.UOM_'+cartItem.Id).text(cartItem.ccrz__Product__r.cc_oo_UoMDesc__c).show();
+                                    }
+                                    // User story: OO-4712 starts
+                                    if(!cartItem.cc_oo_IsListPrice__c){
+                                       $('.price-type_'+cartItem.Id).text(CCRZ.pagevars.pageLabels["CartInc_ContractPrice"]).show();
+                                    }
+                                    else{
+                                        $('.price-type_'+cartItem.Id).text(CCRZ.pagevars.pageLabels["CartInc_Price"]).show();
+                                    }
+                                    // User story: OO-4712 ends
+                                });
+                                
+                                
+                            }
+                        }
+                    });
+
+                };
+
+
+
+
+                orderReviewView.getVfdFlag = function() {
+                    orderReviewModel.getVfdFlag(prodids,function(resp){
+                        if(resp && resp.success) { 
+                            $('.hidden-vfd').each(function(){
+                                var pid=$(this).attr('data-id');
+                                var respData = resp.data;
+                                if(respData) {
+                                    var dataflag = respData[pid];
+                                    if(dataflag){
+                                        $(this).show();         
+                                    }
+                                }
+                            });                       
+                        }                   
+                    });
+                };
+
+                orderReviewView.getProductsLeadTime = function() {
+
+                    orderReviewModel.getProductsLeadTime(function(resp){
+                        if(resp && resp.success) { 
+                            var mainData    = resp.data;
+                            console.log(mainData);
+                            $('.oo_leadTime').each( function(){
+                                var productId = $(this).attr('data-id');
+                                var leadTime = mainData[productId];
+                                if(leadTime) {
+                                    $(this).text(leadTime);
+                                    $(this).closest('.leadTime').show();
+                                }
+                                
+                            });                     
+                        }                   
+                    });
+                };
+
+
+                orderReviewView.validateAlternateEmail = function(e) {
+                    var isEnabled = false;
+                    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    if (re.test($('#alt-email').val())) {
+                        isEnabled = true;
+                        $('#add-alt-email-btn').removeClass('disabled');
+                        $('#add-alt-email-btn').prop('disabled', false);
+                    } else {
+                        isEnabled = false;
+                        $('#add-alt-email-btn').addClass('disabled');
+                        $('#add-alt-email-btn').prop('disabled', true);
+                    }
+                    if(e.keyCode == 13){
+                        e.preventDefault();
+                        if(isEnabled){
+                            addAlternateEmailMessage();
+                        }
+                        return false;
+                    }
+                };
+                
+                
+                orderReviewView.addAlternateEmailMessage = function() {
+                    $('.alt-email-container').slideToggle();
+                    var alternate_email = $('#alt-email').val();
+                    orderReviewView.saveAlternateEmail();
+                    $('#alt-email-ack').text('Order confirmation acknowledgement will be sent to ' + alternate_email + ' as well.');
+                    $('#alt-email-confirm').slideDown();
+                };
+                
+
+                var orderReviewDetails = function() {
+                    var totalWeight = $('.total-weight').html();
+                    if(totalWeight) {
+                        $('.order_weight .value').text(totalWeight);
+                        globalOrderWeight = totalWeight;
+                    }   
+                    else if (globalOrderWeight)
+                        $('.order_weight .value').text(globalOrderWeight);
+
+                    orderReviewView.getOrderReviewDetails();
+                }
+
+                var goToProdDetails = function(e) {
+                    
+                };
+
+
+                orderReviewView.getVfdFlag();
+                orderReviewView.getProductsLeadTime();
+                orderReviewDetails();   
+                orderReviewView.callProducts();
+                orderReviewView.getOrderComments();
+                orderReviewView.saveAlternateEmail();
+                orderReviewView.getDeliveryInstructions();
+            };
+            
+
+            
+            var setCartCheckoutViewData = function(cartCheckoutModel, cartCheckoutView, prodids) {
+            
+                cartCheckoutModel.controllerName = 'cc_oo_OrderItemsController';
+                var cartId = CCRZ.cartCheckoutView.model.attributes.sfid;
+                var orderType = $.urlParam('orderType');
+                var uniqueId = getSessionValue('contactId');
+                var selectedShipTo=uniqueId+'selectedShipTo', selectedPlant=uniqueId+'selectedPlant', shipDate=uniqueId+'shipDate'; 
+                var deliveryInstructions,deliveryinstData;
+                var shipToId = getSessionValue(selectedShipTo);
+                //Override the component script for image for prebook flow
+                if(orderType != undefined && orderType.toLowerCase() == 'prebook' ) {   
+                    CCRZ.uiProperties.CheckoutNav.desktop.tmpl          =   'OO-CheckoutHeader-Desktop';
+                }
+            
+                //OO-972 -  show ShipTo Number
+                // Commenting for Defect: OO-4899
+                /*var shipToNumber = getSessionValue(selectedShipTo);
+                if(shipToNumber && shipToNumber != ''){
+                    $('.ship-address .address_selection_display .addr_name').append('-'+ shipToNumber);
+                }*/
+                //OO-972 -  show ShipTo Number -End
+
+
+                var events = cartCheckoutView.events;
+
+                events["keyup #alt-email"] = function(e) {
+                    CCRZ.views.OrderReviewView.prototype.validateAlternateEmail(e);
+                };
+                
+                events["click .productName"] = function(e) {
+                    e.preventDefault(); 
+                    var prodId = $(e.currentTarget).data('id'); // Defect OO-4324 Fixed
+                    productDetails(prodId);
+                };
+
+                CCRZ.views.ShippingView.prototype.events["click .processShippingInfo"] = null;
+                events["click #add-alt-email"] = function(e) {
+                    $(e.currentTarget).slideUp();
+                    $('.alt-email-container').slideToggle();
+                };
+
+                events["click #add-alt-email-btn"] = function(e) {
+                    CCRZ.views.OrderReviewView.prototype.addAlternateEmailMessage();
+                };
+
+                events["click .custom-processReview"] = function(e) {
+                    e.preventDefault();
+                    if($('.terms-condition').prop("checked")){
+                        CCRZ.pubSub.trigger('action:processPayment', {});
+                        }else{
+                        $('.err_msg').show();
+                    }
+                };
+
+                events["click .editShippingDate"] = function() {
+                    cartDetails();
+                };
+                
+                events["click .terms-condition"] = function(e){
+                    var ele = e.currentTarget;
+                    if($(ele).prop("checked")){
+                        $('.err_msg').hide();
+                    }
+                };
+                
+                events["click #terms-conditions-link"] = function() {
+                    new CCRZ.views.termsConditionsModal(function() {                         
+                        $('#terms-conditions-modal').modal({ keyboard: false, backdrop: 'static', show: true });
+                    });
+
+                };
+
+                
+            };
+            
+            CCRZ.views.termsConditionsModal = CCRZ.CloudCrazeView.extend({
+                viewName : "termsConditionsModal",
+                templateBoth : CCRZ.util.template('terms-conditions-dialog'),
+                selector : ".terms-conditions-link-selector",
+                initialize: function(callback) {
+                    this.render(callback);
+                },
+                
+                render : function(callback) {
+                    this.setElement($(this.selector));
+                    var v = this;
+                    v.$el.html(v.templateBoth());
+                    callback();
+                    CCRZ.pubSub.trigger("view:"+this.viewName+":refresh", this);
+                }
+                
+            });
+            
+        });
+    </script>
+    
+</apex:component>

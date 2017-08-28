@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>SALEM TRUE VALUE HARDWARE INC-420348 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>SALEM TRUE VALUE HARDWARE INC-420348 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>SALEMTRUEVALUEHARDWAREINC420348PartnerManager</parentRole>
+</Role>

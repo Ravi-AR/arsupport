@@ -1,0 +1,72 @@
+<apex:page standardController="Account" extensions="RollupPTExt" docType="html-5.0" >
+      <apex:pageBlock title="Rollup" mode="detail">
+        <apex:pageBlockSection title="Account Level" columns="2" collapsible="false">
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Ship To CY Total Points"/>
+                <apex:outputText value="{!shtcytp}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Ship To CY Total Tons"/>
+                <apex:outputText value="{!shtcytt}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Ship To PY Total Points"/>
+                <apex:outputText value="{!shtpytp}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Ship To PY Total Tons"/>
+                <apex:outputText value="{!shtpytt}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Sold To CY Total Points"/>
+                <apex:outputText value="{!sotcytp}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Sold To CY Total Tons"/>
+                <apex:outputText value="{!sotcytt}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Sold To PY Total Points"/>
+                <apex:outputText value="{!sotpytp}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Sold To PY Total Tons"/>
+                <apex:outputText value="{!sotpytt}"/>
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Hierarchy Level" columns="2"  collapsible="false">
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Total Rollup Ship To CY Points"/>
+                <apex:outputText value="{!rshtcytp}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Total Rollup Ship To CY Tons"/>
+                <apex:outputText value="{!rshtcytt}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Total Rollup Ship To PY Points"/>
+                <apex:outputText value="{!rshtpytp}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Total Rollup Ship To PY Tons"/>
+                <apex:outputText value="{!rshtpytt}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Total Rollup Sold To CY Points"/>
+                <apex:outputText value="{!rsotcytp}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Total Rollup Sold To CY Tons"/>
+                <apex:outputText value="{!rsotcytt}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Total Rollup Sold To PY Points"/>
+                <apex:outputText value="{!rsotpytp}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Total Rollup Sold To PY Tons"/>
+                <apex:outputText value="{!rsotpytt}"/>
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

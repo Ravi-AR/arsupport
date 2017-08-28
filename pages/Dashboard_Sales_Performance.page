@@ -1,0 +1,10 @@
+<apex:page >
+<table>
+
+<tr><td valign="top"><font color="Navy" size="+1"><i>This dashboard makes the assumption that Sales Calls relate to prospects and Support Calls related to existing customers.</i></font></td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td valign="top"><font color="Navy" size="+1"><i>There is also the assumption that opportunities flagged as "New  Business" relate to prospects and opportunities flagged as "Add On" relate to existing customers.</i></font></td></tr>
+
+</table>
+</apex:page>

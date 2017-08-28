@@ -1,0 +1,161 @@
+<apex:component controller="LPDCR_SecondaryBusinessManagementCntlr" allowDML="true">
+ <apex:outputText rendered="{!init}" />
+ <apex:attribute name="componentKey"  
+                 type="String" 
+                 assignTo="{!key}" 
+                 description="The key given to this component so the page can easily get access to it" />
+ <apex:attribute name="thisPageController"  
+                 type="LPDCR_SecondaryPageBaseController"  
+                 assignTo="{!pageController}"  
+                 required="true" 
+                 description="The controller for the page." />
+ <apex:attribute name="speciesFilter" 
+                    description="Set of selected spcecies to filter results" 
+                    type="String[]"
+                    assignTo="{!species_filter}"
+                    required="false"/>
+                    
+ <apex:attribute name="fileFilter" 
+                    description="Set of selected file types to filter results" 
+                    type="String[]"
+                    assignTo="{!files_filter}"
+                    required="false"/>
+                    
+ <apex:attribute name="sortBy" 
+                    description="The selected Sort By option" 
+                    type="String"
+                    assignTo="{!sort_filter}"
+                    required="false"/>
+    
+    
+    <!-- HIDDEN VARIABLES USED TO RETAIN AND HIGHLIGHT THE FILTER OPTIONS -->
+    <input type="hidden" value="{!sort_filter}" class="sortfield" />
+    <apex:repeat value="{!species_filter}" var="sp">
+        <input type="hidden" value="{!sp}" class="speciesfield" />
+    </apex:repeat>
+    <apex:repeat value="{!files_filter}" var="ft">
+        <input type="hidden" value="{!ft}" class="filetype" />
+    </apex:repeat> 
+
+    <apex:actionFunction action="{!showDocumentList}" name="displayBusinessDocuments" rerender="filterContainerPanel,containerPanel,fileTypePanel" oncomplete="changeColor()" status="loader">
+        <apex:param name="docType" assignTo="{!document_type}" value="" />
+    </apex:actionFunction>
+    <apex:actionFunction action="{!hideDocumentList}" name="hideBusinessDocuments" rerender="filterContainerPanel,containerPanel" status="loader"/>
+    
+    <apex:outputPanel id="containerPanel">
+
+    <!-- START Business mgt PANEL -->
+    <apex:outputPanel id="businesslist" rendered="{!showBusinessList}">
+                 
+          <div class="tab-pane fade active in" id="tabsm1default">
+            <div class="col-sm-12 mrg_btm20"> 
+                
+                 <div class="col-sm-6">
+                    <span class="clr_blk fnt20">{!$Label.LPDCR_Invoice_Component_Name}</span>
+                    <div class="clear"></div>   
+                    <div class="col-sm-4 pad_top10 pad_lft0">                                                 
+                        <img src="{!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_ICON_Invoice)}" width="100"/>                                             
+                    </div>
+                    <div class="col-sm-8 pad_top10">
+                        <p class="fnt12 dis_inlineblock">{!$Label.LPDCR_Invoice_Component_Message}
+                            <apex:outputPanel rendered="{!IF(voiceMgtLinkURL != null, True, False)}">
+                                <a href="{!voiceMgtLinkURL}" target='_blank' class="col-xs-12 col-sm-12 pad_lft_rgt fnt12 pad_top10 pad_lft0">{!$Label.LPDCR_Invoice_Component_URL }</a>
+                            </apex:outputPanel>
+                            <apex:outputLink styleClass="col-xs-12 col-sm-12 pad_lft_rgt fnt12 pad_top10 pad_lft0" id="price" value="#" onclick="displayBusinessDocuments('{!$Label.LPDCR_Invoice_Component_Name}');">{!$Label.LPDCR_Invoice_Resource_Subtab_Name}</apex:outputLink> 
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-sm-6">
+                    <span class="clr_blk fnt20">{!$Label.LPDCR_Coupon_Component_Name }</span>
+                    <div class="clear"></div>   
+                    <div class="col-sm-4 pad_top10 pad_lft0">    
+                    
+                    <img src="{!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_ICON_Coupon)}" width="100"/>                                                
+                    </div>
+                    <div class="col-sm-8 pad_top10">
+                        <p class="fnt12 dis_inlineblock">{!$Label.LPDCR_Coupon_Component_Message}
+                              
+                            <apex:outputLink value="{!URLFOR($Page.LPDCR_SecondaryCouponPage, null, [subtab='Coupons'])}"
+                                             styleClass="col-xs-12 col-sm-12 pad_lft_rgt fnt12 pad_top10 pad_lft0"
+                                             rendered="{!!ISPICKVAL($User.UserType,'STANDARD')}">{!$Label.LPDCR_Coupon_Component_URL}</apex:outputLink> 
+                            
+                            <apex:outputLink value="{!URLFOR($Resource.LPDCR_CC_Assets, '/doc/LOL-Coupon_Redemption_Form-Purina-PMI.pdf')}" 
+                                             styleClass="col-xs-12 col-sm-12 pad_lft_rgt fnt12 pad_top10 pad_lft0"
+                                             target="_blank"
+                                             rendered="{!ISPICKVAL($User.UserType,'STANDARD')}">Download Coupon Request Forms</apex:outputLink>
+                            
+                            <a href="{!URLFOR($Page.LPDCR_SecondaryCouponResource)}" class="col-xs-12 col-sm-12 pad_lft_rgt fnt12 pad_top10 visit pad_lft0">{!$Label.LPDCR_Coupon_Resource_Subtab_Name }</a> 
+                        </p>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="col-sm-6">
+                    <span class="clr_blk fnt20">{!$Label.LPDCR_Annual_Planning_Component_Name }</span>
+                    <div class="clear"></div>   
+                    <div class="col-sm-4 pad_top10 pad_lft0">                                                 
+                        <img src="{!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_ICON_AnnualPlanning)}" width="60"/>                                             
+                    </div>
+                    <div class="col-sm-8 pad_top10">
+                        <p class="fnt12 ">{!$Label.LPDCR_Annual_Planning_Component_Message} 
+                            <a href="{!annualPlanningDoc.URLLink}" target='_blank' class="col-sm-12 pad_lft_rgt fnt12 pad_top10 visit pad_lft0">{!$Label.LPDCR_Annual_Planning_Component_Document_Download }</a>
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+ </apex:outputPanel>
+    <!-- /END Business mgt PANEL -->
+    
+    <!-- SHOW PANEL WITH COMPONENT TO DISPLAY THE LIST OF DOCUMENT RECORDS FOR THE SELECTED TYPE -->
+     <apex:outputPanel id="documentList" rendered="{!showDocumentList}">
+         <div class="col-sm-11 pad_rgt0">
+        <a href="#" onclick="hideBusinessDocuments();" class="col-sm-12 pad_rgt0 pull-right fnt14 text-right"><i class="glyphicon glyphicon-arrow-left"></i> Back</a>  </div>      
+        <div class="col-xs-11">
+           <table class="dataTable table tablehead" id="BusinessDocuments">
+                <thead>
+                <tr>
+                <th title="Title" class="sorting"></th>
+                </tr>
+                </thead>
+                <tbody>
+                   <apex:repeat id="ThirdTable1" value="{!documentList}" var="allObj">
+                         <tr>
+                              <td>
+                             
+                             <p class="mrg_btm10"><a href="{!allObj.URLLink}" target="_blank" class="wordWrap">
+                            <label class="clr_red cursor"><apex:outputText escape="false" value="{!allObj.DocumentName}" /></label></a>
+                            <span class="flt_rgt clr_gry text-right">
+                                <apex:outputText value="{0, date, MMM' 'd', 'yyyy}">
+                                    <apex:param value="{!allObj.DocumentsLastModified}" /> 
+                                </apex:outputText>
+                            </span>
+                         </p>
+                            </td>
+                         </tr>
+                     </apex:repeat>
+                 </tbody>
+            </table>
+        </div>
+        <script>
+            $('#BusinessDocuments').on( 'init.dt', function () {
+                    } ).DataTable({"searching":true, "bPaginate":true, "bInfo":true,
+                            "dom": "<'row mrg_btm20 '<'col-sm-12 pad_lft0 pad_rgt0'f>>" +
+                        "<'row'<'col-sm-6 mrg_btm20 pad_lft0'i><'col-sm-6 text-right pad_rgt0 mrg_btm20 hidden-xs'l>>" +
+                        "<'row'<'col-sm-12 pad_lft0 pad_rgt0'tr>>" +
+                        "<'row'<'col-sm-12 pad_lft0 pad_rgt0'p>>", "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                        language: {
+                                search: '<i class="glyphicon glyphicon-search sch_Icon"></i> _INPUT_',
+                                searchPlaceholder: "Search This Section"
+                            },
+                           "aaSorting": [ ] 
+                        }); 
+        </script>
+    </apex:outputPanel>
+    <!-- /END DOCUMENT LIST PANEL -->
+    
+    </apex:outputPanel>
+    <!-- /END contain panel -->
+    
+</apex:component>

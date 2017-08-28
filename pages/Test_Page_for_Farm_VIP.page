@@ -1,0 +1,13 @@
+<apex:page id="page" standardController="Farm_VIP_Registration__c">
+    <script type="text/javascript">
+        if({!$CurrentPage.parameters.conrel} == '1'){
+            location.replace('/006/e?nooverride=1&lookupcmpgn=1&accid={!$CurrentPage.parameters.accid}&conid={!$CurrentPage.parameters.conid}');
+        }
+    </script>
+    <apex:pageMessage severity="ERROR"
+        strength="3"
+        title="Error: FARM VIP Registrations must be created from the Contact page.  If you have questions, please contact your Salesforce.com System Administrator."
+        escape="false"
+                rendered="{! IF(OR($CurrentPage.parameters.conrel = '0',$CurrentPage.parameters.conrel = ''), TRUE, FALSE) }" >
+    </apex:pageMessage>
+</apex:page>

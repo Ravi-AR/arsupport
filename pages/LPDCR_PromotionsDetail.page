@@ -1,0 +1,80 @@
+<!--
+*********************************************************************************
+Author: Govinda Prasad P S
+Email: govinda.prasad@magnet360.com
+Created Date    : 9/30/2016
+Function    :  Visualforce page to display Detailed Promotional Records.
+Version     : 1.0
+*********************************************************************************
+-->
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" Controller="LPDCR_PromotionListController" action="{!getCampaignDetail}">
+    <apex:composition template="LPDCR_BaseTemplate">
+
+        <apex:define name="PageTitle">Promotions - {!cam.camObj.Name}</apex:define>
+        <apex:define name="body">
+        <div class="title_wrapper">
+          <div class="container-fluid">
+              <h3 class="page_title">{!cam.camObj.Name}
+              <apex:outputPanel rendered="{!IF( attachmentId != '', true, false)}">
+                    <!--<a href="{!URLFOR($Action.Attachment.Download, attachmentId)}" download ="{!attachmentId}">-->
+                    <!--LPDCR-971-->
+                   <!-- <a href="/dealercommunity/servlet/servlet.FileDownload?file={!attachmentId}" download ="/dealercommunity/servlet/servlet.FileDownload?file={!attachmentId}">-->
+                   <a href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file={!attachmentId}" download ="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file={!attachmentId}">
+                      <span class="download hidden-xs">Details(PDF)</span>
+                      <span class="download visible-xs-block">PDF</span>
+                      <i class="glyphicon glyphicon-save download" aria-hidden="true"></i>
+                    </a>
+              </apex:outputPanel>
+              </h3>
+          </div>
+          </div>
+          <div class="container-fluid content_wrapper">
+            <div class="row detailbanner">
+                <div class="col-lg-12">
+                 </div>
+                <div>
+
+                   <!-- <apex:image styleClass="img-responsive" url="{!URLFOR($Action.Attachment.Download, bannerdesktopId)}"></apex:image>-->
+                 <!--LPDCR- 971-->
+    <apex:image styleClass="img-responsive" url="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file={!bannerdesktopId}" alt="Campaigns"></apex:image>
+
+                </div>
+            </div><!--end row-->
+            <div class="row">
+                <div class="col-sm-3 col-xs-12">
+                    <ul class="promodetails">
+                        <li>
+                        <apex:outputText rendered="{!IF(cam.camObj.Promotion_Discount_Code__c != null, true,false)}" value="PROMO {!cam.camObj.Promotion_Discount_Code__c}">
+                        </apex:outputText>
+                        </li>
+                       <li> <apex:outputText rendered="{!IF((cam.camObj.Promotion_Start_Date__c != null && cam.camObj.Promotion_End_Date__c != null), true,false)}" value="Event: {!cam.camObj.Date_Range__c}">
+                        </apex:outputText></li>
+                        <li><apex:outputText rendered="{!IF(cam.camObj.Pre_Book_Discount_Code__c != null, true,false)}" value="Pre-Book {!cam.camObj.Pre_Book_Discount_Code__c}">
+                        </apex:outputText></li>
+                        <li><apex:outputText rendered="{!IF((cam.camObj.Pre_Book_Start_Date__c != null && cam.camObj.Pre_Book_End_Date__c != null), true,false)}" value="Pre-book: {!cam.camObj.Pre_Book_Date_Range__c}">
+                        </apex:outputText></li>
+                       <!-- <li>Pre-Book and save now until {!Campaign.Pre_Book_End_Date__c}</li>-->
+                        <li>{!cam.camObj.Promotion_Description__c}</li>
+                        <!--Pre-Book {!Campaign.Pre_Book_Discount_Code__c}-->
+                    </ul>
+
+                    <div class="hidden-xs">
+                        <apex:outputLink rendered="{!IF(cam.camObj.Call_To_Action_URL__c!='' &&  cam.camObj.Call_To_Action_Button_Text__c!='', true, false)}" value="{!cam.camObj.Call_To_Action_URL__c}" styleClass="btn btn-primary btn-block" >{!cam.camObj.Call_To_Action_Button_Text__c}</apex:outputLink>
+                        <apex:outputLink rendered="{!IF(cam.camObj.Pre_Book_Discount_Code__c!='',true,false)}" styleClass="btn btn-primary btn-block" value="{!ccUri}">Sign Up</apex:outputLink>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-9 col-xs-12">
+                     <p><br/><apex:outputText value="{!cam.camObj.Brochure_Content__c}" escape="false"/></p>
+                </div>
+
+                 <div class="col-sm-3 col-xs-12 visible-xs-block">
+                    <apex:outputLink rendered="{!IF(cam.camObj.Call_To_Action_URL__c!='' &&  cam.camObj.Call_To_Action_Button_Text__c!='', true, false)}" value="{!cam.camObj.Call_To_Action_URL__c}" styleClass="btn btn-primary btn-block" >{!cam.camObj.Call_To_Action_Button_Text__c}</apex:outputLink>
+                    <apex:outputLink rendered="{!IF(cam.camObj.Pre_Book_Discount_Code__c!='',true,false)}" styleClass="btn btn-primary btn-block" value="{!ccUri}">Sign Up</apex:outputLink>
+                </div>
+             </div><!--end row-->
+            </div><!--End:Container-->
+        </apex:define>
+    </apex:composition>
+</apex:page>

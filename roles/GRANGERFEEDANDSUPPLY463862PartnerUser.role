@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>GRANGER FEED AND SUPPLY-463862 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>GRANGER FEED AND SUPPLY-463862 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>GRANGERFEEDANDSUPPLY463862PartnerManager</parentRole>
+</Role>

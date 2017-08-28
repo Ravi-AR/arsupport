@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>J AND C FEED AND FARM SUPPLY-548701 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>J AND C FEED AND FARM SUPPLY-548701 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>JANDCFEEDANDFARMSUPPLY548701PartnerManager</parentRole>
+</Role>

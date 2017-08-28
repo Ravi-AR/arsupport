@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Camapaign_Sharing_Local_Events_Exotics_R</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Campaign Sharing of local events for the Exotics team with read access.</description>
+        <label>Camapaign Sharing || Local Events Exotics (R)</label>
+        <sharedTo>
+            <group>Campaign_Sharing_Local_Events_Exotic_R</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Customer Events</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Region__c</field>
+            <operation>equals</operation>
+            <value>National Retail Exotics</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Campaign_Sharing_Engagement_R</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Shares the Campaigns with the Record Type of Engagement and provides Read Access</description>
+        <label>Campaign Sharing || Engagement (R)</label>
+        <sharedTo>
+            <group>Campaign_Sharing_Engagement_R</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Engagement Campaign</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Campaign_Sharing_FARM_VIP_R</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Campaign Sharing for the record type of FARM VIP with Read access.</description>
+        <label>Campaign Sharing || FARM VIP (R)</label>
+        <sharedTo>
+            <group>Campaign_Sharing_FARM_VIP_R</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Farm VIP Event</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Campaign_Sharing_FARM_VIP_R_W</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Campaign Sharing for local events with the record type of FARM VIP and providesw Read/Write access.</description>
+        <label>Campaign Sharing || FARM VIP (R/W)</label>
+        <sharedTo>
+            <group>Campaign_Sharing_FARM_VIP_R_W</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Farm VIP Event</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Campaign_Sharing_Local_Events_All_Read</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Shares campaigns with the record type of Customer Events and provides &quot;Read&quot; access.</description>
+        <label>Campaign Sharing || Local Events All (R)</label>
+        <sharedTo>
+            <group>Campaign_Sharing_Customer_Events_R</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Customer Events</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Campaign_Sharing_Local_Events_CBD_R</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Campaign Sharing for Local Events with the Record Type of Customer Events and Region of CBD</description>
+        <label>Campaign Sharing || Local Events CBD (R)</label>
+        <sharedTo>
+            <group>Campaign_Sharing_Local_Event_CBD_R</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Customer Events</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Region__c</field>
+            <operation>equals</operation>
+            <value>CBD</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Campaign_Sharing_Local_Events_East_R</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Campaign sharing with the Record Type of Customer Events in the East Region and provides read access.</description>
+        <label>Campaign Sharing || Local Events East (R)</label>
+        <sharedTo>
+            <group>Campaign_Sharing_East_R</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Customer Events</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Region__c</field>
+            <operation>equals</operation>
+            <value>Northeast</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Campaign_Sharing_Local_Events_South_R</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Shares the campaigns of Local Events with the South Region and provides read access.</description>
+        <label>Campaign Sharing || Local Events South (R)</label>
+        <sharedTo>
+            <group>Campaign_Sharing_South_R</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Customer Events</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Region__c</field>
+            <operation>equals</operation>
+            <value>Southern</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Campaign_Sharing_Local_Events_UMW_R</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Shares campaigns with the record type of Local Events with the UMW and provides Read Access</description>
+        <label>Campaign Sharing || Local Events UMW (R)</label>
+        <sharedTo>
+            <group>Campaign_Sharing_Local_Events_UMW_R</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Customer Events</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Region__c</field>
+            <operation>equals</operation>
+            <value>Upper Midwest</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Campaign_Sharing_National_Events_R_W</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Shares the campaigns with the record type of National Events with Read/Write Access</description>
+        <label>Campaign Sharing || National Events (R/W)</label>
+        <sharedTo>
+            <group>Campaign_Sharing_Nat_l_Events_R_W</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>National/Regional Events</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Campaign_Sharing_National_Events_Read</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Shares campaigns with the Record Type of National Event and provides Read access.</description>
+        <label>Campaign Sharing || National Events (R)</label>
+        <sharedTo>
+            <group>Campaign_Sharing_Nat_l_Events_R</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>National/Regional Events</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Community_Content_Mgr</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Community Content Mg</description>
+        <label>Community Content Mgr</label>
+        <sharedTo>
+            <role>Community_Content_Manager</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Promotions and Pre-Booking</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Customer_Ops_Campaign_Sharing_Rule</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Sharing Rule for Customer Operations Team to have visibility to Campaigns.</description>
+        <label>Customer Ops Campaign Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>Customer_Ops_Director</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Promotions and Pre-Booking,Farm VIP Event,Customer Events,National/Regional Events</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+</SharingRules>

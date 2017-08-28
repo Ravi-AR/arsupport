@@ -1,0 +1,15 @@
+<font face="arial">Thank you for contacting the Purina Customer Community service team. Your inquiry is important to us. Please allow 1 business day for a response. <br/>
+<br />Case # <b> {!Case.CaseNumber}</b> has been assigned to this inquiry.<br/>
+<br/>
+<br/>
+Purina Customer Service Support
+</font>
+<br/>
+<br/>
+
+
+
+
+<div style="font-size: 7pt">
+{!Case.Thread_Id}
+</div>

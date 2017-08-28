@@ -1,0 +1,2795 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Additional_LPS_Candidate__c</fullName>
+        <externalId>false</externalId>
+        <label>Additional LPS Candidate</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Address__c</fullName>
+        <externalId>false</externalId>
+        <formula>Dealer_Name__r.ShippingStreet &amp;BR()&amp;
+ Dealer_Name__r.ShippingCity &amp; &quot;, &quot;&amp; Dealer_Name__r.ShippingState &amp; &quot; &quot;&amp; Dealer_Name__r.ShippingPostalCode</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Address</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Annual_Points_Growth_Potential__c</fullName>
+        <externalId>false</externalId>
+        <label>Annual Points Growth Potential</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Annual_Points_Prior_Calendar_Year__c</fullName>
+        <externalId>false</externalId>
+        <label>Annual Points Prior Calendar Year</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Annual_Tons_Growth_Potential__c</fullName>
+        <externalId>false</externalId>
+        <label>Annual Tons Growth Potential</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Area__c</fullName>
+        <externalId>false</externalId>
+        <label>Area</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Great Lakes</fullName>
+                    <default>false</default>
+                    <label>Great Lakes</label>
+                </value>
+                <value>
+                    <fullName>Great West</fullName>
+                    <default>false</default>
+                    <label>Great West</label>
+                </value>
+                <value>
+                    <fullName>I-29 Dajota CBD</fullName>
+                    <default>false</default>
+                    <label>I-29 Dajota CBD</label>
+                </value>
+                <value>
+                    <fullName>Iowa</fullName>
+                    <default>false</default>
+                    <label>Iowa</label>
+                </value>
+                <value>
+                    <fullName>Mid South Lifestyle</fullName>
+                    <default>false</default>
+                    <label>Mid South Lifestyle</label>
+                </value>
+                <value>
+                    <fullName>Midwest</fullName>
+                    <default>false</default>
+                    <label>Midwest</label>
+                </value>
+                <value>
+                    <fullName>North Central</fullName>
+                    <default>false</default>
+                    <label>North Central</label>
+                </value>
+                <value>
+                    <fullName>Northeast Lifestyle</fullName>
+                    <default>false</default>
+                    <label>Northeast Lifestyle</label>
+                </value>
+                <value>
+                    <fullName>Pacific Coast</fullName>
+                    <default>false</default>
+                    <label>Pacific Coast</label>
+                </value>
+                <value>
+                    <fullName>Red River Area</fullName>
+                    <default>false</default>
+                    <label>Red River Area</label>
+                </value>
+                <value>
+                    <fullName>South Central</fullName>
+                    <default>false</default>
+                    <label>South Central</label>
+                </value>
+                <value>
+                    <fullName>Southern Coast</fullName>
+                    <default>false</default>
+                    <label>Southern Coast</label>
+                </value>
+                <value>
+                    <fullName>Wisconsin CBD</fullName>
+                    <default>false</default>
+                    <label>Wisconsin CBD</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Attitude__c</fullName>
+        <externalId>false</externalId>
+        <label>Attitude</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Candidate_for_Additional_Stores__c</fullName>
+        <externalId>false</externalId>
+        <label>Candidate for Additional Stores</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Comments</label>
+        <length>1000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Competitive_Brand_1__c</fullName>
+        <externalId>false</externalId>
+        <label>Competitive Brand #1</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>A&amp;M</fullName>
+                    <default>false</default>
+                    <label>A&amp;M</label>
+                </value>
+                <value>
+                    <fullName>Acco</fullName>
+                    <default>false</default>
+                    <label>Acco</label>
+                </value>
+                <value>
+                    <fullName>Ace Hi</fullName>
+                    <default>false</default>
+                    <label>Ace Hi</label>
+                </value>
+                <value>
+                    <fullName>Ackey</fullName>
+                    <default>false</default>
+                    <label>Ackey</label>
+                </value>
+                <value>
+                    <fullName>Adm</fullName>
+                    <default>false</default>
+                    <label>Adm</label>
+                </value>
+                <value>
+                    <fullName>Ag Choice (MFA)</fullName>
+                    <default>false</default>
+                    <label>Ag Choice (MFA)</label>
+                </value>
+                <value>
+                    <fullName>Agland</fullName>
+                    <default>false</default>
+                    <label>Agland</label>
+                </value>
+                <value>
+                    <fullName>Ag Lix</fullName>
+                    <default>false</default>
+                    <label>Ag Lix</label>
+                </value>
+                <value>
+                    <fullName>Agway</fullName>
+                    <default>false</default>
+                    <label>Agway</label>
+                </value>
+                <value>
+                    <fullName>Ahrberg</fullName>
+                    <default>false</default>
+                    <label>Ahrberg</label>
+                </value>
+                <value>
+                    <fullName>Akey</fullName>
+                    <default>false</default>
+                    <label>Akey</label>
+                </value>
+                <value>
+                    <fullName>Alaska Feed</fullName>
+                    <default>false</default>
+                    <label>Alaska Feed</label>
+                </value>
+                <value>
+                    <fullName>Albright&apos;S Mill</fullName>
+                    <default>false</default>
+                    <label>Albright&apos;S Mill</label>
+                </value>
+                <value>
+                    <fullName>American Feed</fullName>
+                    <default>false</default>
+                    <label>American Feed</label>
+                </value>
+                <value>
+                    <fullName>Armada</fullName>
+                    <default>false</default>
+                    <label>Armada</label>
+                </value>
+                <value>
+                    <fullName>Arrow</fullName>
+                    <default>false</default>
+                    <label>Arrow</label>
+                </value>
+                <value>
+                    <fullName>Aslyn Finch</fullName>
+                    <default>false</default>
+                    <label>Aslyn Finch</label>
+                </value>
+                <value>
+                    <fullName>Assorted Brands</fullName>
+                    <default>false</default>
+                    <label>Assorted Brands</label>
+                </value>
+                <value>
+                    <fullName>Banks Mlg</fullName>
+                    <default>false</default>
+                    <label>Banks Mlg</label>
+                </value>
+                <value>
+                    <fullName>Bar G</fullName>
+                    <default>false</default>
+                    <label>Bar G</label>
+                </value>
+                <value>
+                    <fullName>Bartlett</fullName>
+                    <default>false</default>
+                    <label>Bartlett</label>
+                </value>
+                <value>
+                    <fullName>Beaver</fullName>
+                    <default>false</default>
+                    <label>Beaver</label>
+                </value>
+                <value>
+                    <fullName>Big Gain</fullName>
+                    <default>false</default>
+                    <label>Big Gain</label>
+                </value>
+                <value>
+                    <fullName>Big V</fullName>
+                    <default>false</default>
+                    <label>Big V</label>
+                </value>
+                <value>
+                    <fullName>Blue Bonnet</fullName>
+                    <default>false</default>
+                    <label>Blue Bonnet</label>
+                </value>
+                <value>
+                    <fullName>Blue Seal</fullName>
+                    <default>false</default>
+                    <label>Blue Seal</label>
+                </value>
+                <value>
+                    <fullName>Bryant Grain</fullName>
+                    <default>false</default>
+                    <label>Bryant Grain</label>
+                </value>
+                <value>
+                    <fullName>Buckeye</fullName>
+                    <default>false</default>
+                    <label>Buckeye</label>
+                </value>
+                <value>
+                    <fullName>Burkmann</fullName>
+                    <default>false</default>
+                    <label>Burkmann</label>
+                </value>
+                <value>
+                    <fullName>Caldwell Milling</fullName>
+                    <default>false</default>
+                    <label>Caldwell Milling</label>
+                </value>
+                <value>
+                    <fullName>Cargill</fullName>
+                    <default>false</default>
+                    <label>Cargill</label>
+                </value>
+                <value>
+                    <fullName>Cavolar</fullName>
+                    <default>false</default>
+                    <label>Cavolar</label>
+                </value>
+                <value>
+                    <fullName>Central Farm Sup</fullName>
+                    <default>false</default>
+                    <label>Central Farm Sup</label>
+                </value>
+                <value>
+                    <fullName>Christian Feed</fullName>
+                    <default>false</default>
+                    <label>Christian Feed</label>
+                </value>
+                <value>
+                    <fullName>Chs Nutrition</fullName>
+                    <default>false</default>
+                    <label>Chs Nutrition</label>
+                </value>
+                <value>
+                    <fullName>Consolidated</fullName>
+                    <default>false</default>
+                    <label>Consolidated</label>
+                </value>
+                <value>
+                    <fullName>Consumer Supply</fullName>
+                    <default>false</default>
+                    <label>Consumer Supply</label>
+                </value>
+                <value>
+                    <fullName>Countryside</fullName>
+                    <default>false</default>
+                    <label>Countryside</label>
+                </value>
+                <value>
+                    <fullName>E-Barr Feeds</fullName>
+                    <default>false</default>
+                    <label>E-Barr Feeds</label>
+                </value>
+                <value>
+                    <fullName>Evans</fullName>
+                    <default>false</default>
+                    <label>Evans</label>
+                </value>
+                <value>
+                    <fullName>Faithway</fullName>
+                    <default>false</default>
+                    <label>Faithway</label>
+                </value>
+                <value>
+                    <fullName>Farmers Milling</fullName>
+                    <default>false</default>
+                    <label>Farmers Milling</label>
+                </value>
+                <value>
+                    <fullName>Feed In A Drum</fullName>
+                    <default>false</default>
+                    <label>Feed In A Drum</label>
+                </value>
+                <value>
+                    <fullName>Form-A-Feed</fullName>
+                    <default>false</default>
+                    <label>Form-A-Feed</label>
+                </value>
+                <value>
+                    <fullName>Frmrs Ranchers</fullName>
+                    <default>false</default>
+                    <label>Frmrs Ranchers</label>
+                </value>
+                <value>
+                    <fullName>G&amp;M</fullName>
+                    <default>false</default>
+                    <label>G&amp;M</label>
+                </value>
+                <value>
+                    <fullName>Golden Oak</fullName>
+                    <default>false</default>
+                    <label>Golden Oak</label>
+                </value>
+                <value>
+                    <fullName>Goliad Feed</fullName>
+                    <default>false</default>
+                    <label>Goliad Feed</label>
+                </value>
+                <value>
+                    <fullName>Hieden Feed Mix</fullName>
+                    <default>false</default>
+                    <label>Hieden Feed Mix</label>
+                </value>
+                <value>
+                    <fullName>Hometown</fullName>
+                    <default>false</default>
+                    <label>Hometown</label>
+                </value>
+                <value>
+                    <fullName>Hubbard</fullName>
+                    <default>false</default>
+                    <label>Hubbard</label>
+                </value>
+                <value>
+                    <fullName>Ifa</fullName>
+                    <default>false</default>
+                    <label>Ifa</label>
+                </value>
+                <value>
+                    <fullName>Jacoby Feed</fullName>
+                    <default>false</default>
+                    <label>Jacoby Feed</label>
+                </value>
+                <value>
+                    <fullName>Jbs United</fullName>
+                    <default>false</default>
+                    <label>Jbs United</label>
+                </value>
+                <value>
+                    <fullName>Jj Grist</fullName>
+                    <default>false</default>
+                    <label>Jj Grist</label>
+                </value>
+                <value>
+                    <fullName>Kalmbach</fullName>
+                    <default>false</default>
+                    <label>Kalmbach</label>
+                </value>
+                <value>
+                    <fullName>Kent</fullName>
+                    <default>false</default>
+                    <label>Kent</label>
+                </value>
+                <value>
+                    <fullName>L&amp;E</fullName>
+                    <default>false</default>
+                    <label>L&amp;E</label>
+                </value>
+                <value>
+                    <fullName>Legends</fullName>
+                    <default>false</default>
+                    <label>Legends</label>
+                </value>
+                <value>
+                    <fullName>Lindners</fullName>
+                    <default>false</default>
+                    <label>Lindners</label>
+                </value>
+                <value>
+                    <fullName>Lone Star</fullName>
+                    <default>false</default>
+                    <label>Lone Star</label>
+                </value>
+                <value>
+                    <fullName>Lutz&apos;S</fullName>
+                    <default>false</default>
+                    <label>Lutz&apos;S</label>
+                </value>
+                <value>
+                    <fullName>Martindale</fullName>
+                    <default>false</default>
+                    <label>Martindale</label>
+                </value>
+                <value>
+                    <fullName>Mccauley</fullName>
+                    <default>false</default>
+                    <label>Mccauley</label>
+                </value>
+                <value>
+                    <fullName>Mfm</fullName>
+                    <default>false</default>
+                    <label>Mfm</label>
+                </value>
+                <value>
+                    <fullName>M-G</fullName>
+                    <default>false</default>
+                    <label>M-G</label>
+                </value>
+                <value>
+                    <fullName>Midwest Ag</fullName>
+                    <default>false</default>
+                    <label>Midwest Ag</label>
+                </value>
+                <value>
+                    <fullName>Mix 30</fullName>
+                    <default>false</default>
+                    <label>Mix 30</label>
+                </value>
+                <value>
+                    <fullName>Mls</fullName>
+                    <default>false</default>
+                    <label>Mls</label>
+                </value>
+                <value>
+                    <fullName>Moore</fullName>
+                    <default>false</default>
+                    <label>Moore</label>
+                </value>
+                <value>
+                    <fullName>Moormans</fullName>
+                    <default>false</default>
+                    <label>Moormans</label>
+                </value>
+                <value>
+                    <fullName>Nemo Feed</fullName>
+                    <default>false</default>
+                    <label>Nemo Feed</label>
+                </value>
+                <value>
+                    <fullName>Nutrena</fullName>
+                    <default>false</default>
+                    <label>Nutrena</label>
+                </value>
+                <value>
+                    <fullName>O&apos;Neal</fullName>
+                    <default>false</default>
+                    <label>O&apos;Neal</label>
+                </value>
+                <value>
+                    <fullName>Performance Feeds</fullName>
+                    <default>false</default>
+                    <label>Performance Feeds</label>
+                </value>
+                <value>
+                    <fullName>Pipestone</fullName>
+                    <default>false</default>
+                    <label>Pipestone</label>
+                </value>
+                <value>
+                    <fullName>Poulin</fullName>
+                    <default>false</default>
+                    <label>Poulin</label>
+                </value>
+                <value>
+                    <fullName>Powell Milling</fullName>
+                    <default>false</default>
+                    <label>Powell Milling</label>
+                </value>
+                <value>
+                    <fullName>Premier</fullName>
+                    <default>false</default>
+                    <label>Premier</label>
+                </value>
+                <value>
+                    <fullName>Prime Quality</fullName>
+                    <default>false</default>
+                    <label>Prime Quality</label>
+                </value>
+                <value>
+                    <fullName>Producer Coop</fullName>
+                    <default>false</default>
+                    <label>Producer Coop</label>
+                </value>
+                <value>
+                    <fullName>Progressive</fullName>
+                    <default>false</default>
+                    <label>Progressive</label>
+                </value>
+                <value>
+                    <fullName>Qlf</fullName>
+                    <default>false</default>
+                    <label>Qlf</label>
+                </value>
+                <value>
+                    <fullName>Ranchway</fullName>
+                    <default>false</default>
+                    <label>Ranchway</label>
+                </value>
+                <value>
+                    <fullName>Rangens</fullName>
+                    <default>false</default>
+                    <label>Rangens</label>
+                </value>
+                <value>
+                    <fullName>Red River</fullName>
+                    <default>false</default>
+                    <label>Red River</label>
+                </value>
+                <value>
+                    <fullName>Richland Feed</fullName>
+                    <default>false</default>
+                    <label>Richland Feed</label>
+                </value>
+                <value>
+                    <fullName>Rietdyks Feed</fullName>
+                    <default>false</default>
+                    <label>Rietdyks Feed</label>
+                </value>
+                <value>
+                    <fullName>Sabine Valley</fullName>
+                    <default>false</default>
+                    <label>Sabine Valley</label>
+                </value>
+                <value>
+                    <fullName>Seminole</fullName>
+                    <default>false</default>
+                    <label>Seminole</label>
+                </value>
+                <value>
+                    <fullName>Shawnee Feeds</fullName>
+                    <default>false</default>
+                    <label>Shawnee Feeds</label>
+                </value>
+                <value>
+                    <fullName>Show Rite</fullName>
+                    <default>false</default>
+                    <label>Show Rite</label>
+                </value>
+                <value>
+                    <fullName>Sioux Nation</fullName>
+                    <default>false</default>
+                    <label>Sioux Nation</label>
+                </value>
+                <value>
+                    <fullName>Smart-Lyx</fullName>
+                    <default>false</default>
+                    <label>Smart-Lyx</label>
+                </value>
+                <value>
+                    <fullName>Southern States</fullName>
+                    <default>false</default>
+                    <label>Southern States</label>
+                </value>
+                <value>
+                    <fullName>St. Paul</fullName>
+                    <default>false</default>
+                    <label>St. Paul</label>
+                </value>
+                <value>
+                    <fullName>Stillwater Mlg</fullName>
+                    <default>false</default>
+                    <label>Stillwater Mlg</label>
+                </value>
+                <value>
+                    <fullName>Sunglo</fullName>
+                    <default>false</default>
+                    <label>Sunglo</label>
+                </value>
+                <value>
+                    <fullName>Sunnyside Feeds</fullName>
+                    <default>false</default>
+                    <label>Sunnyside Feeds</label>
+                </value>
+                <value>
+                    <fullName>Sunrise</fullName>
+                    <default>false</default>
+                    <label>Sunrise</label>
+                </value>
+                <value>
+                    <fullName>Sure Fed</fullName>
+                    <default>false</default>
+                    <label>Sure Fed</label>
+                </value>
+                <value>
+                    <fullName>Suthers</fullName>
+                    <default>false</default>
+                    <label>Suthers</label>
+                </value>
+                <value>
+                    <fullName>Tenn Frmrs Coop</fullName>
+                    <default>false</default>
+                    <label>Tenn Frmrs Coop</label>
+                </value>
+                <value>
+                    <fullName>Thomas Moore</fullName>
+                    <default>false</default>
+                    <label>Thomas Moore</label>
+                </value>
+                <value>
+                    <fullName>Tony&apos;S House Brand</fullName>
+                    <default>false</default>
+                    <label>Tony&apos;S House Brand</label>
+                </value>
+                <value>
+                    <fullName>Triple Crown</fullName>
+                    <default>false</default>
+                    <label>Triple Crown</label>
+                </value>
+                <value>
+                    <fullName>Tucker Mlg</fullName>
+                    <default>false</default>
+                    <label>Tucker Mlg</label>
+                </value>
+                <value>
+                    <fullName>Umbarger</fullName>
+                    <default>false</default>
+                    <label>Umbarger</label>
+                </value>
+                <value>
+                    <fullName>Union Mills</fullName>
+                    <default>false</default>
+                    <label>Union Mills</label>
+                </value>
+                <value>
+                    <fullName>Vigortone</fullName>
+                    <default>false</default>
+                    <label>Vigortone</label>
+                </value>
+                <value>
+                    <fullName>Ware Milling</fullName>
+                    <default>false</default>
+                    <label>Ware Milling</label>
+                </value>
+                <value>
+                    <fullName>Wendlands</fullName>
+                    <default>false</default>
+                    <label>Wendlands</label>
+                </value>
+                <value>
+                    <fullName>Western Milling (Krues)</fullName>
+                    <default>false</default>
+                    <label>Western Milling (Krues)</label>
+                </value>
+                <value>
+                    <fullName>Westway</fullName>
+                    <default>false</default>
+                    <label>Westway</label>
+                </value>
+                <value>
+                    <fullName>Witmer</fullName>
+                    <default>false</default>
+                    <label>Witmer</label>
+                </value>
+                <value>
+                    <fullName>Woodys</fullName>
+                    <default>false</default>
+                    <label>Woodys</label>
+                </value>
+                <value>
+                    <fullName>Wright Coop</fullName>
+                    <default>false</default>
+                    <label>Wright Coop</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Competitive_Brand_2__c</fullName>
+        <externalId>false</externalId>
+        <label>Competitive Brand #2</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>A&amp;M</fullName>
+                    <default>false</default>
+                    <label>A&amp;M</label>
+                </value>
+                <value>
+                    <fullName>Acco</fullName>
+                    <default>false</default>
+                    <label>Acco</label>
+                </value>
+                <value>
+                    <fullName>Ace Hi</fullName>
+                    <default>false</default>
+                    <label>Ace Hi</label>
+                </value>
+                <value>
+                    <fullName>Ackey</fullName>
+                    <default>false</default>
+                    <label>Ackey</label>
+                </value>
+                <value>
+                    <fullName>Adm</fullName>
+                    <default>false</default>
+                    <label>Adm</label>
+                </value>
+                <value>
+                    <fullName>Ag Choice (MFA)</fullName>
+                    <default>false</default>
+                    <label>Ag Choice (MFA)</label>
+                </value>
+                <value>
+                    <fullName>Agland</fullName>
+                    <default>false</default>
+                    <label>Agland</label>
+                </value>
+                <value>
+                    <fullName>Ag Lix</fullName>
+                    <default>false</default>
+                    <label>Ag Lix</label>
+                </value>
+                <value>
+                    <fullName>Agway</fullName>
+                    <default>false</default>
+                    <label>Agway</label>
+                </value>
+                <value>
+                    <fullName>Ahrberg</fullName>
+                    <default>false</default>
+                    <label>Ahrberg</label>
+                </value>
+                <value>
+                    <fullName>Akey</fullName>
+                    <default>false</default>
+                    <label>Akey</label>
+                </value>
+                <value>
+                    <fullName>Alaska Feed</fullName>
+                    <default>false</default>
+                    <label>Alaska Feed</label>
+                </value>
+                <value>
+                    <fullName>Albright&apos;S Mill</fullName>
+                    <default>false</default>
+                    <label>Albright&apos;S Mill</label>
+                </value>
+                <value>
+                    <fullName>American Feed</fullName>
+                    <default>false</default>
+                    <label>American Feed</label>
+                </value>
+                <value>
+                    <fullName>Armada</fullName>
+                    <default>false</default>
+                    <label>Armada</label>
+                </value>
+                <value>
+                    <fullName>Arrow</fullName>
+                    <default>false</default>
+                    <label>Arrow</label>
+                </value>
+                <value>
+                    <fullName>Aslyn Finch</fullName>
+                    <default>false</default>
+                    <label>Aslyn Finch</label>
+                </value>
+                <value>
+                    <fullName>Assorted Brands</fullName>
+                    <default>false</default>
+                    <label>Assorted Brands</label>
+                </value>
+                <value>
+                    <fullName>Banks Mlg</fullName>
+                    <default>false</default>
+                    <label>Banks Mlg</label>
+                </value>
+                <value>
+                    <fullName>Bar G</fullName>
+                    <default>false</default>
+                    <label>Bar G</label>
+                </value>
+                <value>
+                    <fullName>Bartlett</fullName>
+                    <default>false</default>
+                    <label>Bartlett</label>
+                </value>
+                <value>
+                    <fullName>Beaver</fullName>
+                    <default>false</default>
+                    <label>Beaver</label>
+                </value>
+                <value>
+                    <fullName>Big Gain</fullName>
+                    <default>false</default>
+                    <label>Big Gain</label>
+                </value>
+                <value>
+                    <fullName>Big V</fullName>
+                    <default>false</default>
+                    <label>Big V</label>
+                </value>
+                <value>
+                    <fullName>Blue Bonnet</fullName>
+                    <default>false</default>
+                    <label>Blue Bonnet</label>
+                </value>
+                <value>
+                    <fullName>Blue Seal</fullName>
+                    <default>false</default>
+                    <label>Blue Seal</label>
+                </value>
+                <value>
+                    <fullName>Bryant Grain</fullName>
+                    <default>false</default>
+                    <label>Bryant Grain</label>
+                </value>
+                <value>
+                    <fullName>Buckeye</fullName>
+                    <default>false</default>
+                    <label>Buckeye</label>
+                </value>
+                <value>
+                    <fullName>Burkmann</fullName>
+                    <default>false</default>
+                    <label>Burkmann</label>
+                </value>
+                <value>
+                    <fullName>Caldwell Milling</fullName>
+                    <default>false</default>
+                    <label>Caldwell Milling</label>
+                </value>
+                <value>
+                    <fullName>Cargill</fullName>
+                    <default>false</default>
+                    <label>Cargill</label>
+                </value>
+                <value>
+                    <fullName>Cavolar</fullName>
+                    <default>false</default>
+                    <label>Cavolar</label>
+                </value>
+                <value>
+                    <fullName>Central Farm Sup</fullName>
+                    <default>false</default>
+                    <label>Central Farm Sup</label>
+                </value>
+                <value>
+                    <fullName>Christian Feed</fullName>
+                    <default>false</default>
+                    <label>Christian Feed</label>
+                </value>
+                <value>
+                    <fullName>Chs Nutrition</fullName>
+                    <default>false</default>
+                    <label>Chs Nutrition</label>
+                </value>
+                <value>
+                    <fullName>Consolidated</fullName>
+                    <default>false</default>
+                    <label>Consolidated</label>
+                </value>
+                <value>
+                    <fullName>Consumer Supply</fullName>
+                    <default>false</default>
+                    <label>Consumer Supply</label>
+                </value>
+                <value>
+                    <fullName>Countryside</fullName>
+                    <default>false</default>
+                    <label>Countryside</label>
+                </value>
+                <value>
+                    <fullName>E-Barr Feeds</fullName>
+                    <default>false</default>
+                    <label>E-Barr Feeds</label>
+                </value>
+                <value>
+                    <fullName>Evans</fullName>
+                    <default>false</default>
+                    <label>Evans</label>
+                </value>
+                <value>
+                    <fullName>Faithway</fullName>
+                    <default>false</default>
+                    <label>Faithway</label>
+                </value>
+                <value>
+                    <fullName>Farmers Milling</fullName>
+                    <default>false</default>
+                    <label>Farmers Milling</label>
+                </value>
+                <value>
+                    <fullName>Feed In A Drum</fullName>
+                    <default>false</default>
+                    <label>Feed In A Drum</label>
+                </value>
+                <value>
+                    <fullName>Form-A-Feed</fullName>
+                    <default>false</default>
+                    <label>Form-A-Feed</label>
+                </value>
+                <value>
+                    <fullName>Frmrs Ranchers</fullName>
+                    <default>false</default>
+                    <label>Frmrs Ranchers</label>
+                </value>
+                <value>
+                    <fullName>G&amp;M</fullName>
+                    <default>false</default>
+                    <label>G&amp;M</label>
+                </value>
+                <value>
+                    <fullName>Golden Oak</fullName>
+                    <default>false</default>
+                    <label>Golden Oak</label>
+                </value>
+                <value>
+                    <fullName>Goliad Feed</fullName>
+                    <default>false</default>
+                    <label>Goliad Feed</label>
+                </value>
+                <value>
+                    <fullName>Hieden Feed Mix</fullName>
+                    <default>false</default>
+                    <label>Hieden Feed Mix</label>
+                </value>
+                <value>
+                    <fullName>Hometown</fullName>
+                    <default>false</default>
+                    <label>Hometown</label>
+                </value>
+                <value>
+                    <fullName>Hubbard</fullName>
+                    <default>false</default>
+                    <label>Hubbard</label>
+                </value>
+                <value>
+                    <fullName>Ifa</fullName>
+                    <default>false</default>
+                    <label>Ifa</label>
+                </value>
+                <value>
+                    <fullName>Jacoby Feed</fullName>
+                    <default>false</default>
+                    <label>Jacoby Feed</label>
+                </value>
+                <value>
+                    <fullName>Jbs United</fullName>
+                    <default>false</default>
+                    <label>Jbs United</label>
+                </value>
+                <value>
+                    <fullName>Jj Grist</fullName>
+                    <default>false</default>
+                    <label>Jj Grist</label>
+                </value>
+                <value>
+                    <fullName>Kalmbach</fullName>
+                    <default>false</default>
+                    <label>Kalmbach</label>
+                </value>
+                <value>
+                    <fullName>Kent</fullName>
+                    <default>false</default>
+                    <label>Kent</label>
+                </value>
+                <value>
+                    <fullName>L&amp;E</fullName>
+                    <default>false</default>
+                    <label>L&amp;E</label>
+                </value>
+                <value>
+                    <fullName>Legends</fullName>
+                    <default>false</default>
+                    <label>Legends</label>
+                </value>
+                <value>
+                    <fullName>Lindners</fullName>
+                    <default>false</default>
+                    <label>Lindners</label>
+                </value>
+                <value>
+                    <fullName>Lone Star</fullName>
+                    <default>false</default>
+                    <label>Lone Star</label>
+                </value>
+                <value>
+                    <fullName>Lutz&apos;S</fullName>
+                    <default>false</default>
+                    <label>Lutz&apos;S</label>
+                </value>
+                <value>
+                    <fullName>Martindale</fullName>
+                    <default>false</default>
+                    <label>Martindale</label>
+                </value>
+                <value>
+                    <fullName>Mccauley</fullName>
+                    <default>false</default>
+                    <label>Mccauley</label>
+                </value>
+                <value>
+                    <fullName>Mfm</fullName>
+                    <default>false</default>
+                    <label>Mfm</label>
+                </value>
+                <value>
+                    <fullName>M-G</fullName>
+                    <default>false</default>
+                    <label>M-G</label>
+                </value>
+                <value>
+                    <fullName>Midwest Ag</fullName>
+                    <default>false</default>
+                    <label>Midwest Ag</label>
+                </value>
+                <value>
+                    <fullName>Mix 30</fullName>
+                    <default>false</default>
+                    <label>Mix 30</label>
+                </value>
+                <value>
+                    <fullName>Mls</fullName>
+                    <default>false</default>
+                    <label>Mls</label>
+                </value>
+                <value>
+                    <fullName>Moore</fullName>
+                    <default>false</default>
+                    <label>Moore</label>
+                </value>
+                <value>
+                    <fullName>Moormans</fullName>
+                    <default>false</default>
+                    <label>Moormans</label>
+                </value>
+                <value>
+                    <fullName>Nemo Feed</fullName>
+                    <default>false</default>
+                    <label>Nemo Feed</label>
+                </value>
+                <value>
+                    <fullName>Nutrena</fullName>
+                    <default>false</default>
+                    <label>Nutrena</label>
+                </value>
+                <value>
+                    <fullName>O&apos;Neal</fullName>
+                    <default>false</default>
+                    <label>O&apos;Neal</label>
+                </value>
+                <value>
+                    <fullName>Performance Feeds</fullName>
+                    <default>false</default>
+                    <label>Performance Feeds</label>
+                </value>
+                <value>
+                    <fullName>Pipestone</fullName>
+                    <default>false</default>
+                    <label>Pipestone</label>
+                </value>
+                <value>
+                    <fullName>Poulin</fullName>
+                    <default>false</default>
+                    <label>Poulin</label>
+                </value>
+                <value>
+                    <fullName>Powell Milling</fullName>
+                    <default>false</default>
+                    <label>Powell Milling</label>
+                </value>
+                <value>
+                    <fullName>Premier</fullName>
+                    <default>false</default>
+                    <label>Premier</label>
+                </value>
+                <value>
+                    <fullName>Prime Quality</fullName>
+                    <default>false</default>
+                    <label>Prime Quality</label>
+                </value>
+                <value>
+                    <fullName>Producer Coop</fullName>
+                    <default>false</default>
+                    <label>Producer Coop</label>
+                </value>
+                <value>
+                    <fullName>Progressive</fullName>
+                    <default>false</default>
+                    <label>Progressive</label>
+                </value>
+                <value>
+                    <fullName>Qlf</fullName>
+                    <default>false</default>
+                    <label>Qlf</label>
+                </value>
+                <value>
+                    <fullName>Ranchway</fullName>
+                    <default>false</default>
+                    <label>Ranchway</label>
+                </value>
+                <value>
+                    <fullName>Rangens</fullName>
+                    <default>false</default>
+                    <label>Rangens</label>
+                </value>
+                <value>
+                    <fullName>Red River</fullName>
+                    <default>false</default>
+                    <label>Red River</label>
+                </value>
+                <value>
+                    <fullName>Richland Feed</fullName>
+                    <default>false</default>
+                    <label>Richland Feed</label>
+                </value>
+                <value>
+                    <fullName>Rietdyks Feed</fullName>
+                    <default>false</default>
+                    <label>Rietdyks Feed</label>
+                </value>
+                <value>
+                    <fullName>Sabine Valley</fullName>
+                    <default>false</default>
+                    <label>Sabine Valley</label>
+                </value>
+                <value>
+                    <fullName>Seminole</fullName>
+                    <default>false</default>
+                    <label>Seminole</label>
+                </value>
+                <value>
+                    <fullName>Shawnee Feeds</fullName>
+                    <default>false</default>
+                    <label>Shawnee Feeds</label>
+                </value>
+                <value>
+                    <fullName>Show Rite</fullName>
+                    <default>false</default>
+                    <label>Show Rite</label>
+                </value>
+                <value>
+                    <fullName>Sioux Nation</fullName>
+                    <default>false</default>
+                    <label>Sioux Nation</label>
+                </value>
+                <value>
+                    <fullName>Smart-Lyx</fullName>
+                    <default>false</default>
+                    <label>Smart-Lyx</label>
+                </value>
+                <value>
+                    <fullName>Southern States</fullName>
+                    <default>false</default>
+                    <label>Southern States</label>
+                </value>
+                <value>
+                    <fullName>St. Paul</fullName>
+                    <default>false</default>
+                    <label>St. Paul</label>
+                </value>
+                <value>
+                    <fullName>Stillwater Mlg</fullName>
+                    <default>false</default>
+                    <label>Stillwater Mlg</label>
+                </value>
+                <value>
+                    <fullName>Sunglo</fullName>
+                    <default>false</default>
+                    <label>Sunglo</label>
+                </value>
+                <value>
+                    <fullName>Sunnyside Feeds</fullName>
+                    <default>false</default>
+                    <label>Sunnyside Feeds</label>
+                </value>
+                <value>
+                    <fullName>Sunrise</fullName>
+                    <default>false</default>
+                    <label>Sunrise</label>
+                </value>
+                <value>
+                    <fullName>Sure Fed</fullName>
+                    <default>false</default>
+                    <label>Sure Fed</label>
+                </value>
+                <value>
+                    <fullName>Suthers</fullName>
+                    <default>false</default>
+                    <label>Suthers</label>
+                </value>
+                <value>
+                    <fullName>Tenn Frmrs Coop</fullName>
+                    <default>false</default>
+                    <label>Tenn Frmrs Coop</label>
+                </value>
+                <value>
+                    <fullName>Thomas Moore</fullName>
+                    <default>false</default>
+                    <label>Thomas Moore</label>
+                </value>
+                <value>
+                    <fullName>Tony&apos;S House Brand</fullName>
+                    <default>false</default>
+                    <label>Tony&apos;S House Brand</label>
+                </value>
+                <value>
+                    <fullName>Triple Crown</fullName>
+                    <default>false</default>
+                    <label>Triple Crown</label>
+                </value>
+                <value>
+                    <fullName>Tucker Mlg</fullName>
+                    <default>false</default>
+                    <label>Tucker Mlg</label>
+                </value>
+                <value>
+                    <fullName>Umbarger</fullName>
+                    <default>false</default>
+                    <label>Umbarger</label>
+                </value>
+                <value>
+                    <fullName>Union Mills</fullName>
+                    <default>false</default>
+                    <label>Union Mills</label>
+                </value>
+                <value>
+                    <fullName>Vigortone</fullName>
+                    <default>false</default>
+                    <label>Vigortone</label>
+                </value>
+                <value>
+                    <fullName>Ware Milling</fullName>
+                    <default>false</default>
+                    <label>Ware Milling</label>
+                </value>
+                <value>
+                    <fullName>Wendlands</fullName>
+                    <default>false</default>
+                    <label>Wendlands</label>
+                </value>
+                <value>
+                    <fullName>Western Milling (Krues)</fullName>
+                    <default>false</default>
+                    <label>Western Milling (Krues)</label>
+                </value>
+                <value>
+                    <fullName>Westway</fullName>
+                    <default>false</default>
+                    <label>Westway</label>
+                </value>
+                <value>
+                    <fullName>Witmer</fullName>
+                    <default>false</default>
+                    <label>Witmer</label>
+                </value>
+                <value>
+                    <fullName>Woodys</fullName>
+                    <default>false</default>
+                    <label>Woodys</label>
+                </value>
+                <value>
+                    <fullName>Wright Coop</fullName>
+                    <default>false</default>
+                    <label>Wright Coop</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Competitive_Brand_3__c</fullName>
+        <externalId>false</externalId>
+        <label>Competitive Brand #3</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>A&amp;M</fullName>
+                    <default>false</default>
+                    <label>A&amp;M</label>
+                </value>
+                <value>
+                    <fullName>Acco</fullName>
+                    <default>false</default>
+                    <label>Acco</label>
+                </value>
+                <value>
+                    <fullName>Ace Hi</fullName>
+                    <default>false</default>
+                    <label>Ace Hi</label>
+                </value>
+                <value>
+                    <fullName>Ackey</fullName>
+                    <default>false</default>
+                    <label>Ackey</label>
+                </value>
+                <value>
+                    <fullName>Adm</fullName>
+                    <default>false</default>
+                    <label>Adm</label>
+                </value>
+                <value>
+                    <fullName>Ag Choice (MFA)</fullName>
+                    <default>false</default>
+                    <label>Ag Choice (MFA)</label>
+                </value>
+                <value>
+                    <fullName>Agland</fullName>
+                    <default>false</default>
+                    <label>Agland</label>
+                </value>
+                <value>
+                    <fullName>Ag Lix</fullName>
+                    <default>false</default>
+                    <label>Ag Lix</label>
+                </value>
+                <value>
+                    <fullName>Agway</fullName>
+                    <default>false</default>
+                    <label>Agway</label>
+                </value>
+                <value>
+                    <fullName>Ahrberg</fullName>
+                    <default>false</default>
+                    <label>Ahrberg</label>
+                </value>
+                <value>
+                    <fullName>Akey</fullName>
+                    <default>false</default>
+                    <label>Akey</label>
+                </value>
+                <value>
+                    <fullName>Alaska Feed</fullName>
+                    <default>false</default>
+                    <label>Alaska Feed</label>
+                </value>
+                <value>
+                    <fullName>Albright&apos;S Mill</fullName>
+                    <default>false</default>
+                    <label>Albright&apos;S Mill</label>
+                </value>
+                <value>
+                    <fullName>American Feed</fullName>
+                    <default>false</default>
+                    <label>American Feed</label>
+                </value>
+                <value>
+                    <fullName>Armada</fullName>
+                    <default>false</default>
+                    <label>Armada</label>
+                </value>
+                <value>
+                    <fullName>Arrow</fullName>
+                    <default>false</default>
+                    <label>Arrow</label>
+                </value>
+                <value>
+                    <fullName>Aslyn Finch</fullName>
+                    <default>false</default>
+                    <label>Aslyn Finch</label>
+                </value>
+                <value>
+                    <fullName>Assorted Brands</fullName>
+                    <default>false</default>
+                    <label>Assorted Brands</label>
+                </value>
+                <value>
+                    <fullName>Banks Mlg</fullName>
+                    <default>false</default>
+                    <label>Banks Mlg</label>
+                </value>
+                <value>
+                    <fullName>Bar G</fullName>
+                    <default>false</default>
+                    <label>Bar G</label>
+                </value>
+                <value>
+                    <fullName>Bartlett</fullName>
+                    <default>false</default>
+                    <label>Bartlett</label>
+                </value>
+                <value>
+                    <fullName>Beaver</fullName>
+                    <default>false</default>
+                    <label>Beaver</label>
+                </value>
+                <value>
+                    <fullName>Big Gain</fullName>
+                    <default>false</default>
+                    <label>Big Gain</label>
+                </value>
+                <value>
+                    <fullName>Big V</fullName>
+                    <default>false</default>
+                    <label>Big V</label>
+                </value>
+                <value>
+                    <fullName>Blue Bonnet</fullName>
+                    <default>false</default>
+                    <label>Blue Bonnet</label>
+                </value>
+                <value>
+                    <fullName>Blue Seal</fullName>
+                    <default>false</default>
+                    <label>Blue Seal</label>
+                </value>
+                <value>
+                    <fullName>Bryant Grain</fullName>
+                    <default>false</default>
+                    <label>Bryant Grain</label>
+                </value>
+                <value>
+                    <fullName>Buckeye</fullName>
+                    <default>false</default>
+                    <label>Buckeye</label>
+                </value>
+                <value>
+                    <fullName>Burkmann</fullName>
+                    <default>false</default>
+                    <label>Burkmann</label>
+                </value>
+                <value>
+                    <fullName>Caldwell Milling</fullName>
+                    <default>false</default>
+                    <label>Caldwell Milling</label>
+                </value>
+                <value>
+                    <fullName>Cargill</fullName>
+                    <default>false</default>
+                    <label>Cargill</label>
+                </value>
+                <value>
+                    <fullName>Cavolar</fullName>
+                    <default>false</default>
+                    <label>Cavolar</label>
+                </value>
+                <value>
+                    <fullName>Central Farm Sup</fullName>
+                    <default>false</default>
+                    <label>Central Farm Sup</label>
+                </value>
+                <value>
+                    <fullName>Christian Feed</fullName>
+                    <default>false</default>
+                    <label>Christian Feed</label>
+                </value>
+                <value>
+                    <fullName>Chs Nutrition</fullName>
+                    <default>false</default>
+                    <label>Chs Nutrition</label>
+                </value>
+                <value>
+                    <fullName>Consolidated</fullName>
+                    <default>false</default>
+                    <label>Consolidated</label>
+                </value>
+                <value>
+                    <fullName>Consumer Supply</fullName>
+                    <default>false</default>
+                    <label>Consumer Supply</label>
+                </value>
+                <value>
+                    <fullName>Countryside</fullName>
+                    <default>false</default>
+                    <label>Countryside</label>
+                </value>
+                <value>
+                    <fullName>E-Barr Feeds</fullName>
+                    <default>false</default>
+                    <label>E-Barr Feeds</label>
+                </value>
+                <value>
+                    <fullName>Evans</fullName>
+                    <default>false</default>
+                    <label>Evans</label>
+                </value>
+                <value>
+                    <fullName>Faithway</fullName>
+                    <default>false</default>
+                    <label>Faithway</label>
+                </value>
+                <value>
+                    <fullName>Farmers Milling</fullName>
+                    <default>false</default>
+                    <label>Farmers Milling</label>
+                </value>
+                <value>
+                    <fullName>Feed In A Drum</fullName>
+                    <default>false</default>
+                    <label>Feed In A Drum</label>
+                </value>
+                <value>
+                    <fullName>Form-A-Feed</fullName>
+                    <default>false</default>
+                    <label>Form-A-Feed</label>
+                </value>
+                <value>
+                    <fullName>Frmrs Ranchers</fullName>
+                    <default>false</default>
+                    <label>Frmrs Ranchers</label>
+                </value>
+                <value>
+                    <fullName>G&amp;M</fullName>
+                    <default>false</default>
+                    <label>G&amp;M</label>
+                </value>
+                <value>
+                    <fullName>Golden Oak</fullName>
+                    <default>false</default>
+                    <label>Golden Oak</label>
+                </value>
+                <value>
+                    <fullName>Goliad Feed</fullName>
+                    <default>false</default>
+                    <label>Goliad Feed</label>
+                </value>
+                <value>
+                    <fullName>Hieden Feed Mix</fullName>
+                    <default>false</default>
+                    <label>Hieden Feed Mix</label>
+                </value>
+                <value>
+                    <fullName>Hometown</fullName>
+                    <default>false</default>
+                    <label>Hometown</label>
+                </value>
+                <value>
+                    <fullName>Hubbard</fullName>
+                    <default>false</default>
+                    <label>Hubbard</label>
+                </value>
+                <value>
+                    <fullName>Ifa</fullName>
+                    <default>false</default>
+                    <label>Ifa</label>
+                </value>
+                <value>
+                    <fullName>Jacoby Feed</fullName>
+                    <default>false</default>
+                    <label>Jacoby Feed</label>
+                </value>
+                <value>
+                    <fullName>Jbs United</fullName>
+                    <default>false</default>
+                    <label>Jbs United</label>
+                </value>
+                <value>
+                    <fullName>Jj Grist</fullName>
+                    <default>false</default>
+                    <label>Jj Grist</label>
+                </value>
+                <value>
+                    <fullName>Kalmbach</fullName>
+                    <default>false</default>
+                    <label>Kalmbach</label>
+                </value>
+                <value>
+                    <fullName>Kent</fullName>
+                    <default>false</default>
+                    <label>Kent</label>
+                </value>
+                <value>
+                    <fullName>L&amp;E</fullName>
+                    <default>false</default>
+                    <label>L&amp;E</label>
+                </value>
+                <value>
+                    <fullName>Legends</fullName>
+                    <default>false</default>
+                    <label>Legends</label>
+                </value>
+                <value>
+                    <fullName>Lindners</fullName>
+                    <default>false</default>
+                    <label>Lindners</label>
+                </value>
+                <value>
+                    <fullName>Lone Star</fullName>
+                    <default>false</default>
+                    <label>Lone Star</label>
+                </value>
+                <value>
+                    <fullName>Lutz&apos;S</fullName>
+                    <default>false</default>
+                    <label>Lutz&apos;S</label>
+                </value>
+                <value>
+                    <fullName>Martindale</fullName>
+                    <default>false</default>
+                    <label>Martindale</label>
+                </value>
+                <value>
+                    <fullName>Mccauley</fullName>
+                    <default>false</default>
+                    <label>Mccauley</label>
+                </value>
+                <value>
+                    <fullName>Mfm</fullName>
+                    <default>false</default>
+                    <label>Mfm</label>
+                </value>
+                <value>
+                    <fullName>M-G</fullName>
+                    <default>false</default>
+                    <label>M-G</label>
+                </value>
+                <value>
+                    <fullName>Midwest Ag</fullName>
+                    <default>false</default>
+                    <label>Midwest Ag</label>
+                </value>
+                <value>
+                    <fullName>Mix 30</fullName>
+                    <default>false</default>
+                    <label>Mix 30</label>
+                </value>
+                <value>
+                    <fullName>Mls</fullName>
+                    <default>false</default>
+                    <label>Mls</label>
+                </value>
+                <value>
+                    <fullName>Moore</fullName>
+                    <default>false</default>
+                    <label>Moore</label>
+                </value>
+                <value>
+                    <fullName>Moormans</fullName>
+                    <default>false</default>
+                    <label>Moormans</label>
+                </value>
+                <value>
+                    <fullName>Nemo Feed</fullName>
+                    <default>false</default>
+                    <label>Nemo Feed</label>
+                </value>
+                <value>
+                    <fullName>Nutrena</fullName>
+                    <default>false</default>
+                    <label>Nutrena</label>
+                </value>
+                <value>
+                    <fullName>O&apos;Neal</fullName>
+                    <default>false</default>
+                    <label>O&apos;Neal</label>
+                </value>
+                <value>
+                    <fullName>Performance Feeds</fullName>
+                    <default>false</default>
+                    <label>Performance Feeds</label>
+                </value>
+                <value>
+                    <fullName>Pipestone</fullName>
+                    <default>false</default>
+                    <label>Pipestone</label>
+                </value>
+                <value>
+                    <fullName>Poulin</fullName>
+                    <default>false</default>
+                    <label>Poulin</label>
+                </value>
+                <value>
+                    <fullName>Powell Milling</fullName>
+                    <default>false</default>
+                    <label>Powell Milling</label>
+                </value>
+                <value>
+                    <fullName>Premier</fullName>
+                    <default>false</default>
+                    <label>Premier</label>
+                </value>
+                <value>
+                    <fullName>Prime Quality</fullName>
+                    <default>false</default>
+                    <label>Prime Quality</label>
+                </value>
+                <value>
+                    <fullName>Producer Coop</fullName>
+                    <default>false</default>
+                    <label>Producer Coop</label>
+                </value>
+                <value>
+                    <fullName>Progressive</fullName>
+                    <default>false</default>
+                    <label>Progressive</label>
+                </value>
+                <value>
+                    <fullName>Qlf</fullName>
+                    <default>false</default>
+                    <label>Qlf</label>
+                </value>
+                <value>
+                    <fullName>Ranchway</fullName>
+                    <default>false</default>
+                    <label>Ranchway</label>
+                </value>
+                <value>
+                    <fullName>Rangens</fullName>
+                    <default>false</default>
+                    <label>Rangens</label>
+                </value>
+                <value>
+                    <fullName>Red River</fullName>
+                    <default>false</default>
+                    <label>Red River</label>
+                </value>
+                <value>
+                    <fullName>Richland Feed</fullName>
+                    <default>false</default>
+                    <label>Richland Feed</label>
+                </value>
+                <value>
+                    <fullName>Rietdyks Feed</fullName>
+                    <default>false</default>
+                    <label>Rietdyks Feed</label>
+                </value>
+                <value>
+                    <fullName>Sabine Valley</fullName>
+                    <default>false</default>
+                    <label>Sabine Valley</label>
+                </value>
+                <value>
+                    <fullName>Seminole</fullName>
+                    <default>false</default>
+                    <label>Seminole</label>
+                </value>
+                <value>
+                    <fullName>Shawnee Feeds</fullName>
+                    <default>false</default>
+                    <label>Shawnee Feeds</label>
+                </value>
+                <value>
+                    <fullName>Show Rite</fullName>
+                    <default>false</default>
+                    <label>Show Rite</label>
+                </value>
+                <value>
+                    <fullName>Sioux Nation</fullName>
+                    <default>false</default>
+                    <label>Sioux Nation</label>
+                </value>
+                <value>
+                    <fullName>Smart-Lyx</fullName>
+                    <default>false</default>
+                    <label>Smart-Lyx</label>
+                </value>
+                <value>
+                    <fullName>Southern States</fullName>
+                    <default>false</default>
+                    <label>Southern States</label>
+                </value>
+                <value>
+                    <fullName>St. Paul</fullName>
+                    <default>false</default>
+                    <label>St. Paul</label>
+                </value>
+                <value>
+                    <fullName>Stillwater Mlg</fullName>
+                    <default>false</default>
+                    <label>Stillwater Mlg</label>
+                </value>
+                <value>
+                    <fullName>Sunglo</fullName>
+                    <default>false</default>
+                    <label>Sunglo</label>
+                </value>
+                <value>
+                    <fullName>Sunnyside Feeds</fullName>
+                    <default>false</default>
+                    <label>Sunnyside Feeds</label>
+                </value>
+                <value>
+                    <fullName>Sunrise</fullName>
+                    <default>false</default>
+                    <label>Sunrise</label>
+                </value>
+                <value>
+                    <fullName>Sure Fed</fullName>
+                    <default>false</default>
+                    <label>Sure Fed</label>
+                </value>
+                <value>
+                    <fullName>Suthers</fullName>
+                    <default>false</default>
+                    <label>Suthers</label>
+                </value>
+                <value>
+                    <fullName>Tenn Frmrs Coop</fullName>
+                    <default>false</default>
+                    <label>Tenn Frmrs Coop</label>
+                </value>
+                <value>
+                    <fullName>Thomas Moore</fullName>
+                    <default>false</default>
+                    <label>Thomas Moore</label>
+                </value>
+                <value>
+                    <fullName>Tony&apos;S House Brand</fullName>
+                    <default>false</default>
+                    <label>Tony&apos;S House Brand</label>
+                </value>
+                <value>
+                    <fullName>Triple Crown</fullName>
+                    <default>false</default>
+                    <label>Triple Crown</label>
+                </value>
+                <value>
+                    <fullName>Tucker Mlg</fullName>
+                    <default>false</default>
+                    <label>Tucker Mlg</label>
+                </value>
+                <value>
+                    <fullName>Umbarger</fullName>
+                    <default>false</default>
+                    <label>Umbarger</label>
+                </value>
+                <value>
+                    <fullName>Union Mills</fullName>
+                    <default>false</default>
+                    <label>Union Mills</label>
+                </value>
+                <value>
+                    <fullName>Vigortone</fullName>
+                    <default>false</default>
+                    <label>Vigortone</label>
+                </value>
+                <value>
+                    <fullName>Ware Milling</fullName>
+                    <default>false</default>
+                    <label>Ware Milling</label>
+                </value>
+                <value>
+                    <fullName>Wendlands</fullName>
+                    <default>false</default>
+                    <label>Wendlands</label>
+                </value>
+                <value>
+                    <fullName>Western Milling (Krues)</fullName>
+                    <default>false</default>
+                    <label>Western Milling (Krues)</label>
+                </value>
+                <value>
+                    <fullName>Westway</fullName>
+                    <default>false</default>
+                    <label>Westway</label>
+                </value>
+                <value>
+                    <fullName>Witmer</fullName>
+                    <default>false</default>
+                    <label>Witmer</label>
+                </value>
+                <value>
+                    <fullName>Woodys</fullName>
+                    <default>false</default>
+                    <label>Woodys</label>
+                </value>
+                <value>
+                    <fullName>Wright Coop</fullName>
+                    <default>false</default>
+                    <label>Wright Coop</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Competitor_1_Annual_Pts_Equivalent__c</fullName>
+        <externalId>false</externalId>
+        <label>Competitor #1 Annual Pts Equivalent</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Competitor_1_Annual_Tons__c</fullName>
+        <externalId>false</externalId>
+        <label>Competitor #1 Annual Tons</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Competitor_2_Annual_Pts_Equivalent__c</fullName>
+        <externalId>false</externalId>
+        <label>Competitor #2 Annual Pts Equivalent</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Competitor_2_Annual_Tons__c</fullName>
+        <externalId>false</externalId>
+        <label>Competitor #2 Annual Tons</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Competitor_3_Annual_Pts_Equivalent__c</fullName>
+        <externalId>false</externalId>
+        <label>Competitor #3 Annual Pts Equivalent</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Competitor_3_Annual_Tons__c</fullName>
+        <externalId>false</externalId>
+        <label>Competitor #3 Annual Tons</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>County_FIPS__c</fullName>
+        <externalId>false</externalId>
+        <label>County FIPS</label>
+        <length>5</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>County_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>County Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Current_of_LPS_Local_Hires__c</fullName>
+        <externalId>false</externalId>
+        <label>Current # of LPS/Local Hires</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DBS_Support_Needed__c</fullName>
+        <externalId>false</externalId>
+        <label>DBS Support Needed</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>DBS__c</fullName>
+        <externalId>false</externalId>
+        <label>DBS</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Albert Thomas</fullName>
+                    <default>false</default>
+                    <label>Albert Thomas</label>
+                </value>
+                <value>
+                    <fullName>Elfigo Padilla</fullName>
+                    <default>false</default>
+                    <label>Elfigo Padilla</label>
+                </value>
+                <value>
+                    <fullName>John Mareth</fullName>
+                    <default>false</default>
+                    <label>John Mareth</label>
+                </value>
+                <value>
+                    <fullName>Kevin Huesman</fullName>
+                    <default>false</default>
+                    <label>Kevin Huesman</label>
+                </value>
+                <value>
+                    <fullName>Robert Sipiorski</fullName>
+                    <default>false</default>
+                    <label>Robert Sipiorski</label>
+                </value>
+                <value>
+                    <fullName>Ronald Allison</fullName>
+                    <default>false</default>
+                    <label>Ronald Allison</label>
+                </value>
+                <value>
+                    <fullName>Trent Ardrey</fullName>
+                    <default>false</default>
+                    <label>Trent Ardrey</label>
+                </value>
+                <value>
+                    <fullName>Suher</fullName>
+                    <default>false</default>
+                    <label>Suher</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Dealer_AB__c</fullName>
+        <externalId>false</externalId>
+        <formula>Dealer_Name__r.AccountNumber</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Dealer AB#</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Dealer_Name_Display__c</fullName>
+        <description>for use in SF1 display only</description>
+        <externalId>false</externalId>
+        <formula>Dealer_Name__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Dealer Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Dealer_Name__c</fullName>
+        <description>Master-Detail to Dealer CoOp accounts.</description>
+        <externalId>false</externalId>
+        <label>Dealer Name</label>
+        <lookupFilter>
+            <active>true</active>
+            <errorMessage>The Account selected is not a Dealer CoOp Account.</errorMessage>
+            <filterItems>
+                <field>Account.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Dealer-CoOp Account</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Dealer Segmentations</relationshipLabel>
+        <relationshipName>Dealer_Segmentations</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Dealer_Total__c</fullName>
+        <externalId>false</externalId>
+        <formula>(VALUE(TEXT(Attitude__c ))*3)+ (VALUE(TEXT(Feed_Focus__c ))*2) + VALUE(TEXT(Financial__c )) + VALUE(TEXT(Management__c ))+VALUE(TEXT( VIP_Points__c ))+VALUE(TEXT( Loyalty__c ))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Dealer Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Feed_Focus__c</fullName>
+        <externalId>false</externalId>
+        <label>Feed Focus</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Financial__c</fullName>
+        <externalId>false</externalId>
+        <label>Financial</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Full_Time_LPS_Local_Hires__c</fullName>
+        <externalId>false</externalId>
+        <label># Full Time LPS/Local Hires</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Grand_Total__c</fullName>
+        <externalId>false</externalId>
+        <formula>Dealer_Total__c + (VALUE(TEXT( Market_Potential__c ))*2)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Grand Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Loyalty__c</fullName>
+        <externalId>false</externalId>
+        <label>Loyalty</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Management__c</fullName>
+        <externalId>false</externalId>
+        <label>Management</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Market_Potential__c</fullName>
+        <externalId>false</externalId>
+        <label>Market Potential</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Multiple_Stores_Current_Locations__c</fullName>
+        <externalId>false</externalId>
+        <label>Multiple Stores - Current # Locations</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_Competitive_Brand_1__c</fullName>
+        <description>Other Competitive Brand</description>
+        <externalId>false</externalId>
+        <label>Other Competitive Brand #1</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_Competitive_Brand_2__c</fullName>
+        <description>Other Competitive Brand 2</description>
+        <externalId>false</externalId>
+        <label>Other Competitive Brand #2</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_Competitive_Brand_3__c</fullName>
+        <description>Other Competitive Brand 3</description>
+        <externalId>false</externalId>
+        <label>Other Competitive Brand #3</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Part_Time_LPS_Local_Hires__c</fullName>
+        <externalId>false</externalId>
+        <label># Part Time LPS/Local Hires</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Percent_Served__c</fullName>
+        <externalId>false</externalId>
+        <label>Percent Served</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Region__c</fullName>
+        <description>List of regions.</description>
+        <externalId>false</externalId>
+        <label>Region</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Eastern</fullName>
+                    <default>false</default>
+                    <label>Eastern</label>
+                </value>
+                <value>
+                    <fullName>Northeast</fullName>
+                    <default>false</default>
+                    <label>Northeast</label>
+                </value>
+                <value>
+                    <fullName>Southern</fullName>
+                    <default>false</default>
+                    <label>Southern</label>
+                </value>
+                <value>
+                    <fullName>Upper Midwest</fullName>
+                    <default>false</default>
+                    <label>Upper Midwest</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Sales_Specialist2__c</fullName>
+        <defaultValue>$User.FirstName  &amp; &quot; &quot; &amp;  $User.LastName</defaultValue>
+        <description>Defaults to logged in user.</description>
+        <externalId>false</externalId>
+        <label>Sales Specialist</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Shipping_Address__c</fullName>
+        <externalId>false</externalId>
+        <formula>Dealer_Name__r.ShippingStreet</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Shipping Address</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Shipping_City__c</fullName>
+        <externalId>false</externalId>
+        <formula>Dealer_Name__r.ShippingCity</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Shipping City</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Shipping_State__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(Dealer_Name__r.ShippingStateCode)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Shipping State</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Shipping_Zip__c</fullName>
+        <externalId>false</externalId>
+        <formula>Dealer_Name__r.ShippingPostalCode</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Shipping Zip</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Split_Account__c</fullName>
+        <externalId>false</externalId>
+        <label>Split Account</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Total_Competitive_Annual_Pts_Equivalent__c</fullName>
+        <externalId>false</externalId>
+        <formula>Competitor_1_Annual_Pts_Equivalent__c + Competitor_2_Annual_Pts_Equivalent__c + Competitor_3_Annual_Pts_Equivalent__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Competitive Annual Pts Equivalent</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Competitive_Annual_Tons__c</fullName>
+        <externalId>false</externalId>
+        <formula>Competitor_1_Annual_Tons__c + Competitor_2_Annual_Tons__c + Competitor_3_Annual_Tons__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Competitive Annual Tons</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>VIP_Points__c</fullName>
+        <externalId>false</externalId>
+        <label>VIP Points</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>X24mos_Performance_Expectation__c</fullName>
+        <externalId>false</externalId>
+        <label>24mos Performance Expectation</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Grow</fullName>
+                    <default>false</default>
+                    <label>Grow</label>
+                </value>
+                <value>
+                    <fullName>Maintain</fullName>
+                    <default>false</default>
+                    <label>Maintain</label>
+                </value>
+                <value>
+                    <fullName>Decline</fullName>
+                    <default>false</default>
+                    <label>Decline</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Dealer Segmentation</label>
+    <nameField>
+        <displayFormat>SEG-{000000}</displayFormat>
+        <label>Dealer Segmentation ID</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Dealer Segmentations</pluralLabel>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>Dealer_Name__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Dealer_AB__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Dealer_Name__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Dealer_AB__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>Dealer_Name__c</searchFilterFields>
+        <searchFilterFields>Dealer_AB__c</searchFilterFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,16 @@
+The Service Request {!Case.CaseNumber} requires your approval for the credit amount of {!Case.Credit_Amount_Range__c}.
+
+Click on the Approval Link below or type APPROVE or REJECT in the response first line and comments in the second line.
+Approval Link: {!ApprovalRequest.External_URL}
+
+Details:
+Service Request Subject: {!Case.Subject} 
+Issue Category: {!Case.Issue_Category__c} 
+Issue Sub-Category: {!Case.Issue_Sub_Category__c} 
+
+Account Name: {!Case.Account} 
+Contact Name: {!Case.Contact} 
+
+Credit Amount: {!Case.Credit_Amount_Range__c}
+
+Service Request Link: {!Case.Link}

@@ -1,0 +1,76 @@
+<!--Component cc_oo_ProductSearchWidgetNavRD
+    <Summary>
+    ------------------------------------------------------------------
+    Category tree hide for prebook ordering
+    ------------------------------------------------------------------
+    Rajesh Walawalkar 9/29/2016 Created
+    US:OO-312  Hide Produc Search, wishlist button for probook-->
+<apex:component id="cc_oo_ProductSearchWidgetNavRD">
+<script id="OO-SidebarSearch-View-Desktop" type="text/template">
+ <div class="product_search_nav_container">
+    <h2 class="title">{{pageLabelMap 'ProductSearchNav_Title'}}</h2>
+    <div class="product_search_nav">
+        <p class="introText">{{pageLabelMap 'ProductSearchNav_IntroText'}}</p>
+        <form id="sidebarSearch">
+            <p>
+                <div>
+                    <input name="sidebarSearchText" class="sidebarSearchText searchBar" type="text" placeholder="{{pageLabelMap 'ProductSearchNav'}}" title="{{pageLabelMap 'ProductSearch_Tooltip'}}"/>
+                </div>
+            </p>
+            <p>
+                <div class="alert alert-error searchBar searchBoxError" style="display:none;"></div>
+            </p>
+            <p>
+                <button type="button" name="sidebarSearchButton" class="btn-primary sidebarSearchButton form-button">{{pageLabelMap 'ProductSearchNav_ButtonText'}}</button>
+            
+            </p>
+        </form>
+    </div>
+ </div>
+</script>
+
+<script id="OO-productSearchTemplateDesktop" type="text/template">
+    <span><span class="wlcomeName"></span></span>
+  {{#if (isNotPreBook)}}
+    {{#ifDisplay 'H.DisplSearch'}}
+        <input name="" id="searchText" class="search_input" type="text" placeholder="{{pageLabelMap 'ProductSearch'}}" title="{{pageLabelMap 'ProductSearch_Tooltip'}}"/>
+        <input id="doSearch" class="search_button" type="Submit" value="&gt;&gt;" />
+        <div class="alert alert-error searchTopBarErrorMessage searchBoxWidgetError" style="display:none;"></div>
+    {{/ifDisplay}}
+   {{/if}}
+</script>
+<script id="OO-productSearchTemplatePhone" type="text/template">
+         {{#if (isNotPreBook)}}
+            <div class="left_column">
+            
+                <div class="product_search_container hide"> <!-- Defect 3239 Fixed -->
+                    <h2 class="title">{{pageLabelMap 'Title_ProductSearch'}}</h2>
+                    <div class="product_search">
+                        <input name="" id="searchText" type="text" placeholder="{{pageLabelMap 'ProductSearch'}}" title="{{pageLabelMap 'ProductSearch_Tooltip'}}"/>
+                        <input name="" id="doSearch" type="image" src="{{image 'Static Resource' 'images/phone_search.png' locale=locale}}" />
+                        <p>
+                            <div class="alert alert-error searchBoxWidgetError" style="display:none;"></div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+          {{/if}}
+</script>
+
+
+<script>
+    jQuery(function($) {
+        CCRZ.uiProperties.productSearchView.phone.tmpl ='OO-productSearchTemplatePhone';
+        CCRZ.uiProperties.productSearchView.desktop.tmpl='OO-productSearchTemplateDesktop';
+        CCRZ.uiProperties.searchWidget.tmpl='OO-SidebarSearch';
+
+        CCRZ.pubSub.on('view:footerView:refresh', function(theView) {
+            //alert(CCRZ.currentUser.FirstName + " " + CCRZ.currentUser.LastName);
+            //$("span.wlcomeName").text(CCRZ.currentUser.FirstName + " " + CCRZ.currentUser.LastName);
+        });
+    }); 
+   
+    
+   
+</script>
+</apex:component>

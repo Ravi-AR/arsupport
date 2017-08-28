@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>CAPPLEMAN ENT-566463 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>CAPPLEMAN ENT-566463 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>CAPPLEMANENT566463PartnerManager</parentRole>
+</Role>

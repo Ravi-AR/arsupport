@@ -1,0 +1,30 @@
+Requestor:   {!Case.OwnerFullName}
+
+New User:  {!Case.Name_of_New_User__c}
+Employee Number:  {!Case.Employee_Number_of_New_User__c}
+Email Address:  {!Case.Email_Address__c}
+Manager:  {!Case.Manager__c}
+Function:  {!Case.New_User_Function__c}
+Other Function:  {!Case.Other_Function__c}
+LPS Manager:  {!Case.LPS_Manager__c}
+Time Zone:  {!Case.Time_Zone__c}
+Date of Password Push:  {!Case.Date_to_Push_Password__c}
+WebEx Training Date:  {!Case.WebEx_Training_Date__c}
+Specie Focus:  {!Case.Specie_Focus__c}
+Business Link User Name: {!Case.Business_Link_User_Name__c} 
+Case Notes:  {!Case.Case_Notes__c}
+
+Chatter Groups:
+
+FARM VIP Information:  {!Case.FARM_VIP_Information__c}
+Salesforce.com Support:  {!Case.Salesforce_com_Support__c}
+The Tub Hub:  {!Case.The_Tub_Hub__c}
+
+- ADD TO SALES TEAMS.
+- ADD TO PUBLIC GROUPS.
+- NOTE:  TWO DIFFERENT PUBLIC GROUPS FOR LPS SUPERVISOR'S, PICK CORRECT ONE (SS or AMS)
+- IF LPS, SS or ASM -- GIVE CONGA MERGE LICENSE.
+- FOR THE CORRECT PURINA MILLS ACCOUNT -- ADD CONTACT.
+- IF NEW USER IS AN ASM, MAKE SURE "DELEGATED APPROVER" IS POPULATED ON USER RECORD.
+- FOR PROFILES - REGIONAL DIRECTOR, ASM, SS, ISS MGR, ISS USER AND ISS USER + LEAD REVIEWER, CHANGE "RECEIVE APPROVAL REQUEST EMAILS" TO "NEVER"
+- FOR NEW ASM'S, GIVE ACCESS TO CORRECT ASM SELLING SUPPORT DASHBOARD.

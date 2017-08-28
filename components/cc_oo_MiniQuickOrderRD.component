@@ -1,0 +1,127 @@
+<!-- Component : - cc_oo_MiniQuickOrderRD -->
+<!-- Author                 Date                     Description -->
+<!-- Piyali Mukherjee       10/28/2016               US 339 The system will not allow user to add two types of product in cart. -->
+<!-- Samruddhi Gokhale      11/03/2016               US-49 Allow for product minimum quantities and pallet increments. -->
+<apex:component allowDML="true" controller="cc_oo_MiniQuickOrderController">
+  <script id="cc_oo_MiniQuickOrder-Desktop" type="text/template">
+        <h2 class="title">{{pageLabelMap 'QuickOrder'}}</h2>
+        <div class="quick_order" id="quick_order">
+            <p>{{pageLabelMap 'QuickOrder_QuickOrderBoxCaption'}}</p>
+            <form id="skuQtyForm">
+                <p>
+                    <div class="row">
+                    </div>
+                </p>
+            </form>
+            <p>
+                <!-- <input type="button" class="addToCart form-button" value="{{pageLabelMap 'QuickOrder_AddToCart'}}"/> -->
+                <p><button type="button" class="btn-primary oo-add-to-cartmini form-button">{{pageLabelMap 'QuickOrder_AddToCart'}}</button></p>
+                <p><button type="button" class="btn-primary form-button addMore">{{pageLabelMap 'QuickOrder_AddMore'}}</button></p>
+            </p>
+            <!-- US 49 code comment -->
+            <div class="error-msg alert alert-error modal-message "/> 
+            
+        </div>
+      <!--  <c:cc_oo_CartExportCSV />-->
+    </script>
+
+    <script id="cc_oo_MiniQuickOrder-Entry-Desktop" type="text/template">
+        <span>
+            <div class="sku"><input type="text" class="quickOrderField input_medium addToCartOnEnter sku-input" placeholder="{{pageLabelMap 'QuickOrder_SKUPlaceholder'}}" name="quickorder[{{safeQuote this}}].sku" data-seller="{{this.sellerID}}" data-inventory="{{this.productInventory}}" /></div>
+            <div class="qty"><input type="text" value="1" maxlength="7" class="input_medium addToCartOnEnter qty-input" placeholder="{{pageLabelMap 'QuickOrder_QTYPlaceholder'}}" name="quickorder[{{safeQuote this}}].qty" data-seller="{{this.sellerID}}" data-inventory="{{this.productInventory}}"/></div>
+        </span>
+    </script>
+    
+    <script type="text/javascript">
+        jQuery(function($) {
+            CCRZ.uiProperties.QuickOrderView.desktop.tmpl = 'cc_oo_MiniQuickOrder-Desktop';
+            CCRZ.uiProperties.QuickOrderView.entry.tmpl = 'cc_oo_MiniQuickOrder-Entry-Desktop';
+                        
+            // The function should be called after the quickOrderView  is refreshed
+            CCRZ.pubSub.on('view:QuickOrderView:refresh', function(theView){
+            
+            //US - 339 - modify addtocart button fucntionality
+            $(document).off('click','.oo-add-to-cartmini').on("click",".oo-add-to-cartmini", function(e) {
+                var sku = new Array();
+                var quantity = new Array();
+                $('.sku-input').each(function(){
+                    sku.push($(this).val()); 
+                    
+                    });
+                    
+                $('.qty-input').each(function(){
+                    quantity.push($(this).val()); 
+                    });
+                    var productDetailMap = {};
+                    var skuQuantityMap = {};
+                    //var sku = $(this).attr('sku');
+                    //alert('Hi' + sku);
+                    var cartId = CCRZ.pagevars.queryParams.cartID ? CCRZ.pagevars.queryParams.cartID  : CCRZ.pagevars.queryParams.cartId;                   
+                    //var quantity = $(this).attr('qty');
+                    //alert('Hi quantity' + quantity);
+                    
+                    for (var i=0; i < sku.length; i++){
+                        if(sku[i] != null && sku[i] != '') {
+                            if(skuQuantityMap[sku[i]] == undefined){ //OO-1575 -starts
+                                skuQuantityMap[sku[i]] = quantity[i]; 
+                            }else{
+                                skuQuantityMap[sku[i]] = parseInt(skuQuantityMap[sku[i]]) + parseInt(quantity[i]);
+                            }//OO-1575 - Ends
+                        }
+                    }
+                    
+                    productDetailMap['CartId'] = cartId;
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_MiniQuickOrderController'});
+                    remoteCall.invokeCtx(
+                        'addToCartOO', productDetailMap,skuQuantityMap, 
+                        function(resp){
+                            if(resp){
+                                // OO-49 Show error message if quantity is below minimum quantity for any product
+                                if(resp.data['errorMsg'] != null && resp.data['errorMsg'] != '') {
+                                    var message= resp.data['errorMsg'];
+                                    $('.error-msg').empty().css('display','inline-block').html(message);
+                                    //$('.quick_order').append(message);
+                                }
+                                
+                                if(resp.data['cartId'] != null && resp.data['cartId'] != '') {
+                                    //alert('cart Change');
+                                    CCRZ.pubSub.trigger('cartChange', resp.data['cartId']);
+                                    var skuIdList = resp.data['filteredSkuList'];
+                                    if(skuIdList != null && skuIdList != '') {
+                                        var message = CCRZ.pagevars.pageLabels['OO_AddToCartSucess'] + ' ' + skuIdList ;
+                                        $('.error-msg').empty().css('display','inline-block').html(message);//OO-1581
+                                    }
+                                }
+                            
+                                if(resp.data['productType'] != null && resp.data['productType'] != '') {
+                                    var productType = resp.data['productType'];
+                                    var message = '<span>'+ CCRZ.pagevars.pageLabels['OO_AddToCart_Validate'] +'</span>'; //OO-1581
+                                    $('.error-msg').empty().css('display','inline-block').html(message);
+                                }
+                             }
+                        },{buffer:false,escape:false,nmsp:false});                  
+                    });
+                });  
+                   //OO-1894 - validation for quantity input
+				 $(document).off('keyup', '.qty-input').on('keyup', '.qty-input', function(e) {
+                    //e.preventDefault();
+                     message = '';
+                    var reg = new RegExp('^(0|[1-9][0-9]*)$');
+                    console.log('qun--->' + $(this).val());
+                    if(!reg.test($(this).val())){
+                    	 message += 'A invalid Quantity was entered';
+                    	  console.log('message------------>'+message);
+                    	  $('.error-msg').empty().css('display','inline-block').html(message);
+                        //invalidQty.text(CCRZ.pagevars.pageLabels["OO_Invalid_qty"]).show();
+                        $(this).val('');
+                    }else{
+                    		message='';
+                    	 $('.error-msg').hide();
+                        //invalidQty.hide();
+                    }
+                   });//OO-1894 - validation for quantity input - Ends
+            });
+        
+     </script>
+
+</apex:component>

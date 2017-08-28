@@ -1,0 +1,66 @@
+<!-- 
+*********************************************************************************
+Author: Govinda Prasad P S
+Email: govinda.prasad@magnet360.com
+Created Date    : 11/10/2016
+Function    :  Visualforce page for BUSINESS BUILDER PROGRAM - Confirmation
+Version     : 1.0 
+*********************************************************************************
+--> 
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false">
+    <apex:composition template="LPDCR_CC_BaseTemplate">
+        
+        <apex:define name="PageTitle">BUSINESS BUILDER PROGRAM - Confirmation</apex:define>
+        <apex:define name="body">        
+        <div class="title_wrapper">
+          <div class="container-fluid">
+              <h3 class="page_title">Confirmation of Submission</h3>
+          </div>
+          </div>    
+          <div class="container-fluid content_wrapper">
+            <div class="row detailbanner">
+                 <div class="col-xs-12 lead">
+                 <p>&nbsp;</p>
+                     <center><p class="congrats alert alert-success">Thank you. Your enrollment has been submitted.</p></center>
+                     
+                     <hr/>
+                 </div> 
+                 </div><!--end row--> 
+                 <div class="row bag_clr_white">
+                 <br/>
+              <div class="col-xs-6">
+                     <p>
+                     <b>You can start planning now.</b> Go to the <a href="{!$Site.BaseUrl}/LPDCR_BBPLandingMember">Business Builder Program page</a> to access the Navigator Brochure and other program materials to help you plan your events and promotions
+                     
+                     </p>
+                     
+                 </div> 
+                 <div class="col-xs-6">
+                     <img class="img-responsive" src="{!$Site.BaseUrl}/resource/1475053838000/LPDCR_Assets/img/bbssconfirmation.png" />
+                    
+                 </div>
+                 <div class="col-xs-12 detailbanner">
+                   <center> <a href="{!$Site.BaseUrl}/LPDCR_BBPLandingMember" class="btn btn-primary btn-block btnenroll">Return to Business Builder Program</a>
+                   
+                  <!-- <a href="{!$Site.BaseUrl}/LPDCR_CC_Homepage" class="btn btn-primary btn-block btnenroll">Return to Home Page</a>-->
+                   </center>
+                   <p>&nbsp;</p>
+                   <p>&nbsp;</p>
+                   <p>&nbsp;</p>
+                   <p>&nbsp;</p>
+                   
+                   
+                 </div>
+                 
+                 </div><!--end row--> 
+                  
+            </div><!--End:Container-->
+            <script>
+     $(document).ready(function(){
+      $('#bb').addClass("myactive");
+      $('#mbb').addClass("mobactive");
+    });
+ </script>
+        </apex:define>
+    </apex:composition>
+</apex:page>

@@ -1,0 +1,128 @@
+<apex:component allowDML="true" controller="cc_oo_ContactUSEmailController">
+<!-- Contact Us header -->
+<script type="text/template" id="contact-us-header-template">
+	<div>
+		 <div class="container-fluid">
+            <div class="row-fluid">
+				<h1 class="span12 shopping-cart-header">{{pageLabelMap 'ContactUsTitle'}}</h1>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/template" id="contact-us-mailing-template"> 
+		<div class="container-fluid" id="contact-us-mailing">
+            <div class="row-fluid">
+				<strong class="span12 shopping-cart-header no-margin-left visible-phone">{{pageLabelMap 'ContactUsTitle'}}</strong>
+				<div class="row clear">
+					<label class="span2 align-right">{{pageLabelMap 'From_label'}}:</label>
+					<strong class="span10 value" id="from-value">{!fromEmailAddress}</strong>
+				</div>
+				<div class="row clear no-margin-left">
+					<label class="span2 align-right">{{pageLabelMap 'To_label'}}:</label>
+					<strong class="span10 value" id="to-value">{!CSREmailAddress}</strong>
+				</div>
+				<div class="row clear no-margin-left">
+					<label class="span2 align-right">{{pageLabelMap 'Subject_label'}}:</label>
+					<strong class="span10 value" id="subject-value">{!accName}</strong>
+				</div>
+				<div class="row clear no-margin-left">
+					<label class="span2 align-right">{{pageLabelMap 'Message_label'}}:</label>
+					<textarea id="message-value" class="global-textarea span7 value commentField" placeholder="{{pageLabelMap 'emailPlaceholder'}}" maxlength="255" value = "{{comments}}">{{comments}}</textarea>
+				</div>
+				{{#if comments}}
+					<button class="btn btn-primary medium-btn send-email-btn">{{pageLabelMap 'Send_label'}}</button>
+				{{else}}
+					<button class="btn btn-primary medium-btn send-email-btn" disabled="disabled">{{pageLabelMap 'Send_label'}}</button>
+				{{/if}}
+				
+			</div>
+		</div>
+</script>
+
+<script type="text/template" id="contact-us-mailing-acknowledgement">
+	<div class="container-fluid">
+    	<div class="row-fluid">
+			<div class="lipstick center mailing-ack-message">{{pageLabelMap 'mailing_ack_message'}}</div>
+		</div>
+	</div>
+</script>
+
+<div class="contact-us-mailing-desktop"></div>
+
+<script type="text/javascript">
+	jQuery(function($) {
+		CCRZ.models.contactUsModel = CCRZ.CloudCrazeModel.extend();
+   		
+		CCRZ.views.contactUsView = CCRZ.CloudCrazeView.extend({
+			viewName : "contactUsView",
+			templateBoth : CCRZ.util.template("contact-us-mailing-template"),
+			desktopSelector : ".contact-us-mailing-desktop",
+			mobileSelector : ".phone_center_column",
+			
+			initialize: function(options) {
+				this.render(options);
+			},
+			events: {
+				"keyup #message-value" : "enableDisableButton",
+				"click .send-email-btn" : "sendEmail"
+			},			
+			enableDisableButton : function() {
+				var value = $('#message-value').val();
+				this.dataSet.attributes.comments = value;
+				if(value) {
+					$('.send-email-btn').removeAttr('disabled');
+				} else {
+					$('.send-email-btn').attr('disabled', 'disabled');
+				}
+			},
+			sendEmail : function() {
+				var message = $('#message-value').val();
+				if(message) {
+					var remoteCallForMail = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_ContactUSEmailController'});
+					remoteCallForMail.invokeCtx('sendEmailDetails', message, function(resp) {
+						if(resp && resp.success) {
+							CCRZ.util.createView({
+								desktop: {target:'contact-us-mailing-desktop', template:'contact-us-mailing-acknowledgement'},
+	            				phone: {target:'phone_center_column', template:'contact-us-mailing-acknowledgement'},
+	        				});
+						}
+					}, {buffer:false,escape:false,nmsp:false});
+				}
+			},
+			render : function(modelData) {
+				this.dataSet = modelData;
+				var v = this;
+				if (CCRZ.display.isPhone()) {
+      				v.$el = $(this.mobileSelector);
+     			} else {
+      				v.$el = $(this.desktopSelector);
+     			}
+     			this.setElement(v.$el);
+			  	v.$el.html(v.templateBoth(this.dataSet.toJSON()));
+			  	CCRZ.pubSub.trigger("view:"+this.viewName+":refresh", this);
+			},
+			viewChanged: function() {
+                if(this.currentView !== CCRZ.display.currentView) {
+                    this.currentView = CCRZ.display.currentView;
+                    return true;
+                }
+                return false;
+            },
+			renderViewChanged: function() {
+				CCRZ.display.setCurrentView();
+			    if(this.viewChanged()) {
+			    	this.render(this.dataSet);
+			    }
+			}
+		});
+		
+		var contactUsModel = new CCRZ.models.contactUsModel({
+			"comments" : ""
+		});
+		var contactUsView = new CCRZ.views.contactUsView(contactUsModel);
+		CCRZ.dynamicViews.push(contactUsView);
+		
+	});
+</script>
+</apex:component>

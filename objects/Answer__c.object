@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Houses the Answer options related to the Questions records.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Answer_Minimum__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(
+CONTAINS(Answer_Option__c , &quot;-&quot;),Value(SUBSTITUTE( Left( Answer_Option__c ,FIND(&quot;-&quot;, Answer_Option__c )), &quot;-&quot;, &quot;&quot;)),
+
+If(
+Contains(Answer_Option__c , &quot;+&quot;),Value(SUBSTITUTE( Left( Answer_Option__c ,FIND(&quot;+&quot;, Answer_Option__c )), &quot;+&quot;, &quot;&quot;)),0
+))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Answer (Minimum)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Answer_Option__c</fullName>
+        <description>Answer Option for related Question</description>
+        <externalId>false</externalId>
+        <label>Answer Option</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Answer_Order__c</fullName>
+        <description>This indicates the order that answers are to appear in the survey.  Duplicate values will result in unpredictable results for answers sharing the same order value.</description>
+        <externalId>false</externalId>
+        <label>Order</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Question_Text__c</fullName>
+        <description>Question text from related Question record</description>
+        <externalId>false</externalId>
+        <formula>Question__r.Question__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Question Text</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Question__c</fullName>
+        <description>Question related to the answers</description>
+        <externalId>false</externalId>
+        <label>Question</label>
+        <referenceTo>Question__c</referenceTo>
+        <relationshipLabel>Answers</relationshipLabel>
+        <relationshipName>Answers</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>X18_Digit_Answer_ID__c</fullName>
+        <description>18 Digit Salesforce ID</description>
+        <externalId>false</externalId>
+        <formula>CASESAFEID(Id)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>18 Digit Answer ID</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Answer</label>
+    <nameField>
+        <displayFormat>A-{0000}</displayFormat>
+        <label>Answer Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Answers</pluralLabel>
+    <recordTypes>
+        <fullName>Digigraph_Answer</fullName>
+        <active>true</active>
+        <description>Used for Answers for Digigraph Surveys</description>
+        <label>Digigraph Answer</label>
+    </recordTypes>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>Answer_Option__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Question__c</lookupDialogsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <fullName>Do_Not_Allow_Spaces</fullName>
+        <active>true</active>
+        <description>This validation rule does not allow any combination of hyphens and spaces.</description>
+        <errorConditionFormula>Or( 
+CONTAINS( Answer_Option__c , &quot; - &quot;), 
+CONTAINS( Answer_Option__c , &quot;- &quot;), 
+CONTAINS( Answer_Option__c , &quot; -&quot;), 
+CONTAINS( Answer_Option__c , &quot; + &quot;), 
+CONTAINS( Answer_Option__c , &quot;+ &quot;), 
+CONTAINS( Answer_Option__c , &quot; +&quot;), 
+CONTAINS( Answer_Option__c , &quot; &lt; &quot;), 
+CONTAINS( Answer_Option__c , &quot;&lt; &quot;), 
+CONTAINS( Answer_Option__c , &quot; &lt;&quot;), 
+CONTAINS( Answer_Option__c , &quot; &lt;= &quot;), 
+CONTAINS( Answer_Option__c , &quot;&lt;= &quot;), 
+CONTAINS( Answer_Option__c , &quot; &lt;=&quot;), 
+CONTAINS( Answer_Option__c , &quot; &gt; &quot;), 
+CONTAINS( Answer_Option__c , &quot;&gt; &quot;), 
+CONTAINS( Answer_Option__c , &quot; &gt;&quot;), 
+CONTAINS( Answer_Option__c , &quot; &gt;= &quot;), 
+CONTAINS( Answer_Option__c , &quot;&gt;= &quot;), 
+CONTAINS( Answer_Option__c , &quot; &gt;=&quot;) 
+)</errorConditionFormula>
+        <errorDisplayField>Answer_Option__c</errorDisplayField>
+        <errorMessage>Formatting is incorrect. Please remove spaces.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

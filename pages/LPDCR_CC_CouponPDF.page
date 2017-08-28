@@ -1,0 +1,441 @@
+<apex:page standardcontroller="Coupon_Request__c" showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" renderAs="PDF"> <!-- renderAs="PDF"-->
+    <head>
+        <link href="{!URLFOR($Resource.LPDCR_CC_Assets, 'css/ccstyles.css')}" rel="stylesheet" />
+        <style>
+            .cbody {
+                background-color: #FFF;
+                padding: 0;
+                font-family: Helvetica Neue, Helvetica, Arial, sans-serif
+            }
+
+            .righttext {
+                color: #656565;
+                font-size: 14px;
+            }
+
+            .text {
+                color: #000;
+                font-size: 12px;
+            }
+
+            .couponpdftable {
+                padding: 5px;
+               width:100%;
+            }
+            .couponpdftable th{
+                 
+                 border-right: 1px solid #7f7f7f;
+                 border-bottom: 1px solid #7f7f7f;
+                 color:#808080;
+                 font-size:10px;
+                 padding:5px;
+            }
+            .couponpdftable th:first-child{
+                 border-right: 1px solid #7f7f7f;
+                 border-bottom: 0px;
+                 font-size:10px;
+                 padding:5px;
+            }
+            .couponpdftable td{
+                
+                color:#808080;
+                border-right: 1px solid #7f7f7f;
+               font-size:10px;
+            }
+            .tdtext{
+                padding-bottom:0px 5px !important;
+                border-bottom:1px solid #7f7f7f;
+            }
+            .couponpdftable span{
+            display: table-row;
+            }
+            
+        </style>
+    </head>
+
+    <body class="cbody">
+        <apex:pageBlock >
+        
+        
+            <apex:variable value="{!0}" var="pu" />
+            <apex:variable value="{!0}" var="pmivar" />
+            <apex:repeat value="{!Coupon_Request__c.Coupon_Request_Line_Items__r}" var="purina">
+                <!--PDF 1.0-->
+
+                <apex:outputPanel rendered="{!(purina.Coupon_Brand__c =='Purina')}">
+                <apex:variable var="pu" value="{!pu + 1}" />
+                
+                    <!--PDF 1.0-->
+
+                    <div class="pdfbody">
+                        <div class="block">
+                            <apex:outputPanel rendered="{!AND((purina.Coupon_Brand__c =='Purina'),(pu == 1))}">
+                                <apex:image alt="" value="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/PurinaHorizontalLogo.jpg')}" width="300" />
+                            </apex:outputPanel>
+                        </div>
+                        <div class="row">
+                            <apex:outputPanel rendered="{!AND((purina.Coupon_Brand__c =='Purina'),(pu == 1))}">
+                                <h2 class="fnt18 clr_blk"><b>Coupon Redemption Form</b></h2>
+                                <div class="mrg_top20">
+                                    <table width="100%">
+                                        <tr>
+                                            <td width="40%">
+                                                <p class="invoicenumber fnt10 clr_blk80">Invoice Number:{!Coupon_Request__c.Invoice__c}</p>
+                                                <small class="taglinecoupon fnt8 clr_blk80">(create your own or use the date)</small>
+
+                                            </td>
+                                            <td width="15%">
+                                                <p class="fnt10 clr_blk80 txt_rgt pad_rgt10">COMPLETE AND SUBMIT WITH COUPONS TO</p>
+                                            </td>
+                                            <td width="5%"><img src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/tiangle.png')}" width="25" height="27" /></td>
+                                            <td width="20%">
+
+
+                                                <p class="fnt10 clr_blk80">Purina – Inmar Dept. #19298 One Fawcett Drive Del Rio, TX 78840</p>
+
+
+
+
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+
+                                <div class="mrg_top20">
+                                    <table width="100%">
+                                        <tr>
+                                            <td>
+                                                <p class="brd_btm pad_btm5 clr7 fnt12">Dealer Name: {!Coupon_Request__c.Account__r.Name}</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="pad_top0">
+                                            <td>
+                                                <p class="brd_btm pad_btm5 clr7 fnt12 mrg_top0">Address: {!Coupon_Request__c.Address__c}</p>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                    <table width="100%">
+                                        <tr class="pad_top0">
+                                            <td>
+                                                <p class="brd_btm pad_btm5 clr7 fnt12 mrg_top0">City: {!Coupon_Request__c.City__c}</p>
+                                            </td>
+                                            <td>
+                                                <p class="brd_btm pad_btm5 clr7 fnt12 mrg_top0">State: {!Coupon_Request__c.State__c}</p>
+                                            </td>
+                                            <td>
+                                                <p class="brd_btm pad_btm5 clr7 fnt12 mrg_top0">Zip: {!Coupon_Request__c.Zip__c}</p>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                    <table width="100%">
+                                        <tr class="pad_top0">
+                                            <td>
+                                                <p class="brd_btm pad_btm5 clr7 fnt12 mrg_top0">Dealer Signature:</p>
+                                            </td>
+                                            <td>
+                                                <p class="brd_btm pad_btm5 clr7 fnt12 mrg_top0">Date:
+                                                    <apex:OutputText value=" {0,date,MMMM dd, yyyy}">
+                                                        <apex:param value="{!TODAY()}" />
+                                                    </apex:OutputText>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </apex:outputPanel>
+                            <div class="mrg_top20">
+                                <apex:outputPanel rendered="{!AND((purina.Coupon_Brand__c =='Purina'),(pu == 1))}">
+                                   <h4 class="fnt12 clr_blk"><b>Coupon Inventory</b></h4>
+                                     <table class="couponpdftable" width="100%">
+                                        <tr>
+                                            <th></th>
+                                            <th>Coupon CPN#</th>
+                                            <th>Coupon Description</th>
+                                            <th># of Coupons x</th>
+                                            <th>Face Value =</th>
+                                            <th>Extended Value</th>
+                                        </tr>
+                                        
+                                        <apex:repeat value="{!Coupon_Request__c.Coupon_Request_Line_Items__r}" var="obj" >
+                                          <apex:outputText rendered="{!obj.Coupon_Brand__c =='Purina'}" >
+                                            <tr>
+                                                <td></td>
+                                                <td><p class="tdtext"><apex:outputText value="{!obj.Coupon_Number__r.Name}"/></p></td>
+                                                <td><p class="tdtext"><apex:outputText value="{!obj.Description__c}" /></p></td>
+                                                <td><p class="tdtext"> <apex:outputText value="{0, number, 0}">
+                                                 <apex:param value="{!obj.Number_of_Coupons__c}" />
+                                                 </apex:outputText></p></td>
+                                                <td><p class="tdtext">
+                                                 <apex:outputText value="${0, number, 0.00}">
+                                                 <apex:param value="{!obj.Face_Value__c}" />
+                                                 </apex:outputText>
+                                                </p></td>
+                                                <td><p class="tdtext">
+                                                <apex:outputText value="${0, number, 0.00}">
+                                                 <apex:param value="{!obj.ExtendedValue__c}" />
+                                                 </apex:outputText>
+                                                </p></td>
+                                            </tr>
+                                            </apex:outputText>
+                                        </apex:repeat>
+                                    </table>
+                                     
+                                </apex:outputPanel>
+                            </div>
+
+                            <apex:outputPanel rendered="{!AND((purina.Coupon_Brand__c =='Purina'),(pu == 1))}">
+                                <div class="mrg_top20 pad_top20">
+                                    <div class="flt_lft wid60">
+                                        <p class="fnt10 clr_blk">Coupon Redemption Form MUST accompany coupons</p>
+                                        <p class="fnt10 clr_blk">Dealer: make copy of this form for your records</p>
+                                        <h5 class="fnt12 clr_blk"><b>Inmar Customer Service - 800.285.7602</b></h5>
+                                    </div>
+                                    <div class="flt_rgt wid40">
+                                        <table width="100%">
+                                            <tr>
+                                                <td class="clr_blk80 fnt10 txt_rgt">Sub Total Value </td>
+                                                <td class="clr_blk80 fnt10 txt_rgt">
+                                                <apex:outputText value="${0, number, 00.00}">
+                                                 <apex:param value="{!Coupon_Request__c.Sub_Total_Value_Purina__c}" />
+                                                 </apex:outputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="clr_blk80 fnt10 txt_rgt">Total Coupon Count</td>
+                                                <td class="clr_blk80 fnt10 txt_rgt">
+                                                <apex:outputText value="{0, number, 0}">
+                                                 <apex:param value="{!Coupon_Request__c.Total_Number_of_Purina_Coupons__c}" />
+                                                 </apex:outputText></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="clr_blk80 fnt10 txt_rgt">Postage Expense</td>
+                                                <td class="clr_blk80 fnt10 txt_rgt">
+                                                <apex:outputText value="${0, number, 0.00}">
+                                                 <apex:param value="{!Coupon_Request__c.Postage_Expense_of_Purina_Coupons__c}" />
+                                                 </apex:outputText></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="clr_blk80 fnt10 txt_rgt"><b>Grand Total</b></td>
+                                                <td class="clr_blk80 fnt10 txt_rgt"><b></b>
+                                                <apex:outputText value="${0, number, 00.00}">
+                                                 <apex:param value="{!Coupon_Request__c.Total_Purina_Amount__c}" />
+                                                 </apex:outputText>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>
+                        </div>
+
+                    </div>
+                    <!--/pdfbody-->
+
+
+
+
+
+                </apex:outputPanel>
+                <!--PDF 1.0-->
+            </apex:repeat>
+            
+             <!--PDF 1.0-->
+           
+            
+            <apex:outputPanel rendered="{!IF(Coupon_Request__c.Total_Number_of_Purina_Coupons__c > 0 && Coupon_Request__c.Total_Number_of_PMI_Coupons__c > 0,true,false)}"> 
+             
+            <div style="page-break-after:always"> </div> <!-- new--> 
+             </apex:outputPanel>
+            
+            
+            <!--PDF 1.0-->
+            
+            <!-- PMI -->
+            
+            
+            <apex:repeat value="{!Coupon_Request__c.Coupon_Request_Line_Items__r}" var="pmi">
+                <!--PDF 2.0-->
+               
+                <apex:outputPanel rendered="{!AND ((pmi.Coupon_Brand__c =='PMI'),(Coupon_Request__c.Total_Number_of_PMI_Coupons__c > 0))}">
+                    <apex:variable var="pmivar" value="{!pmivar + 1}" />
+                    <!--PDF 2.0-->
+                       
+                    <div class="pdfbody">
+                        <div class="block">
+                            <apex:outputPanel rendered="{!AND((pmi.Coupon_Brand__c =='PMI'),(pmivar == 1))}">
+                                <apex:image alt="" value="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/PMINutritionLogo.jpg')}" width="300" />
+                            </apex:outputPanel>
+                        </div>
+                        <div class="row">
+                            <apex:outputPanel rendered="{!AND((pmi.Coupon_Brand__c =='PMI'),(pmivar == 1))}">
+                                <h2 class="fnt18 clr_blk"><b>Coupon Redemption Form</b></h2>
+                                <div class="mrg_top20">
+                                    <table width="100%">
+                                        <tr>
+                                            <td width="40%">
+                                                <p class="invoicenumber fnt10 clr_blk80">Invoice Number:{!Coupon_Request__c.Invoice__c}</p>
+                                                <small class="taglinecoupon fnt8 clr_blk80">(create your own or use the date)</small>
+
+                                            </td>
+                                            <td width="15%">
+                                                <p class="fnt10 clr_blk80 txt_rgt pad_rgt10">COMPLETE AND SUBMIT WITH COUPONS TO</p>
+                                            </td>
+                                            <td width="5%"><img src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/tiangle.png')}" width="25" height="27" /></td>
+                                            <td width="20%">
+
+                                                <apex:outputPanel rendered="{!pmi.Coupon_Brand__c =='PMI'}">
+                                                    <p class="fnt10 clr_blk80">PMI – Inmar Dept. #19298 One Fawcett Drive Del Rio, TX 78840</p>
+                                                </apex:outputPanel>
+
+
+
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                                <div class="mrg_top20">
+                                    <table width="100%">
+                                        <tr>
+                                            <td>
+                                                <p class="brd_btm pad_btm5 clr7 fnt12">Dealer Name: {!Coupon_Request__c.Account__r.Name}</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="pad_top0">
+                                            <td>
+                                                <p class="brd_btm pad_btm5 clr7 fnt12 mrg_top0">Address: {!Coupon_Request__c.Address__c}</p>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                    <table width="100%">
+                                        <tr class="pad_top0">
+                                            <td>
+                                                <p class="brd_btm pad_btm5 clr7 fnt12 mrg_top0">City: {!Coupon_Request__c.City__c}</p>
+                                            </td>
+                                            <td>
+                                                <p class="brd_btm pad_btm5 clr7 fnt12 mrg_top0">State: {!Coupon_Request__c.State__c}</p>
+                                            </td>
+                                            <td>
+                                                <p class="brd_btm pad_btm5 clr7 fnt12 mrg_top0">Zip: {!Coupon_Request__c.Zip__c}</p>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                    <table width="100%">
+                                        <tr class="pad_top0">
+                                            <td>
+                                                <p class="brd_btm pad_btm5 clr7 fnt12 mrg_top0">Dealer Signature:</p>
+                                            </td>
+                                            <td>
+                                                <p class="brd_btm pad_btm5 clr7 fnt12 mrg_top0">Date:
+                                                    <apex:OutputText value=" {0,date,MMMM dd, yyyy}">
+                                                        <apex:param value="{!TODAY()}" />
+                                                    </apex:OutputText>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </apex:outputPanel>
+                            <div class="mrg_top20">
+                                <apex:outputPanel rendered="{!AND((pmi.Coupon_Brand__c =='PMI'),(pmivar == 1))}">
+                                    <h4 class="fnt12 clr_blk"><b>Coupon Inventory</b></h4>
+
+                                   <table class="couponpdftable" width="100%">
+                                        <tr>
+                                            <th></th>
+                                            <th>Coupon CPN#</th>
+                                            <th>Coupon Description</th>
+                                            <th># of Coupons x</th>
+                                            <th>Face Value =</th>
+                                            <th>Extended Value</th>
+                                        </tr>
+                                                                              
+                                    <apex:repeat value="{!Coupon_Request__c.Coupon_Request_Line_Items__r}" var="obj">
+                                       <apex:outputText rendered="{!obj.Coupon_Brand__c =='PMI'}"> 
+                                        <tr>
+                                        <td></td>
+                                        <td><p class="tdtext"><apex:outputText value="{!obj.Coupon_Number__r.Name}"/></p></td>
+                                        <td><p class="tdtext"><apex:outputText value="{!obj.Description__c}" /></p></td>
+                                        <td><p class="tdtext">
+                                         <apex:outputText value="{0, number, 0}">
+                                                 <apex:param value="{!obj.Number_of_Coupons__c}" />
+                                                 </apex:outputText></p></td>
+                                        <td><p class="tdtext"><apex:outputText value="${0, number, 0.00}">
+                                                 <apex:param value="{!obj.Face_Value__c}" />
+                                                 </apex:outputText>
+                                                </p></td>
+                                                <td><p class="tdtext">
+                                                <apex:outputText value="${0, number, 0.00}">
+                                                 <apex:param value="{!obj.ExtendedValue__c}" />
+                                                 </apex:outputText></p></td>
+                                        </tr>
+                                        </apex:outputText> 
+                                    </apex:repeat>
+                                    </table>
+                                </apex:outputPanel>
+                            </div>
+                            <apex:outputPanel rendered="{!AND((pmi.Coupon_Brand__c =='PMI'),(pmivar == 1))}">
+                                <div class="mrg_top20 pad_top20">
+                                    <div class="flt_lft wid60 mrg_top20">
+                                        <p class="fnt10 clr_blk">Coupon Redemption Form MUST accompany coupons</p>
+                                        <p class="fnt10 clr_blk">Dealer: make copy of this form for your records</p>
+                                        <h5 class="fnt12 clr_blk"><b>Inmar Customer Service - 800.285.7602</b></h5>
+                                    </div>
+                                    <div class="flt_rgt wid40 mrg_top20">
+                                        <table width="100%">
+                                            <tr>
+                                                <td class="clr_blk80 fnt10 txt_rgt">Sub Total Value </td>
+                                                <td class="clr_blk80 fnt10 txt_rgt">
+                                                <apex:outputText value="${0, number, 00.00}">
+                                                 <apex:param value="{!Coupon_Request__c.Sub_Total_Value_PMI__c}" />
+                                                 </apex:outputText></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="clr_blk80 fnt10 txt_rgt">Total Coupon Count</td>
+                                                <td class="clr_blk80 fnt10 txt_rgt">
+                                                <apex:outputText value="{0, number, 0}">
+                                                 <apex:param value="{!Coupon_Request__c.Total_Number_of_PMI_Coupons__c}" />
+                                                 </apex:outputText></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="clr_blk80 fnt10 txt_rgt">Postage Expense</td>
+                                                <td class="clr_blk80 fnt10 txt_rgt"> 
+                                                <apex:outputText value="${0, number, 0.00}">
+                                                 <apex:param value="{!Coupon_Request__c.Postage_Expense_of_PMI_Coupons__c}" />
+                                                 </apex:outputText></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="clr_blk80 fnt10 txt_rgt"><b>Grand Total</b></td>
+                                                <td class="clr_blk80 fnt10 txt_rgt"><b></b>
+                                                <apex:outputText value="${0, number, 00.00}">
+                                                 <apex:param value="{!Coupon_Request__c.Total_PMI_Amount__c}" />
+                                                 </apex:outputText></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>
+                        </div>
+                    </div>
+                    <!--/pdfbody-->
+
+
+
+
+
+                </apex:outputPanel>
+                <!--PDF 2.0-->
+
+            </apex:repeat>
+            <!--PDF 2.0-->
+            
+        </apex:pageBlock>
+    </body>
+
+   
+</apex:page>

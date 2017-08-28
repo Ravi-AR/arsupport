@@ -1,0 +1,9 @@
+The plant has denied the request to return a product from Service Request {!Case.CaseNumber}- {!Case.Subject}. Please seek another resolution.
+
+Service Request Number: {!Case.CaseNumber}
+Service Request Subject: {!Case.Subject}
+
+Comments: 
+{!ApprovalRequest.Comments}
+
+Service Request Link: {!Case.Link}

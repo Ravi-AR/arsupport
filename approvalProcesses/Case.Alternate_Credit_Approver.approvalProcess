@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <submitter>Customer_Ops_Director</submitter>
+        <type>roleSubordinatesInternal</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>CaseNumber</field>
+        <field>Owner</field>
+        <field>CreatedDate</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Alternate_Approver__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <label>Credit Approval: Alternate Approver</label>
+        <name>Step_1</name>
+    </approvalStep>
+    <description>Process to assign a custom approver in the case where the standard process will not work.</description>
+    <emailTemplate>Customer_Operations_Approval_Emails/Credit_Approval_Request_with_Products</emailTemplate>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <booleanFilter>1 AND (2 OR 3 OR 4 OR 5) AND 6 AND 7 AND 8</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordType</field>
+            <operation>equals</operation>
+            <value>Customer Care</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Issue_Category__c</field>
+            <operation>equals</operation>
+            <value>001 - Transportation,002 - Damaged Product (torn),003 - Warehousing / Bulk Loading,004 - Customer Experience,005 - Order Accuracy,006 - Income Optimization / Pricing,&quot;007 - Income Optimization / Promotion (Rebate, FPC)&quot;</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Issue_Category__c</field>
+            <operation>equals</operation>
+            <value>009 - Customer Accommodation,010 - Poor Flow / Bricked Product,011 - Product Contamination,012 - Excessive Fines,013 - Liquid Application,014 - Infestation,015 - Mold / Off Odor,017 - Accolades</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Issue_Category__c</field>
+            <operation>equals</operation>
+            <value>018 - Sales / Marketing / Financial,019 - Bag / Tag Issues,020 - Manufacturing Issues,&quot;021 - Replenishment Planning(Finished Goods Planners, Replenishment Planners)&quot;,023 - Over/Under Consumption,026 - Unknown / Other</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Issue_Category__c</field>
+            <operation>equals</operation>
+            <value>029 - IT Related Issues,030 - Consumer Reported,008 - Outdated Product,027 - Mass Channel / Vendor Compliance</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Return_Requested__c</field>
+            <operation>notEqual</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Credit_Amount_Range__c</field>
+            <operation>equals</operation>
+            <value>$0 - $100,$101 - $500,&quot;$501 - $1,000&quot;,&quot;$1,001 - $2,000&quot;,&quot;$2,001 - $5,000&quot;,&quot;$5,001 - $10,000&quot;,&quot;Over $10,000&quot;</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Alternate_Approver__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Credit_Amount_Approved</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>Service_Request_Status_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Credit_Amount_Rejected</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>Service_Request_Status_Rejected</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Service_Request_Waiting_for_Approval</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Alternate Credit Approver</label>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

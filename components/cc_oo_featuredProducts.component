@@ -1,0 +1,130 @@
+<apex:component allowDML="true" controller="cc_oo_FeaturedProductsController">
+<script id="oo-Spotlight-Desktop" type="text/template">
+   <div class="product_spotlight_container" >
+    <h2 class="title">
+      {{pageLabelMap 'Spotlight_Title'}}
+    </h2>
+    <div class="product_spotlight row-fluid">
+    {{#each this}}
+    	<div class="row product_spotlight_item_container no-margin-left">
+        	<div class="span12 clear no-margin-left">
+    			{{#if this.brandLogo}}
+    				<img src={{this.brandLogo}} class="span2 brand_logoSpot">
+    				<div class="span10 prod-name">
+    					<a href="javascript:void(0);" class="productName larger" data-id="{{this.sku}}"><strong data-id="{{this.sku}}">{{this.name}}</strong></a>
+                	</div>
+    			{{else}}
+    				<div class="span2 brand_logoSpot pull-left">&nbsp;</div>
+    				<div class="span10 prod-name">
+    					<a href="javascript:void(0);" class="productName no-margin-left larger" data-id="{{this.sku}}"><strong data-id="{{this.sku}}">{{this.name}}</strong></a>
+                	</div>
+                {{/if}}
+    		</div>
+        	<div class="product_spotlight_item span12 clear no-margin-left">
+           		<div class="product_spotlight_viewport span3">
+           			<a href="javascript:void(0);" class="productName" data-id="{{this.sku}}">
+                		{{#if this.url}}
+                    		<img src="{{this.url}}"  data-id="{{this.sku}}" />
+    					{{else if this.brandLogo}}
+    						<img src="{{this.brandLogo}}" data-id="{{this.sku}}" />
+                		{{else}}
+                    		<img class="mainProdImage detailLink prodDetRel noImg"  data-id="{{this.sku}}" />
+                		{{/if}}
+    	        	</a>
+           		</div>
+            	<div class="span8">
+                	<div class="span12 no-margin-left">
+    					<strong>{{pageLabelMap 'CartInc_SKU'}}:</strong>&#160;{{this.sku}}
+    				</div>
+                	<div class="span12 clear no-margin-left description richtext">
+                    	{{unescape this.shortDesc}}
+                	</div>
+            	</div>
+           	</div>
+    	</div>
+		
+    {{/each}}
+    </div>
+    </div>
+                            
+ </script>
+ 
+ <script id="oo-Spotlight-Mobile" type="text/template">
+ <div class="products_1_row_medium_container">
+    <h2 class="title">
+      {{pageLabelMap 'Spotlight_Title'}}
+    </h2>
+    <div class="products_1_row_medium spotlight-products row-fluid">
+    	{{#each this}}
+        	<div class="row product_spotlight_item_container no-margin-left">
+        	    <div class="span12 clear no-margin-left">
+         			{{#if this.brandLogo}}
+                    	<img src={{this.brandLogo}} class="span2 brand_logoSpot pull-left">
+    					<a href="#" class=" span10 productName productNameText prod-name" data-id="{{this.sku}}"><strong data-id="{{this.sku}}">{{this.name}}</strong></a>
+    				{{else}}
+    					<div class="span2 brand_logoSpot pull-left">&nbsp;</div>
+    					<a href="#" class=" span10 productName productNameText no-margin-left prod-name" data-id="{{this.sku}}"><strong data-id="{{this.sku}}">{{this.name}}</strong></a>
+             		{{/if}}
+           		</div>
+          		<div class="products_1_row_medium_item row clear no-margin-left">
+           			<div id = "spotlight-image" class="product_listing_viewport span4 pull-left">
+            			<a href="#" class="productName" data-id="{{this.sku}}">
+                		{{#if this.url}}
+                    		<img src="{{this.url}}" class="detailLink prodDetRel" data-id="{{this.sku}}" />
+                		{{else if this.brandLogo}}
+    						<img src="{{this.brandLogo}}" class="detailLink prodDetRel" data-id="{{this.sku}}" />
+    					{{else}}
+                    		<img class="mainProdImage detailLink prodDetRel noImg"  data-id="{{this.sku}}" />
+                		{{/if}}
+            			</a>
+           			</div>
+    	   			<div class="spotlight-description span8 pull-left">
+    					<div class="span12 clear no-margin-left product-no spotlight">
+                			<span><strong>{{pageLabelMap 'CartInc_SKU'}}:</strong>&#160;{{this.sku}}</span>        
+           				</div>
+    					<div class="span12 clear no-margin-left description richtext spotlight">{{{this.shortDesc}}}</div>
+    	   			</div>
+        		</div>
+        	</div>
+    	{{/each}}
+    </div>
+ </div>
+ </script>
+ <script type="text/javascript">
+ jQuery(function($) {
+            //CCRZ.uiProperties.spotlightView.desktop.tmpl = 'oo-Spotlight-Desktop';  
+            //CCRZ.uiProperties.spotlightView.phone.tmpl = 'oo-Spotlight-Mobile';
+            $('.featured-prod').hide();
+            $('.phone_center_mid').hide();
+            
+            Handlebars.registerHelper("printmydata", function(inputList){ 
+            console.log('debugging'+JSON.stringify(inputList));
+            });
+            CCRZ.pubSub.on('view:spotlightView:refresh',function(theView){
+            var remoteActionCall = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_FeaturedProductsController'});
+                   remoteActionCall.invokeCtx( 'getSpotlightProducts',function(resp){
+                        if(resp){
+                            if(resp.success){ 
+                            var isMobile=CCRZ.display.isPhone();
+                            var source,htmlOutput;
+                            if(isMobile){
+                                source=$('#oo-Spotlight-Mobile').html();
+                                htmlOutput = compileHandler( source, resp.data );
+                                insertContent('.phone_center_mid', htmlOutput );
+                                $('.phone_center_mid').show();
+                            }
+                            else{
+                                source=$('#oo-Spotlight-Desktop').html();
+                                htmlOutput = compileHandler( source, resp.data );
+                                insertContent('.featured-prod', htmlOutput );
+                                $('.featured-prod').show();
+                                
+                            }
+                          }
+                        }
+                     }, {buffer:false,escape:false,nmsp:false}
+                     );
+               });
+        });
+</script>
+</apex:component>

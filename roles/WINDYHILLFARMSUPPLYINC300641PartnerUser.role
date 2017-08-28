@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>WINDY HILL FARM SUPPLY, INC.-300641 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>WINDY HILL FARM SUPPLY, INC.-300641 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>WINDYHILLFARMSUPPLYINC300641PartnerManager</parentRole>
+</Role>

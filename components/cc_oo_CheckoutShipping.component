@@ -1,0 +1,1018 @@
+<!--<Page Name: cc_oo_CheckoutReviewRD> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Rajesh W                                  10/19/2016                                   US:OO-67 Hide ship complete
+Rajeev Choudhary                          10/27/2016                                   US:OO-945 User able to enter characters more than the prescribed limit.
+Murtaza Beejwala                          10/26/2016                                   US:OO-513 To give the ability to enter the PO Number
+-->
+<apex:component allowDML="true" id="cc_oo_CheckoutShipping"  controller="cc_oo_CheckoutShippingController" >
+
+    <script id="oo-Shipping-Desktop" type="text/template" >
+        <form id="shipForm" class="margin_form shipForm">
+            <div class="alert alert-error messagingSection-Error" style="display: none"></div>
+            <div class="alert alert-info messagingSection-Info" style="display: none"></div>
+            <div class="alert alert-warning messagingSection-Warning" style="display: none"></div>
+            <!-- User story OO-1720 To show shipping and billing address in shipping information -->
+            <div class="row-fluid">
+                <fieldset class="span6">        
+                    <legend>{{pageLabelMap 'CheckOut_BillingAddress'}}</legend>
+                    <!-- Commenting the edit link to disable user from editing the billing address-->
+                    <!-- <a id="edit_UserInfo" href="#edit_UserInfo" class="editAddressInfo">{{pageLabelMap 'CheckOut_edit'}}</a> -->
+                    
+                    {{> addressDisplay this.billingAddress}}
+                    {{#if this.hasCoupon}}
+                        <p class="coupon_section"><strong>{{pageLabelMap 'CartInc_AppliedCoupon'}}</strong><br/>{{this.couponName}}</p>
+                    {{/if}}
+                </fieldset>
+                <fieldset class="ship-address span6">
+                    <legend>{{pageLabelMap 'CheckOut_OrderReviewShippingAddress'}}</legend> 
+                    <!-- Commenting the edit link to disable user from editing the shipping address-->
+                    {{#if (isNotPreBook)}}
+                        <!-- <a id="edit_UserInfo" href="#edit_UserInfo" class="editAddressInfo">{{pageLabelMap 'CheckOut_edit'}}</a> -->                       
+                    {{/if}}
+                    
+                    {{> addressDisplay this.shippingAddress}}
+                </fieldset> 
+            </div>
+            <div class="clear"></div>
+            <!--End of user story OO-1720 -->
+            <fieldset>
+                <legend>{{ pageLabelMap 'PurOrd' }}</legend>
+                <div class="row coso_order_purchase form-group shipping_payment">
+                    <label class="control-label">{{pageLabelMap 'PO Number'}}</label>
+                    <input type="text" name="purchaseOrder" value="" class="purchase-order global-input" autocomplete='off' maxlength="25">
+                    <div class="form-error form-empty-error hidden"><span class="font-size-14px inline-error">{{ pageLabelMap 'POIsReq' }} </span></div>
+                </div>
+            </fieldset> 
+            <fieldset>
+                <legend>{{pageLabelMap 'Shipping Information'}}</legend>
+                <div class="shipping_payment">
+                    <div class="row coso_ship_guide_text">{{{pageLabelMap 'CheckOut_ShippingGuidingText'}}}</div>
+                    <!-- US-2434 Start-->
+                    <div class="row shippingDate">
+                        <label class="shippingDate">Ship Date</label>
+                        <div id="ship-Date"><span class="shipping-Day-Date"></span>&nbsp;&nbsp;<a id="edit_Shipping_Date" href="#edit_Shipping_Date" class="editShippingDate lipstick" onclick="cartDetails();">{{pageLabelMap 'CheckOut_edit'}}</a><br/></div>
+                    </div>
+                    <!-- US- 2434 End -->
+                    {{#ifDisplay 'SO.DsplShipOptions'}}
+                        {{#if this.shippingMethods}}
+                            <div class="row coso_ship_method">  
+                                    <label>{{pageLabelMap 'CheckOut_ShippingMethod'}}</label>
+                                    <select class="shippingOptions global-select" name="shippingMethod">
+                                        {{#each this.shippingMethods}}
+                                            <option value="{{this.uniqueId}}" {{#ifEquals ../shippingMethod this.uniqueId}} selected {{/ifEquals}}>
+                                            <!--{{this.provider}}-->  {{pageLabelMap this.serviceName}} 
+                                            </option>
+                                        {{/each}}
+                                    </select>   
+                            </div>
+                            <!-- User story : OO-1415 During checkout, the customer must be prompted to choose Pickup or delivery options -->
+                            <div class="inline-error show-error-message global-error alert alert-error clear hide">{{{pageLabelMap 'CheckOut_ShippingMethodErrorMsg'}}}</div>
+                           <!-- <div class="row coso_est_shipping">
+                                <label>{{pageLabelMap 'CheckOut_EstimatedShipping'}}</label><span class="shippingCost"></span>
+                            </div>-->
+                        {{/if}}
+                    {{/ifDisplay}}
+                    <!-- US-2434 Start-->
+                            <div class="row pickupTime dock-door">
+                            </div>
+
+                            <div class="inline-error show-pickupTime-error-message  alert-error clear hide">Please select a pickup time.</div>
+                            <div class="inline-error show-shipDate-error-message  alert-error clear hide">{{{pageLabelMap 'FullTimeSlots'}}}</div>
+                            <br>
+                            <div class="show-pickupTime-msg inline-info hide">{{{pageLabelMap 'Timemsg'}}}</div> <!-- 2944 --> 
+
+                            <!-- US- 2434 End-->
+                    <!--US:OO-67 Hide ship complete-->
+                    <!--{{#ifDisplay 'SO.DsplShipComplete'}}
+                        <div class="row coso_ship_complete">
+                            <label>{{pageLabelMap 'CheckOut_ShipComplete'}}</label>
+                            <input type="checkbox" name="shipComplete" class="boxes" value="true" {{#if this.shipComplete}} checked {{/if}} />
+                        </div>
+                    {{/ifDisplay}}-->
+                    {{#ifDisplay 'SO.DsplShipNotes'}}
+                       <div class="row coso_delivery_notes">
+                            <label>{{pageLabelMap 'CC_OO_Delivery_Instructions'}}</label>
+                            <div class="value deliverynotes"> </div>
+                        </div>
+                           <div class="row coso_ship_notes">
+
+                            <label>{{pageLabelMap 'CartLineCommentLabel'}}</label>
+
+                   <!-- User able to enter characters more than the prescribed limit. -->
+                            
+
+                            <textarea name="shippingInst" rows="6" class="shipnotes global-input" maxlength="30">{{this.shippingInst}}</textarea>
+                        </div>
+                    {{/ifDisplay}}
+                    {{#ifDisplay 'SO.ShowReqDate'}}
+                        <div class="row deliveryDateMessages" id="deliveryDateMessages"></div>
+                        {{#unless this.requestedDateData.ApiError}}
+                        <div class="row coso_ship_delivery_date">
+                            <label>{{pageLabelMap 'Checkout_RequestedDeliveryDt'}}</label>
+                            <input name="requestedDateStr" value="{{this.requestedDateStr}}" class="requestedDate">
+                        </div>
+                        {{/unless}}
+                    {{/ifDisplay}}
+                    <!-- <div class="row">{{pageLabelMap 'Checkout_Shipping_Conditions' }}</div> -->
+                </div>
+            </fieldset>
+            {{#if this.terms}}
+                <fieldset>
+                    <legend class="coso_footer_tc">{{pageLabelMap 'Footer_TermsAndConditions'}}</legend>
+                    <div class="shipping_payment">
+                        {{#each this.terms}}
+                            <div class="row shiping_payment_term">
+                                <input type="checkbox" name="#" class="boxes terms"/>
+                                <span>
+                                    <strong>{{this.title}}:</strong>
+                                    <p>{{unescape this.description}}</p>
+                                </span>
+                            </div>
+                        {{/each}}
+                    </div>
+                </fieldset>
+            {{/if}}
+            <p class="link_button coso_proceed shippingDetails">
+
+                <!--<button class="btn btn-secondary processBack" type="button">{{pageLabelMap 'Back'}}</button>-->
+                    <button class="btn btn-secondary processBackButton" type="button" onclick="cartDetails();">{{pageLabelMap 'Back'}}</button>
+                <button class="btn btn-primary right tab proceed processShippingInfo" type="button">{{pageLabelMap 'CheckOut_AcceptAndProceed'}}</button>
+
+            </p>
+        </form>
+        <div class="shuffle-cart-modal">{{>shuffleCartModal}}</div>
+    </script>
+
+    <script id="AddressDisplay" type="text/template">
+      <span class="address_selection_display">
+       {{#ifDisplay 'SO.DsplAddrName'}}
+        {{#if this.firstName}}<span class="addr_name">{{this.firstName}} {{this.lastName}}</span><br/>{{/if}}
+       {{/ifDisplay}}
+       {{#ifDisplay 'SO.DsplAddrCompany'}}
+        {{#if this.companyName}}<span class="addr_company">{{this.companyName}}</span><br/>{{/if}}
+       {{/ifDisplay}}
+       <span class="addr_line1 addr_line">{{this.address1}}</span><br/>
+       {{#if this.address2}}<span class="addr_line2 addr_line">{{this.address2}}</span><br/>{{/if}}
+       {{#if this.address3}}<span class="addr_line3 addr_line">{{this.address3}}</span><br/>{{/if}}
+       <span class="addr_city">{{this.city}}</span>{{#if this.state}}<span class="addr_state">, {{this.state}}</span> {{else}}{{#if this.stateCode}}<span class="addr_state">, {{this.stateCode}}</span>{{/if}}  {{/if}}<span class="addr_postal">&#160;{{this.postalCode}}</span><br/>
+       <span class="addr_country">{{this.country}}</span><br/>
+       <span class="addr_extId">{{this.partnerId}}</span>
+      </span>
+ </script>
+ <script id="oo-DockDoor-TimeSlots" type="text/template">
+        <label>Pickup Time {{#if dockdoor.timeZone}}(<span id="pickuptimezone">{{dockdoor.timeZone}}</span>){{/if}}</label>
+        <select class="selectpicker selectPickerTime global-select">
+            <option value="" selected="selected">--Select--</option>
+            {{#if dockdoor.timeSlots.Reserved}}
+                <optgroup  label="Reserved Slot(s)">
+                {{#each dockdoor.timeSlots.Reserved}}
+                    {{#if this.enabled}}
+                        <option value="{{this.pickUpTime}}">{{this.pickUpTime}}</option>
+                    {{else}}
+                        <option disabled value="{{this.pickUpTime}}">{{this.pickUpTime}}</option>
+                    {{/if}}
+                {{/each}}
+                </optgroup>
+            {{/if}}
+            {{#if dockdoor.timeSlots.Alternate}}
+                <optgroup  label="Available Slot(s)">
+                {{#each dockdoor.timeSlots.Alternate}}
+                    {{#if this.enabled}}
+                        <option value="{{this.pickUpTime}}">{{this.pickUpTime}}</option>
+                    {{else}}
+                        <option disabled value="{{this.pickUpTime}}">{{this.pickUpTime}}</option>
+                    {{/if}}
+                {{/each}}
+                </optgroup>
+            {{/if}}
+        </select>
+    </script>
+
+<script id="order-cutOffTime-dialog" type="text/template">
+    <div id="order-cutOff-modal" class="warning-modal-layout modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="order-cutOff-modal-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close btn-cancel oo-order-cutOff-cancel" aria-hidden="true" data-dismiss="modal">&times;
+            </button>
+            <h3 class="modal-title">&nbsp;</h3>
+        </div>
+        <div class="modal-body">
+            <p class="order-cutOffMsg">
+            </p>
+        </div>
+        <div class="modal-footer">
+           <button class="order-cuttOffContinue btn btn-primary">Continue</button>
+        </div>
+    </div>
+  </script> 
+    <script id="oo-Shipping-Mobile" type="text/template">
+        <div class="checkout_container">
+            <div class="alert alert-error messagingSection-Error" style="display: none"></div>
+            <div class="alert alert-info messagingSection-Info" style="display: none"></div>
+            <div class="alert alert-warning messagingSection-Warning" style="display: none"></div>
+            <h2 class="title">{{pageLabelMap 'OrderInformation'}} </h2> <!--Defect: OO-4377 -->
+            <div class="checkout_detail">
+                <div class="checkout_detail_item">
+                    <div class="accordion clear" id="accordion">
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapseOne">{{pageLabelMap 'Shipping Information'}}</a>
+                            </div>
+                            <div class="accordion-body in collapse" id="collapseOne">
+                                <div class="accordion-inner">
+                                    <div class="row coso_ship_guide_text" style="font-size:10px;">{{{pageLabelMap 'CheckOut_ShippingGuidingText'}}}</div>
+                                    <form id="shipForm" class="shipform slight-margin-top">
+                                    <!-- US-2434 Start-->
+                                    
+                                    <div class="row shippingDate">
+                                        <label class="grey" style="font-size:12px;">Ship Date</label>
+                                            <span class="shipping-Day-Date" id="ship-Date"></span>&nbsp;&nbsp;<a id="edit_Shipping_Date" href="#edit_Shipping_Date" class="editShippingDate lipstick" onclick="cartDetails();">{{pageLabelMap 'CheckOut_edit'}}</a><br/>
+                                    </div><br/>
+                                    <!-- US- 2434 End -->
+                                        {{#ifDisplay 'SO.DsplShipOptions'}}
+                                            {{#if this.shippingMethods}}
+                                                <label class="basic grey" style="font-size:12px;">{{pageLabelMap 'CheckOut_ShippingMethod'}}</label>
+                                                <select class="shippingOptions checkout_wide global-select" name="shippingMethod">
+                                                    {{#each this.shippingMethods}}
+                                                        <option value="{{this.uniqueId}}" {{#ifEquals ../shippingMethod this.uniqueId}} selected {{/ifEquals}}>
+                                                            <!-- {{this.provider}} --> {{pageLabelMap this.serviceName}}
+                                                        </option>
+                                                    {{/each}}
+                                                </select>
+                                                <!-- User story : OO-1415 During checkout, the customer must be prompted to choose Pickup or delivery options -->
+                                                <div class="inline-error alert alert-error show-error-message clear hide">{{{pageLabelMap 'CheckOut_ShippingMethodErrorMsg'}}}</div>
+                                                <!--<label class="basic">{{pageLabelMap 'CheckOut_EstimatedShipping'}}</label><span class="shippingCost displayData"></span>-->
+                                            {{/if}}
+                                        {{/ifDisplay}}
+                                        <!-- US-2434 Start-->
+                                        <div class="row pickupTime dock-door grey">
+                                        </div>
+                                        <div class="inline-error show-pickupTime-error-message alert alert-error clear hide">Please select a pickup time.</div>
+                                        <div class="inline-error show-shipDate-error-message alert alert-error clear hide">{{{pageLabelMap 'FullTimeSlots'}}}</div>
+                                        <div class="show-pickupTime-msg inline-info hide">{{{pageLabelMap 'Timemsg'}}}</div> <!-- 2944 -->
+                                        <!-- US- 2434 End-->
+                                        <!--US:OO-67 Hide ship complete-->
+                                        <!--{{#ifDisplay 'SO.DsplShipComplete'}}
+                                            <p>
+                                                <label class="basic">{{pageLabelMap 'CheckOut_ShipComplete'}}</label>
+                                                <input type="checkbox" name="shipComplete" class="shipping_options displayData" value="true" {{#if this.shipComplete}} checked {{/if}} />
+                                            </p>
+                                        {{/ifDisplay}}-->
+                                        {{#ifDisplay 'SO.ShowReqDate'}}
+                                            <p class="deliveryDateMessages" id="deliveryDateMessages"></p>
+                                            {{#unless this.requestedDateData.ApiError}}
+                                            <p>
+                                                <label class="basic" style="font-size:12px;">{{pageLabelMap 'Checkout_RequestedDeliveryDt'}}</label>
+                                                <input name="requestedDateStr" value="{{this.requestedDateStr}}" class="requestedDate checkout_wide">
+                                            </p>
+                                            {{/unless}}
+                                        {{/ifDisplay}}
+                                        {{#ifDisplay 'SO.DsplShipNotes'}}
+                                            <p>
+
+                                                <label class="basic grey" style="font-size:14px;">{{pageLabelMap 'CC_OO_Delivery_Instructions'}}</label>
+
+                                                <div class="value deliverynotes"> </div>
+                                         <!-- User able to enter characters more than the prescribed limit.-->
+                                              </p>
+                                               <p> 
+                                                <label class="basic grey" style="font-size:14px;">{{pageLabelMap 'CartLineCommentLabel'}}</label>
+                                                <textarea name="shippingInst" class="notes shipnotes" maxlength="30">{{this.shippingInst}}</textarea>
+                                            </p>
+                                        {{/ifDisplay}}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion clear" id="accordion">
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapseOne">{{ pageLabelMap 'PurOrd' }}</a>
+                            </div>
+                            <div class="accordion-body in collapse" id="collapseOne">
+                                <div class="accordion-inner">
+                                    <div class="row coso_order_purchase form-group ">
+                                        <label class="control-label grey" style="font-size:12px;">{{pageLabelMap 'PO Number'}}</label>
+                                        <input type="text" name="purchaseOrder" value="" class="purchase-order" autocomplete='off' maxlength="25">
+                                        <div class="form-error form-empty-error hidden"><span class="font-size-14px inline-error">{{ pageLabelMap 'POIsReq' }} </span></div> 
+                                        <div class="button_large_container_steps action-buttons">
+                                            <button class="btn btn-primary large_grey_button processShippingInfo proceed" name="" automation-id="CheckOut_MobileGotoReview" type="button">{{pageLabelMap 'CheckOut_MobileGotoReview'}}</button> <br/><br/>
+                                            <button class="btn btn-secondary processBackButton" type="button" onclick="cartDetails();">Back</button> <!-- Defect 1882 Fixed-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                  
+                </div>
+            </div>
+            
+
+            <!--<h2 class="title">{{pageLabelMap 'Footer_TermsAndConditions'}}</h2> -->
+            <div class="checkout_detail_item">
+                <div class="accordion clear" id="termsAccordion">
+                    <div class="accordion-group">
+                        {{#each this.terms}}
+                            <p class="basic term{{id}}">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-parent="#termsAccordion" data-toggle="collapse" href="#term_{{id}}">{{this.title}}</a>
+                                </div>
+                                <div class="accordion-body in collapse" id="term_{{id}}">
+                                    <div class="accordion-inner">
+                                        {{unescape this.description}}
+                                    </div>
+                                </div>
+                            </p>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="shuffle-cart-modal">{{>shuffleCartModal}}</div>
+        
+    </script>
+    <!--  US 2738 starts -->
+    <script id="weight-restriction-dialog" type="text/template">
+        <div id="weight-restriction-modal" class="warning-modal-layout modal cancel-modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close btn-cancel" aria-hidden="true" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Order Exceeded</h3>
+            </div>
+            <div class="modal-body">
+                <p class="weight-restriction"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary btn-cancel"  aria-hidden="true" data-dismiss="modal">Continue</button>
+            </div>
+        </div>
+    </script>
+    <!--  US 2738 ends -->
+    <script type="text/javascript">
+        jQuery(function($) { 
+            CCRZ.uiProperties.ShippingView.desktop.tmpl =   'oo-Shipping-Desktop';
+            CCRZ.uiProperties.ShippingView.phone.tmpl   =   'oo-Shipping-Mobile';
+            var isCheckoutShip=true,currentCheckoutShipView,firstRemoteCall=false;
+            CCRZ.models.TwoHoursModel = CCRZ.CloudCrazeModel.extend();
+            Handlebars.registerPartial('shuffleCartModal' , $("#order-cutOffTime-dialog").html());
+            //var cartId,shippingDetailsData,deliveryInstructions,isRequired,selectedPickupTime;
+            var shippingMethodOptions, isTimeRendered = false;
+            //var cartId=CCRZ.pagevars.queryParams.cartId != null ? CCRZ.pagevars.queryParams.cartId : CCRZ.pagevars.queryParams.cartID;
+            //var portalUserId=CCRZ.pagevars.portalUserId;
+            var uniqueId = getSessionValue('contactId');
+            var selectedShipTo=uniqueId+'selectedShipTo',selectedPlant=uniqueId+'selectedPlant',shipDate=uniqueId+'shipDate'; 
+            var shipToId = getSessionValue(selectedShipTo);
+            var poNumberData, commentsValue,selectedPickUpTimeIndex, selectedShippingValue;
+            CCRZ.pubSub.on('view:ShippingView:refresh', function(theView) {
+
+                if(isCheckoutShip || currentCheckoutShipView!=CCRZ.display.currentView){
+                    isCheckoutShip=false;
+                    currentCheckoutShipView=CCRZ.display.currentView;
+                    setCheckoutShipData(CCRZ.models.TwoHoursModel.prototype,CCRZ.views.ShippingView.prototype);
+                    firstRemoteCall=true;
+                    theView.setElement(theView.$el);
+                    theView.render();
+                    return;
+                }
+                if(firstRemoteCall && !isCheckoutShip && $('.checkoutContent')[0]){
+                    shippingMethodOptions = $('.shippingOptions').val();
+                    selectedShippingValue=shippingMethodOptions;
+                    // Commenting for Defect: OO-4899
+                    /*if(shipToId != '' && shipToId  != undefined){
+                        $('.ship-address .address_selection_display .addr_name').append('-'+ shipToId);
+                    }*/ 
+                    CCRZ.views.ShippingView.prototype.getShipDate();
+                    CCRZ.views.ShippingView.prototype.isPORequired();
+                    CCRZ.views.ShippingView.prototype.purchaseOrderNumberCheck();
+                    if($('.selectPickerTime option:selected').val() == "disabled") {
+                        var fullTimeSlots = String.format(CCRZ.pagevars.pageLabels['FullTimeSlots'],shippingDate);
+                        $('.show-shipDate-error-message').show();
+                    } else {
+                        $('.show-shipDate-error-message').hide();
+                    }
+                    firstRemoteCall=false;
+                    // Validations for showing error messages - US: OO-2434 start
+                    // validation to check if shipping method = Pickup and pickup time is not selected
+                    /*if($('.shippingOptions')[0].selectedIndex == 1) {
+                        if(($('.selectPickerTime').val()=="") || !$('.selectPickerTime')[0]){
+                            $('.show-pickupTime-error-message').show();
+                         }
+                    } else {
+                        $('.show-pickupTime-error-message').hide();
+                    }
+                    // validation to check if shipping method = Pickup and pickup time is not disabled
+                    if($('.selectPickerTime option:selected').val() == "disabled"){
+                        var fullTimeSlots = String.format(CCRZ.pagevars.pageLabels['FullTimeSlots'],shippingDate);
+                        $('.show-shipDate-error-message').show();
+                    } else {
+                        $('.show-shipDate-error-message').hide();
+                    }*/
+                    // Validations for showing error messages - US: OO-2434 end
+                }
+                /*if(!isCheckoutShip && $('.checkoutContent')[0]){
+                    CCRZ.views.ShippingView.prototype.getPickupTime();
+                }*/
+                if(selectedShippingValue) {
+                    $('.shippingOptions').val(selectedShippingValue);
+                    CCRZ.views.ShippingView.prototype.getPickupTime();
+                }
+                if(poNumberData) {
+                    $('.purchase-order').val(poNumberData);
+                }
+                if(commentsValue) {
+                    $('.shipnotes').val(commentsValue);
+                }
+            });
+            var setCheckoutShipData=function(checkoutShipModel,checkoutShipView){
+                var cartId= CCRZ.cartCheckoutModel.attributes.sfid,isShipError=false;
+                var shippingDetailsData,deliveryInstructions,isRequired,portalUserId=CCRZ.pagevars.portalUserId;
+                var shippingMethod;
+                var cartEncId=CCRZ.pagevars.queryParams.cartId != null ? CCRZ.pagevars.queryParams.cartId : CCRZ.pagevars.queryParams.cartID;
+                CCRZ.views.ShippingView.prototype.events["click .processShippingInfo"] = null;
+                CCRZ.views.ShippingView.prototype.events["click .processBack"] = null;
+                
+                
+                checkoutShipModel.controllerName = 'cc_oo_CheckoutShippingController';
+                /**
+                *validate PO number.
+                **/
+                var validatePoNumber = function(purchaseOrder) {
+                    if(purchaseOrder){
+                        $('.form-empty-error').addClass('hidden'); 
+                        $('.processShippingInfo').removeAttr('disabled');               
+                    } else {
+                        $('.purchase-order').addClass('error');
+                        $('.form-error').removeClass('hidden');
+                        $('.processShippingInfo').removeAttr('disabled');
+                    }
+                };
+                /**
+                * Remote Call for getting shipdate.
+                * @param callback : function Callback function to be executed as soon as we receive response from server.
+                **/
+                checkoutShipModel.getShipDate = function(callback){
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className: checkoutShipModel.controllerName});
+                    remoteCall.invokeCtx('getshipDate', cartId, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+                /**
+                * Remote Call for checking ponumber required.
+                * @param callback : function Callback function to be executed as soon as we receive response from server.
+                **/
+                checkoutShipModel.isPORequired = function(callback){
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className: checkoutShipModel.controllerName});
+                    remoteCall.invokeCtx('isPORequired', shipToId, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+                /**
+                * Remote Call for checking Purchase Order Number.
+                * @param callback : function Callback function to be executed as soon as we receive response from server.
+                **/
+                checkoutShipModel.purchaseOrderNumberCheck = function(callback){
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className: checkoutShipModel.controllerName});
+                    remoteCall.invokeCtx('PurchaseOrderNumberCheck', cartId, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+                
+                /**
+                * Remote Call for getting shipdate.
+                * @param callback : function Callback function to be executed as soon as we receive response from server.
+                **/
+                checkoutShipModel.shuffle = function(requestedDate,callback){
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className: checkoutShipModel.controllerName});
+                    remoteCall.invokeCtx('shuffle', cartEncId,requestedDate,shippingMethod, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+                /**
+                * Remote Call for getting shipdate.
+                * @param callback : function Callback function to be executed as soon as we receive response from server.
+                **/
+                checkoutShipModel.isCartUpdated = function(requestedDate,callback){
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className: checkoutShipModel.controllerName});
+                    remoteCall.invokeCtx('isCartUpdated', cartEncId,requestedDate,shippingMethod, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+                /**
+                * Remote Call for validating cart weight.
+                * @param callback : function Callback function to be executed as soon as we receive response from server.
+                **/
+                checkoutShipModel.getShippingDetails = function(plantId,cartId,shippingMethod,callback){
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className: checkoutShipModel.controllerName});
+                    remoteCall.invokeCtx('getShippingDetails', plantId,cartId,shippingMethod, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+                /**
+                * Remote Call for saving PONumber and processing it.
+                * @param callback : function Callback function to be executed as soon as we receive response from server.
+                **/
+                checkoutShipModel.purchaseOrderNumber = function(cartId,purchaseOrder,modifiedDelvIns,modifiedshipnotes,pickupTime,shippingMethodOptions,timeZone, callback){
+                    
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className: checkoutShipModel.controllerName});
+                    remoteCall.invokeCtx('PurchaseOrderNumber',cartId,purchaseOrder,modifiedDelvIns,modifiedshipnotes,pickupTime,shippingMethodOptions,timeZone,function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+                /**
+                * Remote Call for getting pickup Time.
+                * @param callback : function Callback function to be executed as soon as we receive response from server.
+                **/
+                checkoutShipModel.getPickupTime = function(callback){
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className: checkoutShipModel.controllerName});
+                    remoteCall.invokeCtx('getPickupTime',cartId,function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+                
+                /**
+                * Returns pickup time.
+                **/
+                checkoutShipView.getPickupTime=function() {
+                    var dockDoorTimeslot;
+                    var shippingDate,timeSlot;
+                    if($('.shippingOptions')[0].selectedIndex == 1) {
+                    	$('.shippingOptions').attr("disabled", "disabled");
+                        $('.show-error-message').hide();
+                        checkoutShipModel.getPickupTime(function(resp) {
+                            if(resp && resp.success){
+                                var dockdoor={'dockdoor':resp.data};
+                                var source=$('#oo-DockDoor-TimeSlots').html();
+                                var htmlOutput = compileHandler( source, dockdoor );
+                                insertContent('.dock-door', htmlOutput );
+                                $('.dock-door').show();
+                                if(!resp.data.amendPickUpTime){
+                                    $('.shippingOptions').removeAttr("disabled");
+                                }
+                                isTimeRendered = true;
+                                nP = navigator.platform;      
+                                if (nP == "iPad" || nP == "iPhone" || nP == "iPod" || nP == "iPhone Simulator" || nP == "iPad Simulator"){
+                                    $('select option[disabled]').remove();
+                                }
+                                var pickupTimeTemp;
+                                if(resp.data.timeZone){
+                                    sessionStorage.setItem('TimeZoneFormat',resp.data.timeZone);
+                                }
+                                //OO-4900
+                                var amendedPickUpTime, amendPickUpTimeZone;
+                                if(resp.data.amendPickUpTime){
+                                   var timeString = resp.data.amendPickUpTime;
+                                   var H = +timeString.substr(0, 2);
+                                   var h = (H % 12) || 12;
+                                   h = h > 9  ? h : '0'+h;
+                                   var ampm = H < 12 ? " AM" : " PM";
+                                   amendedPickUpTime = h + timeString.substr(2, 3) + ampm;
+                                   sessionStorage.setItem('PickupTime',amendedPickUpTime);
+                                   if($(".selectPickerTime option[value='"+ amendedPickUpTime +"']").val()==amendedPickUpTime){
+                                        if($(".selectPickerTime option[value='"+ amendedPickUpTime +"']").is(":disabled")){
+                                            $(".selectPickerTime option[value='"+ amendedPickUpTime +"']").removeAttr("disabled");
+                                        }
+                                   }
+                                   else{
+                                        $('.selectPickerTime optgroup[label="Available Slot(s)"]').append("<option value='"+ amendedPickUpTime +"'>"+amendedPickUpTime+"</option>");
+                                   }
+                                   sessionStorage.setItem('pickupTimeIndex',$(".selectPickerTime option[value='" + amendedPickUpTime + "']").index());
+                                   sessionStorage.setItem('slot',$(".selectPickerTime option[value='" + amendedPickUpTime + "']").closest("optgroup")[0].label);
+                                }
+                                if(resp.data.amendPickUpTimeZone){
+                                   amendPickUpTimeZone = resp.data.amendPickUpTimeZone;
+                                   sessionStorage.setItem('TimeZoneFormat',amendPickUpTimeZone);
+                                }
+                                //OO-4900   
+                                var pickupTime = sessionStorage.getItem('PickupTime');
+                                if( pickupTime){
+                                    pickupTimeTemp=pickupTime;
+                                }
+                                
+                                // Defect 3175 start and 3178
+                                var hasEnabledOption = false;
+                                var isPreSelected=true;
+                                _.each(resp.data.timeSlots.Alternate, function(opt) {
+                                    if(opt.enabled) {
+                                        hasEnabledOption = true;   
+                                    }
+                                    if(opt.pickUpTime==pickupTimeTemp && !opt.enabled){
+                                        isPreSelected=false;
+                                    }
+                                });
+                                _.each(resp.data.timeSlots.Reserved, function(opt) {
+                                    if(opt.enabled) {
+                                        hasEnabledOption = true;   
+                                    }
+                                    if(opt.pickUpTime==pickupTimeTemp && !opt.enabled){
+                                        isPreSelected=false;
+                                    }
+                                });
+                                if(resp.data.amendPickUpTime){
+                                    hasEnabledOption=true;
+                                    isPreSelected=true;
+                                }
+                                // Defect 3175 and 3178 end
+                                shippingDate = resp.data.shipDate;
+                                timeSlot = resp.data.timeSlots;
+                                if(hasEnabledOption && isPreSelected && sessionStorage.getItem('pickupTimeIndex') && sessionStorage.getItem('pickupTimeIndex')!= '' && sessionStorage.getItem('slot')){
+                                    $('.selectPickerTime optgroup[label="'+sessionStorage.getItem('slot')+'"] option').eq(parseInt(sessionStorage.getItem('pickupTimeIndex'))).attr('selected',true);
+                                    //$('.selectPickerTime')[0].selectedIndex=parseInt(sessionStorage.getItem('pickupTimeIndex'))+1;
+                                    $('.show-pickupTime-error-message').hide(); 
+                                    $('.show-shipDate-error-message').hide();
+                                }
+                                // Defect 3175 start and 3178
+                                if(!hasEnabledOption) {
+                                    var fullDate=new Date(shippingDate);
+                                    var oneDigitMonth=fullDate.getMonth()+1;
+                                    var currentDate =  oneDigitMonth + "/" + fullDate.getDate() + "/" + fullDate.getFullYear();
+                                    var fullTimeSlots = String.format(CCRZ.pagevars.pageLabels['FullTimeSlots'],currentDate);
+                                    $('.show-shipDate-error-message').text(fullTimeSlots).show();
+                                    isShipError=true;
+                                    $('.show-pickupTime-error-message').hide(); 
+                                    // Defect 3175 end and 3178
+                                }
+                                else if($('.selectPickerTime')[0] && !dockdoor.dockdoor.IsJDEUp){
+                                    $('.pickupTime').show();
+                                    $('.show-pickupTime-msg').show(); // Defect: OO-3954 Fixed - showing time message if shipping method = Pickup
+                                    $('.show-error-message').hide(); // Defect: OO-4108 Fixed
+                                } else {
+                                    $('.show-pickupTime-error-message').hide(); // Defect 3127 Fixed
+                                    $('.show-shipDate-error-message').hide();
+                                    isShipError=false;
+                                }
+                            } else {
+                            	$('.shippingOptions').removeAttr("disabled");
+                            }
+                        });
+                    } else {
+                        $('.show-error-message').hide();
+                        isShipError=false;
+                        $('.show-shipDate-error-message').hide();
+                        $('.pickupTime').hide();
+                        $('.show-pickupTime-msg').hide(); // Defect: OO-3954 Fixed - Hiding time message if shipping method = Delivery
+                        $('.show-pickupTime-error-message').hide();
+                        sessionStorage.removeItem('PickupTime');
+                        sessionStorage.removeItem('pickupTimeIndex');
+                        sessionStorage.removeItem('TimeZoneFormat');                    
+                        sessionStorage.removeItem('slot');
+                    }
+                };
+                
+                /**
+                * save ponumber.
+                **/
+                checkoutShipView.purchaseOrderNumber=function() {
+                    var purchaseOrder=$('.purchase-order').val();
+                    //us-1644
+                    var modifiedDelvIns = $('.value.deliverynotes').text();
+                    var modifiedShipNotes = $('.shipnotes').val(); // Defect 3213 Fixed
+                    var pickupTime = $('.selectPickerTime option:selected').val();
+                    var shippingMethodOptions = $('.shippingOptions').val();
+                    var timeZone = $('#pickuptimezone').text();
+                    var hour,addTime; // Defect -4785
+                    if($('#pickuptimezone').html()){
+                        //pickupTime = pickupTime + ' ' + $('#pickuptimezone').html();
+                        // Saving pickup Time in 24 hour format in Backend
+                        var timeSplit = $('.selectPickerTime option:selected').val().split(' ');
+                        if(timeSplit[1] == 'PM'){
+                            hour = timeSplit[0].split(':')[0];
+                            if(hour=='12'){
+                                addTime = Number(hour);
+                                addTime = addTime+":"+timeSplit[0].split(':')[1];
+                                pickupTime = addTime;
+                            }
+                            else{
+                                addTime = Number(hour)+12;
+                                addTime= addTime+":"+timeSplit[0].split(':')[1];
+                                pickupTime = addTime;
+                            }
+                            
+                        }
+                        else if(timeSplit[1] =='AM'){
+                            hour = timeSplit[0].split(':')[0];
+                            if(hour=='12'){
+                                addTime = '00';
+                                addTime= addTime+":"+timeSplit[0].split(':')[1];
+                                pickupTime = addTime;   
+                            }
+                            else{
+                                addTime = Number(hour);
+                                addTime= hour+":"+timeSplit[0].split(':')[1];
+                                pickupTime = addTime;
+                            }
+                        }
+                        pickupTime =  pickupTime;
+                        //end of saving pickup Time in 24 hour format
+                    }
+                    checkoutShipModel.purchaseOrderNumber(cartId,purchaseOrder,modifiedDelvIns,modifiedShipNotes,pickupTime,shippingMethodOptions,timeZone, function(resp) {
+                        isCheckoutShip = true;
+                        var formData = form2js('shipForm', '.', false, function(node) {}, false);
+                        // Defect OO-4108 start
+                            if(checkoutShipView.validateInfo(formData)) {
+                                CCRZ.cartCheckoutModel.set(formData);
+                            }
+                            CCRZ.cartCheckoutView.goToPosition(2); 
+                    });
+                };
+                /**
+                * Returns shipping details info.
+                **/
+                checkoutShipView.getShippingDetails=function() {
+                    var plantId = $.urlParam('sid');
+                    var fulltruckLoadweight;
+                    shippingMethod=$.trim(shippingMethodOptions);
+                    checkoutShipModel.getShippingDetails(plantId,cartId,shippingMethod,function(resp) {
+                        if(resp && resp.success){
+                            fulltruckLoadweight = resp.data;
+                            console.log('Cart weight is greater than full truck load---->');
+                        
+                            var weightRestrictionModal = $('#weight-restriction-modal');
+                            if(!weightRestrictionModal[0]) {
+                                var weightRestrictionDialog = $($('#weight-restriction-dialog').html());
+                                $(weightRestrictionDialog).appendTo($('body'));
+                                weightRestrictionDialog.find('.weight-restriction').html(String.format(CCRZ.pagevars.pageLabels['Weight-restriction'],fulltruckLoadweight));
+                            }
+                            
+                            $('#weight-restriction-modal').modal('show'); 
+                        }
+                        else {
+                         checkoutShipView.purchaseOrderNumber();
+                        }   
+                    });
+                };
+                 /**
+                * isCartUpdated
+                **/
+                checkoutShipView.isCartUpdated=function() {
+                    var requestedDate=CCRZ.cartCheckoutModel.attributes.requestedDateStr;
+                    shippingMethod=$.trim(shippingMethodOptions);
+                    checkoutShipModel.isCartUpdated(requestedDate,function(resp) {
+                        if(resp && resp.success)
+                        {
+                            var cartUpdated=resp.data['cartUpdated'];
+                            var cutOffTime=resp.data['cutOffTime'];
+                            console.log(cartUpdated);
+                            if(cartUpdated){
+                                //var orderCuttOffModal = $('#order-cutOff-modal');
+                                //if(!orderCuttOffModal[0]) {
+                                  // var orderCutOffDialog = $($('#order-cutOffTime-dialog').html());
+                                   //$(orderCutOffDialog).appendTo($('body'));
+                                   var orderCutOffDialogMsg=CCRZ.pagevars.pageLabels['order_cutoffdialog'];
+                                   var orderCutOffMsg  =String.format(CCRZ.pagevars.pageLabels['order_cutoffmsg'],cutOffTime);
+                                   $('.shuffle-cart-modal').find('.modal-title').html(orderCutOffDialogMsg);
+                                   $('.shuffle-cart-modal').find('.order-cutOffMsg').html(orderCutOffMsg);
+                                //}
+                                $('#order-cutOff-modal').modal('show');
+                            }
+                         }
+                        else{
+                            checkoutShipView.getShippingDetails();               
+                        }
+                    });
+                };
+                /**
+                * shuffles cart.
+                **/
+                checkoutShipView.shuffle=function() {
+                    var requestedDate=CCRZ.cartCheckoutModel.attributes.requestedDateStr;
+                    shippingMethod=$.trim(shippingMethodOptions);
+                    checkoutShipModel.shuffle(requestedDate,function(resp) {
+                        if(resp && resp.success)
+                        {
+                            var cartUpdated=resp.data['cartUpdated'];
+                            var cutOffTime=resp.data['cutOffTime'];
+                            console.log(cartUpdated);
+                            if(cartUpdated){
+                                checkoutShipView.processBack();
+                            }         
+                         }
+                    });
+                };
+                
+                /**
+                * Returns po number check.
+                **/
+                checkoutShipView.purchaseOrderNumberCheck=function() {
+                    checkoutShipModel.purchaseOrderNumberCheck(function(resp) {
+                        if(resp && resp.success)
+                        {
+                        // Defect 3213 fixed - To retain values in order info page
+                            var poNumber=resp.data['PONumber'];
+                            var shipNote = resp.data['shipNote'];
+                            if(poNumber && !poNumberData){
+                                $('.purchase-order').val(poNumber);
+                            }
+                            if(shipNote && !commentsValue){
+                                $('.shipnotes').val(shipNote);
+                            }
+                            var ShippingMethodDisabled = resp.data['AmendedCart'];
+                            if(ShippingMethodDisabled){
+                                $('.shippingOptions').attr('disabled','disabled');   
+                            }
+                            else{
+                                $('.shippingOptions').removeAttr('disabled');      
+                            }
+                            
+                            if(!resp.data.AmendedCart){
+                                if(!resp.data.isDelivery){
+                                    $(".shippingOptions option[value='null - Delivery']").remove();
+                                    $(".shippingOptions option[value='null - Pick Up']").attr('selected',true);
+                                    checkoutShipView.getPickupTime(); // Calling getPickupTime() for amend carts for PickupTime dropdown
+                                }
+                                if(!resp.data.isPickUp){
+                                    $(".shippingOptions option[value='null - Pick Up']").remove();
+                                    $(".shippingOptions option[value='null - Delivery']").attr('selected',true);
+                                }
+                           }
+                        }  
+                    });
+                }
+                /**
+                * Returns PO number flag.
+                **/
+                checkoutShipView.isPORequired=function() {
+                    checkoutShipModel.isPORequired(function(resp) {
+                        //US-1644 -start
+                        shippingDetailsData=resp.data;
+                        isRequired = shippingDetailsData['isPORequired'];
+                        deliveryInstructions = shippingDetailsData['DeliveryInstructions'];
+                        $('.value.deliverynotes').text(deliveryInstructions);
+                        if(isRequired){
+                            $('.form-group').addClass('required');
+                            //$('.processShippingInfo').attr('disabled', 'disabled');
+                        } else {
+                            $('.processShippingInfo').removeAttr('disabled');
+                        }//us-1644-end
+                    });
+                };
+                /**
+                * Returns shipdate.
+                **/
+                checkoutShipView.getShipDate=function() {
+                    checkoutShipModel.getShipDate(function(resp) {
+                        if(resp && resp.success){
+                            dataMap = resp.data; 
+                            //var shipDate = dataMap[shipToNumber].ccrz__Cart__r.ccrz__RequestDate__c;
+                            //var shipDate = new Date('{!shipDateString}');
+                            var shipDate = new Date(dataMap[0]); // Defect 3130 Fixed
+                            shipDate.getDay(); // Defect 3130 Fixed
+                            var weekday = new Array(7);
+                            weekday[0] =  "Sunday";
+                            weekday[1] = "Monday";
+                            weekday[2] = "Tuesday";
+                            weekday[3] = "Wednesday";
+                            weekday[4] = "Thursday";
+                            weekday[5] = "Friday";
+                            weekday[6] = "Saturday";
+                            var shipDay = weekday[shipDate.getDay()];
+                            shipDate = dataMap[0];
+                            $('.shippingDate .shipping-Day-Date').text(shipDay+', '+shipDate);
+                        }                   
+                    });
+                };
+                /**
+                *process back button
+                **/
+                checkoutShipView.processBack=function(){
+                    
+                    if(portalUserId!= null && portalUserId != '' && portalUserId!='undefined' && portalUserId!='null'){
+                        cartDetails();
+                        //document.location = "/apex/ccrz__Cart?cartID=" + cartEncId + getCSRQueryString();
+                    }
+                    else {
+                        cartDetails();
+                        //document.location = "/PurinaMills/ccrz__Cart?cartID=" + cartEncId + getCSRQueryString();
+                    }
+                }
+                /**
+                *process back button
+                **/
+                checkoutShipView.processShipping=function(e){
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
+                    var poNumber=$('.purchase-order').val();
+                    if(isRequired){
+                        validatePoNumber(poNumber);
+                    }
+                    // US: OO-2434 start
+                    if($('.shippingOptions')[0].selectedIndex==0){
+                        $('.show-error-message').show();
+                    }
+                    else if($('.shippingOptions')[0].selectedIndex==1 && (($('.selectPickerTime').val()=="") || !$('.selectPickerTime')[0]) && !isShipError){
+                        $('.show-pickupTime-error-message').show();
+                    }
+                    else if(isShipError){
+                        $('.show-shipDate-error-message').show();
+                    }
+                    else{
+                        $('.show-error-message').hide();
+                        $('.show-pickupTime-error-message').hide();
+                        $('.show-shipDate-error-message').hide();
+                        // US: OO-2738 end
+                        if((poNumber || (!isRequired)) && shippingMethodOptions){
+                            checkoutShipView.isCartUpdated();
+                        }
+                        //validateShippingMethod();
+                        return false;
+                    }
+                };
+                /**
+                *change options
+                **/
+                checkoutShipView.changeShippingOptions=function(e){
+                    var ele = $(e.currentTarget).find('option:selected');
+                    shippingMethodOptions = ele.text();
+                    selectedShippingValue = ele.val();
+                    // Defect: OO-4471 starts
+                    //sessionStorage.removeItem('PickupTime');
+                    if( $('.selectPickerTime')[0]){
+                        $('.selectPickerTime')[0].selectedIndex = 0;
+                    }
+                    // Defect: OO-4471 ends
+                    checkoutShipView.getPickupTime();
+                };
+                
+                /**
+                * enter key event
+                **/
+                checkoutShipView.keyEvent=function(e){
+                    if(e.keyCode===13){
+                        e.preventDefault();
+                    }
+                    poNumberData = e.currentTarget.value;
+                    
+                    if(poNumberData){
+                        //var hyphenSubstrings = poNumberData.trim().match(/[\-]+\s*$/i);
+                        //if(/^[a-z0-9\s\-]*$/i.test(poNumberData) && (!hyphenSubstrings || poNumberData.trim() != hyphenSubstrings[0])){
+                            $('.form-valid-error').addClass('hidden');
+                            $('.form-error').addClass('hidden');
+                            $('.purchase-order').removeClass('error');
+                            $('.processShippingInfo').removeAttr('disabled');
+                        /*}else {
+                            $('.form-valid-error').removeClass('hidden');
+                            $('.purchase-order').addClass('error');
+                            $('.processShippingInfo').attr('disabled', 'disabled');
+                        }
+                    } else {
+                        $('.processShippingInfo').removeAttr('disabled');
+                        $('.purchase-order').removeClass('error');
+                    }               */
+                    }
+                };
+                
+                /**
+                *select picker time change.
+                **/
+                checkoutShipView.checkingPickupTime = function(e) {
+                    var currentSelected = $(e.currentTarget).find('option:selected');
+                    var pickupTimeOptions = currentSelected.text().trim();
+                    selectedPickUpTimeIndex = currentSelected.index();                  
+                    if(pickupTimeOptions.toLowerCase() !== ('--select--').trim().toLowerCase()){
+                        sessionStorage.setItem('PickupTime',pickupTimeOptions);
+                        sessionStorage.setItem('pickupTimeIndex',selectedPickUpTimeIndex);
+                        sessionStorage.setItem('slot',currentSelected.parent().attr('label'));
+                    } else {
+                        pickupTimeOptions = "";
+                    }
+                    $('.show-pickupTime-error-message').hide(); // Defect: OO-3188 Fixed
+                };
+                
+                checkoutShipView.commentsData = function(e) {
+                    commentsValue = e.currentTarget.value;
+                };
+                
+                /**
+                *events handler
+                **/
+                var events = checkoutShipView.events;
+                events["click .processBackButton"]="processBack";
+                events["click .order-cuttOffContinue"]="shuffle";
+                events["click .processShippingInfo"]="processShipping";
+                events["change .shippingOptions"]="changeShippingOptions";
+                events["keydown .shippingOptions"]=function(e){
+                                                        if(e.keyCode===13){
+                                                            e.preventDefault();
+                                                        }
+                                                    };
+                events["keydown .purchase-order"]=function(e){
+                                                        if(e.keyCode===13){
+                                                            e.preventDefault();
+                                                        }
+                                                    };
+                events["keydown .processShippingInfo"]=function(e){
+                                                        if(e.keyCode===13){
+                                                            e.preventDefault();
+                                                        }
+                                                    };                                    
+                events["keyup .purchase-order"]="keyEvent";
+                events["change .selectPickerTime"]="checkingPickupTime";
+                events["keyup .shipnotes"] = "commentsData";
+            };
+        });
+    </script>
+</apex:component>

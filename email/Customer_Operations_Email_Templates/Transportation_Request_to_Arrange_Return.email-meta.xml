@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email template to Transportation Planners requesting return arrangements</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Transportation Request to Arrange Return</name>
+    <style>none</style>
+    <subject>Request to Arrange Product Return - SR# {!Case.CaseNumber}</subject>
+    <type>text</type>
+</EmailTemplate>

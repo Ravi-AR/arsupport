@@ -1,0 +1,146 @@
+<messaging:emailTemplate subject="2017 Chick Days Prebook Confirmation" recipientType="User" relatedToType="ccrz__E_Order__c">
+<messaging:htmlEmailBody >
+<html>
+<style type="text/css">
+body {
+    background-color:#ffffff;
+}
+
+table {
+    background-color: #FFFFFF;
+    border: 2px solid;
+    border-radius: 10px;
+    webkit-border-radius: 10px;
+    moz-border-radius: 10px;
+}
+        
+h {
+    color: #0d6bab;
+    font-family: ProximaNovaBold, Arial, Helvetica, sans-serif;
+}
+          
+h2 {
+    color: #0d6bab;
+    font-family: ProximaNovaBold, Arial, Helvetica, sans-serif;
+}
+
+h3 {
+    color: #0d6bab;
+    font-family: ProximaNovaBold, Arial, Helvetica, sans-serif;
+}
+
+.emailFooter-Div{
+    color: #0d6bab;
+    font-family: ProximaNovaBold, Arial, Helvetica, sans-serif;
+}
+
+.orderItemsProductNameHeading-TD .orderItemsProductName-TD {
+    width:50%;
+}
+
+.orderItemsProductPriceHeading-TD .orderItemsProductPricing-TD {
+    width:110px;
+}
+
+.orderItemsProductQty-TD .orderItemsProductQtyHeading-TD {
+    width:10%;
+}
+
+.totalsSbtAmt-TD {
+    text-align:right;
+    width:20%;
+}
+
+.orderItemsProductTotalHeading-TD .orderItemsProductSubAmt-TD .totalsSbtLbl-TD .totalsShipLbl-TD .totalsShipAmt-TD .totalsTaxLbl-TD .totalsTaxAmt-TD .totalsGTotalLbl-TD .totalsGTotalAmt-TD{
+    width:20%;
+}
+
+.spacerTD {
+    width:60%;
+}
+
+
+</style>
+
+<body>
+<img src="https://c.cs13.content.force.com/servlet/servlet.ImageServer?id=015W0000000A7xR&oid=00DW0000008pmrV&lastMod=1478244705000"/>
+<table  class="orderStatus orderStatusTable">
+<tbody>
+<tr class="orderStatus orderStatusTable-TR">
+<td class="orderStatus orderStatusTable-TD">
+<!--<h3 class="orderStatus orderStatusTable-H3">{!relatedTo.CreatedBy.Name} placed a prebook commitment. Current Order status is: {!relatedTo.ccrz__OrderStatus__c} <br/>-->
+<h3 class="orderStatus orderStatusTable-H3" style="color:#000000">Thank you. Your prebook commitment has been confirmed. <br/>
+Confirmation Number: {!relatedTo.Name} </h3></td>
+</tr>
+</tbody>
+</table>
+
+<!-- Billing and shipping information -->
+
+<table class="email-table1 billShipTable" style="width:500px;">
+<thead class="tableHead billShip-THead">
+            <tr class="headerRows billShipTHead-TR">
+                <td class="headerTextTD billShipTHead-TD" colspan="2">
+                    <h3 class="headingText billShipTHead-H3">
+                        Billing and Shipping Address
+                    </h3>
+                </td>
+            </tr>
+        </thead>
+<tbody class="billShipTBody">
+<tr class="billShip-TR">
+<td class="billShip-BillingInfo-TD" style="width:200px;"><div class="input-box billShip-BillingInfo-DIV"><b style="padding:0 15px 0 15px;">Bill To:</b><br/>{!relatedTo.ccrz__BillTo__r.ccrz__CompanyName__c}<br/>{!relatedTo.ccrz__BillTo__r.ccrz__AddressFirstline__c}<br/>{!relatedTo.ccrz__BillTo__r.ccrz__AddressSecondline__c}, {!relatedTo.ccrz__BillTo__r.ccrz__State__c},{!relatedTo.ccrz__BillTo__r.ccrz__Country__c}<br/>
+  {!relatedTo.ccrz__BillTo__r.ccrz__PostalCode__c}</div></td>
+  <td class="billShip-ShippingingInfo-TD" style="width:200px;"><div class="input-box billShip-ShippingingInfo-DIV" ><b style="padding:0 15px 0 15px;">Ship To:</b><br/>{!relatedTo.ccrz__ShipTo__r.ccrz__CompanyName__c}<br/>{!relatedTo.ccrz__ShipTo__r.ccrz__AddressFirstline__c}<br/>{!relatedTo.ccrz__ShipTo__r.ccrz__AddressSecondline__c}, {!relatedTo.ccrz__ShipTo__r.ccrz__State__c},{!relatedTo.ccrz__ShipTo__r.ccrz__Country__c}<br/>
+  {!relatedTo.ccrz__ShipTo__r.ccrz__PostalCode__c}</div></td>
+</tr>
+</tbody>
+</table>
+
+<!-- Order Details Section-->
+
+<table class="email-table1 orderItemsTable">
+<thead class="tableHead orderItems-THead">
+            <tr class="tableHead orderItemsTHead-TR">
+                <td class="headerTextTD orderItemsTHead-TD" colspan="4">
+                    <h3 class="headingText orderItemsTHead-H3">
+                        Order Items
+                    </h3>
+                </td>
+            </tr>
+        </thead>
+  
+  <tbody class="orderItemsTBody">
+      <tr class="orderItemsLabels-TR">
+                <td class="orderItemsProductNameHeading-TD">
+                    <center><b>Product</b></center>
+                </td>
+                <td class="orderItemsProductQtyHeading-TD">
+                    <center><b>Qty</b></center>
+                </td>
+            </tr>
+    <apex:repeat value="{!relatedTo.ccrz__E_OrderItems__r}" var="ordItem">
+        <tr class="orderItemsProduct-TR">
+            <td class="orderItemsProductName-TD">
+                {!ordItem.ccrz__Product_Name__c}
+          </td>
+          <td class="orderItemsProductQty-TD">
+                {!ordItem.ccrz__Quantity__c}
+          </td>
+      </tr>
+    </apex:repeat>
+  </tbody>
+</table>
+<br/><br/>
+<div class="emailFooter-Div" style="color:#000000">
+    <b>Your Purina Customer© Service representative will contact you to convert your prebook commitment to an order. You 
+    cannot make any changes on-line to your submitted prebook commitment. If you need to make changes, please 
+    contact your Purina Customer© Service representative for assistance. <br/><br/>
+    
+    We appreciate your business and thank you for your support.</b>
+    
+</div>
+</body>
+</html>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

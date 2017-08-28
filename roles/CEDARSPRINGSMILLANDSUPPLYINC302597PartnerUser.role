@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>CEDAR SPRINGS MILL AND SUPPLY INC-302597 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>CEDAR SPRINGS MILL AND SUPPLY INC-302597 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>CEDARSPRINGSMILLANDSUPPLYINC302597PartnerManager</parentRole>
+</Role>

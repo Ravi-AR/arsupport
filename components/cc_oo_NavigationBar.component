@@ -1,0 +1,52 @@
+<apex:component controller="cc_oo_NavigationBarController">
+    
+        <div id="confirm-pop-up" class= "modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class='modal-message'></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-yes">Yes</button>
+                        <button type="button" class="btn btn-secondary btn-no">No</button>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    
+    <script>        
+        //insertContent('body', template);
+        jQuery(function($) {
+        	 
+            /*var prefix;
+            if('{!$CurrentPage.parameters.portalUser}' != '')
+              prefix = 'apex';
+            else
+              prefix = '{!$Site.Prefix}';
+            var url =  prefix +"/ccrz__MyAccount";   */         
+            if( !Handlebars.helpers.isNotPreBook() ) {
+	            $(document).off('click', '.btn-yes').on('click', '.btn-yes', function(e){
+	            	window.location.href = '{!communityLink}';             
+	            });
+	            
+	            $(document).off('click', '.btn-no').on('click', '.btn-no', function(e){
+	            	$('#confirm-pop-up').modal('hide');
+	            });
+	            
+            }
+            
+        });
+    </script>
+    <script type="text/template">
+    <div id="dialog-confirm" title="Empty the recycle bin?" class="hide">
+        <p>
+			<span class="ui-icon ui-icon-alert"></span>
+			<span>These items will be permanently deleted and cannot be recovered. Are you sure?</span>
+		</p>
+    </div>
+    </script>
+</apex:component>

@@ -1,0 +1,325 @@
+<!--
+*********************************************************************************
+Author: Govinda Prasad P S
+Email: govinda.prasad@magnet360.com
+Created Date    : 9/30/2016
+Function    :  Visualforce page to display Detailed Promotional Records.
+Version     : 1.0
+*********************************************************************************
+-->
+
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="LPDCR_ExpenseController" action="{!getExpDetail}">
+<apex:form >
+<apex:composition template="LPDCR_CC_BaseTemplate">
+<apex:define name="PageTitle">Selling Support - {!expObj.expenseObj.Name}</apex:define>
+<apex:define name="body">
+<div class="title_wrapper">
+          <div class="container-fluid">
+           <h3 class="page_title">Request Details<a href="{!$Site.BaseUrl}/LPDCR_Expenses?AccountId={!account.Id}&BBYear={!BBProgYear.id}" class="download">
+               <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
+               <span class="show-xs"> Back</span>
+               <span class="hidden-xs">to Selling Support Summary</span>
+               </a>
+           </h3>
+
+</div></div>
+
+
+      <div class="row top-gap">
+     
+      <div class="col-xs-12">
+      <div class="col-xs-6 col-sm-6">
+        
+     </div>
+      <!-- Changes for Task LPDCR-1144 & 1146 , date 22nd Nov-->
+         <!-- <apex:outputPanel rendered="{! If(expObj.expenseObj.RecordType.Name != 'Balance Adjustment',true,false)  }">-->
+         <apex:outputPanel rendered="{! If((expObj.expenseObj.RecordType.Name != 'Balance Adjustment') && (expObj.expenseObj.ApprovalStatus__c =='Saved' || expObj.expenseObj.ApprovalStatus__c =='Rework' ||  expObj.expenseObj.ApprovalStatus__c == 'Action Required') ,true,false)  }">
+        <div class="col-xs-3 col-xs-offset-0 col-sm-2 col-sm-offset-2">
+            <a href="#" class="btn btn-block btn-success" data-toggle="modal" data-target="#deleteModal">Delete</a>
+        </div>  
+        <div class="col-xs-3 col-sm-2">
+        
+            <a href="{!$Page.LPDCR_ExpenseEdit}?AccountId={!account.Id}&BBYear={!BBProgYear.id}#/expense/{!account.Id}/{!BBProgYear.id}/review/{!expObj.expenseObj.Id}" class="btn btn-block btn-primary">Edit</a>
+        </div> 
+        </apex:outputPanel> 
+    </div>
+    <div class="col-xs-12">
+
+      <div class="modal-body">
+         <table class="table table-responsive no_border tabletd">
+                        <thead>
+                            <tr>
+                                <th><h4><b>REQUEST # </b></h4></th>
+                                <th>ACCT #</th>
+                                <th><apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c!='Balance Adjustment',true,false)}">
+                                        AMOUNT
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c=='Balance Adjustment',true,false)}">
+                                        STATUS
+                                    </apex:outputPanel>
+                               </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <apex:outputPanel rendered="{! If(expObj.expenseObj.ApprovalStatus__c =='Submitted for Approval' ,false,true) }">
+                                       {!expObj.expenseObj.Name}
+                                         <!-- <a href="{!$Page.LPDCR_ExpenseEdit}#/review/{!expObj.expenseObj.Id}">{!expObj.expenseObj.Name}</a>-->
+                                    </apex:outputPanel>
+
+                                    <apex:outputPanel rendered="{! If(expObj.expenseObj.ApprovalStatus__c =='Submitted for Approval' ,true,false) }">
+                                        {!expObj.expenseObj.Name}
+                                    </apex:outputPanel>
+                                </td>
+                                <td>{!expObj.expenseObj.DealerAccount__r.Name}</td>
+                                <td><apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c!='Balance Adjustment',true,false)}">
+                                        <apex:OutputText value="{0, Number, Currency}">
+                                          <apex:Param value="{!expObj.expenseObj.Line_Item_Total__c}" />
+                                          </apex:OutputText>
+                                   </apex:outputPanel>
+                                   <apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c=='Balance Adjustment',true,false)}">
+                                        {!expObj.expenseObj.ApprovalStatus__c}
+                                    </apex:outputPanel>
+                                   
+                                </td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">REQUEST DESCRIPTION</th>
+                                <th><apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c!='Balance Adjustment',true,false)}">
+                                      STATUS 
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c=='Balance Adjustment',true,false)}">
+                                      PROGRAM YEAR
+                                    </apex:outputPanel>
+                                    
+                                    
+                                    </th>
+                            </tr>
+                            <tr>
+                                <td colspan="2">{!expObj.expenseObj.Description__c}</td>
+                                <td><apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c!='Balance Adjustment',true,false)}">
+                                      {!expObj.expenseObj.ApprovalStatus__c} 
+                                    </apex:outputPanel>
+                                     <apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c=='Balance Adjustment',true,false)}">
+                                      {!expObj.expenseObj.Selling_Support_Program_Year__r.Name}
+                                    </apex:outputPanel>
+                                    
+                                    </td>
+                            </tr>
+                             <tr >
+                                <th> <apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c!='Balance Adjustment',true,false)}">
+                                      SUBMITTED DATE
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c=='Balance Adjustment',true,false)}">
+                                      ADJUSTMENT DATE
+                                    </apex:outputPanel>
+                                 </th>
+                                <th><apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c!='Balance Adjustment',true,false)}">
+                                      PROGRAM YEAR
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c=='Balance Adjustment',true,false)}">
+                                      REIMBURSED AMOUNT
+                                    </apex:outputPanel>
+                                    </th>
+                            </tr>
+                            <tr >
+                                <td>
+                                <apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c!='Balance Adjustment',true,false)}">
+                                     <apex:outputText value="{0,date,MM/dd/yy}"><apex:param value="{!expObj.expenseObj.Submitted_for_Approval_Date__c}"/></apex:outputText><!--LPDCR-1525-->
+                                 </apex:outputPanel>
+                                 <apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c=='Balance Adjustment',true,false)}">
+                                     <apex:outputText value="{0,date,MM/dd/yy}"><apex:param value="{!expObj.expenseObj.CreatedDate}"/></apex:outputText><!--LPDCR-1525-->
+                                 </apex:outputPanel>
+                               </td>
+                                <td>
+                                
+                                <apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c!='Balance Adjustment',true,false)}">
+                                      <apex:outputText >{!expObj.expenseObj.Selling_Support_Program_Year__r.Name}</apex:outputText>
+                                    </apex:outputPanel>
+                                <apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c=='Balance Adjustment',true,false)}">
+                                       <apex:OutputText value="{0, Number, Currency}">
+                                  <apex:Param value="{!expObj.expenseObj.SalesOperationsBalanceAdjustment__c}" />
+                                  </apex:OutputText>
+                                    </apex:outputPanel>
+                                </td>
+                            </tr>
+                             <tr >
+                                <th><apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c!='Balance Adjustment',true,false)}">
+                                     CREDIT MEMO#
+                                    </apex:outputPanel></th>
+                                <th><apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c!='Balance Adjustment',true,false)}">
+                                     REIMBURSED AMOUNT
+                                    </apex:outputPanel></th>
+                            </tr>
+                            <tr >
+                                <td>
+                                <apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c!='Balance Adjustment',true,false)}">
+                                     <apex:outputText >{!expObj.expenseObj.CreditMemo__c}</apex:outputText>
+                                    </apex:outputPanel>
+                               
+                                </td>
+                                <td>
+                                 <apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c!='Balance Adjustment' && expObj.expenseObj.Total__c != 0,true,false)}">
+                                     <apex:OutputText value="{0, Number, Currency}">
+                                  <apex:Param value="{!expObj.expenseObj.Total__c}" />
+                                  </apex:OutputText>
+                                    </apex:outputPanel>
+                                </td>
+                            </tr>
+                            <tr>
+                            </tr>
+                            <tr colspan="3">
+                                <td>
+                                    <a href="{!$Page.LPDCR_ExpenseDetail}?ExpenseId={!expObj.expenseObj.Cloned_Expense_From__c}&AccountId={!account.Id}&BBYear={!BBProgYear.id}">
+                                       <apex:outputText rendered="{!IF(expObj.expenseObj.Cloned_Expense_From__c != null, true, false)}" value="View My Original Submission"> 
+                                       </apex:outputText>
+                                    </a>
+                                </td>
+                             </tr>
+                        </tbody>
+                    </table>
+                    <!--<hr class="col-xs-12 top-buffer-0" id="hr1"/>-->
+                    <apex:outputPanel rendered="{!IF(expObj.expenseObj.Type__c!='Balance Adjustment',true,false)}">
+                    <div class="well">
+                    <h4><b>Line Items</b></h4>
+                    <hr class="border-bottom col-xs-12 top-buffer-0" id="hr1"/>
+                    <apex:variable value="{!0}" var="counter"/>
+                    <apex:repeat value="{!expObj.lineItemLst}" var="li">
+                    <table class="table no_border tabletd">
+                        <thead>
+                            <tr>
+                                <th>AMOUNT</th>
+                                <th>SUB-CATEGORY</th>
+                                <th>STATUS</th>                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><apex:OutputText value="{0, Number, Currency}">
+                                  <apex:Param value="{!li.ExpenseAmount__c}" />
+                                  </apex:OutputText></td>
+                                <td>{!li.Reimbursement_Sub_category__c}</td>
+                                <td>{!li.Approval_Status__c}</td>                             
+                            </tr>
+                            <tr>
+                               <td><b><i>{!li.BB_Description__c}</i></b></td>                               
+                            </tr>
+                             <tr>
+                               <th>LINE ITEM DESCRIPTION</th> 
+                               <th colspan="2">
+                                   <apex:outputText rendered="{!IF(li.Approval_Status__c == 'Rework', true, false)}" value="REASON FOR REWORK">
+                                       <span class="glyphicon glyphicon-exclamation-sign notification_icon" aria-hidden="true"></span> 
+                                   </apex:outputText>
+                               </th>                                                          
+                            </tr>
+                            <tr>
+                               <td >{!li.Description__c}</td>
+                               <td colspan="2">{!li.ReasonforRework__c}<br/><br/>{!li.DealerFacingReasonforReworkMessage__c}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <apex:repeat value="{!li.attachments}" var="att">
+                                    <apex:variable var="counter" value="{!counter + 1}"/>
+                                    <tr><td colspan="3"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+                                   {!att.Name}  &nbsp;
+                                   <apex:outputPanel rendered="{!(NOT ((CONTAINS(att.Name,'.csv'))|| (CONTAINS(att.Name,'.txt'))||(CONTAINS(att.Name,'.doc'))||(CONTAINS(att.Name,'.docx'))||(CONTAINS(att.Name,'.xlsx'))||(CONTAINS(att.Name,'.xls'))))}">
+                                                                <a data-toggle="modal"  href="#" class="hidden-xs view_width" data-target="#{!FLOOR(counter)}"> View </a> 
+                                                            </apex:outputPanel>
+                                       
+                                       &nbsp;<a href=" {!URLFOR($Action.Attachment.Download, att.id)}" download="{!URLFOR($Action.Attachment.Download, att.id)}" > Download </a>
+                                    
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="{!FLOOR(counter)}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                         <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                   <div class="modal-header">
+                                                        <h4 class="modal-title" id="myModalLabel">Attachment</h4>
+                                                   </div>
+                                                   <div class="modal-body">
+                                                            <apex:outputPanel rendered="{!((CONTAINS(att.Name,'.jpeg')) || (CONTAINS(att.Name,'.JPEG')) ||(CONTAINS(att.Name,'.JPG')) ||(CONTAINS(att.Name,'.jpg')) ||(CONTAINS(att.Name,'.png'))|| (CONTAINS(att.Name,'.PNG')))}">
+                                                               <img class="img-responsive" src="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file={!att.id}"></img>
+                                                            </apex:outputPanel>
+                                                            
+                                                            <apex:outputPanel rendered="{!(CONTAINS(att.Name,'.pdf'))}">
+                                                           <object type="application/pdf" data="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file={!att.id}" width="100%" height="350">
+                                                         
+                                                          <iframe src="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file={!att.id}" style="width: 100%; height: 350px; " frameborder="0" scrolling="yes"></iframe>
+                                                           </object>
+                                                           </apex:outputPanel>
+                                                           <apex:outputPanel rendered="{!(CONTAINS(att.Name,'.txt'))}">
+                                                           <object type="application/pdf" data="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file={!att.id}" width="100%" height="350">
+                                                         
+                                                          <iframe src="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file={!att.id}" style="width: 100%; height: 350px; " frameborder="0" scrolling="yes"></iframe>
+                                                           </object>
+                                                           </apex:outputPanel>
+                                                           
+                                                           
+                                                           
+                                                                                                         
+                                                   </div>
+                                                   <div class="modal-footer ng-scope">
+                                                        <button class="btn btn-primary" type="button" data-dismiss="modal" aria-label="Close">Close</button>
+                                                    </div>
+                                              </div>
+                                         </div>
+                                    </div><!-- Modal -->
+                                    </td></tr>
+                                    </apex:repeat>
+                                 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr class="border-bottom col-xs-12 top-buffer-0" id="hr1"/>
+                    </apex:repeat>
+                </div><!--well-->
+                </apex:outputPanel>
+          </div>
+      </div>
+
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+           
+            <h3 class="modal-title">Delete Reimbursement Record</h3>
+          </div>
+          <div class="modal-body">
+            <label>Would you like to Delete Reimbursement Record #{!expObj.expenseObj.Name}?</label>
+          </div>
+          <div class="modal-footer">
+          
+              <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>&nbsp;
+            
+        <!--     <button type="button" class="btn btn-primary">Delete</button>      -->   
+           
+              <apex:commandButton action="{!deleteExpense}" value="Delete" styleClass="btn btn-primary" oncomplete="deleteExpenseComplete();"></apex:commandButton>
+         
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+    <script type="text/javascript">
+      function deleteExpenseComplete(){
+        window.location = '{!$Site.BaseUrl}/LPDCR_Expenses?AccountId={!account.Id}&BBYear={!BBProgYear.id}';
+      }
+      
+    </script>
+    <style>
+       img{width:100%}
+       .content{padding:0 15px !important; background:#fff !important}
+    </style>
+<script>
+     $(document).ready(function(){
+      $('#bb').addClass("myactive");
+      $('#mbb').addClass("mobactive");
+    });
+ </script>
+</apex:define>
+</apex:composition>
+</apex:form>
+</apex:page>

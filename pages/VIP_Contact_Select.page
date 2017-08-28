@@ -1,0 +1,39 @@
+<apex:page controller="VIP_Contact_Select_Controller" >
+    --VIP_Contact_Select page --
+    <!-- <apex:inputField value="{!select_contact.Account}" /> -->
+
+<apex:form >
+    <apex:pageBlock >
+
+    <p style="font:bold; font-size:16px;">Please select a contact to Invite to a Farm VIP Event.</p>
+		<!-- contact select information -->
+    	<apex:pageBlockSection id="contact_info" columns="1">
+        	<apex:inputField value="{!reg_info.Registrant__c}" >
+        		<apex:actionSupport id="con_up" event="onchange" action="{!setOpportunitiesList}" reRender="opportunityListTable"  />
+        	</apex:inputField>
+			<apex:inputHidden />
+        </apex:pageBlockSection>   
+		<!--  rendered="{!IF(reg_info.Registrant__c = null, 'false', 'true')}" -->
+        <apex:pageBlockSection id="opportunityListTable" >
+            <apex:outputField value="{!con.Name}" />
+            <apex:outputField value="{!acc.Name}" />
+            <apex:outputField value="{!con.Phone}" />
+            <apex:outputField value="{!con.Email}" />
+        </apex:pageBlockSection>
+        
+        <!-- error message --> 
+        <apex:pageBlockSection rendered="{!showErr}">
+        	<p style="color:red; font-size:14px;" >
+                {!errormsg}
+            </p>
+        </apex:pageBlockSection>
+        
+        <!-- nominate button -->
+        <apex:pageBlockSection >
+            <apex:commandButton value="Nominate VIP" action="{!redirect_or_error}" />
+        </apex:pageBlockSection>
+
+    </apex:pageBlock>
+</apex:form>
+
+</apex:page>

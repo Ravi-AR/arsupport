@@ -1,0 +1,15 @@
+PMI Contact Us Form
+
+Contact Date:  {!Contact.PMI_Contact_Us_Date_Question_Asked__c}
+
+Name:  {!Contact.Name}
+Email:  {!Contact.Email}
+Zip Code:  {!Contact.MailingPostalCode}
+
+Specie:  {!Contact.PMI_Contact_Us_Specie__c}
+Brand:  {!Contact.PMI_Contact_Us_Brand__c}
+Are you a veterinarian:  {!Contact.PMI_Contact_Us_Are_you_a_veterinarian__c}
+
+Question:  {!Contact.PMI_Contact_Us_Question__c}
+
+Receive Pet Health and Management Tips, Key Product Support and Coupons:  {!Contact.PMI_Contact_Us_Receive_Tips_Formula__c}

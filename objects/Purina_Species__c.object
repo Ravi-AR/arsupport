@@ -1,0 +1,1496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Specie information including Nutritionist and Vet details</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Beef_Nutritionist_Email__c</fullName>
+        <description>Email of Beef Nutritionist.</description>
+        <externalId>false</externalId>
+        <label>Beef Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Beef_Nutritionist_Phone__c</fullName>
+        <description>Phone of Beef Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Beef Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Beef_Nutritionist__c</fullName>
+        <description>Name of Beef Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Beef Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Beef_Veterinarian_Email__c</fullName>
+        <description>Email of Beef Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Beef Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Beef_Veterinarian_Phone__c</fullName>
+        <description>Phone of Beef Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Beef Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Beef_Veternarian__c</fullName>
+        <description>Name of Beef Veternarian</description>
+        <externalId>false</externalId>
+        <label>Beef Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Dairy_Nutritionist_Email__c</fullName>
+        <description>Email of Dairy Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Dairy Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Dairy_Nutritionist_Phone__c</fullName>
+        <description>Phone number of Dairy Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Dairy Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Dairy_Nutritionist__c</fullName>
+        <description>Name of Dairy Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Dairy Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Dairy_Veterinarian_Email__c</fullName>
+        <description>Email for the Dairy Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Dairy Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Dairy_Veterinarian_Phone__c</fullName>
+        <description>Phone for the Dairy Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Dairy Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Dairy_Veternarian__c</fullName>
+        <description>Veterinarian for Dairy</description>
+        <externalId>false</externalId>
+        <label>Dairy Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Deer_Elk_Nutritionist_Email__c</fullName>
+        <description>Email of Deer/Elk Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Deer/Elk Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Deer_Elk_Nutritionist_Phone__c</fullName>
+        <description>Phone number of Deer/Elk Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Deer/Elk Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Deer_Elk_Nutritionist__c</fullName>
+        <description>Name of Deer/Elk Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Deer/Elk Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Deer_Elk_Veterinarian_Email__c</fullName>
+        <description>Email for the Deer/Elk Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Deer/Elk Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Deer_Elk_Veternarian__c</fullName>
+        <description>Veterinarian for Deer/Elk</description>
+        <externalId>false</externalId>
+        <label>Deer/Elk Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Deer_Veterinarian_Phone__c</fullName>
+        <description>Phone for the Deer/Elk Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Deer/Elk Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Duck_Nutritionist_Email__c</fullName>
+        <description>Email of Duck Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Duck Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Duck_Nutritionist_Phone__c</fullName>
+        <description>Phone of Duck Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Duck Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Duck_Nutritionist__c</fullName>
+        <description>Name of Duck Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Duck Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Duck_Veterinarian_Email__c</fullName>
+        <description>Email of Duck Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Duck Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Duck_Veterinarian_Phone__c</fullName>
+        <description>Phone of Duck Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Duck Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Duck_Veternarian__c</fullName>
+        <description>Name of Duck Veternarian</description>
+        <externalId>false</externalId>
+        <label>Duck Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Eagle_Creek_Nutritionist_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Eagle Creek Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Eagle_Creek_Nutritionist_Phone__c</fullName>
+        <externalId>false</externalId>
+        <label>Eagle Creek Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Eagle_Creek_Veterinarian_Phone__c</fullName>
+        <externalId>false</externalId>
+        <label>Eagle Creek Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Eagle_Creek_Veternarian_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Eagle Creek Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Eagle_Creek_Veternarian__c</fullName>
+        <externalId>false</externalId>
+        <label>Eagle Creek Veternarian</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Eagle_Creek__c</fullName>
+        <externalId>false</externalId>
+        <label>Eagle Creek Nutritionist</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fish_Nutritionist_Email__c</fullName>
+        <description>Email of Fish Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Fish Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fish_Nutritionist_Phone__c</fullName>
+        <description>Phone of Fish Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Fish Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Fish_Nutritionist__c</fullName>
+        <description>Name of Fish Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Fish Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fish_Veterinarian_Email__c</fullName>
+        <description>Email of Fish Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Fish Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fish_Veterinarian_Phone__c</fullName>
+        <description>Phone of Fish Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Fish Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Fish_Veternarian__c</fullName>
+        <description>Name of Fish Veternarian</description>
+        <externalId>false</externalId>
+        <label>Fish Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Game_Bird_Nutritionist_Email__c</fullName>
+        <description>Email of Game Bird Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Game Bird Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Game_Bird_Nutritionist_Phone__c</fullName>
+        <description>Phone of Game Bird Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Game Bird Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Game_Bird_Nutritionist__c</fullName>
+        <description>Name of Game Bird Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Game Bird Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Game_Bird_Veterinarian_Email__c</fullName>
+        <description>Email of Game Bird Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Game Bird Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Game_Bird_Veterinarian_Phone__c</fullName>
+        <description>Phone of Game Bird Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Game Bird Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Game_Bird_Veternarian__c</fullName>
+        <description>Name of Game Bird Veternarian</description>
+        <externalId>false</externalId>
+        <label>Game Bird Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Goat_Nutritionist_Email__c</fullName>
+        <description>Email of Goat Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Goat Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Goat_Nutritionist_Phone__c</fullName>
+        <description>Phone of Goat Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Goat Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Goat_Nutritionist__c</fullName>
+        <description>Name of Goat Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Goat Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Goat_Veterinarian_Email__c</fullName>
+        <description>Email of Goat Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Goat Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Goat_Veterinarian_Phone__c</fullName>
+        <description>Phone of Goat Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Goat Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Goat_Veternarian__c</fullName>
+        <description>Name of Goat Veternarian</description>
+        <externalId>false</externalId>
+        <label>Goat Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Horse_Nutritionist_Email__c</fullName>
+        <description>Email of Horse Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Horse Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Horse_Nutritionist_Phone__c</fullName>
+        <description>Phone number of Horse Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Horse Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Horse_Nutritionist__c</fullName>
+        <description>Name of Horse Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Horse Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Horse_Veterinarian_Email__c</fullName>
+        <description>Email for the Horse Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Horse Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Horse_Veterinarian_Phone__c</fullName>
+        <description>Phone for the Horse Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Horse Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Horse_Veternarian__c</fullName>
+        <description>Veterinarian for Horse</description>
+        <externalId>false</externalId>
+        <label>Horse Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lab_Animal_Nutritionist_Email__c</fullName>
+        <description>Email of Lab Animal Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Lab Animal Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lab_Animal_Nutritionist_Phone__c</fullName>
+        <description>Phone for Lab Animal Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Lab Animal Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Lab_Animal_Nutritionist__c</fullName>
+        <description>Name of Lab Animal Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Lab Animal Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lab_Animal_Veterinarian_Email__c</fullName>
+        <description>Email of Lab Animal Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Lab Animal Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lab_Animal_Veterinarian_Phone__c</fullName>
+        <description>Phone of Lab Animal Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Lab Animal Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Lab_Animal_Veternarian__c</fullName>
+        <description>Name of Lab Animal Veternarian</description>
+        <externalId>false</externalId>
+        <label>Lab Animal Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Llama_Alpaca_Nutritionist_Email__c</fullName>
+        <description>Email of Llama/Alpaca Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Llama/Alpaca Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Llama_Alpaca_Nutritionist_Phone__c</fullName>
+        <description>Phone of Llama/Alpaca Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Llama/Alpaca Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Llama_Alpaca_Nutritionist__c</fullName>
+        <description>Name of Llama/Alpaca Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Llama/Alpaca Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Llama_Alpaca_Veterinarian_Email__c</fullName>
+        <description>Email of Llama/Alpaca Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Llama/Alpaca Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Llama_Alpaca_Veterinarian_Phone__c</fullName>
+        <description>Phone of Llama/Alpaca Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Llama/Alpaca Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Llama_Alpaca_Veternarian__c</fullName>
+        <description>Name of Llama/Alpaca Veternarian</description>
+        <externalId>false</externalId>
+        <label>Llama/Alpaca Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Mazuri_Diets_Nutritionist_Email__c</fullName>
+        <description>Email of Mazuri Diets Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Mazuri Diets Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Mazuri_Diets_Nutritionist_Phone__c</fullName>
+        <description>Phone of Mazuri Diets Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Mazuri Diets Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Mazuri_Diets_Nutritionist__c</fullName>
+        <description>Name of Mazuri Diets Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Mazuri Diets Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Mazuri_Diets_Veterinarian_Email__c</fullName>
+        <description>Email of Mazuri Diets Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Mazuri Diets Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Mazuri_Diets_Veterinarian_Phone__c</fullName>
+        <description>Phone of Mazuri Diets Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Mazuri Diets Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Mazuri_Diets_Veternarian__c</fullName>
+        <description>Name of Mazuri Diets Veternarian</description>
+        <externalId>false</externalId>
+        <label>Mazuri Diets Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_Companion_Nutritionist_Email__c</fullName>
+        <description>Email of Other Companion Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Other Companion Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_Companion_Nutritionist_Phone__c</fullName>
+        <description>Phone of Other Companion Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Other Companion Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Other_Companion_Nutritionist__c</fullName>
+        <description>Name of Other Companion Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Other Companion Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_Companion_Veterinarian_Email__c</fullName>
+        <description>Email of Other Companion Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Other Companion Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_Companion_Veterinarian_Phone__c</fullName>
+        <description>Phone of Other Companion Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Other Companion Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Other_Companion_Veternarian__c</fullName>
+        <description>Name of Other Companion Veternarian</description>
+        <externalId>false</externalId>
+        <label>Other Companion Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Pet_Nutritionist_Email__c</fullName>
+        <description>Email of Pet Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Pet Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Pet_Nutritionist_Phone__c</fullName>
+        <description>Phone number of Pet Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Pet Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Pet_Nutritionist__c</fullName>
+        <description>Name of Pet Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Pet Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Pet_Veterinarian_Email__c</fullName>
+        <description>Email for the Pet Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Pet Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Pet_Veterinarian_Phone__c</fullName>
+        <description>Phone for the Pet Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Pet Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Pet_Veternarian__c</fullName>
+        <description>Veterinarian for Pet</description>
+        <externalId>false</externalId>
+        <label>Pet Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Poultry_Commercial_Nutritionist_Email__c</fullName>
+        <description>Email of Poultry - Commerical Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Poultry - Commerical Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Poultry_Commercial_Nutritionist__c</fullName>
+        <description>Name of Poultry - Commerical Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Poultry - Commercial Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Poultry_Commercial_Veternarian__c</fullName>
+        <description>Veterinarian for Poultry - Commerical</description>
+        <externalId>false</externalId>
+        <label>Poultry - Commerical Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Poultry_Commerical_Nutritionist_Phone__c</fullName>
+        <description>Phone number of Poultry - Commerical Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Poultry - Commerical Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Poultry_Commerical_Veterinarian_Email__c</fullName>
+        <description>Email for the Poultry - Commerical Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Poultry - Commerical Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Poultry_Commerical_Veterinarian_Phone__c</fullName>
+        <description>Phone for the Poultry - Commerical Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Poultry - Commerical Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Poultry_Farm_Flock_Nutritionist_Email__c</fullName>
+        <description>Email of Poultry- Farm Flock Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Poultry - Farm Flock Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Poultry_Farm_Flock_Nutritionist_Phone__c</fullName>
+        <description>Phone of Poultry - Farm Flock Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Poultry - Farm Flock Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Poultry_Farm_Flock_Nutritionist__c</fullName>
+        <description>Name of Poultry - Farm Flock Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Poultry - Farm Flock Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Poultry_Farm_Flock_Veterinarian_Email__c</fullName>
+        <description>Email of Poultry - Farm Flock Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Poultry - Farm Flock Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Poultry_Farm_Flock_Veterinarian_Phone__c</fullName>
+        <description>Phone of Poultry - Farm Flock Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Poultry - Farm Flock Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Poultry_Farm_Flock_Veternarian__c</fullName>
+        <description>Name of Poultry - Farm Flock Veternarian</description>
+        <externalId>false</externalId>
+        <label>Poultry - Farm Flock Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Primate_Lab_Nutritionist_Email__c</fullName>
+        <description>Email of Primate Lab Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Primate Lab Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Primate_Lab_Nutritionist_Phone__c</fullName>
+        <description>Phone of Primate Lab Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Primate Lab Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Primate_Lab_Nutritionist__c</fullName>
+        <description>Name of Primate Lab Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Primate Lab Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Primate_Lab_Veterinarian_Email__c</fullName>
+        <description>Email of Primate Lab Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Primate Lab Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Primate_Lab_Veterinarian_Phone__c</fullName>
+        <description>Phone of Primate Lab Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Primate Lab Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Primate_Lab_Veternarian__c</fullName>
+        <description>Name of Primate Lab Veternarian</description>
+        <externalId>false</externalId>
+        <label>Primate Lab Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Rabbit_Nutritionist_Email__c</fullName>
+        <description>Email of Rabbit Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Rabbit Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Rabbit_Nutritionist_Phone__c</fullName>
+        <description>Phone of Rabbit Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Rabbit Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Rabbit_Nutritionist__c</fullName>
+        <description>Name of Rabbit Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Rabbit Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Rabbit_Veterinarian_Email__c</fullName>
+        <description>Email of Rabbit Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Rabbit Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Rabbit_Veterinarian_Phone__c</fullName>
+        <description>Phone of Rabbit Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Rabbit Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Rabbit_Veternarian__c</fullName>
+        <description>Name of Rabbit Veternarian</description>
+        <externalId>false</externalId>
+        <label>Rabbit Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Ratite_Nutritionist_Email__c</fullName>
+        <description>Email of Ratite Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Ratite Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Ratite_Nutritionist_Phone__c</fullName>
+        <description>Phone of Ratite Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Ratite Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Ratite_Nutritionist__c</fullName>
+        <description>Name of Ratite Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Ratite Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Ratite_Veterinarian_Email__c</fullName>
+        <description>Email of Ratite Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Ratite Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Ratite_Veterinarian_Phone__c</fullName>
+        <description>Phone of Ratite Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Ratite Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Ratite_Veternarian__c</fullName>
+        <description>Name of Ratite Veternarian</description>
+        <externalId>false</externalId>
+        <label>Ratite Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sheep_Lamb_Nutritionist_Email__c</fullName>
+        <description>Email of Sheep/Lamb Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Sheep/Lamb Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sheep_Lamb_Nutritionist_Phone__c</fullName>
+        <description>Phone of Sheep/Lamb Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Sheep/Lamb Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Sheep_Lamb_Nutritionist__c</fullName>
+        <description>Name of Sheep/Lamb Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Sheep/Lamb Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sheep_Lamb_Veterinarian_Email__c</fullName>
+        <description>Email of Sheep/Lamb Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Sheep/Lamb Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sheep_Lamb_Veterinarian_Phone__c</fullName>
+        <description>Phone of Sheep/Lamb Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Sheep/Lamb Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Sheep_Lamb_Veternarian__c</fullName>
+        <description>Name of Sheep/Lamb Veternarian</description>
+        <externalId>false</externalId>
+        <label>Sheep/Lamb Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Show_Nutritionist_Email__c</fullName>
+        <description>Email of Show Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Show Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Show_Nutritionist_Phone__c</fullName>
+        <description>Phone number of Show Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Show Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Show_Nutritionist__c</fullName>
+        <description>Name of Show Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Show Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Show_Veterinarian_Email__c</fullName>
+        <description>Email for the Show Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Show Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Show_Veterinarian_Phone__c</fullName>
+        <description>Phone for the Show Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Show Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Show_Veternarian__c</fullName>
+        <description>Veterinarian for Show</description>
+        <externalId>false</externalId>
+        <label>Show Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Swine_Nutritionist_Email__c</fullName>
+        <description>Email of Swine Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Swine Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Swine_Nutritionist_Phone__c</fullName>
+        <description>Phone number of Swine Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Swine Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Swine_Nutritionist__c</fullName>
+        <description>Name of Swine Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Swine Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Swine_Veterinarian_Email__c</fullName>
+        <description>Email for the Swine Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Swine Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Swine_Veterinarian_Phone__c</fullName>
+        <description>Phone for the Swine Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Swine Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Swine_Veternarian__c</fullName>
+        <description>Veterinarian for Swine</description>
+        <externalId>false</externalId>
+        <label>Swine Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Tractor_Nutritionist_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Tractor Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Tractor_Nutritionist_Phone__c</fullName>
+        <externalId>false</externalId>
+        <label>Tractor Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Tractor_Nutritionist__c</fullName>
+        <externalId>false</externalId>
+        <label>Tractor Nutritionist</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Tractor_Veterinarian_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Tractor Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Tractor_Veterinarian_Phone__c</fullName>
+        <externalId>false</externalId>
+        <label>Tractor Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Tractor_Veternarian__c</fullName>
+        <externalId>false</externalId>
+        <label>Tractor Veternarian</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Wild_Bird_Nutritionist_Email__c</fullName>
+        <description>Email of Wild Bird Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Wild Bird Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Wild_Bird_Nutritionist_Phone__c</fullName>
+        <description>Phone of Wild Bird Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Wild Bird Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Wild_Bird_Nutritionist__c</fullName>
+        <description>Name of Wild Bird Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Wild Bird Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Wild_Bird_Veterinarian_Email__c</fullName>
+        <description>Email of Wild Bird Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Wild Bird Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Wild_Bird_Veterinarian_Phone__c</fullName>
+        <description>Phone of Wild Bird Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Wild Bird Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Wild_Bird_Veternarian__c</fullName>
+        <description>Name of Wild Bird Veternarian</description>
+        <externalId>false</externalId>
+        <label>Wild Bird Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Zoo_Nutritionist_Email__c</fullName>
+        <description>Email of Zoo Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Zoo Nutritionist Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Zoo_Nutritionist_Phone__c</fullName>
+        <description>Phone of Zoo Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Zoo Nutritionist Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Zoo_Nutritionist__c</fullName>
+        <description>Name of Zoo Nutritionist</description>
+        <externalId>false</externalId>
+        <label>Zoo Nutritionist</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Zoo_Veterinarian_Email__c</fullName>
+        <description>Email of Zoo Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Zoo Veterinarian Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Zoo_Veterinarian_Phone__c</fullName>
+        <description>Phone of Zoo Veterinarian</description>
+        <externalId>false</externalId>
+        <label>Zoo Veterinarian Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Zoo_Veternarian__c</fullName>
+        <description>Name of Zoo Veternarian</description>
+        <externalId>false</externalId>
+        <label>Zoo Veternarian</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Purina Species</label>
+    <visibility>Protected</visibility>
+</CustomObject>

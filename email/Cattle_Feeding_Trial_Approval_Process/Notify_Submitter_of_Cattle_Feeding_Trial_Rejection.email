@@ -1,0 +1,5 @@
+The "{!Feeding_Trial__c.Name}" Feeding Trial has been reviewed and was Rejected.  Please click the link below to review the rejection reason. 
+
+Comments: {!ApprovalRequest.Comments} 
+
+Here is a link to the Feeding Trial: {!Feeding_Trial__c.Link}

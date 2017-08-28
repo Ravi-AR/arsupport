@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Initiate program evaluation from account.</description>
+    <height>250</height>
+    <label>Program Evaluation</label>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <page>LMSA_ProgramEvaluationAccount</page>
+    <type>VisualforcePage</type>
+    <width>-100</width>
+</QuickAction>

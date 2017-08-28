@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Custom tab to display management tips where record type = &apos;Management&apos;</description>
+    <label>Management Tips</label>
+    <mobileReady>false</mobileReady>
+    <motif>Custom83: Pencil</motif>
+    <page>LMSA_ManagementTips</page>
+</CustomTab>

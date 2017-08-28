@@ -1,0 +1,9 @@
+<apex:component >
+
+<ul class="nav nav-tabs lft_menu">
+    <li class="wid100 active"><a href="#tabsm3default" data-toggle="tab" class="lia txt_upper">Promotions</a></li>
+    <li class="wid100"><a href="#tabsm1default" data-toggle="tab" class="lia txt_upper">Media Tools</a></li>
+    <li class="wid100"><a href="#tabsm2default" data-toggle="tab" class="lia txt_upper">Merchandising</a></li>
+</ul>
+
+</apex:component>

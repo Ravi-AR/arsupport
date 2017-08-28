@@ -1,0 +1,13 @@
+Hello!
+{!Contact.LastModifiedBy} is requesting {!Contact.FirstName} {!Contact.LastName} to be switched to a Prebook authorized contact in Salesforce.
+
+Details:
+Contact Email: {!Contact.Email}
+Contact Phone: {!Contact.Phone__c}
+
+
+Please change the record type of this contact (to Prebook Authorized), and set them up as a User.
+
+Please notify them this is complete.
+
+Thank you!

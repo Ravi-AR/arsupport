@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sent every 6mos from the Last Modified Date to the Sales Specialist that created the Segmentation record.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Dealer Segmentation Update Alert</name>
+    <style>none</style>
+    <subject>Dealer Segmentation Update Reminder</subject>
+    <type>text</type>
+</EmailTemplate>

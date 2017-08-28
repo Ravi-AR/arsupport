@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>DDS DDM</fullName>
+        <default>false</default>
+        <label>DDS DDM</label>
+    </standardValue>
+    <standardValue>
+        <fullName>ASM</fullName>
+        <default>false</default>
+        <label>ASM</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Level 1 -Assignment by SBO</fullName>
+        <default>false</default>
+        <label>Level 1 -Assignment by SBO</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Level 2 -Assignment by ASM</fullName>
+        <default>false</default>
+        <label>Level 2 -Assignment by ASM</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Level 3 -Assign by SalesPerson</fullName>
+        <default>false</default>
+        <label>Level 3 -Assign by SalesPerson</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Sales Person</fullName>
+        <default>false</default>
+        <label>Sales Person</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Sales</fullName>
+        <default>false</default>
+        <label>Sales</label>
+    </standardValue>
+</StandardValueSet>

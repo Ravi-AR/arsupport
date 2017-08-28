@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CASE_NUMBER</field>
+    </columns>
+    <columns>
+        <field>Case.Issue_Category__c</field>
+    </columns>
+    <columns>
+        <field>Case.Issue_Sub_Category__c</field>
+    </columns>
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>Service_Request_Product__c.Lot_Code__c</field>
+    </columns>
+    <description>Shows Service Request created in the last 90 days that have an issue category of &quot;Manufacturing Issues&quot;</description>
+    <filter>
+        <criteriaItems>
+            <column>Case.Issue_Category__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>020 - Manufacturing Issues</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Service Requests Manufacturing Issues</name>
+    <params>
+        <name>units</name>
+        <value>d</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CaseCustomEntity$Service_Request_Product__c@Service_Request_Product__c.Manufacturing_Plant__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATEONLY</dateColumn>
+        <interval>INTERVAL_LAST90</interval>
+    </timeFrameFilter>
+</Report>

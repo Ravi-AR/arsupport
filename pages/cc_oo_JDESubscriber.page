@@ -1,0 +1,9 @@
+<!--  
+//
+//  Piyali Mukherjee                    01/04/2017                  US - 517 - JDE API Integration
+//
+//
+-->
+<apex:page docType="html-5.0" sidebar="false" showHeader="false" standardStylesheets="false" applyHtmlTag="false" controller="cc_oo_JDESubscriber"> 
+	<apex:include pageName="cc_oo_JDESubscriberPage"/>
+</apex:page>

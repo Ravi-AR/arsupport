@@ -1,0 +1,9 @@
+The plant has approved the request to return a product  from Service Request {!Case.CaseNumber}- {!Case.Subject}. 
+
+Service Request Number: {!Case.CaseNumber}
+Service Request Subject: {!Case.Subject}
+
+Comments: 
+{!ApprovalRequest.Comments}
+
+Service Request Link: {!Case.Link}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>used in the trigger of animal count &amp; lifestages</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Account_Animal_Count_Field__c</fullName>
+        <externalId>false</externalId>
+        <label>Account Animal Count Field</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_Animal_Served_Field__c</fullName>
+        <externalId>false</externalId>
+        <label>Account Animal Served Field</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Animal Type to Account Fields</label>
+    <visibility>Protected</visibility>
+</CustomObject>

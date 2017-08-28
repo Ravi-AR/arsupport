@@ -1,0 +1,214 @@
+<apex:component controller="LPDCR_SecondaryPageProductsController" allowDML="true">
+<!-- <apex:outputText rendered="{!init}" /> -->
+     <apex:attribute name="componentKey"  type="String" assignTo="{!key}" description="The key given to this component so the page can easily get access to it" />
+     <apex:attribute name="thisPageController"  type="LPDCR_SecondaryPageBaseController"  assignTo="{!pageController}"  required="true" description="The controller for the page." />
+     <apex:attribute name="speciesFilter" 
+                    description="Set of selected spcecies to filter results" 
+                    type="String[]"
+                    assignTo="{!species_filter}"
+                    required="false"/>
+
+     <apex:attribute name="sortBy" 
+                    description="The selected Sort By option" 
+                    type="String"
+                    assignTo="{!sort_filter}"
+                    required="false"/>
+
+    <input type="hidden" value="{!sort_filter}" class="sortfield" />
+    <apex:repeat value="{!species_filter}" var="sp">
+        <input type="hidden" value="{!sp}" class="speciesfield" />
+    </apex:repeat>
+     
+      <!-- <apex:actionFunction name="refreshPageSize" action="{!refreshPageSize}" status="Status" reRender="paginationProduct"/> -->               
+      
+      <apex:actionFunction action="{!getProducts}" name="retrieveProducts"  rerender="paginationProduct"  />
+      <apex:actionFunction action="{!next}" name="nextPage" status="fetchStatus" rerender="paginationProduct" />
+      <apex:actionFunction action="{!searchReset}" name="resetSearch" status="loader" rerender="paginationProduct" />
+      
+    <div class="col-sm-11">            
+
+        <apex:outputPanel id="paginationProduct">
+        
+        <div>
+            <i class="glyphicon glyphicon-search sch_Icon flt_lft"></i>
+            <i class="glyphicon glyphicon-refresh sch_Icon pointer flt_lft" onclick="resetSearch()"></i>
+            <apex:inputText value="{!search_term}" StyleClass="form-control flt_lft wid30" title="Search Products"/>
+            <apex:commandButton onclick="retrieveProducts(); return false;" rerender="paginationProduct" status="loader" immediate="true" StyleClass="btn btn-primary gobtn flt_lft" value="Go"/>
+        </div>
+       
+        <div class="clear"></div>
+            <div class="mrg_top20">
+           <!-- <apex:outputText value="Page {!pageNumber}" StyleClass="dataTables_info"/> -->
+            <apex:outputText StyleClass="mrg_top10 " value="Showing {!start_product_number} to {!end_product_number} of {!total_products}" /></div>
+            <table class="dataTable wid100" > <!-- id="myproductTable" -->
+                <thead>
+                    <tr>
+                        <th title="Title" class="sorting"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                
+              <apex:repeat id="productTable" value="{!current_product_list}" var="productObj">                     
+                <tr>
+                    <td>
+                     <apex:outputPanel id="productArea">
+                        
+                         <div class="productItem brd_btm">
+                             <span class="pull-left col-xs-12 col-sm-3">
+                              <!-- QUERY LIMITS THE MEDIA TO 1 RECORD -->
+                              <apex:repeat value="{!productObj.ccrz__E_ProductMedias__r}" var="media">
+                                  <apex:image alt="{!media.ccrz__AltMessage__c}" url="{!media.ccrz__URI__c}" width="150"/>
+                              </apex:repeat>
+                              
+                              <apex:outputPanel rendered="{!productObj.ccrz__E_ProductMedias__r.size == 0}">
+                                  <apex:image styleClass="im-responsive" url="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/Image_not_available.png')}" width="150" />
+                              </apex:outputPanel>
+                             </span>
+                             <span class="col-xs-12 col-sm-9">
+                                 <h4 class="clr7"><apex:outputText value="{!productObj.Name}" /></h4>
+                                 <h5>Product No: <apex:outputText value="{!productObj.ccrz__ProductId__c}" /></h5>
+                                 <p class="pad_top20 mar_btm_20">
+                                     <apex:outputText value="{!productObj.ccrz__ShortDesc__c}" escape="false"/>
+                                 </p>
+                             </span>
+                             <div class="clear"></div>
+                             <div class="clo-xs-12 mrg_top20">
+                                 <span class="col-sm-3 col-sm-offset-3">
+                                    <a data-toggle="collapse" href="#{!productObj.Id}"  aria-expanded="false" aria-controls="collapseExample">   
+                                     <apex:commandButton value="More Info"  styleClass="btn btn-primary morebuttonforjquery SeeMore" status="loader">
+                                     </apex:commandButton>
+                                     </a>
+                                    
+                                 </span> 
+                                 <div class="clear"></div>
+                               <div class="mrg_top20 collapse details" id="{!productObj.Id}"> 
+                                     <apex:outputPanel id="detail">
+                                         <div class="card card-block">
+                                             <!-- Product Item Details and Characteristics -->
+                                             <div class="col-xs-12 mrg_top20">
+                                                 <ul class="new-product-tab nav nav-tabs">
+                                                     <li><a data-toggle="tab" href="#details{!productObj.Id}">Details</a></li>
+                                                     <li class="active"><a data-toggle="tab" href="#productchar{!productObj.Id}">Product Characteristics</a></li>
+                                                 </ul>
+                                                 <div class="tab-content">
+                                                     
+                                                     <div id="details{!productObj.Id}" class="tab-pane fade">
+                                                         <p class="pad_top20">
+                                                             <apex:outputText value="{!productObj.ccrz__LongDesc__c}" escape="false"/>
+                                                         </p>
+                                                     </div>
+                                                     <div id="productchar{!productObj.Id}" class="tab-pane fade in active">
+                                                         <p class="pad_top20">
+                                                             <table class="table table-bordered">
+                                                                 <apex:repeat value="{!productObj.ccrz__Product_Specs__r}" var="spec">
+                                                                     <tr>
+                                                                      <td class="pad_lft10 pad_top5 pad_btm5 pad_rgt10">{!spec.ccrz__Spec__r.ccrz__DisplayName__c}</td> 
+                                                                      <td class="pad_lft10 pad_top5 pad_btm5 pad_rgt10">{!spec.ccrz__SpecValue__c}</td>
+                                                                  </tr>
+                                                                 </apex:repeat> 
+                                                             </table> 
+                                                         </p>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <!-- /Product Item Details and Charecteristics -->
+                                         </div> 
+                                     </apex:outputPanel>
+                                 </div> <!--/collapse-->
+                             </div>
+                         </div><!--product Item-->
+                         
+                     </apex:outputPanel>
+                     </td>
+                    </tr>                    
+                </apex:repeat> 
+                
+                <tr>
+                    <td> 
+                        
+                        <apex:commandButton status="loader" styleClass="btn btnpagination" reRender="paginationProduct" value="<< First" action="{!first}" disabled="{!!hasPrevious}" title="First Page"/> 
+                        
+                        <apex:commandButton status="loader" styleClass="btn btnpagination" reRender="paginationProduct" value="< Previous" action="{!previous}" disabled="{!!hasPrevious}" title="Previous Page"/> 
+          
+                        <apex:commandButton status="loader" styleClass="btn btnpagination" reRender="paginationProduct" value="Next >" action="{!next}" disabled="{!!hasNext}" title="Next Page"/>
+                       
+                        <apex:commandButton status="loader" styleClass="btn btnpagination" reRender="paginationProduct" value="Last >>" action="{!last}" disabled="{!!hasNext}" title="Last Page"/> 
+                        
+                    
+                    </td>
+                </tr>
+                
+                </tbody>
+            </table>
+            
+           <!-- Loader code starts here -->
+            <apex:actionStatus id="loader">
+                <apex:facet name="start">
+                    <div class="loadercover">
+                    </div>
+                    <div class="loaderfirst">
+                        <div class="loadersec">
+                            <img src="/img/loading32.gif" class="loaderimage" />
+                        </div>
+                    </div>   
+                </apex:facet>
+            </apex:actionStatus>
+            <!-- Loader code ends here-->
+            <script>
+           
+            $( ".morebuttonforjquery" ).click(function() {
+               var id= $(this).attr("alt");
+               
+                  $("#"+id).toggleClass("collapse");
+        });
+        
+        $('.SeeMore').click(function(){
+         var originalSrc = $(this).attr('value');
+         if(originalSrc  == "More Info"){
+            $(this).attr('value', 'Less Info');    
+            }else{
+            $(this).attr('value', 'More Info'); 
+            }
+        });
+        
+                
+            </script>
+           
+        </apex:outputPanel>
+        
+         <div class="clear"></div>
+        <div align="center" class="mrg_top20" > <!-- reRender="productTable,paginationProduct" -->
+                <!--<apex:commandButton styleClass="btn btnpagination" value="<< First" action="{!Beginning}"  />-->
+                
+                <!--  
+                <apex:commandButton styleClass="btn btnpagination" value="<< Previous" action="{!Previous}"/>
+                <apex:commandButton styleClass="btn btnpagination" value="Next >>" action="{!Next}" />
+                -->
+                
+                <!--<apex:commandButton styleClass="btn btnpagination" value="Last >>" action="{!End}"/>-->
+               
+                </div>
+    </div>
+    <script>
+       $(document).ready(function () {
+           retrieveProducts(); 
+        });
+   
+    </script>
+    
+    <style>
+        .btnpagination{
+            background: #cc262c;
+            color: #fff;
+            border: 1px solid #ccc;
+            margin: 5px;
+        
+        }
+        .gobtn{
+            margin:5px 10px;
+            padding:0px;
+        }
+    </style>
+    
+    
+</apex:component>

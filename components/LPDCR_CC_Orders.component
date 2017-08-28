@@ -1,0 +1,110 @@
+<apex:component controller="LPDCR_CC_OrdersController">
+    <apex:attribute name="bgColor"
+                    type="String"
+                    description="The style class for the background color of the component"
+                    required="false"
+                    default="bg_wht" />
+                    
+     <div class="col-sm-12 {!bgColor}">
+         <h3 class="section_title">
+         <apex:outputPanel rendered="{!IF((TEXT($User.UserType) == 'Standard' && purina_data != null && purina_data.myAppUrl != null), true, false)}">
+              <a href="{!purina_data.myAppUrl}" target="_blank">{!$Label.LPDCR_Orders_Component_Name}</a>
+         </apex:outputPanel>
+         <apex:outputPanel rendered="{!IF((TEXT($User.UserType) == 'Standard' && (purina_data == null || purina_data.myAppUrl == null)), true, false)}">
+              <span class="clr7">{!$Label.LPDCR_Orders_Component_Name}</span>
+         </apex:outputPanel>         
+         <apex:outputPanel rendered="{!IF((TEXT($User.UserType) != 'Standard'), true, false)}">
+              
+             <apex:outputPanel rendered="{!IF(purinaOO_data != null && purinaOO_data.app_code != null , true, false)}">
+                <a href="{!purinaOO_data.myAppUrl}" target="_blank">{!$Label.LPDCR_Orders_Component_Name}</a>
+             </apex:outputPanel>
+             <apex:outputPanel rendered="{!IF((purinaOO_data == null || (purinaOO_data != null && purinaOO_data.app_code == null) ) && order_data != null && order_data.app_code  != null, true, false)}">
+                
+                <a href="{!order_data.myAppUrl}" target="_blank">{!$Label.LPDCR_Orders_Component_Name}</a>
+             </apex:outputPanel>
+             <apex:outputPanel rendered="{!IF((purinaOO_data == null || (purinaOO_data != null && purinaOO_data.app_code == null)) && (order_data == null || (order_data != null && order_data.app_code == null)), true, false)}">
+                <span class="clr7">{!$Label.LPDCR_Orders_Component_Name}</span>
+             </apex:outputPanel>
+         </apex:outputPanel>
+         <!--<a href="{!$Setup.LPDCR_Org_Settings__c.Online_Order_Community_Base_URL__c}" target="_blank">{!$Label.LPDCR_Orders_Component_Name}</a>--> 
+             <div class="tooltip1">
+                 <span class="flt_rgt icon_exmty"></span>               
+                 <p class="tooltiptext">{!$Label.LPDCR_Orders_Component_Message}
+                  <br/>
+                    
+                    <apex:outputPanel rendered="{!IF((TEXT($User.UserType) == 'Standard' && purina_data != null && purina_data.myAppUrl != null), true, false)}">
+                        <a class="btn_ent" href="{!purina_data.myAppUrl}" target="_blank">ENTER</a>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!IF((TEXT($User.UserType) == 'Standard' && (purina_data == null || purina_data.myAppUrl == null)), true, false)}">
+                        <span class="btn_cls dis_inlineblock txt_center">ENTER</span>
+                    </apex:outputPanel>
+                     <apex:outputPanel rendered="{!IF((TEXT($User.UserType) != 'Standard'), true, false)}">
+              
+                          <apex:outputPanel rendered="{!IF(purinaOO_data != null && purinaOO_data.app_code != null , true, false)}">
+                              <a class="btn_ent" href="{!purinaOO_data.myAppUrl}"  target="_blank">ENTER</a>
+                         </apex:outputPanel>
+                         <apex:outputPanel rendered="{!IF((purinaOO_data == null || (purinaOO_data != null && purinaOO_data.app_code == null) ) && order_data != null && order_data.app_code  != null, true, false)}">
+                              <a class="btn_ent" href="{!order_data.myAppUrl}"  target="_blank">ENTER</a>
+                         </apex:outputPanel>
+                         <apex:outputPanel rendered="{!IF((purinaOO_data == null || (purinaOO_data != null && purinaOO_data.app_code == null)) && (order_data == null || (order_data != null && order_data.app_code == null)), true, false)}">
+                              <span class="btn_cls dis_inlineblock txt_center">ENTER</span>
+                         </apex:outputPanel>
+                     </apex:outputPanel>
+                   <span class="btn_cls dis_inlineblock txt_center">CLOSE</span>  
+                  </p>
+            </div>
+         </h3> 
+         <div class="col-sm-12 pad_top20 fnt12">
+         <apex:outputPanel id="orderIcon">
+            <div class="wid50 flt_lft txt_center pad_all0">
+                   
+                <!--<a target="_blank" href="{!$Setup.LPDCR_Org_Settings__c.Online_Order_Community_Base_URL__c}" class="clr_red block pad_top10 cursor">Place Order</a> -->
+                
+                <apex:outputPanel rendered="{!IF((TEXT($User.UserType) == 'Standard' && purina_data != null && purina_data.myAppUrl != null), true, false)}">
+                    <img class="" src="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/u208.svg')}" width="50"/> 
+                    
+                    <a target="_blank" href="{!purina_data.myAppUrl}" class="clr_red block pad_top10 cursor">Place Order</a>
+                </apex:outputPanel>
+                <!--<apex:outputPanel rendered="{!IF((TEXT($User.UserType) == 'Standard' && (purina_data == null || purina_data.myAppUrl == null)), true, false)}">
+                    <span class="btn_cls dis_inlineblock txt_center">ENTER</span>
+                    <a target="_blank" href="{!$Setup.LPDCR_Org_Settings__c.Online_Order_Community_Base_URL__c}" class="clr_red block pad_top10 cursor">Place Order</a>
+                </apex:outputPanel>-->
+                 <apex:outputPanel rendered="{!IF((TEXT($User.UserType) != 'Standard'), true, false)}">          
+                     <apex:outputPanel rendered="{!IF(purinaOO_data != null && purinaOO_data.app_code != null , true, false)}">
+                          <img class="" src="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/u208.svg')}" width="50"/> 
+                          
+                          <a target="_blank" href="{!purinaOO_data.myAppUrl}" class="clr_red block pad_top10 cursor">Place Order</a>
+                     </apex:outputPanel>
+                     <apex:outputPanel rendered="{!IF((purinaOO_data == null || (purinaOO_data != null && purinaOO_data.app_code == null) ) && order_data != null && order_data.app_code  != null, true, false)}">
+                          <img class="" src="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/u208.svg')}" width="50"/> 
+                          
+                          <a target="_blank" href="{!order_data.myAppUrl}" class="clr_red block pad_top10 cursor">Place Order</a>
+                     </apex:outputPanel>
+                     <!--<apex:outputPanel rendered="{!IF((purinaOO_data == null || (purinaOO_data != null && purinaOO_data.app_code == null)) && (order_data == null || (order_data != null && order_data.app_code == null)), true, false)}">
+                          <span class="btn_cls dis_inlineblock txt_center">ENTER</span>
+                          <a target="_blank" href="{!$Setup.LPDCR_Org_Settings__c.Online_Order_Community_Base_URL__c}" class="clr_red block pad_top10 cursor">Place Order</a>
+                     </apex:outputPanel>-->
+                 </apex:outputPanel>
+                
+            </div>
+            </apex:outputPanel>
+            <apex:outputPanel id="priceListIcon" rendered="{!is_price_list_available}" >
+                <!-- <div class="col-sm-12 txt_center pad_all0"> -->
+                <div class="wid50 flt_lft txt_center pad_all0">
+                    <img class="" src="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/icon-price_list.svg')}" width="50"/>
+                   <a href="{!URLFOR($Page.LPDCR_CC_Business_Management, null, [subtab='Reports'])}" class="clr_red block pad_top10 cursor">Price Lists</a> 
+                    
+                </div>
+            </apex:outputPanel>
+            
+                
+                <!--
+                <div class="clear mrg_btm20"></div> 
+                <div class="wid50 flt_lft txt_center pad_all0">
+                    <img class="" src="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/u210.svg')}" width="45"/>    
+                    <a target="_blank" href="{!$Setup.LPDCR_Org_Settings__c.Online_Order_Community_Base_URL__c}{!$Label.LPDCR_Online_Order_Order_History_URL}" class="clr_red block pad_top10 cursor">My Orders</a> 
+                </div> 
+                -->
+         </div> 
+     </div>        
+</apex:component>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>lmsa org settings</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>FaciityChecklist_Fieldsets__c</fullName>
+        <description>Custom field for facility checklist object, Contains name and order of fields that will be used on creation of facility checklist page.</description>
+        <externalId>false</externalId>
+        <label>FaciityChecklist Fieldsets</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Management_Tip_Email_Template_Id__c</fullName>
+        <description>Email template to be used on management tip list view</description>
+        <externalId>false</externalId>
+        <label>Management Tip Email Template Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Management_Tip_List_View_Id__c</fullName>
+        <description>Record Type id for record type &apos;Management&apos;, used on management tip page</description>
+        <externalId>false</externalId>
+        <label>Management Tip Record Type Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Program_Evaluation_Email_Template_Id__c</fullName>
+        <description>Template id for program evaluation</description>
+        <externalId>false</externalId>
+        <label>Program Evaluation Email Template Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Purina_Logo_URL__c</fullName>
+        <description>URL for purina logo that is used in email templates</description>
+        <externalId>false</externalId>
+        <label>Purina Logo URL</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Org Settings</label>
+    <visibility>Public</visibility>
+</CustomObject>

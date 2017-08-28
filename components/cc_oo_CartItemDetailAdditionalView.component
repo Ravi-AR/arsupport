@@ -1,0 +1,106 @@
+<!--
+<Component Name: cc_oo_CartItemDetailAdditionalView> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Shrivaths Kulkarni                          9/7/2016                                   OO-121 - Created and added getProductsDetails() method
+                                                                                       which will give the long description in Cart page
+-->
+<apex:component allowDML="true" controller="cc_oo_CartIncRD2Controller" >
+
+    <script id="cc_oo_CartItemDetail-Additional-View" type="text/template">
+        <div id="additional_info{{itemID}}" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h3 id="myModalLabel">{{mockProduct.name}}<!-- OO-183 Defect fix {{displayProductName 'Aggregate_Display' displayProductBean.name mockProduct.name }}</a>--> {{pageLabelMap 'ProductsInc_MiscDetails'}}</h3>
+                
+            </div>
+            
+            <div class="modal-body" style="padding: 15px;">
+                
+                {{#if miscDetails}}
+                    {{miscDetails}}<br/><br/>
+                {{/if}}
+                
+                {{#ifDisplay 'C.DsplAddtlSku'}}
+                    <strong>{{pageLabelMap 'SKU'}}:</strong>&nbsp;{{{getSKU mockProduct.sku}}}<br/><br/>
+                
+                {{/ifDisplay}}
+                
+                <!--{{#ifDisplay 'C.DsplAddtlShortDesc'}}
+                    {{unescape mockProduct.shortDesc}}<br/><br/>
+                {{/ifDisplay}}-->
+                <!-- OO-121 - Inserted div with class oo_longDesc and commented short description -->
+                <div class="OO-longDesc" data-id="{{this.mockProduct.sku}}" >
+                    
+                </div>
+                
+            </div>
+            <!--<div class="oo_E2Description" data-id="{{this.mockProduct.sku}}"></div>-->
+        </div>
+        
+    </script>
+
+
+    <script>
+        jQuery(function($) {
+            CCRZ.uiProperties.CartDetailView.partials.cartItemAdditional = '#cc_oo_CartItemDetail-Additional-View';
+
+            
+            CCRZ.pubSub.on('view:CartDetailView:refresh', function(theView) {
+                // Creating and getting the Product List Data
+                var cartId = CCRZ.cartDetailView.model.attributes.sfid;
+                console.log('cartId-->' + cartId);
+    
+                var remoteData;
+                // Remote Action function call starts from here
+                callProducts = function(){
+                    // Calling the controller class 'cc_oo_CartIncRD2Controller' and the method 'getProductsDetails' having the parameter 'productIds'
+                    var remoteActionCallForProducts = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_CartIncRD2Controller'});
+                    remoteActionCallForProducts.invokeCtx(
+                                'getProductsDetails',
+                                cartId,
+                                function(resp){
+                                    if(resp && resp.data){
+    
+                                        if(resp.success){
+                                            remoteData = resp.data;
+
+                                            // Adding long description in div 'oo_longDesc'
+                                            $('.OO-longDesc').each( function(){
+                                                // Passing data-id which contains the SKU Id
+                                                var productSKU = $(this).attr('data-id');
+
+                                                var productLongDescription = remoteData[productSKU].ccrz__Product__r.ccrz__LongDesc__c;                                            
+                                                // Showing Long description on the additional information popup window
+
+                                                $(this).html(remoteData[productSKU].ccrz__Product__r.ccrz__LongDesc__c);
+                                            });
+                                            $('.oo_E2Description').each( function(){
+                                                var productSKU = $(this).attr('data-id');
+
+                                                //var productLongDescription = resp.data[productSKU];
+                                                //alert('Resp data: '+remoteData[productSKU].ccrz__Product__r.cc_oo_Second_Description__c);
+                                                var E2Description = remoteData[productSKU].ccrz__Product__r.cc_oo_Second_Description__c;
+                                                // Showing the value of long Description on the pop up window
+                                                //$(this).html(productLongDescription);
+                                                $(this).html(E2Description);
+                                            });
+                                        }
+                                    }
+                                },
+                                {buffer:false,escape:false,nmsp:false}
+                    );
+                }
+                // Calling the function call Products() method
+                callProducts();
+            });    
+        });
+    </script>
+    <script>
+        Handlebars.registerHelper("getSKU", function(SKU){
+            return SKU.replace("PAL", "").replace("BG","");
+        });
+    </script>
+</apex:component>

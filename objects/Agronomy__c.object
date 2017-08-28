@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>For capturing agronomy information for a Retail Producer Account or Prospect.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <description>Master-Detail relationship to Account object.</description>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Agronomy</relationshipLabel>
+        <relationshipName>Agronomy</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Category_Type__c</fullName>
+        <description>Category Type for Agronomy</description>
+        <externalId>false</externalId>
+        <label>Category Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Category__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetName>Category_Type_Agronomy</valueSetName>
+            <valueSettings>
+                <controllingFieldValue>Bean</controllingFieldValue>
+                <controllingFieldValue>Corn</controllingFieldValue>
+                <valueName>CPP (Weed &amp; Insect Control)</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bean</controllingFieldValue>
+                <controllingFieldValue>Corn</controllingFieldValue>
+                <valueName>Fertilizer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bean</controllingFieldValue>
+                <valueName>Foliar</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bean</controllingFieldValue>
+                <controllingFieldValue>Corn</controllingFieldValue>
+                <controllingFieldValue>Forage</controllingFieldValue>
+                <controllingFieldValue>Wheat</controllingFieldValue>
+                <valueName>Seed</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bean</controllingFieldValue>
+                <valueName>Seed Treatment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bean</controllingFieldValue>
+                <controllingFieldValue>Corn</controllingFieldValue>
+                <valueName>Services</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bean</controllingFieldValue>
+                <valueName>Soybean BU</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Corn</controllingFieldValue>
+                <valueName>Corn BU</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Corn</controllingFieldValue>
+                <controllingFieldValue>Wheat</controllingFieldValue>
+                <valueName>Fungicide</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Energy</controllingFieldValue>
+                <valueName>Liquid Fuel Gallons</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Energy</controllingFieldValue>
+                <valueName>Propane Gallons</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Forage</controllingFieldValue>
+                <valueName>First Cutting Application</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Forage</controllingFieldValue>
+                <valueName>Pre-dormancy Application</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Forage</controllingFieldValue>
+                <valueName>Second or Later Cutting Application</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Wheat</controllingFieldValue>
+                <valueName>Fall Fertilizer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Wheat</controllingFieldValue>
+                <valueName>Spring Fertilizer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Wheat</controllingFieldValue>
+                <valueName>Wheat BU</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>Crop Insurance</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>Data Storage &amp; Analysis</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>External Promoted Finance Dollars</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>GPS Soil Sampling</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>Internal Financing Program Dollars</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>Precision Equipment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>Precision Seed Plans</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Category__c</fullName>
+        <description>Category for Agronomy</description>
+        <externalId>false</externalId>
+        <label>Category</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Category_for_Agronomy</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Units__c</fullName>
+        <description>Units for Agronomy</description>
+        <externalId>false</externalId>
+        <label>Units</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Agronomy</label>
+    <nameField>
+        <displayFormat>ID-{00000}</displayFormat>
+        <label>Agronomy ID</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Agronomy</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Agronomy</fullName>
+        <active>true</active>
+        <description>Agronomy</description>
+        <label>Agronomy</label>
+        <picklistValues>
+            <picklist>Category_Type__c</picklist>
+            <values>
+                <fullName>CPP %28Weed %26 Insect Control%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Corn BU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Crop Insurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Data Storage %26 Analysis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>External Promoted Finance Dollars</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fall Fertilizer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fertilizer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>First Cutting Application</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Foliar</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fungicide</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GPS Soil Sampling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Financing Program Dollars</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Liquid Fuel Gallons</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pre-dormancy Application</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Precision Equipment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Precision Seed Plans</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Propane Gallons</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Second or Later Cutting Application</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seed Treatment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Soybean BU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Spring Fertilizer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wheat BU</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Category__c</picklist>
+            <values>
+                <fullName>Bean</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Corn</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Energy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Forage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wheat</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <visibility>Public</visibility>
+</CustomObject>

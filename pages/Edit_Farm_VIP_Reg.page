@@ -1,0 +1,55 @@
+<apex:page standardController="Farm_VIP_Registration__c" extensions="Edit_Farm_VIP_Reg_Control" >
+    
+    <apex:pageBlock >
+        
+    <apex:form >
+
+    <div align="center" draggable="false" >
+        <apex:commandButton value="Cancel" action="{!cancelEdit}" />
+        <apex:commandButton value="Save" action="{!saveAndUpdate}" />
+    </div>
+            
+        <apex:pageBlockSection title="Farm VIP Registration Detail" >
+            <apex:outputField value="{!Farm_VIP_Registration__c.Farm_VIP_Event__c}" />
+            <apex:outputField value="{!Farm_VIP_Registration__c.Approval_Status__c}" />
+
+            <apex:outputField value="{!Farm_VIP_Registration__c.Specie_Focus__c}" />
+            <apex:outputField value="{!Farm_VIP_Registration__c.Approval_Date__c}" />
+
+            <apex:outputField value="{!Farm_VIP_Registration__c.Date_of_Event__c}" />
+            <apex:outputField value="{!Farm_VIP_Registration__c.Attendee_Type__c}" />
+            
+            <apex:inputField value="{!cur_reg.Host_will_be_attending__c}" />
+            <apex:inputField value="{!cur_reg.Animals_Influenced__c}" rendered="{!Influencer_Path}"  />
+            
+        </apex:pageBlockSection>
+
+        <apex:pageBlockSection title="Registrant Information" >
+
+            <apex:inputField value="{!cur_con.FirstName}" />
+            <apex:inputField value="{!cur_con.LastName}" />
+
+            <apex:inputField value="{!cur_con.Email}" />
+            <apex:inputField value="{!cur_con.MobilePhone}" />
+
+            <apex:inputField value="{!cur_con.Contact_Type__c}" />
+            <apex:inputField value="{!cur_con.Role__c}" />
+
+        </apex:pageBlockSection>
+
+        <apex:pageBlockSection title="Travel Information" >
+        
+            <apex:inputField value="{!cur_reg.Traveling_Via__c}" />
+            <apex:inputField value="{!cur_reg.Notes__c}" />
+            <apex:inputField value="{!cur_reg.Room_With__c}" />
+            <apex:inputField value="{!cur_reg.Wearable_Size_if_applicable__c}" />
+          
+        </apex:pageBlockSection>
+  </apex:form> 
+
+
+    </apex:pageBlock>
+    
+    
+    
+</apex:page>

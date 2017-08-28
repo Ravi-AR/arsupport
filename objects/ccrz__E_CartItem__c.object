@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Cart Items</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>cc_oo_ContractPrice__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>CC OO ContractPrice</label>
+        <referenceTo>cc_oo_ContractPrice__c</referenceTo>
+        <relationshipLabel>CC Cart Items</relationshipLabel>
+        <relationshipName>CC_Cart_Items</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>cc_oo_DiscountDelta__c</fullName>
+        <externalId>false</externalId>
+        <label>DiscountDelta</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>cc_oo_IsListPrice__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>cc_oo_IsListPrice</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>cc_oo_JDELineNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>JDELineNumber</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>cc_oo_LineNumberId__c</fullName>
+        <externalId>false</externalId>
+        <label>Line Number Id</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>cc_oo_OriginalBagPrice__c</fullName>
+        <externalId>false</externalId>
+        <label>Original Bag Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>cc_oo_OriginalCartItem__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Original Cart Item</label>
+        <referenceTo>ccrz__E_CartItem__c</referenceTo>
+        <relationshipLabel>CC Cart Items (Original Cart Item)</relationshipLabel>
+        <relationshipName>CC_Cart_Items</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>cc_oo_OriginalPalletPrice__c</fullName>
+        <externalId>false</externalId>
+        <label>Original Pallet Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>cc_oo_TotalWieght__c</fullName>
+        <externalId>false</externalId>
+        <formula>ccrz__Product__r.ccrz__ProductWeight__c * ccrz__Quantity__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>cc_oo_TotalWieght</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>cc_oo_UnitPrice__c</fullName>
+        <externalId>false</externalId>
+        <label>UnitPrice</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>cc_oo_isFreightIncluded__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isFreightIncluded</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>cc_oo_leadtime__c</fullName>
+        <externalId>false</externalId>
+        <label>lead time</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>cc_oo_webLineNumber__c</fullName>
+        <description>web auto number upto 6 digit for JDE to track line number</description>
+        <displayFormat>{000000}</displayFormat>
+        <externalId>false</externalId>
+        <label>web Line Number__c</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>AutoNumber</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__AbsoluteDiscount__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The absolute discount for this item in the cart</description>
+        <externalId>false</externalId>
+        <label>Absolute Discount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__AdjustmentAmount__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Additional Adjustment from the CSR</description>
+        <externalId>false</externalId>
+        <label>Adjustment Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__AvailabilityMessage__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Availability Message</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__CartItemId__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <externalId>true</externalId>
+        <label>Cart Item Id</label>
+        <length>128</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ccrz__Cart__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Cart Id</description>
+        <externalId>false</externalId>
+        <label>Cart</label>
+        <referenceTo>ccrz__E_Cart__c</referenceTo>
+        <relationshipLabel>Cart Items</relationshipLabel>
+        <relationshipName>E_CartItems</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>ccrz__Category__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>CategoryID</description>
+        <externalId>false</externalId>
+        <label>Category</label>
+        <referenceTo>ccrz__E_Category__c</referenceTo>
+        <relationshipLabel>Cart Items</relationshipLabel>
+        <relationshipName>E_CartItems</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__Comments__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Comments</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__Coupon__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Coupon ID</description>
+        <externalId>false</externalId>
+        <label>Coupon</label>
+        <referenceTo>ccrz__E_Coupon__c</referenceTo>
+        <relationshipLabel>Cart Items</relationshipLabel>
+        <relationshipName>E_CartItem2</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__DisplayProduct__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Product used to display the name in the cart and link to product detail page</description>
+        <externalId>false</externalId>
+        <label>Display Product</label>
+        <referenceTo>ccrz__E_Product__c</referenceTo>
+        <relationshipLabel>CC Cart Items (Display Product)</relationshipLabel>
+        <relationshipName>CC_Cart_Items</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__Is_Subscription_Selected__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>True if a subscription was selected via the UI, or if the associated product is only a subscription.  False otherwise.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>True if a subscription was selected via the UI, or if the associated product is only a subscription.  False otherwise.</inlineHelpText>
+        <label>Is Subscription Selected</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__ItemLabel__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Alternate label to use when displaying the item in the cart.</description>
+        <externalId>false</externalId>
+        <label>Item Label</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ccrz__ItemStatus__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Item Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Available</fullName>
+                    <default>true</default>
+                    <label>Available</label>
+                </value>
+                <value>
+                    <fullName>Invalid</fullName>
+                    <default>false</default>
+                    <label>Invalid</label>
+                </value>
+                <value>
+                    <fullName>Pre-Order</fullName>
+                    <default>false</default>
+                    <label>Pre-Order</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ccrz__ItemTotal__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>ccrz__AdjustmentAmount__c  +  ccrz__SubAmount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Item Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__OriginalQuantity__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The purpose of this field is to store the appropriate quantity of line items that have  products in the  form of parent and child like bundles kits and dynamic kits</description>
+        <externalId>false</externalId>
+        <label>Original Quantity</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ccrz__ParentCartItem__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Parent Cart Item</label>
+        <referenceTo>ccrz__E_CartItem__c</referenceTo>
+        <relationshipLabel>Cart Items</relationshipLabel>
+        <relationshipName>Cart_Items</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__ParentProduct__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Parent Product Id</description>
+        <externalId>false</externalId>
+        <label>Parent Product</label>
+        <referenceTo>ccrz__E_Product__c</referenceTo>
+        <relationshipLabel>Cart Items (ParentProductID)</relationshipLabel>
+        <relationshipName>E_CartItems</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__PercentDiscount__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The percentage discount for this item in the cart</description>
+        <externalId>false</externalId>
+        <label>Percent Discount</label>
+        <precision>7</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__Price__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Price</description>
+        <externalId>false</externalId>
+        <label>Price</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__ProductType__c</fullName>
+        <deprecated>false</deprecated>
+        <description>ProductType same as CartItemType</description>
+        <externalId>false</externalId>
+        <label>ProductType</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ccrz__Product__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Product ID</description>
+        <externalId>false</externalId>
+        <label>Product</label>
+        <referenceTo>ccrz__E_Product__c</referenceTo>
+        <relationshipLabel>Cart Items (ProductID)</relationshipLabel>
+        <relationshipName>E_CartItem2</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__Quantity__c</fullName>
+        <defaultValue>1</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Quantity</description>
+        <externalId>false</externalId>
+        <label>Quantity</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ccrz__RecurringPriceSubAmt__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Sub total for the recurring price</description>
+        <externalId>false</externalId>
+        <label>Recurring Price Sub Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__RecurringPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The recurring price portion of a subscription</description>
+        <externalId>false</externalId>
+        <label>Recurring Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__RequestDate__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Request Date</description>
+        <externalId>false</externalId>
+        <label>Request Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__Seller__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Seller this Cart Item is to be purchased from.</description>
+        <externalId>false</externalId>
+        <label>Seller</label>
+        <referenceTo>ccrz__E_Seller__c</referenceTo>
+        <relationshipLabel>CC Cart Items</relationshipLabel>
+        <relationshipName>E_CartItems</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__StoreID__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Store ID</label>
+        <length>128</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ccrz__SubAmount__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Sub Amount</description>
+        <externalId>false</externalId>
+        <label>Sub Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__SubProdTerm__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>SubProdTerm</label>
+        <referenceTo>ccrz__E_SubProdTerm__c</referenceTo>
+        <relationshipLabel>CC Cart Items</relationshipLabel>
+        <relationshipName>CC_Cart_Items</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__Subscription_Duration__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Duration of the subscription in months.  If this is field is blank, then this cart item is not a subscribed item.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Duration of the subscription in months.  If this is field is blank, then this cart item is not a subscribed item.</inlineHelpText>
+        <label>Subscription Duration (In Months)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ccrz__Subscription_Frequency__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The frequency of this subscription in days.  If not selected via the UI, then this value defaults to the Product&apos;s subscription frequency.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The frequency of this subscription in days.  If not selected via the UI, then this value defaults to the Product&apos;s subscription frequency.</inlineHelpText>
+        <label>Subscription Frequency</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ccrz__UnitOfMeasure__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Unit Of Measure</label>
+        <length>32</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ccrz__cartItemType__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>cart item type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Major</fullName>
+                    <default>true</default>
+                    <label>Major</label>
+                </value>
+                <value>
+                    <fullName>Minor</fullName>
+                    <default>false</default>
+                    <label>Minor</label>
+                </value>
+                <value>
+                    <fullName>Coupon</fullName>
+                    <default>false</default>
+                    <label>Coupon</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>CC Cart Item</label>
+    <nameField>
+        <displayFormat>{00000000}</displayFormat>
+        <label>CartItemAutoNumber</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>CC Cart Items</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

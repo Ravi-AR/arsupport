@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use when you need to attach a Knowledge Article</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Purina_Letterhead_Template</letterhead>
+    <name>Service Request Info with Knowledge Article</name>
+    <style>freeForm</style>
+    <subject>Information to help with</subject>
+    <textOnly>Thank you for your inquiry.
+
+Please reference the attached material, it should be able to answer your question.
+
+
+
+
+
+
+
+
+{!Case.Articles_as_PDFs}</textOnly>
+    <type>html</type>
+</EmailTemplate>

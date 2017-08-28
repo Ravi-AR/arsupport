@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Created when a Community User fills out a Coupon Redemption form</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <description>Account that the Coupon Request is related to</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Account that the Coupon Request is related to</inlineHelpText>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Coupon Requests</relationshipLabel>
+        <relationshipName>Coupon_Requests</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Address__c</fullName>
+        <description>Shipping Address of the Account - indicated by the Community User is different than Account Address</description>
+        <externalId>false</externalId>
+        <label>Address</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>City__c</fullName>
+        <description>Shipping City of the Account - indicated by the Community User is different than Account City</description>
+        <externalId>false</externalId>
+        <label>City</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Grand_Total_Amount__c</fullName>
+        <description>Overall Total of the Coupon Redemption Request</description>
+        <externalId>false</externalId>
+        <formula>Sub_Total__c +  Postage_Expense__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Overall Toal of the Coupon Redemption Request</inlineHelpText>
+        <label>Grand Total Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Invoice__c</fullName>
+        <description>Invoice # for the Coupon Request</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Invoice # for the Coupon Request</inlineHelpText>
+        <label>Invoice #</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsComplete__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates that the coupon redemption form was completed and downloaded for printing</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates that the coupon redemption form was completed and downloaded for printing</inlineHelpText>
+        <label>IsComplete</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Phone__c</fullName>
+        <description>Phone Number on the Account</description>
+        <externalId>false</externalId>
+        <formula>Account__r.Phone</formula>
+        <inlineHelpText>Phone Number on the Account</inlineHelpText>
+        <label>Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Postage_Expense__c</fullName>
+        <description>Postage Expense for Coupons</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Postage Expense for Coupons based on the Total # of Coupons</inlineHelpText>
+        <label>Postage Expense</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Postage_Expense_of_PMI_Coupons__c</fullName>
+        <externalId>false</externalId>
+        <label>Postage Expense of PMI Coupons</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Postage_Expense_of_Purina_Coupons__c</fullName>
+        <externalId>false</externalId>
+        <label>Postage Expense of Purina Coupons</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>State__c</fullName>
+        <description>Shipping State of the Account - indicated by the Community User is different than Account State</description>
+        <externalId>false</externalId>
+        <label>State</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sub_Total_Value_PMI__c</fullName>
+        <description>Sub-Total Value for PMI Product</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Sub-Total Value for PMI Product Coupons</inlineHelpText>
+        <label>Sub-Total Value PMI</label>
+        <summarizedField>Coupon_Request_Line_Item__c.ExtendedValue__c</summarizedField>
+        <summaryFilterItems>
+            <field>Coupon_Request_Line_Item__c.Coupon_Brand__c</field>
+            <operation>equals</operation>
+            <value>PMI</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Coupon_Request_Line_Item__c.Coupon_Request__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Sub_Total_Value_Purina__c</fullName>
+        <description>Sub-Total Value of all Purina Products</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Sub-Total Value of all Purina Product Coupons</inlineHelpText>
+        <label>Sub-Total Value Purina</label>
+        <summarizedField>Coupon_Request_Line_Item__c.ExtendedValue__c</summarizedField>
+        <summaryFilterItems>
+            <field>Coupon_Request_Line_Item__c.Coupon_Brand__c</field>
+            <operation>equals</operation>
+            <value>Purina</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Coupon_Request_Line_Item__c.Coupon_Request__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Sub_Total__c</fullName>
+        <description>Total of PMI and Purina</description>
+        <externalId>false</externalId>
+        <formula>Sub_Total_Value_PMI__c + Sub_Total_Value_Purina__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Total Extended Value of PMI and Purina Coupons</inlineHelpText>
+        <label>Sub-Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Number_of_Coupons__c</fullName>
+        <description>Total number of coupons being used</description>
+        <externalId>false</externalId>
+        <formula>Total_Number_of_PMI_Coupons__c + Total_Number_of_Purina_Coupons__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Total number of coupons</inlineHelpText>
+        <label>Total Number of Coupons</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Number_of_PMI_Coupons__c</fullName>
+        <description>Sum of all PMI coupons being submitted</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Sum of all PMI coupons being submitted</inlineHelpText>
+        <label>Total Number of PMI Coupons</label>
+        <summarizedField>Coupon_Request_Line_Item__c.Number_of_Coupons__c</summarizedField>
+        <summaryFilterItems>
+            <field>Coupon_Request_Line_Item__c.Coupon_Brand__c</field>
+            <operation>equals</operation>
+            <value>PMI</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Coupon_Request_Line_Item__c.Coupon_Request__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Number_of_Purina_Coupons__c</fullName>
+        <description>Sum of all Purina coupons being submitted</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Sum of all Purina coupons being submitted</inlineHelpText>
+        <label>Total Number of Purina Coupons</label>
+        <summarizedField>Coupon_Request_Line_Item__c.Number_of_Coupons__c</summarizedField>
+        <summaryFilterItems>
+            <field>Coupon_Request_Line_Item__c.Coupon_Brand__c</field>
+            <operation>equals</operation>
+            <value>Purina</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Coupon_Request_Line_Item__c.Coupon_Request__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_PMI_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>Postage_Expense_of_PMI_Coupons__c + Sub_Total_Value_PMI__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total PMI Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Purina_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>Postage_Expense_of_Purina_Coupons__c + Sub_Total_Value_Purina__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Purina Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Zip__c</fullName>
+        <description>Shipping Zip of the Accoun t- indicated by the Community User is different than Account Zip</description>
+        <externalId>false</externalId>
+        <label>Zip</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Coupon Request</label>
+    <nameField>
+        <displayFormat>CR{00000}</displayFormat>
+        <label>Coupon Request</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Coupon Requests</pluralLabel>
+    <recordTypes>
+        <fullName>Standard</fullName>
+        <active>true</active>
+        <description>Coupon Request</description>
+        <label>Standard</label>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

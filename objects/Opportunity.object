@@ -1,0 +1,3498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>AddInfluence</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <businessProcesses>
+        <fullName>General Sales Process</fullName>
+        <description>The general sales process for opportunities</description>
+        <isActive>true</isActive>
+        <values>
+            <fullName>Closed Lost</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed Won</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Negotiating</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prospecting</fullName>
+            <default>false</default>
+        </values>
+    </businessProcesses>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <fieldSets>
+        <fullName>CRMC_PP__CRMC_Action_Grid_Defaults</fullName>
+        <description>Default columns for CRMC Action Grid</description>
+        <displayedFields>
+            <field>Name</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Account.Name</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Amount</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>CloseDate</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>StageName</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Owner.Name</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>CRMC Action Grid Defaults</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>createOpportunityFieldSet</fullName>
+        <description>Account Error Page for creating Opportunities and relating them to the account.</description>
+        <displayedFields>
+            <field>Name</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>CloseDate</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Type</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>StageName</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Species__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Life_Stage__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Annual_Points__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Total_Head__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Annual_Tons__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Amount</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Key_Opportunity__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Description</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>CampaignId</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Probability</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>createOpportunityFieldSet</label>
+    </fieldSets>
+    <fields>
+        <fullName>AccountId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Account_Counselor_Stage__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Account.Counselor_Selling_Stage__c)</formula>
+        <label>Account Counselor Stage</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_Location__c</fullName>
+        <externalId>false</externalId>
+        <formula>Account.BillingCity&amp;&quot;, &quot;&amp; Account.BillingState</formula>
+        <label>Account Location</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>Account.RecordType.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Account Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Acct_Activity_Rpt__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(Not(Contains($User.Profile_Current__c ,&quot;Partner&quot;)), 
+HYPERLINK(&quot;/00Oj0000004JIKI?pv0=&quot;&amp;Account.Id,&quot;Activity Rpt (Last 30 Days)&quot;,&quot;_self&quot;), 
+HYPERLINK(&quot;/partnercommunity/00Oj0000004JIKI?pv0=&quot;&amp;Account.Id,&quot;Activity Rpt (Last 30 Days)&quot;,&quot;_self&quot;))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Acct Activity Rpt</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Activity_Indicator__c</fullName>
+        <description>Is there at least one activity for this Opportunity?</description>
+        <externalId>false</externalId>
+        <label>Activity Indicator</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>true</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Amount</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Animal_Type_Category__c</fullName>
+        <description>Used for Partner Community.</description>
+        <externalId>false</externalId>
+        <formula>If( RecordType.Name =&quot;General Opportunity&quot;,text( Species__c ),
+If( RecordType.Name=&quot;Agronomy Opportunity&quot;,text(Category__c),
+&quot;N/A&quot;))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Animal Type/Category</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Annual_Points_Adjusted__c</fullName>
+        <description>If the Annual Points Override field is populated, use the Annual Points Override, else use the Annual Points</description>
+        <externalId>false</externalId>
+        <formula>If(IsBlank(Annual_Points_Override__c),  Annual_Points__c ,Annual_Points_Override__c)</formula>
+        <label>Annual Points Adjusted</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Annual_Points_Override__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The &quot;Annual Points Override&quot; will not appear in reporting at this time.</inlineHelpText>
+        <label>Annual Points Override</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Annual_Points_Reporting__c</fullName>
+        <description>Formula to calculate Annual Points</description>
+        <externalId>false</externalId>
+        <formula>If(IsBlank(Annual_Points_Override__c),  Annual_Points__c ,Annual_Points_Override__c)</formula>
+        <label>Annual Points (Reporting)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Annual_Points__c</fullName>
+        <externalId>false</externalId>
+        <label>Annual Points</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Annual_Tons__c</fullName>
+        <externalId>false</externalId>
+        <label>Annual Tons</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Anticipated_Close_Date_7_Days__c</fullName>
+        <externalId>false</externalId>
+        <formula>CloseDate + 7</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Anticipated Close Date + 7 Days</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Area_Sales_Manager__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text(Owner.Area_Sales_Manager__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Area Sales Manager</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CampaignId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Category_Type__c</fullName>
+        <description>Category Type for agronomy picklists</description>
+        <externalId>false</externalId>
+        <label>Category Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Category__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetName>Category_Type_Agronomy</valueSetName>
+            <valueSettings>
+                <controllingFieldValue>Bean</controllingFieldValue>
+                <controllingFieldValue>Corn</controllingFieldValue>
+                <valueName>CPP (Weed &amp; Insect Control)</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bean</controllingFieldValue>
+                <controllingFieldValue>Corn</controllingFieldValue>
+                <valueName>Fertilizer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bean</controllingFieldValue>
+                <valueName>Foliar</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bean</controllingFieldValue>
+                <controllingFieldValue>Corn</controllingFieldValue>
+                <controllingFieldValue>Forage</controllingFieldValue>
+                <controllingFieldValue>Wheat</controllingFieldValue>
+                <valueName>Seed</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bean</controllingFieldValue>
+                <valueName>Seed Treatment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bean</controllingFieldValue>
+                <controllingFieldValue>Corn</controllingFieldValue>
+                <valueName>Services</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bean</controllingFieldValue>
+                <valueName>Soybean BU</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Corn</controllingFieldValue>
+                <valueName>Corn BU</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Corn</controllingFieldValue>
+                <controllingFieldValue>Wheat</controllingFieldValue>
+                <valueName>Fungicide</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Energy</controllingFieldValue>
+                <valueName>Liquid Fuel Gallons</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Energy</controllingFieldValue>
+                <valueName>Propane Gallons</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Forage</controllingFieldValue>
+                <valueName>First Cutting Application</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Forage</controllingFieldValue>
+                <valueName>Pre-dormancy Application</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Forage</controllingFieldValue>
+                <valueName>Second or Later Cutting Application</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Wheat</controllingFieldValue>
+                <valueName>Fall Fertilizer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Wheat</controllingFieldValue>
+                <valueName>Spring Fertilizer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Wheat</controllingFieldValue>
+                <valueName>Wheat BU</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>Crop Insurance</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>Data Storage &amp; Analysis</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>External Promoted Finance Dollars</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>GPS Soil Sampling</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>Internal Financing Program Dollars</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>Precision Equipment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>Precision Seed Plans</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Category__c</fullName>
+        <description>Category for agronomy opportunities</description>
+        <externalId>false</externalId>
+        <label>Category</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Category_for_Agronomy</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>CloseDate</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Close_Date_Year__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text(Year( CloseDate ))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Close Date (Year)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Close_Date_in_Future_Open_Oppty__c</fullName>
+        <description>The close date is in the past an the stage is open.</description>
+        <externalId>false</externalId>
+        <formula>if( CloseDate   &gt;=  Today()&amp;&amp;  Open_Count__c =1,1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Open || Close Date Future || Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Closed_Lost_Annual_Points__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(text(StageName)=&quot;Closed Lost&quot;, Annual_Points__c  ,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Closed Lost Annual Points</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Closed_Lost_Count__c</fullName>
+        <description>Count of &quot;Closed Lost&quot; opportunities.</description>
+        <externalId>false</externalId>
+        <formula>if(text(StageName)=&quot;Closed Lost&quot;,1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Closed Lost Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Closed_Lost_Curr_Yr_Count__c</fullName>
+        <externalId>false</externalId>
+        <formula>If( 
+AND( 
+text(StageName) = &quot;Closed Lost&quot;, 
+Year(CloseDate) = Year(today())), 
+1 ,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Closed Lost || Curr Yr || Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Closed_Lost_Curr_Yr_Points__c</fullName>
+        <externalId>false</externalId>
+        <formula>If( 
+AND( 
+text(StageName) = &quot;Closed Lost&quot;, 
+Year(CloseDate) = Year(today())), 
+Closed_Lost_Annual_Points__c  ,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Closed Lost || Curr Yr || Points</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Closed_Won_Annual_Points__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(text(StageName)=&quot;Closed Won&quot;, Annual_Points__c ,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Closed Won Annual Points</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Closed_Won_Count__c</fullName>
+        <description>Count of Closed Won opportunities.</description>
+        <externalId>false</externalId>
+        <formula>if(text(StageName)=&quot;Closed Won&quot;,1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Closed Won Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Closed_Won_Curr_Yr_Count__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(
+AND(
+text(StageName) = &quot;Closed Won&quot;,
+Year(CloseDate) = Year(today())),
+1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Closed Won || Curr Yr || Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Closed_Won_Curr_Yr_Points__c</fullName>
+        <externalId>false</externalId>
+        <formula>If( 
+AND( 
+text(StageName) = &quot;Closed Won&quot;, 
+Year(CloseDate) = Year(today())), 
+  Closed_Won_Annual_Points__c  ,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Closed Won || Curr Yr || Points</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ContractId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Date_Stage_is_Moved_to_Closed_Won__c</fullName>
+        <description>Date the opportunity is moved to Closed Won.</description>
+        <externalId>false</externalId>
+        <label>Date Stage is Moved to &quot;Closed Won&quot;</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Dealer_Involved__c</fullName>
+        <externalId>false</externalId>
+        <label>Dealer Involved?</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>End_User_Focus_Opportunity_2017__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>End User Focus Oppty for 2017</description>
+        <externalId>false</externalId>
+        <label>End User Focus Opportunity (2017)</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>End_User_Focus_Points_for_2017__c</fullName>
+        <description>Used to calculate points for the End User Focus Initiative.</description>
+        <externalId>false</externalId>
+        <formula>If(And(Key_Opportunity__c,Text(StageName) = &quot;Closed Won&quot;,Year(CloseDate)= 2017,Month(CloseDate)= 4),8  *  (Annual_Points_Reporting__c /12), 
+If(And(Key_Opportunity__c,Text(StageName) = &quot;Closed Won&quot;,Year(CloseDate)= 2017,Month(CloseDate)= 5),7  *  (Annual_Points_Reporting__c /12), 
+If(And(Key_Opportunity__c,Text(StageName) = &quot;Closed Won&quot;,Year(CloseDate)= 2017,Month(CloseDate)= 6),6  *  (Annual_Points_Reporting__c /12), 
+If(And(Key_Opportunity__c,Text(StageName) = &quot;Closed Won&quot;,Year(CloseDate)= 2017,Month(CloseDate)= 7),5  *  (Annual_Points_Reporting__c /12), 
+If(And(Key_Opportunity__c,Text(StageName) = &quot;Closed Won&quot;,Year(CloseDate)= 2017,Month(CloseDate)= 8),4  *  (Annual_Points_Reporting__c /12), 
+If(And(Key_Opportunity__c,Text(StageName) = &quot;Closed Won&quot;,Year(CloseDate)= 2017,Month(CloseDate)= 9),3  *  (Annual_Points_Reporting__c /12), 
+If(And(Key_Opportunity__c,Text(StageName) = &quot;Closed Won&quot;,Year(CloseDate)= 2017,Month(CloseDate)= 10),2 *  (Annual_Points_Reporting__c /12), 
+If(And(Key_Opportunity__c,Text(StageName) = &quot;Closed Won&quot;,Year(CloseDate)= 2017,Month(CloseDate)= 11),1 *  (Annual_Points_Reporting__c /12), 
+0))))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>End User Focus Points for 2017</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Event_Name_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>Campaign.Name &amp;&quot;-&quot;&amp; Text( Campaign.Date_of_Event__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Event Name &amp; Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExpectedRevenue</fullName>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Farm_VIP_Registration__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Look up to Farm vip registration -- related list on farm vip registration object.</description>
+        <externalId>false</externalId>
+        <label>Farm VIP Registration</label>
+        <referenceTo>Farm_VIP_Registration__c</referenceTo>
+        <relationshipLabel>Opportunities</relationshipLabel>
+        <relationshipName>Opportunities</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Initiative__c</fullName>
+        <description>Initiative</description>
+        <externalId>false</externalId>
+        <label>Initiative</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Equine Vet Referral</fullName>
+                    <default>false</default>
+                    <label>Equine Vet Referral</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>IsPrivate</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Key_Opportunity__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used to identify key opportunities.</description>
+        <externalId>false</externalId>
+        <label>Key Opportunity</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LeadSource</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Lead_Created_By__c</fullName>
+        <description>Who created the lead this opportunity was created from.</description>
+        <externalId>false</externalId>
+        <label>Lead Created By</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lead_Reviewed_By__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(isblank(Text(Opportunity_Converted_From_Lead__c)),&quot;N/A&quot;,
+If(isblank(Lead_Reviewer__c ),CreatedBy.Full_Name__c,Lead_Reviewer__r.Full_Name__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Lead Reviewed By</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lead_Reviewer_Comments__c</fullName>
+        <description>The Lead Reviewer Comments are mapped over from the lead.</description>
+        <externalId>false</externalId>
+        <label>Lead Reviewer Comments</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Lead_Reviewer_Count__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(
+isblank( Lead_Reviewer__c ),0,1)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Lead Reviewer Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lead_Reviewer__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The Lead Reviewer who reviewed the lead -- mapped over from the lead object.</description>
+        <externalId>false</externalId>
+        <label>Lead Reviewer</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Opportunities</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Life_Stage__c</fullName>
+        <externalId>false</externalId>
+        <label>Lifestage</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Species__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Aqua</fullName>
+                    <default>false</default>
+                    <label>Aqua</label>
+                </value>
+                <value>
+                    <fullName>Back Grounder</fullName>
+                    <default>false</default>
+                    <label>Back Grounder</label>
+                </value>
+                <value>
+                    <fullName>Boarding Kennel</fullName>
+                    <default>false</default>
+                    <label>Boarding Kennel</label>
+                </value>
+                <value>
+                    <fullName>Breeder Operation</fullName>
+                    <default>false</default>
+                    <label>Breeder Operation</label>
+                </value>
+                <value>
+                    <fullName>Breeding Stallion</fullName>
+                    <default>false</default>
+                    <label>Breeding Stallion</label>
+                </value>
+                <value>
+                    <fullName>Broilers</fullName>
+                    <default>false</default>
+                    <label>Broilers</label>
+                </value>
+                <value>
+                    <fullName>Brood Mares</fullName>
+                    <default>false</default>
+                    <label>Brood Mares</label>
+                </value>
+                <value>
+                    <fullName>Caged Bird</fullName>
+                    <default>false</default>
+                    <label>Caged Bird</label>
+                </value>
+                <value>
+                    <fullName>Calf Milk Replacer</fullName>
+                    <default>false</default>
+                    <label>Calf Milk Replacer</label>
+                </value>
+                <value>
+                    <fullName>Cattle</fullName>
+                    <default>false</default>
+                    <label>Cattle</label>
+                </value>
+                <value>
+                    <fullName>Commercial Cow</fullName>
+                    <default>false</default>
+                    <label>Commercial Cow</label>
+                </value>
+                <value>
+                    <fullName>Deer-Elk</fullName>
+                    <default>false</default>
+                    <label>Deer-Elk</label>
+                </value>
+                <value>
+                    <fullName>Duck/Goose</fullName>
+                    <default>false</default>
+                    <label>Duck/Goose</label>
+                </value>
+                <value>
+                    <fullName>Exotics</fullName>
+                    <default>false</default>
+                    <label>Exotics</label>
+                </value>
+                <value>
+                    <fullName>Family Flock</fullName>
+                    <default>false</default>
+                    <label>Family Flock</label>
+                </value>
+                <value>
+                    <fullName>Fed Cattle</fullName>
+                    <default>false</default>
+                    <label>Fed Cattle</label>
+                </value>
+                <value>
+                    <fullName>Foals</fullName>
+                    <default>false</default>
+                    <label>Foals</label>
+                </value>
+                <value>
+                    <fullName>Free Range Property</fullName>
+                    <default>false</default>
+                    <label>Free Range Property</label>
+                </value>
+                <value>
+                    <fullName>Game Birds</fullName>
+                    <default>false</default>
+                    <label>Game Birds</label>
+                </value>
+                <value>
+                    <fullName>Goat</fullName>
+                    <default>false</default>
+                    <label>Goat</label>
+                </value>
+                <value>
+                    <fullName>Grower</fullName>
+                    <default>false</default>
+                    <label>Grower</label>
+                </value>
+                <value>
+                    <fullName>Grower Finish</fullName>
+                    <default>false</default>
+                    <label>Grower Finish</label>
+                </value>
+                <value>
+                    <fullName>Heifer</fullName>
+                    <default>false</default>
+                    <label>Heifer</label>
+                </value>
+                <value>
+                    <fullName>Hogs</fullName>
+                    <default>false</default>
+                    <label>Hogs</label>
+                </value>
+                <value>
+                    <fullName>Hunting Preserve</fullName>
+                    <default>false</default>
+                    <label>Hunting Preserve</label>
+                </value>
+                <value>
+                    <fullName>Lactation</fullName>
+                    <default>false</default>
+                    <label>Lactation</label>
+                </value>
+                <value>
+                    <fullName>Layers</fullName>
+                    <default>false</default>
+                    <label>Layers</label>
+                </value>
+                <value>
+                    <fullName>Nursery</fullName>
+                    <default>false</default>
+                    <label>Nursery</label>
+                </value>
+                <value>
+                    <fullName>PB Cow Bull</fullName>
+                    <default>false</default>
+                    <label>PB Cow Bull</label>
+                </value>
+                <value>
+                    <fullName>Poultry</fullName>
+                    <default>false</default>
+                    <label>Poultry</label>
+                </value>
+                <value>
+                    <fullName>Rabbit</fullName>
+                    <default>false</default>
+                    <label>Rabbit</label>
+                </value>
+                <value>
+                    <fullName>Sheep</fullName>
+                    <default>false</default>
+                    <label>Sheep</label>
+                </value>
+                <value>
+                    <fullName>Show Performance</fullName>
+                    <default>false</default>
+                    <label>Show Performance</label>
+                </value>
+                <value>
+                    <fullName>Sow/Boar Replacement</fullName>
+                    <default>false</default>
+                    <label>Sow/Boar Replacement</label>
+                </value>
+                <value>
+                    <fullName>Sporting/Show Dogs</fullName>
+                    <default>false</default>
+                    <label>Sporting/Show Dogs</label>
+                </value>
+                <value>
+                    <fullName>Starter</fullName>
+                    <default>false</default>
+                    <label>Starter</label>
+                </value>
+                <value>
+                    <fullName>Stocker</fullName>
+                    <default>false</default>
+                    <label>Stocker</label>
+                </value>
+                <value>
+                    <fullName>Turkey</fullName>
+                    <default>false</default>
+                    <label>Turkey</label>
+                </value>
+                <value>
+                    <fullName>Weaning</fullName>
+                    <default>false</default>
+                    <label>Weaning</label>
+                </value>
+                <value>
+                    <fullName>N/A</fullName>
+                    <default>false</default>
+                    <label>N/A</label>
+                </value>
+                <value>
+                    <fullName>Backgrounder</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Backgrounder</label>
+                </value>
+                <value>
+                    <fullName>Breeding</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Breeding</label>
+                </value>
+                <value>
+                    <fullName>Breeding Mares</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Breeding Mares</label>
+                </value>
+                <value>
+                    <fullName>Free Range Feeder</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Free Range Feeder</label>
+                </value>
+                <value>
+                    <fullName>PB Cow Bill</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>PB Cow Bill</label>
+                </value>
+                <value>
+                    <fullName>Preserve/Shooter Ranch</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Preserve/Shooter Ranch</label>
+                </value>
+                <value>
+                    <fullName>Show/ Performance</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Show/ Performance</label>
+                </value>
+                <value>
+                    <fullName>Sporting/ Show Dogs</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Sporting/ Show Dogs</label>
+                </value>
+                <value>
+                    <fullName>Unknown</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Unknown</label>
+                </value>
+                <value>
+                    <fullName>Yearlings</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Yearlings</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Poultry</controllingFieldValue>
+                <valueName>Broilers</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Poultry</controllingFieldValue>
+                <valueName>Duck/Goose</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Poultry</controllingFieldValue>
+                <valueName>Game Birds</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Poultry</controllingFieldValue>
+                <valueName>Layers</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Poultry</controllingFieldValue>
+                <valueName>Turkey</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Deer</controllingFieldValue>
+                <controllingFieldValue>Pet</controllingFieldValue>
+                <valueName>Breeder Operation</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Deer</controllingFieldValue>
+                <valueName>Free Range Property</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Deer</controllingFieldValue>
+                <valueName>Hunting Preserve</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Horse</controllingFieldValue>
+                <valueName>Breeding Stallion</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Horse</controllingFieldValue>
+                <valueName>Brood Mares</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Horse</controllingFieldValue>
+                <valueName>Foals</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Horse</controllingFieldValue>
+                <valueName>Show Performance</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Horse</controllingFieldValue>
+                <valueName>Weaning</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bee Colonies</controllingFieldValue>
+                <valueName>N/A</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cattle</controllingFieldValue>
+                <valueName>Back Grounder</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cattle</controllingFieldValue>
+                <valueName>Commercial Cow</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cattle</controllingFieldValue>
+                <valueName>Fed Cattle</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cattle</controllingFieldValue>
+                <valueName>PB Cow Bull</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cattle</controllingFieldValue>
+                <valueName>Stocker</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Companion</controllingFieldValue>
+                <valueName>Aqua</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Companion</controllingFieldValue>
+                <valueName>Caged Bird</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Companion</controllingFieldValue>
+                <valueName>Deer-Elk</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Companion</controllingFieldValue>
+                <valueName>Exotics</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Companion</controllingFieldValue>
+                <valueName>Family Flock</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Companion</controllingFieldValue>
+                <controllingFieldValue>Show</controllingFieldValue>
+                <valueName>Goat</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Companion</controllingFieldValue>
+                <controllingFieldValue>Show</controllingFieldValue>
+                <valueName>Rabbit</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Companion</controllingFieldValue>
+                <controllingFieldValue>Show</controllingFieldValue>
+                <valueName>Sheep</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Dairy</controllingFieldValue>
+                <valueName>Calf Milk Replacer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Dairy</controllingFieldValue>
+                <valueName>Grower</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Dairy</controllingFieldValue>
+                <valueName>Heifer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Dairy</controllingFieldValue>
+                <valueName>Lactation</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Dairy</controllingFieldValue>
+                <valueName>Starter</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Show</controllingFieldValue>
+                <valueName>Cattle</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Show</controllingFieldValue>
+                <valueName>Hogs</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Show</controllingFieldValue>
+                <valueName>Poultry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Swine</controllingFieldValue>
+                <valueName>Grower Finish</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Swine</controllingFieldValue>
+                <valueName>Nursery</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Swine</controllingFieldValue>
+                <valueName>Sow/Boar Replacement</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pet</controllingFieldValue>
+                <valueName>Boarding Kennel</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pet</controllingFieldValue>
+                <valueName>Sporting/Show Dogs</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Lifestage_Category_Type__c</fullName>
+        <description>Used for the Partner Community.</description>
+        <externalId>false</externalId>
+        <formula>If( RecordType.Name =&quot;General Opportunity&quot;,text( Life_Stage__c ),
+If( RecordType.Name =&quot;Agronomy Opportunity&quot;,text(Category_Type__c),
+&quot;N/A&quot;))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Lifestage/Category Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>My_Opportunity_Indicator__c</fullName>
+        <externalId>false</externalId>
+        <formula>If( $User.X18_Digit_User_ID__c =  Owner.X18_Digit_User_ID__c , &quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>My Opportunity Indicator</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>NextStep</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Open_Annual_Points__c</fullName>
+        <externalId>false</externalId>
+        <formula>case(StageName,&quot;Closed Won&quot;,0,&quot;Closed Lost&quot;,0,Annual_Points__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Open Annual Points</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Open_Close_Date_Future_Points__c</fullName>
+        <externalId>false</externalId>
+        <formula>if( CloseDate   &gt;=  Today()&amp;&amp;  Open_Count__c =1, Open_Annual_Points__c ,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Open || Close Date Future || Points</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Open_Close_Date_Past_Points__c</fullName>
+        <externalId>false</externalId>
+        <formula>if( CloseDate &lt; Today()&amp;&amp; Open_Count__c =1, Open_Annual_Points__c, 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Open || Close Date Past || Points</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Open_Closed_Date_Past_Count__c</fullName>
+        <description>The close date is in the past for open opportunities</description>
+        <externalId>false</externalId>
+        <formula>if( CloseDate   &lt;  Today()&amp;&amp;  Open_Count__c =1,1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Open || Close Date Past || Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Open_Count__c</fullName>
+        <description>Count of Open opportunities.</description>
+        <externalId>false</externalId>
+        <formula>case(StageName,&quot;Closed Won&quot;,0,&quot;Closed Lost&quot;,0,1)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Open  Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Converted_From_Lead__c</fullName>
+        <description>Indicates whether this opportunity was converted from a lead.  This is updated via the lead mapping,</description>
+        <externalId>false</externalId>
+        <label>Opportunity Converted from a Lead</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Count__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(ISBlank( OwnerId ),0,1)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Opportunity Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Owner_Manager_is_Me__c</fullName>
+        <description>If the Opportunity Owner&apos;s Manager is me, then &quot;Yes&quot; or &quot;No&quot;.</description>
+        <externalId>false</externalId>
+        <formula>If( 
+$User.X18_Digit_User_ID__c = Owner.Manager.X18_Digit_User_ID__c ,&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Opportunity Owner Manager is Me</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Owner_is_Me__c</fullName>
+        <description>If the Opportunity owner is me, then &quot;Yes&quot;, &quot;No&quot;.</description>
+        <externalId>false</externalId>
+        <formula>if( $User.X18_Digit_User_ID__c =  Owner.X18_Digit_User_ID__c ,&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Opportunity Owner is Me</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Record_Type2__c</fullName>
+        <description>Partner users are not seeing the the Opportunity Record Type, so this formula field was created so they could do so and this field is being used in partner report filters.</description>
+        <externalId>false</externalId>
+        <formula>RecordType.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Opportunity Record Type2</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Status__c</fullName>
+        <description>Identified the stage of an opportunity.  If open, is the stage &quot;Open Past Due&quot; or &quot;Open&quot;.</description>
+        <externalId>false</externalId>
+        <formula>If(text(StageName) =&quot;Prospecting&quot; &amp;&amp; CloseDate &lt; Today(),&quot;Open || Close Date Past&quot;,
+If(text(StageName) =&quot;Prospecting&quot; &amp;&amp; CloseDate  &gt;= Today(),&quot;Open || Close Date Future&quot;,
+If(text(StageName) =&quot;Negotiating&quot; &amp;&amp; CloseDate &lt; Today(),&quot;Open || Close Date Past&quot;,
+If(text(StageName) =&quot;Negotiating&quot; &amp;&amp; CloseDate  &gt;= Today(),&quot;Open || Close Date Future&quot;,
+If(text(StageName) =&quot;Closed Lost&quot;,&quot;Closed Lost&quot;,
+If(text(StageName) =&quot;Closed Won&quot;, &quot;Closed Won&quot;,
+&quot;NA&quot;))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Opportunity Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_Reason_Lost__c</fullName>
+        <description>If user indicates that Reason Lost is Other, then this field should be filled out</description>
+        <externalId>false</externalId>
+        <label>Other Reason Lost</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OwnerId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Owner_Sales_Team_ID__c</fullName>
+        <description>Opportunity owner&apos;s Sales Team ID</description>
+        <externalId>false</externalId>
+        <formula>Owner.Sales_Team_ID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Owner Sales Team ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Owner_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner.Status_Current__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Owner Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PartnerAccountId</fullName>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Pricebook2Id</fullName>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Primary_Campaign_60_Days_Ago_Y_N__c</fullName>
+        <description>If the primary campaign end date was 60 days from today, then &quot;Yes&quot;, &quot;No&quot;</description>
+        <externalId>false</externalId>
+        <formula>If(Campaign.EndDate&lt; Today() - 60, &quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Primary Campaign 60 Days Ago (Y/N)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Primary_Campaign_Curr_Year_Ind__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(Year(Campaign.Date_of_Event__c ) = Year(Today()),&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Primary Campaign Curr Year Ind</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Primary_Campaign_End_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>Campaign.EndDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Primary Campaign End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Primary_Campaign_Ended_within_60_Days__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(Campaign.EndDate &gt;=  Today() - 60, &quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Primary Campaign Ended within 60 Days</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Primary_Campaign_FARM_VIP_Indicator__c</fullName>
+        <externalId>false</externalId>
+        <formula>If (Campaign.RecordType.Name = &quot;Farm VIP Event&quot;,&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Primary Campaign FARM VIP Indicator</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Primary_Campaign_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Campaign.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Primary Campaign Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Primary_Campaign_Prev_Year_Ind__c</fullName>
+        <externalId>false</externalId>
+        <formula>If (Year(Campaign.Date_of_Event__c )= Year(Today())-1,&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Primary Campaign Prev Year Ind</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Primary_Customer_Event_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>Campaign.X18_Digit_Customer_Event_ID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Primary Customer Event ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Probability</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Reason_Lost__c</fullName>
+        <description>Field for user to indicate why the opportunity was lost. This field must be filled out if the Opportunity is marked as &quot;Closed Lost&quot;</description>
+        <externalId>false</externalId>
+        <label>Reason Lost</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>StageName</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Price</fullName>
+                    <default>false</default>
+                    <label>Price</label>
+                </value>
+                <value>
+                    <fullName>Availability</fullName>
+                    <default>false</default>
+                    <label>Availability</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Closed Lost</controllingFieldValue>
+                <valueName>Price</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Closed Lost</controllingFieldValue>
+                <valueName>Availability</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Closed Lost</controllingFieldValue>
+                <valueName>Other</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Sales_Division_Indicator__c</fullName>
+        <externalId>false</externalId>
+        <formula>If( text( Owner.Sales_Division__c )= text($User.Sales_Division__c) ,&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Division Indicator</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Division__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(Owner.Sales_Division__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Division</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Specialist_and_or_LPS_Team__c</fullName>
+        <externalId>false</externalId>
+        <formula>If (
+And(
+text(Owner.Function__c  )= &quot;LPS&quot;, 
+Owner.Manager_s_Function__c = &quot;Sales Specialist&quot;),
+Owner.Manager.Full_Name__c , Owner.Full_Name__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Specialist and LPS Team</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Self_Generated_Lead__c</fullName>
+        <description>If this opportunity is the result of a converted lead and the lead reviewer is the same person who created the opportunity, then &quot;yes&quot; this lead was &quot;self-generated&quot; by the user vs. being qualified by Inside Sales for the user.</description>
+        <externalId>false</externalId>
+        <formula>If(
+and(
+Lead_Reviewed_By__c =  Lead_Created_By__c , 
+text(Opportunity_Converted_From_Lead__c) = &quot;Yes&quot;),
+&quot;Yes&quot;, &quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Self Generated Lead</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Species__c</fullName>
+        <externalId>false</externalId>
+        <label>Animal Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Cattle</fullName>
+                    <default>false</default>
+                    <label>Cattle</label>
+                </value>
+                <value>
+                    <fullName>Companion</fullName>
+                    <default>false</default>
+                    <label>Companion</label>
+                </value>
+                <value>
+                    <fullName>Dairy</fullName>
+                    <default>false</default>
+                    <label>Dairy</label>
+                </value>
+                <value>
+                    <fullName>Deer</fullName>
+                    <default>false</default>
+                    <label>Deer</label>
+                </value>
+                <value>
+                    <fullName>Horse</fullName>
+                    <default>false</default>
+                    <label>Horse</label>
+                </value>
+                <value>
+                    <fullName>Non-Animal Opportunity</fullName>
+                    <default>false</default>
+                    <label>Non-Animal Opportunity</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Pet</fullName>
+                    <default>false</default>
+                    <label>Pet</label>
+                </value>
+                <value>
+                    <fullName>Poultry</fullName>
+                    <default>false</default>
+                    <label>Poultry</label>
+                </value>
+                <value>
+                    <fullName>Show</fullName>
+                    <default>false</default>
+                    <label>Show</label>
+                </value>
+                <value>
+                    <fullName>Swine</fullName>
+                    <default>false</default>
+                    <label>Swine</label>
+                </value>
+                <value>
+                    <fullName>Bee Colonies</fullName>
+                    <default>false</default>
+                    <label>Bee Colonies</label>
+                </value>
+                <value>
+                    <fullName>Equine</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Equine</label>
+                </value>
+                <value>
+                    <fullName>Exotic</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Exotic</label>
+                </value>
+                <value>
+                    <fullName>Wildlife</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Wildlife</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>StageName</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Stage_Text__c</fullName>
+        <description>Converts the stage picklist value into a text value.</description>
+        <externalId>false</externalId>
+        <label>Stage (Text)</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Top_20_Prospect_Count__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(And( 
+text(Year( CloseDate )) = text(Year(today())), 
+Key_Opportunity__c = True), 
+1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Top 20 Prospect Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Top_20_Prospect_Opportunity__c</fullName>
+        <description>If the Key Opportunity checkbox is checked and the close date is in the current year, then &quot;Yes&quot; else &quot;No&quot;.</description>
+        <externalId>false</externalId>
+        <formula>if(And( 
+text(Year( CloseDate )) = text(Year(today())), 
+Key_Opportunity__c = True), 
+&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The Top 20 Prospect indicator is &quot;Yes&quot; when the Key Opportunity field is checked and the Close Date occurs during the current year.</inlineHelpText>
+        <label>Top 20 Prospect Opportunity</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TotalOpportunityQuantity</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Total_Head_Units__c</fullName>
+        <description>Used for the Partner Community</description>
+        <externalId>false</externalId>
+        <formula>If( RecordType.Name =&quot;General Opportunity&quot;,Total_Head__c,
+If( RecordType.Name =&quot;Agronomy Opportunity&quot;,Units__c,
+0))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Head/Units</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Head__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>What is the number of total head for this opportunity?</description>
+        <externalId>false</externalId>
+        <label>Total Head</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Type</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Units__c</fullName>
+        <description>Units field is used for Agronomy opportunities.</description>
+        <externalId>false</externalId>
+        <label>Units</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X18_Digit_Account_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>Account.X18_Digit_Account_ID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>18 Digit Account ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X18_Digit_Lead_ID__c</fullName>
+        <description>The 18 Digit Lead ID is mapped over from the Lead</description>
+        <externalId>false</externalId>
+        <label>18 Digit Lead ID</label>
+        <length>18</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X18_Digit_Opportunity_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>casesafeid(Id)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>18 Digit Opportunity ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <listViews>
+        <fullName>AllOpportunities</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Annual_Points__c</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>Key_Opportunity__c</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <columns>Account_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Opportunities</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Closed_Won</fullName>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.WON</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.CLOSED</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All Closed Won</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Open_Opportunities</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Annual_Points__c</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>Key_Opportunity__c</columns>
+        <columns>Primary_Campaign_Name__c</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CLOSED</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <label>All Open Opportunities</label>
+    </listViews>
+    <listViews>
+        <fullName>ClosingNextMonth</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Annual_Points__c</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>Key_Opportunity__c</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CLOSED</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.CLOSE_DATE</field>
+            <operation>equals</operation>
+            <value>NEXT_MONTH</value>
+        </filters>
+        <label>Closing Next Month</label>
+    </listViews>
+    <listViews>
+        <fullName>ClosingThisMonth</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Annual_Points__c</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>Key_Opportunity__c</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CLOSED</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.CLOSE_DATE</field>
+            <operation>equals</operation>
+            <value>THIS_MONTH</value>
+        </filters>
+        <label>Closing This Month</label>
+    </listViews>
+    <listViews>
+        <fullName>Key_Opportunities</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Top_20_Prospect_Opportunity__c</columns>
+        <columns>Annual_Points__c</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>Key_Opportunity__c</columns>
+        <columns>Primary_Campaign_Name__c</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <columns>OPPORTUNITY.LAST_ACTIVITY</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Key_Opportunity__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>Key Opportunities</label>
+    </listViews>
+    <listViews>
+        <fullName>MyOpportunities</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Annual_Points__c</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>Key_Opportunity__c</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <filterScope>Mine</filterScope>
+        <label>My Opportunities</label>
+    </listViews>
+    <listViews>
+        <fullName>My_Closed_Won</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Annual_Points__c</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>Key_Opportunity__c</columns>
+        <columns>Primary_Campaign_Name__c</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>OPPORTUNITY.WON</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.CLOSED</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Closed Won</label>
+    </listViews>
+    <listViews>
+        <fullName>My_Open_Farm_VIP_Opportunities</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Annual_Points__c</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>Primary_Campaign_Name__c</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <columns>Sales_Division__c</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CLOSED</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>Primary_Campaign_Name__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <filters>
+            <field>Primary_Campaign_FARM_VIP_Indicator__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </filters>
+        <label>My Open Farm VIP Opportunities</label>
+        <sharedTo>
+            <group>Dealer_Business_Specialist</group>
+            <group>Inside_Sales_Users</group>
+            <group>LPS_Users</group>
+            <group>Leads_Reviewer</group>
+            <group>MRE_Animal_Milk_Users</group>
+            <group>Sales_Specialists_Tech_Sales_Spec</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>My_Open_Opportunities</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Annual_Points__c</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>Key_Opportunity__c</columns>
+        <columns>Primary_Campaign_Name__c</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CLOSED</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <label>My Open Opportunities</label>
+    </listViews>
+    <listViews>
+        <fullName>My_Team_s_Open_Farm_VIP_Oppty_ASM</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Annual_Points__c</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>Primary_Campaign_Name__c</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <columns>Sales_Division__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CLOSED</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>Primary_Campaign_Name__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <filters>
+            <field>Sales_Division_Indicator__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </filters>
+        <filters>
+            <field>Primary_Campaign_FARM_VIP_Indicator__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </filters>
+        <label>My Team&apos;s Open Farm VIP Oppty-ASM</label>
+        <sharedTo>
+            <group>Area_Sales_Managers</group>
+            <group>Assoc_Area_Sales_Manager</group>
+            <group>Dealer_Business_Manager</group>
+            <group>Inside_Sales_Manager</group>
+            <group>MRE_Animal_Milk_Manager</group>
+            <role>CBD_National_Poultry_Manager</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>My_Team_s_Open_Farm_VIP_Oppty_SS_LPS</fullName>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND (5 or 6)</booleanFilter>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Annual_Points__c</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>Primary_Campaign_Name__c</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <columns>Sales_Division__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CLOSED</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>Primary_Campaign_Name__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <filters>
+            <field>Sales_Division_Indicator__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </filters>
+        <filters>
+            <field>Primary_Campaign_FARM_VIP_Indicator__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </filters>
+        <filters>
+            <field>Opportunity_Owner_is_Me__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </filters>
+        <filters>
+            <field>Opportunity_Owner_Manager_is_Me__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </filters>
+        <label>My Team&apos;s Open Farm VIP Oppty-SS &amp; LPS</label>
+        <sharedTo>
+            <group>LPS_Supervisor</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>My_Team_s_Top_20_Prospect_Oppty_ASM</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Top_20_Prospect_Opportunity__c</columns>
+        <columns>Annual_Points__c</columns>
+        <columns>Annual_Points_Override__c</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>Key_Opportunity__c</columns>
+        <columns>Primary_Campaign_Name__c</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <columns>OPPORTUNITY.LAST_ACTIVITY</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Top_20_Prospect_Opportunity__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </filters>
+        <filters>
+            <field>Sales_Division_Indicator__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </filters>
+        <label>My Team&apos;s Top 20 Prospect Oppty-ASM</label>
+        <sharedTo>
+            <group>Area_Sales_Managers</group>
+            <group>Assoc_Area_Sales_Manager</group>
+            <group>Inside_Sales_Manager</group>
+            <group>Sales_Admins</group>
+            <role>CBD_National_Poultry_Manager</role>
+            <role>Training_Role</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>My_Team_s_Top_20_Prospect_Oppty_SS</fullName>
+        <booleanFilter>1 AND 2 AND (3 or 4)</booleanFilter>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Top_20_Prospect_Opportunity__c</columns>
+        <columns>Annual_Points__c</columns>
+        <columns>Annual_Points_Override__c</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>Key_Opportunity__c</columns>
+        <columns>Primary_Campaign_Name__c</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <columns>OPPORTUNITY.LAST_ACTIVITY</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Top_20_Prospect_Opportunity__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </filters>
+        <filters>
+            <field>Sales_Division_Indicator__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </filters>
+        <filters>
+            <field>Opportunity_Owner_is_Me__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </filters>
+        <filters>
+            <field>Opportunity_Owner_Manager_is_Me__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </filters>
+        <label>My Team&apos;s Top 20 Prospect Oppty-SS &amp; LPS</label>
+        <sharedTo>
+            <group>LPS_Supervisor</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>My_Top_20_Prospect_Opportunities</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Top_20_Prospect_Opportunity__c</columns>
+        <columns>Annual_Points__c</columns>
+        <columns>Annual_Points_Override__c</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>Key_Opportunity__c</columns>
+        <columns>Primary_Campaign_Name__c</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <columns>OPPORTUNITY.LAST_ACTIVITY</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>Top_20_Prospect_Opportunity__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </filters>
+        <label>My Top 20 Prospect Opportunities</label>
+        <sharedTo>
+            <role>Sales_VP</role>
+            <role>Training_Role</role>
+            <roleAndSubordinates>Northeast_Region</roleAndSubordinates>
+            <roleAndSubordinates>Southern_Region</roleAndSubordinates>
+            <roleAndSubordinates>Upper_Midwest_UMW_Region</roleAndSubordinates>
+            <roleAndSubordinatesInternal>Commercial_Business_Development_CBD</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>NewThisWeek</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Annual_Points__c</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>Key_Opportunity__c</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>THIS_WEEK</value>
+        </filters>
+        <label>New This Week</label>
+    </listViews>
+    <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Agronomy_Opportunity</fullName>
+        <active>true</active>
+        <businessProcess>General Sales Process</businessProcess>
+        <description>Agronomy Opportunity</description>
+        <label>Agronomy Opportunity</label>
+        <picklistValues>
+            <picklist>Activity_Indicator__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Category_Type__c</picklist>
+            <values>
+                <fullName>CPP %28Weed %26 Insect Control%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Corn BU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Crop Insurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Data Storage %26 Analysis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>External Promoted Finance Dollars</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fall Fertilizer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fertilizer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>First Cutting Application</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Foliar</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fungicide</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GPS Soil Sampling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Financing Program Dollars</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Liquid Fuel Gallons</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pre-dormancy Application</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Precision Equipment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Precision Seed Plans</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Propane Gallons</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Second or Later Cutting Application</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seed Treatment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Soybean BU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Spring Fertilizer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wheat BU</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Category__c</picklist>
+            <values>
+                <fullName>Bean</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Corn</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Energy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Forage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wheat</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Dealer_Involved__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ForecastCategoryName</picklist>
+            <values>
+                <fullName>Best Case</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Commit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Omitted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pipeline</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Initiative__c</picklist>
+            <values>
+                <fullName>Equine Vet Referral</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LeadSource</picklist>
+            <values>
+                <fullName>Current contract</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dealer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>External Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Farm Gate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Producer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Internal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Trade Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Word of mouth</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Life_Stage__c</picklist>
+            <values>
+                <fullName>Aqua</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Back Grounder</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Boarding Kennel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Breeder Operation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Breeding Stallion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Broilers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Brood Mares</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Caged Bird</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Calf Milk Replacer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Commercial Cow</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deer-Elk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Duck%2FGoose</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Exotics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family Flock</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fed Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Foals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Free Range Property</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Game Birds</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Goat</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grower</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grower Finish</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Heifer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hogs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hunting Preserve</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lactation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Layers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nursery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PB Cow Bull</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Poultry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rabbit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sheep</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show Performance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sow%2FBoar Replacement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sporting%2FShow Dogs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Starter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Stocker</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Turkey</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weaning</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Opportunity_Converted_From_Lead__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Reason_Lost__c</picklist>
+            <values>
+                <fullName>Availability</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Price</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Species__c</picklist>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Companion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non-Animal Opportunity</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Poultry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Add On</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Business</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>General_Opportunity</fullName>
+        <active>true</active>
+        <businessProcess>General Sales Process</businessProcess>
+        <description>General Opportunity</description>
+        <label>General Opportunity</label>
+        <picklistValues>
+            <picklist>Activity_Indicator__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Dealer_Involved__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ForecastCategoryName</picklist>
+            <values>
+                <fullName>Best Case</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Commit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Omitted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pipeline</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Initiative__c</picklist>
+            <values>
+                <fullName>Equine Vet Referral</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LeadSource</picklist>
+            <values>
+                <fullName>Current contract</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dealer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>External Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Farm Gate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Producer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Internal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar - Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Trade Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Word of mouth</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Life_Stage__c</picklist>
+            <values>
+                <fullName>Aqua</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Back Grounder</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Boarding Kennel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Breeder Operation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Breeding Stallion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Broilers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Brood Mares</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Caged Bird</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Calf Milk Replacer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Commercial Cow</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deer-Elk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Duck%2FGoose</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Exotics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family Flock</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fed Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Foals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Free Range Property</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Game Birds</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Goat</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grower</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grower Finish</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Heifer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hogs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hunting Preserve</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lactation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Layers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nursery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PB Cow Bull</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Poultry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rabbit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sheep</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show Performance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sow%2FBoar Replacement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sporting%2FShow Dogs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Starter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Stocker</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Turkey</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weaning</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Opportunity_Converted_From_Lead__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Reason_Lost__c</picklist>
+            <values>
+                <fullName>Availability</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Price</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Species__c</picklist>
+            <values>
+                <fullName>Bee Colonies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Companion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non-Animal Opportunity</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Poultry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Add On</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Business</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>OPPORTUNITY.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ACCOUNT.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Annual_Points__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>OPPORTUNITY.AMOUNT</customTabListAdditionalFields>
+        <customTabListAdditionalFields>OPPORTUNITY.STAGE_NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>OPPORTUNITY.CLOSE_DATE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Key_Opportunity__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CORE.USERS.FULL_NAME</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>OPPORTUNITY.NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ACCOUNT.NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Annual_Points__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>OPPORTUNITY.AMOUNT</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>OPPORTUNITY.STAGE_NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>OPPORTUNITY.CLOSE_DATE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Key_Opportunity__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CORE.USERS.FULL_NAME</lookupDialogsAdditionalFields>
+        <lookupFilterFields>OPPORTUNITY.NAME</lookupFilterFields>
+        <lookupFilterFields>ACCOUNT.NAME</lookupFilterFields>
+        <lookupFilterFields>Annual_Points__c</lookupFilterFields>
+        <lookupFilterFields>OPPORTUNITY.STAGE_NAME</lookupFilterFields>
+        <lookupFilterFields>OPPORTUNITY.CLOSE_DATE</lookupFilterFields>
+        <lookupFilterFields>CORE.USERS.FULL_NAME</lookupFilterFields>
+        <lookupPhoneDialogsAdditionalFields>OPPORTUNITY.NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ACCOUNT.NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Annual_Points__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>OPPORTUNITY.AMOUNT</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>OPPORTUNITY.STAGE_NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>OPPORTUNITY.CLOSE_DATE</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Key_Opportunity__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CORE.USERS.FULL_NAME</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>OPPORTUNITY.NAME</searchFilterFields>
+        <searchFilterFields>ACCOUNT.NAME</searchFilterFields>
+        <searchFilterFields>Annual_Points__c</searchFilterFields>
+        <searchFilterFields>OPPORTUNITY.AMOUNT</searchFilterFields>
+        <searchFilterFields>OPPORTUNITY.STAGE_NAME</searchFilterFields>
+        <searchFilterFields>OPPORTUNITY.CLOSE_DATE</searchFilterFields>
+        <searchFilterFields>Key_Opportunity__c</searchFilterFields>
+        <searchFilterFields>CORE.USERS.FULL_NAME</searchFilterFields>
+        <searchResultsAdditionalFields>OPPORTUNITY.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ACCOUNT.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Annual_Points__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>OPPORTUNITY.AMOUNT</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>OPPORTUNITY.STAGE_NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>OPPORTUNITY.CLOSE_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Key_Opportunity__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.FULL_NAME</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <validationRules>
+        <fullName>Close_Date_Not_In_Future_Closed_Won</fullName>
+        <active>false</active>
+        <description>Close date cannot be in the future when the stage is &quot;Closed Won&quot;</description>
+        <errorConditionFormula>AND ( 
+OR ( 
+ISPICKVAL(StageName, &quot;Closed Lost&quot;), 
+ISPICKVAL(StageName, &quot;Closed Won&quot;)), 
+CloseDate &gt;today() 
+)</errorConditionFormula>
+        <errorDisplayField>CloseDate</errorDisplayField>
+        <errorMessage>Close Date cannot be in the future for the Stage of Closed Won or Closed Lost.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Closed_Lost_Reason_Required</fullName>
+        <active>true</active>
+        <description>A reason for an opportunity being Closed Lost must be indicated</description>
+        <errorConditionFormula>AND(ISPICKVAL(StageName, &quot;Closed Lost&quot;),ISNULL( TEXT(Reason_Lost__c )))</errorConditionFormula>
+        <errorDisplayField>Reason_Lost__c</errorDisplayField>
+        <errorMessage>Please include a reason why the Opportunity was Closed Lost</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Indicate_Other_Reason_Lost</fullName>
+        <active>true</active>
+        <description>Have user indicate the &quot;Other&quot; Reason Lost</description>
+        <errorConditionFormula>And(
+ISPICKVAL( Reason_Lost__c , &quot;Other&quot;),
+isblank(Other_Reason_Lost__c))</errorConditionFormula>
+        <errorDisplayField>Other_Reason_Lost__c</errorDisplayField>
+        <errorMessage>Please indicate the &quot;Other&quot; reason lost</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Life_Stage_Required_for_Closed_Won_Lost</fullName>
+        <active>true</active>
+        <description>If the stage is Closed Won for a &quot;General&quot; opportunity, a Lifestage is required unless it is a non animal opportunity.</description>
+        <errorConditionFormula>CONTAINS(Account.RecordType.DeveloperName, &quot;Producer&quot;) 
+&amp;&amp; IsBlank(text(Life_Stage__c )) 
+&amp;&amp; CONTAINS(RecordType.DeveloperName ,&quot;General&quot;) 
+&amp;&amp; Text(Species__c) &lt;&gt; &quot;Non-Animal Opportunity&quot; 
+&amp;&amp; Text(Species__c) &lt;&gt; &quot;Bee Colony&quot; 
+&amp;&amp; Text(StageName) = &quot;Closed Won&quot;</errorConditionFormula>
+        <errorDisplayField>Life_Stage__c</errorDisplayField>
+        <errorMessage>Specify Lifestage</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Total_Head_Required_for_Producer_Opptys</fullName>
+        <active>true</active>
+        <description>Requires Total Head to be entered before saving the Oppty record.</description>
+        <errorConditionFormula>CONTAINS(Account.RecordType.DeveloperName, &quot;Producer&quot;) 
+&amp;&amp; (ISNULL(Total_Head__c) || Total_Head__c = 0)
+&amp;&amp; CONTAINS(RecordType.DeveloperName ,&quot;General&quot;)
+&amp;&amp; Text(Species__c) &lt;&gt; &quot;Non-Animal Opportunity&quot;
+&amp;&amp; (Text(StageName) = &quot;Closed Won&quot; || Text(StageName) = &quot;Closed Lost&quot;)</errorConditionFormula>
+        <errorDisplayField>Total_Head__c</errorDisplayField>
+        <errorMessage>Total Head must be greater than zero for Producer Opportunities.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>APXTConga4__Conga_Composer_OAuth</fullName>
+        <availability>online</availability>
+        <description>*** DO NOT USE THIS BUTTON ON A PAGE LAYOUT *** 
+
+OAuth buttons require additional setup. Please see the Composer Installation Guide for more details.
+
+COPY THE URL FROM THIS BUTTON and paste it into your own custom button or link. Then add optional parameters to finely tune the button&apos;s behavior. See the Composer Configuration Guide for details.</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>660</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Conga Composer (OAuth)</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/apex/APXTConga4__Conga_Composer
+?id={!Opportunity.Id}</url>
+        <width>900</width>
+    </webLinks>
+    <webLinks>
+        <fullName>APXTConga4__Conga_Mail_Merge</fullName>
+        <availability>online</availability>
+        <description>*** DO NOT USE THIS BUTTON ON A PAGE LAYOUT *** 
+
+COPY THE URL FROM THIS BUTTON and paste it into your own custom button or link. Then add optional parameters to finely tune the button&apos;s behavior. See the Conga Configuration Guide for details.</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>false</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>660</height>
+        <isResizable>false</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Conga Composer</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>https://composer.congamerge.com
+?sessionId={!API.Session_ID}
+&amp;serverUrl={!API.Partner_Server_URL_290}
+&amp;id={!Opportunity.Id}</url>
+        <width>900</width>
+    </webLinks>
+    <webLinks>
+        <fullName>Nominate_for_VIP</fullName>
+        <availability>online</availability>
+        <description>Click to begin Farm VIP Registration process.</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Nominate for Farm VIP</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>window.location = &apos;apex/VIP_Events_Router?opportunityid={!Opportunity.Id}&apos;;</url>
+    </webLinks>
+</CustomObject>

@@ -1,0 +1,659 @@
+<apex:page showHeader="true" sidebar="false" controller="CRMC_PP.AGComponentController" title="ActionGrid Setup" docType="html-4.01-strict">
+  <head> 
+    <apex:stylesheet value="{!URLFOR($Resource.CRMC_PP__kendoui, '/styles/kendo.common.min.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.CRMC_PP__kendoui, '/styles/kendo.silver.min.css')}"/>
+    <!-- <apex:includeScript value="https://code.jquery.com/jquery-1.11.0.min.js"/> -->
+    <apex:includeScript value="{!URLFOR($Resource.CRMC_PP__kendoui, '/js/jquery.min.js')}"/>
+    <apex:includeScript value="../../soap/ajax/36.0/connection.js"/>
+    <!-- <apex:includeScript value="{!$Resource.kendodebug}" />  -->
+    <apex:includeScript value="{!URLFOR($Resource.CRMC_PP__kendoui, '/js/kendo.web.min.js')}"/>
+    <apex:includeScript value="{!$Resource.CRMC_PP__Admin}" />
+    <style type="text/css">
+
+        .bigButton{
+            font-size:x-large; 
+            width:100%; 
+            height:150px;
+            border-radius: 20px;
+            overflow:hidden;
+            background-position: right !important;/*salesforce weirdness*/
+        } 
+        .smallButton{
+            font-size:x-large; 
+            width:100%; 
+            height:50px;
+            border-radius: 20px;
+            overflow:hidden;
+            background-position: right !important;/*salesforce weirdness*/
+        } 
+        .bigParent {
+            width:30%; 
+            margin: 0 10% 0 10%; 
+            float:left;
+        }
+        .smallParent {
+            width:19%; 
+            margin: 0 3% 0 3%; 
+            float:left;
+        }
+        .screenShotParent {
+          height:400px; 
+          /*width:50%; */
+/*          margin-left:5%; 
+*/          float:left;
+        }   
+
+        .progBar {
+            margin-left:20%;
+            border: solid 1px #bebec3;
+            width: 60%;
+            min-width:730px;
+            /*padding-bottom: 18px;*/
+            border-radius: 5px;
+            background-color: #f6f6f7;
+        }
+        .tooltip {
+          font-size: x-large;
+          padding:5px;
+        }
+        .header {
+          text-align:center; 
+          width:100%; 
+          font-size: xx-large;
+        }
+/*body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+}
+h1 {
+    font-size: 12pt;
+}*/
+div.chevrons {
+    text-align: center;
+}
+div.chevrons {
+    font-size: xx-large;
+    margin-bottom: 1em;
+    padding: 0;
+    margin: 0;
+    /*list-style: none;
+    overflow: hidden;
+    display: inline;*/
+}
+div.chevrons div:last-child {
+    border-color: red;
+}
+div.chevrons div {
+    padding-top:5px;
+    height: 30px;
+    width: 20%;
+    font-size: 15px;
+    display: inline-block;
+    font-weight: bold;
+    /*margin-left: -10px;*/
+}
+div.chevrons div:first-child {
+    margin-left: 0px;
+}
+/* adjust the first item to not have a chevron on the left
+.chevrons li:first-child:before {
+  border:none
+}*/
+
+/*
+adjust the last arrow to have no arrow on the right hand side
+.chevrons li:last-child:after {
+  border:none
+}
+*/
+ div.chevrons div:before {
+    content:"";
+    border-top: 25px solid #ffffff;
+    border-bottom: 25px solid #ffffff;
+    border-left: 5px solid transparent;
+    height: 0;
+    position: absolute;
+}
+div.chevrons div:after {
+    content:'';
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    border-right: 5px solid transparent;
+    border-left: 10px solid #ffffff;
+    height: 0;
+    position: absolute;
+}
+div.chevrons div span {
+    padding-top: 15px;
+    padding-bottom: 5px;
+    background: #ffffff;
+    text-align: center;
+    margin-left: 5px;
+    height: 30px;
+    width: 75%;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
+    overflow: hidden;
+}
+div.chevrons div.success a {
+    color: #ffffff;
+}
+div.chevrons div.success span {
+    background: #309dd4;
+}
+div.chevrons div.success:after {
+    border-left: 10px solid  #309dd4;
+}
+div.chevrons div.success:before {
+    border-top: 25px solid  #309dd4;
+    border-bottom: 25px solid  #309dd4;
+}
+div.chevrons div.failure a {
+    color: #ffffff;
+}
+div.chevrons div.failure span {
+    background: #b84c4c;
+}
+div.chevrons div.failure:after {
+    border-left: 10px solid #b84c4c;
+}
+div.chevrons div.failure:before {
+    border-top: 25px solid #b84c4c;
+    border-bottom: 25px solid #b84c4c;
+}
+div.chevrons div.inprogress a {
+    color: #ffffff;
+}
+div.chevrons div.inprogress span {
+    background: #e8ca2b;
+}
+div.chevrons div.inprogress:after {
+    border-left: 10px solid #e8ca2b;
+}
+div.chevrons div.inprogress:before {
+    border-top: 25px solid #e8ca2b;
+    border-bottom: 25px solid #e8ca2b;
+}
+div.chevrons a {
+    color: #ffffff;
+}
+span.innerSpan {
+  padding:0px !important;
+  margin-top:-5px;
+  overflow: visible !important;
+}
+/* thanks to Trever Shick http://jsfiddle.net/trevershick/Ez6Q3/ */
+    </style>
+    <script>
+     $(document).ready(function() {
+        sforce.connection.sessionId = "{!JSENCODE($Api.Session_ID)}";
+        sforce.connection.client ="CRMCulture/ActionGrid/";
+        crmc.require(["admin", "GridAdmin", "ObjectList", 'sfdc'], function(admin, AdminService, ObjectList, sfdc) {
+          var breadcrumbs = ['startMenu'];
+          var progText = ['Get Started', 'Select', 'Install', 'Complete'];
+          var progValue = 0;
+          var updateProg = function(value){
+            for(var i = 0; i < 4; i++){
+              if (i <= value){
+                $('#prog'+i).addClass('success').children().html('<span class="innerSpan">' +progText[i] + '</span>');
+              }
+              else {
+                $('#prog'+i).removeClass('success').children().html('<span class="innerSpan">&nbsp;</span>');
+              }
+            }
+            progValue = value;
+          }
+            var navFunc = function(to, prog){
+                return function(){
+                  if (to == 'quickGridMenu') {
+                    progText[1] = 'Select Template';
+                  } else if (to == 'importFromSFMenu') {
+                    progText[1] = 'Select Method';
+                  }
+                    // pb.value(prog?prog:(pb.value()+1));
+                    updateProg(prog?prog:(progValue+1));
+                    var from = breadcrumbs[breadcrumbs.length-1];
+                    breadcrumbs.push(to);
+                    // $('#'+from).fadeOut(500).after( function() {
+                    //   $('#'+to).fadeIn(750);
+                    // });
+                    $('#'+from).hide(250);
+                    $('#'+to).show(500, 'linear');                   
+                    $('#btnBack').data('kendoButton').enable(true);
+                    $('#btnBack').fadeTo(200, 1.0);
+                    window.onresize();
+                };
+            };
+            var backFunc = function(prog){
+              return function(){
+                    if (breadcrumbs.length > 1){
+                        // pb.value(prog?prog:(pb.value()-1));
+                        updateProg(prog?prog:(progValue-1));
+                        var from = breadcrumbs.pop();
+                        var to = breadcrumbs[breadcrumbs.length-1];
+                        $('#'+from).hide(250);
+                        $('#'+to).show(500, 'linear');
+                        if (breadcrumbs.length == 1) {
+                            $('#btnBack').data('kendoButton').enable(false);
+                            
+                            $('#btnBack').fadeTo(200, 0);
+                        }  
+                    }
+                }; 
+            }
+            admin.init("{!$Api.Session_ID}");
+
+            $("#btnQuickGrid").kendoButton({'click': navFunc('quickGridMenu')}).kendoTooltip({
+              content: function(e) {
+                return $('<div class="tooltip">Create ActionGrids by picking from our built-in templates.</div>');
+              },
+              showAfter: 100,
+              width:'30%'
+            });
+            $("#btnImportFromSF").kendoButton().on('click', navFunc('importFromSFMenu')).kendoTooltip({
+              content: function(e) {
+                return $('<div class="tooltip">Build your ActionGrids using existing Apps, List Views, Reports, or learning your data.</div>');
+              },
+              showAfter: 100,
+              width:'30%'
+            });     
+
+            $("#btnBack").kendoButton({enable:false}).on('click', backFunc());
+            
+            $("#btnInstallSales").kendoButton().on('click', navFunc('installSalesMenu')).kendoTooltip({
+              content: function(e) {
+                return $('<div class="tooltip">Set up an ActionGrid view to manage the lifecycle of Leads, Opportunities, and Accounts, and quickly see any Tasks associated with each.</div>');
+              },
+              showAfter: 100,
+              width:'30%'
+            });     
+            $("#btnInstallCase").kendoButton().on('click', navFunc('installCaseMenu')).kendoTooltip({
+              content: function(e) {
+                return $('<div class="tooltip">Set up an ActionGrid view based on Cases which shows Account Details, Tasks, Chatter and Detail Grid for easy editing and updating.</div>');
+              },
+              showAfter: 100,
+              width:'30%'
+            });     
+            $("#btnInstallAccount").kendoButton().on('click', navFunc('installAccountMenu')).kendoTooltip({
+              content: function(e) {
+                return $('<div class="tooltip">Set up an ActionGrid view based on Accounts which easily connects to Opportunities, Contacts, Cases and more.</div>');
+              },
+              showAfter: 100,
+              width:'30%'
+            });     
+            $("#btnInstallAdmin").kendoButton().on('click', navFunc('installAdminMenu')).kendoTooltip({
+              content: function(e) {
+                return $('<div class="tooltip">Set up an ActionGrid view to quickly manage your Users, Visualforce Pages, and ActionGrid Views.</div>');
+              },
+              showAfter: 100,
+              width:'30%'
+            });     
+
+            var installTemplate = function(urlForZip, importCompleteFunction) {
+            if (!urlForZip || urlForZip.length < 1) return;
+              AdminService.showLoader(function() {
+                var finishFunction = function(){
+                  var oReq = new XMLHttpRequest();
+                  oReq.open("GET", urlForZip, true);
+                  oReq.responseType = "arraybuffer";
+
+                  oReq.onload = function(oEvent) {
+                    var arrayBuffer = oReq.response;
+                    var byteArray = new Uint8Array(arrayBuffer);
+                    var blob = new Blob([byteArray], {type: "application/zip"});
+                    AdminService.importAG(oReq.response, true, importCompleteFunction);
+                  };
+
+                  oReq.send();                  
+                };
+
+                if (typeof JSZip != 'undefined') {
+                  finishFunction();
+                  AdminService.hideLoader();
+                }
+                else {
+                  var head = document.getElementsByTagName('HEAD').item(0);
+                  var script = document.createElement("script");
+                  script.type = "text/javascript";
+                  head.appendChild(script);
+                  script.src = "https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js";
+                  script.onerror = function() {
+                    // Is the CDN unavailable or blocked?
+                    alert("Import Failed", "Import failed, contact support@crmculture.com");
+                  };
+                  script.onload = function() {
+                    finishFunction();
+                  }
+                }
+              });
+            };
+            var finishTemplateFunc = function(templateUrl, navButtonId, navMenuId){
+              return function(){
+                installTemplate(templateUrl, function(log, pageName, tabObject, errors, insertedTab) {
+                console.log(errors);
+                $('#'+navButtonId).kendoButton({'click':function(){
+                  sfdc.navigateToVFPage('c', pageName, {'sfdc.tabName': insertedTab[0].id.substr(0,15)}, false, '_BLANK');}
+                });
+                navFunc(navMenuId)();
+              });
+              }
+            };
+
+            $("#btnInstallSales2").kendoButton({'click': finishTemplateFunc('{!$Resource.Sales_Console_Template}', 'btnNavToSales', 'finishSalesMenu')});
+            $("#btnInstallCase2").kendoButton({'click': finishTemplateFunc('{!$Resource.Case_Console_Template}', 'btnNavToCase', 'finishCaseMenu')});
+            $("#btnInstallAccount2").kendoButton({'click': finishTemplateFunc('{!$Resource.Account_Console_Template}', 'btnNavToAccount', 'finishAccountMenu')});
+            $("#btnInstallAdmin2").kendoButton({'click': finishTemplateFunc('{!$Resource.Admin_Console_Grid}', 'btnNavToAdmin', 'finishAdminMenu')});
+            
+
+            $("#btnConvertApp").kendoButton({'click': navFunc('convertAppMenu')}).kendoTooltip({
+              content: function(e) {
+                return $('<div class="tooltip">Select a Salesforce App and ActionGrid will create a new app with ActionGrid views based on your current one.</div>');
+              },
+              showAfter: 100,
+              width:'30%'
+            });
+            $("#btnConvertListViews").kendoButton({'click': navFunc('convertListViewsMenu')}).kendoTooltip({
+              content: function(e) {
+                return $('<div class="tooltip">Select a Salesforce List View (or multiple List Views) that you would like to use to create new ActionGrid views.</div>');
+              },
+              showAfter: 100,
+              width:'30%'
+            });
+            var selectedReport;
+            $("#btnConvertReport").kendoButton({'click': function(){
+              navFunc('convertReportMenu')();
+              var ds = new kendo.data.DataSource({
+                serverFiltering: true,
+                transport: {
+                  read:function(e) {
+                    filterText = '';
+                    if (e.data.filter && e.data.filter.filters && e.data.filter.filters.length > 0) {
+                      filterText = e.data.filter.filters[0].value;
+                    }
+                    if (filterText.length > 2 || filterText.length == 0){
+                      clearTimeout($(this).data("timeout"));
+                      $(this).data("timeout", setTimeout(function() {
+                        var result = sfdc.query("select Id, Name, FolderName from Report where Name like '%{0}%' LIMIT 50", filterText);
+                        e.success(result.map(function(row){return {label:row.FolderName + '/' + row.Name, value:row.Id};}));
+                        //$('#' + id + '_grid').data('kendoGrid').dataSource.read();
+                      }, 500));
+                    }
+                    else {
+                      e.error();
+                    }
+                  }
+                }
+              });
+              var repList = new ObjectList({
+                  elementId: "#reportPicker",
+                  filterField: "label",
+                  listViewTemplate: "<div style='padding:0.5em;'>#:label#</div>",
+                  delegate: {
+                    onSelectedChanged: function(text, value) {
+                        selectedReport = value;
+                        var outputText = value.label + ' selected';
+                        // for(var i = 0; i < value.tab.length; i++) {
+                        //   outputText += '<li>'+value.tab[i]+'</li>';
+                        // }
+                        //outputText += '</ul>';
+                        $('#reportDesc').html(outputText);
+                    },
+                    dataSource: ds
+                  }});
+            }}).kendoTooltip({
+              content: function(e) {
+                return $('<div class="tooltip">Select a Salesforce Report or dashboard that you would like to use to create new ActionGrid views.</div>');
+              },
+              showAfter: 100,
+              width:'30%'
+            });
+            $("#btnLearnData").kendoButton({'click':navFunc('learnDataMenu')}).kendoTooltip({
+              content: function(e) {
+                return $('<div class="tooltip">ActionGrid will scan your objects and fields on your Salesforce instance and create ActionGrid views from the results.</div>');
+              },
+              showAfter: 100,
+              width:'19%'
+            });
+
+            $("#btnLearnDataFinal").kendoButton({'click': function(){
+              AdminService.createQuickGrid(true, function(response, pageName, pageIds, numErrors) {
+                $("#btnNavToLearned").kendoButton({'click':function(){
+                    sfdc.navigateToVFPage('c', response.fullName, {}, false, '_BLANK');}
+                });
+                navFunc('finishedLearnDataMenu')();
+              });
+            }});
+            
+            $("#btnImport").kendoButton().on('click', function() {
+              $("#fileImport").val("");
+              $("#fileImport").trigger("click");
+            }); 
+            $('#fileImport').off('change');
+            $('#fileImport').on('change', function(evt) {
+              return;
+            });
+
+            var selectedApp;
+            $("#btnConvertListViewsFinal").kendoButton({enable:false}).on('click', function(){
+              AdminService.createListViewGrid(true, function(listViews, pageName, tabObjects){
+                $("#btnNavToListView").kendoButton({'click':function(){
+                    sfdc.navigateToVFPage('c', pageName, {'sfdc.tabName': tabObjects[0].id.substr(0,15)}, false, '_BLANK');}
+                  });
+                $('#finishedListViewHeader').text('Successfully created ' + listViews.length + ' Action Grid Views!');
+                navFunc('finishedListViewMenu')();
+              });
+            });
+            $("#btnConvertReportFinal").kendoButton({'click': function(){
+              if (selectedReport) {
+                AdminService.createReportGrid(true, selectedReport.value, selectedReport.label, function(pageName, response, result) {
+                  $("#btnNavToReport").kendoButton({'click':function(){
+                    sfdc.navigateToVFPage('c', pageName, {}, false, '_BLANK');}
+                  });
+                  navFunc('finishedReportMenu')();
+                });
+              }
+            }});
+            $("#btnConvertAppFinal").kendoButton().on('click', function(){AdminService.createCustomAppGrid(selectedApp, function(appObject, ApplicationId) {
+
+              navFunc('finishedConvertAppMenu')();
+
+            });});
+            var custApps;
+
+            AdminService.getCustomApplications(function(apps){
+              custApps = apps.sort(function(a, b) {
+                return a.label.localeCompare(b.label) 
+              });
+              var appPicker = new ObjectList({
+                elementId: "#appPicker",
+                filterField: "label",
+                listViewTemplate: "<div style='padding:0.5em;'>#:label#</div>",
+                delegate: {
+                  onSelectedChanged: function(text, value) {
+                    selectedApp = value.fullName;
+                    var outputText = value.label +' has the following tabs: <ul>';
+                    for(var i = 0; i < value.tab.length; i++) {
+                      outputText += '<li>'+value.tab[i]+'</li>';
+                    }
+                    outputText += '</ul>';
+                    $('#appDesc').html(outputText);
+                  },
+                  dataSource: new kendo.data.DataSource({
+                    transport: {
+                      read: function(e) {
+                        e.success(custApps);
+                      }
+                    },
+                  })
+                }
+              });
+            });
+
+            var list = new ObjectList({
+                elementId: "#ObjectList",
+                includeGlobal: true,
+                delegate: {
+                  onSelectedChanged: function(text, value) {
+                    $("#btnConvertListViewsFinal").data('kendoButton').enable();
+                    AdminService.objectName = value.name;
+                    AdminService.objectLabel = value.label?value.label:value.name;
+                  },
+                },
+            });
+            window.onresize = function(event) {
+                var h = $(window).height() - 330;
+                var objList = $(".resizable > .k-block");
+                objList.css('max-height', (h) + 'px');
+                objList.height(h + 'px')
+            };
+            undoLastOperation = function(){
+              AdminService.undo();
+            }
+        });
+    });
+    </script>
+  </head>
+    
+    <div class="k-loading-mask" id="loadingMask" style="width: 100%; height: 100%; top: 0px; left: 0px; display:none; position:absolute; z-index: 100;"><span class="k-loading-text">Loading...</span><div class="k-loading-image" style="background-position-y:200px;"></div><div class="k-loading-color" ></div></div>
+      <input type="file" id="fileImport" style="display:none;" />
+      <div class="smallParent" style="width:10%; margin-right:0; margin-top:7px;"><button id="btnBack" type="button" class="smallButton" style="opacity:0">Back</button></div>
+      <div class="progBar">
+        <div class="chevrons">
+          <div id="prog0" class="success"><span><span class="innerSpan">Get Started</span></span></div>
+          <div id="prog1"><span><span class="innerSpan">&nbsp;</span></span></div>
+          <div id="prog2"><span><span class="innerSpan">&nbsp;</span></span></div>
+          <div id="prog3"><span><span class="innerSpan">&nbsp;</span></span></div>
+        </div>
+      </div>
+      <!-- <div id="progressBar" class="chevrons" style="width:75%; height:40px; margin:10px 5% 10px 5%;"></div> -->
+     
+      <div id="startMenu">
+          <div class="header">How do you want to set up ActionGrid?</div>
+          <br />
+          <div class="bigParent"><button id="btnQuickGrid" type="button" class="bigButton">Quick Grid Templates</button></div>
+          <div class="bigParent"><button id="btnImportFromSF" type="button" class="bigButton">Build from Existing Salesforce</button></div>
+      </div>
+      <div id="quickGridMenu" style="display:none;">
+          <div class="header">What type of team are you setting up ActionGrid for?</div>
+          <br />
+          <div class="smallParent"><button id="btnInstallSales" type="button" class="bigButton">Sales</button></div>
+          <div class="smallParent"><button id="btnInstallCase" type="button" class="bigButton">Case Management</button></div>
+          <div class="smallParent"><button id="btnInstallAccount" type="button" class="bigButton">Account Management</button></div>
+          <div class="smallParent"><button id="btnInstallAdmin" type="button" class="bigButton">Salesforce Admin</button></div>
+      </div>
+      <div id="installSalesMenu" style="display:none; margin:10px; min-width:1200px;">
+          <div class="header">Sales</div>
+        <div class='screenShotParent'><img title="Screenshot of the installed page" src="{!URLFOR($Resource.GridResources, '/styles/images/SalesTemplate.png')}" /></div><span style="height:200px; margin-left: 10px; font-size: large; float:left; width:33%;">Set up an ActionGrid view to manage the lifecycle of Leads, Opportunities, and Accounts, and quickly see any Tasks associated with each.
+        <div style="width:50%">
+        <button id="btnInstallSales2" class="smallButton" type="button">Install</button>
+        </div></span>
+      </div>
+      <div id="finishSalesMenu" style="display:none; margin:10px;">
+        <div class="header">Template Installed!</div>
+        <div class="smallParent" style="margin-left:41%;">
+          <button id="btnNavToSales" class="smallButton" type="button">Go To Tab</button>
+        </div>
+      </div>
+      <div id="installCaseMenu" style="display:none; margin:10px; min-width:1200px;">
+          <div class="header">Case Management</div>
+        <div class='screenShotParent'><img title="Screenshot of the installed page" src="{!URLFOR($Resource.GridResources, '/styles/images/CaseTemplate.png')}" /></div><span style="height:200px; margin-left: 10px; font-size: large; float:left; width:33%;">Set up an ActionGrid view based on Cases which shows Account Details, Tasks, Chatter and Detail Grid for easy editing and updating.
+        <div style="width:50%">
+        <button id="btnInstallCase2" class="smallButton" type="button">Install</button>
+        </div></span>
+      </div>
+      <div id="finishCaseMenu" style="display:none; margin:10px;">
+        <div class="header">Template Installed!</div>
+        <div class="smallParent" style="margin-left:41%;">
+          <button id="btnNavToCase" class="smallButton" type="button">Go To Tab</button>
+        </div>
+      </div>
+      <div id="installAccountMenu" style="display:none; margin:10px; min-width:1200px;">
+          <div class="header">Account Management</div>
+        <div class='screenShotParent'><img title="Screenshot of the installed page" src="{!URLFOR($Resource.GridResources, '/styles/images/AccountTemplate.png')}" /></div><span style="height:200px; margin-left: 10px; font-size: large; float:left; width:33%;">Set up an ActionGrid view based on Accounts which easily connects to Opportunities, Contacts, Cases and more.
+        <div style="width:50%">
+        <button id="btnInstallAccount2" class="smallButton" type="button">Install</button>
+        </div></span>
+      </div>
+      <div id="finishAccountMenu" style="display:none; margin:10px;">
+        <div class="header">Template Installed!</div>
+        <div class="smallParent" style="margin-left:41%;">
+          <button id="btnNavToAccount" class="smallButton" type="button">Go To Tab</button>
+        </div>
+      </div>
+      <div id="installAdminMenu" style="display:none; margin:10px; min-width:1200px;">
+          <div class="header">Admin</div>
+        <div class='screenShotParent'><img title="Screenshot of the installed page" src="{!URLFOR($Resource.GridResources, '/styles/images/AdminTemplate.png')}" /></div><span style="height:200px; margin-left: 10px; font-size: large; float:left; width:33%;">Set up an ActionGrid view to quickly manage your Users, Visualforce Pages, and ActionGrid Views.
+        <div style="width:50%">
+        <button id="btnInstallAdmin2" class="smallButton" type="button">Install</button>
+        </div></span>
+      </div>
+      <div id="finishAdminMenu" style="display:none; margin:10px;">
+        <div class="header">Template Installed!</div>
+        <div class="smallParent" style="margin-left:41%;">
+          <button id="btnNavToAdmin" class="smallButton" type="button">Go To Tab</button>
+        </div>
+      </div>
+      <div id="importFromSFMenu" style="display:none;">
+          <div class="header">How would you like to set up ActionGrid from your existing Salesforce setup?</div>
+          <br />
+          <div class="smallParent"><button id="btnConvertApp" type="button" class="bigButton">Use an existing Salesforce App</button></div>
+          <div class="smallParent"><button id="btnConvertListViews" type="button" class="bigButton" title='Coming soon!'>Use existing List Views</button></div>
+          <div class="smallParent"><button id="btnConvertReport" type="button" class="bigButton">Use existing Salesforce Report</button></div>
+          <div class="smallParent"><button id="btnLearnData" type="button" class="bigButton">Learn My Data</button></div>  <br /> <br />
+      </div>
+      <div id="convertListViewsMenu" style="display:none;">
+        <div style="text-align:center; width:100%; font-size: x-large">Select an Object</div>
+        <div id="ObjectList" class="resizable" style="float:left; width:20%; height:70%;"></div>
+        <div style="margin-left:22%;"><div id="objDesc"></div>
+        <div class="smallParent" style="width:20%;"><button id="btnConvertListViewsFinal" type="button" class="smallButton">Create List Views</button></div>
+        </div>
+      </div>
+      <div id="finishedListViewMenu" style="display:none;">
+        <div style="text-align:center; width:100%; font-size: x-large" id="finishedListViewHeader">Created List Views!</div>
+        <div class="smallParent" style="margin-left:41%;">
+          <button id="btnNavToListView" class="smallButton" type="button">Go To List Views</button>
+        </div>
+      </div>
+      <div id="convertAppMenu" style="display:none;">
+        <div style="text-align:center; width:100%; font-size: x-large">Select an App</div>
+        <div id="appPicker" class="resizable" style="float:left; width:20%; height:70%;"></div>
+        <div style="margin-left:22%;"><div id="appDesc"></div>
+
+        <div class="smallParent" style="width:20%;"><button id="btnConvertAppFinal" type="button" class="smallButton">Create New App</button></div>
+        </div>
+      </div>
+      <div id="finishedConvertAppMenu" style="display:none; margin:10px;">
+        <div class="header">App Created!</div>
+        <!-- <div class="smallParent" style="margin-left:41%;">
+          <button id="btnNavToAdmin" class="smallButton" type="button">Go To Tab</button>
+        </div> -->
+      </div>      
+      <div id="convertReportMenu" style="display:none;">
+        <div style="text-align:center; width:100%; font-size: x-large">Select a Report</div>
+        <div id="reportPicker" class="resizable" style="float:left; width:20%; height:70%;"></div>
+        <div style="margin-left:22%;"><div id="reportDesc"></div> <br />
+        <div class="smallParent" style="width:20%;"><button id="btnConvertReportFinal" type="button" class="smallButton">Create View</button></div>
+        </div>
+      </div>
+      <div id="finishedReportMenu" style="display:none; margin:10px;">
+        <div class="header">Report Created!</div>
+        <div class="smallParent" style="margin-left:41%;">
+          <button id="btnNavToReport" class="smallButton" type="button">Go To Report</button>
+        </div>
+      </div>
+      <div id="learnDataMenu" style="display:none;">
+        <div style="text-align:center; width:100%; font-size: x-large">Learn My Data</div>
+        <div style="text-align:center; width:100%; font-size: large"><div id="appDesc">This will scan all the objects in this org and create an ActionGrid MultiTab page with views based on which fields are used.</div>
+        <div class="smallParent" style="width:20%; margin-left: 40%; margin-top:10px;"><button id="btnLearnDataFinal" type="button" class="smallButton">Scan</button></div>
+        </div>
+      </div>
+      <div id="finishedLearnDataMenu" style="display:none; margin:10px;">
+        <div class="header">Data Learned!</div>
+        <div class="smallParent" style="margin-left:41%;">
+          <button id="btnNavToLearned" class="smallButton" type="button">Go To Page</button>
+        </div>
+      </div>
+      
+</apex:page>

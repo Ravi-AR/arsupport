@@ -1,0 +1,79 @@
+<apex:page standardController="Opportunity" extensions="Account_Error_CreateNewOppt" >
+<!-- extensions="Account_Error_CreateNewOppt" -->
+<!-- PAGE: Account_Error_createOpportunity -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" />
+    <script type="text/javascript">
+      var global = 'no';
+	    function hideCreateOpportunity(){
+	    	$('[id$=createOpportunity]').hide();
+	    	$('.toggleOpportunity').show();
+	    	return false;
+	    }
+      function showOpportunityCreate(){
+        $('.toggleOpportunity').hide();
+        $('.createOpportunity').show();
+        $('[id$=createOpportunity]').show();
+        return false;
+      }
+    // errorMsg -- class
+      $(document).ready(function(){
+        var temp = 0;
+        // $('.errorMsg').hide();
+        $('.createOpportunity .errorMsg').each(function(){
+          temp++;
+        });
+
+        if(temp > 0){
+          $('.createOpportunity').show();
+          $('.toggleOpportunity').hide();
+        }else{
+          global = 'yes';
+        }
+
+      });
+
+      var ret_url = window.location.href;
+      function redirectBack(){
+          //            window.location.href = '/' + ret_url;
+            window.location = window.location.href;  
+
+      }
+
+      function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+      };
+    </script>
+     <!-- onsubmit="return redirectBack();" -->
+    <apex:form >
+    <!-- id="createOpportunity" -->
+      <apex:pageblock >
+          <div class="toggleOpportunity" >
+            <apex:commandButton value="Create Opportunity" onclick="return showOpportunityCreate();"/>
+          </div>
+
+          <div class="createOpportunity" style="display:none;">
+            <apex:pageBlockSection title="Opportunity Detail" >
+               <apex:repeat value="{!$ObjectType.Opportunity.fieldsets.createOpportunityFieldSet}" var="fieldValue">
+                   <apex:Inputfield value="{!Opportunity[fieldValue]}" required="{!fieldValue.Required}"/>
+               </apex:repeat>
+               <!-- required="!fieldValue.DBRequired" sets the databases standard required fields. -->
+               <apex:inputHidden value="{!Opportunity.AccountId}" />
+            </apex:pageBlockSection>
+            <apex:commandButton value="Save" action="{!Tsave}" />
+          </div>
+<!-- hideCreateOpportunity() -->
+      </apex:pageblock>
+    </apex:form>
+    
+</apex:page>

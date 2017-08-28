@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email sent when the Reimbursement Request is initially created and submitted for approval</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Purina_Swine_App_Letterhead</letterhead>
+    <name>Submission Email - Initial</name>
+    <style>freeForm</style>
+    <subject>New Reimbursement Request Submitted for Approval for Account: {!AMASellingSupportExpense__c.DealerAccount__c}</subject>
+    <textOnly>A Reimbursement Request Record ({!AMASellingSupportExpense__c.Name}) has been submitted on {!AMASellingSupportExpense__c.Submitted_for_Approval_Date__c} by {!AMASellingSupportExpense__c.CreatedBy} for Dealer Account: {!AMASellingSupportExpense__c.DealerAccount__c}
+
+Selling Support Program Year: {!AMASellingSupportExpense__c.Selling_Support_Program_Year__c}
+
+Selling Support Year Available Balance: {!AMASellingSupportExpense__c.AMABalanceFF__c}
+
+Description: {!AMASellingSupportExpense__c.Description__c}
+
+Line Item Total:{!AMASellingSupportExpense__c.Line_Item_Total__c}
+
+Reimbursement Request Approvers:
+Sales Specialist: {!AMASellingSupportExpense__c.Sales_Representative__c}
+
+Area Sales Manager: {!AMASellingSupportExpense__c.Area_Sales_Manager__c}
+
+Record Detail Link: {!AMASellingSupportExpense__c.Link}</textOnly>
+    <type>html</type>
+</EmailTemplate>

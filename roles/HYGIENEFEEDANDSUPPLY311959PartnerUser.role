@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>HYGIENE FEED AND SUPPLY-311959 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>HYGIENE FEED AND SUPPLY-311959 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>HYGIENEFEEDANDSUPPLY311959PartnerManager</parentRole>
+</Role>

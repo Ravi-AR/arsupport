@@ -1,0 +1,366 @@
+<!-- 
+*********************************************************************************
+Author: Govinda Prasad P S
+Email: govinda.prasad@magnet360.com
+Created Date    : 9/27/2016
+Function    :  Visualforce page to display Selling Support Program Records.
+Version     : 1.0 
+*********************************************************************************
+--> 
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="LPDCR_SSProgramDetailController">
+    <apex:composition template="LPDCR_BaseTemplate">
+        
+        <apex:define name="PageTitle">Selling Support Program</apex:define>
+        <apex:define name="body">
+         <div class="title_wrapper">
+              <div class="container-fluid">         
+                  <h3 class="page_title">Selling Support Program</h3>               
+              </div>          
+          </div>        
+         <div class="container-fluid content_wrapper">
+            <div class="row top-gap"> 
+                 <!--Desktop view-->
+                <div class="col-lg-12 hidden-xs hidden-sm hidden-md">
+                <h4 class="page_title" style="border-bottom:0px; border-top:0px"><b>Dealer Levels</b></h4>
+                    <table class="table table-striped ">
+                       
+                                <tbody>
+                                    <tr>
+                                        <th></th>
+                                        <th>Tier</th>
+                                         <th>VIP Points</th>
+                                        <th>Qualification Criteria</th>
+                                        <th>Selling Support</th>
+                                         <th>Additional Info</th>
+                                    </tr>
+                                    <tr>
+                                       <td><img class="ssplogo" src="{!$Site.BaseUrl}/resource/1475053838000/LPDCR_Assets/img/feed_greatness.png"/></td>
+                                       <td><strong> ELITE CED</strong> </td>
+                                       <td>8,000 and greater Points from QPL (Qualified Product List) purchases</td>
+                                        <td><ul class="nomargin">
+                                                <li>Must employ an LPS for the entire 2016 calendar year</li>
+                                                <li>Create media / marketing plan with Purina</li>
+                                                <li> All other elements of a CED listed below</li>
+                                            </ul>
+                                         </td>
+                                         <td>$0.60 / VIP Point based on 2016 QPL</td>
+                                         <td>Special enrolment and training at Top Dealer meeting in February 2017</td>
+                                    </tr>
+                                     <tr>
+                                       <td><img class="ssplogo" src="{!$Site.BaseUrl}/resource/1475053838000/LPDCR_Assets/img/expert_dealer.png"/></td>
+                                       <td><strong>CED</strong> </td>
+                                        <td>7,999 - 5,200 Points from QPL (Qualified Product List) purchases</td>
+                                        <td>
+                                            <ul class="nomargin">
+                                                <li>Enrol in Program</li>
+                                                <li>Participate in minimum of 6 selling events</li>
+                                                <li> Minimum of 2 employees attend FEED selling skills training class</li>
+                                                <li>Complete Purina University Training</li>
+                                                <li>Execute a minimum of 24 Field Day</li>
+                                            </ul>
+                                         </td>
+                                        <td>$0.55 / VIP Point based on 2016 QPL</td>
+                                        <td>Field Days are feed meetings held at customers operation / farm</td>
+                                    </tr>
+                                    <tr>
+                                      <td><img class="ssplogo" src="{!$Site.BaseUrl}/resource/1475053838000/LPDCR_Assets/img/purina.png"/></td>
+                                       <td><strong>Purina</strong> </td>
+                                        <td>5,199 - 3000 Points from QPL (Qualified Product List) purchases</td>
+                                        <td>
+                                            <ul class="nomargin">
+                                                <li>Enrol in Program</li>
+                                                <li>Participate in minimum of 3 selling events</li>
+                                                <li> Minimum of 2 employees attend FEED selling skills training class</li>
+                                            </ul>
+                                         </td>
+                                        <td>$0.25 / VIP Point based on 2016 QPL</td>
+                                        <td>Training held at Purina Fram in Grey Summit, MO</td>
+                                    </tr>
+                                    <tr>
+                                    <td><img class="ssplogo" src="{!$Site.BaseUrl}/resource/1475053838000/LPDCR_Assets/img/program.png"/></td>
+                                       <td><strong>Program</strong> </td>
+                                        <td>Minimum 1200 - 2,999 Points from QPL (Qualified Product List) purchases</td>
+                                        <td>
+                                            <ul class="nomargin">
+                                                <li>Enrol in Program</li>
+                                            </ul>
+                                         </td>
+                                        <td>$0.10 / VIP Point based on 2016 QPL</td>
+                                        <td>* QPL = Qualified Product List</td>
+                                    </tr>
+                                </tbody>
+                    </table>
+                </div> 
+                <!--/Desktop view-->
+                <div class="col-lg-12">
+                <!--Accordions-->
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default hidden-lg">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                         Dealer Levels    <span class="glyphicon glyphicon-plus pull-right"></span>
+
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body">
+                          <table class="table no_border">
+                       
+                                <tbody>
+                                    <tr>
+                                       <td><img class="ssplogo" src="{!$Site.BaseUrl}/resource/1475053838000/LPDCR_Assets/img/feed_greatness.png"/></td>
+                                       <td><strong> ELITE CED</strong> </td>
+                                   
+                                    </tr>
+                                    <tr>
+                                        <td><b>VIP Points</b></td>
+                                        <td>8,000 and greater Points from QPL (Qualified Product List) purchases</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Qualification Criteria</b></td>
+                                        <td>
+                                            <ul class="nomargin">
+                                                <li>Must employ an LPS for the entire 2016 calendar year</li>
+                                                <li>Create media / marketing plan with Purina</li>
+                                                <li> All other elements of a CED listed below</li>
+                                            </ul>
+                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Selling Support</b></td>
+                                        <td>$0.60 / VIP Point based on 2016 QPL</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Additional Info</b></td>
+                                        <td>Special enrolment and training at Top Dealer meeting in February 2017</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                            <div class="border-dashed"></div>
+                            <table class="table no_border">
+                       
+                                <tbody>
+                                    <tr>
+                                       <td><img class="ssplogo" src="{!$Site.BaseUrl}/resource/1475053838000/LPDCR_Assets/img/expert_dealer.png"/></td>
+                                       <td><strong>CED</strong> </td>
+                                   
+                                    </tr>
+                                    <tr>
+                                        <td><b>VIP Points</b></td>
+                                        <td>7,999 - 5,200 Points from QPL (Qualified Product List) purchases</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Qualification Criteria</b></td>
+                                        <td>
+                                            <ul class="nomargin">
+                                                <li>Enrol in Program</li>
+                                                <li>Participate in minimum of 6 selling events</li>
+                                                <li> Minimum of 2 employees attend FEED selling skills training class</li>
+                                                <li>Complete Purina University Training</li>
+                                                <li>Execute a minimum of 24 Field Day</li>
+                                            </ul>
+                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Selling Support</b></td>
+                                        <td>$0.55 / VIP Point based on 2016 QPL</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Additional Info</b></td>
+                                        <td>Field Days are feed meetings held at customers operation / farm</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                            <div class="border-dashed"></div>
+                            <table class="table no_border">
+                       
+                                <tbody>
+                                    <tr>
+                                       <td><img class="ssplogo" src="{!$Site.BaseUrl}/resource/1475053838000/LPDCR_Assets/img/purina.png"/></td>
+                                       <td><strong>Qualified</strong> </td>
+                                   
+                                    </tr>
+                                    <tr>
+                                        <td><b>VIP Points</b></td>
+                                        <td>5,199 - 3000 Points from QPL (Qualified Product List) purchases</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Qualification Criteria</b></td>
+                                        <td>
+                                            <ul class="nomargin">
+                                                <li>Enrol in Program</li>
+                                                <li>Participate in minimum of 3 selling events</li>
+                                                <li> Minimum of 2 employees attend FEED selling skills training class</li>
+                                            </ul>
+                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Selling Support</b></td>
+                                        <td>$0.25 / VIP Point based on 2016 QPL</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Additional Info</b></td>
+                                        <td>Training held at Purina Fram in Grey Summit, MO</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                            <div class="border-dashed"></div>
+                            <table class="table no_border">
+                       
+                                <tbody>
+                                    <tr>
+                                       <td><img class="ssplogo" src="{!$Site.BaseUrl}/resource/1475053838000/LPDCR_Assets/img/program.png"/></td>
+                                       <td><strong>Program</strong> </td>
+                                   
+                                    </tr>
+                                    <tr>
+                                        <td><b>VIP Points</b></td>
+                                        <td>Minimum 1200 - 2,999 Points from QPL (Qualified Product List) purchases</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Qualification Criteria</b></td>
+                                        <td>
+                                            <ul class="nomargin">
+                                                <li>Enrol in Program</li>
+                                            </ul>
+                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Selling Support</b></td>
+                                        <td>$0.10 / VIP Point based on 2016 QPL</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Additional Info</b></td>
+                                        <td>* QPL = Qualified Product List</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                      <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                       Reimbursement at a Glance <span class="glyphicon glyphicon-plus pull-right"></span>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                      <div class="panel-body">
+                           <table class="table table-bordered table-striped ">
+                       
+                                <tbody>
+                                    <tr>
+                                       <th>Program</th>
+                                       <th>100%</th>
+                                       <th>50%</th>
+                                       <th>25%</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Trips to the Purina Animal Nutrition Center</td>
+                                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Purina eStore Merchandising Kits and Materials</td>
+                                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Event in a Box Kits</td>
+                                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>"Did You Know" In-Store Promotions</td>
+                                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Purina University and FEED Selling Training</td>
+                                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Customer Feeding Trial</td>
+                                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>PMI Nutrition Pet Product Samples</td>
+                                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dedicated Pre-Approved Purina or PMI Nutrition Ads</td>
+                                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Multi-Brand Advertising</td>
+                                        <td></td>
+                                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>In-Store Employee Training Workshop</td>
+                                        <td></td>
+                                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Purina Dealer Social Media and/or Digital Advertising</td>
+                                        <td></td>
+                                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dealer Advertising</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Branded Wearables / Premiums</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                      
+                      
+                      
+                      </div>
+                    </div>
+                  </div>
+                </div>                
+                <!--/Accordions-->
+                </div>
+             </div><!--end row-->
+            </div> 
+        </apex:define>
+    </apex:composition>
+            <script>
+            $('.collapse').on('shown.bs.collapse', function(){
+            $(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+            }).on('hidden.bs.collapse', function(){
+            $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+            });
+            </script>
+</apex:page>

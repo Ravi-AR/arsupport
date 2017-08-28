@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>HODGE FARMS LLC-382778 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>HODGE FARMS LLC-382778 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>HODGEFARMSLLC382778PartnerManager</parentRole>
+</Role>

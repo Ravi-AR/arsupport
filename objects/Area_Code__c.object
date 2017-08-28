@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Used by Customer Operations for call routing purposes</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Area_Code__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Area Code</description>
+        <externalId>true</externalId>
+        <label>Area Code</label>
+        <length>5</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Area_Location__c</fullName>
+        <description>Area/Location of Area Code</description>
+        <externalId>false</externalId>
+        <label>Area/Location</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Note__c</fullName>
+        <description>Note about Area Code</description>
+        <externalId>false</externalId>
+        <label>Note</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Region_Number__c</fullName>
+        <description>Number associated to Region for inContact call routing based on Area Code</description>
+        <externalId>false</externalId>
+        <label>Region Number</label>
+        <length>2</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Skill__c</fullName>
+        <description>Skill (group) for Area Code for call routing</description>
+        <externalId>false</externalId>
+        <label>Skill</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Great East</fullName>
+                    <default>false</default>
+                    <label>Great East</label>
+                </value>
+                <value>
+                    <fullName>Great West</fullName>
+                    <default>false</default>
+                    <label>Great West</label>
+                </value>
+                <value>
+                    <fullName>South Central</fullName>
+                    <default>false</default>
+                    <label>South Central</label>
+                </value>
+                <value>
+                    <fullName>Southeast</fullName>
+                    <default>false</default>
+                    <label>Southeast</label>
+                </value>
+                <value>
+                    <fullName>Southwest</fullName>
+                    <default>false</default>
+                    <label>Southwest</label>
+                </value>
+                <value>
+                    <fullName>Unknown Domestic</fullName>
+                    <default>false</default>
+                    <label>Unknown Domestic</label>
+                </value>
+                <value>
+                    <fullName>Unknown International</fullName>
+                    <default>false</default>
+                    <label>Unknown International</label>
+                </value>
+                <value>
+                    <fullName>Upper Midwest</fullName>
+                    <default>false</default>
+                    <label>Upper Midwest</label>
+                </value>
+                <value>
+                    <fullName>West Coast</fullName>
+                    <default>false</default>
+                    <label>West Coast</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Area Code</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Area_Code__c</columns>
+        <columns>Area_Location__c</columns>
+        <columns>Skill__c</columns>
+        <columns>Note__c</columns>
+        <columns>Region_Number__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>AC-{000}</displayFormat>
+        <label>Area Code Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Area Codes</pluralLabel>
+    <recordTypes>
+        <fullName>Customer_Ops_Area_Code</fullName>
+        <active>true</active>
+        <description>Used by Customer Ops for call routing purposes</description>
+        <label>Customer Ops Area Code</label>
+        <picklistValues>
+            <picklist>Skill__c</picklist>
+            <values>
+                <fullName>Great East</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Great West</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>South Central</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Southeast</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Southwest</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unknown Domestic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unknown International</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upper Midwest</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>West Coast</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>Area_Code__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Area_Location__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Skill__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Note__c</customTabListAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,407 @@
+<apex:component controller="LPDCR_SecondaryPageFiltersController" allowDML="true">
+    <apex:attribute name="componentKey" 
+                    type="String" 
+                    assignTo="{!key}" 
+                    description="The key given to this component so the page can easily get access to it" />
+
+    <apex:attribute name="thisPageController" 
+                    type="LPDCR_SecondaryPageBaseController" 
+                    assignTo="{!pageController}" 
+                    required="true" 
+                    description="The controller for the page." />
+    
+    <apex:attribute name="rerenderList" 
+                    description="a csv list of elements to be rerendered" 
+                    type="String" 
+                    required="true"/>
+                    
+    <apex:attribute name="compName" 
+                    description="a component name to display necessary filter items" 
+                    type="String" 
+                    assignTo="{!componentName}" 
+                    required="false"/>
+   
+  
+   
+<apex:outputPanel rendered="{! IF(componentName == 'Feed Manual Pages' || componentName == 'Business Management', false,true)}">  
+ <div class="col-sm-12 pad_lft_rgt accBg pad_btm20">
+ 
+    <div class="col-sm-12 pad_top20 pad_btm15">
+        <span>Filters</span><a href="#" id="reset" onclick="resetFilters();" class="txt_upper txt_rgt flt_rgt fnt12">Reset Filters</a>
+        <apex:actionFunction action="{!resetFilters}" name="resetFilters" rerender="{!rerenderList},filterPanel" status="loader" /> 
+        
+        
+    </div> 
+     
+    <div class="panel-group pad_lft20 fnt12" id="accordion">
+        <!--Collapse Filter--->
+        <apex:outputPanel rendered="{! IF( componentName == 'Talentlink Learning Center' || componentName == 'Search Results' , false,true)}">
+        <div aria-multiselectable="true" class="" id="accordion" role="tablist">
+            <div class="panel panel-default">
+                <div class="panel-heading" id="headingOne" role="tab">
+                     <h4 class="panel-title">
+                        <span aria-controls="123CP" aria-expanded="false" data-parent="#accordion" data-toggle="collapse" href="#123CP" role="button" class="txt_upper wid90 dis_inlineblock fnt12 brd_btm txt_none clr7 pad_top10 clr7 collapsed">
+                        <a class="wid70 flt_lft clr6 fnt12 txt_none">Sort By </a>
+                        
+                            <span class="pull-right glyphiconarrow glyphicon glyphicon-menu-up clr7 txt_none glf_icon"></span>
+                        
+                        </span>
+                        </h4>
+                        <div class="clear"></div>
+                    
+                </div>
+                <div aria-labelledby="headingOne" class="panel-collapse collapse in" id="123CP" role="tabpanel" aria-expanded="false">
+                    
+                     <div id="Sort">
+                          <p></p>
+                          <p class="pad_lft10" onclick="setSortFilter('Date DESC');">
+                              <span class=" pointer"><i class="glyphicon glyphicon-chevron-right arrowiconfilter"></i> <apex:outputText value=" Most Recent" /></span></p>
+                          <p class="pad_lft10" onclick="setSortFilter('Date ASC');">
+                              <span class="pointer"><i class="glyphicon glyphicon-chevron-right arrowiconfilter"></i> <apex:outputText value=" Oldest" /></span></p>
+                          <p class="pad_lft10" onclick="setSortFilter('Name ASC');">
+                              <span class="pointer"><i class="glyphicon glyphicon-chevron-right arrowiconfilter"></i> <apex:outputText value=" A-Z (ascending)" /></span></p>
+                          <p class="pad_lft10" onclick="setSortFilter('Name DESC');">
+                              <span class="pointer"><i class="glyphicon glyphicon-chevron-right arrowiconfilter"></i> <apex:outputText value=" Z-A (descending)" /></span></p>  
+                          <apex:actionFunction action="{!setSortFilter}" name="setSortFilter" rerender="{!rerenderList}" status="loader" >
+                              <apex:param name="sortBy" assignTo="{!sort_filter}" value=""/>
+                          </apex:actionFunction>            
+                        
+                    </div>
+                </div>
+            </div>
+                
+        </div>
+        </apex:outputPanel>  
+        <!--/Collapse Filter--->
+    
+    
+      
+      <apex:outputPanel rendered="{!IF( componentName != 'Talentlink Learning Center' && componentName!='Practices And Policies' && componentName!='Veterinary Feed Directive (VFD)' && componentName!='Feed Safety',true,false)}">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="txt_upper wid90 dis_inlineblock fnt12 brd_btm pad_btm5 txt_none clr7 pad_top10">Species
+            <span class="more-less glyphiconarrow glyphicon glyphicon-menu-up flt_rgt glf_icon"></span>
+            </a>
+          </h4>
+        </div>
+        <div id="collapse2" class="panel-collapse collapse in">
+          <div class="panel-body brd_top0" id="Species">
+              <apex:repeat value="{!SpeciesList}" var="specie">
+                  <p class="pad_lft5 mrg_filter" onclick="setSpeciesFilter('{!specie.Name}');" ><img src="{!specie.Image}" width="35" class=""/>
+                 
+                  <span class="pad_lft5 pointer SpeciesName" id="{!SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(specie.Name, ' ','-'),'amp',''),'&','-')}">{!specie.Name}</span></p>
+                  
+                  
+                 
+              </apex:repeat>
+              <apex:actionFunction action="{!updateSpeciesFilter}" name="setSpeciesFilter" rerender="{!rerenderList}" status="loader" >
+                  <apex:param name="specie" assignTo="{!clicked_specie}" value="" />
+              </apex:actionFunction>
+
+          </div>
+        </div>
+      </div>
+      </apex:outputPanel>
+      
+      <apex:outputPanel rendered="{!IF( componentName=='Product Sales Tools' || componentName=='Feed License Manufacturer' || componentName=='Feed Safety' || componentName=='Veterinary Feed Directive (VFD)' || componentName=='Media Tools' || componentName=='Event Planning' || ( componentName=='Search Results' && $CurrentPage.parameters.type != 'Promotions' && $CurrentPage.parameters.type != 'Events'),true,false)}" id="fileTypePanel">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title pad_btm10 mrg_tm20">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="txt_upper wid90 dis_inlineblock fnt12 brd_btm pad_btm5 txt_none clr7 pad_top10">File Type
+            <span class="more-less glyphiconarrow glyphicon glyphicon-menu-up flt_rgt glf_icon"></span>
+            </a>
+          </h4>
+        </div>
+        <div id="collapse3" class="panel-collapse collapse in" >
+          
+              <apex:outputPanel >
+              <div id="FType" class="onCk" >
+                  <apex:repeat value="{!MarketingFileTypes}" var="fileType">
+                      <p onclick="setFileTypeFilter('{!fileType}');" class="pad_lft5 pointer onCk" ><i class="glyphicon glyphicon-chevron-right"></i> <span class="filetypeselected" name="ft{!fileType}">{!fileType}</span></p>
+                  </apex:repeat>
+                  </div>
+              </apex:outputPanel>
+          
+          <apex:actionFunction action="{!updateFileTypeFilter}" name="setFileTypeFilter" rerender="{!rerenderList}" status="loader">
+              <apex:param name="file_type" assignTo="{!clicked_file_type}" value="" />
+          </apex:actionFunction>
+        </div>
+      </div>
+          <script>
+      
+                      /* file type Starts here */    
+                $(document).ready(function(){   
+                  
+                    // for Dom file
+                        var a = [];
+                        function disp( divs ) 
+                        {
+                            for ( var i = 0; i < divs.length; i++ )
+                              {
+                               a.push( divs[ i ].innerHTML );
+                             }
+                         }
+                     disp( $( ".filetypeselected" ).toArray());
+                    
+                        //For Selected file
+                        var arr = [];
+                        i = 0;
+                        $('.filetype').each(function(){
+                            arr[i++] = $(this).attr('value');
+                            //I should store id in an array
+                         });
+                
+                //matching 2 array
+                
+                       for(var j=0; j<arr.length; j++)
+                       {
+                           for(var k=0; k<a.length; k++)
+                           {
+                               if(a[k] == arr[j])
+                               {
+                                 var namee= arr[j];
+                                   $( ".filetypeselected" ).parent().addClass('clr_red activefilterselectionfile');  
+                               }
+                           }
+                       }
+                       
+                       $( "#FType" ).children().click(function() {
+                          $(this).toggleClass('clr_red activefilterselectionfile');
+                         });
+                        
+                       
+                      }); 
+                      
+                /* file type Ends here */
+          </script>
+      
+      </apex:outputPanel>
+      
+     <apex:outputPanel id="salesContentPanel" rendered="{!IF(TEXT($User.UserType) == 'Standard' && ( componentName =='Talentlink Learning Center' || componentName == $Label.LPDCR_Prac_and_Policies_Subtab_Name || componentName == $Label.LPDCR_ProductSalesTools_Subtab_Name || componentName == $Label.LPDCR_Sales_Sheets_Subtab_Name || componentName == $Label.LPDCR_Tech_Bulletins_Subtab_Name || componentName == $Label.LPDCR_Promotions_Subtab_Name || componentName == $Label.LPDCR_Talentlink_Subtab_Name || componentName == $Label.LPDCR_Targeted_Training_Subtab_Name || componentName == $Label.LPDCR_Purina_University_Subtab_Name || ( componentName == 'Search Results' && $CurrentPage.parameters.type != 'Events')), true, false)}">
+          <div class="panel panel-default">
+              <div class="panel-body" id="internalType">                  
+                  <p onclick="setSalesContentFilter();" class="brd_top0 pad_lft10 pad_rgt10 mrg_rgt20 pointer" ><span class="intdom">Internal Sales Only Content</span></p>
+              </div>          
+              <apex:actionFunction action="{!updateSalesContentFilter}" name="setSalesContentFilter" rerender="{!rerenderList}" status="loader" />
+          </div>
+      </apex:outputPanel>
+     <script>
+    $(document).ready(function(){  
+    var intvariable = $(".inttype").val();
+    
+     if(intvariable =="true"){
+    $( ".intdom" ).parent().addClass('clr_red activefilterselectionfile');
+    }
+    });
+    
+    </script>
+    </div>
+    
+     </div> 
+  </apex:outputPanel><!--Full filter component-->
+  
+    <!-- Loader code starts here -->
+    <apex:actionStatus id="loader">
+        <apex:facet name="start">
+            <div class="loadercover">
+            </div>
+            <div class="loaderfirst">
+                <div class="loadersec">
+                    <img src="/img/loading32.gif" class="loaderimage" />
+                </div>
+            </div>   
+        </apex:facet>
+    </apex:actionStatus>
+    <!-- Loader code ends here-->
+  
+     <script>
+     
+        $(document).ready(function(){ 
+          $('.collapse').on('shown.bs.collapse', function(){
+      
+            $(this).parent().find(".glyphicon-menu-down").removeClass("glyphicon-menu-down").addClass("glyphicon-menu-up");
+            }).on('hidden.bs.collapse', function(){
+            $(this).parent().find(".glyphicon-menu-up").removeClass("glyphicon-menu-up").addClass("glyphicon-menu-down");
+            });    
+        });
+ </script>
+     
+<!-- Script to highlight the selected filters-->
+    <script>
+
+/* Sort Defalut and on selection  Starts here */
+
+     $(document).ready(function(){
+     var sortvariable = $(".sortfield").val();
+    
+     if(sortvariable=="Date DESC"){
+          $( "#Sort").children().removeClass('clr_red activefilterselectionsort');
+            $( "#Sort span:nth(0)" ).parent().addClass('clr_red activefilterselectionsort');            
+        }
+        else if(sortvariable=="Date ASC"){
+             $( "#Sort").children().removeClass('clr_red activefilterselectionsort');
+            $( "#Sort span:nth(1)" ).parent().addClass('clr_red activefilterselectionsort');
+        }
+         else if(sortvariable=="Name ASC"){
+             $( "#Sort").children().removeClass('clr_red activefilterselectionsort');
+            $( "#Sort span:nth(2)" ).parent().addClass('clr_red activefilterselectionsort');
+        }
+         else if(sortvariable=="Name DESC"){
+             $( "#Sort").children().removeClass('clr_red activefilterselectionsort');
+            $( "#Sort span:nth(3)" ).parent().addClass('clr_red activefilterselectionsort');
+        }
+       
+     });
+     
+    $( "#Sort" ).children().click(function() {
+    
+       $( "#Sort").children().removeClass('clr_red activefilterselectionsort');
+        $(this).toggleClass('clr_red activefilterselectionsort');
+        if($( "#Sort" ).children().hasClass('clr_red activefilterselectionsort')){
+            $( "#Sort").children().removeClass('clr_red activefilterselectionsort');
+             $( "#Sort span:nth(0)" ).removeClass('clr_red activefilterselectionsort');   
+             $( "#Sort span:nth(1)" ).removeClass('clr_red activefilterselectionsort');
+             $( "#Sort span:nth(2)" ).removeClass('clr_red activefilterselectionsort');
+             $( "#Sort span:nth(3)" ).removeClass('clr_red activefilterselectionsort');
+            $(this).addClass('clr_red h5 activefilterselectionsort');
+        }     
+    }); 
+    
+/* Sort Defalut and on selection  Ends here */
+
+/* Species  Starts here */
+ $(document).ready(function(){
+        // for Dom Species
+        var a = [];
+        function disp( divs ) 
+        {
+              for ( var i = 0; i < divs.length; i++ )
+              {
+              var sp = ( divs[ i ].innerHTML ).replace(/\&amp\;/g, "").replace(/\s+/g, '').replace(/\-/g, '');
+               a.push( sp );
+               //alert(a[i]);
+              }
+         }
+     
+        disp( $( ".SpeciesName" ).toArray());
+    
+        //For Selected Species
+        var selected = [];
+        var arr = [];
+        i = 0;
+        $('.speciesfield').each(function(){
+          //alert($(this).attr('value'));
+            arr[i++] = $(this).attr('value');
+            //alert(arr.length);
+            //I should store id in an array
+          
+        });
+        for(var o=0; o<arr.length; o++){
+              selected[o] = arr[o].replace(/\s+/g, '-').replace(/\&/g, '-');
+              
+               arr[o]= arr[o].replace(/\&/g, "").replace(/\s+/g, '').replace(/\-/g, '');
+               
+              // alert(arr[o]);
+            }
+        
+        //alert(arr.length);
+        
+
+//matching 2 array
+
+       for(var n=0; n<arr.length; n++)
+       {
+           for(var m=0; m<a.length; m++)
+           {
+               if(a[m] == arr[n])
+               {
+                   //alert("selected"+ selected[n]);
+                  // alert("a="+a[m] + "arr=" +arr[n] );
+                   var name= selected[n];
+                   $("#"+name).parent().addClass('clr_red activefilterselection');
+               }
+           }
+       }       
+   });    
+        
+     $( "#Species" ).children().click(function() {
+         $(this).toggleClass('clr_red activefilterselection');
+    });
+    
+/* Species Ends here */
+
+    $( "#internalType" ).children().click(function() {
+        $(this).toggleClass('clr_red activefilterselectionfile');
+    });
+    
+    $( "#reset" ).click(function() {
+         $( "#Species" ).children().removeClass('clr_red activefilterselection');
+         $( "#Sort").children().removeClass('clr_red activefilterselection');
+         $( "#FType").children().removeClass('clr_red activefilterselection');
+         $( "#internalType" ).children().removeClass('clr_red activefilterselection');
+    });
+    
+    </script>
+  
+   <script>
+     //close the filter on mobile 
+        $(document).ready(function(){
+       //alert($(window).width());
+    if ($(window).width() < 767) {
+        $('.collapse').removeClass('in');
+        $('.glyphiconarrow').removeClass('glyphicon-menu-up')
+        $('.glyphiconarrow').addClass('glyphicon-menu-down');
+    } 
+});
+
+
+   
+   </script> 
+    
+    <style>
+        .pointer{
+            cursor:pointer;
+            
+        }
+        .arrowiconfilter{
+            font-size:14px;
+        }
+        .clr6{
+            color:#3a3434;
+        }
+        .activefilterselection{
+                color: #ffffff;
+                background-color: #cc262c;
+                padding: 1px;
+                border-radius: 3px;
+        }
+        .activefilterselectionsort{
+                color: #ffffff;
+                background-color: #cc262c;
+                padding: 5px;
+                border-radius: 3px;
+        }
+        .activefilterselectionfile{
+                color: #ffffff;
+                background-color: #cc262c;
+                padding: 6px;
+                border-radius: 3px;
+        }
+        .SpeciesName{
+            width:82%;
+            position:absolute;
+            top:10px;
+        }
+        #Sort, #Species, #FType{
+            width:90%;
+        }
+        .mrg_filter{
+            margin:0 0 5px !important;
+            position:relative;
+        }
+        .cc_homepage .panel-default>.panel-heading{
+            border:0px !important;
+        }
+    </style>
+</apex:component>

@@ -1,0 +1,50 @@
+<!-- 
+*********************************************************************************
+Author: Govinda Prasad P S
+Email: govinda.prasad@magnet360.com
+Created Date    : 11/10/2016
+Function    :  Visualforce page for BUSINESS BUILDER PROGRAM - NON Member.
+Version     : 1.0 
+*********************************************************************************
+--> 
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false">
+    <apex:composition template="LPDCR_BaseTemplate">
+        
+        <apex:define name="PageTitle">BUSINESS BUILDER PROGRAM - NON MEMBER</apex:define>
+        <apex:define name="body">        
+        <div class="title_wrapper">
+          <div class="container-fluid">
+              <h3 class="page_title">Business Builder Program</h3>
+          </div>
+          </div>    
+          <div class="container-fluid content_wrapper">
+            <div class="row detailbanner">
+                 <div class="col-xs-12 lead">
+                     <center><p class="congrats">Congratulations! You may eligible to <b>join the Business Builder Program.</b></p></center>
+                 </div>
+                 <div class="col-xs-12">
+                    <a class="btn btn-primary btn-block">Apply for the Program</a>
+                 </div>
+                 <div class="col-xs-12 detailbanner">
+                    <p><b>Why Apply?</b> Consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.</p>
+                      <ul>
+                          <li>Proin sodales pulvinar tempor</li>
+                          <li>Penatibus et magnis dis parturient montes,</li>
+                          <li>Nam fermentum, nulla luctus pharetra</li>
+                          <li>Tellus mollis orci, sed rhoncus sapien</li>
+                       </ul>   
+                 </div>
+                 <div class="col-xs-12 lead">
+                     <center><h4><b>More about the Program</b></h4>
+                         <a href="#"><span class="glyphicon glyphicon-chevron-down"></span></a>
+                     </center>
+                 </div>
+                 
+                  </div><!--end row--> 
+                   <c:LPDCR_BBMaterials />
+            </div><!--End:Container-->
+            
+           
+        </apex:define>
+    </apex:composition>
+</apex:page>

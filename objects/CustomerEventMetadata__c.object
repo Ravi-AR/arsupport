@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Business_Builder_Program_Year__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Business Builder Program Year Metadata</description>
+        <externalId>false</externalId>
+        <label>Business Builder Program Year</label>
+        <referenceTo>BusinessBuilderProgramYear__c</referenceTo>
+        <relationshipLabel>Business Builder Program Year Metadata</relationshipLabel>
+        <relationshipName>Document_Metadata</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Campaign__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Campaign record that is using this metadata.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Campaign record that is using this metadata.</inlineHelpText>
+        <label>Campaign</label>
+        <referenceTo>Campaign</referenceTo>
+        <relationshipName>Customer_Event_Metadata</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <description>Description of the Document being added to the Community</description>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <length>10000</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Display_End_Date__c</fullName>
+        <description>Determines the date the Document should stop displaying in the Dealer Community</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the date the Document should stop displaying in the Dealer Community</inlineHelpText>
+        <label>Display End Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Display_Order_for_Type__c</fullName>
+        <description>Order that the images should display in the Dealer Community</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Order that the documents should display in the Dealer Community</inlineHelpText>
+        <label>Display Order for Type</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Display_Start_Date__c</fullName>
+        <description>Determines the dates that the Document should display in the Dealer Community</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the date the Document should start displaying in the Dealer Community</inlineHelpText>
+        <label>Display Start Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>DocumentDeveloperName__c</fullName>
+        <description>Document Unique Name name for Document record. Not the Document Name/Label.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Document Unique Name name for Document record. Not the Document Name/Label.</inlineHelpText>
+        <label>Document Unique Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DocumentFolderDeveloperName__c</fullName>
+        <description>Folder Unique Name name for Document Folder record. Not the Folder Name/Label.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Folder Unique Name name for Document Folder record. Not the Folder Name/Label.</inlineHelpText>
+        <label>Folder Unique Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Document_Name__c</fullName>
+        <description>Name of the Document that will display in the community</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Name of the Document that will display in the community</inlineHelpText>
+        <label>Document Name</label>
+        <length>250</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MetadataType__c</fullName>
+        <description>Type of Metadata, Image Type or Download PDF.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Type of Metadata, Image Type or Download PDF.</inlineHelpText>
+        <label>Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Banner Mobile</fullName>
+                    <default>false</default>
+                    <label>Banner Mobile</label>
+                </value>
+                <value>
+                    <fullName>Carousel Desktop</fullName>
+                    <default>false</default>
+                    <label>Carousel Desktop</label>
+                </value>
+                <value>
+                    <fullName>Carousel Mobile</fullName>
+                    <default>false</default>
+                    <label>Carousel Mobile</label>
+                </value>
+                <value>
+                    <fullName>Banner Desktop</fullName>
+                    <default>false</default>
+                    <label>Banner Desktop</label>
+                </value>
+                <value>
+                    <fullName>Download PDF</fullName>
+                    <default>false</default>
+                    <label>Download PDF</label>
+                </value>
+                <value>
+                    <fullName>Reimbursement Form</fullName>
+                    <default>false</default>
+                    <label>Reimbursement Form</label>
+                </value>
+                <value>
+                    <fullName>Business Builder Material</fullName>
+                    <default>false</default>
+                    <label>Business Builder Material</label>
+                </value>
+                <value>
+                    <fullName>Selling Support Program Details</fullName>
+                    <default>false</default>
+                    <label>Selling Support Program Details</label>
+                </value>
+                <value>
+                    <fullName>Slide Carousel</fullName>
+                    <default>false</default>
+                    <label>Slide Carousel</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Document Metadata</label>
+    <nameField>
+        <displayFormat>DM{0000}</displayFormat>
+        <label>Document Metadata Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Document Metadata</pluralLabel>
+    <recordTypes>
+        <fullName>Business_Builder_Program_Year_Metadata</fullName>
+        <active>true</active>
+        <description>Documents Metadata related to the Business Builder Program Year</description>
+        <label>Business Builder Program Year Metadata</label>
+        <picklistValues>
+            <picklist>MetadataType__c</picklist>
+            <values>
+                <fullName>Business Builder Material</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reimbursement Form</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Selling Support Program Details</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Customer_Event_Metadata</fullName>
+        <active>true</active>
+        <description>Default record type for Customer Event Metadata</description>
+        <label>Customer Event Metadata</label>
+        <picklistValues>
+            <picklist>MetadataType__c</picklist>
+            <values>
+                <fullName>Banner Desktop</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Banner Mobile</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Carousel Desktop</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Carousel Mobile</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Download PDF</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Slide Carousel</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Standard</fullName>
+        <active>true</active>
+        <description>Default record type for Customer Event Metadata</description>
+        <label>Standard</label>
+        <picklistValues>
+            <picklist>MetadataType__c</picklist>
+            <values>
+                <fullName>Banner Desktop</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Banner Mobile</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Carousel Desktop</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Carousel Mobile</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Download PDF</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Document_Unique_Name</fullName>
+        <active>true</active>
+        <description>The Document Unique Name field can only contain underscores and alphanumeric characters.</description>
+        <errorConditionFormula>AND( 
+NOT( REGEX( DocumentDeveloperName__c , &quot;[a-zA-Z0-9_]+&quot;)) 
+)</errorConditionFormula>
+        <errorDisplayField>DocumentDeveloperName__c</errorDisplayField>
+        <errorMessage>The Document Unique Name field can only contain underscores and alphanumeric characters.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>This template is used when the status turns Yellow or Green on Cooked Tubss</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Cattle Cooked Tubs Distribution Alert When Yellow or Green</name>
+    <style>none</style>
+    <subject>{!Distribution_Alert__c.Name}: Status for Cooked Tubs is {!Distribution_Alert__c.Status_Description__c} as of {!Distribution_Alert__c.Last_Updated__c}</subject>
+    <type>text</type>
+</EmailTemplate>

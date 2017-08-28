@@ -1,0 +1,2 @@
+<apex:page controller="VIP_Events_Router_Controller" action="{!route}" > 
+</apex:page>

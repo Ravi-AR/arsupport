@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HomePageComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <body>&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;span style=&quot;color: #0000CD;&quot;&gt;&lt;a href=&quot;http://nutrazu.com&quot; target=&quot;_blank&quot;&gt;Nutrazu&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.pminutritionaladditives.com/&quot; target=&quot;_blank&quot;&gt;PMI Nutritional Additives&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.purinamills.com&quot; target=&quot;_blank&quot;&gt;Purina Mills&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.mazuri.com&quot; target=&quot;_blank&quot;&gt;Mazuri&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.pminutrition.com&quot; target=&quot;_blank&quot;&gt;PMI Nutrition&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.labdiet.com&quot; target=&quot;_blank&quot;&gt;Lab Diet&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.testdiet.com&quot; target=&quot;_blank&quot;&gt;Test Diet&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.lolmilkreplacer.com/&quot; target=&quot;_blank&quot;&gt;LOL Milk Replacer&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://feedlabeling.landolakes.com/my.policy&quot; target=&quot;_blank&quot;&gt;Feed Tag Retrieval&lt;/a&gt;&lt;/span&gt;&lt;/span&gt;</body>
+    <pageComponentType>htmlArea</pageComponentType>
+    <width>wide</width>
+</HomePageComponent>

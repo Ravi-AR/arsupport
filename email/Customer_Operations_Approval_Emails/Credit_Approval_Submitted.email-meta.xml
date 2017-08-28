@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Inform Transportation contacts that credit has been submitted for approval and is being reviewed</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Credit Approval Submitted</name>
+    <style>none</style>
+    <subject>Service Request {!Case.CaseNumber} has a Large Credit Amount Submitted for Approval</subject>
+    <type>text</type>
+</EmailTemplate>

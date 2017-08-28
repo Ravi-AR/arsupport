@@ -1,0 +1,5 @@
+<!-- The component is to make the Billing Address and Shipping Address non-editable in the Contact information screen-->
+
+<apex:page docType="html-5.0" sidebar="false" showHeader="false" standardStylesheets="false" applyHtmlTag="false">
+    <c:cc_oo_CheckoutUserInfoRD />
+</apex:page>

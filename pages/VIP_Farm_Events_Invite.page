@@ -1,0 +1,42 @@
+<!--<apex:page standardController="Farm_VIP_Registration__c" extensions="VIP_Farm_Events_Invite_Controller" >-->
+<apex:page controller="VIP_Farm_Events_Invite_Controller" >
+    <!-- --VIP_Farm_Events_Invite Page-- -->
+    <apex:pageBlock >
+        <!-- <apex:pageBlockSection > -->
+        <apex:form >
+        
+            <apex:pageBlockTable id="vip_table" value="{!master_events}" var="vip">
+                
+                <apex:column headerValue="Action">
+                    <apex:commandButton value="Select Event" action="{!register}" rerender="hiddenBlock">
+                        <apex:param name="tempid" value="{!vip.id}" assignTo="{!tempid}" />
+                    </apex:commandButton>
+                </apex:column>
+
+                <apex:column headerValue="Event Name">
+                    <apex:outputField value="{!vip.Name}" >
+                    </apex:outputField>
+                </apex:column>
+
+                <apex:column headerValue="Description" >
+                    <apex:outputField value="{!vip.Description}" />
+                </apex:column>
+
+                <apex:column headerValue="Date">
+                    <apex:outputField value="{!vip.Date_of_Event__c}" >
+                    </apex:outputField>
+                </apex:column>
+
+                <apex:column headerValue="Species Focus">
+                    <apex:outputField value="{!vip.Specie_Focus__c}" >
+                    </apex:outputField>
+                </apex:column>
+
+            </apex:pageBlockTable>
+
+            <apex:pageBlock id="hiddenBlock" rendered="false"></apex:pageBlock>
+
+        </apex:form>
+        <!-- </apex:pageBlockSection> -->
+    </apex:pageBlock> 
+</apex:page>

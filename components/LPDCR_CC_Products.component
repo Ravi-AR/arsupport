@@ -1,0 +1,34 @@
+<apex:component controller="LPDCR_CC_Products_Controller" allowDML="true" >
+    <apex:attribute name="bgColor"
+                    type="String"
+                    description="The style class for the background color of the component"
+                    required="false"
+                    default="bg_wht" />
+                    
+     <div class="col-sm-12 {!bgColor}">
+         <h3 class="section_title"><a href="{!$Page.LPDCR_CC_ProductPage}">{!$Label.LPDCR_Products_Component_Name}</a> 
+             <div class="tooltip1">
+                 <span class="flt_rgt icon_exmty"></span>                
+                 <p class="tooltiptext">{!$Label.LPDCR_Products_Component_Message}
+                  <br/>
+                    <a class="btn_ent" href="{!URLFOR($Page.LPDCR_CC_ProductPage)}">ENTER</a><span class="btn_cls dis_inlineblock txt_center">CLOSE</span>  
+                  </p>
+            </div>
+         </h3>         
+         <div class="col-sm-12 pad_top5 fnt12">
+             <div class="col-sm-6 flt_lft txt_center pad_btm20">
+                <img src="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/u274.png')}" width="60" style="border: solid 1px #ccc;"/>    
+                <a class="clr_red block pad_top5 mrg_top5" href="{!URLFOR($Page.LPDCR_CC_ProductPage)}">Product Detail Pages</a> 
+            </div>
+            <apex:outputPanel styleClass="wid50 flt_lft txt_center pad_btm20" layout="block" rendered="{!areProdManAvailable}" >
+                <img src="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/u272.png')}" width="60" style="border-bottom: solid 1px #ccc;"/>    
+                <a class="clr_red block pad_top5 mrg_top5" href="{!productManualData.myAppUrl}" target="_blank">{!productManualData.app_title}</a> 
+            </apex:outputPanel>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 flt_lft txt_center pad_btm20 css_lft">
+                <img src="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/u270.png')}" width="60"/>    
+                <a class="clr_red block pad_top5 mrg_top5" href="{!URLFOR($Page.LPDCR_CC_ProductPage, null, ['subtab'='SalesSheets'])}">Sell Sheets</a>  
+            </div>            
+         </div>
+     </div>        
+</apex:component>

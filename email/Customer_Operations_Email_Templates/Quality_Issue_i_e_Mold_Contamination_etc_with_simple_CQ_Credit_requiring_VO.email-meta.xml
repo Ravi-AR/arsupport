@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use to send to customer for follow-up on Quality issue</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Quality Issue (i.e. Mold, Contamination, etc) with simple CQ Credit requiring VO</name>
+    <style>none</style>
+    <subject>{!Case.CaseNumber – {!Case.Description}</subject>
+    <type>text</type>
+</EmailTemplate>

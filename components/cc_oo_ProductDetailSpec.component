@@ -1,0 +1,152 @@
+<!-- 
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Murtaza Beejwala                                10/27/2016                                   US:OO-148  The guaranteed Analysis specs.
+-->
+<apex:component allowDML="true"  >
+    <script id="OO-ProductDetail-TabContainer-Desktop" type="text/template">
+        <div class="tabs_container">
+            <ul class="nav nav-tabs" id="myTab">
+                {{#each this}}
+                    <li {{#ifEquals @index 0}} class="active" {{/ifEquals}}><a href="#{{this.sectionID}}_{{this.grouping}}" data-toggle="tab">{{pageLabelMap this.sectionLabel}}</a></li>
+                {{/each}}
+            </ul>
+            <div class="tab-content">
+                {{#each this}}
+                    <div class="tab-pane {{#ifEquals @index 0}} active {{/ifEquals}}" id="{{this.sectionID}}_{{this.grouping}}" {{#ifEquals @index 0}} active {{/ifEquals}} ><div class="{{this.sectionID}}">Loading content...</div></div>
+                {{/each}}
+            </div>
+        </div>
+ </script>
+    <script id="OO-ProductDetail-TabContainer-Mobile" type="text/template">
+        <div id="accordion" class="accordion clear">
+            {{#each this}}
+                <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a href="#{{this.sectionID}}_{{this.grouping}}" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">{{pageLabelMap this.sectionLabel}}</a>
+                </div>
+                <div class="accordion-body collapse" id="{{this.sectionID}}_{{this.grouping}}" >
+                <div class="accordion-inner"><div class="{{this.sectionID}}">Loading content...</div></div>
+                </div>
+                </div>
+            {{/each}}
+        </div>
+ </script>
+ <script id="OO-ProductDetail-NameValueSection-Desktop" type="text/template">
+  {{#if (filterSpec this)}}
+    {{#each this.pageData}}
+        <div class="nvRow">
+            <div class="name">{{pageLabelMap this.name}}</div><div class="value">{{this.value}}</div>
+        </div>
+    {{/each}}
+    {{#if this.isEnabled}}
+        {{#if this.seeMore}}
+            <div class="nvRow pull-right lipstick spec-pagination-more">
+                <a href="#">
+                    <div class="icon-icons_down pull-left lipstick spec-pagination"></div>
+                    <div class="lipstick pull-left lipstick">See More</div>
+                </a>
+            </div>
+        {{else}}
+            <div class="nvRow pull-right lipstick spec-pagination-less">
+            <a href="#">
+                <div class="icon-icons_up pull-left lipstick spec-pagination"></div>
+                <div class="pull-left lipstick ">See Less</div>
+            </a>
+            </div>
+        {{/if}}
+    {{/if}}
+  {{/if}}
+ </script>
+
+<script id="OO-ProductDetail-NameValueSection-Mobile" type="text/template">
+  {{#if (filterSpec this)}}
+    {{#each this.pageData}}
+        <div class="nvRow">
+            <div class="name">{{pageLabelMap this.name}}</div><div class="value">{{this.value}}</div>
+        </div>
+    {{/each}}
+    {{#if this.isEnabled}}
+        {{#if this.seeMore}}
+            <div class="nvRow pull-right lipstick spec-pagination-more">
+                <a href="#" >
+                    <div class="icon-icons_down pull-left lipstick spec-pagination"></div>
+                    <div class="lipstick pull-left lipstick">See More</div>
+                </a>
+            </div>
+        {{else}}
+            <div class="nvRow pull-right lipstick spec-pagination-less spec-pagination">
+                <a href="#" >
+                    <div class="icon-icons_up pull-left lipstick"></div>
+                    <div class="lipstick pull-left lipstick">See Less</div>
+                </a>
+            </div>
+        {{/if}}
+    {{/if}}
+  {{/if}}
+</script>
+    <script type="text/javascript">
+        var isFirstTime=true,currentSpecView;
+        var fullCollection  =[];
+        var initialData =[];
+        var source=$("#OO-ProductDetail-NameValueSection-Desktop").html();
+        jQuery(function($) {
+            CCRZ.uiProperties.tabSectionView.phone.tmpl    =   'OO-ProductDetail-TabContainer-Mobile';
+            CCRZ.uiProperties.tabSectionView.desktop.tmpl      =   'OO-ProductDetail-TabContainer-Desktop';
+            CCRZ.uiProperties.nameValSectionView.desktop.tmpl   =   'OO-ProductDetail-NameValueSection-Desktop';
+            CCRZ.uiProperties.nameValSectionView.phone.tmpl     =   'OO-ProductDetail-NameValueSection-Mobile';
+             
+            CCRZ.pubSub.on('view:nameValSectionView:refresh', function(theView) {
+	            if(currentSpecView!=CCRZ.display.currentView){
+	                currentSpecView=CCRZ.display.currentView;
+	                isFirstTime=true;
+	                var htmlOutput = compileHandler( source, fullCollection ); 
+	                insertContent('.secSpecs-SingleGuaranteed_Analysis', htmlOutput );
+	            }
+	            $(document).off('click','.spec-pagination-less').on('click','.spec-pagination-less', function(e){
+	                initialData.seeMore=true;
+	                isFirstTime=false;
+	                var htmlOutput = compileHandler( source, initialData ); 
+	                insertContent('.secSpecs-SingleGuaranteed_Analysis', htmlOutput );
+	                return false;
+	            });
+	            $(document).off('click','.spec-pagination-more').on('click','.spec-pagination-more', function(e){
+	                fullCollection.seeMore=false;
+	                isFirstTime=false;
+	                var htmlOutput = compileHandler( source, fullCollection ); 
+	                insertContent('.secSpecs-SingleGuaranteed_Analysis', htmlOutput );
+	                return false;
+	            });
+           
+            });
+        });
+        Handlebars.registerHelper('filterSpec', function(inputList) {
+		            if(inputList&&inputList.pageSection &&inputList.pageSection.sectionOther=='Guaranteed Analysis'){
+		                var initialDataTemp=inputList;
+		                if(isFirstTime){
+		                    isFirstTime=false;
+		                    fullCollection  =JSON.parse(JSON.stringify(inputList));
+		                    initialData=JSON.parse(JSON.stringify(inputList));
+		                    initialData.pageData=initialData.pageData.slice(0,5);
+		                    if(inputList.pageData.length>5){
+                        initialDataTemp.isEnabled=true;
+                        initialDataTemp.seeMore=true;
+                        initialData.isEnabled=true;
+                        initialData.seeMore=true
+                        fullCollection.isEnabled=true;
+                        fullCollection.seeMore=true;
+                        initialData.pageData=initialData.pageData.slice(0,5);
+                        initialDataTemp.pageData=initialData.pageData.slice(0,5);
+                    	}
+                	 }
+                
+                	return initialDataTemp;
+            	 }
+            		else{
+                		return inputList;
+            		}
+        });
+        
+    </script>
+</apex:component>

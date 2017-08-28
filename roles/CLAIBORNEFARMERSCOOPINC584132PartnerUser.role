@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>CLAIBORNE FARMERS CO-OP INC-584132 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>CLAIBORNE FARMERS CO-OP INC-584132 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>CLAIBORNEFARMERSCOOPINC584132PartnerManager</parentRole>
+</Role>

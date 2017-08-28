@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Response for CRM Support Email2Case submissions</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Customer Care - CRM Support Email2Case Response</name>
+    <style>freeForm</style>
+    <subject>Service Request Confirmation RE: {!Case.Subject} | {!Case.Thread_Id}</subject>
+    <textOnly>Thank you for contacting the Purina CRM Support team. Your inquiry is important to us.
+
+Case #{!Case.CaseNumber} has been assigned to this inquiry. 
+
+Purina CRM Support
+
+
+
+
+{!Case.Thread_Id}</textOnly>
+    <type>custom</type>
+</EmailTemplate>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Internal Notification of Service Request details</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Purina_Letterhead_Template</letterhead>
+    <name>Internal Notification of Service Request Details</name>
+    <style>freeForm</style>
+    <subject>Please Review the Following Service Request: {!Case.CaseNumber} {!Case.Subject}</subject>
+    <textOnly>Please review the following Service Request information:
+
+Service Request Subject: {!Case.Subject}
+
+Service Request Information:
+Service Request Category: {!Case.Issue_Category__c}
+Service Request Sub-Category: {!Case.Issue_Sub_Category__c}
+
+Description: {!Case.Description}
+
+Service Request Link: {!Case.Link}
+
+
+Related to:
+Account Number: {!Case.Account_Number__c}
+Account Name: {!Case.Account}
+Account Mailing Name: {!Account.Mailing_Name__c}
+Account Phone: {!Account.Phone}
+
+
+Contact Name: {!Case.Contact}
+Contact Role: {!Case.Contact_Role__c}
+Contact Type: {!Case.Contact_Type__c}
+Contact Phone: {!Case.Contact_Phone__c}
+Contact Mobile Phone: {!Case.Contact_Mobile_Phone__c}
+
+
+
+Thank you,
+{!Case.OwnerFullName}</textOnly>
+    <type>html</type>
+</EmailTemplate>

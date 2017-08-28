@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Purina_Swine_App_Letterhead</letterhead>
+    <name>Facility Checklist Final</name>
+    <style>freeForm</style>
+    <subject>{!Facility_Checklist__c.Producer_Facility__c} - Purina Facility Checklist</subject>
+    <textOnly>A walk-through was recently completed for your swine facility. Results can be seen below.
+
+Please also refer to any attachments that may or may not be included in this email concerning additional technical or management opportunities.
+
+Below are the results of the Facility Walk Through that occurred on {!Facility_Checklist__c.CreatedDate}.
+
+Facility Name: {!Facility_Checklist__c.Producer_Facility__c}
+Farm Production Consultant: {!Facility_Checklist__c.OwnerFullName}
+
+GENERAL
+All In, All Out Operation:  {!Facility_Checklist__c.All_In_All_Out_Operation__c}
+Facility Type:  {!Facility_Checklist__c.Facility_Type__c}
+Ween Weight of Current Group:  {!Facility_Checklist__c.Wean_Weight_of_Current_Group__c}
+Current Pig Weight Estimate:  {!Facility_Checklist__c.Current_Pig_Weight_Estimate__c}
+Is Pig Space Adequate:  {!Facility_Checklist__c.Is_Pig_Space_Adequate__c}
+Are Pigs Active:  {!Facility_Checklist__c.Are_pigs_active__c}
+Pig Uniformity per Pen:  {!Facility_Checklist__c.Pig_Uniformity_per_Pen__c}
+Are Pigs Piling:  {!Facility_Checklist__c.Are_Pigs_Piling__c}
+Estimated % Fallouts:  {!Facility_Checklist__c.Estimated_Fallouts__c}
+Mortality Rate:  {!Facility_Checklist__c.Mortality_Rate__c}
+Portion of Group Sneezing/Coughing:  {!Facility_Checklist__c.Portion_of_Group_Sneezing_Coughing__c}
+Severity of Scouring:  {!Facility_Checklist__c.Severity_of_Scouring__c}
+Are Fall Back Pigs Sorted Out:  {!Facility_Checklist__c.Are_fall_back_pigs_sorted_out__c}
+Are Individual Treated Pigs Marked:  {!Facility_Checklist__c.Are_individual_treated_pigs_being_marked__c}
+Are Mats Used:  {!Facility_Checklist__c.Are_Mats_Used__c}
+Environment Clean, Dry &amp; Free of Drafts:  {!Facility_Checklist__c.Environment_clean_dry_free_of_drafts__c}
+General Biosecurity Quality:  {!Facility_Checklist__c.General_biosecurity_quality__c}
+Do You See Foam Activity in the Pit:  {!Facility_Checklist__c.Do_you_see_foam_activity_in_the_pit__c}
+Other Observations:  {!Facility_Checklist__c.Other_Observations__c}
+Recommendation to Producer:  {!Facility_Checklist__c.Recommendation_to_Producer__c}
+
+FEED
+Feeders in Good Condition &amp; Adjusted:  {!Facility_Checklist__c.Feeders_in_good_condition_adjusted__c}
+High Quality Feed Storage:  {!Facility_Checklist__c.High_quality_feed_storage__c}
+UltraCare Used:  {!Facility_Checklist__c.UltraCare_Used__c}
+Meal or Pelleted Diet for Phase 1 &amp; 2:  {!Facility_Checklist__c.Meal_or_Pelleted_Diet_for_Phase_1_2__c}
+UltraCare Gel Used in Phase 1:  {!Facility_Checklist__c.UltraCare_Gel_Used_in_Phase_1__c}
+Was this Group Creep Fed:  {!Facility_Checklist__c.Was_this_group_creep_fed__c}
+Electrolytes Used:  {!Facility_Checklist__c.Electrolytes_Used__c}
+Are Pigs Eating:  {!Facility_Checklist__c.Are_pigs_eating__c}
+Sufficient Feeder Space:  {!Facility_Checklist__c.Sufficient_feeder_space__c}
+Current Feed Phase:  {!Facility_Checklist__c.Current_Feed_Phase__c}
+Days or Budget Fed:  {!Facility_Checklist__c.Days_or_Budget_Fed__c}
+Mat Fed:  {!Facility_Checklist__c.Mat_fed__c}
+Other Observations:  {!Facility_Checklist__c.Other_Observations_feed__c}
+Recommendations to Producer:  {!Facility_Checklist__c.Recommendation_to_Producer_feed__c}
+
+AIR
+Environment Temperature Correct:  {!Facility_Checklist__c.Environmental_temperature_correct__c}
+Exhaust Fans Functioning / Blades Clean:  {!Facility_Checklist__c.Are_exhaust_fans_functioning_Are_blades__c}
+Air Fan Louvers in Place &amp; Functioning:  {!Facility_Checklist__c.Air_fan_louvers_in_place_and_functioning__c}
+Are Air Inlets Adjusted Properly:  {!Facility_Checklist__c.Are_air_inlets_adjusted_properly__c}
+Are Pit Levels Restricting Ventilation:  {!Facility_Checklist__c.Are_pit_levels_restricting__c}
+Humidity Evaluation:  {!Facility_Checklist__c.Humidity_evaluation__c}
+Other Observations:  {!Facility_Checklist__c.Other_Observations_air__c}
+Recommendation to Producer:  {!Facility_Checklist__c.Recommendation_to_Producer_air__c}
+
+WATER
+Is the water pressure appropriate:  {!Facility_Checklist__c.Is_the_water_pressure_appropriate__c}
+How many head per cup or nipple:  {!Facility_Checklist__c.How_many_head_per_cup_or_nipple__c}
+Water high quality / Would you drink it:  {!Facility_Checklist__c.Water_high_quality_Would_you_drink_it__c}
+Are waterers functioning properly:  {!Facility_Checklist__c.Are_waterers_functioning_properly__c}
+Water medicator availability:  {!Facility_Checklist__c.Water_medicator_availability__c}
+Other Observations (Water):  {!Facility_Checklist__c.Other_Observations_water__c}
+Recommendations to Producer (Water):  {!Facility_Checklist__c.Recommendation_to_Producer_water__c}</textOnly>
+    <type>html</type>
+</EmailTemplate>

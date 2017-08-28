@@ -1,0 +1,12 @@
+A large credit amount of {!Case.Net_Credit_Amount__c} on Service Request {!Case.CaseNumber} has been approved.
+
+Service Request Link: {!Case.Link} 
+
+Service Request Subject: {!Case.Subject} 
+Service Request Category: {!Case.Issue_Category__c} 
+Service Request Sub-Category: {!Case.Issue_Sub_Category__c} 
+
+Account Name: {!Case.Account} 
+Contact Name: {!Case.Contact}
+
+Credit Amount Range: {!Case.Credit_Amount_Range__c}

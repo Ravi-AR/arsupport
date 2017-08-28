@@ -1,0 +1,209 @@
+<apex:page controller="LPDCR_CC_BusinessManagementController" action="{!initCachedData}" showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false">
+<apex:form id="form">
+    <apex:composition template="LPDCR_CC_BaseTemplate" >
+    <apex:define name="body">
+    <div class="content container-fluid">
+        <div class="wrapper">
+        
+            <div class="col-sm-12 pad_all">                         
+                 <div class="cc_homepage pagenation_promation">
+                   <div class="row">
+                        <div class="col-sm-12 mob_pads1">
+                              <!--<c:LPDCR_SecondaryPageHeader title="Business Management" />-->
+                              
+                              <c:LPDCR_SecondaryPageHeader title="{!JSENCODE(page_title)}" id="pageTitleText" />
+                         </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-12 mob_pads"> 
+                           <div class="panel-heading col-sm-3 leftMenu_hide">
+                           
+                                <ul class="nav nav-tabs lft_menu">
+                                    <li class="wid100 {!IF($CurrentPage.parameters.subtab == 'BusinessManagment' || $CurrentPage.parameters.subtab == '', 'active','')}">
+                                    <a href="#BSM" onclick="setTitle('BusinessManagment');" data-toggle="tab" class="lia txt_upper">Business Management</a></li>
+                                    
+                                    <li class="wid100 {!IF($CurrentPage.parameters.subtab == 'Reports', 'active','')}">
+                                    <a href="#reports" onclick="setTitle('Reports');" data-toggle="tab" class="lia txt_upper">Reports</a></li>
+                                    
+                                    <li class="wid100 {!IF($CurrentPage.parameters.subtab == 'Practices And Policies','active','')}">
+                                    <a href="#pp" onclick="setTitle('Practices And Policies');" data-toggle="tab" class="lia txt_upper">{!JSENCODE($Label.LPDCR_Prac_and_Policies_Subtab_Name)}</a></li>
+                                    
+                                    <!--<li class="wid100 {!IF($CurrentPage.parameters.subtab == 'Practices And Policies','active','')}"><a href="#pp" onclick="setTitle('Practices And Policies'); alert('3');" data-toggle="tab" class="lia txt_upper">Practices And Policies {!JSENCODE($Label.LPDCR_Prac_and_Policies_Subtab_Name)}</a></li>-->
+                                    
+                                    
+                                    
+                                    <li class="wid100 {!IF($CurrentPage.parameters.subtab == 'Veterinary Feed Directive','active','')}">
+                                    <a href="#vfd" onclick="setTitle('Veterinary Feed Directive');" data-toggle="tab" class="lia txt_upper">{!JSENCODE($Label.LPDCR_VFD_Subtab_Name)}</a></li>
+                                    <li class="wid100 {!IF($CurrentPage.parameters.subtab == 'Feed Safety','active','')}">
+                                    <a href="#feedsafety" onclick="setTitle('Feed Safety');" data-toggle="tab" class="lia txt_upper">{!JSENCODE($Label.LPDCR_Feed_Safety_Subtab_Name)}</a></li>
+                                    <li class="wid100 {!IF($CurrentPage.parameters.subtab == 'Sales Resources','active','')}">
+                                    <apex:outputPanel rendered="{!ISPICKVAL($User.UserType,'STANDARD')}" styleClass="condition_class">                                        
+                                           <a href="#sales" onclick="setTitle('Sales Resources');" data-toggle="tab" class="lia txt_upper">{!JSENCODE($Label.LPDCR_Sales_Resources_Subtab_Name)}</a>                                       
+                                    </apex:outputPanel></li>
+                                    <li class="wid100 {!IF($CurrentPage.parameters.subtab == 'FLM','active','')}">
+                                    <apex:outputPanel rendered="{!IF(isFLMAccount||ISPICKVAL($User.UserType,'STANDARD'),TRUE,FALSE)}" styleClass="condition_class">                                     
+                                        <a href="#flmContent" onclick="setTitle('FeedLicenseManufacturer');" data-toggle="tab" class="lia txt_upper">{!JSENCODE($Label.LPDCR_FLM_Subtab_Name)}</a>
+                                    </apex:outputPanel></li>
+                                    
+                                </ul>                                
+                                <apex:actionFunction action="{!setPageTitle}" name="setTitle" rerender="pageTitleText,filterPanel,componentPanel" status="loader">
+                                    <apex:param name="title" assignTo="{!selected_title}" value="" />
+                                </apex:actionFunction>
+                                <apex:outputPanel layout="block" id="filterPanel" >           
+                                        <c:LPDCR_SecondaryPageFilters componentKey="filtersComponent" 
+                                                                      thisPageController="{!this}"
+                                                                      rerenderList="componentPanel"
+                                                                      compName="{!page_title}"/>
+                                </apex:outputPanel>
+                            </div>
+                            <div class="panel-body col-sm-9 pad_lft10 zeroPad rpt_Pannel">
+                                <div class="tab-content bgWht flt_lft wid100">
+                                <apex:outputPanel id="componentPanel">         
+                                    <div class="tab-pane fade {!IF(page_title == $Label.LPDCR_Business_Management_Component_Name,'active in','')}" id="BSM">
+                                       
+                                        <apex:outputPanel id="businessMgtPanel" rendered="{!IF(page_title == $Label.LPDCR_Business_Management_Component_Name,true,false)}">
+                                            
+                                            <c:LPDCR_SecondaryBusinessManagement componentKey="businessMgtComponent" 
+                                                                                thisPageController="{!this}"
+                                                                                speciesFilter="{!SpecieList}"
+                                                                                fileFilter="{!FileTypeFilter}"
+                                                                                sortBy="{!SortBy}"/>
+                                           </apex:outputPanel>
+                                        </div>
+                                   
+                                    <div class="tab-pane fade {!IF(page_title == $Label.LPDCR_Reports_Subtab_Name, 'active in','')}" id="reports">
+                                        
+                                        <apex:outputPanel id="reportPanel" rendered="{!IF(page_title == $Label.LPDCR_Reports_Subtab_Name,true,false)}">
+                                            
+                                           <c:LPDCR_SecondaryReport componentKey="reportComponent" 
+                                                                    thisPageController="{!this}" 
+                                                                    speciesFilter="{!SpecieList}"
+                                                                    fileFilter="{!FileTypeFilter}" 
+                                                                    sortBy="{!SortBy}"/>
+                                        </apex:outputPanel>
+                                       
+                                    </div> 
+                                    <!-- Feed Safety -->
+                                        <div class="tab-pane fade {!IF(page_title == $Label.LPDCR_Feed_Safety_Subtab_Name, 'active in','')}" id="feedsafety">
+                                        
+                                           <apex:outputPanel id="feedContentPanel" rendered="{!IF(page_title == $Label.LPDCR_Feed_Safety_Subtab_Name,true,false)}">
+                                               
+                                               <c:LPDCR_SecondaryFeedSafety componentKey="feedComponent" 
+                                                                                thisPageController="{!this}"
+                                                                                fileFilter="{!FileTypeFilter}"
+                                                                                sortBy="{!SortBy}" /> 
+                                            </apex:outputPanel>
+                                       
+                                    </div>
+                                    <!-- VFD -->
+                                    <div class="tab-pane fade {!IF(page_title == $Label.LPDCR_VFD_Subtab_Name, 'active in','')}" id="vfd">
+                                        
+                                            <apex:outputPanel id="vfdContentPanel" rendered="{!IF(page_title == $Label.LPDCR_VFD_Subtab_Name,true,false)}">
+                                               <c:LPDCR_SecondaryVFD componentKey="vfdComponent" 
+                                                                                thisPageController="{!this}"  
+                                                                                fileFilter="{!FileTypeFilter}"
+                                                                                sortBy="{!SortBy}" />
+                                            </apex:outputPanel>
+                                        
+                                    </div>
+                                    <!-- Practice And Policies -->
+                                    <div class="tab-pane fade {!IF(page_title == $Label.LPDCR_Prac_and_Policies_Subtab_Name, 'active in','')}" id="pp">
+                                       
+                                            <apex:outputPanel id="pracContentPanel" rendered="{!IF(page_title == $Label.LPDCR_Prac_and_Policies_Subtab_Name,true,false)}">
+                                               <c:LPDCR_SecondaryPracAndPolicies componentKey="pracComponent" 
+                                                                                thisPageController="{!this}"
+                                                                                internalOnly="{!InternalUserCheck}"
+                                                                                sortBy="{!SortBy}" />
+                                            </apex:outputPanel>
+                                        
+                                    </div>
+                                   <!-- Sales Resources -->
+                                    
+                                    <div class="tab-pane fade {!IF(page_title == $Label.LPDCR_Sales_Resources_Subtab_Name, 'active in','')}" id="sales">
+                                        
+                                            <apex:outputPanel id="salesContentPanel" rendered="{!IF( ISPICKVAL($User.UserType,'STANDARD') && ( page_title == $Label.LPDCR_Sales_Resources_Subtab_Name), true, false)}">
+                                               <c:LPDCR_SecondarySalesResource componentKey="salesComponent" 
+                                                                                thisPageController="{!this}"
+                                                                                speciesFilter="{!SpecieList}"
+                                                                                fileFilter="{!FileTypeFilter}"
+                                                                                sortBy="{!SortBy}" />
+                                            </apex:outputPanel>
+                                        
+                                    </div>
+                                    
+                                    
+                                    <div class="tab-pane fade {!IF(page_title == $Label.LPDCR_FLM_Subtab_Name, 'active in','')}" id="flmContent">
+                                       
+                                            <apex:outputPanel id="flmContentPanel" rendered="{!IF((isFlmAccount || ISPICKVAL($User.UserType,'STANDARD')) && (page_title == $Label.LPDCR_FLM_Subtab_Name),TRUE,FALSE)}" >
+                                               <c:LPDCR_SecFeedLicenceManufacturer componentKey="flmComponent" 
+                                                                                thisPageController="{!this}"
+                                                                                speciesFilter="{!SpecieList}"
+                                                                                fileFilter="{!FileTypeFilter}"
+                                                                                sortBy="{!SortBy}" />
+                                            </apex:outputPanel>
+                                       
+                                    </div>
+                                </apex:outputPanel>
+                                </div>
+                          </div>
+                      </div>
+                  </div> 
+                   
+                 </div>
+              </div>
+        
+        </div>
+    </div>
+        <!-- Loader code starts here -->
+        <apex:actionStatus id="loader">
+            <apex:facet name="start">
+                <div class="loadercover">
+                </div>
+                <div class="loaderfirst">
+                    <div class="loadersec">
+                        <img src="/img/loading32.gif" class="loaderimage" />
+                    </div>
+                </div>   
+            </apex:facet>
+        </apex:actionStatus>
+        <!-- Loader code ends here-->
+    </apex:define> 
+    </apex:composition> 
+    </apex:form>
+    
+    <script>
+      $('.collapse').on('shown.bs.collapse', function(){
+          
+            $(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+            }).on('hidden.bs.collapse', function(){
+            $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+            });
+    </script>
+    <script src="{!URLFOR($Resource.LPDCR_CC_Assets, 'js/datable.js')}"></script> 
+ <script src="{!URLFOR($Resource.LPDCR_CC_Assets, 'js/bootstrap_datable.js')}"></script>
+  
+    <script>
+         $(document).ready(function(){
+          $('#bm').addClass("myactive");
+          $('#mbm').addClass("mobactive");
+        });
+     </script>
+    <script type="text/javascript">
+                   
+                   function GetselectedAccount(){
+                        //alert('$value--'+$("input[name='account']:checked").attr('value'));
+                        var selectedAccId = $("input[name='account']:checked").attr('value');
+                        //alert(selectedAccId);
+                        
+                        var urlString = '{!$Site.BaseUrl}/';
+                        window.location = urlString+'LPDCR_CC_Business_Management?selectedAccountId='+selectedAccId;
+                        
+                        //changeAccount($("input[name='account']:checked").attr('value'));
+                    }
+                    
+         </script>
+         <style>.condition_class a{text-decoration: none !important;}.condition_class{display: block;float: left;width: 100%;font-size: 11px; margin:5px 0px 5px 0px !important;} li.active .condition_class a{color:#333 !important;text-decoration: none;}</style>
+         <style>.media{background:url({!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_Header_BusinessMgt)}); width:100%; height:133px; background-repeat: no-repeat;
+    background-size: contain;}</style>
+   
+</apex:page>

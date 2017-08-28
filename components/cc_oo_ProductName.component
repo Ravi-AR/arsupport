@@ -1,0 +1,15 @@
+<apex:component >
+    <script>
+        jQuery(function($) {
+            // User story OO-307 Disable link for E1 description for Pre-order.
+            var orderType = $.urlParam("orderType");
+            Handlebars.registerHelper('productName', function (prodData) {
+                prodData = prodData || {"name": "", "sku": "", id: ""};
+                
+                return (orderType && orderType.toLowerCase() === ("preBook").toLowerCase()) ? 
+                '<p><strong>'+prodData.name+'</strong></p>' :
+                '<a href="javascript:void(0);" class="prodLink productName" data-id="'+prodData.sku+'" data-sku="'+prodData.sku+'">'+prodData.name+'</a>';                    
+            });
+        });
+    </script>
+</apex:component>

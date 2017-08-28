@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SamlSsoConfig xmlns="http://soap.sforce.com/2006/04/metadata">
+    <identityLocation>SubjectNameId</identityLocation>
+    <identityMapping>FederationId</identityMapping>
+    <issuer>LOL:SAML2:Prod</issuer>
+    <loginUrl>https://sso.landolakesinc.com/idp/startSSO.ping?PartnerSpId=https://lolanimalnutrition.force.com/mypurinamills</loginUrl>
+    <logoutUrl>https://www.purinamills.com/</logoutUrl>
+    <name>Purina Dealer Login</name>
+    <oauthTokenEndpoint>https://lolanimalnutrition.my.salesforce.com/services/oauth2/token?so=00Dj0000000I9xQ</oauthTokenEndpoint>
+    <redirectBinding>false</redirectBinding>
+    <requestSignatureMethod>1</requestSignatureMethod>
+    <salesforceLoginUrl>https://lolanimalnutrition.my.salesforce.com?so=00Dj0000000I9xQ</salesforceLoginUrl>
+    <samlEntityId>https://lolanimalnutrition.force.com/mypurinamills</samlEntityId>
+    <samlVersion>SAML2_0</samlVersion>
+    <userProvisioning>false</userProvisioning>
+    <validationCert>MIIDSDCCAjCgAwIBAgIGAVgh3Z4ZMA0GCSqGSIb3DQEBCwUAMGUxCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJNTjELMAkGA1UEBxMCQUgxFDASBgNVBAoTC0xhbmQgT0xha2VzMQswCQYDVQQLEwJJVDEZMBcGA1UEAxMQUHVyaW5hU2FsZXNmb3JjZTAeFw0xNjExMDEyMTQ4NDFaFw0xODExMjEyMjQ4NDFaMGUxCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJNTjELMAkGA1UEBxMCQUgxFDASBgNVBAoTC0xhbmQgT0xha2VzMQswCQYDVQQLEwJJVDEZMBcGA1UEAxMQUHVyaW5hU2FsZXNmb3JjZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAI2ObrKhDvUotIEbplAICe0OY8q3mssLhrNARslzEXdnmlogdP4xbylcHwBGKdB3yarv64uop4zjy9L+6ImUDvFlz3PXlsB4VZypnIzDDm83mkN+R7ZRrL9VTPqE19g89HBswygvxVVIiwZW+n7A62VFmsx4XIGPllAyQBZHiVV1BlxK1qDYf1QeFZEUcv+ve515Y6jlpdSaWwjBm5wFT4fgZVOLLH3kh3O4FtqBC4ZWkB/NNf+tM5SFXb4s6k4KsJvBz3k5baOsuGYk1KpnGhVtQ/0B4C8NRtNuequuEurUO4mRZJfP1hs19UMYsRLgBfP+1z/O1wv0CY86r0XNVhECAwEAATANBgkqhkiG9w0BAQsFAAOCAQEACrr//1OtzBaz2sdJAFBEnwjsm+ohkSsq+E2QkNCruz6uSRofzFYGL0RLVNeLEOYJVehbCrYm2HTAg9kRyJDVrzsqyIbWGp0FWNLY+rjKl8uyCC7NvIbjqnnAmnBtCK7Xe8yJyjcWm2ZJEhcQK3pcn91WBXD5SLHVu46OTdc81dC3osIqjfHGWfTIN/fM0fyE9e6wnK10jd8tkFPD+5roVe4mqhMuvOZ+vMCN0syOfwoDjd8XcwL4zjLwIH3LQM+OBVG2s1KS4y+Ly1vJBL7WB0H2Nkx+0NjE+DOlO0Z4L3QxHSAb1rqHv4Titx5oWC4+0klN30tyvf8acKIT+CCc5A==</validationCert>
+</SamlSsoConfig>

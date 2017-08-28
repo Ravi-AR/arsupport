@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailFolder xmlns="http://soap.sforce.com/2006/04/metadata">
+    <accessType>Shared</accessType>
+    <name>FARM VIP Opportunity Reminder</name>
+    <publicFolderAccess>ReadOnly</publicFolderAccess>
+    <sharedTo>
+        <role>MRE_General_Manager</role>
+        <role>MRE_Support</role>
+        <roleAndSubordinatesInternal>MRE_Animal_Milk_Marketing</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>Sales_VP</roleAndSubordinatesInternal>
+        <roleAndSubordinatesInternal>Technical_Services_Manager</roleAndSubordinatesInternal>
+    </sharedTo>
+</EmailFolder>

@@ -1,0 +1,35 @@
+<!-- 
+*********************************************************************************
+Author: Govinda Prasad P S
+Email: govinda.prasad@magnet360.com
+Created Date    : 11/10/2016
+Function    :  Visualforce page for BUSINESS BUILDER PROGRAM - Enrollment Submitted.
+Version     : 1.0 
+*********************************************************************************
+--> 
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false">
+    <apex:composition template="LPDCR_BaseTemplate">
+        
+        <apex:define name="PageTitle">BUSINESS BUILDER PROGRAM - NON MEMBER</apex:define>
+        <apex:define name="body">        
+        <div class="title_wrapper">
+          <div class="container-fluid">
+              <h3 class="page_title">Business Builder Program</h3>
+          </div>
+          </div>    
+          <div class="container-fluid content_wrapper">
+            <div class="row detailbanner">
+                 <div class="col-xs-12 lead">
+                     <center><p class="congrats">Your <b>enrollment request</b> is being reviewed and we will get back to you as soon as possible.</p></center>
+                     
+                     <hr/>
+                 </div> 
+                 
+                 </div><!--end row--> 
+                   <c:LPDCR_BBMaterials />
+            </div><!--End:Container-->
+            
+           
+        </apex:define>
+    </apex:composition>
+</apex:page>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Customer_Ops_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Shares Customer Care, Mass Channel, and Consumer Service Requests</description>
+        <label>Customer Ops Sharing Rule</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>Customer_Ops_Director</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Customer Care,Consumer,Email2Case,Mass Channel/Farm &amp; Ranch</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+</SharingRules>

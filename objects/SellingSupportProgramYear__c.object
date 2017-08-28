@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>Default</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Default</fullName>
+        <fields>Name</fields>
+        <fields>Account__c</fields>
+        <label>Default</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <description>The Parent AR record where the program funds are allocation. Dealers associated with this Parent AR draw from this Program Year record</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Parent AR record where the program funds are allocation. Dealers associated with this Parent AR draw from this Program Year record</inlineHelpText>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Selling Support Program Years</relationshipLabel>
+        <relationshipName>Selling_Support_Program_Years</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Approval_Status__c</fullName>
+        <description>Approval Status for the Selling Support Program Year</description>
+        <externalId>false</externalId>
+        <label>Approval Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Tentative</fullName>
+                    <default>true</default>
+                    <label>Tentative</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Draft</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Draft</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Available_Balance__c</fullName>
+        <description>The Selling Support dollars that are available to dealers. Calculation of Program Year Allocation - Approved Requests - Pending Requests + Balance Adjustments</description>
+        <externalId>false</externalId>
+        <formula>Program_Year_Allocation__c -  Total_Approved_Requests__c -  Total_Pending_Requests__c +  Total_Balance_Adjustments__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The Selling Support dollars that are available to dealers. Calculation of Program Year Allocation - Approved Requests - Pending Requests + Balance Adjustments</inlineHelpText>
+        <label>Available Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>BB_Ind_Curr_Year__c</fullName>
+        <description>Process Builder puts a &quot;1&quot; in this field if the Selling Support Year is in the current year everytime a record is created or updated.</description>
+        <externalId>false</externalId>
+        <label>BB Ind Curr Year Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BB_Ind_Prev_Year__c</fullName>
+        <description>The process builder puts a 1 in this record is for the previous year.</description>
+        <externalId>false</externalId>
+        <label>BB Ind Prev Year Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BusinessBuilderProgramEndDate__c</fullName>
+        <description>End Date for the Business Builder Program Year</description>
+        <externalId>false</externalId>
+        <formula>BusinessBuilderProgramYear__r.EndDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Business Builder Program End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>BusinessBuilderProgramStartDate__c</fullName>
+        <description>Start Date for the Business Builder Program Year</description>
+        <externalId>false</externalId>
+        <formula>BusinessBuilderProgramYear__r.StartDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Business Builder Program Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>BusinessBuilderProgramStatus__c</fullName>
+        <description>Status of the registration record.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Status of the registration record.</inlineHelpText>
+        <label>Business Builder Registration Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Enrolled</fullName>
+                    <default>true</default>
+                    <label>Not Enrolled</label>
+                </value>
+                <value>
+                    <fullName>Enrolled</fullName>
+                    <default>false</default>
+                    <label>Enrolled</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>BusinessBuilderProgramTier__c</fullName>
+        <description>Program Tier for the Business Builder Program Tier</description>
+        <externalId>false</externalId>
+        <label>Business Builder Program Tier</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Program Dealer</fullName>
+                    <default>false</default>
+                    <label>Program Dealer</label>
+                </value>
+                <value>
+                    <fullName>Qualified Dealer</fullName>
+                    <default>false</default>
+                    <label>Qualified Dealer</label>
+                </value>
+                <value>
+                    <fullName>Certified Expert Dealer</fullName>
+                    <default>false</default>
+                    <label>Certified Expert Dealer</label>
+                </value>
+                <value>
+                    <fullName>Elite Certified Expert Dealer</fullName>
+                    <default>false</default>
+                    <label>Elite Certified Expert Dealer</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>BusinessBuilderProgramYear__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>Business Builder Program Year associated to the Selling Support Program Year</description>
+        <externalId>false</externalId>
+        <label>Business Builder Program Year</label>
+        <referenceTo>BusinessBuilderProgramYear__c</referenceTo>
+        <relationshipLabel>Selling Support Program Years</relationshipLabel>
+        <relationshipName>Selling_Support_Program_Years</relationshipName>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Enrolled_Count__c</fullName>
+        <description>If the status is &quot;Enrolled&quot;, than 1 else 0.</description>
+        <externalId>false</externalId>
+        <formula>If(text(BusinessBuilderProgramStatus__c)=&quot;Enrolled&quot;,1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Enrolled Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LPSProjectNumberofFieldDays__c</fullName>
+        <description>Projected number of Field Days annually</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Projected number of Field Days annually</inlineHelpText>
+        <label>LPS Project Number of Field Days</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LPSworkingmin100FieldDays__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>We have an LPS who works a minimum of 100 Field Days (2.5 days per week) annually.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>We have an LPS who works a minimum of 100 Field Days (2.5 days per week) annually.</inlineHelpText>
+        <label>LPS working min 100 Field Days</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Not_Enrolled_Count__c</fullName>
+        <description>If status is &quot;Not Enrolled&quot;, then 1 else 0.</description>
+        <externalId>false</externalId>
+        <formula>If(text(BusinessBuilderProgramStatus__c)=&quot;Not Enrolled&quot;,1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Not Enrolled Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Program_Year_Allocation__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>The starting balance or allocation for this Parent AR for the Program Year</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The starting balance or allocation for this Parent AR for the Program Year</inlineHelpText>
+        <label>Program Year Allocation ($)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>SalespersonNumberofFieldDays__c</fullName>
+        <description>Projected number of Field Days annually</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Projected number of Field Days annually</inlineHelpText>
+        <label>Salesperson Number of Field Days</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Salespersonworkingmin100fielddays__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>We have our own salesperson, on our payroll, who works a minimum of 100 field days (2.5 days per week) annually.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>We have our own salesperson, on our payroll, who works a minimum of 100 field days (2.5 days per week) annually.</inlineHelpText>
+        <label>Salesperson working min 100 field days</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SellingSupportExternalId__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Naming Convention - Program Year-Account External Id</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Naming Convention - Program Year-Account External Id</inlineHelpText>
+        <label>Selling Support External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>TermsandConditionsAccepted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Terms and Conditions accepted by the Dealer.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Terms and Conditions accepted by the Dealer.</inlineHelpText>
+        <label>Terms and Conditions Accepted</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Total_Approved_Requests__c</fullName>
+        <description>The automatically calculated sum of all Approved requests tied to this program year.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The automatically calculated sum of all Approved requests tied to this program year.</inlineHelpText>
+        <label>Total Approved Requests</label>
+        <summarizedField>AMASellingSupportExpense__c.Total__c</summarizedField>
+        <summaryFilterItems>
+            <field>AMASellingSupportExpense__c.Internal_Status__c</field>
+            <operation>equals</operation>
+            <value>Approved Sales Operations, Complete - Paid in Full, Complete - Partially Paid</value>
+        </summaryFilterItems>
+        <summaryFilterItems>
+            <field>AMASellingSupportExpense__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Expense</value>
+        </summaryFilterItems>
+        <summaryForeignKey>AMASellingSupportExpense__c.Selling_Support_Program_Year__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Balance_Adjustments__c</fullName>
+        <description>The automatically calculated sum of all Balance Adjustment records that are entered by Sales Operations to increase or reduce the Selling Support dollars tied to this program year.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The automatically calculated sum of all Balance Adjustment records that are entered by Sales Operations to increase or reduce the Selling Support dollars tied to this program year.</inlineHelpText>
+        <label>Total Balance Adjustments</label>
+        <summarizedField>AMASellingSupportExpense__c.SalesOperationsBalanceAdjustment__c</summarizedField>
+        <summaryFilterItems>
+            <field>AMASellingSupportExpense__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Balance Adjustment</value>
+        </summaryFilterItems>
+        <summaryForeignKey>AMASellingSupportExpense__c.Selling_Support_Program_Year__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Pending_Requests__c</fullName>
+        <description>The automatically calculated sum of all Pending requests tied to this program year.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The automatically calculated sum of all Pending requests tied to this program year.</inlineHelpText>
+        <label>Total Pending Requests</label>
+        <summarizedField>AMASellingSupportExpense__c.Total_Pending__c</summarizedField>
+        <summaryFilterItems>
+            <field>AMASellingSupportExpense__c.Internal_Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted for Approval, Approved by Sales Specialist, Approved by Area Sales Manager, Approved Sales Operations, Entered by Sales Admin</value>
+        </summaryFilterItems>
+        <summaryFilterItems>
+            <field>AMASellingSupportExpense__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Expense</value>
+        </summaryFilterItems>
+        <summaryForeignKey>AMASellingSupportExpense__c.Selling_Support_Program_Year__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>X18_Digit_Selling_Support_Program_Yr_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASESAFEID(Id)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>18 Digit Selling Support Program Yr ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Selling Support Program Year</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Account__c</columns>
+        <columns>Program_Year_Allocation__c</columns>
+        <columns>Total_Approved_Requests__c</columns>
+        <columns>Total_Pending_Requests__c</columns>
+        <columns>Total_Balance_Adjustments__c</columns>
+        <columns>Available_Balance__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>BusinessBuilderProgramStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Selling Support Program Year Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Selling Support Program Years</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Standard</fullName>
+        <active>true</active>
+        <description>Default record type for Selling Support Program Year records</description>
+        <label>Standard</label>
+        <picklistValues>
+            <picklist>Approval_Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tentative</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>BusinessBuilderProgramStatus__c</picklist>
+            <values>
+                <fullName>Enrolled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Enrolled</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>BusinessBuilderProgramTier__c</picklist>
+            <values>
+                <fullName>Certified Expert Dealer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Elite Certified Expert Dealer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Program Dealer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Qualified Dealer</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>Account__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Program_Year_Allocation__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Total_Approved_Requests__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Total_Pending_Requests__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Total_Balance_Adjustments__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Available_Balance__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Account__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Account__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>Account__c</searchFilterFields>
+        <searchResultsAdditionalFields>Account__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <fullName>BalanceAdjustmentNegative</fullName>
+        <active>true</active>
+        <description>Balances cannot be a negative number  LPDCR 1772</description>
+        <errorConditionFormula>Available_Balance__c &lt; 0</errorConditionFormula>
+        <errorMessage>Balances cannot be a negative number</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Name_Validation_for_Community</fullName>
+        <active>false</active>
+        <description>Dealer community users cannot edit the Selling Support Program Year name</description>
+        <errorConditionFormula>NOT(ISPICKVAL($User.UserType, &apos;Standard&apos;)) &amp;&amp;
+ NOT( ISNEW() )</errorConditionFormula>
+        <errorMessage>Dealer community users cannot edit the Selling Support Program Year name</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>SSPY_Acct_has_a_BB_SS_and_ASM_Approver</fullName>
+        <active>true</active>
+        <description>SSPY Account has a BB SS and ASM Approver before Requests can be created</description>
+        <errorConditionFormula>ISBLANK(Account__r.Business_Builder_Reimbursement_Approver__c) || ISBLANK( Account__r.ASM_BB_Approver__c) &amp;&amp;  Program_Year_Allocation__c  &lt;&gt; NULL</errorConditionFormula>
+        <errorMessage>To create a SSPY Record Business Builder Approvers (Sales Specialist or ASM) are required on the Account record.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

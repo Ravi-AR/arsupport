@@ -1,0 +1,25 @@
+<!--
+/**
+* Visualforce component that will hold the list of email templates that are sent from management tips page (LMSA-219)
+* 
+* @Date: 11.05.2015
+* @Author: Adeel Ahmad (Magnet 360)
+* 
+*
+*/
+--> 
+<apex:component controller="LMSA_SelectedManagementTipsController" access="global" allowDML="true">
+       <table width="100%" cellpadding="3" cellspacing="3">
+       	   <apex:variable var="count" value="{!1}" />
+           <apex:repeat value="{!tips}" var="t">
+	          <tr>
+	          	  <td><b>{!count}. {!t.Name}</b></td>
+	           </tr>
+	           <apex:variable var="count" value="{!count+1}" /> 
+           	</apex:repeat>
+			<tr>
+         		<td>Farm Production Consultant: {!$User.FirstName} {!$User.LastName}</td>
+         	</tr>
+      </table>
+
+</apex:component>

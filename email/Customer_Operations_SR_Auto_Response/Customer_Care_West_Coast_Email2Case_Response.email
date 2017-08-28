@@ -1,0 +1,18 @@
+<font face="arial">Thank you for contacting the West Coast Service team.We have received your email and will process it in a timely fashion.  Your email has been assigned a reference # <b> {!Case.CaseNumber}</b>. <br/>
+<br/>
+If you have any additional questions or would like to discuss your request further, please contact us at 844-787-4622 and reference the above reference number.<br/>  
+<br/>
+Thank you for your business and have a good day. <br/>
+<br/>
+<br/>
+Purina Customer Service
+</font>
+<br/>
+<br/>
+
+
+
+
+<div style="font-size: 7pt">
+{!Case.Thread_Id}
+</div>

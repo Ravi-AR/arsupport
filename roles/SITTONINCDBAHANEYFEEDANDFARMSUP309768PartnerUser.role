@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>SITTON INC DBA HANEY FEED AND FARM SUP-309768 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>SITTON INC DBA HANEY FEED AND FARM SUP-309768 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>SITTONINCDBAHANEYFEEDANDFARMSUP309768PartnerManager</parentRole>
+</Role>

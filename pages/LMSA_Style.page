@@ -1,0 +1,725 @@
+<!--
+/**
+* Visualforce page that will add styles to custom pages
+* 
+* @Date: 10.08.2015
+* @Author: Adeel Ahmad (Magnet 360)
+* 
+* @Updates:
+*/
+-->
+<apex:page contentType="text/css">
+	<!-- Collapse Styles -->
+    .panel{
+        margin: 0px !important;
+        border-radius: 0px;
+        border-top: 1px solid #ffffff !important;
+        border-width: 1px 0px 0px 0px !important;
+    }
+
+    .error-report{
+        color:#FF4646; 
+        cursor:pointer;
+    }
+
+    div #err
+    {
+        border: 1px solid #CC252C;
+        color: #FFFFFF;
+        padding: 10px 10px 10px 10px !important;
+        text-shadow: none;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        display: none;
+    }
+
+    .error-msgs-wrapper h5{
+        font-weight:bold;
+        color:#CC252C;
+    }
+
+    .error-msgs-wrapper li{
+        list-style:none;
+        list-style-type:none;
+    }
+
+    .error-msgs-wrapper li a{
+        color:#CC252C;
+        font-size:12px;
+    }
+    
+    .panel-heading{
+        background:#CC252C !important;
+        border-radius:0px !important;
+        position:relative;
+    }
+    
+    .panel-heading a{
+        color:#ffffff;
+        font-size:14px;
+        text-decoration:none;
+    }
+    
+    .panel-heading a:hover {
+    color:#ffffff;
+    }
+    
+    i.collapse-icon{
+    vertical-align: top;
+    padding-left: 2px;
+    padding-top: 3px;
+    }
+    
+    .accordion-inner .panel-heading{
+    background: #777777 !important;
+    }
+    
+    <!-- //Collapse Styles -->
+    
+    <!-- Modal Box Styles -->
+    .tip_section{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-left: 1px solid #fff;
+    z-index: 1000;
+    width:60px;
+    }
+    
+    .tip_section i{
+    font-size:20px !important;
+    }
+    
+    .modal-content{
+    background: transparent !important;
+    box-shadow: none !important;
+    }
+    
+    .modal-body{
+    border-radius: 10px !important;
+    background: #ffffff;
+    }
+    
+    .modal-header{
+    border:none !important;
+    min-height:50px !important;
+    padding-right:5px !important;
+    }
+    
+    .tip_modal_close, .tip_modal_close i{
+    color:#ffffff !important;
+    opacity:1.0 !important;
+    }
+    
+    .modal-content{
+    border:none !important;
+    }
+    
+    .tip_header, .tip_header i{
+    color:#FF9C01;
+    display:block;
+    }
+    
+    .tip_header span{
+    font-size:20px;
+    }
+    
+    .tip_content{
+    display: block;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    }
+    
+     .input_disbale{
+    background-color:#dddddd !important;
+    color:#fff !important;
+    }
+    
+    p {
+    margin: 0 0 0px;
+    } 
+    
+    .btn1 {
+        display: inline-block !important;
+        padding: 4px 12px !important;
+        margin-bottom: 0 !important;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        line-height: 1.42857143 !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+        vertical-align: middle!important ;
+        -ms-touch-action: manipulation !important;
+        touch-action: manipulation !important;
+        cursor: pointer !important;
+        -webkit-user-select: none !important;
+        -moz-user-select: none !important;
+        -ms-user-select: none !important;
+        user-select: none !important;
+        background-image: none !important;
+        border: 1px solid transparent !important;
+        border-radius: 4px !important;
+        min-width: 65px !important;
+        margin-left:5px !important;
+        height:31px;
+    }
+    
+    .closebtn{
+    background-color:#CC252C;
+    color: #ffffff;
+    font-weight:16px;
+    margin-top:5px;
+    } 
+   
+    .btn-primary {
+    color: #fff !important;
+    background-color: #2a94d6 !important;
+    border-color: #2585c1 !important;
+}
+  .padding5
+    {
+    padding-bottom:5px;
+    }
+    .divcheckbx{
+    margin-top:5px;
+    text-align:left;
+    } 
+    
+    .brder{
+    border-top: 3px solid #CC252C;
+    border-bottom: 3px solid #CC252C;
+    display:block;
+    margin-bottom:i5px;
+    } 
+    
+  
+    <!-- @Ends Modal Box Styles -->
+    
+    <!-- Inline styles copied from page -->
+    ul {
+    list-style: none;
+    padding: 0;
+    }
+    ul .inner {
+    padding:15px;
+    overflow: hidden;
+    display: none;
+    border-left: 1px solid #CC252C;
+    border-right: 1px solid #CC252C;
+    background:#F0F1F2;
+    }
+    
+    ul.accordion li{
+    margin: 0px;
+    border-bottom: 1px solid #ffffff;
+    }
+    
+    ul li {
+    margin: .5em 0;
+    }
+    ul li a.toggle {
+    width: 100%;
+    display: block;
+    background: #CC252C;
+    color: #ffffff;
+    padding: .75em;
+    border-radius: 0;
+    text-decoration: none; /* remove if using accordion UI */
+    outline: none !important; /* remove if using accordion UI */
+    }
+    
+    ul.inner li a{
+    background: #777777;
+    }
+    
+    ul.inner li a.toggle{
+    border-top: 1px solid #ffffff;
+    }
+    
+    ul.inner li ul.inner{
+    padding: 0px;
+    border: 1px solid #777777;
+    }
+    
+    a.toggle{
+    position: relative;
+    width:100%;
+    
+    }
+    
+    span.question{
+    background: #dddddd none repeat scroll 0 0;
+    border-bottom: 1px solid #777777;
+    border-top: 1px solid #777777;
+    display: block;
+    padding: 15px;
+    }
+    
+    span.question_option{
+    display: block;
+    padding: 5px 15px;
+    background:#ffffff;
+    }
+    
+    a:focus {
+    outline: none !important;
+    }
+    
+    ul.accordion label{
+    font-weight: normal;
+    margin-left: 5px;
+    }
+    
+    .container-fluid{
+    background:#ffffff;
+    }
+    
+    .facility_header{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    }
+    
+    .facility_header .btn-cancel{
+    background:rgb(238,238,238) !important;
+    border:none !important;
+    box-shadow:none !important;
+    color:#767676 !important;
+    padding-left:10px;
+    padding-right:10px;
+    }
+    
+    .facility_header .btn-email{
+    background:#FF9C00 !important;
+    border:none !important;
+    box-shadow:none !important;
+    color:#ffffff !important;
+    padding-left:10px;
+    padding-right:10px;
+    }
+    
+    .facility_header .btn-save{
+    background:#137CBD !important;
+    border:none !important;
+    box-shadow:none !important;
+    color:#ffffff !important;
+    padding-left:10px;
+    padding-right:10px;
+    }
+    
+    i.completed_sec{
+    display:inline-block;
+    margin-top:-10px;
+    }
+    
+    ul.attachments_ul label{
+    color:#CC252C;
+    }
+    
+    ul.attachments_ul div.tip_title{
+    font-weight:bold;
+    margin-left:22px;
+    }
+    
+    ul.attachments_ul div.tip_desc{
+    margin-left:22px;
+    }
+    
+    .container-fluid{
+    }
+    
+    .boolean {
+		text-align: center;
+    }
+
+    .boolean .form-control{
+    box-shadow:none !important;
+    display: inline-block;
+    width: auto;
+    }
+    
+    .search_loading{
+    position: absolute;
+    z-index: 1000000;
+    top: 50%;
+    left: 40%;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 5px;
+    }
+    
+    .waitingSearchDiv{
+    position:relative;
+    }
+    
+    .message .messageText h4 {
+    margin:5px 0px 0px 0px !important;
+    }
+    
+    .message{
+    margin:0px !important;
+    }
+    
+    .message ul{
+    margin-top:-10px !important;
+    }
+    
+    .message li{
+    margin-top:0px !important;
+    padding-top:0px !important;
+    }
+    
+    .no-padding{
+    padding:0px !important;
+    }
+
+    /* No Left Padding Utility Class */
+	.no-padding-left {
+		padding-left: 0 !important;
+	}
+
+	/* Reduced Form Field Padding */
+	.form-control-padding-reduced {
+	    padding: 6px 8px !important;
+	}
+    
+    <!-- inline styles ends -->
+    
+    <!-- Program Evaluation -->
+    .program_evaluation ul li a.toggle {
+    background-color:#47B56C !important; 
+    }
+    
+    .program_evaluation ul .inner {
+    border-left: 1px solid #47B56C;
+    border-right: 1px solid #47B56C;
+    background:none  !important; 
+    }
+    
+    .program_evaluation .option_title {
+    font-weight:bold;
+    font-size:12px;
+    color: #47B56C;
+    }
+    
+    .program_evaluation .row {
+    margin-bottom: 10px;
+    }
+    
+    .program_evaluation ul.accordion{
+    border-bottom: 1px solid #47B56C;
+    }
+    .program_evaluation .div_color{
+    background-color: #47B56C !important;
+    color:#ffffff  !important;
+    
+    }
+    .program_evaluation .font-title{
+    font-weight:bold;
+    padding-top:25px;
+    padding-bottom:10px;
+    font-size: 16px;
+    }
+    
+    
+    
+    .program_evaluation span.option_title{
+    text-transform: uppercase;
+    }
+    
+    .program_evaluation .result{
+    // background-color: #CDCDCB;
+    // color: none;
+    display:block;
+    padding-top:12px;
+    padding-bottom:12px;
+    font-size:14px;
+    }
+    
+    .program_evaluation .green-font{
+    font-weight:bold;
+    font-size:12px;
+    
+    }
+    
+    
+    .program_evaluation .mid{
+    padding-left:35%;
+    }
+    .program_evaluation .result_title{
+    color: #CFD0BF;
+    font-weight:bold;
+    font-size:12px;
+    }
+    
+    .program_evaluation .padding_left {
+    padding-left:1px !important;
+    
+    }
+    .program_evaluation .padding_right {
+    padding-right:1px !important;
+    }
+    .program_evaluation .radius_left {
+    border-top-left-radius:6px !important;
+    border-bottom-left-radius:6px !important;
+    
+    }
+    .program_evaluation .radius_right {
+    border-top-right-radius:6px !important;
+    border-bottom-right-radius:6px !important;
+    }
+    
+    .program_evaluation .text-align {
+    text-align:right  !important;
+    }
+    
+    .program_evaluation .margin-bottom{
+    margin-bottom:30px  !important;
+    }
+    
+    a.form-control{
+    background:none !important;
+    text-align:center;
+    padding-left:0px !important;
+    padding-right:0px !important;
+    }
+
+    .number_input{
+        padding-left:5px !important;
+        padding-right:5px !important;
+    }
+    <!-- @Ends Program Evaluation -->
+    
+    <!-- @start Management Tips -->
+    .management_tip_pg{
+    background:none !important;
+    }
+    
+    .management_tip_pg  .linkBar{
+    display: none !important;
+    }
+    
+    .management_tip_pg .x-grid3-hd-ACTION_COLUMN{
+    display: none !important;
+    }
+    
+    .management_tip_pg .x-grid3-col-ACTION_COLUMN{
+    display: none !important;
+    }      
+    
+    .management_tip_pg .pageTitleIcon
+    {
+    display: none !important;
+    }
+    
+    .management_tip_pg .selectorTarget{
+    display:none !important;
+    }
+    
+    .management_tip_pg .controls{
+    display:none !important;
+    }
+    .management_tip_pg .left-align{
+    text-align: left !important;
+    font-size: 90% !important;
+    }
+
+    .management_tip_pg .list_div{
+        padding: 15px;
+        border: 1px solid #f13449 !important;
+        margin-top: 15px !important;
+        margin-bottom: 15px !important;
+        border-radius: 3px;    
+    }
+    .management_tip_pg .margin-top{
+    margin-top: 4px !important;
+    }
+    .management_tip_pg a:hover
+    {
+     text-decoration: none;
+    }
+    .management_tip_pg .margin-contact{
+    margin-top: 20px !important;
+    color:#f13449;
+     font-size: 15px;
+    }
+    .management_tip_pg .margin-contact1{
+      font-size: 15px;
+    color:#f13449;
+    }
+     .management_tip_pg .h1margin{
+    margin-bottom: 2px !important;   
+   
+    
+    }
+    
+  
+   .bold{
+     font-weight: bold !important;
+    }
+    .management_tip_pg .block{
+    display:block;
+    
+    
+    }
+    
+    .management_tip_pg .border{
+    border-bottom:   1px solid #ccc ;
+    
+    }
+    
+    .management_tip_pg span_padding{
+          padding-left:   10px ;
+    }
+    
+    h1.tip_h1{
+        color:#f13449;
+        font-size:20px;
+    }
+    
+    table.x-grid3-row-table tbody tr td{
+    	padding:5px !important;
+    }
+    
+    table thead tr.x-grid3-hd-row td.x-grid3-td-checkbox
+    {
+        width:30px !important ;padding:5px !important;
+    }
+    
+    table.x-grid3-row-table tbody tr td.x-grid3-td-checkbox
+    {
+        width:30px !important ;
+    }
+      
+     table.x-grid3-row-table tbody tr td.x-grid3-td-checkbox
+    {
+  
+    width:30px !important ;
+    }
+    
+    .management_tip_pg  input[type=checkbox], input[type=radio] {
+        margin: -1px 0 0 !important;
+        line-height: normal;
+    }
+	
+	.table tbody tr.selected {
+    	background: #b0e1fa;
+	}
+    
+    .paginator .right{
+        display:none !important;    
+    }
+
+    h5.tip_title{
+        font-weight: bold !important;
+        font-size: 12px !important;
+        font-style: italic !important;
+    }
+
+    span.tip_desc{
+        font-size:12px;
+    }
+    
+    <!-- @Ends Management Tips -->    
+
+    <!-- Lookup Input Styling -->
+    .lookupInput a{
+        display:block;
+        position:absolute;
+        top:0px;
+        right:10px;
+        width:auto !important;
+        box-shadow:none !important;
+        border:none !important;
+    }
+
+    .lookupInput img{
+        float:right;
+    }
+
+    span.lookupInput{
+        position:relative;
+        display:inherit;
+    }
+
+    .lookupInput a, .lookupInput a{
+        border:none !important;
+        background:none !important;
+    }
+
+    ul.accordion span.lookupInput a.form-control{
+    }
+
+    <!-- @Ends lookup input styling -->
+
+    <!-- Confirmation Modal -->
+    .confirmModal .modal-dialog{
+        background: #ffffff !important;
+        border-radius:5px;
+    }
+
+    .confirmModal .modal-header{
+        border: 0px !important;
+    }
+
+    .confirmModal .modal-footer{
+        text-align: center !important; 
+        border: 0px !important;
+        padding-bottom: 30px !important;
+    }
+
+    .confirmModal .modal-title{
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .confirmModal .btn-primary{
+        border-radius: 3px;
+        border: none !important;
+        padding: 5px 10px !important;
+        background: #2a94d6 !important;
+    }
+
+    .confirmModal .btn-default{
+        border-radius: 3px;
+        border: none;
+        padding: 5px 10px;
+        background: #E6E6E6;
+    }
+    
+    div.message{
+	    background-color: #d9edf2;
+    	border: 1px solid #bfe8e9;
+	    border-radius: 4px;
+	    color: #2d839a;
+	    margin-bottom: 10px !important;
+	    padding: 15px;
+    }
+        
+    .errorM3 img.msgIcon{
+    	display:none;    
+    }
+        
+    h5.nativeErrorHead{
+        color: #cc252c;
+        font-weight: bold;
+        display:block;
+        padding-left:2px;
+    }
+    
+    .errorM3{
+ 	   background:#ffffff !important;
+    }
+    
+    .errorM3 .messageText a{
+    	margin-left:0px !important;
+    }
+    
+    td.noSidebarCell{
+    	border:none !important;
+    }
+    <!-- @Ends Confirmation Modal -->
+</apex:page>

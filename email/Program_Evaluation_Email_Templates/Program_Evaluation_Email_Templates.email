@@ -1,0 +1,254 @@
+<messaging:emailTemplate subject="Program Evaluation" recipientType="Contact" relatedToType="Program_Evaluation__c">
+<messaging:htmlEmailBody >
+   <html>
+    <head>
+        <style>
+            *{
+                margin:0px;
+                padding:0px;
+             }
+        </style>
+    </head>
+    <body>
+      <table style="width:100%;">
+         <tr>
+             <td><img src="{!$Setup.Org_Settings__c.Purina_Logo_URL__c}" width="174" height="49" alt="Purina" /></td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               An evaluation of your current feed program versus the proposed was recently completed for your swine facility. Results can be seen below.
+            </td>
+         </tr>
+         <tr>
+            <td style="padding-bottom:10px;"></td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               Facility Name: {!relatedTo.Producer_Facility__r.Name}
+            </td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               Farm Production Consultant: {!relatedTo.Owner.Name}
+            </td>
+         </tr>
+         <tr>
+            <td style="padding-bottom:10px;"></td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               <b>Current Program Summary:</b>
+            </td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               Current Program ADG: {!relatedTo.Current_Program_ADG__c}
+            </td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               Current Program Total Feed Lbs: {!relatedTo.Current_Program_Total_Feed_Lbs__c}
+            </td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               Current Program Total Feed $: {!relatedTo.Current_Program_Total_Feed_Dollar__c}
+            </td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               Current Program Feed/Gain: {!relatedTo.Current_Program_Feed_Gain__c}
+            </td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               Current Program $/lb gain: {!relatedTo.Current_Program_lb_gain__c}
+            </td>
+         </tr>
+         <tr>
+            <td style="padding-bottom:10px;"></td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               <b>UltraCare Program Summary:</b>
+            </td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               UltraCare Program ADG: {!relatedTo.UltraCare_ADG__c}
+            </td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               UltraCare Program Total Feed Lbs: {!relatedTo.Ultracare_Total_Feed_Lbs__c}
+            </td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               UltraCare Program Total Feed $: {!relatedTo.Total_Feed_Cost_Ultracare__c}
+            </td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               UltraCare Program Feed/Gain: {!relatedTo.UltraCare_Feed_Gain__c}
+            </td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               UltraCare Program $/lb gain: {!relatedTo.UltraCare_Program_lb_gain__c}
+            </td>
+         </tr>
+         <tr>
+            <td  style="padding-bottom:10px;"></td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               <b>Results Summary:</b>
+            </td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               ADG % Difference: {!relatedTo.Diff_ADG__c}
+            </td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               Feed/Gain Difference: {!relatedTo.Feed_Gain_Difference__c}
+            </td>
+         </tr>
+         <tr>
+            <td style="font-size:14px;">
+               $/Lb Gain Difference: {!relatedTo.Lb_Gain_Difference__c}
+            </td>
+         </tr>
+         <tr>
+            <td  style="padding-bottom:10px;"></td>
+         </tr>
+         <tr>
+            <td style="font-size:12px;"><b>Current Feed Program:</b></td>
+         </tr>
+         <tr>
+            <td>
+               <table style="width:60%; border: 1px solid black; border-collapse: collapse; font-size:12px;">
+                  <tr>
+                     <td style=" border: 1px solid #000000;padding-left:5px;"><b>Diet Name</b></td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;"><b>Lbs</b></td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;"><b>$/LB Diet</b></td>
+                  </tr>
+                  <tr>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.Diet_Name_1__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.Lbs_1__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.lb_diet_1__c}</td>
+                  </tr>
+                  <tr>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.Diet_Name_2__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.Lbs_2__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.lb_diet_2__c}</td>
+                  </tr>
+                  <tr>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.Diet_Name_3__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.Lbs_3__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.lb_diet_3__c}</td>
+                  </tr>
+                  <tr>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.Diet_Name_4__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.Lbs_4__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.lb_diet_4__c}</td>
+                  </tr>
+                  <tr>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.Diet_Name_5__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.Lbs_5__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.lb_diet_5__c}</td>
+                  </tr>
+               </table>
+            </td>
+         </tr>
+         <tr>
+            <td  style="padding-bottom:10px;"></td>
+         </tr>
+         <tr style="font-size:12px;">
+            <td><b>Number of Pigs In:</b> {!relatedTo.pigs_in__c}</td>
+         </tr>
+         <tr style="font-size:12px;">
+            <td><b>Number of Pigs Out:</b> {!relatedTo.pigs_out_currentprogram__c}</td>
+         </tr>
+         <tr>
+            <td  style="padding-bottom:10px;"></td>
+         </tr>
+         <tr style="font-size:12px;">
+            <td><b>Avg Weight In: </b> {!relatedTo.avg_wt_in__c}</td>
+         </tr>
+         <tr style="font-size:12px;">
+            <td><b>Avg Weight Out: </b> {!relatedTo.avg_wt_out__c}</td>
+         </tr>
+         <tr style="font-size:12px;">
+            <td><b>Days on Feed:</b> {!relatedTo.days_on_feed__c}</td>
+         </tr>
+         <tr>
+            <td  style="padding-bottom:10px;"></td>
+         </tr>
+         <tr>
+            <td style="font-size:12px;"><b>UltraCare Feed Program:</b></td>
+         </tr>
+         <tr>
+            <td>
+               <table style="width:60%; border: 1px solid black; border-collapse: collapse; font-size:12px;">
+                  <tr>
+                     <td style=" border: 1px solid #000000;padding-left:5px;"><b>Diet Name</b></td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;"><b>Lbs</b></td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;"><b>$/LB Diet</b></td>
+                  </tr>
+                  <tr>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.UC_Diet_Name_1__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.UC_lbs_1__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.UC_lb_diet_1__c}</td>
+                  </tr>
+                  <tr>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.UC_Diet_Name_2__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.UC_lbs_2__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.UC_lb_diet_2__c}</td>
+                  </tr>
+                  <tr>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.UC_Diet_Name_3__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.UC_lbs_3__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.UC_lb_diet_3__c}</td>
+                  </tr>
+                  <tr>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.UC_Diet_Name_4__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.UC_lbs_4__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.UC_lb_diet_4__c}</td>
+                  </tr>
+                  <tr>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.UC_Diet_Name_5__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.UC_lbs_5__c}</td>
+                     <td style=" border: 1px solid #000000;padding-left:5px;">{!relatedTo.UC_lb_diet_5__c}</td>
+                  </tr>
+               </table>
+            </td>
+         </tr>
+         <tr>
+            <td  style="padding-bottom:10px;"></td>
+         </tr>
+         <tr style="font-size:12px;">
+            <td><b>Number of Pigs In: </b> {!relatedTo.UC_pigs_in__c}</td>
+         </tr>
+         <tr style="font-size:12px;">
+            <td><b>Number of Pigs Out: </b> {!relatedTo.UC_pigs_out__c}</td>
+         </tr>
+         <tr>
+            <td style="padding-bottom:10px;"></td>
+         </tr>
+         <tr style="font-size:12px;">
+            <td><b>Avg Weight In: </b> {!relatedTo.UC_avg_wt_in__c}</td>
+         </tr>
+         <tr style="font-size:12px;">
+            <td><b>Avg Weight Out:  </b> {!relatedTo.UC_avg_wt_out__c}</td>
+         </tr>
+         <tr style="font-size:12px;">
+            <td><b>Days on Feed: </b> {!relatedTo.UC_days_on_feed__c}</td>
+         </tr>
+      </table>
+      </body>
+   </html>   
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

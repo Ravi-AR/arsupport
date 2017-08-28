@@ -1,0 +1,13 @@
+<apex:component controller="LPDCR_CC_Products_Controller" allowDML="true">
+
+ <center><div class="col-sm-12 mrg_btm20 pad_btm20">                                                                   
+            <img src="{!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_Logo_FeedManual)}" width="155" height="38" class=""/> 
+        </div></center>
+        <div class="clear"></div>
+        <div class="col-sm-11">
+            <p class="mrg_btm20">{!$Label.LPDCR_FeedManual_Desc}</p>
+            <p><apex:outputPanel layout="block" rendered="{!areProdManAvailable}" >                
+                <a class="clr_red block pad_top5 mrg_top5" href="{!productManualData.myAppUrl}" target="_blank">Connect to the {!productManualData.app_title}</a> 
+            </apex:outputPanel></p>
+        </div>
+</apex:component>

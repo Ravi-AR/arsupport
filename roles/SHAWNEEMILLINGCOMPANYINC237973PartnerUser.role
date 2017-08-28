@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>SHAWNEE MILLING COMPANY INC-237973 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>SHAWNEE MILLING COMPANY INC-237973 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>SHAWNEEMILLINGCOMPANYINC237973PartnerManager</parentRole>
+</Role>

@@ -1,0 +1,2955 @@
+<!--<Component Name: cc_oo_Header>
+
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+
+Shrivaths Kulkarni                         9/19/2016                                   US-244 hide price from Header
+Shivani Singh                              9/29/2016                                   US-492 write a program to view the total weight of an order under the header
+Rajesh W                                   9/29/2016                                   US-312 Hide product search in header for prebook process
+Piyali Mukherjee                           10/7/2016                                   US-205- To add promotion code from query parameter to order
+Samruddhi Gokhale                          10/10/2016                                  Home page should redirect to Product page
+Piyali Mukherjee                           10/20/2016                                  US-141 To add validation message when user doesnot select shipTo
+Saloni Kale                                12/9/2016                                   US- 142 The customer needs the ability to access the contact information of the
+                                                                                              customer's assigned CSR in the online ordering system.
+Shivani Singh                              02/07/2017                                  US- 2384 Default selection of Ship To and Ship From locations if only one option is available
+
+Controller:cc_oo_HeaderController
+-->
+
+<apex:component allowDML="true" controller="cc_oo_HeaderController">
+    <script id="OO-CartHeaderPhone" type="text/template">
+        <p><a href="#" id="cart_btn_phone" class='chead' data-toggle="modal">
+        {{#if (isNotPreBook)}}
+            {{price this.cartTotal}}<!-- OO-492 -->
+        {{/if}}
+        <span class="cartItems"></span>
+        <span class="totalWeightMobile"></span>
+        </a></p>
+    </script>
+
+    <script id="OO-CartHeaderBrowser" type="text/template">
+        <!--US-1722 for cart name-->
+        <span id="customPageLabel" > {{pageLabelMap 'Primary_Cart'}}: </span>
+        <span class="cartItems"></span>
+        {{pageLabelMap 'Component_MiniCart_Item'}}{{#if (isNotPreBook)}},&nbsp;{{/if}}
+        <span class="cartHeadInfo">
+            {{#if (isNotPreBook)}}<!-- OO-244 -->
+            <span class="cartHeadTot">
+                {{price this.cartTotal}}
+            </span>
+            {{/if}}<!-- OO-244 -->
+        </span>
+    </script>
+
+
+    <script id="OO-HeaderDesktop" type="text/template">
+        <div class="top_navigation">
+        <div class="misc-function" />
+
+      <p class="hide">
+            <span> 
+                <span class="cartsec">
+                    <a id="cartHeader">
+
+                    </a> |
+                <!--<span class="totalWeight">
+                </span>
+                </span>
+                <span>Welcome {!currentUserDisplayName }</span>-->
+            </span>
+        </p>
+    </div>
+
+    <div class="logo_tagline hidden-phone">
+        <div class="width100p logo show-desktop">
+            <div class="left-top-nav pull-left">
+                <a class="brand-logo pull-left brandLogo" id="brandLogo">
+                    <!--<img src="{!URLFOR($Resource.CC_Purina_Theme_3, '/images/logo.png')}" />-->
+                    <h3>ONLINE ORDER</h3>
+                </a>
+                <div class="oo-ship-to-plant-sel pull-left">
+                    <!-- 215 -->
+                    <i class="fa fa-lg fa-map-marker"></i>
+                    <span id="shipToDisplay"></span>
+                    <br class="show-maxHeight-1200">
+                    <i class="fa fa-lg fa-truck"></i>
+                    <span id="sellerDisplay"></span>
+                    <span class="ship-change-btn">
+                        <a href="#" class="ship-to-change">Change</a>
+                    </span>
+                    <!-- 215 -->
+                </div>
+            </div>
+        </div>
+        <div class="pull-right width100p right-top-nav tablet_top_nav_fix">
+            <ul class="top-nav pull-right nav">
+               <!--Uncomment this li when developers have the customer community link setup--> 
+               <!--<li class="btn-group dropdowns">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="lipstick">Customer Community&nbsp;&nbsp; </span><i class="icon2-icon-exit-icon"></i></a>
+                </li>-->
+                <li class="btn-group dropdowns contact-us">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="lipstick">Contact&nbsp;&nbsp; </span><i class="icon2-icon-info-icon-circle"></i></a>
+                    <ul class="dropdown-menu info-list" role="menu" aria-labelledby="dropdownMenu">
+                        <li>
+                            <a tabindex="-1" class="contact-us-phone">
+                                <i class="custom-icons circle icon-icons_call pull-left"></i>
+                                <label class="pull-left spacing-left">{!CSRPhoneNumber}</label>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="csrEmailAddress">
+                                <i class="custom-icons circle icon-icons_mail pull-left"></i>
+                                <label class="pull-left spacing-left">{{pageLabelMap 'CSRemail'}}&nbsp;{!CSREmailAddress}</label>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="btn-group welcome">
+                    <span>Welcome, {!currentUserDisplayName }</span> &nbsp;<i class="icon2-icon-account-icon"></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="ship-to-selector"></div>
+	<div class="remove-warning"></div>
+</script>
+<script id = "OO-CartDetails" type="text/template">
+{{#each cartItems}}
+    <li class="cart-data" data-id="{{this.cartId}}">
+        <a class="cartHeaderLink span12" href="#">
+            <i class="icon-icons_cart circle pull-left"></i>
+            <span class="span9">
+                <strong id="customPageLabel" class="span12 lipstick"> {{this.cartNumber}} </strong>
+                <span class="span12">
+                    <label class="cartItems">{{this.noOfItems}}</label>
+                    <label> {{pageLabelMap 'Component_MiniCart_Item'}}</label>
+                </span>
+                <span class="cartHeadInfo span12 no-margin-left">
+                    {{#if (isNotPreBook)}}<!-- OO-244 -->
+                        <strong>{{pageLabelMap 'Price'}}:</strong>
+                        <label class="cartHeadTotal spacing-left">
+                            {{this.price}}
+                        </label>
+                    {{/if}}<!-- OO-244 -->
+                </span>
+                <span class="span12">
+                    <strong>{{pageLabelMap 'Weight'}}:</strong>
+                    <label class="total-weight spacing-left">{{this.weight}} lb</label>
+                </span>
+            </span>
+        </a>
+    </li>
+{{/each}}
+{{#if this.isClearCartAvailable }}
+	<li class="clear center">
+		<button class="btn-secondary clear-cart warningClick" data-name="clearCart">{{pageLabelMap 'ClearCart'}}</button>
+	</li>
+{{/if}}
+</script>
+
+<script id="remove-products-warning-dialog" type="text/template">
+	<div id="remove-products-warning-modal" class="warning-modal-layout modal cancel-modal hide fade in" tabindex="-1" role="dialog" aria-hidden="true">
+    	<div class="modal-header">
+        	<button type="button" class="close btn-cancel" aria-hidden="true">&times;</button>
+            <h3 class="modal-title">{{pageLabelMap 'SureContinue'}}</h3>
+		</div>
+        <div class="modal-body">
+        	<div class="amend-cancel-warning">{{pageLabelMap 'RemoveProducts'}}</div>
+		</div>
+        <div class="modal-footer">
+        	<button class="btn btn-secondary btn-cancel">{{pageLabelMap 'Cancel'}}</button>
+            <button class="btn btn-primary btn-remove">{{pageLabelMap 'Remove'}}</button>
+		</div>
+	</div>
+</script>
+
+<script id="OO-ProductListHeaderPhone" type="text/template">
+    <ul class="modal-navigation">
+        {{#each this}}
+            <li><a href="#" class="mobile-categoryLink warningClick" data-id="{{this.sfid}}" data-name="productList">{{{this.name}}}</a></li>
+        {{/each}}
+    </ul>
+</script>
+    <script id="OO-HeaderPhone" type="text/template">               
+    <div class="phone_header">
+        {{#if (isNotPreBook)}}
+
+            <ul class="nav nav-pills prod-cat-mobile hide">
+              <li class="dropdown margin-none">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="productHeaderLink">
+                    {{pageLabelMap 'Component_SiteHeader_Products'}}
+                    <span class="icon-icons_down"></span>
+                </a>
+                <div class="dropdown-menu" id="productListHeader"></div>
+              </li>
+            </ul>
+
+        {{/if}}
+
+        <!--<div id="products" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 id="myModalLabel">{{pageLabelMap 'Component_SiteHeader_ProductsNavigation'}}</h3>
+            </div>
+            <div class="modal-body" id="productListHeader">
+            </div>
+        </div>
+
+        <div class="account_sign_in_products">
+
+        </div>-->
+
+        <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 id="myModalLabel">{{pageLabelMap 'Component_SiteHeader_Login'}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="message_container" style="display:none;">
+                    <span class="error-msg">
+
+                    </span>
+                </div>
+                <form>
+                    <label>{{pageLabelMap 'Component_SiteHeader_EmailAddress'}}</label>
+                    <input name="" type="email" id="modal_email">
+                    <label>{{pageLabelMap 'Component_SiteHeader_Password'}}</label>
+                   <input name="" type="password" id="modal_password">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-primary" id="signInButton" value="{{pageLabelMap 'Component_SiteHeader_SignIn'}}"/>
+                {{#ifDisplay 'Login.DsplReg'}}
+                    <input type="button" class="btn btn-primary" id="siteRegister" style="margin-top:10px; margin-left:0px;" value="{{pageLabelMap 'SiteLogin_CreateAccount'}}"/>
+                {{/ifDisplay}}
+                <a href="#" id="forgotPasswordButton" style="margin-top:10px;float:right;">{{pageLabelMap 'Component_SiteHeader_ForgotPassword'}}</a>
+            </div>
+        </div>
+
+        <div id="forgotPassword" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 id="myModalLabel">{{pageLabelMap 'Component_SiteHeader_ForgotPassword'}}</h3>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <p>{{pageLabelMap 'ForgotPassword_PleaseEnterEmail'}}</p>
+                    <label>{{pageLabelMap 'Component_SiteHeader_EmailAddress'}}</label>
+                    <input name="" type="email" id="fpEmailField">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-primary" id="submitBtn" value="{{pageLabelMap 'Component_SiteHeader_Submit'}}"/>
+                <a href="#" id="backToLogin" style="margin-top:10px;float:right;">{{pageLabelMap 'Component_SiteHeader_BackLogin'}}</a>
+            </div>
+        </div>
+
+        <div id="account" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 id="myModalLabel">{{pageLabelMap 'Component_SiteHeader_Account'}}</h3>
+            </div>
+            <div class="modal-body">
+                <ul class="modal-navigation">
+                    {{#each this.myAccountLinks}}
+                      {{#if (compare this.linkLabel )}}
+                        <li>
+                            <a href="javascript:void(0);" class="gotoMA {{this.viewState}}" data-vs="{{this.viewState}}">
+                                {{pageLabelMap this.linkLabel}}
+                            </a>
+                        </li>
+                      {{/if}}
+                    {{/each}}
+                    {{#if (isNotPreBook)}}
+                     <li><a href="#" class="doLogout">{{pageLabelMap 'Component_SiteHeader_Logout'}}</a></li>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+
+       <!-- <div class="cart_products" id="cartHeader">
+
+        </div>-->
+
+        <div id="cart" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 id="myModalLabel">{{pageLabelMap 'Component_SiteHeader_MyCart'}}</h3>
+            </div>
+            <!-- <div class="modal-body"><div id="cartBody"></div><div class="dropdown_cart_total"></div></div> CCRZ-2789 -->
+            <div class="modal-footer">
+                <input type="button" value="{{pageLabelMap 'Component_SiteHeader_CheckOut'}}" class="btn btn-primary" automation-id="checkOut"/>
+            </div>
+        </div>
+
+    </div>
+    <div class="ship-to-selector"></div>
+	<div class="remove-warning"></div>
+</script>
+
+<!--To override logo URL in mobile view -->
+<script id="OO-menu-mobile-template" type="text/template">
+    <div class="navbar navbar-inverse row mobile-version">
+        <div class="navbar-inner animate-overlay">
+            <div class="container">
+                <div class="phone_header_misc">
+                    <div class="row-fluid oo-ship-to-plant-sel">
+                        <div class="span9">
+                            <div class="span12">
+                                <i class="fa fa-lg fa-map-marker"></i>
+                                <span id="shipToDisplay"></span>
+                            </div>
+                            <div class="span12 clear">
+                                <i class="fa fa-lg fa-truck"></i>
+                                <span id="sellerDisplay"></span>
+                            </div>
+                        </div>
+                        <div class="span3 pull-right">
+                            <span>
+                                <a href="#" class="ship-to-change">Change</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="misc-function"></div>
+                </div>
+                <div class="top_nav_container">
+                    <div class="btn_container">
+                        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="logo_container" href="#">
+                        <a class="brand_phone visible-phone white brandLogo" href="#" id="brandLogo">ONLINE ORDER</a>
+                    </div>
+                    <div class="search_form_container" href="#">
+<!--                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> -->
+
+                        <ul class="top-nav nav">
+                            <li class="btn-group dropdowns csr-mobile-link">
+                                <a href="" class="dropdown-toggle nav-toggle" data-toggle="dropdown"><i class="icon2-icon-info-icon-circle"></i></a>
+                                <ul class="dropdown-menu info-list" role="menu" aria-labelledby="dropdownMenu">
+                                    <li>
+                                        <a tabindex="-1" class="contact-us-phone">
+                                            <i class="custom-icons circle icon-icons_call pull-left"></i>
+                                            <label class="pull-left spacing-left">{!CSRPhoneNumber}</label>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="csrEmailAddress">
+                                            <i class="custom-icons circle icon-icons_mail pull-left"></i>
+                                            <label class="pull-left spacing-left">{{pageLabelMap 'CSRemail'}}&nbsp;{!CSREmailAddress}</label>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="btn-group dropdowns">
+                                <a href="" class="dropdown-toggle cart_btn nav-toggle" data-toggle="dropdown"><i class="icon-icons_cart"></i></a>
+                                <ul class="dropdown-menu cart-list pull-right" role="menu" aria-labelledby="dropdownMenu">
+                                </ul>
+                            </li>
+                            <li><span class="search-toggle"><i class="fa fa-search span12" aria-hidden="true"></i></span></li>
+                        </ul>
+                    </div>
+                </div>
+            <div class="custom-search-form">
+                <input id="searchText" name="search" class="searchbox-input ui-autocomplete-input" type="text" placeholder="Search Products" title="Product search, at least 2 characters are required" autocomplete="on" maxlength="70">
+            </div>
+            <div class="collapsed-nav collapse animate-menu">
+                    <ul class="nav">
+                        {{#each .}}
+                            {{#if children}}
+                                <li class="dropdown">
+                                    <a data-toggle="dropdown" class="dropdown-toggle" href="{{linkURL}}" data-menuid="{{menuId}}">{{displayName}} <b class="caret"></b></a>
+                                    <ul class="dropdown-menu sub-menu" >
+                                        {{#each children}}
+                                            {{#if children}}
+                                                <li class="sub">
+                                                    <a href="javascript:void(0);" data-menuid="{{menuId}}">{{displayName}}</a>
+                                                    <ul>
+                                                        {{#each children}}
+                                                            {{#ifEquals mType 'Category'}}
+                                                                <li><a class="category" href="javascript:void(0);" data-id="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                                            {{/ifEquals}}
+                                                            {{#ifEquals mType 'Product'}}
+                                                                <li><a class="product" href="javascript:void(0);" data-id="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                                            {{/ifEquals}}
+                                                            {{#ifEquals mType 'URL'}}
+                                                                <li><a class="menuTypeURL" href="javascript:void(0);" data-href="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                                            {{/ifEquals}}
+                                                            {{#ifEquals mType 'None'}}
+                                                                <li><a href="javascript:void(0);" data-menuid="{{menuId}}">{{displayName}}</a></li>
+                                                            {{/ifEquals}}
+                                                        {{/each}}
+                                                    </ul>
+                                                </li>
+                                            {{else}}
+                                                {{#ifEquals mType 'Category'}}
+                                                    <li><a class="category" href="javascript:void(0);" data-id="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                                {{/ifEquals}}
+                                                {{#ifEquals mType 'Product'}}
+                                                    <li><a class="product" href="javascript:void(0);" data-id="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                                {{/ifEquals}}
+                                                {{#ifEquals mType 'URL'}}
+                                                    <li><a class="menuTypeURL" href="javascript:void(0);" data-href="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                                {{/ifEquals}}
+                                                {{#ifEquals mType 'None'}}
+                                                    <li><a href="javascript:void(0);" data-menuid="{{menuId}}">{{displayName}}</a></li>
+                                                {{/ifEquals}}
+                                            {{/if}}
+                                        {{/each}}
+                                    </ul>
+                                </li>
+                            {{else}}
+                                {{#ifEquals mType 'Category'}}
+                                    <li><a class="category" href="javascript:void(0);" data-id="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                {{/ifEquals}}
+                                {{#ifEquals mType 'Product'}}
+                                    <li><a class="product" href="javascript:void(0);" data-id="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                {{/ifEquals}}
+                                {{#ifEquals mType 'URL'}}
+                                    <li><a class="menuTypeURL" href="javascript:void(0);" data-href="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                {{/ifEquals}}
+                                {{#ifEquals mType 'None'}}
+                                   <li><a href="javascript:void(0);">{{displayName}}</a></li>
+                                {{/ifEquals}}
+                            {{/if}}
+                        {{/each}}
+                        <!-- <li>
+                        <hr width="50%">
+                            <a href="#">Log Out</a>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--To override logo URL in mobile view -->
+<script id="OO-breadCrumbPhone" type="text/template">
+    <div class="breadcrumb_phone">
+    <div class="breadcrumb_phone_container">
+        <a href="#" title="{{this.home.attributes.title}}" onclick="homePage();">{{this.home.attributes.label}}</a>
+
+        {{#each this.categoryList.models}}
+            {{../separator}}&nbsp;
+            <a href="{{this.attributes.href}}" class="categoryLink" title="{{this.attributes.title}}">{{this.attributes.label}}</a>
+        {{/each}}
+
+        {{#if this.displayCategoryBreadCrumb}}
+            {{#if this.product.attributes.label}}
+                {{this.separator}}&nbsp;
+
+                <a href="{{this.product.attributes.href}}" title="{{this.product.attributes.title}}">{{this.product.attributes.label}}</a>
+            {{/if}}
+        {{/if}}
+
+        {{#if this.displaySearchBreadCrumb}}
+            {{this.separator}}&nbsp;
+            <a href="#">{{this.searchResultsLabel}}</a>
+
+            {{this.separator}}&nbsp;
+            {{this.product.attributes.label}}
+        {{/if}}
+
+        {{#if this.displaySearchBreadCrumbWithoutLink}}
+            {{this.separator}}&nbsp;
+            {{this.search.attributes.label}}
+        {{/if}}
+    </div>
+    </div>
+</script>
+
+<script id="OO-menu-desktop-template" type="text/template">
+    <div class="navbar main_navigation_container desktop_nav_fix">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="brand_phone visible-phone white brandLogo" id="brandLogo">ONLINE ORDER</a>
+                    <a class="brand visible-tablet">{{pageLabelMap 'Main_Navigation'}}</a>
+                    <div class="nav-collapse margin-none span7 collapse pull-left">
+                        <ul class="nav span12 pull-left">
+                            {{#each .}}
+                                {{#if children}}
+                                    <li class="dropdown">
+                                        <a data-toggle="dropdown" class="dropdown-toggle " href="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}  <b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                {{> subMenuItem}}
+                                            </ul>
+                                    </li>
+                                {{else}}
+                                    {{#ifEquals mType 'Category'}}
+                                        <li data-menuid="{{menuId}}"><a class="category" href="javascript:void(0);" data-id="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                    {{/ifEquals}}
+                                    {{#ifEquals mType 'Product'}}
+                                        <li data-menuid="{{menuId}}"><a class="product" href="javascript:void(0);" data-id="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                    {{/ifEquals}}
+                                    {{#ifEquals mType 'URL'}}
+                                        <li data-menuid="{{menuId}}"><a class="menuTypeURL" href="javascript:void(0);" data-href="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                    {{/ifEquals}}
+                                    {{#ifEquals mType 'None'}}
+                                        <li data-menuid="{{menuId}}"><a href="javascript:void(0);" data-menuid="{{menuId}}">{{displayName}}</a></li>
+                                    {{/ifEquals}}
+                                {{/if}}
+                            {{/each}}
+                        </ul>
+                    </div>
+                    <div class="span5 pull-right margin-none">
+                    {{#if (isNotPreBook)}}
+                        <div class="span9">
+                            <div class="custom-search-form span12">
+                                <input name="" id="searchText" class="search_input ui-autocomplete-input span9" type="text" placeholder="Search Products" title="Product search, at least 2 characters are required" autocomplete="on" maxlength="70">
+                                <span class="span3 icon-icons_search search_button" id="doSearch"></span>
+                            </div>
+                        </div>
+                            <div class="span3 pull-right cartdropdown">
+
+                                <div class="row">
+                                    <div class="span12">
+                                        <ul class="top-nav nav">
+                                            <div class="verticalLine"></div>
+                                            <li class="btn-group dropdowns my-cart">
+                                                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-icons_cart"></i></a>
+                                                <ul class="dropdown-menu cart-list pull-right" role="menu" aria-labelledby="dropdownMenu">
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="search-error-wrap">
+                            <div class="clear alert alert-error searchTopBarErrorMessage searchBoxWidgetError hide span12 pull-right"></div>
+                        </div>
+                        
+                    {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-inverse mobile-version tablet_nav_fix">
+        <div class="navbar-inner animate-overlay">
+            <div class="container">
+                <div class="top_nav_container">
+                    <div class="btn_container">
+                        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="logo_container" href="#">
+                        <a class="white brand_phone visible-phone visible-tablet brandLogo" href="#" id="brandLogo">ONLINE ORDER</a>
+                    </div>
+                    <div class="search_form_container" href="#">
+<!--                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> -->
+
+                        <ul class="top-nav nav">
+                            <li class="btn-group dropdowns csr-mobile-link">
+                                <a href="" class="dropdown-toggle nav-toggle" data-toggle="dropdown"><i class="icon2-icon-info-icon-circle"></i></a>
+                                <ul class="dropdown-menu info-list" role="menu" aria-labelledby="dropdownMenu">
+                                    <li>
+                                        <a tabindex="-1" class="contact-us-phone">
+                                            <i class="custom-icons circle icon-icons_call pull-left"></i>
+                                            <label class="pull-left spacing-left">{!CSRPhoneNumber}</label>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="csrEmailAddress">
+                                            <i class="custom-icons circle icon-icons_mail pull-left"></i>
+                                            <label class="pull-left spacing-left">{{pageLabelMap 'CSRemail'}}&nbsp;{!CSREmailAddress}</label>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="btn-group dropdowns">
+                                <a href="" class="dropdown-toggle cart_btn nav-toggle" data-toggle="dropdown"><i class="icon-icons_cart"></i></a>
+                                <ul class="dropdown-menu cart-list pull-right" role="menu" aria-labelledby="dropdownMenu">
+                                </ul>
+                            </li>
+                            <li><span class="search-toggle"><i class="fa fa-search" aria-hidden="true"></i></span></li>
+                        </ul>
+                    </div>
+                </div>
+            <div class="custom-search-form">
+                <input id="searchText2" name="" class="searchbox-input ui-autocomplete-input tablet" type="text" placeholder="Search Products" title="Product search, at least 2 characters are required" autocomplete="on"/>
+            </div>
+            <div class="collapsed-nav collapse animate-menu">
+                    <ul class="nav">
+                        {{#each .}}
+                            {{#if children}}
+                                <li class="dropdown">
+                                    <a data-toggle="dropdown" class="dropdown-toggle" href="{{linkURL}}" data-menuid="{{menuId}}">{{displayName}} <b class="caret"></b></a>
+                                    <ul class="dropdown-menu sub-menu" >
+                                        {{#each children}}
+                                            {{#if children}}
+                                                <li class="sub">
+                                                    <a href="javascript:void(0);" data-menuid="{{menuId}}">{{displayName}}</a>
+                                                    <ul>
+                                                        {{#each children}}
+                                                            {{#ifEquals mType 'Category'}}
+                                                                <li data-menuid="{{menuId}}"><a class="category" href="javascript:void(0);" data-id="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                                            {{/ifEquals}}
+                                                            {{#ifEquals mType 'Product'}}
+                                                                <li data-menuid="{{menuId}}"><a class="product" href="javascript:void(0);" data-id="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                                            {{/ifEquals}}
+                                                            {{#ifEquals mType 'URL'}}
+                                                                <li data-menuid="{{menuId}}"><a class="menuTypeURL" href="javascript:void(0);" data-href="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                                            {{/ifEquals}}
+                                                            {{#ifEquals mType 'None'}}
+                                                                <li data-menuid="{{menuId}}"><a href="javascript:void(0);" data-menuid="{{menuId}}">{{displayName}}</a></li>
+                                                            {{/ifEquals}}
+                                                        {{/each}}
+                                                    </ul>
+                                                </li>
+                                            {{else}}
+                                                {{#ifEquals mType 'Category'}}
+                                                    <li data-menuid="{{menuId}}"><a class="category" href="javascript:void(0);" data-id="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                                {{/ifEquals}}
+                                                {{#ifEquals mType 'Product'}}
+                                                    <li data-menuid="{{menuId}}"><a class="product" href="javascript:void(0);" data-id="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                                {{/ifEquals}}
+                                                {{#ifEquals mType 'URL'}}
+                                                    <li data-menuid="{{menuId}}"><a class="menuTypeURL" href="javascript:void(0);" data-href="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                                {{/ifEquals}}
+                                                {{#ifEquals mType 'None'}}
+                                                    <li data-menuid="{{menuId}}"><a href="javascript:void(0);" data-menuid="{{menuId}}">{{displayName}}</a></li>
+                                                {{/ifEquals}}
+                                            {{/if}}
+                                        {{/each}}
+                                    </ul>
+                                </li>
+                            {{else}}
+                                {{#ifEquals mType 'Category'}}
+                                    <li data-menuid="{{menuId}}"><a class="category" href="javascript:void(0);" data-id="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                {{/ifEquals}}
+                                {{#ifEquals mType 'Product'}}
+                                    <li data-menuid="{{menuId}}"><a class="product" href="javascript:void(0);" data-id="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                {{/ifEquals}}
+                                {{#ifEquals mType 'URL'}}
+                                    <li data-menuid="{{menuId}}"><a class="menuTypeURL" href="javascript:void(0);" data-href="{{linkURL}}" data-menuid="{{menuId}}" {{linkTarget openInNewWindow}}>{{displayName}}</a></li>
+                                {{/ifEquals}}
+                                {{#ifEquals mType 'None'}}
+                                   <li data-menuid="{{menuId}}"><a href="javascript:void(0);">{{displayName}}</a></li>
+                                {{/ifEquals}}
+                            {{/if}}
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+	<div id="alert-pop-up" class= "modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">x</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class='modal-message'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script id="OO-selection-modal" type="text/template">
+        <!-- Begin Modal -->
+        
+        <div id="selectShipToPlantModal" class="modal hide fade custom-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button id="closeBtn" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 id="myModalLabel" class="modal-title">{{pageLabelMap 'ShipToShipFromSelect'}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid visible-desktop">
+                    <div class="row-fluid">
+                        <!-- Ship To Panel -->
+                        <div class="span7 ship-to-panel no-margin-left">
+                            <div class="row-fluid">
+                                <div class="span12 custom-header" id="select-ship-to">
+                                    <span class="icon cust-icons inactive-data icon-icons_location"></span>
+                                    <span class = "ship-to-label">
+										<strong class='select-ship inactive-data tab'>{{pageLabelMap 'SelectShipTo'}}</strong>
+                                    	<strong class="count-ship-to inactive-data"></strong>
+									</span>
+                                    <span class="cust-icons filter-icon icon-unfilter-icon pull-right" data-type="shipTo"></span>
+                                    <span class="cust-icons icon-icons_search pull-right"></span>
+                                    <span class="cust-icons icon-icons_close hidden pull-right"></span>
+                                    <input type="text" name="search-ship-to" class="search-data textbox hidden" data-type="shipTo" autofocus="true"/>
+                                </div>
+                            </div>
+                            <div class="row-fluid ship-to-body">
+                                <div class="span12">
+                                    <div class="list-group ship-to-list-group">
+                                        <div class="span12 no-ship-to">{{pageLabelMap 'NoShipTo'}}</div>
+                                        <!-- Ship To Content will be inserted here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Ship To Panel -->
+                        <!-- Begin Plants Panel -->
+                        <div class="span5 plants-ship-to-panel">
+                            <div class="row-fluid">
+                                <div class="span12 custom-header" id="plants-ship-to">
+                                    <span class="icon cust-icons inactive-data icon-icons_truck"></span>
+                                    <strong class='select-ship inactive-data tab'>{{pageLabelMap 'SelectShipFrom'}}</strong>
+                                    <strong class="count-plant inactive-data">(0)</strong>
+                                    <span class="cust-icons filter-icon icon-unfilter-icon pull-right" data-type="plantTo"></span>
+                                    <span class="cust-icons icon-icons_search pull-right" data-type="plantTo"></span>
+                                    <span class="cust-icons icon-icons_close hidden pull-right"></span>
+                                    <input type="text" name="search-ship-to" class="search-data textbox hidden" data-type="plantTo" autofocus="true"/>
+                                </div>
+                            </div>
+                            <div class="row-fluid plant-to-body">
+                                <div class="span12 plant-offset">
+                                    <div class="list-group plant-list-group">
+                                        <div class="span12 no-ship-to">{{pageLabelMap 'NoShipToSelected'}}</div>
+                                        <!-- Plant Content will be inserted here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Plants Panel -->
+                    </div>
+                </div>
+                <div class="container-fluid visible-phone">
+                        <div class="row-fluid outer-cntr">
+                            <!-- Ship To Panel -->
+                            <div class="span12 ship-to-panel">
+                                <div class="row-fluid">
+                                    <div class="span12 custom-header" id="select-ship-to">
+                                        <span class="icon cust-icons inactive-data icon-icons_location icon-lg"></span>
+                                        <span class="ship-to-label">
+											<strong class='select-ship inactive-data'>{{pageLabelMap 'SelectShipTo'}}</strong>
+                                        	<strong class="count-ship-to inactive-data"></strong>
+                                        </span>
+										<span class="cust-icons icon filter-icon icon-unfilter-icon pull-right" data-type="shipTo"></span>
+                                        <span class="cust-icons active-data icon-icons_search pull-right"></span>
+                                        <span class="cust-icons icon-icons_close hidden pull-right"></span>
+                                        <input type="text" name="search-ship-to" class="search-data textbox hidden" data-type="shipTo" autofocus="true"/>
+                                    </div>
+                                </div>
+                                <div class="row-fluid ship-to-body">
+                                    <div class="span12">
+                                        <div class="list-group ship-to-list-group">
+                                            <div class="span12 no-ship-to">{{pageLabelMap 'NoShipToAvailable'}}</div>
+                                            <!-- Ship To Content will be inserted here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Ship To Panel -->
+                            <!-- Begin Plants Panel -->
+                            <div class="span12 plants-ship-to-panel">
+                               <div class="row-fluid">
+                                            <div class="span12 custom-header">
+                                                <span class="cust-icons icon-icons_location icon-lg"></span>
+                                                <span class = "larger ship-to-label" id="info-title">{{pageLabelMap 'SelectedShipTo'}}</span>
+                                            </div>
+                                 </div>
+                                <div class="row-fluid">
+                                    <div class="span12" id="ship-to-info">
+                                        <div class="row-fluid">
+                                            <div class="info">
+                                                <span class="st-id"></span>
+                                                <br/>
+                                                <span class="st-add-line-1"></span>
+                                                <br/>
+                                                <span class="st-add-line-2"></span>
+                                            </div>
+                                            <div class="change">
+                                                <br/>
+                                                <button class="btn btn-link change-shipto pull-right" id="change-shipto" type="button">{{pageLabelMap 'LocaleSwitcher_Change'}}</button>
+                                            </div>
+                                        </div>
+                                        <div class="row-fluid">
+                                            <div class="span12">
+    
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span12 custom-header" id="plants-ship-to">
+                                        <span class="cust-icons icon-icons_truck icon-lg inactive-data"></span>
+                                        <strong class='select-ship inactive-data'>{{pageLabelMap 'SelectShipFrom'}}</strong>
+                                        <strong class="count-plant inactive-data">(0)</strong>
+                                        <span class="cust-icons icon filter-icon icon-unfilter-icon pull-right" data-type="plantTo"></span>
+                                        <span class="cust-icons icon-icons_search pull-right" data-type="plantTo"></span>
+                                        <span class="cust-icons icon-icons_close hidden pull-right"></span>
+                                        <input type="text" name="search-ship-to" class="search-data textbox hidden" data-type="plantTo" autofocus="true"/>
+                                    </div>
+                                </div>
+                                <div class="row-fluid plant-to-body">
+                                    <div class="span11">
+                                        <div class="list-group plant-list-group">
+                                            <!-- Plant Content will be inserted here -->
+                                            <div class="span12 no-ship-to">{{pageLabelMap 'NoShipToAvailable'}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Plants Panel -->
+                        </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row-fluid visible-desktop">
+                    <div class="marg-btm span5 date-pick-step pull-right">
+                        <div class="marg-btm-sm span12 ship-date pull-right">
+                            <label class="font16px white slipght-margin-top">{{pageLabelMap 'ShipDate'}}:</label>
+                            <span class="pull-right Zebra_DatePicker_Icon_Wrapper date spacing-left">
+                                <input class="span12" id="ship-date-picker-input" type="text" readonly="readonly"/>
+                                <button class="date-picker-icon Zebra_DatePicker_Icon Zebra_DatePicker_Icon_Inside" type="button">Pick a date</button>
+                            </span>
+                            <input id ="ship-date-picker" class="pull-left hide" type="text"/>
+                        </div>
+                        <div class="span12 visible-desktop pull-right">
+                            <span class="spacing-left slight-margin-top larger">
+                                <label class="white hide route-day-msg"></label>
+                                <strong class="route-day white"></strong>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="marg-btm modal-cta-btn span12 visible-desktop">
+                        <button id="cancelBtn" class="btn-secondary close-modal" data-dismiss="modal" aria-hidden="true">{{pageLabelMap 'Cancel'}}</button>
+                        <button id="confirmShipToPlant" class="btn btn-primary select-stp">{{pageLabelMap 'Continue'}}</button>
+                    </div>
+                </div>
+                <div class="row-fluid visible-phone">
+                    <div class="span12" align="center">
+                       <div class="span12 clear ship-date hide">
+                              <label class="pull-left larger white">{{pageLabelMap 'ShipDate'}}:</label>
+                                          <span class="Zebra_DatePicker_Icon_Wrapper date-phone spacing-left">
+                                    <input class="span12 global-input" id="ship-date-picker-input-phone" type="text" readonly="readonly"/>
+                                    <button class="date-picker-icon Zebra_DatePicker_Icon Zebra_DatePicker_Icon_Inside" type="button">Pick a date</button>
+                              </span>
+                              <input id ="ship-date-picker" class="pull-left hide" type="text"/>
+                       </div>
+    
+                       <div class="span12 clear route-msg-wrap larger">
+                             <label class="white center hide route-day-msg"></label>
+                             <strong class="route-day white center"></strong>
+                       </div>
+    
+                        <div class="span12">
+                            <button class="btn btn-primary" id="select-ship-to-btn" disabled="disabled">{{pageLabelMap 'Continue'}}</button>
+                            <button class="btn btn-primary select-stp hide" id="confirm-plant">{{pageLabelMap 'Continue'}}</button>
+                            <br/>
+                            <br/>
+                            <button id="close-mobile" class="btn btn-secondary close-modal" data-dismiss="modal" aria-hidden="true">{{pageLabelMap 'Cancel'}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal -->
+    
+        <!-- FIlter Modal --->
+        <div id="filter" class="modal hide fade" tabindex="-1">
+            <div class="custom-modal">
+                <div class="modal-header">
+                    <button type="button" class="close close-modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">{{pageLabelMap 'Filter'}}</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row-fluid">
+                            <div class="span12 filter" id="filter-state">
+                                <div class="row-fluid">
+                                    <div class="span12 custom-header">
+                                        <span class="cust-icons icon-icons_search pull-right"></span>
+                                        <strong class="info-title active-data">{{pageLabelMap 'CheckOut_State'}}</strong>
+                                        <input type="text" name="state-data" class="search-data filter-input hidden"/>
+                                    </div>
+                                </div>
+                                <div class="row-fluid filter-data-placeholder">
+                                    <div class="span12">
+                                        <div class="list-group filter-state-data">
+                                            <!-- Ship To Content will be inserted here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span12 filter" id="filter-city">
+                                <div class="row-fluid">
+                                    <div class="span12 custom-header">
+                                        <span class="cust-icons icon-icons_search pull-right"></span>
+                                        <strong class="info-title active-data">{{pageLabelMap 'CheckOut_City'}}</strong>
+                                        <input type="text" name="city-data" class="search-data filter-input hidden" autofocus="true"/>
+                                    </div>
+                                </div>
+                                <div class="row-fluid filter-data-placeholder">
+                                    <div class="span12">
+                                        <div class="list-group filter-city-data">
+                                            <!-- Ship To Content will be inserted here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row-fluid">
+                        <div class="span12 visible-desktop" align="right">
+                            <button class="btn btn-secondary reset-filter reset-button-size" aria-hidden="true">{{pageLabelMap 'Reset'}}</button>
+                            <button class="btn btn-primary apply-filter" disabled="disabled">{{pageLabelMap 'ApplyFilter'}}</button>
+                        </div>
+                        <div class="span12 visible-phone" align="center">
+                            <br/>
+                            <button class="btn btn-primary apply-filter" disabled="disabled">{{pageLabelMap 'ApplyFilter'}}</button>
+                            <br/>
+                            <br/>
+                            <button class="btn btn-secondary reset-filter  reset-button-size-mobile" aria-hidden="true">{{pageLabelMap 'Reset'}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- End modal -->
+    </script>
+    
+    <!-- Begin Ship To List Template -->
+    <script id="shipTo-list-template" type="text/x-handlebars-template">
+        {{#each arrShipTo}}
+            {{>shipToRow}}
+        {{/each}}
+    </script>
+    <!-- End Ship To List Template -->
+    <!-- Begin Ship To Row Template -->
+    <script id="shipTo-row-template" type="text/x-handlebars-template">
+        {{#if this.selected}}
+            <div class="list-group-item span12 no-margin-left active ship-to-row" data-ship-to-id="{{shipToId}}">
+        {{else}}
+            <div class="list-group-item span12 no-margin-left ship-to-row" data-ship-to-id="{{shipToId}}">
+        {{/if}}
+                <div class="span10">
+                    <strong class="list-group-item-heading">{{shipToName}} {{{hasshiptonumber shipToName shipToId}}}</strong>
+                    <p class="list-group-item-text">
+                        <span class="add-line-1">{{shipToStreet}}, {{shipToCity}}, {{shipToState}}</span><br/>
+                        <span class="add-line-2">{{shipToCountry}}- {{shipToPostalCode}}</span>
+                    </p>
+                </div>
+                <span class = "icon-icons_check_incircle span2 center"></span>
+            </div>
+    </script>
+    <!-- End Ship To Row Template -->
+    <!-- Begin Plant list Template -->
+    <script id="plant-list-template" type="text/x-handlebars-template">
+        {{#each arrPlant}}
+            {{>plantRow}}
+        {{/each}}
+    </script>
+    <!-- End Plant list Template -->
+    <!-- Begin Plant Row Template -->
+    <script id="plant-row-template" type="text/x-handlebars-template">
+        {{#if this.selected}}
+            <div class="list-group-item span12 no-margin-left active plant-row-item" data-plant-id="{{sellerSFId}}">
+        {{else}}
+            <div class="list-group-item span12 no-margin-left plant-row-item" data-plant-id="{{sellerSFId}}">
+        {{/if}}
+                <div class="span10">
+                    <strong class="list-group-item-heading">{{sellerId}}</strong>
+                    <p class="list-group-item-text">
+                        <span class="add-line-1">{{sellerName}}</span>
+                        <br/>
+            <span class="add-line-2">{{generatePlantAddress this.sellerAddresLine1  this.sellerAddresLine2 this.sellerCity this.sellerState this.sellerPostalCode }}</span>
+                    </p>
+                </div>
+                <span class = "icon-icons_check_incircle span2 center"></span>
+            </div>
+    </script>
+    <!-- End Plant list Template -->
+
+    <!-- Filter list template -->
+    <script id="filter-list-template" type="text/x-handlebars-template">
+        {{#each filterList}} {{>filterDataRow}} {{/each}}
+    </script>
+    <!-- End Filter List Template -->
+    <!-- Begin Filter Data Row Template -->
+    <script id="filter-row-template" type="text/x-handlebars-template">
+        {{#if this.checked}}
+            <div class="list-group-item filter-item active" data-value="{{this.name}}" data-checked="{{this.checked}}" data-type="{{this.type}}">
+        {{else}}
+            <div class="list-group-item filter-item" data-value="{{this.name}}" data-checked="{{this.checked}}" data-type="{{this.type}}">
+        {{/if}}
+            {{#if this.checked}}
+                <i class="fa fa-check-square-o pull-left"/>
+            {{else}}
+                <i class="fa fa-square-o pull-left"/>
+            {{/if}}
+            <strong class="list-group-item-heading font14px">{{this.name}}</strong>
+        </div>
+    </script>
+    <!-- End Filter Data Template -->
+    <!-- 215 -->
+
+<script type="text/javascript">
+    Handlebars.registerHelper('compare', function(v1, v2) {
+    	return (v1 === "My Profile" || v1 === "My Orders");
+    });
+    
+    Handlebars.registerHelper('hasshiptonumber', function(name, shipto, options) {
+        if(name.indexOf(shipto) == -1){
+            return ' - ' + shipto;
+        }
+        else{
+            return '';
+        }
+    });
+
+    Handlebars.registerHelper('generatePlantAddress', function(sellerAddresLine1, sellerAddresLine2, sellerCity, sellerState, sellerPostalCode ) {
+        sellerAddresLine1 = sellerAddresLine1 ? sellerAddresLine1+"," : "";
+        sellerAddresLine2 = sellerAddresLine2 ? sellerAddresLine2 +"," : "";
+        sellerCity = sellerCity ? sellerCity+"," : "";
+        sellerState = sellerState ? sellerState +"," : "";
+        sellerPostalCode = sellerPostalCode || "";
+        var address = sellerAddresLine1+sellerAddresLine2+sellerCity+sellerState+sellerPostalCode;
+        return address;
+    });
+    
+    /**
+     * Sets variables in session storage
+     * @param sessionName: String Session variable name to be set
+     * @param sessionValue: String Session value to be set
+    **/
+    var setSessionValue = function(sessionName, sessionValue){
+    	sessionStorage.setItem(sessionName, sessionValue);
+    };
+    
+    /**
+     * Returns value from session storage
+     * @param sessionName: String Session storage variable name to be get
+    **/
+    var getSessionValue = function(sessionName) {
+    	return sessionStorage.getItem(sessionName);
+    };
+    
+    var removeSessionItem = function(sessionName) {
+    	sessionStorage.removeItem(sessionName);
+    };
+    
+    //US-1765
+    setSessionValue('contactId','{!contactId}');
+    
+    var selectedShipTo='{!contactId}'+'selectedShipTo',selectedPlant='{!contactId}'+'selectedPlant',shipDate='{!contactId}'+'shipDate';
+    var selectedSellerSFID = '',selectedSellerSFIDTemp = '', selectedShipToIdTemp = '', selectedShipToId = '', isSameShipto = 'false', refreshCart = 'false', lastWidth, datePickerValue;
+    var currentType,  isMainView = true, menuIdList = [];
+    var isDataLoaded = false, isPhoneClicked = false;
+
+    jQuery(function($) {
+        CCRZ.uiProperties.headerView.desktop.tmpl='OO-HeaderDesktop';
+        CCRZ.uiProperties.headerView.phone.tmpl='OO-HeaderPhone';
+        CCRZ.uiProperties.cartHeaderView.desktop.tmpl = 'OO-CartHeaderBrowser';
+        CCRZ.uiProperties.cartHeaderView.phone.tmpl = 'OO-CartHeaderPhone';
+        CCRZ.uiProperties.Menu.desktop.tmpl = 'OO-menu-desktop-template';
+        CCRZ.uiProperties.Menu.phone.tmpl = 'OO-menu-mobile-template';
+        CCRZ.uiProperties.breadcrumbView.phone.tmpl = 'OO-breadCrumbPhone';        CCRZ.uiProperties.productListModal.phone.tmpl= 'OO-ProductListHeaderPhone';       
+        var cartId=CCRZ.pagevars.queryParams.cartID || CCRZ.pagevars.queryParams.cartId;
+        var shipTo = {
+	        stateGroup: null,
+	        cityGroup: null,
+	        stateData: null,
+	        cityData: null,
+	        stateDataFilter: null,
+	        cityDataFilter: null,
+	        stateDataArr: null,
+	        cityDataArr: null,
+	        filteredData: [],
+	        filteredStateData : [],
+	        filteredCityData : [],
+	        originalData: null,
+	        originalStateData: null,
+	        originalCityData: null,
+	        counterData : {},
+	        searchValue: ""
+	    }, plantTo = $.extend(true, {}, shipTo), defaultDisable = ['* * * 0,6'];
+	    var executionDone = false, lastPageVisited, alreadySearched = false, isRemoveOpened =false, isModalOpened = false;
+        CCRZ.pubSub.on('view:cartHeaderView:refresh', function(theView) {
+            Handlebars.registerPartial("plantRow", $("#plant-row-template").html());
+            Handlebars.registerPartial('filterDataRow', $('#filter-row-template').html());
+            Handlebars.registerPartial("shipToRow", $("#shipTo-row-template").html());
+            var promotionCode=CCRZ.pagevars.queryParams.promotionCode; 
+            
+            
+            var noShipToSelectedMessage = CCRZ.pagevars.pageLabels["NoShipToSelected"];
+            $('.no-ship-to').html(noShipToSelectedMessage);
+
+            // OO-47
+            if(!executionDone) {
+
+                if(sessionStorage.getItem("currentPage")) {
+                    lastPageVisited = sessionStorage.getItem("currentPage");
+                }
+                var lastSku = sessionStorage.getItem("lastSKU");
+                if(CCRZ.pagevars.currentPageName != "ccrz__ProductDetails" || (lastSku && CCRZ.pagevars.queryParams.sku && lastSku != CCRZ.pagevars.queryParams.sku)) {
+                    sessionStorage.removeItem("operation");
+                    sessionStorage.setItem("currentPage", CCRZ.pagevars.currentPageName);
+                }
+                if((lastPageVisited && lastPageVisited != "ccrz__Products" && CCRZ.pagevars.currentPageName != "ccrz__Products") || (lastSku && CCRZ.pagevars.queryParams.sku && lastSku != CCRZ.pagevars.queryParams.sku)) {
+                    if (lastSku != CCRZ.pagevars.queryParams.sku) {
+                        $('.back-to-search-results-container').hide();
+                    }
+                }
+                var skuVal = CCRZ.pagevars.queryParams.sku ? CCRZ.pagevars.queryParams.sku : "";
+                sessionStorage.setItem("lastSKU", skuVal);
+                executionDone = true;
+            }
+            // OO-47
+        });
+
+        var remoteData;
+        var pathName=$(location).attr('href');
+        pathName = pathName.split('?')[0];
+        var path = pathName.split('/');
+        url=path[0]+'//'+path[2]+'/'+path[3];
+        var cartId=CCRZ.pagevars.queryParams.cartId;
+        var orderType=CCRZ.pagevars.queryParams.orderType;
+        var promotionCode=CCRZ.pagevars.queryParams.promotionCode;
+        var portalUserId=CCRZ.pagevars.portalUserId;
+        var isRedirect = false;
+        var isHeaderNotRefreshed = true, currentHeaderView, isMenuNotRefreshed = true, currentMenuView;
+        CCRZ.pubSub.on('view:headerView:refresh', function(theView) {
+        	var selectModel = new CCRZ.models.selectModel();
+            var selectView = new CCRZ.views.selectModalView(selectModel);
+            //OO-3284
+            //To disbale the buttons on the load till use selects the Plant
+            $('.select-stp').attr('disabled', 'disabled;');
+            selectedSellerSFID = getSessionValue(selectedPlant);
+            selectedShipToId = getSessionValue(selectedShipTo);
+            if(((!selectedSellerSFID && !selectedShipToId) || checkSesssion() == 1) && !isModalOpened) {//OO-1581
+    
+                orderId = sessionStorage.getItem("order");
+                if(!orderId){
+                    removeSessionItem(selectedPlant);
+                    removeSessionItem(selectedShipTo);
+                    selectedSellerSFID = null;
+                    selectedShipToId = '';
+                }
+                
+                setSessionValue(selectedPlant, selectedSellerSFID);
+                setSessionValue(selectedShipTo, selectedShipToId);
+                if(CCRZ.pagevars.currentPageName.toLowerCase() === ('ccrz__HomePage').toLowerCase() && sessionStorage.getItem('stpselected') != 'false'){//OO-1941 - set condition to display on homepage
+                    sessionStorage.setItem('stpselected', 'false'); //OO-2014 - display overlay
+                    $('#selectShipToPlantModal').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+                    isModalOpened = true;
+                }//OO-1941 - set condition to display on homepage - ends
+            }
+            
+            
+            if(isHeaderNotRefreshed || currentHeaderView !== CCRZ.display.currentView) {
+                isHeaderNotRefreshed = false;               
+                currentHeaderView = CCRZ.display.currentView;
+                headerData(CCRZ.models.headerModel.prototype, CCRZ.views.headerView.prototype);
+                if(CCRZ.display.isPhone()){
+                    theView.setElement($(CCRZ.uiProperties.headerView.phone.selector));
+                } else {
+                    theView.setElement($(CCRZ.uiProperties.headerView.desktop.selector));
+                    //OO-3284
+                    getShipToSellerInfo();
+                }
+            }
+            if(isModalOpened) {
+                selectedShipToId = selectedShipToIdTemp;
+                selectedSellerSFID = selectedSellerSFIDTemp;
+            }
+            if(isRemoveOpened) {
+            	openRemoveModalPopup();
+            }
+            
+            if(CCRZ.display.isPhone()) {
+                var currentPageName = CCRZ.pagevars.currentPageName;
+                var pagekey = CCRZ.pagevars.queryParams.pageKey;
+                if(currentPageName === "ccrz__HomePage" || currentPageName === "ccrz__Products" || currentPageName === "ccrz__ProductDetails" || (currentPageName === "ccrz__CCPage" && pagekey === "ContactUsCSRPage")) {
+                    $('.prod-cat-mobile').removeClass('hide');
+                }
+            }
+                        
+        });
+        
+        CCRZ.pubSub.on("view:Menu:refresh", function(view) {
+            if(isMenuNotRefreshed || currentMenuView !== CCRZ.display.currentView) {
+                isMenuNotRefreshed = false;             
+                currentMenuView = CCRZ.display.currentView;
+                addMenuEventHandlers(CCRZ.views.Menu.prototype);
+                if(CCRZ.display.isPhone()) {
+                    view.setElement($(CCRZ.uiProperties.Menu.phone.selector));
+                    getShipToSellerInfo();
+                } else {
+                    view.setElement($(CCRZ.uiProperties.Menu.desktop.selector));
+                }
+                if($('.cart-list')[0] && CCRZ.pagevars.currentPageName !== "ccrz__Cart") {           
+                    getCartDetailsData();
+                }               
+            }
+            
+            $('#searchText').autocomplete({
+                source: []
+            });
+            $('#searchText2').autocomplete({
+                source: []
+            });
+        });
+        
+        $(window).resize(function() {
+            if(!isMenuNotRefreshed) {
+            	var searchBox;
+            	if(CCRZ.display.isTablet()) {
+            		searchBox = $("#searchText2");
+            	} else {
+            		searchBox = $("#searchText");
+            	}
+                CCRZ.views.Menu.prototype.positionSearchAutocomplete(searchBox);
+            } 
+        });
+
+        var addMenuEventHandlers = function(menuView) {
+            var options = {"minLength":2,"delay":300,"resultLimit":10,"position":{"collision":"none flip"}};
+            $('.nav a').each(function() {
+                var obj = {
+                    "menuId": $(this).data('menuid'),
+                    "value": $(this).text()
+                };
+                menuIdList.push(obj);
+            });
+            menuView.navClickHandler = function(e) {
+                e.preventDefault();
+                var itemName = e.currentTarget.text;
+                sessionStorage.setItem("navItem", e.currentTarget.dataset["menuid"]);
+                menuView.gotoURL(e);
+            };
+            
+            
+            /**
+             * US - 339 - Click handler for header product search button.
+            **/
+            menuView.productSearch = function() {
+                if(CCRZ.views.productSearchView.prototype.validateSearchInput()) {
+                     var searchText = $("#searchText").val();
+                     var URL = CCRZ.productSearchModel.get("defaults").page + '?cartID='+ CCRZ.pagevars.currentCartID + '&operation=quickSearch&searchText='+encodeURIComponent(searchText);
+                     URL += getCSRQueryString();
+                     window.location.href = URL;return false;
+                }
+            };
+            
+            menuView.positionSearchAutocomplete = function(ele) {
+                var autoComplete=$('.ui-autocomplete');
+                $('.ui-autocomplete').each(function(){
+                    if($(this).children().length>0){
+                        autoComplete = $(this);
+                    }
+                });
+                 
+                var searchBarPosition = $(ele).offset();
+                autoComplete.css({"top": searchBarPosition.top+50+"px", "left": searchBarPosition.left+"px","width": $(ele).width()+"px"});
+                if(isDataLoaded)
+                    $('.ui-autocomplete .ui-menu-item').attr('data-name', 'prodSearch').addClass('warningClick');
+            };
+                
+            menuView.prodSearchKeyUpHandler = function(e) {
+                e.stopPropagation();
+                var ele = e.currentTarget;
+                if(ele.id === "searchText2") {
+                    $('#searchText').val($('#searchText2').val());
+                }
+                if(e.keyCode === 13) {
+                    e.preventDefault();
+                    this.productSearch();
+                } else {
+                    if($(ele).val().length >= 2) {
+                        $('.searchBoxWidgetError').toggle(false);
+                        $(ele).autocomplete({
+                            source: function( request, response ) {
+    
+                                Visualforce.remoting.Manager.invokeAction(
+                                    'ccrz.cc_ctrl_AutoComplete.searchAutoComplete',
+                                    CCRZ.pagevars.remoteContext,
+                                    request.term,
+                                    options.resultLimit,
+                                    'PRODUCT_SEARCH',
+                                    function(resp){
+                                        if(resp && resp.data){
+                                            response(resp.data);
+                                            menuView.positionSearchAutocomplete(ele);
+                                        }
+                                    },{buffer:false,escape:false});
+    
+                            },
+                            open: function(result) {
+                                if(navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
+                                    $('.ui-autocomplete').off('menufocus hover mouseover mouseenter');
+                                }
+                            },
+                            minLength: options.minLength,
+                            delay: options.delay,
+                            position: options.position
+    
+                        });
+                    } else if(!alreadySearched) {
+                        $(ele).autocomplete({
+                            source: []
+                        });
+                        alreadySearched = true;
+                    }
+                }
+                
+            };
+            
+            menuView.toggleMenuView = function(){
+                //OO-2037
+                var htmlHeight = $('html').height();
+                var windowHeight = $(window).height();
+                if (htmlHeight > windowHeight){
+                    var bgHeight = htmlHeight;
+                } else{
+                    var bgHeight = windowHeight;
+                }
+                $('.collapsed-nav.collapse > .nav').css("height", bgHeight); 
+                
+                $('.btn_container').toggleClass('isOpen');
+
+                if($('.custom-search-form').hasClass('searchOpen')){
+                    $('.searchbox-input').toggle();
+                    $('.custom-search-form').toggleClass('searchOpen');
+                }
+
+                $('.animate-menu').toggleClass("move");
+                $('.animate-overlay').toggleClass("black");
+            };
+            
+            menuView.toggleSearchBar = function(e) {
+                $('.custom-search-form').toggleClass('searchOpen');
+                if(!$('.btn_container').hasClass('isOpen')){
+                    $('.searchbox-input').toggle();
+                }
+                if($('.btn_container').hasClass('isOpen')) {
+                    $('.btn_container').toggleClass('isOpen');
+                    setTimeout(function() {
+                        $('.searchbox-input').toggle();
+                    }, 800);
+                    $('.animate-menu').removeClass("move");
+                    $('.animate-overlay').removeClass("black");
+                }           
+            };
+            
+            menuView.toggleCartView = function(e) {
+                e.stopPropagation();
+                $('.cart-list').toggleClass('.cartOpen');
+                if($('.btn_container').hasClass('isOpen')){
+                    $('.animate-menu').removeClass("move");
+                    $('.animate-overlay').removeClass("black");
+                }
+                if($('.custom-search-form').hasClass('searchOpen')){
+                    $('.searchbox-input').toggle();
+                    $('.custom-search-form').removeClass('searchOpen');
+                }
+                if($(e.currentTarget).find(".icon2-icon-info-icon-circle").length) {
+                    if(isPhoneClicked) {
+                        $('.csr-mobile-link').addClass("open");
+                        isPhoneClicked = false;
+                    }
+                    $('.custom-search-form').removeClass('searchOpen');
+                    $('.animate-menu').removeClass("move");
+                    $('.animate-overlay').removeClass("black");
+                } else {
+                    $('.csr-mobile-link').removeClass("open");
+                }
+                return false;
+            };
+            
+            
+            /**
+             * Opens Ship to Ship From modal pop up
+            **/
+            menuView.openShipToModal = function(e) {
+                e.stopPropagation();
+                if(shipTo.originalData){
+                    CCRZ.views.selectModalView.prototype.loadShipToData(shipTo.originalData, false);
+                }
+                $('.Zebra_DatePicker').addClass('dp_hidden');
+                $('#selectShipToPlantModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                isModalOpened = true;
+            };
+            
+            menuView.mouseEnterDropDowns = function(e) {
+                $(e.currentTarget).addClass("open");
+            };
+        
+            menuView.mouseLeaveDropDowns = function(e) {
+                $(e.currentTarget).removeClass("open");
+            };
+            
+            
+            menuView.toggleOverlay = function(e){
+                if($('.btn_container').hasClass('isOpen')){
+                    $('.btn_container').removeClass("isOpen");
+                    $('.animate-menu').removeClass("move");
+                }
+            }
+        
+            menuView.cartPage = function(e) {
+                cartDetailsPage(e.currentTarget.dataset["id"]);
+            };
+            
+            menuView.contactUsPage = function(e) {
+                e.stopPropagation();
+                contactUsPage();
+            };
+            
+            menuView.clearCart = function(e) {
+            	e.stopPropagation();
+            	openRemoveModalPopup();
+            };
+        
+            var events = menuView.events;
+            events["click .ship-to-change"] = "openShipToModal"; 
+            events["click .brandLogo"] = "goHome";
+            events["click a.menuTypeURL"] = "navClickHandler";
+            events["click #doSearch"] = "productSearch";
+            events["keyup #searchText"] = "prodSearchKeyUpHandler";
+            events["keyup #searchText2"] = "prodSearchKeyUpHandler";
+            events["click .btn_container"] = "toggleMenuView";
+            events["click .search-toggle"] = "toggleSearchBar";
+            events["click .mobile-version .collapsed-nav"] = "toggleOverlay";
+            events["click .nav-toggle"] = "toggleCartView";
+            events["click .cart-data"] = "cartPage";
+            events["mouseenter ul.nav li.dropdowns"] = "mouseEnterDropDowns";
+            events["mouseleave ul.nav li.dropdowns"] = "mouseLeaveDropDowns";
+            events["click .csrEmailAddress"] = "contactUsPage";
+            events["click .clear-cart"] = "clearCart";
+            events["click .contact-us-phone"] = function() {
+                isPhoneClicked = true;
+                $('.csr-mobile-link').addClass("open");
+            }
+        };
+        
+        CCRZ.models.selectModel = CCRZ.CloudCrazeModel.extend({
+            className:'cc_oo_HeaderController',
+            getShipTo: function(callback) {
+                var remoteActionCallForCartType = _.extend(CCRZ.RemoteInvocation,{className: this.className});
+                remoteActionCallForCartType.invokeCtx('getShipTos', function(resp){
+                    callback(resp);
+                }, {buffer:false,escape:false,nmsp:false});
+            },
+            getPlants : function(shipToCode, callback) {
+                var remoteActionCallForCartType = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_HeaderController'});
+                remoteActionCallForCartType.invokeCtx('getSellers', shipToCode, function(resp){
+                    callback(resp);
+                }, {buffer:false,escape:false,nmsp:false});
+            },
+        });
+        
+        CCRZ.views.selectModalView = CCRZ.CloudCrazeView.extend({
+            viewName : "selectModal",
+            templateBoth : CCRZ.util.template("OO-selection-modal"),
+            selector : ".ship-to-selector",         
+            initialize: function(options) {
+                this.render(options);
+            },
+            events: {
+                "click .ship-to-row" : "getPlants",
+                "click .plant-row-item" : "selectPlant",
+                "click #select-ship-to-btn" : "selectShipToBtn",
+                "click #confirmShipToPlant, #closeBtn, #cancelBtn, #confirm-plant, #close-mobile": "modalClose",
+                "click .cust-icons.icon-icons_search": "searchIconHandler",
+                "click .icon-icons_close" : "closeIconHandler",
+                "keyup .textbox": "textBoxHandler",
+                "keyup .filter-input": "searchFilteredData",
+                "click #selectShipToPlantModal .filter-icon": "filterIconClick",
+                "click  .filter-item i, .filter-item strong" : "filterSelection",
+                "click .apply-filter": "applyFilterHandler",
+                "click .reset-filter": "resetFilterHandler",
+                "click #filter .close-modal": "cancelFilter",
+                "click #change-shipto": "changeShipToHandler",
+                "click .date-picker-icon": "datePickerClickHandler",
+                "click #ship-date-picker-input": "datePickerClickHandler",
+                "click #ship-date-picker-input-phone": "datePickerClickHandler",
+                "focus #ship-date-picker-input-phone": function(e) { e.currentTarget.blur() },
+                "focus #ship-date-picker-input": function(e) { e.currentTarget.blur() }
+            },
+            render : function(modelData) {
+                this.model = modelData;
+                var v = this;
+                this.$el = $(this.selector);
+                this.setElement(this.$el);
+                this.$el.html(v.templateBoth());
+                this.init();
+                CCRZ.pubSub.trigger("view:"+this.viewName+":refresh", this);
+            },
+            viewChanged: function() {
+                if(this.currentView !== CCRZ.display.currentView) {
+                    this.currentView = CCRZ.display.currentView;
+                    return true;
+                }
+                return false;
+            },
+            renderViewChanged: function() {
+                CCRZ.display.setCurrentView();
+                if(this.viewChanged()) {
+                    this.render(this.model);
+                }
+            },
+            modalClose: function(e) {
+                
+                var ele = e.currentTarget;
+                var eleId = $(ele).attr("id");
+                if(eleId != 'confirmShipToPlant' && eleId != 'confirm-plant') {
+                    selectedSellerSFID = getSessionValue(selectedPlant);
+                    selectedShipToId = getSessionValue(selectedShipTo);
+                    if(selectedSellerSFID === '') {
+                        selectedSellerSFID = null;
+                        setSessionValue(selectedPlant, null);
+                    }
+                    isRedirect = false;
+                    //US-141 - code added for OO scanario
+                    if(orderType && orderType.toLowerCase()===('Prebook').toLowerCase()) {
+                        if(CCRZ.pagevars.currentPageName.toLowerCase() === ('ccrz__HomePage').toLowerCase()) {
+                            isRedirect = true;
+                            selectedSellerSFID = null;
+                            if($.urlParam('viewState') == 'myOrders') {
+                                removeSessionItem(selectedPlant);
+                                removeSessionItem(selectedShipTo);
+                                selectedShipToId = '';
+                            }
+                        }
+                    }
+                } else {
+                    isRedirect = true;
+                    //Set cookie
+                    setSessionValue(selectedPlant, selectedSellerSFID);
+                    setSessionValue(selectedShipTo, selectedShipToId);
+                    setSessionValue(shipDate, datePickerValue);
+                }
+                
+                if(isRedirect) {
+                	var isLogoClicked = false;//5203
+                    CCRZ.models.headerModel.prototype.getHomeUrl( cartId,url, selectedSellerSFID, selectedShipToId, refreshCart,portalUserId,isSameShipto, datePickerValue,isLogoClicked, function(resp) {//5203
+                        if(resp && resp.success) {
+                            CCRZ.pagevars.currentCartID = $.urlParam('cartId',resp.data);
+                            CCRZ.pagevars.queryParams.cartId = $.urlParam('cartId',resp.data);
+                            CCRZ.pubSub.trigger('cartChange', $.urlParam('cartId',resp.data));
+                            window.location=resp.data;
+                        }
+                    });
+                }
+                // User Story: OO-2059
+                if(eleId == 'cancelBtn' || eleId == 'closeBtn' || eleId=='close-mobile') {
+                    this.setDateValue('');
+                    currentType = "shipTo";
+                    this.resetOriginalData(shipTo.originalData);
+                    this.resetFilter();
+                    var selectShipEle = $('#select-ship-to');
+                    selectShipEle.find('.search-data').val('').addClass('hidden'); // to remove the data wich was searched
+                    selectShipEle.removeClass('active'); // to make the background grey again
+                    selectShipEle.find('.inactive-data').removeClass('hidden'); // to show the ship to label
+                    //$('#select-ship-to').find('.inactive-data').show();
+                    selectShipEle.find(".icon-icons_close").addClass('hidden'); // for hiding cross icon
+                    selectShipEle.find(".icon-icons_search").addClass('pull-right'); // for adding search icon
+                    this.numberOfShip();
+                    $('.route-day').empty();
+                    $('.route-day-msg').empty();
+                    $('#ship-date-picker-input, #ship-date-picker-input-phone').val('');
+                    if(lastWidth < 768 ) {
+                        isMainView = false;
+                        this.toggleView(false);
+                    }
+                    $('#selectShipToPlantModal').modal('hide');
+                }
+                isModalOpened = false;
+                // End of US-2059
+                    
+            },
+            /**
+             * Search Icon click handler
+            **/
+            searchIconHandler: function(e) {
+                e.stopPropagation();
+                var ele = e.currentTarget;
+                if(ele.dataset.type === "plantTo" && !shipTo.isCurrentSelected)
+                    return;
+    
+                if(!this.checkForPlantSelection(ele.dataset.type)) {
+                    var parent = $(ele).parent();
+                    var parentId = parent.attr('id');
+                    if(parentId === 'select-ship-to') {
+                        parentId = '#select-ship-to';
+                    } else if(parentId === 'plants-ship-to') {
+                        parentId = '#plants-ship-to';
+                    }
+                    
+                    if(parent.hasClass("active") && (parentId === '#select-ship-to' || parentId === '#plants-ship-to')){
+                        e.stopPropagation();
+                    } else {
+                        if(parentId === '#select-ship-to' || parentId === '#plants-ship-to') {
+                            var closestParent = $(ele).closest(parentId);
+                            closestParent.addClass('active');
+                            closestParent.find(".icon-icons_search").removeClass('pull-right');
+                            closestParent.find(".icon-icons_close").removeClass('hidden');
+                            closestParent.find('.inactive-data').toggleClass('hidden');
+                            closestParent.find('input').toggleClass('hidden').focus();
+                        }
+                        else {
+                            parent.toggleClass('active');
+                            parent.find('.inactive-data').toggleClass('hidden');
+                            parent.find('input').toggleClass('hidden').focus();
+                        }
+                    }
+                }               
+            },
+            changeShipToHandler: function(e){
+                isMainView = true;
+                this.toggleView(false);
+                $('.ship-date').hide();
+            },
+            /**
+             * Checks for Plant selection
+            **/
+            checkForPlantSelection: function(type) {
+                return ( type==="plantTo" && !plantTo.originalData );
+            },
+            selectShipToBtn : function(e) {
+                isMainView = false;
+                $('.st-id').html($('.visible-phone .ship-to-panel .list-group .list-group-item.active .list-group-item-heading').html());
+                $('.st-add-line-1').html($('.visible-phone .ship-to-panel .list-group .list-group-item.active .add-line-1').html());
+                $('.st-add-line-2').html($('.visible-phone .ship-to-panel .list-group .list-group-item.active .add-line-2').html());
+                $('.ship-date').show();
+                this.toggleView(true);                
+            },
+            /**
+             * This function is to call the Ship To data
+            **/
+            getShipTos: function() {
+                var self = this;
+                this.model.getShipTo( function(resp) {
+                    var noData = '<div class="span12 no-ship-to">'+CCRZ.pagevars.pageLabels["NoShipTo"]+'</div>';
+                    if( resp && resp.success && resp.data && resp.data.length) {
+                        self.loadShipToData(resp.data, true);
+                    } else {
+                        self.noShipTo();
+                    }
+                });
+            },
+            /**
+             * Loads Ship to data.
+             * @param data : Array Ship To data that needs to be set.
+             * @param isPartialRegistered : Boolean Whether we need to register partial or not.
+            **/
+            loadShipToData: function(data, isPartialRegistered) {
+                $(".count-ship-to").html('(' + data.length + ')');
+                var arrShipTo = data;
+                if(arrShipTo.length === 1){
+                    arrShipTo[0].selected = true;
+                } else {
+                    if(isPartialRegistered) {
+                        this.resetOriginalData(arrShipTo);
+                    }
+                }
+                // Store the context in an object for Handlebar usage
+                var oShipTo = { 'arrShipTo': arrShipTo };
+                if(isPartialRegistered) {
+                    shipTo.originalData = $.extend(true, [], arrShipTo);
+                    shipTo.stateGroup = _.groupBy(arrShipTo, 'shipToState');
+                    shipTo.stateData = this.createFilterData(sortData(_.keys(shipTo.stateGroup)), "state", shipTo, false, true);
+                    shipTo.originalStateData = $.extend(true, {}, shipTo.stateData);
+                    shipTo.stateDataFilter = $.extend(true, {}, shipTo.stateData);
+                    shipTo.cityGroup = _.groupBy(arrShipTo, 'shipToCity');
+                    shipTo.cityData = this.createFilterData(sortData(_.keys(shipTo.cityGroup)), "city", shipTo, false, true);
+                    shipTo.originalCityData = $.extend(true, {}, shipTo.cityData);
+                    shipTo.cityDataFilter = $.extend(true, {}, shipTo.cityData);                    
+                    // Register the row partial, used within the list
+                    
+                    
+                }
+                    // Get the list helper
+                var source = $("#shipTo-list-template").html();
+                var htmlOutput = compileHandler(source, oShipTo);
+                insertContent('.ship-to-list-group', htmlOutput);
+                if(arrShipTo.length === 1) {
+                    var shipToId=data[0].shipToId;
+                    this.getPlantsInfo(shipToId);
+                }
+                if(CCRZ.display.isPhone()) {
+                    $('.ship-to-row').removeClass('span12').addClass('row');
+                }
+            },
+            /**
+             * Inserts No Ship to message on overlay screen when there is no ship to data avialable..
+            **/
+            noShipTo: function() {
+                insertNoDataMsg('.ship-to-list-group', "NoShipTo");
+                $(".count-ship-to").html('(0)');
+                $('.ship-to-panel .filter-icon').removeClass('icon-icons_filter').addClass('icon-unfilter-icon');
+            },          
+            /**
+             * Reset the Selected value in data
+             * @param data : Array Data for which selected value will be reset.
+            **/
+            resetOriginalData: function(data) {
+                for(var i=0;i<data.length; i++) {
+                    data[i].selected = false;
+                }
+            },
+            /**
+             * This function is to call the Plants data
+             * @param shipToCode: string Ship To code for which plant data needs to retrieved.
+             * @param oClickItem: object Element which is clicked
+            **/
+            getPlants: function(e) {
+                var oClickItem = e.currentTarget;
+                var shipToCode = oClickItem.dataset["shipToId"];
+                this.setActiveSelection(oClickItem);
+                this.getPlantsInfo(shipToCode, true);
+            },      
+            /**
+             * This function is used to set actie element.
+             * @param oClickItem: object Element which is clicked
+            **/
+            setActiveSelection:  function(oClickItem){
+                var oClickedItem = $(oClickItem);
+                if (oClickedItem[0]) {
+                    oClickedItem.siblings('.list-group-item').removeClass('active');
+                    oClickedItem.addClass('active');
+                }
+            },      
+            /**
+             * This function is to retrieve the Plants data
+             * @param shipToCode: string Ship To code for which plant data needs to retrieved.
+            **/
+            getPlantsInfo : function(shipToCode, flag) {
+            	$('.plant-list-group').empty();
+                var orderType = $.urlParam('orderType');
+                //To disable the button till user selects the Plant
+                $('.route-day').empty();
+                $('.route-day-msg').empty();
+                $('.select-stp').attr('disabled', 'disabled');
+                if($('.visible-desktop').is(':hidden')) {
+                    $('#select-ship-to-btn').prop('disabled', false);
+                }
+                selectedShipToId = shipToCode;
+                selectedShipToIdTemp = selectedShipToId;
+                selectedSellerSFIDTemp = '';//OO-2089
+                if(flag) {
+                    this.resetOriginalData(shipTo.originalData);
+                    var selectedObj = _.findWhere(shipTo.originalData, {"shipToId": shipToCode});
+                    if(selectedObj) {
+                        selectedObj.selected = true;
+                    }
+                }
+                shipTo.isCurrentSelected = true;
+                var self = this;
+                var prebookExistsMessage = $('<span clas="min-error">A Prebook Commitment already exists for the selected store location. Please select a different Ship To location.<span><br/>');
+                CCRZ.models.selectModel.prototype.getPlants(shipToCode, function(resp) {
+                    if( resp ) {
+                        if( resp.data && resp.data.listSellers.length ) {
+                            self.loadPlantData(resp.data, true);
+                        } else {
+                            self.noPlants();
+                        }
+    
+                        //US-141 - code added for OO scanario
+                        if(!resp.success && (orderType && orderType.toLowerCase()===('Prebook').toLowerCase())) {
+                            $('#alert-pop-up .modal-message').text('A Prebook Commitment already exists for the selected store location. Please select a different Ship To location.');
+                            $('#alert-pop-up').modal({
+                                backdrop: 'static',
+                                keyboard: false
+                            });
+                            $('.modal-backdrop').addClass('alert-pop-up');
+                            isSameShipto = 'true';
+                        } else {
+                            isSameShipto = 'false';
+                        }
+                    } else {
+                        self.noPlants();
+                    }
+                });
+            },
+            loadPlantData: function(arrPlantData, isPartialRegistered) {
+                var arrPlant=isPartialRegistered ? arrPlantData.listSellers : arrPlantData;
+                $('.count-plant').text("("+ arrPlant.length + ")");
+                $('.plants-ship-to-panel .filter-icon').removeClass('icon-icons_filter').addClass('icon-unfilter-icon');
+                if(arrPlant.length === 1) {
+                    arrPlant[0].selected = true;
+                } 
+
+                // Store the context in an object for Handlebar usage
+                var oPlant = { 'arrPlant': arrPlant };
+                plantTo.filteredData = [];
+                plantTo.originalData = $.extend(true, [], arrPlant);
+                plantTo.stateGroup = _.groupBy(arrPlant, 'sellerState');
+                plantTo.stateData = this.createFilterData(sortData(_.keys(plantTo.stateGroup)), "state", plantTo, false, true);
+                plantTo.originalStateData = $.extend(true, {}, plantTo.stateData);
+                plantTo.stateDataFilter = $.extend(true, {}, plantTo.stateData);
+                plantTo.cityGroup = _.groupBy(arrPlant, 'sellerCity');
+                plantTo.cityData = this.createFilterData(sortData(_.keys(plantTo.cityGroup)), "city", plantTo, false, true);
+                plantTo.originalCityData = $.extend(true, {}, plantTo.cityData);
+                plantTo.cityDataFilter = $.extend(true, {}, plantTo.cityData);
+                plantTo.routeValue= isPartialRegistered ? arrPlantData.routeSellers: plantTo.routeValue;
+                
+                // Get the list helper
+                var source = $("#plant-list-template").html();
+                var htmlOutput = compileHandler(source, oPlant);
+                insertContent('.plant-list-group', htmlOutput);
+                $('#plants-ship-to .cust-icons.pull-right').css('color', '#cc252c');
+                if(arrPlant.length === 1) {
+                    var sellerId=arrPlant[0].sellerSFId;
+                    this.setPlantSelection(sellerId);
+                }
+                if(CCRZ.display.isPhone()) {
+                    $('.plant-row-item').removeClass('span12').addClass('row');
+                }
+            },
+            
+            /**
+             * Inserts No Ship from message on overlay screen when there is no ship from data avialable.
+            **/
+            noPlants: function() {
+                insertNoDataMsg('.plant-list-group', "NoShipToSelected");
+                $(".count-plant").html('(0)');
+                var shipFrom = $('#plants-ship-to');
+                shipFrom.find('.filter-icon').removeClass('icon-icons_filter').addClass('icon-unfilter-icon');
+                shipFrom.find('.search-data').val('').addClass('hidden'); // to remove the data wich was searched
+                shipFrom.removeClass('active'); // to make the background grey again
+                shipFrom.find('.inactive-data').removeClass('hidden'); // to show the ship to label
+                shipFrom.find(".icon-icons_close").addClass('hidden'); // for hiding cross icon
+                shipFrom.find(".icon-icons_search").addClass('pull-right'); // for adding search icon
+                shipFrom.find('.cust-icons.pull-right').css('color', '#777777');
+            },
+            /**
+             * Handles Date picker selection. // US1718.
+             * @param disabledDates: Array/undefined Contains array of dates which needs to be disabled or it will be undefined.
+            **/
+            handleDatePicker: function(disabledDates, flag) {
+                var datePicker = $('#ship-date-picker').data('Zebra_DatePicker');
+                if( datePicker ) {
+                    datePicker.destroy();
+                    //$('.Zebra_DatePicker').remove();
+                }
+                if(flag) {
+                    setSessionValue('disabledDates', JSON.stringify(disabledDates));
+                }
+                var self = this;
+                var date_picker_input;
+                
+                if($('#ship-date-picker')[0]) {
+                    $('#ship-date-picker').Zebra_DatePicker({
+                        format:'m/d/Y',
+                        first_day_of_week: 0,
+                        direction: 1,
+                        disabled_dates: disabledDates,
+                        onSelect: function(date, dateInFormat, dateObj, ele){
+                            self.setDateValue(date);
+                        },
+                        onOpen: function() {
+                        	var topPosition, datepickerPos;
+                            if(lastWidth < 768) {
+                                datepickerPos = $('#ship-date-picker-input-phone').offset();
+                                topPosition = datepickerPos.top - 250;
+                            } else {
+                                datepickerPos = $('.date').position();
+                                topPosition = datepickerPos.top - 200;
+                            }
+                            $('.Zebra_DatePicker').css({'z-index': '99999', left: datepickerPos.left+"px", top: topPosition+"px" });
+                        },
+                        onClear : function() {
+                            self.setDateValue('');
+                        }
+                    });
+                }
+            },      
+            /**
+             * Sets Date value. // US1718.
+             * @param date: String Contains date which is selected by the user.
+            **/
+            setDateValue: function(date) {
+                datePickerValue = date;
+                if(lastWidth < 768) {
+                    $('#ship-date-picker-input-phone').val(date);
+                } else {
+                    $('#ship-date-picker-input').val(date);
+                }
+                this.enableContinueButton();
+            },
+            /**
+             * Checks whether the selected date is present in the date list of the selected plant.
+             * @param datesList: Array/undefined Contains array of dates which needs to be disabled or it will be undefined.
+            **/
+            checkDateValue: function(datesList) {
+                var date = this.changeDateFormat(datePickerValue);
+                if(datesList && datesList.indexOf(date) > -1) {
+                    $('.dp_clear').trigger('click');
+                }
+            },
+            /**
+             * Returns date picker value in format supported by Zebra date picker.
+             * @param value: String Date value which needs to be converted.
+            **/
+            changeDateFormat: function(value) {
+                var date = value.split('/');
+                return date[1]+ " " + date[0] + " "+ date[2];
+            },
+            /**
+             * Enables continue button on ship to overlay.
+            **/
+            enableContinueButton: function() {
+                if(selectedSellerSFIDTemp && selectedShipToIdTemp && datePickerValue ) {
+                    $('.select-stp').addClass('lipstick-background').removeAttr('disabled');
+                } else {
+                    $('.select-stp').attr('disabled', 'disabled');
+                }
+            },
+            /**
+             * Called on initialization. This function will call all other functions to initialize the elements on the modal
+            **/
+            init: function() {
+                var self = this;
+                lastWidth = $(window).width();
+                if(!shipTo.originalData) {
+                    this.getShipTos();
+                    this.initToggle();
+                    handleUserInteractions();
+                    this.handleDatePicker(defaultDisable, false);
+                }
+                if(isModalOpened) {
+                    this.loadShipToData(shipTo.originalData, false);
+                    if(selectedShipToId) {
+                        $('#select-ship-to-btn').show().removeAttr('disabled');
+                    }
+                    $('.Zebra_DatePicker').addClass("dp_hidden");
+                    this.handleDatePicker(defaultDisable, false);
+                    if(plantTo.originalData) {
+                        this.loadPlantData(plantTo.originalData, false);
+                        if(lastWidth < 768 && !isMainView) {
+                            this.selectShipToBtn();
+                        }
+                        if(selectedSellerSFIDTemp) {
+                            this.setPlantSelection(selectedSellerSFIDTemp);
+                        }
+                    }
+                    
+                    if(datePickerValue) {
+                        this.setDateValue(datePickerValue);
+                    }
+                    $('.modal-backdrop').remove();
+                    $('#selectShipToPlantModal').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+                    
+                    
+                }
+            },
+            /**
+             * Initializes Toggle Views between shipto and plants
+            **/
+            initToggle: function() {
+                var self = this;
+                window.onresize = function() {
+                    if($(window).width()!=lastWidth){
+                        lastWidth = $(window).width();
+                        self.showView();
+                    }
+                };
+                this.showView();
+            },
+            /**
+             * Toggle Views between shipto and plants
+            **/
+            toggleView: function(shipTo) {
+                if (shipTo) {
+                    $('.ship-to-panel').hide();
+                    $('#select-ship-to-btn').hide();
+                    $('.plants-ship-to-panel').show();
+                    $('#confirm-plant').show();
+                    $('.ship-date').show();
+                } else {
+                    $('.ship-to-panel').show();
+                    $('#select-ship-to-btn').show();
+                    if(!isMainView) {
+                        $('#select-ship-to-btn').attr('disabled', 'disabled');
+                    }
+                    $('.plants-ship-to-panel').hide();
+                    $('#confirm-plant').hide();
+                    $('.ship-date').hide();
+                }
+            },
+            /**
+             * Shows plant to view.
+            **/
+            showView: function() {
+                if(lastWidth < 768) {
+                    //this.toggleView(false);
+                    this.handleDatePicker(defaultDisable, false);
+                } else {
+                    $('.ship-to-panel').show();
+                    $('.plants-ship-to-panel').show();
+                    $('.ship-date').show();
+                }
+            },
+            /**
+             * Selects plant selection on click of an item.
+             * @param plantId: string Ship from code/.
+             * @param oClickItem: object Element which is clicked
+            **/
+            selectPlant: function(e) {
+                var oClickItem = e.currentTarget;
+                var plantId = oClickItem.dataset["plantId"]
+                this.setActiveSelection(oClickItem);
+                this.setPlantSelection(plantId, true);
+            },
+            /**
+             * Selects plant selection on click of an item.
+             * @param plantId: string Ship from code/.
+             * @param flag: Boolean Element for which selected property needs to be set to true
+            **/
+            setPlantSelection: function(plantId, flag) {
+                $('.route-day').empty();
+                $('.route-day-msg').empty();
+                if(plantId != '') {
+                    selectedSellerSFIDTemp = plantId;
+                    if(selectedSellerSFID != plantId){
+                        selectedSellerSFID = plantId;
+                        refreshCart = true;
+                    }else{
+                        refreshCart = true;
+                    }
+                    var routeDay = _.findWhere(plantTo.originalData, {"sellerSFId": plantId});
+                    if(flag) {
+                        this.resetOriginalData(plantTo.originalData);
+                        if(routeDay) {
+                            routeDay.selected = true;
+                        }
+                    }
+                    if(datePickerValue && routeDay && routeDay.sellerHoliday) {
+                        this.checkDateValue(routeDay.sellerHoliday);
+                    }
+                    if(routeDay && routeDay.sellerHoliday) {
+                        var holidaysList = routeDay.sellerHoliday.concat(defaultDisable);
+                        this.handleDatePicker(holidaysList, true);
+                    } else {
+                        this.handleDatePicker(defaultDisable, true);
+                    }
+                    //US - 1914
+                    if(plantTo.routeValue && plantTo.routeValue[routeDay.sellerId]) {
+                        $('.route-day-msg').html(CCRZ.pagevars.pageLabels["packagedRouteDay"]).show();
+                        $('.route-day').show().html(plantTo.routeValue[routeDay.sellerId]);
+                    }
+                    this.enableContinueButton();
+                }
+            },
+            closeIconHandler : function(e) {
+                e.stopPropagation();
+                var parent;
+                var parentId;
+                var ele = e.currentTarget;
+                if($(ele).parent().attr('id') === 'select-ship-to') {
+                    parent = $(ele).parent();
+                    parentId = '#select-ship-to';
+                } else if($(ele).parent().attr('id') === 'plants-ship-to') {
+                    parent = $(ele).parent();
+                    parentId = '#plants-ship-to';
+                }
+                
+                if(parentId === '#select-ship-to' || parentId === '#plants-ship-to') {
+                    var closestParent = $(ele).closest(parentId);
+                    closestParent.removeClass('active');
+                    closestParent.find(".icon-icons_search").addClass('pull-right');
+                    closestParent.find(".icon-icons_close").addClass('hidden');
+                    closestParent.find('.inactive-data').removeClass('hidden');
+                    closestParent.find('input').toggleClass('hidden').focus();
+                    closestParent.find(".search-data").val('');
+                    var e = jQuery.Event("keyup", { keyCode: 8 });
+                    closestParent.find(".search-data").trigger( e );
+                }                   
+            },      
+            textBoxHandler: function(e) {
+                e.stopPropagation();
+                currentType = e.currentTarget.dataset.type;
+                this.searchData(e.currentTarget.value);
+            },
+            /**
+             * Performs Search functionality in ship to and plant selection screen
+             * @param value: string Data for which search operation needs to be performed.
+            **/
+            searchData: function(value){
+                var isShipTo=currentType === "shipTo";
+                var obj = currentType === "shipTo" ? shipTo : plantTo;
+                var className = currentType === "shipTo" ? '.ship-to-list-group' : '.plant-list-group';
+                var searchField = currentType === "shipTo" ? "consolidateShipto" : "consolidateSeller";
+                obj.searchValue = value;
+                var filterData = [];
+                var list = obj.originalData;
+                for(i = 0; i < list.length; i++) {
+                    if(list[i][searchField].toLowerCase().indexOf(obj.searchValue.toLowerCase()) > -1){
+                        filterData.push(list[i]);
+                    }
+                }
+                if( filterData.length ){
+                    this.generateFilterData(filterData, false,false);
+                    obj.filteredStateData = [];
+                    obj.filteredCityData = [];
+                    if(isShipTo){
+                        $(".count-ship-to").html('(' + filterData.length + ')');
+                    }
+                    else{
+                        $(".count-plant").html('(' + filterData.length + ')');
+                    }
+        
+                 } else {
+                    insertNoDataMsg(className, "NoSearchResults");
+                }
+            },
+            /**
+             * Performs search functionality in filter.
+             * @param value: string Data for which search needs to be performed.
+             * @param name: string Name of current input element
+            **/
+            searchFilteredData: function(e) {
+                var value = e.currentTarget.value, name = e.currentTarget.name;
+                var source = $('#filter-list-template').html();
+                var obj = currentType === "shipTo" ? shipTo : plantTo;
+                var dataToBeFiltered = name === "state-data" ? obj.stateData.filterList : obj.cityData.filterList;
+                var className = name === "state-data" ? ".filter-state-data" : ".filter-city-data";
+                var data = [];
+                for(var i=0; i<dataToBeFiltered.length; i++) {
+                    if(dataToBeFiltered[i]["name"].toLowerCase().indexOf(value.toLowerCase()) > -1) {
+                        data.push(dataToBeFiltered[i]);
+                    }
+                }
+                if(data.length) {
+                    insertData(source, className, {"filterList": data});
+                    //$('.apply-filter').removeAttr('disabled');
+                } else {
+                    insertNoDataMsg(className, "NoSearchResults");
+                    //$('.apply-filter').attr('disabled', 'disabled');
+                }
+            },
+            filterIconClick: function(e) {
+                e.stopPropagation();
+                var type = e.currentTarget.dataset.type;
+                if(type === "plantTo" && !shipTo.isCurrentSelected)
+                    return;
+                if(!this.checkForPlantSelection(type)) {
+                    this.loadFilterData(type);
+                }
+            },
+            /**
+             * Loads filter data in filter modal pop up.
+             * @param type: string Identifies the type of screen for which filter data needs to be loaded.
+            **/
+            loadFilterData: function(type) {
+                currentType = type;
+                this.loadDataInFilter();
+                $('#selectShipToPlantModal').hide();
+                $('#filter').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+        
+                $('.modal-backdrop').addClass('other-modal');
+                if($(window).width() < 767){
+                    $('#filter').addClass('custom-modal');
+                } else {
+                    $('#filter').removeClass('custom-modal');
+                }
+        
+                //OO-1944 disable filter by default
+                $('.apply-filter').attr('disabled', 'disabled');
+                //OO-1944 disable filter by default - Ends
+            },
+            /**
+             * Loads filter data in filter modal pop up.
+            **/
+            loadDataInFilter: function() {
+                var source = $('#filter-list-template').html();
+                var obj = currentType === "shipTo" ? shipTo : plantTo;
+                insertData(source, '.filter-state-data', obj.stateData);
+                insertData(source, '.filter-city-data', obj.cityData);
+            },
+            filterSelection : function(e) {
+                e.stopPropagation();
+                var ele = e.currentTarget;
+                if($.isEmptyObject(ele.dataset)){
+                    ele = ele.parentNode;
+                }
+                this.filterData(ele);
+            },
+            /**
+             * Filters data based on selected element.
+             * @param ele : Element which is currently selected.
+            **/
+            filterData: function(ele) {
+                var isShipTo = currentType === "shipTo";
+                var obj = isShipTo ? shipTo : plantTo;
+                var cityData, stateData, item, pos, data;
+                var state = isShipTo ? "shipToState" : "sellerState";
+                var city = isShipTo ? "shipToCity" : "sellerCity";
+                var isChecked = JSON.parse(ele.dataset['checked']);
+                isChecked = !isChecked;
+                ele.dataset['checked'] = isChecked;
+                var type = ele.dataset['type'];
+                var value = ele.dataset['value'];
+                $(ele).find('.fa').toggleClass('fa-check-square-o fa-square-o');
+                $(ele).toggleClass('active');
+                var source = $('#filter-list-template').html();
+                if(!isChecked) {
+                    $('.filter-input').val('');
+                }
+                if(type === "state") {
+                    obj.filteredStateData = [];
+                    cityData = sortData(_.pluck(obj.stateGroup[value], city));
+                    item = _.findWhere(obj.stateData.filterList, {"name" : value});
+                    item.checked = isChecked;
+                    this.uncheckFilterData(obj.cityData.filterList);
+                    var items = _.pluck(obj.stateData.filterList, "name");
+                    for(var j = 0; j<items.length; j++) {
+                        obj.counterData[items[j]] = 0;
+                    }
+                    
+                    for(var i =0; i< cityData.length; i++){
+                        pos = obj.filteredCityData.indexOf(cityData[i]);
+                        if(isChecked){
+                            obj.counterData[cityData[i]]++;
+                            if(pos === -1) {
+                                obj.filteredCityData.push(cityData[i]);
+                            }
+                        } else {
+                            obj.counterData[cityData[i]]--;
+                            if(obj.counterData[cityData[i]] <= 0) {
+                                obj.counterData[cityData[i]] = 0;
+                                obj.filteredCityData.splice( pos, 1 );
+                            }
+                        }
+                    }
+                    if(obj.filteredCityData.length){
+                        data = this.createFilterData(obj.filteredCityData, "city", obj);
+                        //$('.apply-filter').removeAttr('disabled');
+                    } else {
+                        data = $.extend(true, {}, obj.originalCityData);
+                        obj.stateData  = $.extend(true, {}, obj.originalStateData);
+                        obj.cityData = $.extend(true, {}, obj.originalCityData);
+                        insertData(source, '.filter-state-data', obj.stateData);
+                        //$('.apply-filter').attr('disabled', 'disabled');
+                    }
+                    insertData(source, '.filter-city-data', data);
+                } else if(type === "city") {
+                    obj.filteredCityData = [];
+                    stateData = sortData(_.pluck(obj.cityGroup[value], state));
+                    item = _.findWhere(obj.cityData.filterList, {"name" : value});
+                    item.checked = isChecked;
+                    this.uncheckFilterData(obj.stateData.filterList);
+                    var items = _.pluck(obj.cityData.filterList, "name");
+                    for(var j = 0; j<items.length; j++) {
+                        obj.counterData[items[j]] = 0;
+                    }
+        
+                    for(var i=0; i<stateData.length;i++) {
+                        pos = obj.filteredStateData.indexOf(stateData[i]);
+                        if(isChecked) {
+                            obj.counterData[stateData[i]]++;
+                            if(pos === -1) {
+                                obj.filteredStateData.push(stateData[i]);
+                            }
+                        } else {
+                            obj.counterData[stateData[i]]--;
+                            if(obj.counterData[stateData[i]] <= 0) {
+                                obj.counterData[stateData[i]] = 0;
+                                obj.filteredStateData.splice( pos, 1);
+                            }
+                        }
+                    }
+                    if(obj.filteredStateData.length) {
+                        data = this.createFilterData(obj.filteredStateData, "state", obj);
+                        //$('.apply-filter').removeAttr('disabled');
+                    } else {
+                        data =  $.extend(true, {}, obj.originalStateData);
+                        obj.stateData  = $.extend(true, {}, obj.originalStateData);
+                        obj.cityData = $.extend(true, {}, obj.originalCityData);
+                        insertData(source, '.filter-city-data', obj.cityData);
+                        //$('.apply-filter').attr('disabled', 'disabled');
+                    }
+                    insertData( source, '.filter-state-data', data);
+                }
+                //OO-1944 enable if changes are done
+                $('.apply-filter').removeAttr('disabled');
+                //OO-1944 enable if changes are done - Ends
+            },
+            /**
+             * Click handler for apply filter button.
+            **/
+            applyFilterHandler: function(e) {
+                e.stopPropagation();
+                this.applyFilter();
+                var isShipTo = currentType === "shipTo";
+                var obj = isShipTo ? shipTo : plantTo;
+                if(!obj.isCurrentSelected) {
+                    this.numberOfShip();
+                } else {
+                    if(isShipTo && plantTo.originalData) {
+                        var data = plantTo.filteredData.length ?  plantTo.filteredData : plantTo.originalData;
+                        var oPlant = { 'arrPlant':  data};
+                        var source = $("#plant-list-template").html();
+                        var htmlOutput = compileHandler(source, oPlant);
+                        insertContent('.plant-list-group', htmlOutput);
+                        $('#plants-ship-to .cust-icons.pull-right').css('color', '#cc252c');
+                    }
+                }
+            },
+            /**
+             * Click handler for apply filter button.
+            **/
+            applyFilter: function() {
+                var shipToData, filteredData = [], data, isStateSelected = false, isCitySelected = false, value;
+                var isShipTo = currentType === "shipTo";
+                var obj = isShipTo ? shipTo : plantTo;
+                var state = isShipTo ? "shipToState" : "sellerState";
+                var city = isShipTo ? "shipToCity" : "sellerCity";
+                obj.stateDataArr = $.extend(true, [], obj.filteredStateData);
+                obj.cityDataArr = $.extend(true, [], obj.filteredCityData);
+                if(!obj.filteredStateData.length && !obj.filteredCityData.length) {
+                    filteredData = $.extend(true, [], obj.originalData);
+                    obj.filteredData = filteredData;
+                    this.generateFilterData(filteredData, isStateSelected, isCitySelected);
+                    if(isShipTo){
+                        $(".count-ship-to").html('(' + obj.originalData.length + ')');
+                    }
+                    else{
+                        $(".count-plant").html('(' + obj.originalData.length + ')');
+                    }
+                    this.setCurrentSelected(filteredData, isShipTo, obj);
+                    return;
+                }
+                if(obj.filteredStateData.length) {
+                    isStateSelected = false;
+                    isCitySelected = true;
+                    data = sortData(_.pluck(_.where(obj.cityData.filterList, {"checked": true}), "name"));
+                    value = city;
+                } else if(obj.filteredCityData.length) {
+                    isStateSelected = true;
+                    isCitySelected = false;
+                    data = sortData(_.pluck(_.where(obj.stateData.filterList, {"checked": true}), "name"));
+                    value = state;
+                }
+                //shipToData = obj.cityGroup;
+                for(var i=0; i<data.length; i++) {
+                    for(var j=0; j<obj.originalData.length; j++) {
+                        if(obj.originalData[j][value] === data[i]) {
+                            filteredData.push(obj.originalData[j]);
+                        }
+                    }
+                }
+        
+                if(isShipTo){    //US-1905 to display the number next to Ship-to and ship from
+                    $(".count-ship-to").html('(' + filteredData.length + ')');
+                    if(filteredData.length > 0)
+                        $('.ship-to-panel .filter-icon').removeClass('icon-unfilter-icon').addClass('icon-icons_filter');
+                    else
+                        $('.ship-to-panel .filter-icon').removeClass('icon-icons_filter').addClass('icon-unfilter-icon');
+                } else {
+                    $(".count-plant").html('(' + filteredData.length + ')');
+                    if(filteredData.length > 0)
+                        $('.plants-ship-to-panel .filter-icon').removeClass('icon-unfilter-icon').addClass('icon-icons_filter');
+                    else
+                        $('.plants-ship-to-panel .filter-icon').removeClass('icon-icons_filter').addClass('icon-unfilter-icon');
+                }
+                this.setCurrentSelected(filteredData, isShipTo, obj);
+                obj.filteredData = filteredData;
+                this.generateFilterData(filteredData, isStateSelected, isCitySelected);
+            },
+            /**
+             * Sets current selected value in the filteredData object.
+             * @param filteredData: Array Filtered data which needs to be set.
+             * @param isShipTo : Boolean Checks whether current object is of shipto or ship from.
+             * @param obj: Object Object of either shipTo or shipFrom.
+            **/
+            setCurrentSelected: function(filteredData, isShipTo, obj) {
+                var isCurrentObj;
+                if(isShipTo){
+                    isCurrentObj = _.findWhere(filteredData , {"shipToId": selectedShipToId});
+                }
+                else {
+                    isCurrentObj = _.findWhere(filteredData , {"sellerSFId": selectedSellerSFID});
+                }
+                obj.isCurrentSelected = isCurrentObj ? true : false;
+            },      
+            /**
+             * Generates filter data and loads it in ship to and plant screen.
+             * @param filteredData: Object Filtered data that needs to be loaded.
+             * @param isStateSelected: boolean Indicates whether state is selected.
+             * @param isCitySelected: boolean Indicates whether city is selected.
+            **/
+            generateFilterData: function(filteredData, isStateSelected, isCitySelected) {
+                var isShipTo = currentType === "shipTo";
+                var obj = isShipTo ? shipTo : plantTo;
+                var state = isShipTo ? "shipToState" : "sellerState";
+                var city = isShipTo ? "shipToCity" : "sellerCity";
+                var oShipTo = isShipTo ? { 'arrShipTo': filteredData} : { 'arrPlant': filteredData };
+                var stateData = _.pluck(filteredData, state);
+                var cityData = _.pluck(filteredData, city);
+                obj.stateData = this.createFilterData(sortData(_.unique(stateData)), "state", obj, isStateSelected, true);
+                obj.stateDataFilter = $.extend(true, {}, obj.stateData);
+                obj.cityData = this.createFilterData(sortData(_.unique(cityData)), "city", obj, isCitySelected, true);
+                obj.cityDataFilter = $.extend(true, {}, obj.cityData);
+                if(isStateSelected) {
+                    this.incCounterData(cityData, obj);
+                }
+                if(isCitySelected) {
+                    this.incCounterData(stateData, obj);
+                }
+        
+                var sourceName = isShipTo ? "#shipTo-list-template" : "#plant-list-template";
+                var source = $(sourceName).html();
+                var className = isShipTo ? '.ship-to-list-group' : ".plant-list-group";
+                insertData(source, className, oShipTo);
+                if(!isStateSelected && !isCitySelected) {
+                    var filterIcon = isShipTo ? $('.ship-to-panel .filter-icon') : $('.plants-ship-to-panel .filter-icon');
+                    filterIcon.removeClass('icon-icons_filter').addClass('icon-unfilter-icon');
+                }
+                this.hideFilterPopup();
+                if(CCRZ.display.isPhone()) { //Defect-4562 fix
+                    if(isShipTo) {
+                        $('.ship-to-row').removeClass('span12').addClass('row');
+                    } else {
+                        $('.plant-row-item').removeClass('span12').addClass('row');
+                    }
+                }
+            },      
+            /**
+             * Hides filter pop.
+            **/
+            hideFilterPopup: function(){
+                $('.filter-input').addClass('hidden').val('').closest('.custom-header').removeClass('active');
+                $('#selectShipToPlantModal').show();
+                $('#filter').modal('hide');
+                $('.modal-backdrop').removeClass('other-modal');
+            },      
+            /**
+             * Increments counter data for ship to or ship from object.
+            **/
+            incCounterData: function(data, obj){
+                for(var i=0; i<data.length; i++) {
+                    obj.counterData[data[i]]++;
+                }
+            },
+            uncheckFilterData: function (data) {
+                for(var i=0; i<data.length; i++) {
+                    data[i].checked = false;
+                }
+            },
+            
+        
+            /**
+             * Pushes Filtered Data and returns final created filtered object.
+            **/
+            createFilterData: function(keys, type, obj, checked, flag){
+                var filterData = [];
+                for(var i =0;i<keys.length;i++) {
+                    filterData.push({
+                        "name": keys[i],
+                        "type" : type,
+                        "checked" : checked ? checked: false
+                    });
+                    if(flag) {
+                        obj.counterData[keys[i]] = 0;
+                    }
+                }
+                return {"filterList": filterData };
+            },
+            /**
+             * Click handler for reset filter button.
+            **/
+            resetFilterHandler: function(e) {
+                e.stopPropagation();
+                this.resetFilter();
+                var isShipTo=currentType === "shipTo";
+                if(isShipTo) {
+                    if(plantTo.originalData) {
+                        var data = plantTo.filteredData.length ?  plantTo.filteredData : plantTo.originalData;
+                        var oPlant = { 'arrPlant':  data};
+                        var source = $("#plant-list-template").html();
+                        var htmlOutput = compileHandler(source, oPlant);
+                        insertContent('.plant-list-group', htmlOutput);
+                        $('#plants-ship-to .cust-icons.pull-right').css('color', '#cc252c');
+                    } else {
+                        this.numberOfShip();
+                    }
+                    $('.ship-to-panel .filter-icon').removeClass('icon-icons_filter').addClass('icon-unfilter-icon');
+                } else {
+                    $('.plants-ship-to-panel .filter-icon').removeClass('icon-icons_filter').addClass('icon-unfilter-icon');
+                }
+            },
+            /**
+             * Click handler for reset filter button.
+            **/
+            resetFilter: function() {
+                this.resetFilterData();
+                this.applyFilter(); //For US-1906 Reset filter without clicking Apply Filter button
+            },
+        
+            /**
+             * Resets filter data.
+            **/
+            resetFilterData: function(flag) {
+                var obj = currentType === "shipTo" ? shipTo  : plantTo;
+                if(flag) {
+                    obj.filteredStateData = $.extend(true, [], obj.stateDataArr);
+                    obj.filteredCityData = $.extend(true, [], obj.cityDataArr);
+                    obj.cityData = $.extend(true, {}, obj.cityDataFilter);
+                    obj.stateData = $.extend(true, {}, obj.stateDataFilter);
+                } else {
+                    obj.filteredStateData = [];
+                    obj.filteredCityData = [];
+                    obj.cityData = $.extend(true, {}, obj.originalCityData);
+                    obj.stateData = $.extend(true, {}, obj.originalStateData);
+                    $('.apply-filter').removeAttr('disabled');
+        
+                    /**** Nishant to check this - defect 1527 ********/
+                    //$('.apply-filter').attr('disabled', 'disabled');
+                }
+            },
+            /**
+             * Click handler for cancel button.
+            **/
+            cancelFilter: function(e) {
+                e.stopPropagation();
+                this.resetFilterData(true);
+                //applyFilter();
+                this.hideFilterPopup();
+            },
+            datePickerClickHandler: function(e) {
+                var datePicker = $('#ship-date-picker').data('Zebra_DatePicker');
+                if(datePicker) {
+                	datePicker.show();
+               	}
+            },
+            /**
+             * Resets Plant Data to empty whenever no data is available.
+            **/
+            numberOfShip: function(){
+                var isShipTo = currentType === "shipTo";
+                if(isShipTo) {
+                    this.noPlants();
+                    plantTo = {
+                        stateGroup: null,
+                        cityGroup: null,
+                        stateData: null,
+                        cityData: null,
+                        stateDataFilter: null,
+                        cityDataFilter: null,
+                        stateDataArr: null,
+                        cityDataArr: null,
+                        filteredData: [],
+                        filteredStateData : [],
+                        filteredCityData : [],
+                        originalData: null,
+                        originalStateData: null,
+                        originalCityData: null,
+                        counterData : {},
+                        searchValue: "",
+                        routeValue:null // bug-4572
+                    };
+                    this.resetOriginalData(shipTo.originalData);
+                    selectedSellerSFIDTemp = '';
+                    selectedShipToIdTemp = '';
+                    this.enableContinueButton();
+                }
+            }
+        });
+        
+        $(document).off("shown", "#selectShipToPlantModal").on("shown", "#selectShipToPlantModal", function(){
+            CCRZ.views.selectModalView.prototype.enableContinueButton();
+            if(ie_ver()) {
+                $(document).off('focusin.modal');
+            }
+        });
+        
+    
+    
+        var headerData = function(headerModel, headerView){
+            
+            headerModel.controllerName = "cc_oo_HeaderController";
+            /**
+             * Returns Home URL created.
+            **/
+            headerModel.getHomeUrl = function(cartId,url, selectedSellerSFID, selectedShipToId, refreshCart,portalUserId,isSameShipto, datePickerValue,isLogoClicked, callback) {
+                var remoteActionCallForCartType = _.extend(CCRZ.RemoteInvocation,{className: headerModel.controllerName});
+                remoteActionCallForCartType.invokeCtx(
+                    'redirect',cartId,url, selectedSellerSFID, selectedShipToId, refreshCart,portalUserId,isSameShipto, datePickerValue,isLogoClicked, //US-1718
+                    function(resp) {
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false}
+                );
+            };
+            
+            headerView.homePageUrl = function() {
+                var remoteData;
+                var pathName=$(location).attr('href');
+                pathName = pathName.split('?')[0];
+                var path = pathName.split('/');
+                url=path[0]+'//'+path[2]+'/'+path[3];
+                var cartId=CCRZ.pagevars.currentCartID;
+                var orderType=CCRZ.pagevars.queryParams.orderType;
+                var promotionCode=CCRZ.pagevars.queryParams.promotionCode;
+                var portalUserId=CCRZ.pagevars.portalUserId;
+                var sameShipTo = false;
+                if(CCRZ.pagevars.currentPageName.toLowerCase() === ("ccrz__OrderConfirmation").toLowerCase()) {
+                    CCRZ.pagevars.isSameShipTo = true;
+                    sameShipTo = true;
+                    isSameShipto = 'true';
+                } else {
+                    sameShipTo = CCRZ.pagevars.isSameShipTo;
+                    isSameShipto = CCRZ.pagevars.isSameShipTo.toString();
+                }
+        
+                selectedSellerSFID = getSessionValue(selectedPlant);
+                selectedShipToId = getSessionValue(selectedShipTo);
+                datePickerValue =    getSessionValue(shipDate);
+                var isLogoClicked = true;//5203
+                // Calling the controller class 'cc_oo_HeaderController' and the method 'redirect' having the parameter 'productIds'
+                headerModel.getHomeUrl(cartId, url, selectedSellerSFID, selectedShipToId, refreshCart,portalUserId,isSameShipto, datePickerValue, isLogoClicked,function(resp) {//5203
+                    if( resp && resp.success ){
+                        window.location=resp.data;
+                    }
+                });
+                
+            };
+            
+            /**
+             * Opens Ship to Ship From modal pop up
+            **/
+            headerView.openShipToModal = function(e) {
+                e.stopPropagation();
+                if(shipTo.originalData){
+                    CCRZ.views.selectModalView.prototype.loadShipToData(shipTo.originalData, false);
+                }
+                $('.Zebra_DatePicker').addClass("dp_hidden");
+                $('#selectShipToPlantModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });            
+                CCRZ.views.selectModalView.prototype.handleDatePicker(defaultDisable, false);
+                isModalOpened = true;
+            };
+            
+            headerView.myAccountsPage = function() {
+                var myAccount = _.findWhere(menuIdList, {"value": CCRZ.pagevars.pageLabels["Component_SiteHeader_MyAccount"]});
+                sessionStorage.setItem("navItem", myAccount.menuId);
+                window.location = CCRZ.pagevars.currSiteURL+ 'ccrz__MyAccount?' + getCSRQueryString();
+            };
+            
+            headerView.mouseEnterDropDowns = function(e) {
+                $(e.currentTarget).addClass("open");
+            };
+            
+            headerView.mouseLeaveDropDowns = function(e) {
+                $(e.currentTarget).removeClass("open");
+            };
+            headerView.contactUsPage = function(e) {
+                e.stopPropagation();
+                contactUsPage();
+            };
+            
+            headerView.prodListPage = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                productList(e.currentTarget.dataset.id);
+            };
+            var events = headerView.events;
+            events["click .ship-to-change"] = "openShipToModal";
+            events["click .brandLogo"]= "homePageUrl";
+            events["click .welcome"] = "myAccountsPage";
+            events["mouseenter ul.nav li.dropdowns"] = "mouseEnterDropDowns";
+            events["mouseleave ul.nav li.dropdowns"] = "mouseLeaveDropDowns";
+            events["click .csrEmailAddress"] = "contactUsPage";
+            events["click .mobile-categoryLink"] = "prodListPage";
+        };
+        
+        /**
+         * Handles user interactions for various events
+        **/
+        var handleUserInteractions = function() {        
+            $(document).off("click", ".ui-autocomplete .ui-menu-item").on("click", ".ui-autocomplete .ui-menu-item", function(e) {
+                e.stopPropagation();
+                CCRZ.views.Menu.prototype.productSearch();
+            });
+        }; //Handle user interaction End
+        
+        /**
+         * Returns ship to and seller info.  
+        **/
+        var getShipToSellerInfo= function() {
+            var orderType=CCRZ.pagevars.queryParams.orderType;
+            if(CCRZ.pagevars.currentPageName.toLowerCase() === ('ccrz__HomePage').toLowerCase() && $.urlParam('viewState') === 'myOrders') {
+                removeSessionItem(selectedPlant);
+                removeSessionItem(selectedShipTo);
+                selectedShipToId = '';
+                selectedSellerSFID = null;
+            }
+            var existingCartId = null;
+            if(CCRZ.pagevars.currentPageName.toLowerCase() == ('ccrz__Cart').toLowerCase()) {
+                if(($.urlParam('cartId') != undefined && $.urlParam('cartId') != '') || ($.urlParam('cartID') != undefined && $.urlParam('cartID') != '')){
+                    if($.urlParam('cartId') == undefined){
+                        existingCartId = $.urlParam('cartID');
+                    } else {
+                        existingCartId = $.urlParam('cartId');
+                    }
+                }
+            }
+            var remoteActionCalls = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_HeaderController'});
+            remoteActionCalls.invokeCtx( 'getShipToSellerInfo', selectedSellerSFID, selectedShipToId, existingCartId, function(resp) {
+                if(resp.data) {
+                    $('#shipToDisplay').empty().html(resp.data.shipToName);
+                    $('#sellerDisplay').empty().html(resp.data.sellerName);
+                    if(resp.data.sellerId && resp.data.shipToId) {
+                        setSessionValue(selectedPlant, resp.data.sellerId);
+                        setSessionValue(selectedShipTo, resp.data.shipToId);
+                    }
+                }
+                //US-141 - code added for OO scanario
+                if(orderType && orderType.toLowerCase() === ('Prebook').toLowerCase()) {
+                    if(CCRZ.pagevars.currentPageName.toLowerCase() === ("ccrz__HomePage").toLowerCase()) {
+                        $('#selectShipToPlantModal').modal({
+                            backdrop: 'static',
+                            keyboard: false
+                        });
+                    }
+                }
+            }, {buffer:false,escape:false,nmsp:false});
+        };
+        
+        /**
+         * Returns verion number of browser if it is IE
+        **/ 
+        var ie_ver = function(){  
+            var iev=0;
+            var ieold = (/MSIE (\d+\.\d+);/.test(navigator.userAgent));
+            var trident = !!navigator.userAgent.match(/Trident\/7.0/);
+            var rv=navigator.userAgent.indexOf("rv:11.0");
+        
+            if (ieold) iev=new Number(RegExp.$1);
+            if (navigator.appVersion.indexOf("MSIE 10") != -1) iev=10;
+            if (trident&&rv!=-1) iev=11;
+        
+            return iev;         
+        };
+        
+        /**
+         * checks session for one complete transaction - OO-1420, OO-1581
+         * @param selectedPlantValue : string Selected plant value to be updated.
+         * @param selectedShipToValue: string Selected ship to value to be updated.
+        **/
+        var checkSesssion = function(){
+            var plant = sessionStorage.getItem(selectedPlant);
+            var shipTo = sessionStorage.getItem(selectedShipTo);
+            if(!plant && !shipTo){
+                return 1;
+            }else{
+                return 0;
+            }
+        };
+        
+        /**
+         * Inserts no data message in HTML element.
+         * @param className: string Class name of HTML element where no data message needs to be inserted.
+        **/
+        var insertNoDataMsg = function(className, message) {
+            var emptyMessage =  CCRZ.pagevars.pageLabels[message];
+            var noData = '<div class="span12 no-ship-to">'+emptyMessage+'</div>';
+            insertContent( className, noData );
+        };
+        
+        CCRZ.views.removeProductsModal = CCRZ.CloudCrazeView.extend({
+	        viewName : "removeProductsModal",
+	        templateBoth : CCRZ.util.template('remove-products-warning-dialog'),
+	        selector : ".remove-warning",
+	        isDisabled: false,
+	        initialize: function(callback) {
+	            this.render(callback);
+	        },
+	        events :{
+	            "click .btn-remove" : "removeHandler",
+	            "click .btn-cancel": "cancelHandler"
+	        },
+	        render : function(callback) {
+	            this.setElement($(this.selector));
+	            var v = this;
+	            v.$el.html(v.templateBoth());
+	            callback();
+	        },
+	        removeHandler : function(e) {
+	        	this.isDisabled = true;
+	        	$(e.currentTarget).attr("disabled", "disabled");
+	        	this.$el.find('.btn-cancel').attr("disabled", "disabled");
+	        	var self = this;
+	            getCartDetailsData(true, function(){
+	            	self.isDisabled = false;
+	            	self.cancelHandler(e);
+	            	CCRZ.pubSub.trigger('cartChange', CCRZ.pagevars.currentCartID); 
+	            	if(CCRZ.pagevars.currentPageName === "ccrz__Cart") {
+	            		cartDetailsPage(CCRZ.pagevars.currentCartID);
+	            	}
+	            	if(CCRZ.pagevars.queryParams.pageKey === "quickorder" || CCRZ.pagevars.queryParams.pageKey=='reorder') {
+	            		quickView.getCartDetails();
+	            		removeGlobalMsg('OO_AddToCart_Validate', 'global-err-msg');
+	            	}
+	            	if(CCRZ.pagevars.currentPageName === "ccrz__ProductDetails") {
+	            		productDetails(CCRZ.pagevars.queryParams.sku);
+	            	}
+	            });
+	        },
+	        cancelHandler: function(e) {
+	        	if(this.isDisabled) 
+	        		return;
+	            $('#remove-products-warning-modal').modal('hide');
+	            isRemoveOpened = false;
+	            
+	        }
+	    });
+	    
+	    var openRemoveModalPopup = function(){
+            $('.remove-warning').html("");
+            var removeWarningModal = new CCRZ.views.removeProductsModal(function() { 
+                $('.modal-backdrop').remove();                        
+                $('#remove-products-warning-modal').modal({ keyboard: false, backdrop: 'static', show: true });
+                isRemoveOpened = true;
+             });
+        };
+    
+    });
+        
+    /**
+     * Creates a call to get cart details.
+    **/
+    var getCartDetailsData = function(flag, callback) {
+    	flag = flag || false;
+        var sellerId  = CCRZ.pagevars.sid;
+        var shipTo = getSessionValue(selectedShipTo);
+        var selectedShipDate = getSessionValue(shipDate);
+        var cartIdForWeight=CCRZ.pagevars.queryParams.cartID || CCRZ.pagevars.queryParams.cartId;
+       	if(!cartIdForWeight && !CCRZ.pagevars.currentPageName==='ccrz__OrderConfirmation'){//OO-2792
+            cartIdForWeight = CCRZ.pagevars.currentCartID;
+        } //OO-2792 - Ends
+        var remoteActionCallForCart = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_HeaderController'});
+        if(sellerId && shipTo) {
+            remoteActionCallForCart.invokeCtx( 'getCartDetails', sellerId, shipTo, cartIdForWeight,false,selectedShipDate, flag, function(resp){
+                if(resp && resp.success) {
+                    setCartData(resp.data);
+                    $('.cartdropdown li.btn-group.dropdowns a.dropdown-toggle, a.cart_btn').removeClass('noCartData');
+                    if(callback) {
+                    	callback();
+                    }
+                } else {
+                    $('.cartdropdown li.btn-group.dropdowns a.dropdown-toggle, a.cart_btn').addClass('noCartData');
+                }
+            }, {buffer:false,escape:false,nmsp:false});
+        } else {
+            $('.cartdropdown li.btn-group.dropdowns a.dropdown-toggle, a.cart_btn').addClass('noCartData');
+        }
+    };
+    
+    /**
+     * Sets cart data
+     * @param cartData: Object Cart data to be set.
+    **/
+    var setCartData = function(cartData){        
+        var cartItems = [];
+        setDataInCart(cartData.primaryCart, cartItems,"Cart 1");
+        setDataInCart(cartData.secondaryCart, cartItems,"Cart 2");
+        var currentPageName = CCRZ.pagevars.currentPageName;
+        var isClearCartAvailable;
+        if(cartItems && cartItems.length) {
+        	isClearCartAvailable = (cartItems[0].noOfItems > 0 || cartItems.length >1) && (currentPageName !== "ccrz__CheckoutNew" && currentPageName !== "ccrz__OrderConfirmation");
+        }
+        insertData($('#OO-CartDetails').html(), '.cart-list', {"cartItems": cartItems, "isClearCartAvailable": isClearCartAvailable});
+        $('.cart-data').attr({'data-name': 'cartData'}).addClass('warningClick');
+        if(cartItems.length <=1){
+            $('.minicart').show();
+        } else {
+            $('.minicart').hide();
+        }
+        
+    };
+    
+    /**
+     * Sets data in required JSON format.
+    **/
+    var setDataInCart = function(cartData, cartItems, cartLabel) {
+        if(cartData && !$.isEmptyObject(cartData)) {
+            cartItems.push({
+                "cartNumber": cartLabel,
+                "weight": cartData.weight,
+                "price":  cartData.price ? "$"+cartData.price : "$0.00",
+                "cartId" : cartData.cartId,
+                "noOfItems": cartData.noOfItems
+            });
+        }
+    };
+
+    //US 1719
+    var cartDetailsPage = function(cartId) {
+        document.location = CCRZ.pagevars.currSiteURL + "ccrz__Cart?cartId=" + cartId + getCSRQueryString();
+    }; 
+    
+    /**
+     * Inserts filtered data in ship to and plant screen.
+     * @param source: Object HTML source element which needs to be inserted.
+     * @param className: string Class name of the html element.
+     * @param data: Object Data which needs to be set in HTML source element.
+    **/
+    var insertData = function(source, className, data){
+        var html = compileHandler(source, data);
+        insertContent(className, html);
+    };
+    
+    /**
+     * Sorts data in an array in alphabetical order.
+     * @param arr: Array Data that needs to be sorted
+    **/
+    var sortData = function(arr) {
+        return arr.sort(function(a,b) {
+            if(a.toLowerCase() < b.toLowerCase()) return -1;
+            else if(a.toLowerCase() > b.toLowerCase()) return 1;
+            else return 0;
+        });
+    };
+
+    /**
+     * Function that will take the source and data and compile the output HTML using handlebars.
+    **/
+    var compileHandler = function( source, context ) {
+        var template = Handlebars.compile(source);
+        var outputHTML = template(context);
+        return outputHTML;
+    };
+
+    /**
+     * Function that will insert the content at the required location.
+    **/
+    var insertContent = function(selector, htmlContent) {
+        if ($(selector)[0]) {
+            $(selector).empty().html(htmlContent);
+        }
+    };
+        
+</script>
+</apex:component>

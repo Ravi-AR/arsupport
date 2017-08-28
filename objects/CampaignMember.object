@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>AddCampaign</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ConvertLead</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Create_Opportunity</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>CampaignId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>City</fullName>
+    </fields>
+    <fields>
+        <fullName>CompanyOrAccount</fullName>
+    </fields>
+    <fields>
+        <fullName>Company_Account_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK( Contact.Account.Name ),  Lead.Company , Contact.Account.Name )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Company/Account Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ContactId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Contact_Farm_VIP_Attended_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.FARM_VIP_Attended_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact || Farm VIP Attended Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Contact_Farm_VIP_Newsletter__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF ( INCLUDES ( Contact.Newsletters__c , &quot;Farm VIP Cattle&quot; ), &quot;Farm VIP Cattle; &quot;,null ) &amp; 
+IF ( INCLUDES ( Contact.Newsletters__c , &quot;Farm VIP Companion&quot; ), &quot;Farm VIP Companion; &quot;,null ) &amp; 
+IF ( INCLUDES ( Contact.Newsletters__c , &quot;Farm VIP Dairy&quot; ), &quot;Farm VIP Dairy; &quot;,null ) &amp; 
+IF ( INCLUDES ( Contact.Newsletters__c , &quot;Farm VIP Education/Training&quot; ), &quot;Farm VIP Education/Training; &quot;,null ) &amp; 
+IF ( INCLUDES ( Contact.Newsletters__c , &quot;Farm VIP Horse&quot; ), &quot;Farm VIP Horse; &quot;,null )&amp;
+IF ( INCLUDES ( Contact.Newsletters__c  , &quot;Farm VIP Show&quot; ),  &quot;Farm VIP Show; &quot;,null )&amp;
+IF ( INCLUDES ( Contact.Newsletters__c  , &quot;Farm VIP Swine&quot; ), &quot;Farm VIP Swine; &quot;,null )&amp;
+IF ( INCLUDES ( Contact.Newsletters__c  , &quot;HERDSMART&quot; ), &quot;HERDSMART; &quot;,null )&amp;
+IF ( INCLUDES ( Contact.Newsletters__c  , &quot;NSM 2016 Group A&quot; ), &quot;NSM 2016 Group A; &quot;,null )&amp;
+IF ( INCLUDES ( Contact.Newsletters__c  , &quot;NSM 2016 Group B&quot; ), &quot;NSM 2016 Group B; &quot;,null )&amp;
+IF ( INCLUDES ( Contact.Newsletters__c  , &quot;Mazuri&quot; ), &quot;Mazuri; &quot;,null )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact || Farm VIP Newsletter</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_Farm_VIP_Specie_Focus__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(Contact.Farm_VIP_Species_Focus__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact || Farm VIP Specie Focus</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_First_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.FirstName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact First Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_Last_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact Last Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_Newsletter__c</fullName>
+        <description>If the Newsletter field on the contact is blank, then &quot;Yes&quot;, &quot;No&quot;.</description>
+        <externalId>false</externalId>
+        <formula>IF(
+isblank( Contact.Newsletters__c ),&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact || Newsletter is Blank Indicator</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_Role__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text(Contact.Role__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact Role</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_Salutation__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text(Contact.Salutation)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact Salutation</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_Street_Address__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.MailingStreet</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact Street Address</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_Type__c</fullName>
+        <description>Contact Type from Contact</description>
+        <externalId>false</externalId>
+        <formula>TEXT( Contact.Contact_Type__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact Type</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_s_Account_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.Account.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact&apos;s Account Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_s_City__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.MailingCity</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact&apos;s City</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_s_Email__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.Email</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact&apos;s Email</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_s_Mobile_Number__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.MobilePhone</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact&apos;s Mobile Number</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_s_State__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(Contact.MailingStateCode)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact&apos;s State</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_s_Zip_Code__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.MailingPostalCode</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact&apos;s Zip Code</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Country</fullName>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+    </fields>
+    <fields>
+        <fullName>DoNotCall</fullName>
+    </fields>
+    <fields>
+        <fullName>Email</fullName>
+    </fields>
+    <fields>
+        <fullName>Event_Member_Count__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(
+isnull( x18_Digit_Campaign_Member_ID__c ),0,1)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Event Member Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Farm_VIP_Registration__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Farm VIP Event Registration tied to Campaign Member</description>
+        <externalId>false</externalId>
+        <label>Farm VIP Registration</label>
+        <referenceTo>Farm_VIP_Registration__c</referenceTo>
+        <relationshipLabel>Campaign Members</relationshipLabel>
+        <relationshipName>Campaign_Members</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Fax</fullName>
+    </fields>
+    <fields>
+        <fullName>FirstName</fullName>
+    </fields>
+    <fields>
+        <fullName>FirstRespondedDate</fullName>
+    </fields>
+    <fields>
+        <fullName>GLR_Large_Herd_Initative__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(Includes(Contact.Account.Initiative__c, &quot;GLR Large Herd Initiative&quot;),&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>GLR Large Herd Initative</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HasOptedOutOfEmail</fullName>
+    </fields>
+    <fields>
+        <fullName>HasOptedOutOfFax</fullName>
+    </fields>
+    <fields>
+        <fullName>HasResponded</fullName>
+    </fields>
+    <fields>
+        <fullName>LastName</fullName>
+    </fields>
+    <fields>
+        <fullName>Last_Modified_Date_Time__c</fullName>
+        <externalId>false</externalId>
+        <formula>LastModifiedDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Last Modified Date/Time</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>LeadId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LeadSource</fullName>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Lead_Farm_VIP_Attended_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead.FARM_VIP_Attended_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Lead || Farm VIP Attended Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Lead_Farm_VIP_Specie_Focus__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(Lead.Farm_VIP_Species_Focus__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Lead || Farm VIP Specie Focus</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lead_Newsletter_is_Blank_Indicator__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(
+isblank(Lead.Newsletters__c),&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Lead || Newsletter is Blank Indicator</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Member_Email__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(Contact.Email), Lead.Email, Contact.Email)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Member Email</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Member_First_Associated_to_Campaign__c</fullName>
+        <externalId>false</externalId>
+        <formula>CreatedDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Member First Associated to Campaign</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Member_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(Contact.LastName),Lead.FirstName + &quot; &quot; + Lead.LastName,Contact.FirstName + &quot; &quot; + Contact.LastName)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Member Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Member_Phone__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(Contact.Phone), Lead.Phone, Contact.Phone)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Member Phone</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Member_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(Contact.Id), &quot;Lead&quot;, &quot;Contact&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Member Type</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MobilePhone</fullName>
+    </fields>
+    <fields>
+        <fullName>Newsletter_to_Load__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(
+Specie_Focus__c = &quot;Companion&quot;,&quot;Farm VIP Companion&quot;,
+if(
+Specie_Focus__c = &quot;Dairy&quot;,&quot;Farm VIP Dairy&quot;,
+if(
+Specie_Focus__c= &quot;Education &amp; Training&quot;,&quot;Farm VIP Education/Training&quot;,
+If(
+Specie_Focus__c = &quot;Horse&quot;,&quot;Farm VIP Horse&quot;,
+If(
+Specie_Focus__c = &quot;Cattle&quot;,&quot;Farm VIP Cattle&quot;,
+If(
+Specie_Focus__c= &quot;Swine&quot;,&quot;Farm VIP Swine&quot;,
+If(
+Specie_Focus__c = &quot;Show&quot;,&quot;Farm VIP Show&quot;,
+&quot;???&quot;)))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Newsletter to Load</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Nominating_Sales_Person_ASM__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(Farm_VIP_Registration__r.Owner:User.Area_Sales_Manager__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Nominating Sales Person ASM</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Nominating_Sales_Person_Full_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Farm_VIP_Registration__r.Owner:User.FirstName &amp;&quot; &quot;&amp;Farm_VIP_Registration__r.Owner:User.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Nominating Sales Person Full Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Nominating_Sales_Person_Sales_Division__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text(Farm_VIP_Registration__r.Owner:User.Sales_Division__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Nominating Sales Person Sales Division</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Nominating_Sales_Person_Sales_Region__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text( Farm_VIP_Registration__r.Owner:User.Sales_Region__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Nominating Sales Person Sales Region</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Phone</fullName>
+    </fields>
+    <fields>
+        <fullName>PostalCode</fullName>
+    </fields>
+    <fields>
+        <fullName>Sales_Mtg_Campaign_Group__c</fullName>
+        <externalId>false</externalId>
+        <label>Sales Mtg Campaign Group</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Group A</fullName>
+                    <default>false</default>
+                    <label>Group A</label>
+                </value>
+                <value>
+                    <fullName>Group B</fullName>
+                    <default>false</default>
+                    <label>Group B</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Sales_Person_Email__c</fullName>
+        <externalId>false</externalId>
+        <formula>Sales_Person_Name__r.Email</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Person Email</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Person_Name__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup to the contact record used to identify a Sales Rep</description>
+        <externalId>false</externalId>
+        <label>Sales Person Name</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Campaign Members</relationshipLabel>
+        <relationshipName>Campaign_Members</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Sales_Person_Phone__c</fullName>
+        <externalId>false</externalId>
+        <formula>Sales_Person_Name__r.Phone</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Person Phone</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Salutation</fullName>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Specie_Focus__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text(Campaign.Specie_Focus__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Specie Focus</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>State</fullName>
+    </fields>
+    <fields>
+        <fullName>Status</fullName>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Street</fullName>
+    </fields>
+    <fields>
+        <fullName>Title</fullName>
+    </fields>
+    <fields>
+        <fullName>VIPHost_Mobile__c</fullName>
+        <description>Nominating Sales Person Mobile Phone</description>
+        <externalId>false</externalId>
+        <formula>Farm_VIP_Registration__r.Owner:User.MobilePhone</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Host Mobile</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>VIPNominating_Sales_Person_First_Name__c</fullName>
+        <description>First name of Sales Person Nominating</description>
+        <externalId>false</externalId>
+        <formula>Farm_VIP_Registration__r.Owner:User.FirstName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Nominating Sales Person First Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>VIPNominating_Sales_Person_Last_Name__c</fullName>
+        <description>Last name of nominating sales person</description>
+        <externalId>false</externalId>
+        <formula>Farm_VIP_Registration__r.Owner:User.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Nominating Sales Person Last Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>VIPNominating_Sales_Person_Role__c</fullName>
+        <description>Role of the Nominating Sales Person</description>
+        <externalId>false</externalId>
+        <formula>Farm_VIP_Registration__r.Owner:User.UserRole.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Nominating Sales Person Role</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>VIPNotes_from_Registration__c</fullName>
+        <description>Value from &quot;Notes&quot; field on Farm VIP Registration record</description>
+        <externalId>false</externalId>
+        <formula>Farm_VIP_Registration__r.Notes__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Notes from Registration</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>VIPRequester_Email__c</fullName>
+        <description>Email of the Nominating Sales Person for Farm VIP</description>
+        <externalId>false</externalId>
+        <formula>Farm_VIP_Registration__r.Owner:User.Email</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Requester Email</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>VIPRoom_With__c</fullName>
+        <description>Value for &quot;Room With&quot; field from Farm VIP</description>
+        <externalId>false</externalId>
+        <formula>Farm_VIP_Registration__r.Room_With__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Room With</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>VIPSales_Person_Nominating_Attending__c</fullName>
+        <description>Value from the &quot;I will be Attending&quot; field on the Farm VIP Registration</description>
+        <externalId>false</externalId>
+        <formula>TEXT(Farm_VIP_Registration__r.Host_will_be_attending__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Person Nominating Attending?</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>VIPTraveling_Via__c</fullName>
+        <description>Value from the &quot;Traveling Via&quot; field on the Farm VIP Registration record</description>
+        <externalId>false</externalId>
+        <formula>TEXT( Farm_VIP_Registration__r.Traveling_Via__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Traveling Via</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Will_Host_Be_Attending__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text(Farm_VIP_Registration__r.Host_will_be_attending__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Will Host be Attending?</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X18_Digit_Account_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.Account.X18_Digit_Account_ID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>18 Digit Account ID</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X18_Digit_Campaign_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>Campaign.X18_Digit_Customer_Event_ID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>18 Digit Campaign ID</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X18_Digit_Contact_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.X18_Digit_Contact_ID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>18 Digit Contact ID</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X18_Digit_Lead_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead.X18_Digit_Lead_ID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>18 Digit Lead ID</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>et4ae5__Activity__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Activity</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Sent</fullName>
+                    <default>false</default>
+                    <label>Sent</label>
+                </value>
+                <value>
+                    <fullName>Unsubscribed</fullName>
+                    <default>false</default>
+                    <label>Unsubscribed</label>
+                </value>
+                <value>
+                    <fullName>Soft Bounce</fullName>
+                    <default>false</default>
+                    <label>Soft Bounce</label>
+                </value>
+                <value>
+                    <fullName>Hard Bounce</fullName>
+                    <default>false</default>
+                    <label>Hard Bounce</label>
+                </value>
+                <value>
+                    <fullName>Opened</fullName>
+                    <default>false</default>
+                    <label>Opened</label>
+                </value>
+                <value>
+                    <fullName>Clicked</fullName>
+                    <default>false</default>
+                    <label>Clicked</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>x18_Digit_Campaign_Member_ID__c</fullName>
+        <description>18 Digit ID</description>
+        <externalId>false</externalId>
+        <formula>CASESAFEID(Id)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>18 Digit Campaign Member ID</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <recordTypes>
+        <fullName>Campaign_Member</fullName>
+        <active>true</active>
+        <description>Campaign Member</description>
+        <label>Campaign Member</label>
+        <picklistValues>
+            <picklist>Sales_Mtg_Campaign_Group__c</picklist>
+            <values>
+                <fullName>Group A</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Group B</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>et4ae5__Activity__c</picklist>
+            <values>
+                <fullName>Clicked</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hard Bounce</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Opened</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Soft Bounce</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+</CustomObject>

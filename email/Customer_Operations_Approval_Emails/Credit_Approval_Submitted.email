@@ -1,0 +1,10 @@
+A credit amount of {!Case.Credit_Amount_Range__c} on Service Request {!Case.CaseNumber} has been submitted for approval and is currently being reviewed. 
+
+Service Request Link: {!Case.Link} 
+
+Service Request Subject: {!Case.Subject} 
+Service Request Category: {!Case.Issue_Category__c} 
+Service Request Sub-Category: {!Case.Issue_Sub_Category__c} 
+
+Account Name: {!Case.Account} 
+Contact Name: {!Case.Contact}

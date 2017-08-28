@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>ELENBAAS CO INC - RETAIL-311586 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>ELENBAAS CO INC - RETAIL-311586 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>ELENBAASCOINCRETAIL311586PartnerManager</parentRole>
+</Role>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use to send to customer for follow-up on shipping error</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Shipping Error, never received or received and keeping product</name>
+    <style>none</style>
+    <subject>{!Case.CaseNumber} – Shipping Error</subject>
+    <type>text</type>
+</EmailTemplate>

@@ -1,0 +1,75 @@
+<apex:page controller="LPDCR_SearchResultsController" action="{!validate}" showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false">
+  <apex:form id="form">
+    <apex:composition template="LPDCR_CC_BaseTemplate" >
+    <apex:define name="PageTitle">SEARCH RESULTS</apex:define>
+    <apex:define name="body">
+
+        <div class="wrapper">    
+            <div class="row equalHgt">
+                 <div class="col-sm-12 topgap">
+                     <!-- START: MAIN PAGE BODY -->
+                     <div class="wrapper cc_homepage pagenation_promation">
+                       <div class="row">
+                           <div class="col-sm-12">
+                              <div class="row">
+                                  <div class="col-sm-12 ">
+                                      <!-- <c:LPDCR_SecondaryPageHeader title="{!JSENCODE(page_title)}" id="pageTitleText" /> -->
+                                      <c:LPDCR_SecondaryPageHeader title="Search Results" id="pageTitleText" />
+                                  </div>
+                              </div>
+                           </div>
+                       </div><!-- /END row -->
+                       <div class="row">
+                           <div class="col-sm-12 topgap">
+                               <div class="panel with-nav-tabs panel-default">
+                                    <div class="panel-heading col-sm-3">
+                                         
+                                        <apex:outputPanel layout="block" styleClass="col-sm-12 pad_lft_rgt accBg pad_btm20" id="filterPanel" >
+                                           <c:LPDCR_SecondaryPageFilters componentKey="filtersComponent" 
+                                                                         thisPageController="{!this}"
+                                                                         rerenderList="resultsSection"
+                                                                         compName="Search Results"/>
+                                        </apex:outputPanel>
+                                        
+                                    </div><!-- /END panel-heading -->
+                                    <div class="panel-body col-sm-9 pad_lft10 zeroPad">
+                                        <div class="tab-content bgWht flt_lft wid100">
+                                           <div class="tab-pane fade active in" id="searchResultList">
+                                               <apex:outputPanel id="resultsList" rendered="{!IF( term != null, true, false)}">
+
+                                                   <c:LPDCR_SearchResultsList componentKey="resultsListComponent" 
+                                                                              thisPageController="{!this}"
+                                                                              searchTerm="{!term}"
+                                                                              searchCategory="{!type}"/>
+                                               </apex:outputPanel>
+                                           </div><!-- /END tab-pane fade -->
+                                        </div><!-- /END tab-content -->
+                                    </div><!-- /END panel-body -->
+                               </div><!-- /END panel with-nav-tab -->
+                           </div><!-- /END col-sm-12 mob_pads -->
+                       </div><!-- /END row -->
+                    </div><!-- /END: MAIN PAGE BODY -->
+                </div>
+            </div>
+        </div><!-- /END wrapper -->
+
+    </apex:define>
+    </apex:composition>
+</apex:form>
+ <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script> 
+
+
+
+ <style>.media{background:url({!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_Header_SearchRes)}); width:100%; height:133px; background-repeat: no-repeat;
+    background-size: contain;}
+    .topgap{
+        padding-top:20px;
+    }
+    @media only screen and (max-width: 750px) {
+    .topgap{
+        padding-top:0px !important;
+    }
+    }
+    </style>  
+</apex:page>

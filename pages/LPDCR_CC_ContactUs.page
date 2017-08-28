@@ -1,0 +1,160 @@
+<!-- 
+*********************************************************************************
+Author: Govinda Prasad P S
+Email: govinda.prasad@magnet360.com
+Created Date    : 03/14/2017
+Function    :  Visualforce page Contact Us 
+Version     : 1.0 
+*********************************************************************************
+--> 
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="LPDCR_ContactUsController" action="{!initialize}">
+
+ <apex:form id="form">
+     
+    <apex:composition template="LPDCR_CC_BaseTemplate" >
+    <apex:define name="PageTitle">Contact Us</apex:define>
+    <apex:define name="body"> 
+    
+    <apex:actionFunction name="setContactReasonAF" action="{!setContactReason}" immediate="true" rerender="toAddress">
+        <apex:param name="reason" assignTo="{!contactReason}" value="" />
+    </apex:actionFunction>
+    
+    
+    <div class="wrapper">    
+        <div class="col-sm-12 pad_lft_rgt pad_top20">
+              <div class="row">
+                  <div class="col-sm-12 mrg_btm20 mob_pad">
+                      <c:LPDCR_SecondaryPageHeader title="Contact Us" />
+                   </div>
+              </div>
+              <div class="row mrg_all0">
+                <div class="well backgroundcolor mrg_topNeg30">
+                    <p>&nbsp;</p>
+                    <p>Thank you for getting in touch with Purina Customer Service.</p>
+                    <p>Please fill out your message below and we will get back to you as soon as possible.<br />
+                        If you prefer to call us please use this number 855-333-3565.</p>
+                    <p>&nbsp;</p>
+                    <div class="row">
+                    
+                     <form class="form-horizontal">
+                          <div class="form-group">
+                            <span class="col-sm-2 control-label text-right">Regarding:</span >
+                            <div class="col-sm-4">
+                             <apex:selectList id="contactReasons" value="{!contactReason}" size="1" multiselect="false" onchange="setContactReasonJS();" styleClass="form-control">                                 
+                                 <apex:selectOption itemLabel="{!$Label.LPDCR_Contact_Regarding_OrderPricing}" itemValue="{!$Label.LPDCR_Contact_Regarding_OrderPricing}"></apex:selectOption>
+                                 <apex:selectOption itemLabel="{!$Label.LPDCR_Contact_Regarding_Other}" itemValue="{!$Label.LPDCR_Contact_Regarding_Other}" ></apex:selectOption>
+                             </apex:selectList>
+                            </div>
+                          </div>
+                          <br/>
+                          <!--<div class="form-group">
+                            <span class="col-sm-2 control-label text-right">From:</span >
+                            <div class="col-sm-10">
+                             <label>{!userName.Email}</label>
+                            </div>
+                          </div>
+                          <br/>
+                          <div class="form-group">
+                          
+                            <span class="col-sm-2 control-label text-right">To:</span >
+                            <div class="col-sm-10">
+                            <apex:outputPanel id="toAddress">-->
+                             <!--<label>{!emailObj.Address}</label>-->
+                             <!--<label>{!displayAddress}</label>
+                             </apex:outputPanel>
+                            </div>
+                          </div>
+                          <br/>
+                          <div class="form-group">
+                            <span class="col-sm-2 control-label text-right">Subject:</span >
+                            <div class="col-sm-10">
+                             <label>{!subject}</label>
+                            </div>
+                          </div>-->
+                          <br/>
+                          <div class="form-group">
+                            <span class="col-sm-2 control-label text-right">Message:</span>
+                            <div class="col-sm-10">
+                             <!--<textarea class="form-control textareawidth" value="{!emailBody}" cols="80" rows="15" placeholder="Write your message here."></textarea>-->
+                             <apex:inputTextarea styleClass="form-control textareawidth" id="emailbody"  value="{!emailBody}" cols="80" rows="15" ></apex:inputTextarea>
+
+                                <div class="clear"></div>
+                                
+                                <div class="clr_red">
+                                
+                                    <apex:pageMessages id="showmsg" ></apex:pageMessages>
+                                   
+                              </div>
+                              
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">
+                             <p>&nbsp;</p> 
+                            <div class="col-sm-offset-2 col-sm-10">
+                             <apex:commandButton action="{!sendEmail}" value="SEND" styleClass="btn btn-primary sendbutton"  disabled="false" reRender="showmsg"/>
+                             <!-- <apex:commandButton value="ClickMe" onclick="checkDoubleSubmit(this);"/>-->
+                            </div>
+                          </div>
+                        </form>
+                     </div>
+                    
+                
+                
+                </div>
+             </div>
+             
+             
+              
+        </div>
+    </div>
+    
+    </apex:define>
+    </apex:composition>
+ </apex:form>
+ <script>
+     $( document ).ready(function() {
+        $('.sendbutton').click(function(){
+        
+                var error = 0;
+                var comment = $('.textareawidth').val().trim();
+               
+                if (comment == ''||comment == null) {
+            
+                    error = 1;
+                     $('.sendbutton').attr("disabled", false);
+                } 
+          
+            else{
+               
+                 $('.sendbutton').attr("disabled", true);}
+        
+           
+        });
+    });
+ 
+
+</script>
+
+ <script type="text/javascript">
+                   
+                   function GetselectedAccount(){
+                        //alert('$value--'+$("input[name='account']:checked").attr('value'));
+                        var selectedAccId = $("input[name='account']:checked").attr('value');
+                        //alert(selectedAccId);
+                        
+                        var urlString = '{!$Site.BaseUrl}/';
+                        window.location = urlString+'LPDCR_CC_ContactUs?selectedAccountId='+selectedAccId;
+                        
+                        //changeAccount($("input[name='account']:checked").attr('value'));
+                    }
+                    
+                    function setContactReasonJS(){                                               
+                        setContactReasonAF($("select[id$='contactReasons'] :selected").attr('value'));
+                    }
+                    
+         </script>
+         <style>.btn-primary{border: 1px solid #cc262c !important;font-size: 14px !important; width:75px !important;font-weight: normal;padding: 8px 0px;}</style>
+<style>.media{background:url({!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_Header_Contact)}); width:100%; height:133px; background-repeat: no-repeat;
+    background-size: contain;}</style>
+</apex:page>

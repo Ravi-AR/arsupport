@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>WALLACE FARM AND PET SUPPLY INC-307182 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>WALLACE FARM AND PET SUPPLY INC-307182 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>WALLACEFARMANDPETSUPPLYINC307182PartnerManager</parentRole>
+</Role>

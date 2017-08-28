@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Corn BU</fullName>
+        <default>false</default>
+        <label>Corn BU</label>
+    </customValue>
+    <customValue>
+        <fullName>CPP (Weed &amp; Insect Control)</fullName>
+        <default>false</default>
+        <label>CPP (Weed &amp; Insect Control)</label>
+    </customValue>
+    <customValue>
+        <fullName>Crop Insurance</fullName>
+        <default>false</default>
+        <label>Crop Insurance</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Storage &amp; Analysis</fullName>
+        <default>false</default>
+        <label>Data Storage &amp; Analysis</label>
+    </customValue>
+    <customValue>
+        <fullName>External Promoted Finance Dollars</fullName>
+        <default>false</default>
+        <label>External Promoted Finance Dollars</label>
+    </customValue>
+    <customValue>
+        <fullName>Fall Fertilizer</fullName>
+        <default>false</default>
+        <label>Fall Fertilizer</label>
+    </customValue>
+    <customValue>
+        <fullName>Fertilizer</fullName>
+        <default>false</default>
+        <label>Fertilizer</label>
+    </customValue>
+    <customValue>
+        <fullName>First Cutting Application</fullName>
+        <default>false</default>
+        <label>First Cutting Application</label>
+    </customValue>
+    <customValue>
+        <fullName>Foliar</fullName>
+        <default>false</default>
+        <label>Foliar</label>
+    </customValue>
+    <customValue>
+        <fullName>Fungicide</fullName>
+        <default>false</default>
+        <label>Fungicide</label>
+    </customValue>
+    <customValue>
+        <fullName>GPS Soil Sampling</fullName>
+        <default>false</default>
+        <label>GPS Soil Sampling</label>
+    </customValue>
+    <customValue>
+        <fullName>Internal Financing Program Dollars</fullName>
+        <default>false</default>
+        <label>Internal Financing Program Dollars</label>
+    </customValue>
+    <customValue>
+        <fullName>Liquid Fuel Gallons</fullName>
+        <default>false</default>
+        <label>Liquid Fuel Gallons</label>
+    </customValue>
+    <customValue>
+        <fullName>Precision Equipment</fullName>
+        <default>false</default>
+        <label>Precision Equipment</label>
+    </customValue>
+    <customValue>
+        <fullName>Precision Seed Plans</fullName>
+        <default>false</default>
+        <label>Precision Seed Plans</label>
+    </customValue>
+    <customValue>
+        <fullName>Pre-dormancy Application</fullName>
+        <default>false</default>
+        <label>Pre-dormancy Application</label>
+    </customValue>
+    <customValue>
+        <fullName>Propane Gallons</fullName>
+        <default>false</default>
+        <label>Propane Gallons</label>
+    </customValue>
+    <customValue>
+        <fullName>Second or Later Cutting Application</fullName>
+        <default>false</default>
+        <label>Second or Later Cutting Application</label>
+    </customValue>
+    <customValue>
+        <fullName>Seed</fullName>
+        <default>false</default>
+        <label>Seed</label>
+    </customValue>
+    <customValue>
+        <fullName>Seed Treatment</fullName>
+        <default>false</default>
+        <label>Seed Treatment</label>
+    </customValue>
+    <customValue>
+        <fullName>Services</fullName>
+        <default>false</default>
+        <label>Services</label>
+    </customValue>
+    <customValue>
+        <fullName>Soybean BU</fullName>
+        <default>false</default>
+        <label>Soybean BU</label>
+    </customValue>
+    <customValue>
+        <fullName>Spring Fertilizer</fullName>
+        <default>false</default>
+        <label>Spring Fertilizer</label>
+    </customValue>
+    <customValue>
+        <fullName>Wheat BU</fullName>
+        <default>false</default>
+        <label>Wheat BU</label>
+    </customValue>
+    <description>Category Type is a dependent picklist of &quot;Category&quot;.</description>
+    <masterLabel>Category Type || Agronomy</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,7 @@
+At the {!Distribution_Alert__c.Name} location(s) the status for Cooked Tubs is {!Distribution_Alert__c.Status_Description__c} as of {!Distribution_Alert__c.Last_Updated__c}.
+
+Reason: {!Distribution_Alert__c.Reason__c}.
+
+Email to follow with more details.
+
+Sent on behalf of Melanie Mainquist, Customer Marketing

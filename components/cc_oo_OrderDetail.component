@@ -1,0 +1,1090 @@
+<!--<Component Name:cc_oo_OrderDetail>
+<Summary>
+-----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+
+Shrivaths  Kulkarni                         9/21/2016                                   US-244 hide price   
+Shivani Singh                              9/27/2016                                   US-411 Display a message upon placing a prebook order                                                                                                                         
+Saloni Kale                                9/28/2016                                   US- 371 Add E2 description on the PL page, cart page, order review and order
+Samruddhi Gokhale                          9/29/2016                                   US-211 Send email notification on Order confirmation page
+Samruddhi Gokhale                            10/28/2016                                US-511 Show JDE order number
+Gurleen Kaur                                12/13/2016                                 US-972 to show account number
+-->
+<apex:component allowDML="true" controller="cc_oo_OrderDetailController">
+    <script id="OO-OrderItems-Desktop" type="text/template">
+        <div id="cart_items_container orderdetailSection" class="">
+            <div class="cart_item_list">
+                {{sortingorder this.orderItems}}
+                {{#each this.orderItems}}
+                    <div class="cart_item cart_item_order {{this.itemID}}" data-id="{{this.itemID}}">
+                            <div class="price">
+                                {{#ifNotEquals ../isConfirmation true}} 
+                                 <!--   {{pageLabelMap 'MyOrdersInc_Status'}}: {{pageLabelMap orderLineStatus}}<br/> --> 
+                                {{/ifNotEquals}}
+                                {{#ifNotEquals this.itemType 'Coupon'}}
+                                    <p>
+                                        <span class="value">{{pageLabelMap 'MiniCart_Quantity'}}: {{this.quantity}}</span>
+                                        <span class="UOM_{{itemID}} value"></span>
+                                    </p>
+                                {{/ifNotEquals}}
+                                {{#if (isNotPreBook)}}
+                                <p class="price">
+                                   {{#ifNotEquals this.itemType 'Coupon'}}
+                                    {{#if this.price}}
+                                        {{#if this.priceType}}
+                                            <label class="inline-info price-freight price-state">
+                                                {{#if this.isfreightincluded}}
+                                                    {{pageLabelMap 'Contract_Freight_DLV'}}
+                                                {{else}}
+                                                    {{pageLabelMap 'Contract_Freight_FOB'}}
+                                                {{/if}}
+                                            </label> {{pageLabelMap 'CartInc_Price'}}: {{{price this.price ../../../currencyCode}}}<br/>
+                                        {{else}}
+                                            <label class="inline-info price-freight price-state">
+                                                {{#if this.isfreightincluded}}
+                                                    {{pageLabelMap 'Contract_Freight_DLV'}}
+                                                {{else}}
+                                                    {{pageLabelMap 'Contract_Freight_FOB'}}
+                                                {{/if}}
+                                            </label> {{pageLabelMap 'CartInc_ContractPrice'}}: {{{price this.price ../../../currencyCode}}}<br/>
+                                        {{/if}}
+                                    {{/if}}
+                                    {{#if this.absoluteDiscount}}
+                                        {{#ifGreater this.absoluteDiscount 0}}
+                                            <span>{{pageLabelMap 'Checkout_YouSave'}}: {{{price this.absoluteDiscount ../../../../currencyCode}}}</span><br/>
+                                        {{/ifGreater}}
+                                        {{#ifLessThan this.absoluteDiscount 0}}
+                                            <span>{{pageLabelMap 'CartInc_Surcharge'}}: {{{priceAbs this.absoluteDiscount ../../../../currencyCode}}}</span><br/>
+                                        {{/ifLessThan}}
+                                    {{/if}}
+                                    {{/ifNotEquals}}
+                                    <strong>{{pageLabelMap 'CartInc_Total'}}: {{{price this.SubAmount ../currencyCode}}}</strong>
+                                </p>
+                                {{/if}}
+                            </div>
+                        {{#ifNotEquals this.itemType 'Coupon'}}
+                        <div class="cart_item_viewport item-order">
+                            {{#if (isNotPreBook)}}
+                                <a href="#" class="prodLink" data-id="{{this.mockProduct.sku}}">
+                                    {{#if this.mediaWrapper}}
+                                        <img src="{{this.mediaWrapper.0.mediaName}}" class="orderDetail" data-id="{{this.mockProduct.sku}}" />
+                                    {{else}}
+                                        <img class="mainProdImage detailLink prodDetRel noImg orderDetail" data-id="{{this.mockProduct.sku}}" />
+                                    {{/if}}
+                                </a>
+                            {{else}}
+                                {{{displayImage this.mediaWrapper 'orderDetail'}}}
+                            {{/if}}
+                        </div>
+                        <div class="span8 no-margin-left">
+                            <a href="#" class="prodLink span4" data-id="{{this.mockProduct.sku}}">{{{this.mockProduct.name}}}</a>
+                            {{#if this.showSubProdTerm}}
+                                <p>
+                                    <span>
+                                        {{insertTokens this.orderDisplayName this.displayName (price this.price) (price this.SubAmount) (price this.recurringPrice) (price this.recurringPriceSubAmount) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.installmentFrequencyUOM) this.orderFrequency this.installmentFrequency this.installmentCount this.orderCount}}
+                                    </span>
+                                </p>
+                            {{/if}}
+                                <div class="hide hidden-vfd vfd-icon lipstick span8" data-id="{{this.mockProduct.id}}">
+                                    <div class="icon-icons_vfd_regulated_feed pull-left" href="#" title="CAUTION: Federal law restricts medicated feed containing this veterinary feed directive (VFD) drug to use by or on the order of a licensed veterinarian." ></div>
+                                    <label class="pull-left">{{pageLabelMap 'VFDRegulatedFeed'}}</label>
+                                </div>
+                          </div>
+                        <div class="oo_e2Description hide span8 no-margin-left" data-id="{{this.mockProduct.sku}}">       
+                        </div> 
+                        <p><span class="span8 no-margin-left product-no"><strong>{{pageLabelMap 'Checkout_SKU'}}:</strong> {{this.mockProduct.sku}}</span></p>
+						{{#if this.leadTime}}
+                        	<p class="span8 no-margin-left leadTime">
+                            	<strong>{{pageLabelMap 'LeadTime'}}:</strong>
+                            	<span class="oo_leadTime value" data-id="{{this.mockProduct.id}}">{{this.leadTime}}</span>
+                            	<span>{{pageLabelMap 'LeadTimeMeasure'}}</span>
+                        	</p>
+                        {{/if}}
+                        <!-- US-2690 start -->
+                        {{#if this.comments}}
+                            <div class="span8 no-margin-left hidden-tablet"><a  href="#comments_{{this.itemID}}" id="commentsLink" data-toggle="modal">{{pageLabelMap 'Notes'}}</a></div>
+                                <div id="comments_{{this.itemID}}" class="info-modal-layout modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header"> 
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3 id="myModalLabel">{{displayProductName 'Aggregate_Display' displayProductBean.name mockProduct.name }}</h3>
+                                </div>
+                                <div id="commentsForm{{itemID}}" class="modal-body">
+                                    <div class="itemComment">{{this.comments}}</div>
+                                </div> 
+                            </div>
+                        {{/if}}
+                        
+                        <!-- US- 2690 end -->
+                        {{#if this.isSubscription}}
+                            <p class="subscriptionSummary">{{subscriptionSummary 'Order_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                            <p class="subscriptionNextDate">{{pageLabelMap 'Order_Subscription_Next_Payment'}} {{this.nextSubscriptionDateStr}}</p>
+                            {{#if this.isLimitedSubscription}}
+                                <p class="subscriptionSummary">{{pageLabelMap 'Order_Subscription_End_Date'}} {{this.subscriptionEndDateStr}}</p>
+                            {{/if}}
+                        {{/if}}
+                        {{#each minorLines}}
+                            {{#if this.isSubscription}}
+                                <p class="subscriptionSummary">{{subscriptionSummary 'Order_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                                <p class="subscriptionNextDate">{{pageLabelMap 'Order_Subscription_Next_Payment'}} {{this.nextSubscriptionDateStr}}</p>
+                                {{#if this.isLimitedSubscription}}
+                                    <p class="subscriptionEndDate">{{pageLabelMap 'Order_Subscription_End_Date'}} {{this.subscriptionEndDateStr}}</p>
+                                {{/if}}
+                            {{/if}}
+                        {{/each}}
+                        {{#if this.minorLines }}
+                            <p><a href="#included_items{{this.itemID}}" id="includedItemsLink" data-toggle="modal" data-id="{{this.itemID}}">{{pageLabelMap 'CheckOut_IncludedItems'}}</a></p>
+                            {{> includedDisplay}}
+                        {{/if}}
+                        {{/ifNotEquals}}
+                        {{#ifEquals this.itemType 'Coupon'}}
+                        <p class="item_title coupon_title">
+                            {{{this.mockProduct.name}}}
+                        </p>    
+                        {{/ifEquals}}
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class="clear"></div>
+    </script>
+
+    <script id="OO-OrderDetails-View-Desktop" type="text/template">
+        <div class="margin_form" {{{setOrderName this.orderNumber}}}>
+            {{#if this.isConfirmation}}
+                <fieldset class="confDetails confirmOrder">
+                    <legend class="grey confDetails">{{pageLabelMap 'OrderConfirmation_Title'}}</legend>
+                    {{#if (isNotPreBook)}}
+                    
+                        <p class="largest">
+                            <!--<i class="fa fa-check fa-2x" aria-hidden="true"></i>-->
+                            <img src="{!URLFOR($Resource.CC_Purina_Theme_3,'/images/check-circle.png')}">
+                            <span class="thankyou"><strong><i>{{pageLabelMap 'OrderConfirmation_PlacedOrder_ThankYou_OnlineOrder'}}</i></strong></span>
+                        </p>
+                        <p class="larger"><span class="confirmationText orderNumber hide">{{pageLabelMap 'OrderConfirmation_PlacedOrder_CC_OrderNumber'}} </span> <a class="confirmationData CCOrderNumber hide" title="{{pageLabelMap 'Order_temporary_number'}}"><strong>{{this.name}}</strong></a></p>
+                        <p class="larger"><span class="confirmationText hide">{{pageLabelMap 'OrderConfirmation_PlacedOrder_OrderNumber'}} </span> <span class="confirmationData JDEOrderNumber hide"><strong>{{this.name}}</strong></span></p>
+                        <p class="larger"><span class="confirmationText">{{pageLabelMap 'OrderConfirmation_StatusInfo_OnlineOrder'}} &nbsp;<u><a href="#" class="orderHistory"><strong>{{pageLabelMap 'Order History'}}</strong></a></u></span></p>
+                        <!-- User story: OO-1720 - Adding 'Check out next cart' button on order confirmation page -->
+                        <div class="center next-action">
+                            <button id="addNextCart" class="btn btn-secondary wide submit-button addNextCart hide" type="button" value="Check out Next Cart">Check out Next Cart</button>
+                            <!--US OO-1262 Adding new link 'Place Another Order'-->
+                            <a href="#" class="btn btn-secondary wide submit-button lnkPlaceNewOrder hide" data-toggle="modal" data-target="#selectShipToPlantModal" data-backdrop="static" data-keyboard="false">Place Another Order</a>
+                        </div>
+                        <!-- End of User story: OO-1720 - Adding 'Check out next cart' button on order confirmation page -->
+                        
+                    {{else}}
+                        
+                        <p class="largest">
+                            <img src="{!URLFOR($Resource.CC_Purina_Theme_3,'/images/check-circle.png')}">
+                            <span class="thankyou"><strong><i>{{pageLabelMap 'OrderConfirmation_PlacedOrder_ThankYou_Prebook'}}</i></strong></span>
+                        </p>
+                        <p class="larger"><span class="confirmationText orderNumber hide">{{pageLabelMap 'OrderConfirmation_PlacedOrder_CC_OrderNumber'}} </span> <a class="confirmationData CCOrderNumber hide" title="{{pageLabelMap 'Order_temporary_number'}}"><strong>{{this.name}}</strong></a></p>
+                        <p class="larger"><span class="confirmationText hide">{{pageLabelMap 'OrderConfirmation_PlacedOrder_CommittmentNumber_Prebook'}} </span> <span class="confirmationData JDEOrderNumber hide"><strong>{{this.name}}</strong></span></p>
+                        <p class="larger"><span class="confirmationText">{{pageLabelMap 'OrderConfirmation_StatusInfo_Prebook'}} &nbsp;<u><a href="#" class="orderHistory"><strong>{{pageLabelMap 'Prebook History'}}</strong></a></u></span></p>
+                    {{/if}}
+                    
+                    <p>
+                        {{#each this.payments}} 
+                          {{#ifEquals paymentMethod "PO Number"}}
+                                <!--{{pageLabelMap 'CheckOut_POGuidingText'}}-->
+                            {{/ifEquals}}
+                        {{/each}}
+                    </p>
+                </fieldset>
+            {{else}}
+                <fieldset class="clear orderDetails">
+                    <legend class="grey orderDetails">{{pageLabelMap 'OrderInformation'}}</legend>
+                    <p class="larger">
+                           
+                        {{#if (isNotPreBook)}}
+                          <span class="orderNum"><strong><span class="JDEOrderLabel">{{pageLabelMap 'OrderView_OrderNumber'}}</span>:&nbsp;</strong> <span class="JDEOrderNumber">{{this.name}}</span></span><br/>
+                        {{else}}
+                        <span class="orderNum"><strong><span class="JDEOrderLabel">{{pageLabelMap 'OrderView_PrebookCommitmentNumber'}}</span>:&nbsp;</strong> <span class="JDEOrderNumber">{{this.name}}</span></span><br/>
+                        {{/if}}
+                        {{#ifDisplay 'OD.DsplExtOrderNumber'}} <span class="orderExtNum"><strong>{{pageLabelMap 'ExternalOrderID'}}:&nbsp;</strong> {{this.externalOrderId}}</span><br/> {{/ifDisplay}}
+                        <span class="orderStat"><strong>{{pageLabelMap 'MyOrdersInc_Status'}}:&nbsp;</strong> {{pageLabelMap this.status}}</span><br/>
+                        <span class="rightside"><a href="#" class="orderHistory">{{pageLabelMap 'OrderConfirmation_OrderHistory'}}</a></span>
+                    </p>
+                    <p>
+                        {{#each this.payments}}
+                            {{#ifEquals paymentMethod "PO Number"}}
+                                {{pageLabelMap 'CheckOut_POGuidingText'}}
+                            {{/ifEquals}}
+                        {{/each}}
+                    </p>
+                </fieldset>
+            {{/if}}
+            <fieldset class="grey">
+                <legend class="grey">{{pageLabelMap 'CheckOut_GeneralInformation'}}</legend>
+                <ul class="order_review">
+                    <li>
+                        <p>
+                            <strong>{{pageLabelMap 'CheckOut_BuyerInformation'}}</strong><br/>
+                            {{#if buyerFirstName}}
+                                {{this.buyerFirstName}} {{this.buyerLastName}}<br/>
+                                {{#if this.buyerPhone}}
+                                    {{this.buyerPhone}}<br/>
+                                {{/if}}
+                                {{this.buyerEmail}} 
+                            {{else}}
+                                <span class="custom-info"></span>
+                            {{/if}}
+
+                        </p>
+                        {{#if (isNotPreBook)}}
+                         <p>
+                            <strong>{{pageLabelMap 'CheckOut_ShippingInformation'}}</strong><br/>
+                            {{#if this.shippingMethod}}
+ 
+                                <strong>{{pageLabelMap 'CheckOut_ShippingMethod'}}:&nbsp;</strong>
+                                                     {{{shippingOptions this.shippingMethod}}}<br/>
+ 
+                            {{/if}}
+                           <!-- {{#if this.shippingInst}}
+                                <span><strong>{{pageLabelMap 'CheckOut_ShippingNotes'}}:</strong> {{this.shippingInst}}</span><br/>
+                            {{/if}} -->
+                            {{#if this.requestedDate}}
+ 
+                                {{#ifEquals (shippingOptions this.shippingMethod) 'Delivery'}}
+                                <strong>{{pageLabelMap 'Checkout_RequestedDeliveryDt'}}: </strong>
+                                                           <span>{{this.requestedDateStr}}&nbsp;</span>
+                                                           <br/>
+                                                    {{else}}
+                                                           <strong>{{pageLabelMap 'PickupDate'}}: </strong>
+                                                           <span>{{this.requestedDateStr}}&nbsp;<span>
+                                                           <br/>
+                                                          
+                                                           <span class="pickupTime hide">
+                                                                  <strong>{{pageLabelMap 'PickupTime'}}: </strong>
+                                                                  <span class="pickupTime-value">{{this.pickupTime}}&nbsp;</span>
+                                                           </span>
+                                                     {{/ifEquals}}
+                                                    <div class="span8 pull-left no-margin-left oo_deliveryInstruction hide">
+                                              <strong class="pull-left">{{pageLabelMap 'Delivery Instructions'}}:&nbsp;</strong><span class="pull-left oo_deliveryInstructionValue"></span>
+                                        </div>
+                                                    <div class="span8 pull-left no-margin-left oo_comments hide">
+                                                     <strong class="pull-left">{{pageLabelMap 'Comments'}}:&nbsp;</strong><span class="pull-left oo_commentsValue"></span>
+                                                    </div>
+                            {{/if}}
+                         </p>
+                        {{/if}}
+                    </li>
+                    <li>
+                        <p>
+                            <strong>{{pageLabelMap 'CheckOut_BillingAddress'}}</strong><br/>
+                            {{> addressDisplay this.billingAddress}}
+                        </p>
+                                 
+                <div class="oo_PONumber hide"><strong>{{pageLabelMap 'PO Number'}}: </strong><span class="oo_PONumberValue"></span></div>
+                       
+                    </li>
+                    <li>
+                        <p class="shipto">
+                            <strong>{{pageLabelMap 'CheckOut_ShippingAddress'}}</strong><br/>
+                            {{> addressDisplay this.shippingAddress}}
+                        </p>
+                        {{#if this.hasCoupon}}
+                        <li>
+                            <p class="coupon_section"><strong>{{pageLabelMap 'CartInc_AppliedCoupon'}}</strong><br/>{{this.couponName}}</p>
+                        </li>
+                        {{/if}}
+                    </li>
+                                 <div class="reviewPaymentSection clear">
+                                       <span class="payment-terms"><strong>{{pageLabelMap 'CheckOut_PaymentTerms'}}:&nbsp;</strong>{!paymentTerms}</span>
+                                 </div>
+                </ul>
+            </fieldset>
+                    <div class="inline-info pull-left price-difference-disclaimer" style="margin-bottom:15px;"><span>{{pageLabelMap 'PriceDifferenceDisclaimer'}}</span></div>
+            {{> orderItemsDesktop}}
+            {{> totalsSection}}
+                   
+            <div class="clear"></div>
+ 
+            {{#if this.shipments}}
+                <br/><br/>
+                <table border="0" cellpadding="0" cellspacing="0" class="shopping_cart orderShipments">
+                    <thead class="rich-table-thead ordShipmentHdr" >
+                        <tr>
+                            <th class="smaller ordShipmentTrackingUrlHdr"    width="10%">&nbsp;</th>
+                            <th class="smaller ordShipmentDateHdr"           width="14%">{{pageLabelMap 'OrderShipment_ShipmentDate'}}</th>
+                            <th class="smaller ordShipmentCarrierHdr"        width="14%">{{pageLabelMap 'OrderShipment_Carrier'}}</th>
+                            <th class="smaller ordShipmentMethodHdr"         width="21%">{{pageLabelMap 'OrderShipment_ShipmentMethod'}}</th>
+                            <th class="smaller ordShipmentTrackingNumHdr"    width="21%">{{pageLabelMap 'OrderShipment_TrackingNumber'}}</th>
+                            <th class="smaller ordShipmentDeliverDateHdr"    width="14%">{{pageLabelMap 'OrderShipment_DeliveryDate'}}</th>
+                        </tr>
+                    </thead>
+                    {{#each this.shipments}}
+                        <tr class="header odd orderShipmentRow {{sfid}}">
+                            <td class="ordShipmentTrackingUrl"><a target="shiptracking" href="{{{trackingUrl}}}">{{pageLabelMap 'OrderShipment_Track'}}</a></td>
+                            <td class="ordShipmentDate">{{shipmentDateStr}}</td>
+                            <td class="ordShipmentCarrier">{{carrier}}</td>
+                            <td class="ordShipmentMethod">{{shippingMethod}}</td>
+                            <td class="ordShipmentTrackingNum">{{trackingNo}}</td>
+                            <td class="ordShipmentDeliverDate">{{deliveryDateStr}}</td>
+                        </tr>
+                        {{#each this.items}}
+                            <tr class="child even ordShipmentDetails">
+                                <td />
+                                <td colspan="5" class="orderShipmentDetailLine {{sfid}}">
+                                    {{pageLabelMap 'CartInc_SKU'}} {{sku}}, {{pageLabelMap 'CartInc_Qty'}}: {{quantity}}
+                                </td>
+                            </tr>
+                        {{/each}}
+                    {{/each}}
+                </table>
+            {{/if}}
+            <!-- US-212 Add 'Back to Community portal' link -->
+            
+            <!-- commented buton for online Order Flow-->
+            {{#if (isNotPreBook)}}
+                
+            {{else}}
+               <div class="right">
+                    <button class="btn btn-primary wide submit-button addPrebook" type="button" value="Prebook Another Location" onclick="homePage();">Prebook Another Location</button>
+ 
+                </div>
+            {{/if}}
+        </div> 
+    </script>
+ 
+    <script id="OO-OrderDetails-View-Mobile" type="text/template">
+        <div class="checkout_container">
+            <h2 class="title">{{pageLabelMap 'OrderConfirmation_Title'}}</h2>
+            <div class="checkout_detail">
+                <div class="checkout_detail_item">
+                    {{#if this.isConfirmation}}
+                      <fieldset class="confDetails confirmOrder center">
+                       
+                        {{#if (isNotPreBook)}}
+                            <p class="largest">
+                                <img src="{!URLFOR($Resource.CC_Purina_Theme_3,'/images/check-circle.png')}">
+                                <span class="thankyou"><strong><i>{{pageLabelMap 'OrderConfirmation_PlacedOrder_ThankYou_OnlineOrder'}}</i></strong></span>
+                            </p>
+                                       <p class="larger"><span class="confirmationText orderNumber hide">{{pageLabelMap 'OrderConfirmation_PlacedOrder_CC_OrderNumber'}} </span> <span class="confirmationData CCOrderNumber hide"><strong>{{this.name}}</strong></span></p>
+                            <p class="larger"><span class="confirmationText hide">{{pageLabelMap 'OrderConfirmation_PlacedOrder_OrderNumber'}} </span> <span class="confirmationData JDEOrderNumber hide"><strong>{{this.name}}</strong></span></p>
+                            <p class="larger"><span class="confirmationText">{{pageLabelMap 'OrderConfirmation_StatusInfo_OnlineOrder'}} &nbsp;<u><a href="#" class="orderHistory"><strong>{{pageLabelMap 'Order History'}}</strong></a></u></span></p>
+                          <!--US OO-1262 Adding new link 'Place Another Order'-->
+                                       <div class="center next-action">
+                                                    <button class="btn btn-secondary wide submit-button addNextCart hide" type="button">Check out Next Cart</button>
+                                 <a href="#" class="btn btn-secondary wide submit-button lnkPlaceNewOrder hide" data-toggle="modal" data-target="#selectShipToPlantModal" data-backdrop="static" data-keyboard="false">Place Another Order</a>
+                                       </div>
+                        {{else}}
+ 
+                            <p class="largest">
+                                <img src="{!URLFOR($Resource.CC_Purina_Theme_3,'/images/check-circle.png')}">
+                                <br/><br/>
+                                <span class="thankyou"><strong><i>{{pageLabelMap 'OrderConfirmation_PlacedOrder_ThankYou_Prebook'}}</i></strong></span></p>
+                            <p class="larger"><span class="confirmationText orderNumber hide">{{pageLabelMap 'OrderConfirmation_PlacedOrder_CC_OrderNumber'}} </span> <span class="confirmationData CCOrderNumber hide"><strong>{{this.name}}</strong></span></p>
+                                              <p class="larger"><span class="confirmationText hide">{{pageLabelMap 'OrderConfirmation_PlacedOrder_CommittmentNumber_Prebook'}} </span> <span class="confirmationData JDEOrderNumber hide"><strong>{{this.name}}</strong></span></p>
+                            <p class="larger"><span class="confirmationText">{{pageLabelMap 'OrderConfirmation_StatusInfo_Prebook'}} &nbsp;<u><a href="#" class="orderHistory"><strong>{{pageLabelMap 'Prebook History'}}</strong></a></u>.</span></p>
+                                 <button class="btn btn-primary wide pull-right submit-button addPrebook" type="button" onclick="homePage();">Prebook Another Location</button>
+                        {{/if}}
+                      </fieldset>
+                    {{/if}}
+                                 <br>
+                                 <div class="inline-info pull-left price-difference-disclaimer" style="margin-bottom:15px;"><span>{{pageLabelMap 'PriceDifferenceDisclaimer'}}</span></div>
+                    <div id="accordion" class="accordion clear">
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a href="#collapseOne" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">{{pageLabelMap 'OrderInformation'}}</a>
+                            </div>
+                            <div class="accordion-body in collapse" id="collapseOne" style="height: auto;">
+                                <div class="accordion-inner">
+                                    {{#if (isNotPreBook)}}
+                                    <span class="orderNum"><strong><span class="JDEOrderLabel">{{pageLabelMap 'OrderView_OrderNumber'}}</span>:&nbsp;</strong><span class="JDEOrderNumber">{{this.name}}</span></span><br/>
+                                    {{else}}
+                                    <span class="orderNum"><strong><span class="JDEOrderLabel">{{pageLabelMap 'OrderView_PrebookCommitmentNumber'}}</span>:&nbsp;</strong><span class="JDEOrderNumber">{{this.name}}</span></span><br/>
+                                    {{/if}}
+                                    {{#ifDisplay 'OD.DsplExtOrderNumber'}} <p class="basic"><strong>{{pageLabelMap 'ExternalOrderID'}}:&nbsp;</strong>{{this.externalOrderId}}</p> {{/ifDisplay}}
+                                    <p class="basic"><strong>{{pageLabelMap 'MyOrdersInc_Status'}}:&nbsp;</strong>{{pageLabelMap this.status}}</p>
+                                </div>
+                            </div>                 
+                        </div>
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a href="#collapseTwo" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">{{pageLabelMap 'UserInformation'}}</a>
+                            </div>
+                            <div class="accordion-body in collapse" id="collapseTwo" style="height: auto;">
+                                <div class="accordion-inner">                     
+                                    <p class="basic"><strong>{{pageLabelMap 'CheckOut_BuyerInformation'}}</strong><br>
+                                        {{#if buyerFirstName}}
+                                            {{this.buyerFirstName}} {{this.buyerLastName}}<br/>
+                                            {{#if this.buyerPhone}}
+                                                {{this.buyerPhone}}<br/>
+                                            {{/if}}
+                                            {{this.buyerEmail}} 
+                                        {{else}}
+                                            <span class="custom-info"></span>
+                                        {{/if}}
+                                    </p>
+                                    <p class="basic_half"><strong>{{pageLabelMap 'CheckOut_BillingAddress'}}</strong><br/>
+                                        {{> addressDisplay this.billingAddress}}
+                                    </p>
+                                    <p class="basic_half shipto"><strong>{{pageLabelMap 'CheckOut_ShippingAddress'}}</strong><br/>
+                                        {{> addressDisplay this.shippingAddress}}
+                                    </p>
+                                    <!-- PO Number -->
+ 
+                                    <div>
+                                                                  <span class="payment-terms">
+                                                                        <strong>{{pageLabelMap 'CheckOut_PaymentTerms'}}:&nbsp</strong>
+                                                                        <span class="black">{!paymentTerms}</span>
+                                                                  </span>
+                                                                  <div class="oo_PONumber hide"><strong>{{pageLabelMap 'PO Number'}}: </strong><span class="oo_PONumberValue"></span></div>
+                                                           </div>
+                                                    </div>
+                            </div>
+                        </div>    
+                    {{#if (isNotPreBook)}}
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a href="#collapseThree" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">{{pageLabelMap 'CheckOut_ShippingInformation'}}</a>
+ 
+ 
+                            </div>
+                            <div class="accordion-body in collapse" id="collapseThree" style="height: auto;">
+                                <div class="accordion-inner">
+                                    {{#if (isNotPreBook)}}                     
+                                    <p class="basic">
+                                        {{#if this.shippingMethod}}
+                                            <strong>{{pageLabelMap 'CheckOut_ShippingMethod'}}:&nbsp;</strong>{{{shippingOptions this.shippingMethod}}}<br/>
+                                        {{/if}}
+                                       <!-- {{#if this.shippingInst}}
+                                            <strong>{{pageLabelMap 'CheckOut_ShippingNotes'}}:&nbsp;</strong>{{this.shippingInst}}<br/>
+                                        {{/if}} -->
+                                        {{#if this.requestedDate}}
+                                            {{#ifEquals (shippingOptions this.shippingMethod) 'Delivery'}}
+                                                <strong>{{pageLabelMap 'Checkout_RequestedDeliveryDt'}}: </strong>
+                                                <span>{{this.requestedDateStr}}&nbsp;</span> 
+                                                <br/>
+                                            {{else}}
+                                                <strong>{{pageLabelMap 'PickupDate'}}: </strong>
+                                                <span>{{this.requestedDateStr}}&nbsp;<span>
+                                                <br/>
+                                    
+                                                <span class="pickupTime hide">
+                                                    <strong>{{pageLabelMap 'PickupTime'}}: </strong>
+                                                    <span class="pickupTime-value">{{this.pickupTime}}&nbsp;</span>
+                                                </span>
+                                                
+                                            {{/ifEquals}}
+                                            <div class="span8 pull-left no-margin-left oo_deliveryInstruction hide">
+                                                <strong class="pull-left">{{pageLabelMap 'Delivery Instructions'}}:&nbsp;</strong><span class="pull-left oo_deliveryInstructionValue"></span>
+                                            </div>
+                                            <div class="span8 pull-left no-margin-left oo_comments hide">
+                                                <strong class="pull-left">{{pageLabelMap 'Comments'}}:&nbsp;</strong><span class="pull-left oo_commentsValue"></span>
+                                            </div>
+                                        {{/if}}
+                                    </p> 
+                                    {{/if}}                  
+                                </div>
+                            </div>
+                        </div>
+                    {{/if}}
+                       
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                            <a href="#collapseFour" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">{{pageLabelMap 'CartDetails'}}</a>
+                        </div>
+                        <div class="accordion-body in collapse" id="collapseFour" style="height: auto;">
+                            <div class="accordion-inner">                     
+                                {{#each this.orderItems}}
+                                    <div class="cart_review_1_row">
+                                        <div class="cart_review_1_row_item">
+                                            {{#ifNotEquals this.itemType 'Coupon'}}
+                                                <a href="#" class="prodLink" data-id="{{this.mockProduct.sku}}">{{{this.mockProduct.name}}}</a>
+                                                <div class="hide hidden-vfd icon-icons_vfd_regulated_feed lipstick pull-right" href="#" data-id="{{this.mockProduct.id}}" title="CAUTION: Federal law restricts medicated feed containing this veterinary feed directive (VFD) drug to use by or on the order of a licensed veterinarian."></div>
+                                                <div class="oo_e2Description" data-id="{{this.mockProduct.sku}}">      
+                                            </div>                         
+                                                
+                                            {{#if this.showSubProdTerm}}
+                                                <p><label class="prodLink">{{insertTokens this.orderDisplayName this.displayName (price this.price) (price this.SubAmount) (price this.price) (price this.SubAmount) (price this.recurringPrice) (price this.recurringPriceSubAmount) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.installmentFrequencyUOM) this.orderFrequency this.installmentFrequency this.installmentCount this.orderCount}}</span></label></p>
+                                            {{/if}}
+                                            <p><strong>{{pageLabelMap 'Checkout_SKU'}}:&nbsp;</strong>{{this.mockProduct.sku}}</p>
+                                           
+                                                                        <p class="span8 no-margin-left leadTime_{{this.itemID}} hide">
+                                                                               <strong>{{pageLabelMap 'LeadTime'}}:</strong>
+                                                                               <span class="oo_leadTime_{{this.itemID}} value" data-id="{{this.mockProduct.id}}"></span>
+                                                                               <span>{{pageLabelMap 'LeadTimeMeasure'}}</span>
+                                                                        </p>
+                                                                        <!-- US-2690 start -->
+                                            <!--{{#if this.comments}}
+                                                                               <div class="span8 no-margin-left hidden-tablet"><a  href="#comments_{{this.itemID}}" id="commentsLink" data-toggle="modal">{{pageLabelMap 'Notes'}}</a></div>
+                                              <div id="comments_{{this.itemID}}" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-header">
+                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                     <h3 id="myModalLabel">{{displayProductName 'Aggregate_Display' displayProductBean.name mockProduct.name }}</h3>
+                                                    </div>
+                                                    <div id="commentsForm{{itemID}}" class="modal-body">
+                                                    <div class="itemComment">{{this.comments}}</div>
+                                                    </div>
+                                              </div>
+                                                                        {{/if}}-->
+                                                                       
+                                            <!-- US- 2690 end -->
+                                            {{#if this.isSubscription}}
+                                                <p class="subscriptionSummary">{{subscriptionSummary 'Order_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                                                 <p class="subscriptionNextDate">{{pageLabelMap 'Order_Subscription_Next_Payment'}} {{this.nextSubscriptionDateStr}}</p>
+                                                {{#if this.isLimitedSubscription}}
+                                                    <p class="subscriptionSummary">{{pageLabelMap 'Order_Subscription_End_Date'}} {{this.subscriptionEndDateStr}}</p>
+                                                {{/if}}
+                                            {{/if}}
+                                            {{#each minorLines}}
+                                                {{#if this.isSubscription}}
+                                                    <p class="subscriptionSummary">{{subscriptionSummary 'Order_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                                                    <p class="subscriptionNextDate">{{pageLabelMap 'Order_Subscription_Next_Payment'}} {{this.nextSubscriptionDateStr}}</p>
+                                                    {{#if this.isLimitedSubscription}}
+                                                        <p class="subscriptionEndDate">{{pageLabelMap 'Order_Subscription_End_Date'}} {{this.subscriptionEndDateStr}}</p>
+                                                    {{/if}}
+                                                {{/if}}
+                                            {{/each}}
+                                            {{#if this.minorLines }}
+                                                <p><a href="#included_items{{this.itemID}}" id="includedItemsLink" data-toggle="modal" data-id="{{this.itemID}}">{{pageLabelMap 'CheckOut_IncludedItems'}}</a></p>
+                                                {{> includedDisplay}}
+                                            {{/if}}
+                                            {{/ifNotEquals}}
+                                            {{#ifEquals this.itemType 'Coupon'}}
+                                            <p>{{{this.mockProduct.name}}}</p>
+                                            {{/ifEquals}}
+ 
+                                            {{#if (isNotPreBook)}}
+                                            <div class="cart_figures">
+                                                <div class="section1" >
+                                                    <label class="priceType_{{this.itemID}}">
+                                                        {{#ifNotEquals this.itemType 'Coupon'}}{{pageLabelMap 'CartInc_Price'}}:{{/ifNotEquals}}
+                                                        {{#ifEquals this.itemType 'Coupon'}}&nbsp;{{/ifEquals}}
+                                                    </label>
+                                                    <label class="inline-info price-freight_{{itemID}} price-state"></label>
+                                                </div>
+                                                 
+                                                <div class="section2">
+                                                    {{#ifNotEquals this.itemType 'Coupon'}}{{pageLabelMap 'MiniCart_Quantity'}}:{{/ifNotEquals}}
+                                                    {{#ifEquals this.itemType 'Coupon'}}&nbsp;{{/ifEquals}}
+                                                </div>
+                                                <div class="section3">{{pageLabelMap 'CartInc_Total'}}:</div>
+                                                <div class="section1 clear">
+                                                    {{#ifNotEquals this.itemType 'Coupon'}}
+                                                        {{#if price}}
+                                                            {{{price this.price ../../currencyCode}}}
+                                                        {{else}}
+                                                            &nbsp;
+                                                        {{/if}}
+                                                    {{/ifNotEquals}}
+                                                    {{#ifEquals this.itemType 'Coupon'}}&nbsp;{{/ifEquals}}
+                                                </div>
+                                                <div class="section2">
+                                                {{#ifNotEquals this.itemType 'Coupon'}}{{this.quantity}}&nbsp;<span class="UOM_{{itemID}} value"></span>{{/ifNotEquals}}
+                                                {{#ifEquals this.itemType 'Coupon'}}&nbsp;{{/ifEquals}}
+                                                </div>
+                                                <div class="section3 totalAmount">
+                                                    <strong class="price">{{{price this.itemTotal ../currencyCode}}}</strong>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+ 
+                                             {{else}}
+                                                <div class="cart_figures">
+                                                    <span class="section2">
+                                                        {{#ifNotEquals this.itemType 'Coupon'}}{{pageLabelMap 'MiniCart_Quantity'}}:{{/ifNotEquals}}
+                                                        {{#ifEquals this.itemType 'Coupon'}}&nbsp;{{/ifEquals}}
+                                                     </span>
+                                                     <span class="section2">
+                                                        {{#ifNotEquals this.itemType 'Coupon'}}{{this.quantity}}{{/ifNotEquals}}
+                                                        {{#ifEquals this.itemType 'Coupon'}}&nbsp;{{/ifEquals}}
+                                                    </span>
+                                                </div>
+                                            {{/if}}
+ 
+                                        </div>
+                                    </div>
+                                {{/each}}
+                                {{> totalsSection}}
+                                                                         
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </script>
+   
+    <script id="OO-OrderHeader-Mobile" type="text/template">
+        {{#if (isNotPreBook)}}
+            <ul class="checkout_steps">
+                <li class="step">{{pageLabelMap 'OrderInformation'}}</li>
+                <li class="step">{{pageLabelMap 'Order Review'}}</li>
+                <li class="current step">{{pageLabelMap 'Order Confirmation'}}</li>
+            </ul>
+        {{else}}
+            <ul class="checkout_steps pre-book-header">
+                <li class="step">{{pageLabelMap 'CheckOut_PrebookReview'}}</li>
+                <li class="current step">{{pageLabelMap 'OrderReview_PrebookConfirmation'}}</li>
+            </ul>
+        {{/if}}
+ 
+ 
+    </script>
+ 
+   
+    <!--- Load the header image conditionally for prebook -->
+    <script id="OO-OrderHeader-Desktop" type="text/template">
+        <img src="{!URLFOR($Resource.CC_Purina_Theme_3, 'en_US/images/order_confirmation_header_prebook.png')}"/>
+       
+    </script>
+    <script type="text/javascript">
+        jQuery(function($) {
+            var isOrderDetailNotRefreshed = true, currentOrderDetailView, detailNotRefreshed = true;
+            var orderType = $.urlParam('orderType');
+            CCRZ.uiProperties.OrderDetailView.partial.orderItemsDesktop = '#OO-OrderItems-Desktop';             
+            CCRZ.uiProperties.OrderDetailView.phone.tmpl = 'OO-OrderDetails-View-Mobile';
+            CCRZ.uiProperties.OrderDetailView.desktop.tmpl = 'OO-OrderDetails-View-Desktop';
+            CCRZ.uiProperties.OrderNav.phone.tmpl = 'OO-OrderHeader-Mobile';
+            var portalUserId=CCRZ.pagevars.portalUserId;
+            // defect: OO-2116
+            var cartId = CCRZ.pagevars.queryParams.cartID || CCRZ.pagevars.queryParams.cartId;
+            //Override the component script for header image for prebook flow
+            /*if(orderType != undefined && orderType.toLowerCase() == 'prebook' ) {//OO-3252  
+                CCRZ.uiProperties.OrderNav.desktop.tmpl         =   'OO-OrderHeader-Desktop';
+\            }*/
+ 
+            Handlebars.registerHelper("setOrderName", function(inputOrderName){
+                return inputOrderName;
+            });
+ 
+            Handlebars.registerHelper("getSKU", function(SKU){
+                return SKU.replace("PAL", "").replace("BG","");
+            });
+            <!-- User story OO-1720: Handlebar for hiding shipper from shipping method -->
+            Handlebars.registerHelper("shippingOptions",function(shippingOptionsData){
+                if($(shippingOptionsData).has(":contains('null')"))
+                {
+                    var  hyphenIndex = shippingOptionsData.indexOf('-');
+                    if(hyphenIndex>0){
+                        var res = shippingOptionsData.substring(hyphenIndex+1);
+                        return $.trim(res);
+                    }
+                    else{
+                        return shippingOptionsData;
+                    }
+                }
+                else
+                    return shippingOptionsData;
+            });
+ 
+            // To add more prebookings in order confirmation page
+            if(CCRZ.pagevars.currentPageName === "ccrz__OrderView"){
+                $('.addPrebook').hide();
+            }
+            
+            sessionStorage.removeItem('PickupTime');
+            sessionStorage.removeItem('pickupTimeIndex');
+            sessionStorage.removeItem('TimeZoneFormat');
+            sessionStorage.removeItem('slot');
+        
+            CCRZ.pubSub.on('view:OrderDetailView:refresh', function(theView) {
+                if(isOrderDetailNotRefreshed || currentOrderDetailView != CCRZ.display.currentView) {
+                    currentOrderDetailView = CCRZ.display.currentView;
+                    isOrderDetailNotRefreshed = false;
+                    setOrderDetailViewData(CCRZ.models.OrderDetail.prototype, CCRZ.views.OrderDetailView.prototype);
+                    detailNotRefreshed = true;
+                    //theView.setElement(.$el);
+                    theView.render();
+                    return;
+                }
+                if(detailNotRefreshed && !isOrderDetailNotRefreshed) {
+                   detailNotRefreshed = false;
+                       var jdeOrderno='{!jdeOrderNo}';
+                       if(jdeOrderno){
+                            $('.confirmationText').show();
+                            $('.JDEOrderNumber').show();
+                            $('.JDEOrderNumber').text(jdeOrderno);
+                            $('.JDEOrderLabel').text('Order Number');
+                            $('.confirmationText.orderNumber').hide();
+                            $('.CCOrderNumber').hide();//US-2391
+                       }else if(jdeOrderno == ''){
+                           // Start of Defect - 3176: if jde order number is not available then display order name
+      
+                           //Defect#OO-3264,OO-3280
+                               var jdeName = '{!jdeName}';
+                               $('.JDEOrderNumber').text(jdeName);
+                               $('.JDEOrderLabel').html('Order Number');
+                               $('.confirmationText.orderNumber').show();
+                                 $('.CCOrderNumber').show();//US-2391
+                                 $('.JDEOrderLabel').html('Order Number');
+                           
+                       // End of Defect - 3176: if jde order number is not available then display order name
+                       //Defect#OO-3264,OO-3280
+                       // defect: OO-2360
+                       }   
+                       if(!{!addnextCart}){
+                           $('.addNextCart').show();
+                           $('.lnkPlaceNewOrder').hide();
+                       }
+                       if(CCRZ.pagevars.currentPageName === "ccrz__OrderConfirmation"){
+                           if(!cartId){
+                               $('.addNextCart').hide();
+                               $('.lnkPlaceNewOrder').show();
+                           }
+                           else
+                           {
+                               $('.addNextCart').show();
+                               $('.lnkPlaceNewOrder').hide();
+                           }
+                          
+                       }
+                       else{
+                           $('.addNextCart').hide();
+                           $('.lnkPlaceNewOrder').show();
+                       }
+                       // end of defect: OO-2360
+                       
+                   
+                   }
+               
+            });
+           
+                        
+            var setOrderDetailViewData = function(orderDetailModel, orderDetailView) {
+                orderDetailModel.controllerName = "cc_oo_OrderDetailController";
+                var orderId = CCRZ.orderDetailView.model.attributes.sfid;
+                var orderItems=CCRZ.orderDetailModel.attributes.orderItems;
+                var prodids=[];
+                for(var i=0;i<orderItems.length;i++){
+                    prodids.push(orderItems[i].mockProduct.id);
+                }
+ 
+                orderDetailModel.callProductsDetails = function(callback) {
+                    var remoteActionCallForProducts = _.extend(CCRZ.RemoteInvocation,{className: orderDetailModel.controllerName});
+                    remoteActionCallForProducts.invokeCtx(
+                        'getProductsDetails',
+                        orderId,
+                        function(resp) {
+                            callback(resp);
+                        }, {buffer:false,escape:false,nmsp:false}
+                    );
+                };
+ 
+                orderDetailModel.getVfdFlag = function(prodids,callback) {
+                    var remoteCallVfd = _.extend(CCRZ.RemoteInvocation,{className: orderDetailModel.controllerName});
+                    remoteCallVfd.invokeCtx( 'getVfdFlag',prodids, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+ 
+ 
+                orderDetailModel.getPONumber = function(callback) {
+                    var remoteCallForPONumber = _.extend(CCRZ.RemoteInvocation,{className: orderDetailModel.controllerName});
+                   remoteCallForPONumber.invokeCtx( 'getPONumber',orderId, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+ 
+             /* OO-4800   orderDetailModel.getProductsLeadTime = function(callback) {
+                    var remoteCallForProductsLeadTime = _.extend(CCRZ.RemoteInvocation,{className: orderDetailModel.controllerName});
+                    remoteCallForProductsLeadTime.invokeCtx( 'getOrderDetailLeadTimeDetails',prodids, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };*/
+ 
+                orderDetailModel.orderConfirmationDetails = function(callback) {
+                    var remoteCallForOrderConfirmationDetails = _.extend(CCRZ.RemoteInvocation,{className: orderDetailModel.controllerName});
+                    remoteCallForOrderConfirmationDetails.invokeCtx( 'getOrderConfirmationDetails', orderId, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+ 
+                orderDetailModel.getOrderWeight = function(callback) {
+                    var remoteCallForOrderWeight = _.extend(CCRZ.RemoteInvocation,{className: orderDetailModel.controllerName});
+                    remoteCallForOrderWeight.invokeCtx( 'getOrderTotalWeight', orderId, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+ 
+                orderDetailModel.sendAckEmail = function(callback) {
+                    var remoteCallForSendingAckEmail = _.extend(CCRZ.RemoteInvocation,{className: orderDetailModel.controllerName});
+                    remoteCallForSendingAckEmail.invokeCtx( 'sendAcknowledgementMail',orderId, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+ 
+                orderDetailView.sendAckEmail = function() {
+                    orderDetailModel.sendAckEmail(function(resp){
+                        if(resp && resp.success) {                     
+                        }                  
+                    });
+                };
+ 
+                orderDetailView.getOrderWeight = function() {
+                    orderDetailModel.getOrderWeight(function(resp){
+                        if(resp && resp.success) {
+                            var respData = resp.data;
+                            if(respData) {
+                                var orderWeight = resp.data;
+                                if(orderWeight) {
+                                    $('.order_weight .value').text(orderWeight+' lb');
+                                }
+                            }                      
+                        }                   
+                    });
+                };
+ 
+                orderDetailView.orderConfirmationDetails = function() {
+                    orderDetailModel.orderConfirmationDetails(function(resp){
+                        if(resp && resp.success) {
+                            var respData = resp.data;
+                            if(respData && respData.OrderDetailData) {
+                                /*
+                                if(respData.OrderDetailData[0] && respData.OrderDetailData[0].ccrz__Order__r) {
+                                    var pickup_time = respData.OrderDetailData[0].ccrz__Order__r.cc_oo_PickUpTime__c || '';
+                                    if(pickup_time) {
+                                        $('.pickupTime-value').text(pickup_time);
+                                        // Defect OO-4205 start
+                                        var pickupTimeZone = $('.pickupTime-value').text().split(':')[0];
+                                        if(pickupTimeZone > 12){
+                                            var addTime = pickupTimeZone - 12;
+                                            addTime = '0'+addTime+":"+$('.pickupTime-value').text().split(':')[1] + ' ' +'PM';
+                                        }
+                                        else if(pickupTimeZone <= 12){
+                                            var addTime = pickupTimeZone;
+                                            addTime = addTime + ":" + $('.pickupTime-value').text().split(':')[1] +' '+ 'AM';
+                                        }
+                                        $('.pickupTime-value').text(addTime);
+                                        $('.pickupTime').show();
+                                         // Defect OO-4205 end
+                                    }
+                                }*/
+                                _.each(respData.OrderDetailData, function(cartItem) {
+                                    if(cartItem.ccrz__Product__r && cartItem.ccrz__Product__r.cc_oo_UoMDesc__c) {
+                                        $('.UOM_'+cartItem.Id).text(cartItem.ccrz__Product__r.cc_oo_UoMDesc__c);
+                                    }
+                                });
+                            }                       
+                        }                  
+                    });
+                };
+ 
+            /* OO-4800    orderDetailView.getProductsLeadTime = function() {
+                    orderDetailModel.getProductsLeadTime(function(resp){
+                        if(resp && resp.success) {
+                            if(resp.data) {
+                                var mainData = resp.data;
+                                $('.oo_leadTime').each( function(){
+                                    var productId = $(this).attr('data-id');
+                                    var leadTime = mainData[productId];
+                                    if(leadTime) {
+                                        $(this).text(leadTime);
+                                        $(this).closest('.leadTime').show();
+                                    }
+                                });
+                            }
+                        }                              
+                    });
+                };*/
+ 
+                orderDetailView.getPONumber = function() {
+                    orderDetailModel.getPONumber(function(resp){
+                        if(resp && resp.success) {
+                            var respData = resp.data;
+                            if(respData) {
+                                if(respData['PONumber']){
+                                    var poNumber = respData['PONumber'];
+                                    $('.oo_PONumberValue').html(poNumber);
+                                    $('.oo_PONumber').show();
+                                }
+                                if(respData['Comments']){
+                                    var commentsData = respData['Comments'];
+                                    $('.oo_commentsValue').text(commentsData);
+                                    $('.oo_comments').show();
+                                }
+                                if(respData['cartId']) {
+                                       var cartId = CCRZ.pagevars.queryParams.cartID ? CCRZ.pagevars.queryParams.cartID  : CCRZ.pagevars.queryParams.cartId;
+                                                   if(!cartId){
+                                                       CCRZ.pagevars.currentCartID = respData['cartId'];
+                                              CCRZ.pagevars.queryParams.cartId = respData['cartId'];
+                                                   }
+                                }
+                               
+                                 //OO-972 to show account number
+                                 // Commenting for Defect: OO-4899
+                                /*var shipToNumber = respData['AccountNumber'];
+                                if(shipToNumber){
+                                    $('.shipto .address_selection_display .addr_name').append('-'+ shipToNumber);
+                                }*/
+                                //OO-972 finish
+                            }                      
+                        }                  
+                    });
+                };
+ 
+                orderDetailView.getVfdFlag = function() {
+                    orderDetailModel.getVfdFlag(prodids,function(resp){
+                        if(resp && resp.success) {
+                          $('.hidden-vfd').each(function(){
+                                   var pid=$(this).attr('data-id');
+                                   var respData = resp.data;
+                                   if(respData) {
+                                       var dataflag = respData[pid];
+                                       if(dataflag){
+                                           $(this).show();        
+                                       }
+                                        }
+                               });                  
+                        }                  
+                    });
+                };
+ 
+ 
+                orderDetailView.callProductsDetails = function() {
+                    orderDetailModel.callProductsDetails(function(resp) {
+                        if(resp && resp.success) {
+                            if(resp.data) {
+                                var remoteData = resp.data;
+                                insertData($('#OO-OrderItems-Desktop').html(), '.cart_item_list', remoteData);
+                                var buyerInfo='';
+                                if(resp.data.buyerFirstName){
+                                    buyerInfo+=resp.data.buyerFirstName+' '+resp.data.buyerLastName;
+                                }
+                                if(resp.data.buyerPhone){
+                                    buyerInfo+="</br>"+resp.data.buyerPhone;
+                                }
+                                if(resp.data.buyerEmail){
+                                    buyerInfo+="</br>"+resp.data.buyerEmail;
+                                }
+                                $('.custom-info').html(buyerInfo);
+                                var orderItems=resp.data.orderItems;
+                                if(CCRZ.display.isPhone()){
+	                                for (i = 0; i < orderItems.length; i++) { 
+	                                     if(orderItems[i].priceType){
+	                                        $('.priceType_'+orderItems[i].itemID).html(CCRZ.pagevars.pageLabels['CartInc_Price']);
+	                                     }
+	                                     else{
+	                                        $('.priceType_'+orderItems[i].itemID).html(CCRZ.pagevars.pageLabels['CartInc_ContractPrice']);
+	                                     }
+	                                     if(orderItems[i].isfreightincluded){
+	                                        $('.price-freight_'+orderItems[i].itemID).html(CCRZ.pagevars.pageLabels['Contract_Freight_DLV']);
+	                                     }
+	                                     else{
+	                                        $('.price-freight_'+orderItems[i].itemID).html(CCRZ.pagevars.pageLabels['Contract_Freight_FOB']);
+	                                     }
+	                                     if(orderItems[i].leadTime){
+	                                     	$('.oo_leadTime_'+orderItems[i].itemID).html(orderItems[i].leadTime);
+	                                     	$('.leadTime_'+orderItems[i].itemID).show();
+	                                     }
+                                	} 
+                                }                             
+                                if(remoteData['DeliveryInstructions']){
+                                    $('.oo_deliveryInstructionValue').text(remoteData['DeliveryInstructions']);
+                                    $('.oo_deliveryInstruction').show();
+                                }
+                                 /*var mainData = remoteData['dataLeadMap']; //OO-4800
+                                if(mainData){
+                                $('.oo_leadTime').each( function(){
+                                    var productId = $(this).attr('data-id');
+                                    var leadTime = mainData[productId];
+                                    if(leadTime) {
+                                        $(this).text(leadTime);
+                                        $(this).closest('.leadTime').show();
+                                    }
+                                });
+                                }*/
+                                // Adding long description in div 'oo_longDesc'
+                                $('.oo_longDesc').each( function(){
+                                    // Passing data-id which contains the SKU Id
+                                    var productSKU = $(this).attr('data-id');
+                                    var productLongDescription = resp.data[productSKU].ccrz__Product__r.ccrz__LongDesc__c;                                           
+                                    // Showing Long description on the additional information popup window
+                                    $(this).html(productLongDescription);
+                                });
+ 
+                                $('.oo_e2Description').each( function(){
+                                    var productSKU = $(this).attr('data-id');
+                                    var E2Description = remoteData[productSKU].ccrz__Product__r.cc_oo_Second_Description__c;
+                                    // Showing the value of long Description on the pop up window
+                                    if(E2Description){
+                                        $(this).show();
+                                        $(this).html(E2Description);
+                                    }
+                                });
+                                if(remoteData.shippingMethod.indexOf("Pick Up")>=0){
+                                    var pickupTimeValue = '';
+                                    if(remoteData.pickupTime) {
+                                       if(!(remoteData.pickupTime.indexOf("AM")>=0 || remoteData.pickupTime.indexOf("PM")>=0)) {
+                                           var timeSplit = remoteData.pickupTime.split(":");
+                                           var hour = Number(timeSplit[0]);
+                                           if(hour === 0) {
+                                                  timeSplit[0] = hour + 12;
+                                                  timeSplit.push("AM");
+                                           }
+                                           else if(hour === 12) {
+                                                  timeSplit.push("PM");
+                                           }
+                                           else if(hour >12) {
+                                                  timeSplit[0] = hour - 12;
+                                                  if(timeSplit[0]<10) {
+                                                        timeSplit[0] = "0"+timeSplit[0];
+                                                  }
+                                                  timeSplit.push("PM");
+                                           }
+                                           else{
+                                                  timeSplit.push("AM");
+                                           }
+                                           pickupTimeValue = timeSplit[0]+":"+timeSplit[1]+" "+timeSplit[2];
+                                           
+                                       }
+                                       else {
+                                            pickupTimeValue = remoteData.pickupTime;
+                                       }
+                                       
+                                       if(remoteData.timeZone) {
+                                              pickupTimeValue+= " "+remoteData.timeZone;
+                                       }
+                                       $('.pickupTime-value').text(pickupTimeValue);
+                                       $('.pickupTime').show();
+                                }
+                                }
+                                orderDetailView.getVfdFlag(); // Showing VFD flag for relevant products
+                                        orderDetailView.getPONumber();  //OO-2690 - Showing PO Number in Order confirmation page
+                                        // OO-4800 orderDetailView.getProductsLeadTime(); //OO-2690 - Showing Lead Time for each product
+                                        orderDetailView.orderConfirmationDetails(); //OO-2690
+                                        orderDetailView.getOrderWeight();   //OO-2690
+                                       // orderDetailView.getCommentDetails();    //OO-2690
+                                                   
+                            }
+                        }
+                    });
+                };
+               
+                orderDetailView.loadMyOrders = function() {
+                    var myOrders = _.findWhere(menuIdList, {"value": CCRZ.pagevars.pageLabels["Component_SiteHeader_MyOrders"]});
+                           sessionStorage.setItem("navItem", myOrders.menuId);
+                           myOrderHistory();
+                };
+ 
+                orderDetailView.callProductsDetails();  // Creating and getting the Product List Data
+                var events = orderDetailView.events;
+ 
+                events["click .addNextCart"] = function() {
+                    // defect: OO-2130
+                    window.location = CCRZ.pagevars.currSiteURL + "ccrz__Cart?cartID=" + cartId + getCSRQueryString();
+                    // end of defect: OO-2130
+                };
+ 
+                events["click .addPrebook"] = function() {
+                    homePage();
+                };
+                events["click .prodLink"]=function(event){
+                    var objLink = $(event.currentTarget);
+                    var productId = objLink.data("id");
+                    document.location = CCRZ.pagevars.currSiteURL+"ccrz__ProductDetails?viewState=DetailView&cartID=" + CCRZ.pagevars.currentCartID + "&sku=" + productId + getCSRQueryString();
+                }
+                events["click .orderHistory"]= "loadMyOrders";
+            };
+ 
+        });
+        Handlebars.registerHelper('sortingorder', function(options) {
+                    console.log(options);
+             });
+    </script>
+   
+</apex:component>

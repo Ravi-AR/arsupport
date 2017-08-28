@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dashboard xmlns="http://soap.sforce.com/2006/04/metadata">
+    <backgroundEndColor>#FFFFFF</backgroundEndColor>
+    <backgroundFadeDirection>Diagonal</backgroundFadeDirection>
+    <backgroundStartColor>#FFFFFF</backgroundStartColor>
+    <dashboardType>SpecifiedUser</dashboardType>
+    <isGridLayout>false</isGridLayout>
+    <leftSection>
+        <columnSize>Wide</columnSize>
+        <components>
+            <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+            <componentType>Table</componentType>
+            <dashboardTableColumn>
+                <column>Lead$Status</column>
+                <sortBy>RowLabelAscending</sortBy>
+            </dashboardTableColumn>
+            <dashboardTableColumn>
+                <aggregateType>Sum</aggregateType>
+                <calculatePercent>false</calculatePercent>
+                <column>Lead$Lead_Count__c</column>
+                <showTotal>true</showTotal>
+            </dashboardTableColumn>
+            <displayUnits>Auto</displayUnits>
+            <drillEnabled>false</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <footer>The number of open leads from customer events where someone has requested a 60 Day Trial and has ten or more horses.</footer>
+            <header>60 Day Trial Request || Customer Events</header>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#C25454</indicatorLowColor>
+            <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
+            <report>Lead_Reviewer_Leads/ISS_Horse_60_Day_Trial</report>
+            <showPicturesOnTables>true</showPicturesOnTables>
+            <title>60 Day Trial Request || Horse Leads</title>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartAxisRange>Auto</chartAxisRange>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <axisBinding>y</axisBinding>
+                <column>Lead$Lead_Count__c</column>
+            </chartSummary>
+            <componentType>Bar</componentType>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>true</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <enableHover>false</enableHover>
+            <expandOthers>false</expandOthers>
+            <footer>Open leads from customer events where someone has requested a 60 Day Trial and has 10 or more horses.  Create date is the date the person answered the Digigraph question.</footer>
+            <groupingColumn>Lead.Survey_Results__r$CreatedDate</groupingColumn>
+            <legendPosition>Bottom</legendPosition>
+            <report>Lead_Reviewer_Leads/ISS_Horse_60_Day_Trial_10</report>
+            <showPercentage>false</showPercentage>
+            <showPicturesOnCharts>false</showPicturesOnCharts>
+            <showValues>false</showValues>
+            <sortBy>RowLabelDescending</sortBy>
+            <title>60 Day Trial Request || 10+ Horses</title>
+            <useReportChart>false</useReportChart>
+        </components>
+    </leftSection>
+    <middleSection>
+        <columnSize>Wide</columnSize>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartAxisRange>Auto</chartAxisRange>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <axisBinding>y</axisBinding>
+                <column>Lead.Lead_Count__c</column>
+            </chartSummary>
+            <componentType>Donut</componentType>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>true</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <enableHover>false</enableHover>
+            <expandOthers>true</expandOthers>
+            <footer>Open leads is defined as leads in the status of  Contacted, Open, Unqualified || Re-evaluate &amp; Will Not Pursue || Re-evaluate.</footer>
+            <groupingColumn>Lead.Horse_Grouping__c</groupingColumn>
+            <header>Horse Leads</header>
+            <legendPosition>Bottom</legendPosition>
+            <report>Lead_Reviewer_Leads/ISS_Horse_Leads</report>
+            <showPercentage>true</showPercentage>
+            <showTotal>true</showTotal>
+            <showValues>false</showValues>
+            <sortBy>RowLabelDescending</sortBy>
+            <title>Horse Leads</title>
+            <useReportChart>false</useReportChart>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartAxisRange>Auto</chartAxisRange>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <axisBinding>y</axisBinding>
+                <column>Lead.Lead_Count__c</column>
+            </chartSummary>
+            <componentType>Bar</componentType>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>true</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <enableHover>false</enableHover>
+            <expandOthers>false</expandOthers>
+            <footer>Open horse leads by horse groupings.</footer>
+            <groupingColumn>Lead.Horse_Grouping__c</groupingColumn>
+            <legendPosition>Bottom</legendPosition>
+            <report>Lead_Reviewer_Leads/ISS_Horse_Leads</report>
+            <showPercentage>false</showPercentage>
+            <showPicturesOnCharts>false</showPicturesOnCharts>
+            <showValues>true</showValues>
+            <sortBy>RowLabelAscending</sortBy>
+            <title>Horse Leads</title>
+            <useReportChart>false</useReportChart>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartAxisRange>Auto</chartAxisRange>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <axisBinding>y</axisBinding>
+                <column>Lead.Horse_Count__c</column>
+            </chartSummary>
+            <componentType>BarStacked</componentType>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>true</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <enableHover>false</enableHover>
+            <expandOthers>false</expandOthers>
+            <footer>Open horse leads sorted by survey month.</footer>
+            <groupingColumn>Lead.Date_Horse_Updated__c</groupingColumn>
+            <groupingColumn>Lead.Horse_Grouping__c</groupingColumn>
+            <legendPosition>Bottom</legendPosition>
+            <report>Lead_Reviewer_Leads/ISS_Horse_Leads_by_Month</report>
+            <showPercentage>false</showPercentage>
+            <showValues>false</showValues>
+            <sortBy>RowLabelAscending</sortBy>
+            <title>Horse Leads by Month of Survey</title>
+            <useReportChart>false</useReportChart>
+        </components>
+    </middleSection>
+    <rightSection>
+        <columnSize>Wide</columnSize>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartAxisRange>Auto</chartAxisRange>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <axisBinding>y</axisBinding>
+                <column>Lead.Lead_Count__c</column>
+            </chartSummary>
+            <componentType>BarStacked</componentType>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>true</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <enableHover>false</enableHover>
+            <expandOthers>false</expandOthers>
+            <footer>National horse event leads for the current year.</footer>
+            <groupingColumn>CAMPAIGN_NAME</groupingColumn>
+            <groupingColumn>Lead.Horse_Grouping__c</groupingColumn>
+            <header>National Horse Event Leads for the Current Year</header>
+            <legendPosition>Bottom</legendPosition>
+            <report>Lead_Reviewer_Leads/ISS_National_Horse_Events_Curr_Yr</report>
+            <showPercentage>false</showPercentage>
+            <showValues>false</showValues>
+            <sortBy>RowLabelAscending</sortBy>
+            <title>National Horse Events || Current Year</title>
+            <useReportChart>false</useReportChart>
+        </components>
+    </rightSection>
+    <runningUser>gprobertson@purinamills.com</runningUser>
+    <textColor>#000000</textColor>
+    <title>Lead Reviewer || Horse Leads</title>
+    <titleColor>#000000</titleColor>
+    <titleSize>12</titleSize>
+</Dashboard>

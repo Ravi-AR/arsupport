@@ -1,0 +1,17 @@
+Hi {!Opportunity.OwnerFirstName},
+
+This email is a reminder that you have an opportunity associated with the {!Opportunity.Primary_Campaign_Name__c} that needs attention. 
+
+To update the opportunity, use the link below.  If you are still working on this opportunity, change the Anticipated Close Date to a date in the future.  If the opportunity is ready to be closed, change the Stage to Closed Won or Closed Lost.
+
+Opportunity Name:  {!Opportunity.Name}
+Account Name:       {!Opportunity.Account}
+Opportunity Link:     {!Opportunity.Link}
+
+Note:  If you are receiving this email and your FARM VIP has not yet occurred, it is because your opportunity's anticipated close date is in the past and the opportunity is still open.  In this case, please change the opportunity anticipated close date to a date that is after the Farm VIP.
+
+If you require assistance, please contact us at purinacrmsupport@landolakes.com.
+
+Thank you!!
+
+Salesforce.com Support Team

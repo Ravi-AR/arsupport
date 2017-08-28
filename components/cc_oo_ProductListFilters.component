@@ -1,0 +1,78 @@
+<!--<Page Name: cc_oo_ProductListFilters> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Lalit Shankarrao                                12/22/2016                                    Defect 1887 - Sorting of the product spec filters
+
+-->
+
+<apex:component allowDML="true" >
+
+	<script type="text/javascript">
+		CCRZ.uiProperties.FeatureFilterView.desktop.tmpl = 'OO-FeatureFilter-View-Desktop';
+		CCRZ.uiProperties.FeatureFilterView.phone.tmpl = 'OO-FeatureFilter-View-Mobile';
+	</script>
+
+	<script id="OO-FeatureFilter-View-Desktop" type="text/template">
+        <h2 class="title">{{pageLabelMap 'Filter_Title'}}</h2>
+        <div class="filters">
+            <div class="filter_breadcrumb_container"></div>
+            <div class="filter_search">
+                <div class="alert alert-error messagingSectionFilter-Error" style="display: none"></div>
+                <div class="alert alert-warn messagingSectionFilter-Warn" style="display: none"></div>
+                <div class="alert alert-info messagingSectionFilter-Info" style="display: none"></div>
+                <input class="filterSearch"/>
+                <button type="button" class="searchFilter btn slim">{{pageLabelMap 'Search'}}</button>
+            </div>
+            {{#eachInMap (sortMap this) ''}}
+                <div class="spec">
+                    {{key}}
+                    {{#ifEquals value.displayType 'Checkbox'}}
+                        {{#eachInMap value.specValues }}
+                            <div class="value">
+                                <input type="checkbox" class="checkfilter" data-spec="{{../key}}" data-id="{{key}}" /> <span class="checkfilter" data-spec="{{../key}}" data-id="{{key}}">{{key}}</span> <div class="filtercount">{{pageLabelMap 'filter_count' value.length}}</div>
+                            </div>
+                        {{/eachInMap}}
+                    {{/ifEquals}}
+                    {{#ifEquals value.displayType 'Slider'}}
+                        <div class="value">
+                            <div class="alert alert-error messagingSectionFilter-Error{{../value.specId}}" style="display: none"></div>
+                            <div class="alert alert-warn messagingSectionFilter-Warn{{../value.specId}}" style="display: none"></div>
+                            <div class="alert alert-info messagingSectionFilter-Info{{../value.specId}}" style="display: none"></div>
+                       </div>
+                        <div class="slider_{{../value.specId}}"></div>
+                        <div class="lowerDisp lower_{{../value.specId}}"></div><div class="upperDisp higher_{{../value.specId}}"></div>
+                        <button type="button" data-id="{{../value.specId}}" data-spec="{{../key}}" class="slideFilter btn slim">{{pageLabelMap 'Go'}}</button>
+                    {{/ifEquals}}
+                </div>
+            {{/eachInMap}}
+        </div>
+   </script>
+   
+   <script id="OO-FeatureFilter-View-Mobile" type="text/template">
+   </script>
+   
+   
+   <script type="text/javascript">   
+    	Handlebars.registerHelper("sortMap", function(o){     
+                var sorted = {},
+                key, a = [];
+            
+                for (key in o) {
+                    if (o.hasOwnProperty(key)) {
+                        a.push(key);
+                    }
+                }
+            
+                //a.sort();
+            
+                for (key = 0; key < a.length; key++) {
+                    sorted[a[key]] = o[a[key]];
+                }
+                return sorted;
+            });
+   
+   </script>
+
+</apex:component>

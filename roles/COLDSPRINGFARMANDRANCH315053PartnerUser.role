@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>COLDSPRING FARM AND RANCH-315053 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>COLDSPRING FARM AND RANCH-315053 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>COLDSPRINGFARMANDRANCH315053PartnerManager</parentRole>
+</Role>

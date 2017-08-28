@@ -1,0 +1,2 @@
+<apex:page standardController="Farm_VIP_Registration__c" extensions="Cancel_VIP_Reg_Control" action="{!cancel_reg}">
+</apex:page>

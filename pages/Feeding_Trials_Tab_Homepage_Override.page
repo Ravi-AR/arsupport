@@ -1,0 +1,4 @@
+<apex:page showHeader="true" tabstyle="Feeding_Trial__c">
+<apex:sectionheader title="Feeding Trials" subtitle="Home"></apex:sectionheader>
+    <apex:ListViews type="Feeding_Trial__c" />
+</apex:page>

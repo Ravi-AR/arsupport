@@ -1,0 +1,26 @@
+<apex:page >
+
+
+Current Year
+<table>
+
+<tr><td valign="top">01 &nbsp; </td><td valign="top"><a target="_top" href="/00Oj0000004OSJB">Completed Activities by Person</a></td></tr>
+
+</table>
+<p>
+</p>
+
+Previous Year
+
+<table>
+
+<tr><td valign="top">01 &nbsp; </td><td valign="top"><a target="_top" href="/00Oj0000004OSRA">Account Activities Completed || Prev Yr</a></td></tr>
+
+<tr><td valign="top">02 &nbsp; </td><td valign="top"><a target="_top" href="/00Oj0000004OSRU">Opportunities Closed Won || Prev Year</a></td></tr>
+
+<tr><td valign="top">03 &nbsp; </td><td valign="top"><a target="_top" href="/00Oj0000004OSQR">Customer Events || Prev Year</a></td></tr>
+
+<tr><td valign="top">04 &nbsp; </td><td valign="top"><a target="_top" href="/00Oj0000004OSLC">Farm VIP Opportunities || Prev Year</a></td></tr>
+
+</table>
+</apex:page>

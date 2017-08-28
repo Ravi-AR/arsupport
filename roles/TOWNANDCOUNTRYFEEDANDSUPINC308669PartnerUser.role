@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>TOWN AND COUNTRY FEED AND SUP INC-308669 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>TOWN AND COUNTRY FEED AND SUP INC-308669 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>TOWNANDCOUNTRYFEEDANDSUPINC308669PartnerManager</parentRole>
+</Role>

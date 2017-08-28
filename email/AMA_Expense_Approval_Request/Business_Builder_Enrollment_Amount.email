@@ -1,0 +1,6 @@
+<table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
+<tr valign="top" height="400" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<p class="MsoNormal" style="margin-right: 0in; margin-left: 0in; background-color: rgb(255, 255, 255);"><font face="Arial, sans-serif">Thank you, {!SellingSupportProgramYear__c.Account__c}, for enrolling in the Business Builder Program for {!SellingSupportProgramYear__c.BusinessBuilderProgramYear__c}. Your starting balance of {!SellingSupportProgramYear__c.Program_Year_Allocation__c} for {!SellingSupportProgramYear__c.BusinessBuilderProgramYear__c} is now available through the Business Builder Program and will be available until {!SellingSupportProgramYear__c.BusinessBuilderProgramEndDate__c}.</font></p>]]></td>
+</tr>
+</table>

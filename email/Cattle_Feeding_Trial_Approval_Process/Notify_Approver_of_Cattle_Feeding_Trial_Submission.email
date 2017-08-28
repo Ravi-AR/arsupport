@@ -1,0 +1,3 @@
+The "{!Feeding_Trial__c.Name}" Feeding Trial has been submitted for your approval.  Please review the Feeding Trial and related Product/Ingredient information and provide Approval/Rejection.  
+
+Here is a link to the Feeding Trial: {!Feeding_Trial__c.Link}

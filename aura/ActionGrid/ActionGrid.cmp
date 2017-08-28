@@ -1,0 +1,19 @@
+<aura:component access="global" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName">
+    
+    <!-- designer attributes -->
+    <aura:attribute access="global" name="objectName" type="String" default="Opportunity" required="true"/>
+    <aura:attribute access="global" name="relationshipName" type="String"/>
+    <aura:attribute access="global" name="height" type="Integer" default="600" />
+    <aura:attribute access="global" name="viewID" type="String" />
+    <!-- internal attributes -->
+    <aura:attribute name="vfUrl" type="String" />
+
+    <div class="container" style="{!'height:' + v.height + 'px;'}">
+        <iframe class="iframe" aura:id="vfIframe" seamless="true" src="{!v.vfUrl}"></iframe>
+    </div>
+    <!--<ltng:require scripts="/resource/kendoui/js/jquery.min.js,/resource/kendoui/js/kendo.web.min.js,/resource/GridCore" afterScriptsLoaded="{!c.init}"></ltng:require>
+    <ltng:require styles="/resource/kendoui/styles/kendo.common.min.css"></ltng:require>
+    <ltng:require styles="/resource/kendoui/styles/kendo.silver.min.css"></ltng:require>-->
+    
+    <aura:handler name="init" action="{!c.auraInit}" value="{!this}"/>
+</aura:component>

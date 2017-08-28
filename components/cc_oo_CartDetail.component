@@ -1,0 +1,184 @@
+<!--<Component Name: cc_oo_CartDetail> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Shrivaths                                9/19/2016                                    US:OO - 244 Hide prices for Prebook flow
+Rajesh W                                10/5/2016                                   US:OO-212 Back to community portal link
+-->
+<apex:component allowDML="true" controller="cc_oo_CartController">
+<script id="OO-CartDetail-View-Mobile" type="text/template">
+	<div class="container-fluid" id="shopping-cart-split-header"></div>
+        <div class="cart_1_row_medium_container">
+            <div class="cart_1_row_medium">
+                {{> headerSection}}
+                <!-- Cart Items -->
+                <div class="cart_item_list">
+                    {{#if this.cartItems}}
+                        {{#each this.cartItems.models}}
+                            <div class="cart_item {{this.attributes.itemID}}">
+                                {{> cartItemsMobile}}
+                            </div>
+                        {{/each}}
+                    {{/if}}
+                    <!--<div class="oo_E2Description" data-id="{{this.mockProduct.sku}}"></div>-->
+                </div>
+                {{> emailModal}}
+                {{> rfqModal}}
+                {{> wishModal}}
+                <!-- OO-796(333) -->
+                <div class="container">
+                    <div class="minimum-weight-msg hide"></div>
+					<div class="span12 total-weight-msg hide">
+                        <strong class="span4">{{pageLabelMap 'Order_Weight'}}</strong>
+                        <strong class="totalWeight1 span8"></strong>
+                    </div>
+                </div>
+                <!-- OO-796(333) -->
+                <div class="cartactions">
+                    <!-- US:OO - 212 Back to community portal link -->
+                    <!--{{#if (isNotPreBook)}}
+                        
+                    {{else}}
+                        <button class="btn slim commPortalLink" onclick="location.href='{!commPortalLink}';">{{pageLabelMap 'CartInc_CommPortalLink'}}</button>
+                    {{/if}}-->
+                    <!--<button class="btn btn-secondary continue-shopping" name="" type="button" >{{pageLabelMap 'CartInc_ContinueShopping'}}</button>-->
+                    
+                    {{#if (isNotPreBook)}}
+                        <h2 class="title row checkout">
+                            <div class="span12 clear">
+                                <strong class="span4">{{pageLabelMap 'CartInc_Total'}}</strong>
+                                <strong class="span8">{{price this.subTotal}}</strong>
+                            </div>
+                            {{#if this.totalInfo}}
+                                <div class="span12 clear">
+                                    <strong class="span4">{{pageLabelMap 'CartInc_Total'}}</strong>
+                                    <strong class="cart_total_amount">{{this.totalInfo}}</strong>
+                                </div>
+                            {{/if}}
+                        </h2>
+                    {{/if}}
+					
+					<div class="span12 global-error clear alert alert-error no-margin-left check-out-2-cart hide">{{pageLabelMap 'Checkoutcart2'}}</div>
+					<div class="span12 global-info clear alert alert-error no-margin-left hide" id="splitCartMsg">{{pageLabelMap 'Cart_SplitOrderMsg'}}</div>	
+                    <br/>
+					<br/>
+					<div class="span12 action-buttons center clear">
+						{{#if this.cartItems}}
+                			{{#ifNotEquals this.cartItems.length 0}}
+                    			{{#if this.allowCheckout}}
+                        			{{#ifEquals this.preventCheckout false}}
+                            			{{#if (isNotPreBook)}}
+                            				<button type="button" class="btn btn-primary check-out-btn wide-btn" value="{{pageLabelMap 'CartInc_Checkout'}}">{{pageLabelMap 'CartInc_Checkout'}}</button>
+                        				{{ else }}
+                            				<button type="button" class="btn btn-primary wide submit-button wide-btn" value="{{pageLabelMap 'CartInc_CheckoutPrebook'}}">{{pageLabelMap 'CartInc_CheckoutPrebook'}}</button>
+                        				{{/if}}                                		
+	                        		{{/ifEquals}}
+                    			{{/if}}
+                			{{/ifNotEquals}}
+            			{{/if}}
+                        
+                        <br/><br/>
+                        <button class="btn btn-secondary remove update-cart-button wide-btn" type="button" >{{pageLabelMap 'CartInc_UpdateAll'}}</button>
+                        <br/><br/>
+						 {{#if (isNotPreBook)}}
+                        	<button type="button" href="#" class="btn btn-secondary wide-btn continue-shopping continueShoppingButton" >{{pageLabelMap 'CartInc_ContinueShopping'}}</button>
+                    		<br/><br/>
+							<button type="button" class="btn btn-secondary wide-btn cancel-shopping hide" data-dismiss="modal" aria-hidden="true" name="" type="button" >{{pageLabelMap 'Cancel'}}</button>
+						{{ else }}
+							<button class="btn btn-secondary continue-shopping wide-btn" name="" type="button" >{{pageLabelMap 'CartInc_ContinueShopping'}}</button>
+						{{/if}}
+						
+					</div>
+                    
+                    <!--{{#if {!ISPICKVAL($User.UserType, 'Guest')} }}
+                    {{ else }}
+                        {{#ifStoreSetting 'AutoCalcPriceAdjust__c'}}
+                        {{else}}
+                            <button class="btn btn-secondary remove getExtPricingButton" type="button" >{{pageLabelMap 'CartInc_ApplyDiscounts'}}</button>
+                        {{/ifStoreSetting}}
+                        {{#if (isNotPreBook)}}
+                        <button class="btn btn-secondary createWishlist" name="" type="button" data-toggle="modal" data-target="#wishMod">{{pageLabelMap 'Create_Cart_Wishlist'}}</button>
+                        {{/if}}
+                    {{/if}}
+                    {{#if (isNotPreBook)}}
+                     {{#if {!ISPICKVAL($User.UserType, 'Guest')} }}
+                        {{#ifDisplay 'C.EmailAnon'}}
+                            <a href="#emailModal" id="emailCartLink" data-toggle="modal"><button class="btn btn-secondary remove" type="button" >{{pageLabelMap 'CartOrderEmailer_Header'}}</button></a>
+                        {{/ifDisplay}}
+                     {{else}}
+                        {{#ifDisplay 'C.EnableEmailCart'}}
+                            <a href="#emailModal" id="emailCartLink" data-toggle="modal"><button class="btn btn-secondary remove" type="button" >{{pageLabelMap 'CartOrderEmailer_Header'}}</button></a>
+                        {{/ifDisplay}}
+                     {{/if}}-->
+                    
+                    <!-- rfq button -->
+         <!--        {{#if {!ISPICKVAL($User.UserType, 'Guest')} }}
+                        {{#ifDisplay 'rfq.GuestUser'}}
+                            <a href="#rfqModal" id="rfqLink" data-toggle="modal"><button class="btn btn-secondary remove" type="button" >{{pageLabelMap 'CartRFQForm_Header'}}</button></a>
+                        {{/ifDisplay}}
+                     {{else}} 
+                        {{#ifDisplay 'rfq.LoggedIn'}}
+                            <a href="#rfqModal" id="rfqLink" data-toggle="modal"><button class="btn btn-secondary remove" type="button" >{{pageLabelMap 'CartRFQForm_Header'}}</button></a>
+                        {{/ifDisplay}}
+                    
+                     {{/if}} 
+
+                    
+                {{/if}} -->
+                </div>
+                
+                <!--AH add Coupon div for mobile --> 
+                <!--{{#ifStoreSetting 'Display_Cart_Coupon__c'}}
+                {{#if (isNotPreBook)}}
+                <div class="discount_code_container_mobile ">
+                {{#if this.hasCoupon}}
+                    <form id="couponClearForm">
+                    <h2 class="title">{{pageLabelMap 'CartInc_discountCodes'}}</h2>
+                    <div class="discount_code_mobile">
+                            <p>{{pageLabelMap 'CartInc_AppliedCoupon'}} {{this.couponName}}</p>
+                            <p><button id="clearCouponBtn" type="button">{{pageLabelMap 'CartInc_ClearCoupon'}}</button></p>
+                        </div>
+                    </form>
+                {{else}}
+                    <form id="couponAddForm">
+                        <h2 class="title">{{pageLabelMap 'CartInc_discountCodes'}}</h2>
+                        <div class="discount_code_mobile">
+                            <p id="couponAddError"></p>
+                        <p>{{pageLabelMap 'CartInc_EntercouponCode'}}</p>
+                            <p><input type="text" id="addCouponId" name="couponId" /></p>
+                            <div class="couponMessagingSection-Error"></div>
+                            <p><button id="addCouponBtn" type="button">{{pageLabelMap 'CartInc_ApplyCoupon'}}</button></p>
+                    </div>
+                    </form>
+                {{/if}}
+                </div>
+                {{/if}}
+        
+            {{/ifStoreSetting}}
+                {{#if this.cartItems}}
+                    {{#ifNotEquals this.cartItems.length 0}}
+                        {{#if this.allowCheckout}}
+                            {{#ifEquals this.preventCheckout false}}
+                                <div class="button_large_container">
+                                    {{#if (isNotPreBook)}}
+                                        <button type="button" class="btn btn-primary checkOutBtn" value="{{pageLabelMap 'CartInc_Checkout'}}">{{pageLabelMap 'CartInc_Checkout'}}</button>
+                                    {{ else }}
+                                        <button type="button" class="btn btn-primary wide submit-button" value="{{pageLabelMap 'CartInc_CheckoutPrebook'}}">{{pageLabelMap 'CartInc_CheckoutPrebook'}}</button>
+                                    {{/if}}
+                                </div>
+                            {{/ifEquals}}
+                        {{/if}}
+                    {{/ifNotEquals}}
+                {{/if}}-->
+            </div>
+        </div>
+    </script>
+    
+    <script type="text/javascript">
+        
+        jQuery(function($) {
+            CCRZ.uiProperties.CartDetailView.phone.tmpl = 'OO-CartDetail-View-Mobile';
+        });
+    </script>
+</apex:component>

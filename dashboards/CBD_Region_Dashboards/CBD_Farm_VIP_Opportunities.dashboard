@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dashboard xmlns="http://soap.sforce.com/2006/04/metadata">
+    <backgroundEndColor>#FFFFFF</backgroundEndColor>
+    <backgroundFadeDirection>Diagonal</backgroundFadeDirection>
+    <backgroundStartColor>#FFFFFF</backgroundStartColor>
+    <dashboardType>SpecifiedUser</dashboardType>
+    <description>This dashboard will show region totals.  If you are a manager, when you click on a report  you will see only your team&apos;s opportunities.  If you are not a manager, when you click on a report you will see your opportunities.</description>
+    <isGridLayout>false</isGridLayout>
+    <leftSection>
+        <columnSize>Wide</columnSize>
+        <components>
+            <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+            <componentType>Table</componentType>
+            <dashboardTableColumn>
+                <column>Opportunity.Sales_Division__c</column>
+                <sortBy>RowLabelAscending</sortBy>
+            </dashboardTableColumn>
+            <dashboardTableColumn>
+                <aggregateType>Sum</aggregateType>
+                <calculatePercent>false</calculatePercent>
+                <column>Opportunity.Opportunity_Count__c</column>
+                <showTotal>true</showTotal>
+            </dashboardTableColumn>
+            <dashboardTableColumn>
+                <aggregateType>Sum</aggregateType>
+                <calculatePercent>false</calculatePercent>
+                <column>Opportunity.Annual_Points__c</column>
+                <showTotal>true</showTotal>
+            </dashboardTableColumn>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>false</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <footer>Open Opportunities associated with FARM VIP&apos;s for the current year.</footer>
+            <header>Open Opportunities</header>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#C25454</indicatorLowColor>
+            <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
+            <report>CBD_FARM_VIP_Opportunities_Curr_Yr/X1A_Open_Oppty_s_CY_Farm_VIP_s</report>
+            <showPicturesOnTables>true</showPicturesOnTables>
+            <title>Curr Yr Farm VIP&apos;s || Open</title>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <column>Opportunity.Opportunity_Count__c</column>
+            </chartSummary>
+            <componentType>Metric</componentType>
+            <displayUnits>Integer</displayUnits>
+            <header>Older Farm VIP&apos;s Open Opportunities</header>
+            <indicatorBreakpoint1>0.0</indicatorBreakpoint1>
+            <indicatorHighColor>#548BC2</indicatorHighColor>
+            <indicatorLowColor>#548BC2</indicatorLowColor>
+            <indicatorMiddleColor>#548BC2</indicatorMiddleColor>
+            <metricLabel>Farm VIP 60+ Days Ago || Oppty Close Date Past Due</metricLabel>
+            <report>CBD_FARM_VIP_Opportunities_Curr_Yr/X1B_CBD_Farm_Vip_60_Oppty_Past_Due</report>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <column>Opportunity.Opportunity_Count__c</column>
+            </chartSummary>
+            <componentType>Metric</componentType>
+            <displayUnits>Integer</displayUnits>
+            <indicatorBreakpoint1>0.0</indicatorBreakpoint1>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#54C254</indicatorLowColor>
+            <indicatorMiddleColor>#54C254</indicatorMiddleColor>
+            <metricLabel>Farm VIP 60+ Days Ago || Oppty Close Date in Future</metricLabel>
+            <report>CBD_FARM_VIP_Opportunities_Curr_Yr/X1C_CBD_Farm_Vip_60_Oppty_Future</report>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <column>Opportunity.Opportunity_Count__c</column>
+            </chartSummary>
+            <componentType>Metric</componentType>
+            <displayUnits>Integer</displayUnits>
+            <header>Recent Farm VIP&apos;s Open Opportunities</header>
+            <indicatorBreakpoint1>0.0</indicatorBreakpoint1>
+            <indicatorHighColor>#548BC2</indicatorHighColor>
+            <indicatorLowColor>#548BC2</indicatorLowColor>
+            <indicatorMiddleColor>#548BC2</indicatorMiddleColor>
+            <metricLabel>Farm VIP within Last 60 Days || Oppty Past Due</metricLabel>
+            <report>CBD_FARM_VIP_Opportunities_Curr_Yr/X1DCBD_Farm_VIP_w_in_60_Oppty_Overdue</report>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <column>Opportunity.Opportunity_Count__c</column>
+            </chartSummary>
+            <componentType>Metric</componentType>
+            <displayUnits>Integer</displayUnits>
+            <indicatorBreakpoint1>0.0</indicatorBreakpoint1>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#54C254</indicatorLowColor>
+            <indicatorMiddleColor>#54C254</indicatorMiddleColor>
+            <metricLabel>Farm VIP within Last 60 Days || Oppty Close Date in Future</metricLabel>
+            <report>CBD_FARM_VIP_Opportunities_Curr_Yr/X1E_CBD_Farm_Vip_w_in_60_Opty_Future</report>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <column>Opportunity.Opportunity_Count__c</column>
+            </chartSummary>
+            <componentType>Metric</componentType>
+            <displayUnits>Integer</displayUnits>
+            <header>Future Farm VIP&apos;s Open Opportunities</header>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#C25454</indicatorLowColor>
+            <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
+            <metricLabel>Farm VIP in Future || Oppty Close Date Past Due</metricLabel>
+            <report>CBD_FARM_VIP_Opportunities_Curr_Yr/X1F_CBD_Future_Farm_VIP_Opty_Overdue</report>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <column>Opportunity.Opportunity_Count__c</column>
+            </chartSummary>
+            <componentType>Metric</componentType>
+            <displayUnits>Integer</displayUnits>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#C25454</indicatorLowColor>
+            <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
+            <metricLabel>Farm VIP in Future || Oppty Close Date in Future</metricLabel>
+            <report>CBD_FARM_VIP_Opportunities_Curr_Yr/X1G_CBD_Future_VIP_Oppty_In_Future</report>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartAxisRange>Auto</chartAxisRange>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <axisBinding>y</axisBinding>
+                <column>Opportunity.Opportunity_Count__c</column>
+            </chartSummary>
+            <componentType>BarStacked</componentType>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>true</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <enableHover>false</enableHover>
+            <expandOthers>false</expandOthers>
+            <footer>Open Opportunities associated to FARM VIP&apos;s when the VIP occurred more than 60 days ago.</footer>
+            <groupingColumn>Opportunity.Sales_Division__c</groupingColumn>
+            <groupingColumn>Opportunity.Opportunity_Status__c</groupingColumn>
+            <header>By Sales Division || Older Farm VIP&apos;s</header>
+            <legendPosition>Bottom</legendPosition>
+            <report>CBD_FARM_VIP_Opportunities_Curr_Yr/X1H_CBD_Open_Opty_FARM_VIP_60_Days</report>
+            <showPercentage>false</showPercentage>
+            <showValues>false</showValues>
+            <sortBy>RowLabelAscending</sortBy>
+            <title>Farm VIP Occurred 60+ Days Ago</title>
+            <useReportChart>false</useReportChart>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartAxisRange>Auto</chartAxisRange>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <axisBinding>y</axisBinding>
+                <column>Opportunity.Opportunity_Count__c</column>
+            </chartSummary>
+            <componentType>BarStacked</componentType>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>true</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <enableHover>false</enableHover>
+            <expandOthers>false</expandOthers>
+            <footer>Open Opportunities associated to FARM VIP&apos;s when the VIP occurred within the last 60 days.</footer>
+            <groupingColumn>Opportunity.Sales_Division__c</groupingColumn>
+            <groupingColumn>Opportunity.Opportunity_Status__c</groupingColumn>
+            <header>By Sales Division || Recent Farm VIP&apos;s</header>
+            <legendPosition>Bottom</legendPosition>
+            <report>CBD_FARM_VIP_Opportunities_Curr_Yr/X1I_CBD_Open_Opty_VIP_w_in_60_Days</report>
+            <showPercentage>false</showPercentage>
+            <showValues>false</showValues>
+            <sortBy>RowLabelAscending</sortBy>
+            <title>Farm VIP Occurred within 60 Days</title>
+            <useReportChart>false</useReportChart>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartAxisRange>Auto</chartAxisRange>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <axisBinding>y</axisBinding>
+                <column>Opportunity.Opportunity_Count__c</column>
+            </chartSummary>
+            <componentType>BarStacked</componentType>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>true</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <enableHover>false</enableHover>
+            <expandOthers>false</expandOthers>
+            <footer>Open Opportunities associated to FARM VIP&apos;s in the future.</footer>
+            <groupingColumn>Opportunity.Sales_Division__c</groupingColumn>
+            <groupingColumn>Opportunity.Opportunity_Status__c</groupingColumn>
+            <header>By Sales Division || Future Farm VIP&apos;s</header>
+            <legendPosition>Bottom</legendPosition>
+            <report>CBD_FARM_VIP_Opportunities_Curr_Yr/X1J_CBD_Open_Oppty_Farm_VIP_s_in_Future</report>
+            <showPercentage>false</showPercentage>
+            <showValues>false</showValues>
+            <sortBy>RowLabelAscending</sortBy>
+            <title>Farm VIP&apos;s Occurring in the Future</title>
+            <useReportChart>false</useReportChart>
+        </components>
+    </leftSection>
+    <middleSection>
+        <columnSize>Wide</columnSize>
+        <components>
+            <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+            <componentType>Table</componentType>
+            <dashboardTableColumn>
+                <column>Opportunity.Sales_Division__c</column>
+                <sortBy>RowLabelAscending</sortBy>
+            </dashboardTableColumn>
+            <dashboardTableColumn>
+                <aggregateType>Sum</aggregateType>
+                <calculatePercent>false</calculatePercent>
+                <column>Opportunity.Opportunity_Count__c</column>
+                <showTotal>true</showTotal>
+            </dashboardTableColumn>
+            <dashboardTableColumn>
+                <aggregateType>Sum</aggregateType>
+                <calculatePercent>false</calculatePercent>
+                <column>Opportunity.Annual_Points__c</column>
+                <showTotal>true</showTotal>
+            </dashboardTableColumn>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>false</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <footer>Closed Won Opportunities associated with FARM VIP&apos;s for the current year.</footer>
+            <header>Closed Won Opportunities</header>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#C25454</indicatorLowColor>
+            <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
+            <report>CBD_FARM_VIP_Opportunities_Curr_Yr/X2A_CBD_FARM_VIP_Oppty_Closed_Won</report>
+            <showPicturesOnTables>true</showPicturesOnTables>
+            <title>Curr Yr Farm VIP&apos;s || Closed Won</title>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <column>Opportunity.Opportunity_Count__c</column>
+            </chartSummary>
+            <componentType>Metric</componentType>
+            <displayUnits>Integer</displayUnits>
+            <footer>Closed Won Opportunities associated with FARM VIP&apos;s for the current year.</footer>
+            <header>Closed Won</header>
+            <indicatorBreakpoint1>0.0</indicatorBreakpoint1>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#54C254</indicatorLowColor>
+            <indicatorMiddleColor>#54C254</indicatorMiddleColor>
+            <metricLabel>Closed Won Opportunities by Person</metricLabel>
+            <report>CBD_FARM_VIP_Opportunities_Curr_Yr/X2B_CBD_Curr_Yr_Opty_Closed_Won_Opty</report>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartAxisRange>Auto</chartAxisRange>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <axisBinding>y</axisBinding>
+                <column>Opportunity.Opportunity_Count__c</column>
+            </chartSummary>
+            <componentType>Bar</componentType>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>true</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <enableHover>false</enableHover>
+            <expandOthers>false</expandOthers>
+            <footer>Closed Won Opportunities associated with FARM VIP&apos;s for the current year.</footer>
+            <groupingColumn>Opportunity.Sales_Division__c</groupingColumn>
+            <header>By Sales Division || Closed Won</header>
+            <legendPosition>Bottom</legendPosition>
+            <report>CBD_FARM_VIP_Opportunities_Curr_Yr/X2A_CBD_FARM_VIP_Oppty_Closed_Won</report>
+            <showPercentage>false</showPercentage>
+            <showPicturesOnCharts>false</showPicturesOnCharts>
+            <showValues>true</showValues>
+            <sortBy>RowLabelAscending</sortBy>
+            <title>Curr Yr Farm VIP&apos;s || Closed Won</title>
+            <useReportChart>false</useReportChart>
+        </components>
+    </middleSection>
+    <rightSection>
+        <columnSize>Wide</columnSize>
+        <components>
+            <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+            <componentType>Table</componentType>
+            <dashboardTableColumn>
+                <column>Opportunity.Sales_Division__c</column>
+                <sortBy>RowLabelAscending</sortBy>
+            </dashboardTableColumn>
+            <dashboardTableColumn>
+                <aggregateType>Sum</aggregateType>
+                <calculatePercent>false</calculatePercent>
+                <column>Opportunity.Opportunity_Count__c</column>
+                <showTotal>true</showTotal>
+            </dashboardTableColumn>
+            <dashboardTableColumn>
+                <aggregateType>Sum</aggregateType>
+                <calculatePercent>false</calculatePercent>
+                <column>Opportunity.Annual_Points__c</column>
+                <showTotal>true</showTotal>
+            </dashboardTableColumn>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>false</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <footer>Closed Lost Opportunities associated with FARM VIP&apos;s for the current year.</footer>
+            <header>Closed Lost Opportunities</header>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#C25454</indicatorLowColor>
+            <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
+            <report>CBD_FARM_VIP_Opportunities_Curr_Yr/X3A_CBD_Closed_Oppty_s_CY_Farm_VIP</report>
+            <showPicturesOnTables>true</showPicturesOnTables>
+            <title>Curr Yr Farm VIP&apos;s || Clost Lost</title>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <column>Opportunity.Opportunity_Count__c</column>
+            </chartSummary>
+            <componentType>Metric</componentType>
+            <displayUnits>Integer</displayUnits>
+            <footer>Closed Lost Opportunities associated with FARM VIP&apos;s for the current year.</footer>
+            <header>Closed Lost</header>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#C25454</indicatorLowColor>
+            <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
+            <metricLabel>Closed Lost Opportunities by Person</metricLabel>
+            <report>CBD_FARM_VIP_Opportunities_Curr_Yr/X3B_CBD_Curr_Yr_VIP_s_Closed_Lost_Opp</report>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartAxisRange>Auto</chartAxisRange>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <axisBinding>y</axisBinding>
+                <column>Opportunity.Opportunity_Count__c</column>
+            </chartSummary>
+            <componentType>Bar</componentType>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>true</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <enableHover>false</enableHover>
+            <expandOthers>false</expandOthers>
+            <footer>Closed Lost Opportunities associated with FARM VIP&apos;s for the current year.</footer>
+            <groupingColumn>Opportunity.Sales_Division__c</groupingColumn>
+            <header>By Sales Division || Closed Lost</header>
+            <legendPosition>Bottom</legendPosition>
+            <report>CBD_FARM_VIP_Opportunities_Curr_Yr/X3A_CBD_Closed_Oppty_s_CY_Farm_VIP</report>
+            <showPercentage>false</showPercentage>
+            <showPicturesOnCharts>false</showPicturesOnCharts>
+            <showValues>true</showValues>
+            <sortBy>RowLabelAscending</sortBy>
+            <title>Curr Yr Farm VIP&apos;s || Clost Lost</title>
+            <useReportChart>false</useReportChart>
+        </components>
+    </rightSection>
+    <runningUser>dwfinnerty@landolakes.com</runningUser>
+    <textColor>#000000</textColor>
+    <title>CBD || Curr Yr Farm VIP Opportunities</title>
+    <titleColor>#000000</titleColor>
+    <titleSize>12</titleSize>
+</Dashboard>

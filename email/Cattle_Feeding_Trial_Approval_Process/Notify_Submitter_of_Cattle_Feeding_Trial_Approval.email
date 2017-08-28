@@ -1,0 +1,5 @@
+The "{!Feeding_Trial__c.Name}" Feeding Trial has been reviewed and was Approved.  The information provided will now be available to query for future analysis.  Please click the link below to review the feeding trial and any comments The Approver may have entered. 
+
+Comments: {!ApprovalRequest.Comments} 
+
+Here is a link to the Feeding Trial: {!Feeding_Trial__c.Link}

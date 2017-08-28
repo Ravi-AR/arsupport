@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>MobileSession$Owner</field>
+    </columns>
+    <columns>
+        <field>MobileSession$Manufacturer</field>
+    </columns>
+    <columns>
+        <field>MobileSession$DeviceModel</field>
+    </columns>
+    <columns>
+        <field>MobileSession$DeviceApplicationVersion</field>
+    </columns>
+    <columns>
+        <field>MobileSession$OsVersion</field>
+    </columns>
+    <columns>
+        <field>MobileSession$Duration</field>
+    </columns>
+    <columns>
+        <field>MobileSession$MetaSize</field>
+    </columns>
+    <columns>
+        <field>MobileSession$Owner.Sales_Division__c</field>
+    </columns>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>MobileSession$StartedDate</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Mobile Session</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Mobile_Session__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>MobileSession$StartedDate</dateColumn>
+        <interval>INTERVAL_LASTTHISMONTH</interval>
+    </timeFrameFilter>
+</Report>

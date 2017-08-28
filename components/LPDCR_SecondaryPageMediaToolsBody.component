@@ -1,0 +1,216 @@
+<apex:component controller="LPDCR_SecondaryPageMediaToolsCtrlr" allowDML="true">
+
+    <apex:attribute name="componentKey" 
+                    type="String" 
+                    assignTo="{!key}" 
+                    description="The key given to this component so the page can easily get access to it" />
+
+    <apex:attribute name="thisPageController" 
+                    type="LPDCR_SecondaryPageBaseController" 
+                    assignTo="{!pageController}" 
+                    required="true" 
+                    description="The controller for the page." />
+    
+    <apex:attribute name="speciesFilter" 
+                    description="Set of selected spcecies to filter results" 
+                    type="String[]"
+                    assignTo="{!species_filter}"
+                    required="false"/>
+                    
+    <apex:attribute name="fileFilter" 
+                    description="Set of selected file types to filter results" 
+                    type="String[]"
+                    assignTo="{!files_filter}"
+                    required="false"/>
+                    
+    <apex:attribute name="sortBy" 
+                    description="The selected Sort By option" 
+                    type="String"
+                    assignTo="{!sort_filter}"
+                    required="false"/>
+
+
+     <input type="hidden" value="{!sort_filter}" class="sortfield" />
+    <apex:repeat value="{!species_filter}" var="sp">
+        <input type="hidden" value="{!sp}" class="speciesfield" />
+    </apex:repeat>
+    <apex:repeat value="{!files_filter}" var="ft">
+        <input type="hidden" value="{!ft}" class="filetype" />
+    </apex:repeat> 
+
+    <apex:actionFunction action="{!showDocumentList}" name="displayDocuments" rerender="filterContainerPanel,containerPanel,fileTypePanel" oncomplete="changeColor()" status="loader" >
+        <apex:param name="docType" assignTo="{!document_type}" value="" />
+    </apex:actionFunction>
+    <apex:actionFunction action="{!hideDocumentList}" name="hideDocuments" rerender="filterContainerPanel,containerPanel" status="loader"/>
+    
+    <apex:outputPanel id="containerPanel">
+
+    <!-- START MEDIA TOOLS LIST PANEL -->
+    <apex:outputPanel id="mediaToolsList" rendered="{!showMediaToolsList}">
+        
+        <div class="col-sm-6">
+            <span class="fnt20 clr_blk">{!$Label.LPDCR_Logo_Component_Name}</span>
+            <div class="clear"></div>   
+            <div class="col-sm-3 pad_top10 pad_lft0">                                                 
+                <img src="{!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_ICON_Logos)}" width="60"/>                                                
+            </div>
+            <div class="col-sm-9 pad_top10">
+                <p class="fnt12">{!$Label.LPDCR_Logo_Component_Message}
+                    <!-- <a href="{!$Site.BaseUrl}/LPDCR_CC_TertiaryMediaTools" class="col-sm-12 pad_lft_rgt txt_center fnt12 pad_top10 visit">{!$Label.LPDCR_Logo_Component_URL}</a> -->
+                    <a href="#" id="visitLogo" onclick="displayDocuments('{!$Label.LPDCR_Logo_Component_Name}');" class="col-sm-12 pad_lft_rgt txt_lft fnt12 pad_top10 visit">{!$Label.LPDCR_Logo_Component_URL}</a>
+                </p>
+                
+            </div>
+        </div>
+        
+        <div class="col-sm-6">
+           <span class="fnt20 clr_blk">{!$Label.LPDCR_Package_Component_Name}</span >
+            <div class="clear"></div>   
+            <div class="col-sm-3 pad_top10 pad_lft0">                                                 
+                <img src="{!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_ICON_PackageImage)}" width="60"/>                                                
+            </div>
+            <div class="col-sm-9 pad_top10">
+                <p class="fnt12">{!$Label.LPDCR_Package_Component_Message}
+                    <a href="#" onclick="displayDocuments('{!$Label.LPDCR_Package_Component_Name}');" class="col-sm-12 pad_lft_rgt txt_lft fnt12 pad_top10 visit">{!$Label.LPDCR_Package_Component_URL}</a>
+                </p>
+                
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="col-sm-6">
+           <span class="fnt20 clr_blk">{!$Label.LPDCR_Social_Media_Component_Name}</span >
+            <div class="clear"></div>   
+            <div class="col-sm-3 pad_top10 pad_lft0">                                                 
+                <img src="{!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_ICON_SocialMedia)}" width="60"/>                                                
+            </div>
+            <div class="col-sm-9 pad_top10">
+                <p class="fnt12">{!$Label.LPDCR_Social_Media_Component_Message}
+                    <a href="#" onclick="displayDocuments('{!$Label.LPDCR_Social_Media_Component_Name}');" class="col-sm-12 pad_lft_rgt txt_lft fnt12 pad_top10 visit">{!$Label.LPDCR_Social_Media_Component_URL}</a>
+                </p>
+                
+            </div>
+        </div>
+       
+        <div class="col-sm-6">
+          <span class="fnt20 clr_blk">{!$Label.LPDCR_Video_Component_Name} </span >
+            <div class="clear"></div>   
+            <div class="col-sm-3 pad_top10 pad_lft0">                                                 
+                <img src="{!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_ICON_Video)}" width="60"/>                                                
+            </div>
+            <div class="col-sm-9 pad_top10">
+                <p class="fnt12">{!$Label.LPDCR_Video_Component_Message} 
+                    <a href="#" onclick="displayDocuments('{!$Label.LPDCR_Video_Component_Name}');" class="col-sm-12 pad_lft_rgt txt_lft fnt12 pad_top10 visit">Visit Video</a>
+                </p>
+                
+            </div>
+        </div>
+         <div class="clear"></div>
+        <div class="col-sm-6">
+           <span class="fnt20 clr_blk">{!$Label.LPDCR_Ad_Slicks_Component_Name}</span >
+            <div class="clear"></div>   
+            <div class="col-sm-3 pad_top10 pad_lft0">                                                 
+                <img src="{!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_ICON_AdSlicks)}" width="60"/>                                                
+            </div>
+            <div class="col-sm-9 pad_top10">
+                <p class="fnt12">{!$Label.LPDCR_Ad_Slicks_Component_Message}
+                    <a href="#" onclick="displayDocuments('{!$Label.LPDCR_Ad_Slicks_Component_Name}');" class="col-sm-12 pad_lft_rgt txt_lft fnt12 pad_top10 visit">{!$Label.LPDCR_Ad_Slicks_Component_URL}</a>
+                </p>
+                
+            </div>
+        </div>
+       
+        <div class="col-sm-6">
+            <span class="fnt20 clr_blk">{!$Label.LPDCR_Radio_Scripts_Component_Name}</span >
+            <div class="clear"></div>   
+            <div class="col-sm-3 pad_top10 pad_lft0">                                                 
+                <img src="{!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_ICON_Radio)}" width="60"/>                                                
+            </div>
+            <div class="col-sm-9 pad_top10">
+                <p class="fnt12">{!$Label.LPDCR_Radio_Scripts_Component_Message}
+                    <a href="#" onclick="displayDocuments('{!$Label.LPDCR_Radio_Scripts_Component_Name}');" class="col-sm-12 pad_lft_rgt txt_lft fnt12 pad_top10 visit">{!$Label.LPDCR_Radio_Scripts_Component_URL}</a>
+                </p>
+                
+            </div>
+        </div>
+         <div class="clear"></div>
+        <div class="col-sm-6">
+            <span class="fnt20 clr_blk">Online Ad Builder</span >
+            <div class="clear"></div>   
+            <div class="col-sm-3 pad_top10 pad_lft0">                                                 
+                <img src="{!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_ICON_AdBuilder)}" width="60"/>                                                
+            </div>
+            <div class="col-sm-9 pad_top10">
+                <p class="fnt12">{!$Label.LPDCR_AdBuilder_Component_Message}
+                    <apex:outputPanel rendered="{!IF(fadBuilderURL != null, True, False)}">
+                        <a href="{!fadBuilderURL}" target="_blank" class="col-sm-12 pad_lft_rgt txt_lft fnt12 pad_top10 visit">{!$Label.LPDCR_AdBuilder_Component_URL}</a>
+                    </apex:outputPanel>
+                </p>
+                
+            </div>
+        </div>
+        
+    </apex:outputPanel>
+    <!-- /END MEDIA TOOLS LIST PANEL -->
+    
+    <!-- SHOW PANEL WITH COMPONENT TO DISPLAY THE LIST OF DOCUMENT RECORDS FOR THE SELECTED TYPE -->
+     <apex:outputPanel id="documentList" rendered="{!showDocumentList}">
+         <div class="col-sm-11 pad_rgt0">
+        <a href="#" onclick="hideDocuments();" class="col-sm-12 pad_rgt0 pull-right fnt14 text-right"><i class="glyphicon glyphicon-arrow-left"></i> Back</a>  </div>      
+        <div class="col-xs-11">
+           <table class="dataTable table tablehead" id="ThirdTable">
+                <thead>
+                <tr>
+                <th title="Title" class="sorting"></th>
+                </tr>
+                </thead>
+                <tbody>
+                   <apex:repeat id="ThirdTable1" value="{!documentList}" var="allObj">
+                         <tr>
+                              <td>
+                             
+                              <div class="row mrg_btm20 pad_btm20">
+                                    <apex:outputPanel styleClass="col-xs-12 col-sm-3 pull-left" layout="block" rendered="{!IF((document_type ==$Label.LPDCR_Logo_Component_Name || document_type == $Label.LPDCR_Package_Component_Name ||document_type == $Label.LPDCR_Social_Media_Component_Name ),true,false)}">
+                                        <apex:image styleClass="img-responsive" url="{!allObj.URLLink}" width="200" rendered="{!allObj.IsWebVisibleFile}"/>
+                                        <apex:image styleClass="im-responsive" url="{!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_ImageNotAvailable)}" width="150" rendered="{!!allObj.IsWebVisibleFile}"/>
+                                    </apex:outputPanel>
+                                    
+                                    <apex:outputPanel styleClass="col-xs-12 col-sm-6" layout="block">
+                                      <p class="mrg_btm5"><label class="clr7"><apex:outputText value="{!allObj.DocumentName}" escape="false"/></label><span class="flt_rgt clr_gry text-right"></span></p>
+                                      <p class="mrg_btm20"><apex:outputText value="{!allObj.DocumentShortDescription}" escape="false"/></p>
+                                      <p class="mrg_btm20">
+                                            <apex:outputLink value="{!allObj.URLLink}" rendered="{!IF(allObj.FileType == 'YouTube Video',true,false)}" target="_blank">View on YouTube</apex:outputLink>
+                                            <apex:outputLink value="{!allObj.URLLink}" target="_blank" html-download="{!allObj.URLLink}" rendered="{!IF(allObj.FileType == 'YouTube Video',false,true)}">Download as {!allObj.FileType}</apex:outputLink>
+                                      </p>
+                                    </apex:outputPanel>
+                               </div>
+                               
+                            </td>
+                         </tr>
+                     </apex:repeat>
+                 </tbody>
+            </table>
+        </div>
+        <script src="{!URLFOR($Resource.LPDCR_CC_Assets, 'js/datable.js')}"></script> 
+ <script src="{!URLFOR($Resource.LPDCR_CC_Assets, 'js/bootstrap_datable.js')}"></script>
+        <script>
+            $('#ThirdTable').on( 'init.dt', function () {
+                    } ).DataTable({"searching":true, "bPaginate":true, "bInfo":true,
+                            "dom": "<'row mrg_btm20 '<'col-sm-12 pad_lft0 pad_rgt0'f>>" +
+                        "<'row'<'col-sm-6 mrg_btm20 pad_lft0'i><'col-sm-6 text-right pad_rgt0 mrg_btm20 hidden-xs'l>>" +
+                        "<'row'<'col-sm-12 pad_lft0 pad_rgt0'tr>>" +
+                        "<'row'<'col-sm-12 pad_lft0 pad_rgt0'p>>", "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                        language: {
+                                search: '<i class="glyphicon glyphicon-search sch_Icon"></i> _INPUT_',
+                                searchPlaceholder: "Search This Section"
+                            },
+                           "aaSorting": [ ] 
+                        }); 
+        </script>
+    </apex:outputPanel>
+    <!-- /END DOCUMENT LIST PANEL -->
+    
+    </apex:outputPanel>
+    <!-- /END contain panel -->
+        
+    
+</apex:component>

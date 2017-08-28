@@ -1,0 +1,15 @@
+<!--<Page Name: cc_oo_OrderConfirmationPage> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Shrivaths                                 9/19/2016                                    US:OO - 244 Hide prices for Prebook flow
+-->
+<apex:page docType="html-5.0" sidebar="false" showHeader="false" standardStylesheets="false" applyHtmlTag="false">
+    <c:cc_oo_OrderDetail /> 
+    <c:cc_oo_CommonTemplatesTotalSection />
+    <c:cc_oo_NavigationBar />
+    <c:cc_oo_Header />
+    <c:cc_oo_FooterComponent />
+    
+</apex:page>

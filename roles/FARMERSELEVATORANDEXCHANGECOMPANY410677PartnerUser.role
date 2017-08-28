@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>FARMERS ELEVATOR AND EXCHANGE COMPANY-410677 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>FARMERS ELEVATOR AND EXCHANGE COMPANY-410677 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>FARMERSELEVATORANDEXCHANGECOMPANY410677PartnerManager</parentRole>
+</Role>

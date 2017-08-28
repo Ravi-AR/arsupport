@@ -1,0 +1,6 @@
+<table height="400" width="550" cellpadding="5" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="0" aEditID="c1r1" >
+<![CDATA[<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">The nomination for&nbsp;{!Farm_VIP_Registration__c.Registrant__c} from&nbsp;{!Farm_VIP_Registration__c.Customer_Name__c} for&nbsp;{!Farm_VIP_Registration__c.Farm_VIP_Event__c} has been <b>rejected</b>. &nbsp;Please see comments below to update and re-submit for approval.&nbsp;</div><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><br></div><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><br></div><div><font face="arial">Comments: {!ApprovalRequest.Comments}</font></div><div><font face="arial"><br></font></div><div><font face="arial">Link to record:&nbsp;{!Farm_VIP_Registration__c.Link}</font></div><div><font face="arial"><br></font></div><div><font face="arial">Thank you,&nbsp;</font></div><div><font face="arial"><br></font></div><div><font face="arial">Farm VIP Events Team</font></div>]]></td>
+</tr>
+</table>

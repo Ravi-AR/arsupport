@@ -1,0 +1,397 @@
+<apex:component controller="LPDCR_BBPLandingMemberController">
+    <apex:attribute name="bgColor"
+                    type="String"
+                    description="The style class for the background color of the component"
+                    required="false"
+                    default="bg_wht" />
+
+
+     <div class="col-sm-12 {!bgColor}">
+         <h3 class="section_title">
+         <apex:outputPanel rendered="{!IF((TEXT($User.UserType) != 'Standard'), true, false)}">
+             <a href="{!URLFOR($Page.LPDCR_BBPLandingMember)}">{!$Label.LPDCR_Business_Builder_Component_Name}</a>
+         </apex:outputPanel>
+         <apex:outputPanel rendered="{!IF((TEXT($User.UserType) == 'Standard'), true, false)}">
+             <span class="clr7">{!$Label.LPDCR_Business_Builder_Component_Name}</span>
+         </apex:outputPanel>
+             <div class="tooltip1">
+                 <span class="flt_rgt icon_exmty"></span>                
+                 <p class="tooltiptext">{!$Label.LPDCR_Business_Builder_Component_Message}
+                  <br/>
+                    <apex:outputPanel rendered="{!IF((TEXT($User.UserType) != 'Standard'), true, false)}">
+                        <a class="btn_ent" href="{!URLFOR($Page.LPDCR_BBPLandingMember)}">ENTER</a>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!IF((TEXT($User.UserType) == 'Standard'), true, false)}">
+                        <span class="btn_cls dis_inlineblock txt_center">ENTER</span>
+                    </apex:outputPanel>
+                    <span class="btn_cls dis_inlineblock txt_center">CLOSE</span>  
+                  </p>
+            </div>
+         </h3> 
+         
+         <apex:outputText rendered="{!init}"></apex:outputText>
+         
+         <apex:outputPanel rendered="{!IF(selectedAcc.ParentId != null, TRUE, FALSE)}">
+                             <div class="mrg_top20">
+                             <p>&nbsp;</p>
+                             <p>&nbsp;</p>
+                            <p class="pad_top20">{!$Label.LPDCR_Business_Builder_Ineligible_Account_Message}</p></div>
+                            </apex:outputPanel>
+         <div class="col-sm-12 pad_lft_rgt">
+         <apex:outputPanel rendered="{!IF((TEXT($User.UserType) != 'Standard' && selectedAcc.ParentId == null), true, false)}">
+
+         <apex:outputPanel rendered="{!IF(AccVsYearDetails[0].showenrollMsg||AccVsYearDetails[0].showAccount||AccVsYearDetails[0].showTier||AccVsYearDetails[0].showqualifyMsg||AccVsYearDetails[0].balanceButNotEnrolled||AccVsYearDetails[0].showAvailBlncMsg||AccVsYearDetails[0].createNewPPY,true,false)}">
+                            <p class="pad_lft_rgt mrg_btm0 pad_top10"><label> {!AccVsYearDetails[0].programYear} Reimbursement Usage YTD</label></p>
+                            <apex:outputPanel id="ssProgPanel" rendered="{!IF(AccVsYearDetails[0].showenrollMsg||AccVsYearDetails[0].showAccount||AccVsYearDetails[0].showTier||AccVsYearDetails[0].showqualifyMsg||AccVsYearDetails[0].balanceButNotEnrolled||AccVsYearDetails[0].showAvailBlncMsg||AccVsYearDetails[0].createNewPPY,true,false)}">
+                                
+                                <!--4.0-->
+                                <apex:outputPanel id="yearone" rendered="{!AccVsYearDetails[0].balanceButNotEnrolled}">
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6 col-sm-7 text-center"><b>Available Balance</b></div>
+                                        <div class="col-sm-5 col-xs-6 text-center">
+                                            <apex:outputText rendered="{!IF(AccVsYearDetails[0].ssPYRec!=null,true,false)}" value="{0, Number, Currency}">
+                                                <apex:param value="{!AccVsYearDetails[0].availableBalance}" />
+                                            </apex:outputText>
+                                            
+                                            <apex:outputText rendered="{!IF(AccVsYearDetails[0].ssPYRec==null,true,false)}" value="{0, Number, Currency}">
+                                                <apex:param value="{!0}" />
+                                            </apex:outputText> 
+                                        </div>
+                                    </div>                                    
+                                </apex:outputPanel>
+                                    
+                                <!--4.0 and new-->
+                                <apex:outputPanel id="yearthree" rendered="{!AccVsYearDetails[0].showenrollMsg}">
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6 col-sm-7 text-center"><b>Available Balance</b></div>
+                                        <div class="col-sm-5 col-xs-6 text-center">
+                                    Available                        <apex:outputText value="{0,date, MMM dd, yyyy}"> 
+                                    <apex:param value="{!AccVsYearDetails[0].programStartDate}" />
+                                    
+                                    </apex:outputText>
+                                                </div>
+                                    </div>                                    
+                                </apex:outputPanel>
+                                
+                                <!--1.0 & 5.0-->
+                                <apex:outputPanel id="EnrollMessage" rendered="{!IF(AccVsYearDetails[0].showAvailBlncMsg,true,false)}">
+                                    <center>
+                                        <p class="topgap">Your {!AccVsYearDetails[0].enrollStartYear} Selling Support Dollars Balance will be available to use  
+                                        <span><apex:outputText value="{0,date, MMM dd, yyyy}"> 
+                                        <apex:param value="{!AccVsYearDetails[0].programStartDate}" /><!--1584 Changed enrollStartDate to programStartDate-->
+                                
+                                        </apex:outputText></span>
+                                       </p>
+                                    </center>
+                                </apex:outputPanel>
+
+                                <!--1.0-->
+                                <apex:outputPanel id="EnrollMessageone" rendered="{!AccVsYearDetails[0].showenrollMsg}">
+                                    <center><p class="lineheight">You are not enrolled for {!AccVsYearDetails[0].enrollStartYear} Business Builder. <br/>
+                                        <apex:outputPanel rendered="{!AccVsYearDetails[0].disableEnrollNow}">
+                                        <a Class="btn btn-primary btnenroll btnenrollcc disabled" href="{!$Site.BaseUrl}/LPDCR_BBEnrollment?AccountId={!selectedAcc.Id}&BBYearId={!AccVsYearDetails[0].bbPYRec.id}" >Enroll Now</a> 
+                                       </apex:outputPanel> 
+                                       <apex:outputPanel rendered="{!(!AccVsYearDetails[0].disableEnrollNow)}">
+                                        <a Class="btn btn-primary btnenroll btnenrollcc " href="{!$Site.BaseUrl}/LPDCR_BBEnrollment?AccountId={!selectedAcc.Id}&BBYearId={!AccVsYearDetails[0].bbPYRec.id}" >Enroll Now</a> 
+                                       </apex:outputPanel> 
+                                       </p>
+                                    </center>
+                                </apex:outputPanel> 
+                                
+                                <!--2.0-->
+                                <apex:outputPanel id="EnrollMessagetwo" rendered="{!AccVsYearDetails[0].balanceButNotEnrolled}">
+                                    <center><img class="notificationicon" src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/u234.png')}"/><p class="lineheight"> You are not enrolled for {!AccVsYearDetails[0].enrollStartYear} Business Builder.<br/> 
+                                       <apex:outputPanel rendered="{!AccVsYearDetails[0].disableEnrollNow}">
+                            
+                                        <a Class="btn btn-primary btnenroll btnenrollcc disabled" href="{!$Site.BaseUrl}/LPDCR_BBEnrollment?AccountId={!selectedAcc.Id}&BBYearId={!AccVsYearDetails[0].bbPYRec.id}">Enroll Now</a> 
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!(!AccVsYearDetails[0].disableEnrollNow)}">
+                            
+                                        <a Class="btn btn-primary btnenroll btnenrollcc" href="{!$Site.BaseUrl}/LPDCR_BBEnrollment?AccountId={!selectedAcc.Id}&BBYearId={!AccVsYearDetails[0].bbPYRec.id}">Enroll Now</a> 
+                                    </apex:outputPanel>
+                                    </p>
+                                    </center>
+                                </apex:outputPanel>
+                                
+                                <!--3.0-->
+                                <apex:outputPanel id="QualificationMsg" rendered="{!AccVsYearDetails[0].showqualifyMsg}">
+                                    <center>  <br/>You did not have enough eligible points earned for a Selling Support Budget. <br/>
+                                        <a href="{!URLFOR($Resource.LPDCR_Assets, '/doc/BusinessBuilderFundsonepager_Final.pdf')}" download="{!URLFOR($Resource.LPDCR_Assets, '/doc/Business-Builder-Information.pdf')}" class="btn btn-primary btnenroll btnenrollcc ">Learn More</a>
+                                    </center>
+                                </apex:outputPanel>
+                                
+                                <!--4.0-->
+                                <apex:outputPanel id="year" rendered="{!AccVsYearDetails[0].showAccount}">
+                                    <div class="col-sm-12 pad_lft_rgt mrg_top10">
+                                        <div class="pad_lft_rgt col-sm-2 fnt12 mrg_top20">                                
+                                            <div id="circle" class="c100 lightBlue">
+                                                <span>
+                                                <apex:outputText rendered="{!AccVsYearDetails[0].earnedPerc!=null}" value="{!CEILING(AccVsYearDetails[0].earnedPerc)}"/>
+                                                <apex:outputText rendered="{!AccVsYearDetails[0].earnedPerc==null}" value="NA"/>%  </span>
+                                                <input type="hidden" value="{!CEILING(AccVsYearDetails[0].earnedPerc)}" id="percent"></input>
+                                                <div class="slice">
+                                                    <div class="bar"></div>
+                                                    <div class="fill"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pad_lft_rgt col-sm-10 fnt12 mrg_top10">
+                                        <p class="mrg_top10">
+                                            <span class="col-sm-8 pad_top5 flt_lft">{!$Label.LPDCR_BeginningBalance}<!--{!AccVsYearDetails[0].programYear}--></span> <span class="col-sm-4 pad_lft_rgt dis_inlineblock fnt18 fntnrml">
+                                            <apex:outputText value="{0, Number, Currency}">
+                                                <apex:param value="{!AccVsYearDetails[0].ssPYRec.Program_Year_Allocation__c}" />
+                                                </apex:outputText>
+                                            </span>
+                                           <!-- <span class="col-sm-8 clr_gry pad_top5">Total Earned {!AccVsYearDetails[0].programYear}</span> 
+                                            <span class="col-sm-4 pad_lft_rgt flt_lft dis_inlineblock clr_gry fnt18 fntnrml">${!AccVsYearDetails[0].totalEarned}</span> -->
+                                                                </p>
+                                            <p><span class="col-sm-8 pad_top5 flt_lft">{!$Label.LPDCR_ProjectedBalance}</span> <span class="col-sm-4 pad_lft_rgt dis_inlineblock fnt18 fntnrml">
+                                             <apex:outputText value="{0, Number, Currency}">
+                                                <apex:param value="{!AccVsYearDetails[0].ssPYRec.Available_Balance__c}" />
+                                                </apex:outputText>
+                                            </span>
+                                            </p>           
+                                        </div>
+                                        <div class="div_cen col-sm-12 pad_top20">
+                                        <!--<apex:commandButton action="{!$Site.BaseUrl}/LPDCR_BBPLandingMember" styleClass="btn_bbs" value="SUBMIT REIMBURSEMENT"> </apex:commandButton>-->
+                                        <!--<button class=""><a href="{!$Site.BaseUrl}/LPDCR_BBPLandingMember"></a></button>-->
+                                        <a href="{!$Site.BaseUrl}/LPDCR_BBPLandingMember" class="btn btn_bbs">SUBMIT REIMBURSEMENT</a>
+                                        </div>
+                                    </div>
+                                </apex:outputPanel>
+                                
+                                <!--5.0-->
+                                
+                                
+                                <!--LPDCR-1747-->
+                                <apex:outputPanel id="yearfour" rendered="{!AccVsYearDetails[0].showAvailBlnc}">
+                                    <div class="col-xs-12">
+                                    <div class="col-xs-6 col-sm-5 col-sm-offset-1 text-center"><b>Available Balance</b></div>
+                                    <div class="col-sm-5 col-xs-6 text-center">
+                                        <apex:outputText rendered="{!IF(AccVsYearDetails[0].ssPYRec!=null,true,false)}" value="{0, Number, Currency}">
+                                            <apex:param value="{!AccVsYearDetails[0].availableBalance}" />
+                                        </apex:outputText>
+                                        
+                                        <apex:outputText rendered="{!IF(AccVsYearDetails[0].ssPYRec==null,true,false)}" value="{0, Number, Currency}">
+                                            <apex:param value="{!0}" />
+                                        </apex:outputText> 
+                                        <p>&nbsp;</P> </div>
+                                    </div>
+                                </apex:outputPanel>
+                                
+                                
+                            </apex:outputPanel>
+                    </apex:outputPanel>
+                            
+                    <apex:outputPanel rendered="{!IF(AccVsYearDetails == null || AccVsYearDetails[0].showenrollMsg||AccVsYearDetails[0].showAccount||AccVsYearDetails[0].showTier||AccVsYearDetails[0].showqualifyMsg||AccVsYearDetails[0].balanceButNotEnrolled||AccVsYearDetails[0].showAvailBlncMsg||AccVsYearDetails[0].createNewPPY,false,true)}">
+                            <p class="pad_lft_rgt mrg_btm0 pad_top10"><label> {!AccVsYearDetails[1].programYear} Reimbursement Usage YTD</label></p>
+                            <apex:outputPanel id="ssProgPanel1" rendered="{!IF(AccVsYearDetails[1].showenrollMsg||AccVsYearDetails[1].showAccount||AccVsYearDetails[1].showTier||AccVsYearDetails[1].showqualifyMsg||AccVsYearDetails[1].balanceButNotEnrolled||AccVsYearDetails[1].showAvailBlncMsg||AccVsYearDetails[1].createNewPPY,true,false)}">
+                                
+                                <!--4.0-->
+                                <apex:outputPanel id="yearone1" rendered="{!AccVsYearDetails[1].balanceButNotEnrolled}">
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6 col-sm-7 text-center"><b>Available Balance</b></div>
+                                        <div class="col-sm-5 col-xs-6 text-center">
+                                            <apex:outputText rendered="{!IF(AccVsYearDetails[1].ssPYRec!=null,true,false)}" value="{0, Number, Currency}">
+                                                <apex:param value="{!AccVsYearDetails[1].availableBalance}" />
+                                            </apex:outputText>
+                                            
+                                            <apex:outputText rendered="{!IF(AccVsYearDetails[1].ssPYRec==null,true,false)}" value="{0, Number, Currency}">
+                                                <apex:param value="{!0}" />
+                                            </apex:outputText> 
+                                        </div>
+                                    </div>                                    
+                                </apex:outputPanel>
+                                    
+                                <!--4.0 and new-->
+                                <apex:outputPanel id="yearthree1" rendered="{!AccVsYearDetails[1].showenrollMsg}">
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6 col-sm-7 text-center"><b>Available Balance</b></div>
+                                        <div class="col-sm-5 col-xs-6 text-center">
+                                    Available                        <apex:outputText value="{0,date, MMM dd, yyyy}"> 
+                                    <apex:param value="{!AccVsYearDetails[1].programStartDate}" />
+                                    
+                                    </apex:outputText>
+                                                </div>
+                                    </div>                                    
+                                </apex:outputPanel>
+                                
+                                <!--1.0 & 5.0-->
+                                <apex:outputPanel id="EnrollMessage1" rendered="{!IF(AccVsYearDetails[1].showAvailBlncMsg,true,false)}">
+                                    <center>
+                                        <p class="topgap">Your {!AccVsYearDetails[1].enrollStartYear} Selling Support Dollars Balance will be available to use  
+                                        <span><apex:outputText value="{0,date, MMM dd, yyyy}"> 
+                                        <apex:param value="{!AccVsYearDetails[1].programStartDate}" /><!--1584 Changed enrollStartDate to programStartDate-->
+                                
+                                        </apex:outputText></span>
+                                       </p>
+                                    </center>
+                                </apex:outputPanel>
+
+                                <!--1.0-->
+                                <apex:outputPanel id="EnrollMessageone1" rendered="{!AccVsYearDetails[1].showenrollMsg}">
+                                    <center><p class="lineheight">You are not enrolled for {!AccVsYearDetails[1].enrollStartYear} Business Builder. <br/>
+                                        <apex:outputPanel rendered="{!AccVsYearDetails[1].disableEnrollNow}">
+                                        <a Class="btn btn-primary btnenroll btnenrollcc disabled" href="{!$Site.BaseUrl}/LPDCR_BBEnrollment?AccountId={!selectedAcc.Id}&BBYearId={!AccVsYearDetails[1].bbPYRec.id}" >Enroll Now</a> 
+                                       </apex:outputPanel> 
+                                       <apex:outputPanel rendered="{!(!AccVsYearDetails[1].disableEnrollNow)}">
+                                        <a Class="btn btn-primary btnenroll btnenrollcc " href="{!$Site.BaseUrl}/LPDCR_BBEnrollment?AccountId={!selectedAcc.Id}&BBYearId={!AccVsYearDetails[1].bbPYRec.id}" >Enroll Now</a> 
+                                       </apex:outputPanel></p>
+                                    </center>
+                                </apex:outputPanel> 
+                                
+                                <!--2.0-->
+                                <apex:outputPanel id="EnrollMessagetwo1" rendered="{!AccVsYearDetails[1].balanceButNotEnrolled}">
+                                    <center><img class="notificationicon" src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/u234.png')}"/><p class="lineheight"> You are not enrolled for {!AccVsYearDetails[1].enrollStartYear} Business Builder.<br/> 
+                                         <apex:outputPanel rendered="{!AccVsYearDetails[1].disableEnrollNow}">
+                            
+                                        <a Class="btn btn-primary btnenroll btnenrollcc disabled" href="{!$Site.BaseUrl}/LPDCR_BBEnrollment?AccountId={!selectedAcc.Id}&BBYearId={!AccVsYearDetails[1].bbPYRec.id}">Enroll Now</a> 
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!(!AccVsYearDetails[1].disableEnrollNow)}">
+                            
+                                        <a Class="btn btn-primary btnenroll btnenrollcc" href="{!$Site.BaseUrl}/LPDCR_BBEnrollment?AccountId={!selectedAcc.Id}&BBYearId={!AccVsYearDetails[1].bbPYRec.id}">Enroll Now</a> 
+                                    </apex:outputPanel></p>
+                                    </center>
+                                </apex:outputPanel>
+                                
+                                <!--3.0-->
+                                <apex:outputPanel id="QualificationMsg1" rendered="{!AccVsYearDetails[1].showqualifyMsg}">
+                                    <center>  <br/>You did not have enough eligible points earned for a Selling Support Budget. <br/>
+                                        <a href="{!URLFOR($Resource.LPDCR_Assets, '/doc/BusinessBuilderFundsonepager_Final.pdf')}" download="{!URLFOR($Resource.LPDCR_Assets, '/doc/Business-Builder-Information.pdf')}" class="btn btn-primary btnenroll btnenrollcc ">Learn More</a>
+                                    </center>
+                                </apex:outputPanel>
+                                
+                                <!--4.0-->
+                                <apex:outputPanel id="year1" rendered="{!AccVsYearDetails[1].showAccount}">
+                                    <div class="col-sm-12 pad_lft_rgt mrg_top10">
+                                        <div class="pad_lft_rgt col-sm-2 fnt12 mrg_top20">                                
+                                            <div id="circle" class="c100 lightBlue">
+                                                <span>
+                                                <apex:outputText rendered="{!AccVsYearDetails[1].earnedPerc!=null}" value="{!CEILING(AccVsYearDetails[1].earnedPerc)}"/>
+                                                <apex:outputText rendered="{!AccVsYearDetails[1].earnedPerc==null}" value="NA"/>%  </span>
+                                                <input type="hidden" value="{!CEILING(AccVsYearDetails[1].earnedPerc)}" id="percent"></input>
+                                                <div class="slice">
+                                                    <div class="bar"></div>
+                                                    <div class="fill"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pad_lft_rgt col-sm-10 fnt12 mrg_top10">
+                                            <p>
+                                            <span class="col-sm-8 pad_top5 flt_lft">{!$Label.LPDCR_BeginningBalance} <!--{!AccVsYearDetails[1].programYear}--></span> <span class="col-sm-4 pad_lft_rgt flt_lft dis_inlineblock fnt18 fntnrml">
+                                                <apex:outputText value="{0, Number, Currency}">
+                                                <apex:param value="{!AccVsYearDetails[1].ssPYRec.Program_Year_Allocation__c}" />
+                                                </apex:outputText>
+                                             </span>
+                                         <!--   <span class="col-sm-8 clr_gry pad_top5">Total Earned {!AccVsYearDetails[1].programYear}</span> 
+                                           <span class="col-sm-4 pad_lft_rgt flt_lft dis_inlineblock clr_gry fnt18 fntnrml">${!AccVsYearDetails[1].totalEarned}</span> -->
+                                                      </p>  
+                                                      <p class="mrg_top10"><span class="col-sm-8 pad_top5 flt_lft">{!$Label.LPDCR_ProjectedBalance}</span> <span class="col-sm-4 pad_lft_rgt dis_inlineblock fnt18 fntnrml">
+                                                       <apex:outputText value="${0, Number, Currency}">
+                                                <apex:param value="{!AccVsYearDetails[1].ssPYRec.Available_Balance__c}" />
+                                                </apex:outputText>
+                                                      </span>
+                                            </p>                   
+                                        </div>
+                                        <div class="div_cen col-sm-12 pad_top20">
+                                        <!--<apex:commandButton action="{!$Site.BaseUrl}/LPDCR_BBPLandingMember" styleClass="btn_bbs" value="SUBMIT REIMBURSEMENT"> </apex:commandButton>-->
+                                        <!--<button class=""><a href="{!$Site.BaseUrl}/LPDCR_BBPLandingMember"></a></button>-->
+                                        <a href="{!$Site.BaseUrl}/LPDCR_BBPLandingMember" class="btn btn_bbs">SUBMIT REIMBURSEMENT</a>
+                                        </div>
+                                    </div>
+                                </apex:outputPanel>
+                                
+                                <!--5.0-->
+                                
+                                
+                                <!--LPDCR-1747-->
+                                <apex:outputPanel id="yearfour1" rendered="{!AccVsYearDetails[1].showAvailBlnc}">
+                                    <div class="col-xs-12">
+                                    <div class="col-xs-6 col-sm-5 col-sm-offset-1 text-center"><b>Available Balance</b></div>
+                                    <div class="col-sm-5 col-xs-6 text-center">
+                                        <apex:outputText rendered="{!IF(AccVsYearDetails[1].ssPYRec!=null,true,false)}" value="{0, Number, Currency}">
+                                            <apex:param value="{!AccVsYearDetails[1].availableBalance}" />
+                                        </apex:outputText>
+                                        
+                                        <apex:outputText rendered="{!IF(AccVsYearDetails[1].ssPYRec==null,true,false)}" value="{0, Number, Currency}">
+                                            <apex:param value="{!0}" />
+                                        </apex:outputText> 
+                                        <p>&nbsp;</P> </div>
+                                    </div>
+                                </apex:outputPanel>
+                                
+                             
+                            </apex:outputPanel>
+                            </apex:outputPanel>
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!IF(TEXT($User.UserType) == 'Standard', TRUE, FALSE)}">
+                             <div class="mrg_top20">
+                                 <p>&nbsp;</p>
+                                 <p>&nbsp;</p>
+                                <p class="pad_top20"> You do not have access to Business Builder features.</p>
+                             </div>
+                            </apex:outputPanel>
+                            
+                        </div>
+                        
+     </div>   
+     <style>
+         .btnenrollcc {
+            margin-top: 15px;
+            margin-bottom: 10px;
+            }
+            .topgap{
+            margin-top:20px;
+            }
+            .lineheight{
+                line-height:24px;
+            }
+            .positionrel{
+                    position: absolute;
+                bottom:0;
+            }
+            .fntnrml{
+                text-align:right;
+            }
+        </style> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+$( document ).ready(function() {
+    console.log(document.getElementById('percent').value);
+    if (document.getElementById('percent').value == "0") {
+        $('#circle').addClass('p0');
+    }
+    else if ((document.getElementById('percent').value >= 1) &&(document.getElementById('percent').value <= 19)) {
+        $('#circle').addClass('p10');
+    }
+    else if ((document.getElementById('percent').value >= 20) &&(document.getElementById('percent').value <= 29)) {
+        $('#circle').addClass('p20');
+    }
+    else if ((document.getElementById('percent').value >= 30) &&(document.getElementById('percent').value <= 39)) {
+        $('#circle').addClass('p30');
+    }
+    else if ((document.getElementById('percent').value >= 40) &&(document.getElementById('percent').value <= 49)) {
+        $('#circle').addClass('p40');
+    }
+    else if ((document.getElementById('percent').value >= 50) &&(document.getElementById('percent').value <= 59)) {
+        $('#circle').addClass('p50');
+    }
+    else if ((document.getElementById('percent').value >= 60) &&(document.getElementById('percent').value <= 69)) {
+        $('#circle').addClass('p60');
+    }
+    else if ((document.getElementById('percent').value >= 70) &&(document.getElementById('percent').value <= 79)) {
+        $('#circle').addClass('p70');
+    }
+    else if ((document.getElementById('percent').value >= 80) &&(document.getElementById('percent').value <= 89)) {
+        $('#circle').addClass('p80');
+    }
+    else if ((document.getElementById('percent').value >= 90) &&(document.getElementById('percent').value <= 99)) {
+        $('#circle').addClass('p90');
+    }
+    else if (document.getElementById('percent').value == 100) {
+        $('#circle').addClass('p100');
+    }
+});
+</script>   
+</apex:component>

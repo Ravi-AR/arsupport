@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Lead_Sharing_Producer_Producer_Consumer_Leads</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Shares Leads with the Record Type of Producer Leads &amp; Producer/Consumer Leads (Read/Write Access)</description>
+        <label>Lead Sharing || Producer &amp; Producer Consumer Leads</label>
+        <sharedTo>
+            <group>Lead_Sharing_Producer_Producer_Cons</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Producer/Consumer Lead,Producer Lead</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Lead_Sharing_Producer_Producer_Consumer_Read_Only</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Provides read access to the leads with the record type of Producer Consumer and Producer</description>
+        <label>Lead Sharing || Producer &amp; Producer Consumer || Read Only</label>
+        <sharedTo>
+            <group>Lead_Sharing_Read_Only</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Producer/Consumer Lead,Producer Lead</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+</SharingRules>

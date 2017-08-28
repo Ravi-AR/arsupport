@@ -1,0 +1,5 @@
+Greetings,
+
+Consumer service request # {!Case.CaseNumber} has been open since {!Case.LastModifiedDate} and is still awaiting response from you. Please follow up on this service request as it will be automatically closed if no action is taken.
+
+Thank you.

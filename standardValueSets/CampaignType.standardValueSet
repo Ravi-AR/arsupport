@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Cattle Great Starts Program</fullName>
+        <default>false</default>
+        <label>Cattle Great Starts Program</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Cattle Mineral Meetings</fullName>
+        <default>false</default>
+        <label>Cattle Mineral Meetings</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Cattle Owner Workshop (COW Event)</fullName>
+        <default>false</default>
+        <label>Cattle Owner Workshop (COW Event)</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Check-R-Board Days</fullName>
+        <default>false</default>
+        <label>Check-R-Board Days</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Chick Days</fullName>
+        <default>false</default>
+        <label>Chick Days</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Dairy – Cool Cow Promotion</fullName>
+        <default>false</default>
+        <label>Dairy – Cool Cow Promotion</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Equine Plus Program</fullName>
+        <default>false</default>
+        <label>Equine Plus Program</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Flocktober</fullName>
+        <default>false</default>
+        <label>Flocktober</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Horse Owner Workshop (HOW Event)</fullName>
+        <default>false</default>
+        <label>Horse Owner Workshop (HOW Event)</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other Cattle local promos/meeting events</fullName>
+        <default>false</default>
+        <label>Other Cattle local promos/meeting events</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other Dairy local meeting events</fullName>
+        <default>false</default>
+        <label>Other Dairy local meeting events</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other Event</fullName>
+        <default>false</default>
+        <label>Other Event</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other Flock local promos/meeting event</fullName>
+        <default>false</default>
+        <label>Other Flock local promos/meeting event</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other Horse local promos/meeting events</fullName>
+        <default>false</default>
+        <label>Other Horse local promos/meeting events</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other Swine local meeting events</fullName>
+        <default>false</default>
+        <label>Other Swine local meeting events</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Producer Meeting</fullName>
+        <default>false</default>
+        <label>Producer Meeting</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Purina Bucks</fullName>
+        <default>false</default>
+        <label>Purina Bucks</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Animal Lifecycle</fullName>
+        <default>false</default>
+        <label>Animal Lifecycle</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Cross-species</fullName>
+        <default>false</default>
+        <label>Cross-species</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Shopping Basket</fullName>
+        <default>false</default>
+        <label>Shopping Basket</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Farm VIP Events</fullName>
+        <default>false</default>
+        <label>Farm VIP Events</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Regional Farm VIP (PhD Virtual Session)</fullName>
+        <default>false</default>
+        <label>Regional Farm VIP (PhD Virtual Session)</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Newsletters</fullName>
+        <default>false</default>
+        <label>Newsletters</label>
+    </standardValue>
+    <standardValue>
+        <fullName>National</fullName>
+        <default>false</default>
+        <label>National</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Local</fullName>
+        <default>false</default>
+        <label>Local</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Regional</fullName>
+        <default>false</default>
+        <label>Regional</label>
+    </standardValue>
+    <standardValue>
+        <fullName>National VIP</fullName>
+        <default>false</default>
+        <label>National VIP</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Regional VIP</fullName>
+        <default>false</default>
+        <label>Regional VIP</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Elite/Red Carpet VIP</fullName>
+        <default>false</default>
+        <label>Elite/Red Carpet VIP</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Dealer/Training VIP</fullName>
+        <default>false</default>
+        <label>Dealer/Training VIP</label>
+    </standardValue>
+</StandardValueSet>

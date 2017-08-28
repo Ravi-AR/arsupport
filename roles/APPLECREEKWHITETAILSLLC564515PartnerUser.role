@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>APPLE CREEK WHITETAILS LLC-564515 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>APPLE CREEK WHITETAILS LLC-564515 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>APPLECREEKWHITETAILSLLC564515PartnerManager</parentRole>
+</Role>

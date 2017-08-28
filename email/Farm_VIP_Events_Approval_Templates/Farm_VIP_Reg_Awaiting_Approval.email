@@ -1,0 +1,6 @@
+<table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
+<tr valign="top" height="400" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[Thank you for nominating&nbsp;{!Farm_VIP_Registration__c.Registrant__c} from&nbsp;{!Farm_VIP_Registration__c.Customer_Name__c} for the&nbsp;{!Farm_VIP_Registration__c.Farm_VIP_Event__c}.&nbsp;<div><br></div><div>You will be notified of approval or rejection shortly. &nbsp;</div><div><br></div><div>Link to record:&nbsp;{!Farm_VIP_Registration__c.Link}</div><div><br></div><div>Thank you,&nbsp;</div><div><br></div><div>Farm VIP Events Team</div>]]></td>
+</tr>
+</table>

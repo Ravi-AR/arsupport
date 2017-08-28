@@ -1,0 +1,33 @@
+Dear {!Case.Customer_Service_Contact__c},
+
+Please log the following Service Request:
+
+Case Type: {!Case.Type}
+Customer Issue Type: {!Customer_Issue_Type__c}
+Service Request Origin: {!Case.Origin}
+
+Shipping Plant: {!Shipping_Plant__c}
+Estimated Ship Date: {!Estimated_Ship_Date__c}
+Item Number: {!Item_Number__c}
+Lot Number: {!Lot_Number__c}
+Sales Order #: {!Sales_Order__c}
+Invoice #: {!Invoice__c}
+
+Case Link: {!Case.Link}
+
+Related to:
+Account Number: {!Case.Account_Number__c}
+Account Name: {!Case.Account}
+Account Mailing Name: {!Case.Account_Mailing_Name__c}
+Account Phone: {!Case.Account_Phone__c}
+
+
+Contact Name: {!Case.Contact}
+Contact Role: {!Case.Contact_Role__c}
+Contact Type: {!Case.Contact_Type__c}
+Contact Phone: {!Case.Contact_Phone__c}
+Contact Mobile Phone: {!Case.Contact_Mobile_Phone__c}
+
+
+Thank you,
+{!Case.OwnerFullName}

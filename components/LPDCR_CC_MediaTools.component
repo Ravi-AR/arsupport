@@ -1,0 +1,364 @@
+<apex:component >
+   
+  <div class="wrapper cc_homepage pagenation_promation">
+       <div class="row">
+           <div class="col-sm-12 pad_lft_rgt pad_top10">
+              <div class="row">
+                  <div class="col-sm-12 pad_all0 ">
+                      <img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u110.png" width="100%" height="133"/>
+                      <a href="" class="media">Media Tools</a>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-sm-12 pad_top10 pad_lft0 pad_rgt0 mrg_topNeg30">
+                      <div class="panel with-nav-tabs panel-default">
+                           <div class="panel-heading col-sm-3">
+                                <c:LPDCR_SubTabs />
+                                <!--
+                                <ul class="nav nav-tabs lft_menu">
+                                    <li class="wid100 active"><a href="#tabsm1default" data-toggle="tab" class="lia txt_upper">Media Tools</a></li>
+                                    <li class="wid100"><a href="#tabsm2default" data-toggle="tab" class="lia txt_upper">Merchandising</a></li>
+                                    <li class="wid100"><a href="#tabsm3default" data-toggle="tab" class="lia txt_upper">Promotions</a></li>                            
+                                </ul>
+                                -->
+                                
+                                <div class="col-sm-12 pad_lft_rgt accBg"> 
+                                  <div class="col-sm-12 pad_top20 pad_btm15">
+                                      <span>Filters</span><a href="#" class="txt_upper txt_rgt flt_rgt fnt12">Reset Filters</a>
+                                  </div> 
+                                  <div class="panel-group pad_lft20 fnt12" id="accordion">
+                                    <div class="panel panel-default">
+                                      <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="txt_upper wid90 dis_inlineblock fnt12 brd_btm pad_btm5 txt_none clr7 pad_top10">Sort By
+                                          <span class="more-less glyphicon glyphicon-menu-down flt_rgt glf_icon"></span>
+                                          </a>
+                                          
+                                        </h4>
+                                      </div>
+                                      <div id="collapse1" class="panel-collapse collapse">
+                                        <div class="panel-body brd_top0">Sort</div>
+                                      </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                      <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="txt_upper wid90 dis_inlineblock fnt12 brd_btm pad_btm5 txt_none clr7 pad_top10">Species
+                                          <span class="more-less glyphicon glyphicon-menu-up flt_rgt glf_icon"></span>
+                                          </a>
+                                        </h4>
+                                      </div>
+                                      <div id="collapse2" class="panel-collapse collapse in">
+                                        <div class="panel-body brd_top0">
+                                        
+                                            <p class="pad_lft10"><img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u170.svg" width="35" class=""/>
+                                            <span class="pad_lft20">Dairy</span></p>
+                                            <p class="pad_lft10"><img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u172.svg" width="35" class=""/>
+                                            <span class="pad_lft20">Horse</span></p>
+                                            <p class="pad_lft10"><img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u174.svg" width="30" class=""/>
+                                            <span class="pad_lft20">Flock</span></p>
+                                            <p class="pad_lft10"><img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u176.svg" width="35" class=""/>
+                                            <span class="pad_lft20">Cattle</span></p>
+                                            <p class="pad_lft10"><img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u178.svg" width="35" class=""/>
+                                            <span class="pad_lft20">Goat</span></p>
+                                            <p class="pad_lft10"><img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u188.svg" width="35" class=""/>
+                                            <span class="pad_lft20">Swine</span></p>
+                                            <p class="pad_lft10"><img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u180.svg" width="30" class=""/>
+                                            <span class="pad_lft20">Rabbit</span></p>
+                                            <p class="pad_lft10"><img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u182.svg" width="35" class=""/>
+                                            <span class="pad_lft20">Deer</span></p>
+                                            <p class="pad_lft10"><img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u184.svg" width="35" class=""/>
+                                            <span class="pad_lft20">Exotic</span></p>
+                                            
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                      <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="txt_upper wid90 dis_inlineblock fnt12 brd_btm pad_btm5 txt_none clr7 pad_top10">Type
+                                          <span class="more-less glyphicon glyphicon-menu-down flt_rgt glf_icon"></span>
+                                          </a>
+                                        </h4>
+                                      </div>
+                                      <div id="collapse3" class="panel-collapse collapse">
+                                        <div class="panel-body brd_top0">Type</div>
+                                      </div>
+                                    </div>
+                                  </div> 
+                                </div>
+                                
+                            </div>
+                             <div class="panel-body col-sm-9 pad_lft10 zeroPad">
+                                <div class="tab-content bgWht flt_lft wid100">
+                                    <div class="tab-pane fade active in" id="tabsm1default">
+                                        <div class="col-sm-12 mrg_btm20">
+                                            <span class="glyphicon glyphicon-search sch_Icon"></span><input type="text" class="inpt" placeholder="Search Media Tools"/>                                                                                     
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a herf="#" class="fnt20">Logos</a>
+                                            <div class="clear"></div>   
+                                            <div class="col-sm-4 pad_top10 pad_lft0">                                                 
+                                                <img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u197.png" width="65"/>                                                
+                                            </div>
+                                            <div class="col-sm-8 pad_top10">
+                                                <p class="fnt12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                                    <a href="#" class="col-sm-12 pad_lft_rgt txt_center fnt12 pad_top10 visit">Visit Logos</a>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-6">
+                                            <a herf="#" class="fnt20">Package Images</a>
+                                            <div class="clear"></div>   
+                                            <div class="col-sm-4 pad_top10 pad_lft0">                                                 
+                                                <img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u193.png" width="65"/>                                                
+                                            </div>
+                                            <div class="col-sm-8 pad_top10">
+                                                <p class="fnt12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                                    <a href="#" class="col-sm-12 pad_lft_rgt txt_center fnt12 pad_top10 visit">Visit Package Images</a>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-6">
+                                            <a herf="#" class="fnt20">Social Media</a>
+                                            <div class="clear"></div>   
+                                            <div class="col-sm-4 pad_top10 pad_lft0">                                                 
+                                                <img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u191.png" width="65"/>                                                
+                                            </div>
+                                            <div class="col-sm-8 pad_top10">
+                                                <p class="fnt12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                                    <a href="#" class="col-sm-12 pad_lft_rgt txt_center fnt12 pad_top10 visit">Visit Social Media</a>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a herf="#" class="fnt20">Video</a>
+                                            <div class="clear"></div>   
+                                            <div class="col-sm-4 pad_top10 pad_lft0">                                                 
+                                                <img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u195.png" width="65"/>                                                
+                                            </div>
+                                            <div class="col-sm-8 pad_top10">
+                                                <p class="fnt12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                                    <a href="#" class="col-sm-12 pad_lft_rgt txt_center fnt12 pad_top10 visit">Visit Video</a>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-6">
+                                            <a herf="#" class="fnt20">Ad Slicks</a>
+                                            <div class="clear"></div>   
+                                            <div class="col-sm-4 pad_top10 pad_lft0">                                                 
+                                                <img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u199.png" width="65"/>                                                
+                                            </div>
+                                            <div class="col-sm-8 pad_top10">
+                                                <p class="fnt12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                                    <a href="#" class="col-sm-12 pad_lft_rgt txt_center fnt12 pad_top10 visit">Visit Ad Slicks</a>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a herf="#" class="fnt20">Radio Scripts</a>
+                                            <div class="clear"></div>   
+                                            <div class="col-sm-4 pad_top10 pad_lft0">                                                 
+                                                <img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u189.png" width="65"/>                                                
+                                            </div>
+                                            <div class="col-sm-8 pad_top10">
+                                                <p class="fnt12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                                    <a href="#" class="col-sm-12 pad_lft_rgt txt_center fnt12 pad_top10 visit">Visit Radio Scripts</a>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        
+                                    </div>
+                                    <div class="tab-pane fade " id="tabsm2default">
+                                    
+                                    <div class="col-sm-12 mrg_btm20">
+                                            <span class="glyphicon glyphicon-search sch_Icon"></span><input type="text" class="inpt" placeholder="Search Media Tools"/>                                                                                     
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a herf="#" class="fnt20">Display Library</a>
+                                            <div class="clear"></div>   
+                                            <div class="col-sm-4 pad_top10 pad_lft0">                                                 
+                                                <img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u232.png" width="55"/>                                                
+                                            </div>
+                                            <div class="col-sm-8 pad_top10">
+                                                <p class="fnt12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                                    <a href="#" class="col-sm-12 pad_lft_rgt txt_center fnt12 pad_top10 visit">Visit Display Library</a>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-6">
+                                            <a herf="#" class="fnt20">Planograms</a>
+                                            <div class="clear"></div>   
+                                            <div class="col-sm-4 pad_top10 pad_lft0">                                                 
+                                                <img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u242.png" width="55"/>                                                
+                                            </div>
+                                            <div class="col-sm-8 pad_top10">
+                                                <p class="fnt12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                                    <a href="#" class="col-sm-12 pad_lft_rgt txt_center fnt12 pad_top10 visit">Visit Planograms</a>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="col-sm-6">
+                                            <a herf="#" class="fnt20">POS Sign Templates</a>
+                                            <div class="clear"></div>   
+                                            <div class="col-sm-4 pad_top10 pad_lft0">                                                 
+                                                <img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u236.png" width="55"/>                                                
+                                            </div>
+                                            <div class="col-sm-8 pad_top10">
+                                                <p class="fnt12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                                    <a href="#" class="col-sm-12 pad_lft_rgt txt_center fnt12 pad_top10 visit">Visit POS Sign Templates</a>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-6">
+                                            <a herf="#" class="fnt20">Promotions eStore</a>
+                                            <div class="clear"></div>   
+                                            <div class="col-sm-4 pad_top10 pad_lft0">                                                 
+                                                <img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u234.png" width="55"/>                                                
+                                            </div>
+                                            <div class="col-sm-8 pad_top10">
+                                                <p class="fnt12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                                    <a href="#" class="col-sm-12 pad_lft_rgt txt_center fnt12 pad_top10 visit">Visit Promotions eStore</a>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-6">
+                                            <a herf="#" class="fnt20">Print eStore</a>
+                                            <div class="clear"></div>   
+                                            <div class="col-sm-4 pad_top10 pad_lft0">                                                 
+                                                <img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u238.png" width="55"/>                                                
+                                            </div>
+                                            <div class="col-sm-8 pad_top10">
+                                                <p class="fnt12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                                    <a href="#" class="col-sm-12 pad_lft_rgt txt_center fnt12 pad_top10 visit">Visit Print eStore</a>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-6">
+                                            <a herf="#" class="fnt20">Exterior Signs</a>
+                                            <div class="clear"></div>   
+                                            <div class="col-sm-4 pad_top10 pad_lft0">                                                 
+                                                <img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u244.png" width="55"/>                                                
+                                            </div>
+                                            <div class="col-sm-8 pad_top10">
+                                                <p class="fnt12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                                    <a href="#" class="col-sm-12 pad_lft_rgt txt_center fnt12 pad_top10 visit">Visit Exterior Signs</a>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="pad_btm20 clear mrg_btm20"></div>
+                                        <div class="col-sm-6">
+                                            <a herf="#" class="fnt20">Interior Signs</a>
+                                            <div class="clear"></div>   
+                                            <div class="col-sm-4 pad_top10 pad_lft0">                                                 
+                                                <img src="/mypurinamills/resource/1488953340000/LPDCR_CC_Assets/img/u240.png" width="55"/>                                                
+                                            </div>
+                                            <div class="col-sm-8 pad_top10">
+                                                <p class="fnt12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                                    <a href="#" class="col-sm-12 pad_lft_rgt txt_center fnt12 pad_top10 visit">Visit Interior Signs</a>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        
+                                    
+                                    
+                                    </div>
+                                    <div class="tab-pane fade " id="tabsm3default">
+                                    
+                                        <div class="col-sm-12 mrg_btm20">
+                                            <span class="glyphicon glyphicon-search sch_Icon"></span><input type="text" class="inpt" placeholder="Search Media Tools"/>                                                                                     
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <h3 class="p_title clr7">Current Promotions</h3>
+                                            <p class="col-sm-8 clr_red pad_lft0">Purina Chick Days</p><p class="col-sm-4">Jan-Apr</p>
+                                            <p class="col-sm-8 clr_red pad_lft0">AntlerMax® Extreme Energy™ Supplement</p><p class="col-sm-4">Jan-Apr</p>  
+                                            <div class="clear pad_btm20"></div>
+                                            <h3 class="p_title clr7">Upcoming Promotions</h3>
+                                            <p class="col-sm-8 clr_red pad_lft0">Equine Spring Savings Event</p><p class="col-sm-4">Jan-Apr</p>
+                                            <p class="col-sm-8 clr_red pad_lft0">High Octane® Supplements Spring Offer</p><p class="col-sm-4">Jan-Apr</p>  
+                                            <div class="clear pad_btm20"></div>
+                                            <h3 class="p_title clr7">All Promotions</h3>
+                                            <p class="col-sm-8 clr_red pad_lft0">Equine Spring Savings Event</p><p class="col-sm-4">Jan-Apr</p>
+                                            <p class="col-sm-8 clr_red pad_lft0">High Octane® Supplements Spring Offer</p><p class="col-sm-4">Jan-Apr</p>  
+                                            <p class="col-sm-8 clr_red pad_lft0">Additional Promotional Offer 1 </p><p class="col-sm-4">Apri 17 - May 19</p> 
+                                                                                  
+                                        </div>
+                                    
+                                        <nav aria-label="Page navigation example">
+                                          <ul class="pagination">
+                                            <li class="page-item">
+                                              <a class="page-link" href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                                <span class="sr-only">Previous</span>
+                                              </a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item">
+                                              <a class="page-link" href="#" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                                <span class="sr-only">Next</span>
+                                              </a>
+                                            </li>
+                                          </ul>
+                                        </nav>
+                
+                
+                                    </div>
+                                </div>
+                             </div>
+                      
+                      </div>                      
+                  </div>
+              </div>
+           </div>
+       </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <script src="/mypurinamills/resource/1488627212000/LPDCR_Assets/libs/bootstrap/js/bootstrap.min.js"></script>
+   <script>
+         $(document).ready(function () {
+            function toggleIcon(e) {
+                $(e.target)
+                    .prev('.panel-heading')
+                    .find(".more-less")
+                    .toggleClass('glyphicon-menu-up glyphicon-menu-down');
+                    
+            }
+            $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+            $('.panel-group').on('shown.bs.collapse', toggleIcon);
+        });
+    </script>
+    
+    
+    
+
+  
+</apex:component>

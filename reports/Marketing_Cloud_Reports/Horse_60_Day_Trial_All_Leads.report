@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CAMPAIGN_NAME</field>
+    </columns>
+    <columns>
+        <field>EMAIL</field>
+    </columns>
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>Lead.Pardot_Horse_Form_Inserted_Date__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Referral_Type__c</field>
+    </columns>
+    <description>These are all the daily new sign-ups for 60 Day Trial from Kentico...inserted into the Customer Event ID of: 701j0000000B5XqAAK all Kentico sign-ups are uploaded as Leads.</description>
+    <filter>
+        <criteriaItems>
+            <column>Campaign.X18_Digit_Customer_Event_ID__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>701j0000000B5XqAAK</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Horse 60 Day Trial All Leads</name>
+    <params>
+        <name>scopeid</name>
+        <value></value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CampaignLead</reportType>
+    <scope>orgAll</scope>
+    <showDetails>true</showDetails>
+    <sortColumn>Lead.Pardot_Horse_Form_Inserted_Date__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+</Report>

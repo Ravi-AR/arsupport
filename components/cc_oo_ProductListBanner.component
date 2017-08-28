@@ -1,0 +1,97 @@
+<apex:component allowDML="true">
+<script id="OO-productCatalogDesktop" type="text/template">
+  <div class="prodCatContainer">
+   <div class="products_1_row_medium_container">
+    {{#if this.noSearchResults}}
+     <div class="main_content_container search_no_results">
+      <h1 class="search_no_results_header">{{pageLabelMap 'Search_NoResults' this.searchString}}</h1>
+      <p class="search_no_results_body">{{pageLabelMap 'Search_NoResultsBody' this.searchString}}</p>
+     </div>
+    {{else}} 
+     {{#if this.wasSearch}}
+      <div class="main_content_container search_results">
+       <h1 class="search_results_header">{{pageLabelMap 'Search_Results' this.searchString}}</h1>
+       <p class="search_results_body">{{pageLabelMap 'Search_ResultsBody' this.searchString}}</p>
+       <div class="filter_breadcrumb_container_main"></div>
+      </div>
+     {{else}}
+      <div class="main_content_container category_name">
+       {{#if this.mediaWrapper }}
+        <div class="maincategory_image">         
+         {{#if (isNotPreBook)}}
+            {{displayImage this.mediaWrapper 'maincategory_img'}}
+        {{else}}
+            <!--<img src="{!URLFOR($Resource.CC_Purina_Theme_3,'/images/banner-image.jpg')}" alt="Banner-image">-->
+            <!--<img src="{!URLFOR($Resource.CC_Purina_Theme_3,'/images/HeroHeader/Hero_Horse_PurinaMills.jpg')}" alt="Banner-image">-->
+                <img src="http://www.purinamills.com/purinamills/media/Images/HeroHeader/Hero_Horse_PurinaMills.jpg?ext=.jpg" alt="Banner-image">
+        {{/if}}
+        </div>
+       {{/if}}
+       <div class="maincategory_name"><h1>{{this.mockCategory.name}}</h1></div>
+       <div class="filter_breadcrumb_container_main"></div>
+       <div class="maincategory_desc"><p>{{unescape this.mockCategory.ShortDesc}}</p></div>
+      </div>
+      {{#ifDisplay 'PL.DsplSubCat'}}
+       {{#if this.subcategories}}
+        <h2 class="heading sub_category_header">{{pageLabelMap 'SubCategories'}}</h2>
+        <div class="products_1_row_medium sub_categories">
+         {{> subcats}}
+        </div>
+       {{/if}}
+      {{/ifDisplay}}
+     {{/if}}
+    {{/if}}
+    <div class="listPaginationSec"></div>
+    <div class="prodListSec"></div>
+    <div class="listPaginationSec"></div>
+   </div>
+  </div>
+ </script>
+
+ <script id="OO-productCatalogPhone" type="text/template">
+  <div class="prodCatContainer">
+   <div class="products_1_row_medium_container">
+    {{#if this.noSearchResults}}
+    <div class="product_search search_no_results">
+     <p class="search_no_results_header">{{pageLabelMap 'Search_NoResults' this.searchString}}</p>
+     <p class="search_no_results_body">{{pageLabelMap 'Search_NoResultsBody' this.searchString}}</p>
+    </div>
+    {{else}} {{#if this.wasSearch}}
+    <div class="product_search search_results">
+      <h1 class="search_results_header">{{pageLabelMap 'Search_Results' this.searchString}}</h1>
+      <p class="search_results_body">{{pageLabelMap 'Search_ResultsBody' this.searchString}}</p>
+     </div>
+    {{else}}
+    <div class="main_content_container category_name">
+     {{#if this.mediaWrapper }}
+      <div class="maincategory_image">
+        {{#if (isNotPreBook)}}
+            {{displayImage this.mediaWrapper 'maincategory_img'}}
+        {{else}}
+            <!--<img src="{!URLFOR($Resource.CC_Purina_Theme_3,'/images/banner-image.jpg')}" alt="Banner-image">-->
+            <img src="http://www.purinamills.com/purinamills/media/Images/HeroHeader/Hero_Horse_PurinaMills.jpg?ext=.jpg" alt="Banner-image">
+        {{/if}}
+      </div>
+     {{/if}}
+     <div class="maincategory_name"><h1>{{this.mockCategory.name}}</h1></div>
+     <div class="maincategory_desc"><p>{{unescape this.mockCategory.ShortDesc}}</p></div>
+    </div>
+    {{#ifDisplay 'PL.DsplSubCat'}}
+     {{#if this.subcategories}}
+      <h2 class="heading sub_category_header">{{pageLabelMap 'SubCategories'}}</h2>
+      <div class="products_1_row_medium sub_category_header">
+       {{> subcats}}
+      </div>
+     {{/if}}
+    {{/ifDisplay}}
+    {{/if}}{{/if}}
+    <div class="prodListSecPhone"></div>
+    <div class="listPaginationSecPhone"></div>
+   </div>
+  </div>
+ </script>
+ <script>
+     CCRZ.uiProperties.productCatalogView.desktop.tmpl = 'OO-productCatalogDesktop';
+     CCRZ.uiProperties.productCatalogView.phone.tmpl = 'OO-productCatalogPhone';
+ </script>
+</apex:component>

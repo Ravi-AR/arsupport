@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>Edit</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>Central Mexico</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>Latin America-Central Mexico</name>
+    <opportunityAccessLevel>Edit</opportunityAccessLevel>
+    <parentRole>Latin_America_Manager</parentRole>
+</Role>

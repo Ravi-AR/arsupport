@@ -1,0 +1,94 @@
+<!--
+*********************************************************************************
+Author: Heena Tanna
+Email: heena.tanna@magnet360.com
+Created Date: 15/02/2017
+Function    :  Visualforce page created for controller LPDCR_ReimbursementLineItemController
+Version     : 1.0
+*********************************************************************************
+-->
+
+
+<apex:page standardController="AMASellingSupportExpenseLineItem__c" extensions="LPDCR_ReimbursementLineItemController" id="rrVF">
+  <apex:form >
+  
+  <apex:pageBlock title="Reimbursement Request Line Item Edit" >
+  <apex:pageMessages />
+     <apex:pageBlockButtons >
+      <!--<h3 class="text-left">Reimbursement Request Line Item Edit</h3>-->
+       <apex:commandButton value="Save" action="{!saveLineItem}"/>
+       <apex:commandButton value="Cancel" action="{!cancel}"/>
+       <apex:commandButton value="<< Back to Reimbursement Request" action="{!backMethod}"/>
+       </apex:pageBlockButtons>
+
+    <apex:pageBlockSection >
+    
+  
+        <apex:inputField value="{!AMASellingSupportExpenseLineItem__c.Expense__c}"/>
+        <apex:inputField value="{!AMASellingSupportExpenseLineItem__c.Approval_Status__c}" required="True"/>
+        <apex:inputField value="{!AMASellingSupportExpenseLineItem__c.Name}"/>
+        <apex:inputField value="{!AMASellingSupportExpenseLineItem__c.ReasonforRework__c}" rendered="true"/>
+        <apex:inputTextarea value="{!AMASellingSupportExpenseLineItem__c.Description__c}"/> 
+      
+        <apex:inputField value="{!AMASellingSupportExpenseLineItem__c.DealerFacingReasonforReworkMessage__c}"/>
+        
+        
+        <!-- Show the editable fields only if the use has edit access to the field -->
+        <apex:pageBlockSectionItem >
+            <apex:outputLabel value="Reimbursement Category" for="categoryList"/>
+            <apex:selectList size="1" value="{!category}" id="categoryList" required="true">
+                    <apex:selectOptions value="{!CategorySelectList}"/>
+                    <apex:actionSupport event="onchange" reRender="subCategoryList" status="loading"/>
+             </apex:selectList>
+        </apex:pageBlockSectionItem>
+        
+        <!-- Display text only values if the category can't be updated -->
+       <!-- <apex:pageBlockSectionItem rendered="{!!editCategory}">
+            <apex:outputLabel value="Reimbursement Category" for="categoryList2"/>
+            
+             <apex:outputText id="categoryList2" value="{!category}" />
+        </apex:pageBlockSectionItem> -->
+        
+        <apex:inputField value="{!AMASellingSupportExpenseLineItem__c.Cloned_Expense_Line_From__c}"/>
+        
+        <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Reimbursement Sub-category" for="subCategoryList"/>
+                <apex:selectList size="1" value="{!subcategory}" id="subCategoryList" required="true" rendered="true">
+                    <apex:selectOptions value="{!SubCategorySelectList}"/>                  
+                </apex:selectList>
+        </apex:pageBlockSectionItem>
+        
+        <!--  Display only text if the user does not have access to edit the subcategory -->
+        <!--<apex:pageBlockSectionItem rendered="{!!editCategory}">
+                <apex:outputLabel value="Reimbursement Sub-category" for="subCategoryList2"/>
+                <apex:outputText value="{!subcategory}" id="subCategoryList2" />
+        </apex:pageBlockSectionItem>-->
+
+        
+        <apex:outputField value="{!AMASellingSupportExpenseLineItem__c.CloneExpensefromCreatedByUser__c}" />
+        <apex:inputField value="{!AMASellingSupportExpenseLineItem__c.Total_Spend__c}"/>
+        <apex:inputField value="{!AMASellingSupportExpenseLineItem__c.JDEPARTNUMBER__c}"/>
+        <apex:inputField value="{!AMASellingSupportExpenseLineItem__c.Quantity_Multiplier__c}"/>
+        <apex:inputField value="{!AMASellingSupportExpenseLineItem__c.BB_Description__c}"/>  
+        <apex:inputField value="{!AMASellingSupportExpenseLineItem__c.Reimbursement_Percentage__c}"/>
+        <apex:inputField value="{!AMASellingSupportExpenseLineItem__c.ExpenseAmount__c}"/>
+        <apex:inputField value="{!AMASellingSupportExpenseLineItem__c.Max_Reimbursement__c}"/>
+        </apex:pageBlockSection>
+          
+       
+    
+</apex:pageBlock>
+        
+  </apex:form>
+  <apex:actionStatus id="loading">
+<apex:facet name="start"> 
+<!--<img src="/img/loading.gif"/>-->
+<div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+ &nbsp;
+</div>
+ <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 30% 50%">
+      <img src="/img/loading.gif"/>
+</div>
+</apex:facet>
+</apex:actionStatus>
+</apex:page>

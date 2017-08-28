@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>NORTH IOWA WOOD SHAVINGS-413071 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>NORTH IOWA WOOD SHAVINGS-413071 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>NORTHIOWAWOODSHAVINGS413071PartnerManager</parentRole>
+</Role>

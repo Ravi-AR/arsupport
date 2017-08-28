@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>Settings used by the LOLUtilities class</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>cfgEmail__c</fullName>
+        <description>Email value of current entry - optionally enter an email address</description>
+        <externalId>false</externalId>
+        <label>cfgEmail</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>cfgIsYorN__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Is current configuration item Yes or No</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Optional usage for current row - if needed then contains a Boolean value</inlineHelpText>
+        <label>cfgIsYorN</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>cfgText__c</fullName>
+        <description>Text value for configuration setting</description>
+        <externalId>false</externalId>
+        <label>cfgText</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>LOLUtilities Settings</label>
+    <visibility>Public</visibility>
+</CustomObject>

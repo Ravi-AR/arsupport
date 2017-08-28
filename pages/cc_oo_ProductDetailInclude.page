@@ -1,0 +1,4 @@
+<apex:page docType="html-5.0" sidebar="false" showHeader="false" standardStylesheets="false" applyHtmlTag="false">
+  <c:cc_oo_ProductDetailInclude />
+  <c:cc_oo_ProductDetailSpec />
+</apex:page>

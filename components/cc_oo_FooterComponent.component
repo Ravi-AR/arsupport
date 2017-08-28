@@ -1,0 +1,59 @@
+<!--<Component cc_oo_FooterComponent>
+    <Summary>
+    ------------------------------------------------------------------
+    US:OO-212 hide footer for prebook and online order
+    ------------------------------------------------------------------
+    Rajesh Walawalkar 10/4/2016 Created-->
+
+<apex:component allowDML="true" controller="cc_oo_FooterController">
+    <script id="foot_phone_old" type="text/template">
+      <!--{{#if (isNotPreBook)}}-->
+        <!--{{#each this}}-->
+            <p>
+               <!-- <a href="{{this.href}}" target="{{this.target}}">{{pageLabelMap this.label}}</a>
+                <a href="#csr-info-modal" class="csr-footer-link" data-toggle="modal">Contact Customer Service</a>-->
+            </p>
+        <!--{{/each}}-->
+       <!--{{/if}}--> 
+    </script>
+
+    <script id="foot_desktop_old" type="text/template">
+      <!--{{#if (isNotPreBook)}}-->
+        <div class="footer">
+            <p>
+               <!-- {{#each this}}-->
+                   <!-- <a href="{{this.href}}" target="{{this.target}}">{{pageLabelMap this.label}}</a>
+                    <a href="#csr-info-modal" class="csr-footer-link" data-toggle="modal">Contact Customer Service</a>-->
+               <!-- {{/each}}-->
+            </p>
+        </div>
+      <!--{{/if}}-->  
+    </script>
+    
+    <script id="foot_phone" type="text/template">
+			<div class="row corporateInfoRow">
+				<div class="small-12 columns small-centered text-center">
+        			<a target="_blank" href="https://www.landolakesinc.com"><img class="footerLogoLOL" alt="Land 'O Lakes Logo" src="{!URLFOR($Resource.CC_Purina_Theme_3,'/images/logo-black.png')}"></a>
+        			<p class="subLinks">
+            			<a target="_blank" href="https://www.landolakesinc.com/Privacy-Policy">Privacy &amp; Terms</a>
+            			<span class="divider">|</span>
+            			<a target="_blank" href="https://www.landolakesinc.com/California-Supply-Chains-Act">CA Supply Chain Act</a>
+					</p>
+				</div>
+			</div>
+    </script>
+    <script id="foot_desktop" type="text/template">
+			<div class="row corporateInfoRow">
+				<div class="small-12 columns small-centered text-center">
+        			<a target="_blank" href="https://www.landolakesinc.com"><img class="footerLogoLOL" alt="Land 'O Lakes Logo" src="{!URLFOR($Resource.CC_Purina_Theme_3,'/images/logo-black.png')}"></a>
+
+        			<p class="subLinks">
+            			<a target="_blank" href="https://www.landolakesinc.com/Privacy-Policy">Privacy &amp; Terms</a>
+            			<span class="divider">|</span>
+            			<a target="_blank" href="https://www.landolakesinc.com/California-Supply-Chains-Act">CA Supply Chain Act</a>
+					</p>
+				</div>
+			</div>
+    </script>
+    
+</apex:component>

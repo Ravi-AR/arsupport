@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Custom Assignment fields that could not be added to Account Team.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>AB_Number__c</fullName>
+        <description>AB Number from Sales Assignment hierarchy.</description>
+        <externalId>false</externalId>
+        <label>AB Number</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_Team_Member__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup to Users for Account Team association.</description>
+        <externalId>false</externalId>
+        <label>Account Team Member</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Acct_Team_Additional_Assignment_Info</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Account__c</fullName>
+        <description>Account to which the Additional Account Team information is related.</description>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipName>Acct_Team_Additional_Assignment_Info</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>true</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Checksum__c</fullName>
+        <description>For use with JDE Integration only.</description>
+        <externalId>false</externalId>
+        <label>Checksum</label>
+        <length>32</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Composite_Key_JDE__c</fullName>
+        <description>External JDE ID.</description>
+        <externalId>true</externalId>
+        <label>Composite Key JDE</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Percentage_Split__c</fullName>
+        <description>Percentage Split from Sales Assignment hierarchy.</description>
+        <externalId>false</externalId>
+        <label>Percentage Split</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Sales_District__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Account_Team_Member__r.Sales_District__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales District</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Division__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(  Account_Team_Member__r.Sales_Division__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Division</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Region__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(  Account_Team_Member__r.Sales_Region__c  )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Region</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Territory__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text(  Account_Team_Member__r.Sales_Territory__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Territory</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales__c</fullName>
+        <description>Assignment Type from Sales Assignment hierarchy.</description>
+        <externalId>false</externalId>
+        <label>Assignment Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>DDS DDM</fullName>
+                    <default>false</default>
+                    <label>DDS DDM</label>
+                </value>
+                <value>
+                    <fullName>ASM</fullName>
+                    <default>false</default>
+                    <label>ASM</label>
+                </value>
+                <value>
+                    <fullName>Level 1 -Assignment by SBO</fullName>
+                    <default>false</default>
+                    <label>Level 1 -Assignment by SBO</label>
+                </value>
+                <value>
+                    <fullName>Level 2 -Assignment by ASM</fullName>
+                    <default>false</default>
+                    <label>Level 2 -Assignment by ASM</label>
+                </value>
+                <value>
+                    <fullName>Level 3 -Assign by SalesPerson</fullName>
+                    <default>false</default>
+                    <label>Level 3 -Assign by SalesPerson</label>
+                </value>
+                <value>
+                    <fullName>Sales Person</fullName>
+                    <default>false</default>
+                    <label>Sales Person</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>UserDefined__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Flag to identify user created Account Team Member. Used for ETL process.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Flag to identify user created Account Team Member. Used for ETL process.</inlineHelpText>
+        <label>UserDefined</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Account Team (Custom)</label>
+    <nameField>
+        <displayFormat>AT-{00000}</displayFormat>
+        <label>Account Team ID</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Account Team</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <visibility>Public</visibility>
+</CustomObject>

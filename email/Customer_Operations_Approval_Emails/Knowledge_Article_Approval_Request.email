@@ -1,0 +1,6 @@
+Hello, 
+
+A new Knowledge Article has been created by {!User.FirstName} {!User.LastName} and needs your approval. To approve the article for publication click on the Knowledge tab in your org, click on the article, scroll to the bottom of the page, and click either approve or reject.
+
+Thank you,
+{!User.FirstName} {!User.LastName}

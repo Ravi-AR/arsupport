@@ -1,0 +1,49 @@
+<apex:component controller="LPDCR_SecondaryPageMediaToolsCtrlr" allowDML="true">
+    <apex:attribute name="bgColor"
+                    type="String"
+                    description="The style class for the background color of the component"
+                    required="false"
+                    default="bg_wht" />
+                    
+     <div class="col-sm-12 {!bgColor}">
+         <h3 class="section_title"><a href="{!$Page.LPDCR_CC_MarketingPage}">{!$Label.LPDCR_Marketing_Component_Name}</a> 
+             <div class="tooltip1">
+                 <span class="flt_rgt icon_exmty"></span>                
+                 <p class="tooltiptext">{!$Label.LPDCR_Marketing_Component_Message}
+                  <br/>
+                     
+                    <a class="btn_ent" href="{!URLFOR($Page.LPDCR_CC_MarketingPage)}">ENTER</a><span class="btn_cls dis_inlineblock txt_center">CLOSE</span>  
+                  </p>
+            </div>
+         </h3> 
+         <div class="col-sm-12 pad_lft_rgt pad_top20 mrg_top20 fnt12">
+            
+            <div class="wid50 flt_lft txt_center pad_all0">
+                <img src="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/icon-logos.svg')}" width="60" />    
+                <a href="{!URLFOR($Page.LPDCR_CC_MarketingPage, null, [subtab='MediaTools'])}" class="clr_red block pad_top10">Logos</a> 
+            </div>
+            <div class="wid50 flt_lft txt_center pad_all0">
+                <img src="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/icon-package_images.svg')}" width="60"/>    
+                <a href="{!URLFOR($Page.LPDCR_CC_MarketingPage, null, [subtab='MediaTools'])}" class="clr_red block pad_top10">Package Images</a> 
+            </div> 
+            
+            <!--<p class="pad_lft_rgt txt_upper mrg_btm0 lb_css mrg_top15"><label>Current Promotions</label></p>
+            <table class="table campainlist">    
+                  <apex:repeat value="{!Campaigns}" var="camObj">       
+                      <tr>
+                          <td>
+                          <a href="{!$Page.LPDCR_PromotionsDetail}?Id={!camObj.Id}">{!camObj.Name}</a></td>
+                           <td class="date"><apex:outputText rendered="{!IF((camObj.Promotion_Start_Date__c != null && camObj.Promotion_End_Date__c != null), true,false)}" value="Event: {!camObj.Date_Range__c}"> 
+                                </apex:outputText> <br/>
+                                <apex:outputText rendered="{!IF((camObj.Pre_Book_Start_Date__c != null && camObj.Pre_Book_End_Date__c != null), true,false)}" value="Pre-book: {!camObj.Pre_Book_Date_Range__c}"> 
+                                </apex:outputText></td>
+                      </tr>                           
+                  </apex:repeat>
+              </table>
+            <p class="pad_lft_rgt txt_upper mrg_btm0 lb_css"><label>Upcoming Promotions</label></p>-->
+            
+           
+            
+        </div>                   
+     </div>        
+</apex:component>

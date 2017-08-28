@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Checkerboard Logo to display in the Local Hire Community</description>
+    <internalUseOnly>false</internalUseOnly>
+    <keywords>Checkerboard, Community, Local Hire, Logo</keywords>
+    <name>Purina Checkerboard Logo for Local Hire Community</name>
+    <public>true</public>
+</Document>

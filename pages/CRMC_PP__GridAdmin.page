@@ -1,0 +1,618 @@
+<apex:page showHeader="true" sidebar="false" controller="CRMC_PP.AGComponentController" title="ActionGrid Setup" docType="html-4.01-strict">
+  <head> 
+    <apex:stylesheet value="{!URLFOR($Resource.CRMC_PP__kendoui, '/styles/kendo.common.min.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.CRMC_PP__kendoui, '/styles/kendo.silver.min.css')}"/>
+    <!-- <apex:includeScript value="https://code.jquery.com/jquery-1.11.0.min.js"/> -->
+    <apex:includeScript value="{!URLFOR($Resource.CRMC_PP__kendoui, '/js/jquery.min.js')}"/>
+    <apex:includeScript value="../../soap/ajax/36.0/connection.js"/>
+    <!-- <apex:includeScript value="{!$Resource.kendodebug}" />  -->
+    <apex:includeScript value="{!URLFOR($Resource.CRMC_PP__kendoui, '/js/kendo.web.min.js')}"/>
+    <apex:includeScript value="{!$Resource.CRMC_PP__Admin}" />
+    <apex:stylesheet value="{!URLFOR($Resource.CRMC_PP__GridResources, '/styles/actiongrid.css')}"/>
+    <!-- Grid css: -->
+    <style type="text/css">
+    .apexp .bPageBlock.apexDefaultPageBlock .pbBody{
+        margin:0px;
+    }
+    .circle { 
+       width: 14px;
+       height: 14px;
+       background: red; 
+       -moz-border-radius: 7px; 
+       -webkit-border-radius: 7px; 
+       border-radius: 7px;
+    }
+    .crmc_tabstrip>.k-content{
+        padding:1px 0px 0px 0px;
+    }
+    .tabButton {
+        margin:5px;
+        width:150px;
+    }
+    </style>
+    <script>
+    var queryArgs = location.search.slice(1).split('&');
+    var queryObj = {};
+    for (var i=0; i<queryArgs.length; i++) {
+      var keyVal = queryArgs[i].split('=');
+      if (keyVal.length === 2) {
+        queryObj[unescape(keyVal[0].toLowerCase())] = unescape(keyVal[1]);
+      }
+    }
+    $(document).ready(function() {
+
+        crmc.require(["admin", "GridAdmin", "ObjectList"], function(admin, AdminService, ObjectList) {
+            sforce.connection.sessionId = "{!JSENCODE($Api.Session_ID)}";
+            admin.init("{!$Api.Session_ID}");
+
+            // Create global variable so can be used in javascript: url handlers
+            window.AdminService = AdminService;
+
+            var list = new ObjectList({
+                elementId: "#ObjectList",
+                includeGlobal: true,
+                delegate: {
+                  onSelectedChanged: function(text, value) {
+                    $('#setupSplash').css('display', 'none');
+                    // Selected table changed, update display
+                    AdminService.showLoader(function(){
+                      AdminService.getCustomObject(value.name, value.label);
+                      var tabName = $(".crmc_tabstrip").data('kendoTabStrip').select().attr('id');
+                      if (['defaultViews', 'views'].indexOf(tabName) > -1){
+                        window.initGrids();
+                      }
+                      if (tabName =="integration" || tabName == undefined){//(tabName == 'vfPages'){
+                        AdminService.initPageList();
+                      }
+                      AdminService.resizeDivs();
+                    });
+                  },
+                },
+            });
+            
+            $(".crmc_tabstrip").kendoTabStrip({
+                activate: function(e){
+                  if (e.contentElement && e.contentElement.style.height == '0px'){
+                      e.contentElement.style.height = 'inherit';//irritating bug
+                  }
+                },
+                show: function(e){
+                  AdminService.showLoader(function() {
+                    var tabType = e.item.getAttribute('crmc_tabtype');
+                    var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+                    var tabName = tabStrip.select().prop('id');
+                    
+                    AdminService.initTab(tabName);
+                    // if (tabType == 'feature'){
+                    //     AdminService.initActions(tabName);         
+                    // }
+                    if (['defaultViews', 'views'].indexOf(tabName) > -1){
+                      window.initGrids();
+                    }
+                    if (tabName =="integration" || tabName == undefined){//(tabName == 'vfPages'){
+                      AdminService.initPageList();
+                    }
+                    AdminService.hideLoader();
+                    AdminService.resizeDivs();
+                  });
+                },
+                animation: {
+                  open: {
+                    effects: "fadeIn"
+                  }
+                }
+            });
+
+            $("#btnCustomPage").kendoButton().on('click', AdminService.createCustomPage);
+            $("#btnCustomMultiTab").kendoButton().on('click', AdminService.createMultiTabCustomPage);
+            $("#btnMultiTabRelatedList").kendoButton().on('click', AdminService.createMultiTabRelatedList);
+            $("#btnMultiTabAuto").kendoButton().on('click', AdminService.createMultiTabAuto);
+            $("#btnRelatedList").kendoButton().on('click', AdminService.createRelatedList);
+            
+            // Wire up button event handlers
+            $("#btnCreate").kendoButton().on('click', AdminService.createButton);
+            $("#btnSearchResults").kendoButton().on('click', AdminService.addToSearchResult);
+            $("#btnListView").kendoButton().on('click', AdminService.addToListViewButtons);
+            $("#btnMultiTabPage").kendoButton().on('click', AdminService.createMultiTabCustomPage);
+
+            $("#btnCreateApp").kendoButton().on('click', function(){AdminService.createCustomAppGrid();});
+            $("#btnQuickGrid").kendoButton().on('click', function(){
+              AdminService.createQuickGrid();
+            });
+            $("#btnConvertListView").kendoButton().on('click', function(){AdminService.createListViewGrid();});
+            //$("#btnCreateMyRecentViews").kendoButton().on('click', AdminService.createMyRecentView);
+
+            $("#btnConvertReport").kendoButton().on('click', function(){AdminService.createReportGrid();});
+            $("#btnExport").kendoButton().on('click', AdminService.exportAG);
+            $("#btnImport").kendoButton().on('click', function() {
+              $("#fileImport").val("");
+              $("#fileImport").trigger("click");
+            }); 
+            $('#fileImport').off('change');
+            $('#fileImport').on('change', function(evt) {
+              AdminService.showLoader(function() {
+                if (typeof JSZip != 'undefined') {
+                  AdminService.importAG(evt);
+                  AdminService.hideLoader();
+                }
+                else {
+                  var head = document.getElementsByTagName('HEAD').item(0);
+                  var script = document.createElement("script");
+                  script.type = "text/javascript";
+                  head.appendChild(script);
+                  script.src = "https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js";
+                  script.onerror = function() {
+                    // Is the CDN unavailable or blocked?
+                    alert("Import Failed", "Import failed, contact support@crmculture.com");
+                  };
+                  script.onload = function() {
+                    AdminService.importAG(evt);     
+                  }
+                }
+              });
+            });
+            
+            $("#cbTip").prop("indeterminate", true);
+            window.onresize = function(event) {
+              AdminService.resizeDivs();
+            };
+            // Resize to fill available space
+            // var mainPane = $("#rightPane");
+            // var objList = $("#ObjectList > .k-block");
+
+            // var resizeElements = function() {
+            //   var h = $(window).height() - 200;
+            //   mainPane.height(h);
+            //   objList.css('max-height', (h - 45) + 'px');
+            //   objList.height(h + 'px');
+            // };
+
+            // $(window).on('resize', resizeElements);
+            // resizeElements();
+            AdminService.resizeDivs();
+        });
+    });
+    </script>
+  </head>
+    
+<!--   <apex:sectionHeader subtitle="ActionGrid Setup" title="Select a Custom Object to configure ActionGrid buttons and Related Lists" /> -->
+
+  <div id='mainOutput'>
+  <div class="k-loading-mask" id="loadingMask" style="width: 100%; height: 100%; top: 0px; left: 0px; display:none; position:absolute; z-index: 100;"><span class="k-loading-text">Loading...</span><div class="k-loading-image" style="background-position-y:200px;"></div><div class="k-loading-color" ></div></div>
+    <div id="ObjectList" style="float:left; width:20%;"></div>
+    <div id="setupSplash" style="float:left;width:79%;height:100%;">
+        <iframe style="height:100%; margin-left:5px;" src="https://support.getconga.com/Reference/ActionGrid_Setup_Tab" width="100%" height="100%" />
+    </div>
+    <div id="rightPane" style="float:left; margin-left:4px; width:79%; display:none;">
+    
+      <div id="tabstrip" class="crmc_tabstrip" style="height:100%;">
+        <ul>
+          <li id="global">
+            Global Setup
+          </li>
+          <li class="k-state-active" id="integration">
+            Tabs &amp; Related Lists
+          </li>
+          <li id="buttons">
+            Buttons
+          </li>
+          <li id="action" crmc_tabtype="feature">
+            Actions
+          </li>
+          <li id="explorer">
+            Object Visibility
+          </li>
+          <li id="field" crmc_tabtype="feature">
+            Fields
+          </li>
+          <li id="views">
+            Views
+          </li>
+          <li id="defaultViews">
+            Default Views
+          </li>
+          <!-- <li id="vfPages">
+            VisualForce Pages
+          </li> -->
+        </ul>
+        <div id="globalTab"> <!-- style="max-width:800px;">      -->    
+          <div>
+            <table style="border:none; padding: 10px;"> 
+              <tr>
+                <th style="vertical-align: top">MultiTab Page:</th>
+                <td>
+                  <button id="btnMultiTabPage">New MultiTab Page</button><br /> <br />
+                  <div class="k-block k-info-colored">Note:  Creates a VisualForce page that can be using in a Tab. 
+                  When complete you must still set security to the VF page and create a new Tab of type VisualForce Page that will display the page. 
+                  This wizard simply creates the code to allow multiple tabs by prompting you for successive objects. See documentation for further details.</div>
+                  <br />
+                </td>                            
+              </tr>
+              <tr>
+                <th style="vertical-align: top;">Import/Export:</th>
+                <td>
+                  <input type="file" id="fileImport" style="display:none;" />
+                  <button id="btnExport">Export</button> &nbsp; <button id="btnImport">Import</button><br/><br />
+                  <div class="k-block k-info-colored">Creates a ZIP file containing the Pages and Views used by the Grid in order to import them with correct IDs.</div>
+                  <br />
+                </td>
+              </tr>
+             
+            </table>
+            <table style="border:none; padding: 10px;"> 
+            <tr>
+              <th style="vertical-align: top;" colspan="2">
+                <h2>Below are beta features that are not fully supported yet</h2>
+              </th>
+            </tr> 
+            <tr>
+                <th style="vertical-align: top;">Report Converter:</th>
+                <td>
+                  <button id="btnConvertReport">Convert Report (beta)</button><br/><br />
+                  <div class="k-block k-info-colored">Select a Report and create an ActionGrid View based on it.</div>
+                </td>
+              </tr>
+              <tr>
+                <th style="vertical-align: top">Scan My Data:</th>
+                <td>
+                  <button id="btnQuickGrid">New Quick Grid Page (beta)</button><br /> <br />
+                  <div class="k-block k-info-colored">Note:  Creates a VisualForce page based on the most used objects in this org, creating views based on the most populated fields on those objects.</div>
+                  <br />
+                </td>                            
+              </tr>
+              <tr>
+                <th style="vertical-align: top">Convert SF App:</th>
+                <td>
+                  <button id="btnCreateApp">New ActionGrid App Page (beta)</button><br /> <br />
+                  <div class="k-block k-info-colored">Note:  Creates a VisualForce page based on a selected app, matching the tabs that refer to objects directly.  Also creates views based on those listviews.</div>
+                  <br />
+                </td>                            
+              </tr>
+            </table>
+          </div>
+        </div>  
+        <div id="integrationTab"> <!-- style="max-width:800px;">      -->
+          <div id="objectSetup">
+          <div style="margin:10px" class="k-block k-info-colored">Use these wizards to create Salesforce Tabs and Related Lists.  These wizards only create the VisualForce pages which are then added as <a href="/setup/ui/customtabs.jsp?setupid=CustomTabs" target="_blank">VisualForce Tabs</a> or dragged onto the <a href="javascript:AdminService.navigateLayouts();">Page Layout</a> in the case of related lists. <br /><br />Please read more about the creation of Tabs and Related Lists <a href="https://support.getconga.com/Conga_ActionGrid/ActionGrid_Essentials/Create_a_Multi-Tabular_ActionGrid_Interface" target="_blank">here</a></div>
+            <div style="margin:5px;">
+            <div style="margin:5px; font-weight:bold;">Tab Creation</div>
+            <div><a class="tabButton" href="#" id="btnCustomMultiTab">Multi-Tabular ActionGrid</a> <span style="margin:10px" class="k-block k-info-colored">Creates a VisualForce page with multiple tabs, each containing an ActionGrid.</span>
+            </div>
+            <div>
+            <a class="tabButton" href="#" id="btnCustomPage">Single ActionGrid</a> <span style="margin:10px" class="k-block k-info-colored">Creates a VisualForce page with one ActionGrid</span>
+            </div>
+            <div>
+            <a class="tabButton" href="#" id="btnConvertListView">Convert ListView (beta)</a> <span style="margin:10px" class="k-block k-info-colored">Creates ActionGrid views based on Salesforce ListViews.  Also can create a VF Page.</span>
+            </div>
+            <br /><br />
+            <div style="margin:5px;"><span style="font-weight:bold;">Page Layout</span> (Related Lists as ActionGrid(s))</div>
+            <div><a class="k-primary tabButton" href="#" id="btnMultiTabAuto">Multi-Tabular (Automatic)</a> <span style="margin:10px" class="k-block k-info-colored">Builds a VisualForce page based on a Page Layout's Related Lists.</span></div>
+           <div><a class="tabButton" href="#" id="btnMultiTabRelatedList">Multi-Tabular (Manual)</a> <span style="margin:10px" class="k-block k-info-colored">Allows you to specify which tabs you want on the VisualForce page.</span>
+           </div><div><a class="tabButton"  href="#" id="btnRelatedList">Single ActionGrid</a><span style="margin:10px" class="k-block k-info-colored">Creates a single Related List ActionGrid VisualForce page. </span></div>
+            </div>
+            <br />
+            <div style="margin:10px" class="k-block k-info-colored">Below are the VisualForce pages created by this wizard associated with this Object.</div>
+            <div style="margin:10px;" id="vfPagesList" />
+
+           <!--  <table style="border:none; margin: 10px;border-collapse: collapse">       
+              <tr>
+                <th>Create VF Page:</th>
+                <td>
+                  <button id="btnCustomPage">New VF Page</button>
+                </td>                            
+              </tr>
+              <tr>
+                <th>Page Layout:</th>
+                <td>
+                  <button id="btnMultiTabRelatedList">New MultiTab Related List</button>
+                  <button style="padding-left:5px" id="btnRelatedList">New Related List</button><br /> <br />
+                  <span class="k-block k-info-colored">Note: Related Lists must be manually added to <a href="javascript:AdminService.navigateLayouts();">Page Layouts</a> as a Visualforce page.</span> <br /> <br />
+                </td>
+              </tr>
+              <tr>
+                <th style="border-top: 1pt solid gray;">Beta:</th>
+                <td style="border-top: 1pt solid gray;">
+                  <br />
+                  <button id="btnMultiTabAuto">Automatic MultiTab Related List</button><br /> <br />
+                  <span class="k-block k-info-colored">This allows you to select a layout and it will copy it to an ActionGrid multi-tab page.</span><br /> 
+                  <br /><span class="k-block k-info-colored">Note: Related Lists must still be manually added to <a href="javascript:AdminService.navigateLayouts();">Page Layouts</a> as a Visualforce page.</span>
+                </td>
+              </tr>          
+            </table> -->
+          </div>
+        </div>
+        <div id="buttonTab"> <!-- style="max-width:800px;">      -->    
+          <div>
+          <div style="margin:10px" class="k-block k-info-colored">ActionGrid can be used as a verb, as in to:  <span style="font-weight:bold; font-style:italic;">"ActionGrid my <span style="text-decoration: underline;">selected</span> List View or Related List records, so I can do cool things."</span>
+          </div><div style="margin:10px" class="k-block k-info-colored">
+          <span style="color:#FF0000">WARNING:</span>  While this a useful tool when transitioning from list views to ActionGrids, we recommend re-creating your list views as ActionGrid tabs and related lists for the best utilization since you are still constrained by the limits of the List View when using the button method.
+          </div><div style="margin:10px" class="k-block k-info-colored">
+            Create the button and then place it on your List View and Search Results Layouts.  You may also put the buttons on the top of related lists.  
+            A green check mark indicates that the button is already created and already on the List View or Search Results list.  
+          </div>
+            <table style="border:none; margin: 10px;border-collapse: collapse" cellpadding="5">
+              <tr>
+                <th>ActionGrid Button:</th>
+                <td>
+                  <span id='hasButton' style="display:none"><apex:image url="/img/msg_icons/confirm16.png"></apex:image></span>
+                  <span id='noButton' style="display:none"><button id="btnCreate">Create Button</button></span>
+                </td>
+              </tr>
+              <tr>                      
+                <th>List View:</th>
+                <td>
+                  <span name='errIcon' style="display:none"><apex:image url="/img/msg_icons/error16.png"></apex:image></span> 
+                  <span name='noErr' id='hasListView' style="display:none"><apex:image url="/img/msg_icons/confirm16.png"></apex:image></span>
+                  <span name='noErr' id='noListView' style="display:none">
+                  <span class="k-block k-info-colored">Add the ActionGrid button to the <a href="javascript:AdminService.navigateSearchLayout(true);">List View Search Layout</a>.</span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <th>Search Results:</th>
+                <td>
+                  <span name='errIcon' style="display:none"><apex:image url="/img/msg_icons/error16.png"></apex:image></span> 
+                  <span name='noErr' id='hasSearchResults' style="display:none"><apex:image url="/img/msg_icons/confirm16.png"></apex:image></span>
+                  <span name='noErr' id='noSearchResults' style="display:none">
+                  <span class="k-block k-info-colored">Add the ActionGrid button to the <a href="javascript:AdminService.navigateSearchLayout();">Search Results Search Layout</a>.</span>
+                  </span>
+                </td>
+              </tr>                   
+            </table>
+          </div>
+        </div>
+        <div id="actionsTab"> <!-- style="max-width:800px;">      -->
+          <div>
+            <table>
+              <tr>
+                <td id="actionOwner" style="width:25%; vertical-align:top; display:none">
+                  <span id="actionProfiles" style="display:none;"></span>
+                  <span id="actionUsers" style="display:none;"></span>
+                </td>
+                <td style="vertical-align:top">
+                  <div id="actionFeatures"  style="max-width:900px; min-width:325px"></div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div> 
+        <div id="explorerTab"> <!-- style="max-width:800px;">      -->
+          <div>
+            <table>
+              <tr>
+                <td id="explorerOwner" style="width:25%; vertical-align:top; display:none;">
+                  <span id="explorerProfiles" style="display:none;"></span>
+                  <span id="explorerUsers" style="display:none;"></span>
+                </td>
+                <td style="vertical-align:top;">
+                  <div id="explorerFeatures" style="max-width:900px; min-width:325px"></div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>      
+        <div id="fieldsTab">
+          <div>
+            <div class="toolbar" style="padding:0.5em; width:100%">
+              <button style="float:left;" id="btnfieldSave" class="k-primary">Save</button> 
+              <div style="float: left; margin-left:10px; margin-right: 10px;">Apply to: <br />
+                <input type="radio" class="fieldRadio" name="fieldRadio" id="fieldRadio_global" value="global" checked='checked' /><label for="fieldRadio_global">All Users</label>
+                <input type="radio" class="fieldRadio" name="fieldRadio" id="fieldRadio_profile" value="profile" /><label for="fieldRadio_profile">Profile</label>
+                <input type="radio" class="fieldRadio" name="fieldRadio" id="fieldRadio_user" value="user" /><label for="fieldRadio_user">User</label>
+              </div>
+            </div>
+            <div class="k-block k-info-colored" style="float:left;">
+              Note: <input id="cbTip" type="checkbox" disabled="true" /> indicates behavior will be inherited or defaulted based on field level security.
+            </div>
+            <br/><br/><br/>
+            <table>
+              <tr>
+                <td id="fieldOwner" style="width:25%; vertical-align:top; display:none">
+                <span id="fieldProfiles" style="display:none;"></span>
+                <span id="fieldUsers" style="display:none;"></span>
+                </td>
+                <td style="vertical-align:top; width:75%">
+                  <div id="fieldFeatures"></div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div> 
+        <div id="viewsTab"> <!-- style="max-width:800px;">      -->
+          <div>
+          <div style="margin:10px" class="k-block k-info-colored">These are the Views related to this object. This area is only meant to manage the actual view and is not the recommend method for interacting with the view. Instead use ActionGrid Explorer or create VisualForce tabs to interact with these views</div>
+           <!--
+            <table style="border:none; margin: 10px;border-collapse: collapse">        
+             <tr>
+                <th>Create My Recent Views:</th>
+                <td>
+                  <button id="btnCreateMyRecentViews">Create</button>
+                </td>                            
+              </tr>
+            </table>-->
+            <div>
+                <div id="viewsGrid" style="height:500px;">
+                </div>
+            </div>
+          </div>
+        </div> 
+        <div id="defaultViewsTab"> <!-- style="max-width:800px;">      -->    
+          <div>
+            <div id="tabstrip" class="crmc_tabstrip">
+              <ul>
+              <li class="k-state-active">Explorer</li>
+              <li>Related List</li>
+              </ul>
+              <div id="explorerDefaultViews">
+                <div id="explorerDefaultViewsGrid" style="height:500px;">
+                </div>
+              </div>
+              <div id="relatedListDefaultViews">
+                <div id="relatedListDefaultViewsGrid" style="height:500;">
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>  
+        <!-- <div id="vfPagesTab">
+          <div>
+            <div id="vfPagesList" />
+          </div>
+        </div>  -->    
+      </div>
+    </div>
+  </div>
+<!-- Include AJAX tookit as normal html script tag at end, if used as apex includeScript it loads too early for communities support -->
+<!-- <script type="text/javascript" src="../../soap/ajax/34.0/connection.js"/> -->
+<script type="text/javascript">
+(function() {
+
+// Setup AJAX toolkit session id
+sforce.connection.sessionId = "{!JSENCODE($Api.Session_ID)}";
+sforce.connection.client ="CRMCulture/ActionGrid/";
+// Extend default remote action timeout from default of 30s
+//Visualforce.remoting.timeout = 120000; // Set timeout at page level
+
+// Attempt to precache userInfo and customSettings (if fails should just slow things down later)
+crmc.require(["sfdc", "CustomSettings"], function(sfdc, customSettings) {
+  window.getDefaultViews = function() {
+    if (!window.defaultViews){
+      window.defaultViews = {};
+    }
+    if (!window.defaultViews[AdminService.objectName]) {
+      var prefix = sfdc.getNamespace(true);
+      var defaults = defaultViews = sfdc.query(
+                      "select {0}Context__c, Name, Id from {0}GridView__c where {0}ObjectName__c = '{1}' and {0}IsDefault__c = true and isDeleted = false",
+                      prefix,
+                      AdminService.objectName);
+      var output = {};
+      Object.each(defaults, function(view){
+        output[view[prefix+'Context__c']] = view.Id;
+      });
+      window.defaultViews[AdminService.objectName] = output;
+    }
+    return window.defaultViews[AdminService.objectName];
+  }
+    var setCulture = function(userInfo) {
+        sfdc.userInfo = userInfo;
+        // Precache AG settings (dependent on userInfo)
+        customSettings.initAsync();
+        // Set kendo culture settings
+        var cultureScript = "{!URLFOR($Resource.kendoui, '/js/cultures/kendo.culture.en-US.min.js')}";
+        if (userInfo && userInfo.userLocale) var culture = userInfo.userLocale.replace("_", "-");
+        if (typeof(culture) === "string") sfdc.setCulture(culture, cultureScript.replace("en-US", culture));      
+    };
+    if (!sfdc.userInfo) {
+        sforce.connection.getUserInfo({
+            onSuccess: function(userInfo) {
+                // Cache user info
+                setCulture(userInfo);
+            },
+            onFailure: function(err) {
+                console.log(JSON.stringify(err));
+            }
+        });    
+    }
+    else {
+        setCulture(sfdc.userInfo);
+    }
+});
+
+var init = function() {
+    crmc.require(['sfdc', 'GridBase', 'GridConstants'], function(sfdc, Grid, data) {
+        window.initGrids = function() {
+            sfdc.sessionId = "{!JSENCODE($Api.Session_ID)}";
+            var pageURL = window.location.href;
+            if (window != window.top) pageURL = document.referrer;
+            // Initialize grid on page load
+            var prefix = sfdc.getNamespace(true);
+            var defaults = getDefaultViews();
+            var newGrids = [
+            {objectName: AdminService.objectName,
+             offset:100,
+             id: 'explorerDefaultViewsGrid',
+             viewId: defaults.Explorer
+             },
+            {objectName: AdminService.objectName,
+             offset:100,
+             id: 'relatedListDefaultViewsGrid',
+             viewId: defaults['Page Layout']
+            },
+            {objectName: prefix + 'GridView__c',
+             offset: 117,
+             id: 'viewsGrid',
+             filter: {"logic":"and","filters":[{"logic":"and","filters":[{"field":prefix+"ObjectName__c","operator":"eq","value":AdminService.objectName}]}]}
+            }
+            ];
+            Object.each(newGrids, function(newGrid){
+              var settings = {
+                  pageInfo: {
+                      objectName: newGrid.objectName,
+                      //selectedRecordIds: selectedIds,
+                      // This property allows us to determine if selectedViewIds were passed in or saved in a view
+                      selectedRecordsPassed: false,
+                      //filterId: selectedIds.length === 0 ? filterId : undefined,
+                      columns: [],
+                      takeCount: 100, // Default page size, and ensures grid loads data first time
+                  },
+                  id: newGrid.id,
+                  pageURL: pageURL,//'{!JSENCODE($CurrentPage.URL)}',
+                  //fkField: fkField,
+                  //fkValue: fkValue,
+                  //newButtonURL: '',
+                  //metadata: metadata,
+                  enableNewButton: true,
+                  enableNewInline: true,
+                  enableEdit: true,
+                  enableFieldChooser: true,
+                  enableToolbar: true,
+                  enableActions: true,
+                  enableStickyViews: false,
+                  enableViews: true,
+                  enableFormatting: true,
+                  enableReadingPane: false,
+                  isFullscreen: true,
+                  Partner_Server_URL_290: "{!$Api.Partner_Server_URL_290}"
+              };
+              if (newGrid.viewId) {
+                settings.viewId = newGrid.viewId;
+              }
+              if (newGrid.filter) {
+                settings.baseFilter = newGrid.filter;
+              }
+              var grid = Grid.create(settings);
+              grid.resize = function () {
+                  if (this.settings.isFullscreen) {
+                    var parentElement = $("#" + this.settings.id);
+                    if (!this.settings.isChildGrid) {
+                      
+                      var parentOffset = parentElement.offset();
+                      parentOffset = parentOffset || {top:0}; // If parent element not visible...
+                      // Determine if header is displayed and not embedded on page layout
+                      var showHeader = $("#AppBodyHeader").length > 0 && !this.settings.fkValue;
+                      // Size to fit either related list viewport or VF page space
+                      var height = showHeader ? $(window).height() - data.SFDC_HEADER_PX : $(window).height() - parentOffset.top - 10; 
+                      // Resize splitter height
+                      height -= newGrid.offset;//90;
+                      parentElement.css({ height: Math.floor(height) + "px"  });
+                    }
+                    else {
+                      parentElement.css({ height: "100%" });
+                    }
+                    this.getElement("grid").css({ height: '100%' });
+                    this.getElement("paneSplit").css({ height: '100%' });
+                    // Resize field chooser scrollable view height, subtract header and footer
+                    var headerHeight = 35 * 2;
+                    $(this.getElementId("fieldTreeView") + ">div.k-grid-content").css({"max-height":(height - headerHeight)});
+                  }
+                }
+          });
+        };
+    });
+};
+
+init();
+})();
+</script>
+</apex:page>

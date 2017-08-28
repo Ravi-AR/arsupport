@@ -1,0 +1,81 @@
+<!--<Component cc_oo_CategoryTreeRD>
+    <Summary>
+    ------------------------------------------------------------------
+    Category tree hide for prebook ordering
+    ------------------------------------------------------------------
+    Rajesh Walawalkar 09/14/2016 Created-->
+
+<apex:component >
+    <script id="oo-category-container-template" type="text/template">
+{{#if (isNotPreBook)}}
+    <div class="categories_side_container">
+      <h2 class="title">{{pageLabelMap 'CategoryTree_Categories'}}</h2>
+
+        <ul class="side_navigation_dropdown" id="side_nav">
+            {{#each .}}
+                <li><a href="#{{sfid}}">{{name}}</a>
+
+                {{#if children}}
+                    <ul>
+                        {{#each children}}
+                            <li><a href="#{{sfid}}">{{name}}</a>
+
+                            {{#if children}}
+                                <ul>
+                                    {{#each children}}
+                                        <li><a href="#{{sfid}}">{{name}}</a></li>
+                                    {{/each}}
+                                </ul>
+                            {{/if}}
+
+                            </li>
+                        {{/each}}
+                    </ul>
+                {{/if}}
+
+                </li>
+            {{/each}}
+        </ul> 
+    </div>
+  {{/if}}
+</script>
+    <script type="text/javascript">
+        jQuery(function($) {
+            CCRZ.uiProperties.CategoryTree.tmpl = 'oo-category-container-template';
+            //215 -  to show the message
+            //769 - add validation for ship to
+            var tempSid = $.urlParam('sid');
+            if(!tempSid || tempSid=='null') {
+                if(CCRZ.pagevars.orderType && CCRZ.pagevars.orderType.toLowerCase() === ("preBook").toLowerCase() && CCRZ.pagevars.currentPageName === CCRZ.pagevars.pageLabels['ccrz__Products']) {
+                    var message = '<fieldset class="confirmOrder marginBottom10px"><p>'+ CCRZ.pagevars.pageLabels['Prebook_Shipto_Validate']+'</p></fieldset>';
+                    $('.products_1_row_medium_container').append(message);
+                } else {
+                    var message = '<fieldset class="confirmOrder marginBottom10px"><p>'+ CCRZ.pagevars.pageLabels['OO_Shipto_Validate'] +'</p></fieldset>';
+                    if(CCRZ.pagevars.currentPageName === CCRZ.pagevars.pageLabels['ccrz__Products']){
+                        $('.prodCatContainer').append(message);
+                        $('.products_1_row_medium_container').hide();
+                    } else if(CCRZ.pagevars.currentPageName.toLowerCase() === CCRZ.pagevars.pageLabels['ccrz__HomePage']){
+                    	/*CCRZ.pubSub.trigger('pageMessage',{
+	                		messages:[
+	                		{
+		                		type: 'Custom',
+		                		severity: 'INFO',
+		                		message:	'<fieldset class="confirmOrder marginBottom10px"><p>'+ CCRZ.pagevars.pageLabels['OO_Shipto_Validate'] +'</p></fieldset>',
+		                		classToAppend: 'cart-template'
+	                		}
+	                 	   ]
+	              	  	});  */  
+	              	  	var x = message + $('.desktop_center_column').html();
+	              	  	$('.desktop_center_column').html(x);
+            		 	$('.visible-phone .phone_center_column .phone_center_top').append(message);
+                        $('.quickWishlist_container').hide();
+                    }
+                }
+                  
+                CCRZ.pubSub.trigger('cartChange', '');
+                $('.my_cart.mini_cart').html('');
+                $('.my_cart.mini_cart').html('<p>' + CCRZ.pagevars.pageLabels['Component_MiniCart_NoItems'] + '</p>');
+            }
+        });     
+    </script>
+</apex:component>

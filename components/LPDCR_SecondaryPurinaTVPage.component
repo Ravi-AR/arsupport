@@ -1,0 +1,77 @@
+<apex:component controller="LPDCR_SecondaryPurinaTVCntrlr" allowDML="true">
+<apex:outputText rendered="{!init}" />
+ <apex:attribute name="componentKey"  type="String" assignTo="{!key}" description="The key given to this component so the page can easily get access to it" />
+<apex:attribute name="speciesFilter" 
+                    description="Set of selected spcecies to filter results" 
+                    type="String[]"
+                    assignTo="{!species_filter}"
+                    required="false"/>
+                    
+    <apex:attribute name="sortBy" 
+                    description="The selected Sort By option" 
+                    type="String"
+                    assignTo="{!sort_filter}"
+                    required="false"/>
+                
+     <!-- HIDDEN VARIABLES USED TO RETAIN AND HIGHLIGHT THE FILTER OPTIONS -->
+    <input type="hidden" value="{!sort_filter}" class="sortfield" />
+    <apex:repeat value="{!species_filter}" var="sp">
+        <input type="hidden" value="{!sp}" class="speciesfield" />
+    </apex:repeat>
+   
+
+    <apex:attribute name="thisPageController"  type="LPDCR_SecondaryPageBaseController"  assignTo="{!pageController}"  required="true" description="The controller for the page." />
+    <div class="col-sm-11">
+        <!--<h3 class="clr_gry mrg_btm20 mrg_top0">{!$Label.LPDCR_LatestVideos}</h3>-->
+        <a class="btn btn_bbs mrg_btm20 fnt11 pad_top10" href="{!$Label.LPDCR_PurinaTV_SubscriptionURL}" target="_blank">{!$Label.LPDCR_PurinaTV_SubscriptionText}</a>
+        <apex:outputPanel id="paginationPurinaTV">  
+            <table class="dataTable wid100" id="myPurinaTVItemTable">
+                <thead>
+                    <tr>
+                        <th title="Title" class="sorting"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <apex:repeat id="purinaTVTable" value="{!purinaTVList}" var="purinaTVItem">
+                     
+                     <tr><td>
+                         <p class="mrg_btm10"><a href="{!purinaTVItem.URLLink}" target="_blank" class="wordWrap">
+                            <label class="clr_red cursor"><apex:outputText escape="false" value="{!purinaTVItem.DocumentName}" /></label></a>
+                            <span class="flt_rgt clr_gry text-right">
+                                <apex:outputText value="{0, date, MMM' 'd', 'yyyy}">
+                                    <apex:param value="{!purinaTVItem.DocumentsLastModified}" /> 
+                                </apex:outputText>
+                            </span>
+                          </p>
+                       </td>
+                    </tr>
+                    
+                </apex:repeat>
+                </tbody>
+            </table>
+            <script>
+        $(document).ready(function(){
+        
+        
+        $('#myPurinaTVItemTable').on( 'init.dt', function () {
+                    } ).DataTable({"searching":true, "bPaginate":true, "bInfo":true,
+            "dom": "<'row mrg_btm20 '<'col-sm-12 pad_lft0 pad_rgt0'f>>" +
+        "<'row'<'col-sm-6 mrg_btm20 pad_lft0'i><'col-sm-6 text-right pad_rgt0 mrg_btm20 hidden-xs'l>>" +
+        "<'row'<'col-sm-12 pad_lft0 pad_rgt0'tr>>" +
+        "<'row'<'col-sm-12 pad_lft0 pad_rgt0'p>>", "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        language: {
+        search: '<i class="glyphicon glyphicon-search sch_Icon"></i>   ',
+        searchPlaceholder: "Search PurinaMills TV"
+    },        
+    "aaSorting": [ ]
+        });
+        
+        
+    });    
+    </script>
+    
+   
+            
+        </apex:outputPanel>
+    </div>
+</apex:component>

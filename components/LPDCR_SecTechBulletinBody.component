@@ -1,0 +1,74 @@
+<apex:component controller="LPDCR_SecTechBulletinController" allowDML="true">
+<apex:outputText rendered="{!init}" />
+ <apex:attribute name="componentKey"  type="String" assignTo="{!key}" description="The key given to this component so the page can easily get access to it" />
+ <apex:attribute name="speciesFilter" 
+                    description="Set of selected spcecies to filter results" 
+                    type="String[]"
+                    assignTo="{!species_filter}"
+                    required="false"/>
+ <apex:attribute name="sortBy" 
+                    description="The selected Sort By option" 
+                    type="String"
+                    assignTo="{!sort_filter}"
+                    required="false"/>
+  <apex:attribute name="internalOnly" 
+                    description="Internal Only Check" 
+                    type="Boolean"
+                    assignTo="{!internal_only}"
+                    required="false"/>
+    <div class="clear"></div>
+    
+    <apex:attribute name="thisPageController"  type="LPDCR_SecondaryPageBaseController"  assignTo="{!pageController}"  required="true" description="The controller for the page." />
+    <!-- HIDDEN VARIABLES USED TO RETAIN AND HIGHLIGHT THE FILTER OPTIONS -->
+    <input type="hidden" value="{!sort_filter}" class="sortfield" />
+    <apex:repeat value="{!species_filter}" var="sp">
+        <input type="hidden" value="{!sp}" class="speciesfield" />
+    </apex:repeat>
+    <input type="hidden" value="{!internal_only}" class="inttype" />  
+    
+    <!--{!techBulletinLst}-->
+    <div class="col-sm-11">
+        <!--<h3 class="clr_gry mrg_btm20 mrg_top0">{!$Label.LPDCR_LatestVideos}</h3>-->
+        <apex:outputPanel id="paginationTechBulletin">  
+            <table class="dataTable wid100" id="mytechTable">
+                <thead>
+                    <tr>
+                        <th title="Title" class="sorting"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <apex:repeat id="techBulletinTable" value="{!techBulletinLst}" var="techObj">
+                     <!--<apex:outputPanel rendered="{!(techObj!=null && (techObj.DocumentName !=null && techObj.DocumentName !='' ))}">-->
+                     <tr><td>
+                         <p class="mrg_btm10"><a target="_blank" href="{!techObj.URLLink}" class="wid70 dis_inlineblock">
+                            <label class="clr_red cursor">{!techObj.DocumentName}</label></a>
+                            <span class="flt_rgt clr_gry text-right wid30">
+                            <apex:outputText value="{0,date,MMM' 'd',' YYYY}">
+                                <apex:param value="{!techObj.DocumentsLastModified}" /> 
+                            </apex:outputText>
+                            </span></p>
+                       </td>
+                    </tr>
+                    <!--</apex:outputPanel>-->
+                </apex:repeat>
+                </tbody>
+            </table>
+            <script>
+                $(document).ready(function(){ 
+                     $('#mytechTable').on( 'init.dt', function () {
+                                } ).DataTable({"searching":true, "bPaginate":true, "bInfo":true,
+                        "dom": "<'row mrg_btm20 '<'col-sm-12 pad_lft0 pad_rgt0'f>>" +
+                     "<'row'<'col-sm-6 mrg_btm20 pad_lft0'i><'col-sm-6 pad_rgt0 text-right mrg_btm20 hidden-xs'l>>" +
+                    "<'row'<'col-sm-12 pad_lft0 pad_rgt0'tr>>" +
+                    "<'row'<'col-sm-12 pad_lft0 pad_rgt0'p>>", "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                    language: {
+                    search: '<i class="glyphicon glyphicon-search sch_Icon"></i>   ',
+                    searchPlaceholder: "Search Tech Bulletins"
+                },
+                "aaSorting": [ ]
+                    }); 
+                });
+            </script>
+        </apex:outputPanel>
+    </div>
+</apex:component>

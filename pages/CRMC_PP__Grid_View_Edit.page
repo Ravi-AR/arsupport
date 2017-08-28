@@ -1,0 +1,23 @@
+<apex:page standardController="CRMC_PP__GridView__c" sidebar="false" docType="html-4.01-strict">
+    <apex:sectionHeader title="ActionGrid View" subtitle="{!CRMC_PP__GridView__c.Name}" />
+    <apex:form >
+        <apex:pageBlock title="ActionGrid View Detail" mode="edit" >
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!Save}" value="Save" />
+                <apex:commandButton action="{!Delete}" value="Delete" onclick="return confirm('Are you sure?');" />
+                <apex:commandButton action="{!Cancel}" value="Cancel" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection collapsible="false">
+                <apex:inputField value="{!CRMC_PP__GridView__c.Name}"/>
+                <apex:inputField value="{!CRMC_PP__GridView__c.OwnerId}"/>
+                <apex:inputField value="{!CRMC_PP__GridView__c.CRMC_PP__ObjectName__c}"/>
+                <apex:inputField value="{!CRMC_PP__GridView__c.CRMC_PP__Privacy__c}"/>
+                <apex:inputField value="{!CRMC_PP__GridView__c.CRMC_PP__Description__c}"/>
+                <apex:inputField value="{!CRMC_PP__GridView__c.CreatedById}"/>
+                <apex:inputField value="{!CRMC_PP__GridView__c.CRMC_PP__Context__c}"/>
+                <apex:inputField value="{!CRMC_PP__GridView__c.LastModifiedById}"/>
+                <apex:inputField value="{!CRMC_PP__GridView__c.CRMC_PP__IsDefault__c}"/>
+            </apex:pageBlockSection>   
+        </apex:pageBlock>    
+    </apex:form>                    
+</apex:page>

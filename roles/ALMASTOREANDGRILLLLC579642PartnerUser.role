@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>ALMA STORE AND GRILL, LLC-579642 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>ALMA STORE AND GRILL, LLC-579642 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>ALMASTOREANDGRILLLLC579642PartnerManager</parentRole>
+</Role>

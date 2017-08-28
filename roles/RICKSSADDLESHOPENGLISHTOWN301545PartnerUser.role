@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>RICK&apos;S SADDLE SHOP ENGLISHTOWN-301545 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>RICK&apos;S SADDLE SHOP ENGLISHTOWN-301545 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>RICKSSADDLESHOPENGLISHTOWN301545PartnerManager</parentRole>
+</Role>

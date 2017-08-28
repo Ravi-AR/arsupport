@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>ROUGHCREEK ENT DBA SNYDER F AND R SUPPLY-310854 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>ROUGHCREEK ENT DBA SNYDER F AND R SUPPLY-310854 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>ROUGHCREEKENTDBASNYDERFANDRSUPPLY310854PartnerManager</parentRole>
+</Role>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Contact$Name</field>
+    </columns>
+    <columns>
+        <field>Contact$X18_Digit_Contact_ID__c</field>
+    </columns>
+    <columns>
+        <field>Contact$Email</field>
+    </columns>
+    <filter>
+        <booleanFilter>((1 OR 2) OR 3) OR 4</booleanFilter>
+        <criteriaItems>
+            <column>Contact$Email</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>lgnoel@landolakes.com</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact$Email</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>KMayer@filamentmarketing.com</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact$Email</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>kquinlan@landolakes.com</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact$Email</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>kjquinlan@gmail.com</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>TEST Herdsmart List</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Contacts__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>Contact$LastActivityDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

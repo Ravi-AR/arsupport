@@ -1,0 +1,238 @@
+<!--<Component Name: cc_oo_MiniCartDetailsRDRD> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+
+Shrivaths Kulkarni                         9/16/2016                                   US-244 hide price for prebook flow                                                               
+Saloni Kale                                9/16/2016                                   US-196 Hide Mini Cart for prebook flow
+Samruddhi Gokhale                          11/03/2016                                  US-49 Allow for product minimum quantities and pallet increments.
+-->
+
+<apex:component allowDML="true" controller="cc_oo_MiniCartDetailsController">
+    <script id="OO-MiniCart-Desktop" type="text/template">
+    <div class="products_1_row_medium_container MiniCart">
+        <h2 class="title">{{pageLabelMap 'Header_MyCart'}}</h2>
+        <div class="my_cart mini_cart">
+            {{#ifDisplay 'MC.Ext'}}
+                {{#ifGreater cartItemCount 0}} 
+                    {{#ifDisplay 'MC.DsplItem'}}
+                        <div class="header">
+                                <div class="product">{{pageLabelMap 'MiniCart_Product'}}</div>
+                                <div class="quantity">{{pageLabelMap 'MiniCart_Quantity'}}</div>
+                        </div>
+                        {{#each this.cartItems}}
+                            <div class="cart_item">
+                                <!--<a href="#" class="productNameLink" data-sku="{{this.mockProduct.sku}}">{{this.mockProduct.name}}</a>-->
+                                <!--{{{ productName this.mockProduct }}}-->
+                                <div class="span8">{{this.mockProduct.name}}</div>
+
+                                <div id="CartItemDetail-Qty-View" class="quantity span4">
+                                {{#ifDisplay 'MC.RO'}}
+                                    <input type="text" name="qty" data-id= "{{this.itemID}}" value="{{this.quantity}}" readonly />
+                                {{else}}
+                                    <input type="text" name="qty" data-id= "{{this.itemID}}" value="{{this.quantity}}" class="input-text entry qty-input-editable" maxlength="6" data-sku="{{this.mockProduct.sku}}"/>
+                                {{/ifDisplay}}  
+                                </div>
+                           </div>
+                        {{/each}}
+                    {{/ifDisplay}}
+                    <div class="summary">
+                        <div class="totalqty">{{pageLabelMap 'MiniCart_Total_Qty'}}</div>
+                        
+                        {{#if (isNotPreBook)}}<!-- OO-244 -->
+                            <div class="totalprice">{{pageLabelMap 'MiniCart_Total_Price'}}</div>
+                        {{/if}}<!-- OO-244 -->
+
+                        <p class="minitotal">
+                            <strong>{{cartItemCount}}</strong>
+                        </p>
+                        {{#if (isNotPreBook)}}<!-- OO-244 -->
+                            <p class="minitotal">
+                                <strong>{{price subTotal}}</strong>
+                            </p>
+                        {{/if}}<!-- OO-244 -->
+                        {{#ifDisplay 'MC.DsplItem'}}
+                            {{#ifDisplay 'MC.RO'}}
+                            {{else}}
+                                <p>
+                                    <button type="button" class="btn btn-primary update-CartButton" value="{{pageLabelMap 'MiniCart_Update'}}">{{pageLabelMap 'MiniCart_Update'}}</button>
+                                    <button type="button" class="btn btn-primary updateCartButton hide" value="{{pageLabelMap 'MiniCart_Update'}}">{{pageLabelMap 'MiniCart_Update'}}</button>
+                                </p>
+                            {{/ifDisplay}}
+                        {{/ifDisplay}}
+                        <p> 
+                            <button type="button" class="btn btn-primary loggedInAction" value="{{pageLabelMap 'Component_MiniCart_Action'}}">{{pageLabelMap 'Component_MiniCart_Action'}}</button>
+                        </p>
+                    </div>
+                {{else}}
+                    <p>{{pageLabelMap 'Component_MiniCart_NoItems'}}</p>
+                {{/ifGreater}}
+            {{else}} 
+                {{#ifGreater cartItemCount 0}}
+                    <p>
+                        {{#ifEquals cartItemCount 1}}
+                            {{pageLabelMap 'Component_MiniCart_ThereIs'}}&nbsp;{{cartItemCount}}&nbsp;{{pageLabelMap 'Component_MiniCart_Item'}}
+                        {{else}}
+                            {{pageLabelMap 'Component_MiniCart_ThereAre'}}&nbsp;{{cartItemCount}}&nbsp;{{pageLabelMap 'Component_MiniCart_Items'}}
+                        {{/ifEquals}}
+                    </p>
+                    <p class="minitotal">
+                        {{pageLabelMap 'Component_MiniCart_Subtotal'}}:&nbsp;<strong>{{price subTotal}}</strong>
+                    </p>
+                    <p>
+                        {{#ifStoreSetting 'UseGatingCart__c'}}
+                            <input type="button" value="{{pageLabelMap 'Component_MiniCart_Action'}}" class="loggedInAction"/>
+                        {{else}}
+                            {{#if {!ISPICKVAL($User.UserType, 'Guest')} }}
+                                <input type="button" value="{{pageLabelMap 'Component_MiniCart_Action'}}" class="gotoLogin"/>
+                            {{/if}}
+                            {{#if {!NOT(ISPICKVAL($User.UserType, 'Guest'))} }}
+                                <input type="button" value="{{pageLabelMap 'Component_MiniCart_Action'}}" class="loggedInAction"/>
+                            {{/if}}
+                        {{/ifStoreSetting}}
+                    </p>
+                {{else}}
+                    <p>{{pageLabelMap 'Component_MiniCart_NoItems'}}</p>
+                {{/ifGreater}}
+            {{/ifDisplay}} 
+
+            <!-- OO-1594 -->
+            <span class="error-msg-minicart hide"/>
+			<span class="error-invalid-quantity-minicart font12px inline-error alert alert-error modal-message hide"/>
+        </div>
+        
+
+    </div>
+    <!--<span class="errorMsg"/>-->
+</script>
+
+<script type="text/javascript">
+    jQuery(function($) {
+        CCRZ.uiProperties.miniCartView.desktop.tmpl = 'OO-MiniCart-Desktop';
+        var processed = true;
+        var message;
+        var skuQuantityMap = {};
+        var responseData = {};
+        //OO-1594 -  mini cart update issue
+        CCRZ.pubSub.on('view:cartHeaderView:refresh', function(theView) {
+
+            $('.qty-input-editable').each(function(){
+                skuQuantityMap[$(this).attr('data-sku')] = $(this).val(); 
+                    
+            });
+                var remoteCallForMiniCart = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_MiniCartDetailsController'});
+                remoteCallForMiniCart.invokeCtx(
+                    'validateMinimumQuantity',skuQuantityMap, 
+                    function(resp){ 
+                        if(resp){
+                            responseData = resp.data;
+                        }
+                        return false;
+                    },
+                     
+                    {buffer:false,escape:false,nmsp:false}
+                );
+
+
+            //CCRZ.pubSub.on('view:minCartView:refresh', function(theView) {//cartHeaderView
+            //OO-1594 -  mini cart update issue
+            var isError;
+            $(document).off('click','.update-CartButton').on('click','.update-CartButton', function(e) { 
+                //e.preventDefault();
+                isError=false;
+                var msg='';
+                $('.qty-input-editable').each(function(){
+                	totalQtyFunction();
+                	var qty;
+                    var productSku=$(this).attr('data-sku');
+                    var enteredValue = $(this).val();
+                    if(enteredValue!=null || !isNaN(enteredValue) || enteredValue!=undefined){
+                    	qty=Number(enteredValue);
+                    }
+                    if(responseData) {
+                    	var invItem = responseData[productSku];
+                    }
+                    if(invItem){
+                    var minQty=invItem.cc_oo_MinQuantity__c;
+                    if(minQty==null || isNaN(minQty) || minQty==undefined){
+	                        	minQty=0;
+	                }
+                    var palletSize=invItem.cc_oo_PalletSize__c;
+                    var productname = invItem.ccrz__ProductItem__r.Name;
+                    //var minOrder=invItem.ccrz__QtyAvailable__c;
+                    var isFullPalletReq=invItem.cc_oo_IsOnlyPalletProduct__c;
+                    var totalPrdqty=prodSkuQty[productSku];
+                    var pUOM= invItem.ccrz__ProductItem__r.cc_oo_UoMDesc__c;
+                    if(!pUOM){
+                        pUOM='UOM';
+                    }
+                    var typeOfProduct=invItem.ccrz__ProductItem__r.cc_oo_TypeOfProduct__c;
+                    if(isFullPalletReq){
+	                          message = minRequirements(isFullPalletReq,palletSize,typeOfProduct,minQty,productSku,true,qty,pUOM);
+	                    }else{
+	                          message = minRequirements(isFullPalletReq,palletSize,typeOfProduct,minQty,productSku,true,totalPrdqty,pUOM);
+	                    }
+	                    if(message){
+	                    //defect#4325
+	                    	var add_min= String.format(CCRZ.pagevars.pageLabels['add_min'],minQty,pUOM);
+		                    if(message===add_min || message===CCRZ.pagevars.pageLabels['add_min']){
+		                    	message=String.format(CCRZ.pagevars.pageLabels['minicart_add_min'],minQty,pUOM);
+		                    }//defect#4325-ends
+		                     msg += '<div class="inline-error font12px">'+message+' '+productname + '</div>';
+		                    setMessage(msg);
+		                    isError=true;
+	                    }
+	                   }
+                });
+                if(isError){
+                	 return false;
+                }else{
+                	$('.error-msg-minicart').hide();
+                    CCRZ.cartView.saveCart(e);
+                    setTimeout(function(){
+                      CCRZ.pubSub.trigger('view:productDetailView:refresh');
+                      getCartDetailsData();
+                    }, 2000);
+                    return true;
+                }
+            });
+            //OO-1594 -  mini cart update issue   
+        });
+		 //OO-1894 - validation for quantity input
+				 $(document).off('keyup', '.qty-input-editable').on('keyup', '.qty-input-editable', function(e) {
+                    var reg = new RegExp('^(0|[1-9][0-9]*)$');
+                    var invalidQty = $('.error-invalid-quantity-minicart');
+                    console.log('qun--->' + $(this).val());
+                    if((!reg.test($(this).val()))|| $(this).val()==0){
+                    	$('.error-msg-minicart').hide();
+                        invalidQty.text(CCRZ.pagevars.pageLabels["OO_Invalid_qty"]).show();
+                        $(this).val('');
+                    }else{
+                         invalidQty.hide();
+                    }
+                });//OO-1894 - validation for quantity input - Ends
+        
+        function setMessage(msg){
+            $('.error-msg-minicart').empty().css('display','inline-block').html(msg);
+        }
+        
+       totalQtyFunction=function(){
+            prodSkuQty=[]; 
+            var cartItems=CCRZ.cartView.cartmodel.attributes.cartItems;
+            if(CCRZ.cartView.cartmodel.attributes.cartItemCount > 0) {
+                for(var i=0;i<cartItems.length;i++) {
+                        if(!(cartItems[i].mockProduct.sku in prodSkuQty)){
+                            prodSkuQty[cartItems[i].mockProduct.sku]=Number(cartItems[i].quantity);
+                        } else {
+                            var prevQty = Number(prodSkuQty[cartItems[i].mockProduct.sku]);
+                            var qty=Number(cartItems[i].quantity);
+                            var totalQty = Number(prevQty) + Number(qty);
+                            prodSkuQty[cartItems[i].mockProduct.sku]=Number(totalQty);
+                        }
+                }
+            }
+        };
+    });
+</script>
+</apex:component>

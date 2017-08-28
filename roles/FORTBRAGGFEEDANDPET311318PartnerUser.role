@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>FORT BRAGG FEED AND PET-311318 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>FORT BRAGG FEED AND PET-311318 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>FORTBRAGGFEEDANDPET311318PartnerManager</parentRole>
+</Role>

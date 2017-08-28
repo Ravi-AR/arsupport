@@ -1,0 +1,15 @@
+<!--<Page Name: cc_oo_CheckoutReviewRD> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Piyali                                    9/15/2016                                    The component is to remove the edit button for the Billing Address and Shipping Address on the Order Review Screen-
+Shrivaths                                 9/19/2016                                    US:OO - 244 Hide prices for Prebook flow
+Rajesh W								  10/19/2016								   US:OO - 67 Hide ship complete
+-->
+<apex:page docType="html-5.0" sidebar="false" showHeader="false" standardStylesheets="false" applyHtmlTag="false">
+    <c:cc_oo_CheckoutReviewRD />
+    <c:cc_oo_CommonTemplatesTotalSection />
+    <c:cc_oo_CheckoutShipping />
+    <c:cc_oo_ProductName />
+</apex:page>

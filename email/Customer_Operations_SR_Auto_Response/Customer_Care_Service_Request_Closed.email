@@ -1,0 +1,6 @@
+<table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
+<tr valign="top" height="400" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<span style="font-size: medium;">Thank you for contacting Purina Customer Care. Your Service Request #</span><span style="background-color: rgb(255, 255, 255);">{!Case.CaseNumber}</span><span style="font-size: medium;">&nbsp;request which was received on&nbsp;</span><span style="background-color: rgb(255, 255, 255);">{!Case.Created_Date__c}</span><span style="font-size: medium;">&nbsp;via&nbsp;</span><span style="background-color: rgb(255, 255, 255);">{!Case.Origin}</span><span style="font-size: medium;">&nbsp;has been closed. Should you have additional questions or require further information, feel free to contact us at 1-800-522-3354.&nbsp;</span><div><font face="arial"><div><br></div><div>Purina Customer Care</div></font></div>]]></td>
+</tr>
+</table>

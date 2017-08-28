@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Response for Customer Care West Coast Email2Case submissions</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Customer Care - West Coast Email2Case Response</name>
+    <style>freeForm</style>
+    <subject>Service Request Confirmation RE: {!Case.Subject} | {!Case.Thread_Id}</subject>
+    <textOnly>Thank you for contacting the West Coast Service team.We have received your email and will process it in a timely fashion.  Your email has been assigned a reference #  {!Case.CaseNumber}.
+
+If you have any additional questions or would like to discuss your request further, please contact us at 844-787-4622 and reference the above reference number.
+
+Thank you for your business and have a good day.
+
+
+Purina Customer Service
+
+{!Case.Thread_Id}</textOnly>
+    <type>custom</type>
+</EmailTemplate>

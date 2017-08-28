@@ -1,0 +1,105 @@
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="LPDCR_CC_HomePageController" action="{!checkPermissionSetAssigment}">
+ <apex:form id="form">
+    <apex:composition template="LPDCR_CC_BaseTemplate" >
+    <apex:define name="PageTitle">BALANCE and USE SUMMARY REPORT</apex:define>
+    <apex:define name="body">
+       
+    <div class="wrapper cc_homepage">
+    <div class="paddingtext"> 
+       <!-- <p>MY FEED STORE - 999999 | <span><a href="#">Change Account</a></span></p> -->
+    </div>
+    
+    <div class="row equalHgt">
+        <div class="col-sm-12 pad_all bg_grey">
+            <apex:outputpanel rendered="{!bbm}">
+                <div class="col-sm-4 pad_lft_rgt">
+                    <c:LPDCR_CC_BusinessCenter bgColor="{!bbmBGColor}" />
+                </div>
+            </apex:outputpanel>
+            <apex:outputpanel rendered="{!oo}">
+                <div class="col-sm-4 pad_lft_rgt">
+                    <c:LPDCR_CC_Orders bgColor="{!ooBGColor}" />
+                </div>
+            </apex:outputpanel>   
+            <apex:outputpanel rendered="{!bb}">
+                <div class="col-sm-4 pad_lft_rgt">
+                    <c:LPDCR_CC_BusinessBuilder bgColor="{!bbBGColor}" />
+                </div>
+            </apex:outputpanel>
+            <apex:outputpanel rendered="{!pi}">
+                <div class="col-sm-4 pad_lft_rgt">
+                    <c:LPDCR_CC_Products bgColor="{!piBGColor}" />
+                </div>
+            </apex:outputpanel>  
+            <apex:outputpanel rendered="{!mm}">
+                <div class="col-sm-4 pad_lft_rgt">
+                    <c:LPDCR_CC_Marketing bgColor="{!mmBGColor}" />
+                </div>
+            </apex:outputpanel>
+            <apex:outputpanel rendered="{!ep}">
+                <div class="col-sm-4 pad_lft_rgt">
+                    <c:LPDCR_CC_EventsPlanning bgColor="{!epBGColor}" />
+                </div>
+            </apex:outputpanel>    
+            <apex:outputpanel rendered="{!tt}">
+                <div class="col-sm-4 pad_lft_rgt">
+                    <c:LPDCR_CC_Training bgColor="{!ttBGColor}" />
+                </div>
+            </apex:outputpanel>
+            <!-- TILE TO FILL IN THE SECOND ROW WHEN THERE ARE 7 TILES INCLUDING THE CAROUSEL -->
+            <apex:outputpanel rendered="{!mm && tile_counter == 7}">
+                <div class="col-sm-4 pad_lft_rgt hidden-xs">
+                    <div class="col-sm-12 bg_wht">&nbsp;</div>
+                </div>
+            </apex:outputpanel>
+            <apex:outputpanel rendered="{!mm}">
+                <div class="col-sm-8 pad_lft_rgt">
+                    <c:LPDCR_CC_Carousel bgColor="{!carouselBGColor}" />                
+                </div>
+            </apex:outputpanel> 
+            <!-- Fill in the rest of the tiles -->
+            <apex:repeat value="{!filler_tiles}" var="tile">
+                <div class="col-sm-4 pad_lft_rgt hidden-xs">
+                    <div class="col-sm-12 {!tile}">&nbsp;</div>
+                </div>
+            </apex:repeat>
+         </div>
+    </div>
+
+    
+    
+   
+    
+</div>
+  
+    </apex:define>
+    </apex:composition>
+ </apex:form>
+
+<style>
+
+    .paddingtext{padding: 20px 0 0 0px;font-weight:bold;}
+    .row{margin:0px;}
+    .pad_all{padding:0px !important}
+    .pad_lft_rgt{padding-left:0px !important;padding-right:0px !important}
+
+    .icon_exmty{background:url("{!URLFOR($Resource.LPDCR_CC_Assets, 'img/u106.png')}") 0 0; height:26px; width:26px; cursor:pointer}    
+    .icon_exmty:hover{background:url("{!URLFOR($Resource.LPDCR_CC_Assets, 'img/u100.png')}") 0 0; height:26px; width:26px;cursor:pointer}
+    </style>
+<script type="text/javascript">
+                   
+                   function GetselectedAccount(){
+                        //alert('$value--'+$("input[name='account']:checked").attr('value'));
+                        var selectedAccId = $("input[name='account']:checked").attr('value');
+                        //alert(selectedAccId);
+                        
+                        var urlString = '{!$Site.BaseUrl}/';
+                        window.location = urlString+'LPDCR_CC_HomePage?selectedAccountId='+selectedAccId;
+                        
+                        //changeAccount($("input[name='account']:checked").attr('value'));
+                    }
+                    
+         </script>
+ 
+
+</apex:page>

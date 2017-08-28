@@ -1,0 +1,30 @@
+<apex:page standardController="CRMC_PP__GridView__c" sidebar="false" title="ActionGrid View" docType="html-4.01-strict">
+    <apex:sectionHeader title="ActionGrid View" subtitle="{!CRMC_PP__GridView__c.Name}" />
+    <chatter:feedWithFollowers entityId="{!CRMC_PP__GridView__c.id}"/>
+    <apex:form >
+        <apex:pageBlock title="ActionGrid View Detail" >
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!Edit}" value="Edit" />
+                <apex:commandButton action="{!Delete}" value="Delete" onclick="return confirm('Are you sure?');" />
+                <apex:commandButton action="{!URLFOR($Action.GridView__c.Share,GridView__c.Id)}" value="Sharing"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection collapsible="false">
+                <apex:outputField value="{!CRMC_PP__GridView__c.Name}"/>
+                <apex:outputField value="{!CRMC_PP__GridView__c.OwnerId}"/>
+                <apex:outputField value="{!CRMC_PP__GridView__c.CRMC_PP__ObjectName__c}"/>
+                <apex:outputField value="{!CRMC_PP__GridView__c.CRMC_PP__Privacy__c}"/>
+                <apex:outputField value="{!CRMC_PP__GridView__c.CRMC_PP__Description__c}"/>
+                <apex:outputField value="{!CRMC_PP__GridView__c.CreatedById}"/>
+                <apex:outputField value="{!CRMC_PP__GridView__c.CRMC_PP__Context__c}"/>
+                <apex:outputField value="{!CRMC_PP__GridView__c.LastModifiedById}"/>
+                <apex:outputField value="{!CRMC_PP__GridView__c.CRMC_PP__IsDefault__c}"/>
+            </apex:pageBlockSection>   
+        </apex:pageBlock>    
+    </apex:form>                    
+    <apex:pageBlock >
+        <apex:pageBlockSection collapsible="true" title="ActionGrid" columns="1">
+            <c:Grid viewID="{!CRMC_PP__GridView__c.id}" objectname="{!CRMC_PP__GridView__c.CRMC_PP__ObjectName__c}" />
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    <c:DrillUp />
+</apex:page>

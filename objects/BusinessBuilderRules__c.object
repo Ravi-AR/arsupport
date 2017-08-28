@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>Used to hold the business builder reimbursement request rules used in the Dealer community custom pages.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Active__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Active</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ApplicableYears__c</fullName>
+        <description>Text field to capture the applicable years for the categories</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Text field to capture the applicable years for the categories</inlineHelpText>
+        <label>Applicable Years</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Category__c</fullName>
+        <externalId>false</externalId>
+        <label>Reimbursement Category</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Checkpoint_Multiplier__c</fullName>
+        <externalId>false</externalId>
+        <label>Quantity Multiplier</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <description>Used to hold the description text for each reimbursement level.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Used to hold the description text for each reimbursement level.</inlineHelpText>
+        <label>Description</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>JDEPARTNUMBER__c</fullName>
+        <externalId>false</externalId>
+        <label>JDE PART NUMBER</label>
+        <length>25</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Max_Reimbursement__c</fullName>
+        <externalId>false</externalId>
+        <label>Max Reimbursement</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Reimbursement_Percentage__c</fullName>
+        <externalId>false</externalId>
+        <label>Reimbursement Percentage</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Reimbursement_Subcategory__c</fullName>
+        <externalId>false</externalId>
+        <label>Reimbursement Subcategory</label>
+        <length>200</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>BusinessBuilderRules</label>
+    <visibility>Protected</visibility>
+</CustomObject>

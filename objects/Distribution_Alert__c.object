@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>true</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Distribution Alerts</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Comments</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Status_Description__c</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Email to follow with more details.</fullName>
+                    <default>false</default>
+                    <label>Email to follow with more details.</label>
+                </value>
+                <value>
+                    <fullName>None</fullName>
+                    <default>false</default>
+                    <label>None</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Green</controllingFieldValue>
+                <controllingFieldValue>Yellow</controllingFieldValue>
+                <valueName>None</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Red</controllingFieldValue>
+                <valueName>Email to follow with more details.</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Distribution_Alert_Summary__c</fullName>
+        <description>Report link to show the history on the distribution alerts.</description>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(&quot;/00Oj0000004JJuJ?pv0=&quot;&amp;Id,&quot;Distribution Alert Summary&quot;,&quot;_self&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Distribution Alert Summary</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Impact__c</fullName>
+        <description>Impact is a dependent picklist based on the reason.</description>
+        <externalId>false</externalId>
+        <label>Impact</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Status_Description__c</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Customer Impact</fullName>
+                    <default>true</default>
+                    <label>Customer Impact</label>
+                </value>
+                <value>
+                    <fullName>No customer impact.</fullName>
+                    <default>false</default>
+                    <label>No customer impact.</label>
+                </value>
+                <value>
+                    <fullName>Customers may experience spot service issues.</fullName>
+                    <default>false</default>
+                    <label>Customers may experience spot service issues.</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Green</controllingFieldValue>
+                <valueName>No customer impact.</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Yellow</controllingFieldValue>
+                <valueName>Customers may experience spot service issues.</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Red</controllingFieldValue>
+                <valueName>Customer Impact</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Last_Updated__c</fullName>
+        <description>Date and time last updated.</description>
+        <externalId>false</externalId>
+        <label>Last Updated</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Mission_Statement__c</fullName>
+        <description>Mission statement for Cooked Tubs</description>
+        <externalId>false</externalId>
+        <formula>&quot;To identify a solutions-based plan to create a consistent supply of cooked tubs this season and long-term that regains customer confidence in our ability to service their cooked tub needs.&quot;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Mission Statement</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Previous_Status_Description__c</fullName>
+        <description>The previous value of the Status Description field.</description>
+        <externalId>false</externalId>
+        <label>Previous Status Description</label>
+        <length>25</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Reason__c</fullName>
+        <description>Reason for the Status</description>
+        <externalId>false</externalId>
+        <label>Reason</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Weather</fullName>
+                    <default>false</default>
+                    <label>Weather</label>
+                </value>
+                <value>
+                    <fullName>Ingredients</fullName>
+                    <default>false</default>
+                    <label>Ingredients</label>
+                </value>
+                <value>
+                    <fullName>Trucks - No Order Pickup</fullName>
+                    <default>false</default>
+                    <label>Trucks - No Order Pickup</label>
+                </value>
+                <value>
+                    <fullName>Maintenance</fullName>
+                    <default>false</default>
+                    <label>Maintenance</label>
+                </value>
+                <value>
+                    <fullName>Incident</fullName>
+                    <default>false</default>
+                    <label>Incident</label>
+                </value>
+                <value>
+                    <fullName>Product Availability</fullName>
+                    <default>false</default>
+                    <label>Product Availability</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Status_Description__c</fullName>
+        <description>The Status Description is Red, Yellow or Green</description>
+        <externalId>false</externalId>
+        <label>Status Description</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Green</fullName>
+                    <default>false</default>
+                    <label>Green</label>
+                </value>
+                <value>
+                    <fullName>Yellow</fullName>
+                    <default>false</default>
+                    <label>Yellow</label>
+                </value>
+                <value>
+                    <fullName>Red</fullName>
+                    <default>false</default>
+                    <label>Red</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <description>The status of Cooked Tubs for the location.</description>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(text(Status_Description__c )),NULL,
+IF(text(Status_Description__c)=&quot;Red&quot;, IMAGE(&quot;/img/samples/color_red.gif&quot;, &quot;red&quot;, 15, 15),
+IF(text(Status_Description__c)=&quot;Green&quot; ,IMAGE(&quot;/img/samples/color_green.gif&quot;, &quot;green&quot;, 15, 15),
+IF(text(Status_Description__c)=&quot;Yellow&quot;,IMAGE(&quot;/img/samples/color_yellow.gif&quot;, &quot;yellow&quot;, 15, 15),NULL))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status_formula__c</fullName>
+        <description>This field is used in the process builder which triggers an email alert.</description>
+        <externalId>false</externalId>
+        <formula>text( Status_Description__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Status (formula)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X18_Digit_Distribution_Alert_ID__c</fullName>
+        <description>SFDC 18 digit ID for Distribution Alerts</description>
+        <externalId>false</externalId>
+        <formula>CASESAFEID(Id)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>18 Digit Distribution Alert ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Year__c</fullName>
+        <description>Year is derived from the Last Updated field.</description>
+        <externalId>false</externalId>
+        <formula>text(Year(DATEVALUE(Last_Updated__c)))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Year</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Distribution Alert</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Status__c</columns>
+        <columns>Status_Description__c</columns>
+        <columns>Impact__c</columns>
+        <columns>Reason__c</columns>
+        <columns>Last_Updated__c</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All1</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Location</label>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Distribution Alerts</pluralLabel>
+    <recordTypeTrackHistory>true</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Cooked_Tubs</fullName>
+        <active>true</active>
+        <description>Cattle Cooked Tubs</description>
+        <label>Cooked Tubs</label>
+        <picklistValues>
+            <picklist>Comments__c</picklist>
+            <values>
+                <fullName>Email to follow with more details%2E</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>None</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Impact__c</picklist>
+            <values>
+                <fullName>Customer Impact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Customers may experience spot service issues%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No customer impact%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Reason__c</picklist>
+            <values>
+                <fullName>Incident</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ingredients</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Maintenance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product Availability</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Trucks - No Order Pickup</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weather</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status_Description__c</picklist>
+            <values>
+                <fullName>Green</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Red</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yellow</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Status_Description__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Impact__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Reason__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Last_Updated__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Status_Description__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Impact__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Reason__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Last_Updated__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>RECORDTYPE</lookupDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>Status_Description__c</searchFilterFields>
+        <searchFilterFields>Impact__c</searchFilterFields>
+        <searchFilterFields>Reason__c</searchFilterFields>
+        <searchFilterFields>RECORDTYPE</searchFilterFields>
+        <searchResultsAdditionalFields>Status_Description__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Impact__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Reason__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Last_Updated__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Cooked_Tubs_No_Reason_Green_Status</fullName>
+        <active>true</active>
+        <description>If the record type is Cooked Tubs and that Status description is Green, there should be no value selected for &quot;Reason&quot;.</description>
+        <errorConditionFormula>And( 
+RecordType.Name = &quot;Cooked Tubs&quot;, 
+text( Status_Description__c ) = &quot;Green&quot;, 
+Not(ISBLANK( text(Reason__c )) )
+)</errorConditionFormula>
+        <errorDisplayField>Reason__c</errorDisplayField>
+        <errorMessage>There should not be a &quot;Reason&quot; when the status is Green.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Cooked_Tubs_Reason_For_Red_Status</fullName>
+        <active>true</active>
+        <description>If the Record Type is Cooked Tubs and the Status Description is Red, a Reason is required.</description>
+        <errorConditionFormula>And(
+RecordType.Name = &quot;Cooked Tubs&quot;,
+text( Status_Description__c ) = &quot;Red&quot;, 
+ISBLANK( text(Reason__c ))
+)</errorConditionFormula>
+        <errorDisplayField>Reason__c</errorDisplayField>
+        <errorMessage>This field is required.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

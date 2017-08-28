@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>CAPPS TRUE VALUE HARDWARE AND AG-309853 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>CAPPS TRUE VALUE HARDWARE AND AG-309853 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>CAPPSTRUEVALUEHARDWAREANDAG309853PartnerManager</parentRole>
+</Role>

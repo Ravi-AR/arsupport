@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>ELKHORN FEED CENTER, INC-305914 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>ELKHORN FEED CENTER, INC-305914 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>ELKHORNFEEDCENTERINC305914PartnerManager</parentRole>
+</Role>

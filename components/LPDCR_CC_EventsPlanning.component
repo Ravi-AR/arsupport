@@ -1,0 +1,48 @@
+<apex:component controller="LPDCR_CC_VIPEventsController" allowDML="true">
+    <apex:attribute name="bgColor"
+                    type="String"
+                    description="The style class for the background color of the component"
+                    required="false"
+                    default="bg_wht" />
+                    
+    <style>
+        .dates{background:}
+    </style>
+     <div class="col-sm-12 {!bgColor}">
+         <h3 class="section_title"><a href="{!$Page.LPDCR_CC_VIP}">{!$Label.LPDCR_Events_Component_Name}</a>
+            <div class="tooltip1">
+                 <span class="flt_rgt icon_exmty"></span>               
+                 <p class="tooltiptext">{!$Label.LPDCR_Events_Component_Message}
+                  <br/>
+                    <a class="btn_ent" href="{!$Page.LPDCR_CC_VIP}">ENTER</a><span class="btn_cls dis_inlineblock txt_center">CLOSE</span>  
+                  </p>
+            </div></h3>         
+          <div class="col-sm-12 pad_top20 fnt12">
+            <div class="col-sm-12 txt_center pad_rgt0 pad_lft0"> 
+              <apex:repeat value="{!campList_homepage}" var="camObj">
+                  <div class="col-sm-12 pad_rgt0 pad_btm20 pad_lft0">
+                    <img src="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/u255.svg')}" width="100" class="flt_lft"/>
+                    <p class="pos_abs"><span class="clr5 dis_inlineblock pad_top10 mrg_topLftn">{!camObj.Event_Date_Range__c}</span></p>
+                    <a class="clr_red block pad_top20 flt_lft pad_lft20 mrg_top15 wid200" href="{!$Page.LPDCR_CC_VIP}">{!camObj.Name}</a>                    
+                    </div><div class="clear"></div>
+               </apex:repeat> 
+            </div>
+            <!--<div class="clear"></div>
+            <div class="col-sm-12 txt_center pad_top10">
+               <img src="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/u194.svg')}" width="80" class="flt_lft"/>
+                    <p class="pos_abs pad_top10">APR<br/><span class="clr_red fnt18 dis_inlineblock pad_top10">3-8</span></p>
+                <a class="clr_red block pad_top20 flt_lft pad_lft20 mrg_top15">Range</a>
+            </div>-->            
+         </div>
+     </div> 
+     <script>
+        $(document).ready(function(){
+             $(".tooltip1").mouseover(function(){
+                $('.tooltiptext').show();
+            });
+            $(".btn_cls").click(function(){
+                $('.tooltiptext').hide();
+            });
+        });
+        </script>      
+</apex:component>

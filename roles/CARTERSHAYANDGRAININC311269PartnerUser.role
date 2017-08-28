@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>CARTERS HAY AND GRAIN INC-311269 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>CARTERS HAY AND GRAIN INC-311269 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>CARTERSHAYANDGRAININC311269PartnerManager</parentRole>
+</Role>

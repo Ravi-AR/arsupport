@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>37.0</apiVersion>
+    <available>true</available>
+    <description>Need approval of Receiving Location to return product to plant</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Product Return Approval Request With Products</name>
+    <style>none</style>
+    <subject>Requesting Approval of Product Return</subject>
+    <type>visualforce</type>
+</EmailTemplate>

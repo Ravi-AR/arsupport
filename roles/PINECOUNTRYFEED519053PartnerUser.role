@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>PINE COUNTRY FEED-519053 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>PINE COUNTRY FEED-519053 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>PINECOUNTRYFEED519053PartnerManager</parentRole>
+</Role>

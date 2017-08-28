@@ -1,0 +1,287 @@
+<!--ComponentName:cc_oo_MyAccountCarts  
+Summary:
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Samruddhi Gokhale                         10/12/2016                                       OO-546 Cart Name should be shown as a unique number on My Carts.
+----------------------------------------------------------------------------------------------------------------------- -->
+<apex:component allowDML="true" controller="cc_oo_MyAccountCartsController">
+    <script id="OO-MyAccount-MyCarts-Desktop" type="text/template">
+        <h2 class="title">{{pageLabelMap 'MyAccount_MyCarts'}}</h2>
+        <div class="row searchOrderForm margin-none">
+            <div class="span3">
+                <label>{{pageLabelMap 'MyAccount_ShipTo'}} </label>
+                <select id="shipTo" class="global-select"></select>
+            </div>
+            <div class="span3">
+                <label>{{pageLabelMap 'MyAccount_ShipFrom'}}</label>
+                <select id="shipFrom" class="global-select"></select>
+            </div>
+            <div class="span6">
+                <button class="btn-secondary btn-reset">Reset</button>
+                <button class="btn-primary btn-search">Search</button>
+            </div>
+        </div>
+        <div class="span12"></div>
+        <div class="main_content_large_solo_container row">
+            <table id="cartTable" class="shopping_cart table table-hover shopping_cart">
+                <thead>
+                    <tr class="even">
+                        <td class="right_align">{{pageLabelMap 'MyCartsInc_CartName'}}</td>
+                        <td class="right_align">{{pageLabelMap 'MyCartsInc_LastCreate'}}</td>
+                        <td class="right_align">{{pageLabelMap 'MyCartsInc_LastUpdate'}}</td>
+                        {{#if (isNotPreBook)}}
+                            <td class="right_align">{{pageLabelMap 'cart_weight'}}</td>
+                            <td class="right_align" style="width: 110px">{{pageLabelMap 'MyCartsInc_Actions'}}</td>
+                        {{/if}}
+                    </tr>
+                </thead> 
+                <tbody class="carts-data">
+                </tbody> 
+            </table>
+            {{#each this}}
+                <div id="renameMod_{{sfid}}" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header"> 
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
+                        <h3 id="myModalLabel">{{pageLabelMap 'Title_ModifyCart' name }}</h3>
+                    </div>
+                    <form class="modal-body renameForm">
+                        <input type="text" value="{{name}}" name="rename_{{sfid}}" class="rename_{{sfid}}">
+                    </form>
+                    <div class="modal-footer"><input type="button" class="renameCart" data-id="{{sfid}}" value="{{pageLabelMap 'Save'}}"/></div>
+                </div>
+            {{/each}}
+        </div>
+    </script>
+    
+    <script id="OO-MyAccount-MyCarts-Mobile" type="text/template">
+        <div class="checkout_container">
+            <h2 class="title">{{pageLabelMap 'MyAccount_MyCarts'}}</h2>
+            <div class="checkout_detail">
+                <div class="checkout_detail_item">
+                    {{#each this}}
+                        <div class="order_history_info">
+                            <div class="arrow"></div>
+                            <div class="info"><strong>{{pageLabelMap 'MyCartsInc_CartName'}}:</strong><a href="#"  data-id="{{encryptedId}}" data-seller="{{sellerId}}" data-shipTo="{{shipTo}}" class="gotoCartDetails my-cart-name">{{pageLabelMap 'Mycart_name'}}{{sfdcName}}</a></div>
+                            <div class="info"><strong>Date:</strong> {{lastModifiedDateStr}}</div>
+                            {{#if (isNotPreBook)}}
+                                <div class="info">
+                                    <!--<input type="button" class="remove clone" data-id="{{sfid}}" value="{{pageLabelMap 'Action_Clone'}} "/>&nbsp;
+                                    <a href="#renameMod_{{sfid}}" data-toggle="modal"><input type="button" value="{{pageLabelMap 'Action_Rename'}}"/></a>&nbsp;-->
+                                    <input type="button" class="remove deleteCart" data-id="{{sfid}}" value="{{pageLabelMap 'Action_Delete'}}"/>
+                                </div>
+                            {{/if}}
+                        </div>
+                    {{/each}}
+                </div>
+                {{#each this}}
+                    <div id="renameMod_{{sfid}}" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
+                            <h3 id="myModalLabel">{{pageLabelMap 'Title_ModifyCart' name }}</h3>
+                        </div>
+                        <form class="modal-body renameForm"><input type="text" placeholder="{{name}}" name="rename_{{sfid}}" class="rename_{{sfid}}"></form>
+                        <div class="modal-footer"><input type="button" class="renameCart" data-id="{{sfid}}" value="{{pageLabelMap 'Save'}}"/></div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </script>
+    <script type="text/template" id="MyCarts-data">
+        {{#each cartData}}
+            <tr class="odd myAccCartRows" id="{{encryptedId}}">
+                <td class="right_align"><a href="#" data-id="{{encryptedId}}" data-seller="{{sellerId}}" data-shipTo="{{shipTo}}" class="gotoCartDetails">{{pageLabelMap 'Mycart_name'}}{{sfdcName}}</a></td>
+                
+                <td class="right_align lastCreate">{{lastCreate}}</td>
+                <td class="right_align" >{{lastModifiedDateStr}}</td>
+                {{#if (isNotPreBook)}}
+                    <td class="right_align">{{cartWeight}}</td>
+                    <td class="right_align" nowrap="true">
+                                    <!--<button type="button" class="remove clone btn btn-primary" data-id="{{sfid}}" value="{{pageLabelMap 'Action_Clone'}} ">{{pageLabelMap 'Action_Clone'}}</button>
+                                    <button href="#renameMod_{{sfid}}" data-toggle="modal" class="btn btn-primary">{{pageLabelMap 'Action_Rename'}}</button>-->
+                                    <button type="button" class="remove btn btn-primary deleteCart" data-id="{{sfid}}" value="{{pageLabelMap 'Action_Delete'}}">{{pageLabelMap 'Action_Delete'}}</button>
+                    </td>
+                {{/if}}
+            </tr> 
+        {{/each}}
+    </script>
+    <script type="text/javascript">
+    jQuery(function($) {
+        CCRZ.uiProperties.myCartsView.desktop.tmpl = 'OO-MyAccount-MyCarts-Desktop';
+        CCRZ.uiProperties.myCartsView.phone.tmpl = 'OO-MyAccount-MyCarts-Mobile';
+        var isCartNotRefreshed=true,currentCartView,shipToOptions=[];
+        var shipFromOptions=[];
+        CCRZ.pubSub.on('view:myCartsView:refresh', function(theView) {            
+                    shipToOptions=[];
+                    shipFromOptions=[];
+                    if(isCartNotRefreshed || currentCartView !== CCRZ.display.currentView) {
+                    	currentCartView=CCRZ.display.currentView;
+                    	isCartNotRefreshed=false;
+                    	setCartViewData(CCRZ.collections.CartList.prototype,CCRZ.views.myCartsView.prototype);
+                    	theView.setElement(theView.$el);
+                    	theView.render();
+                    	return;
+                    }
+                    CCRZ.views.myCartsView.prototype.getAllShipValues();
+            });
+			var setCartViewData = function(myCartCollection,myCartView){
+					var shipTo,shipFrom,shipToAndFrom,cartDataRelation, myCartData,shipFromAndTo,isShipTo=false,isShipFrom=false;
+					var resetSearchFilter = function() {
+            			var cData = {"cartData" : myCartData};
+            			$('#shipTo').html(shipToOptions);
+            			$('#shipFrom').html(shipFromOptions);
+            			insertData($('#MyCarts-data').html(), '.carts-data', cData);
+        			};
+					myCartCollection.controllerName="cc_oo_MyAccountCartsController";
+					/**
+		            * Remote Call for getting all the mycart ship details
+		            * @param callback : function Callback function to be executed as soon as we receive response from server.
+		           	**/
+		           	myCartCollection.getAllShipValues = function(callback){
+		           	var remoteCall = _.extend(CCRZ.RemoteInvocation,{className: myCartCollection.controllerName});
+		               remoteCall.invokeCtx('getAllShipValues',function(resp){
+		               		callback(resp);
+						}, {buffer:false,escape:false,nmsp:false});
+		           	};
+		           	/**
+             		* Returns cart ship details info.
+            		**/
+            		myCartView.getAllShipValues=function() {
+            			myCartCollection.getAllShipValues(function(resp) {
+            				if(resp && resp.success){
+                        		shipTo=resp.data['shipTo'];
+                                shipFrom=resp.data['shipFrom'];
+                                shipToAndFrom=resp.data['shipToAndFrom'];
+                                shipFromAndTo=resp.data['shipFromAndTo'];
+                                //console.log('shipToAndFrom'+shipToAndFrom['250287']);
+                                cartDataRelation = resp.data['cartData'];
+                                shipToOptions.push("<option value=''>-- Select --</option>");
+                                for(var i=0;i<shipTo.length;i++){
+                                    shipToOptions.push("<option value='"+shipTo[i]+"'>"+shipTo[i]+"</option>");
+                                }
+                                $('#shipTo').html(shipToOptions);
+                                shipFromOptions.push("<option value=''>-- Select --</option>");
+                                for(i=0;i<shipFrom.length;i++){
+                                    shipFromOptions.push("<option value='"+shipFrom[i]+"'>"+shipFrom[i]+"</option>");
+                                }
+                                $('#shipFrom').html(shipFromOptions);
+            				}
+            				myCartView.fetch();
+            			});
+            		};
+	    		/**
+            		* Click on Cart functionality call.
+           		**/
+           			myCartView.goToCart=function(event) {
+	           			var cartSellerId = $(event.currentTarget).attr('data-seller');
+	           			var cartShipTo = $(event.currentTarget).attr('data-shipTo');
+	           			var cartId=$(event.currentTarget).attr('data-id');
+						CCRZ.pagevars.sid=cartSellerId;
+						setCookie(selectedShipTo, cartShipTo);
+						setCookie(selectedPlant, cartSellerId);
+	                    cartDetails(cartId);        	
+           			};
+            		/**
+             		* Returns all carts info.
+            		**/
+            		myCartView.fetch=function(){
+	           			var remoteCall12 = _.extend(CCRZ.RemoteInvocation,{className:'cc_ctrl_myaccountRD'});
+                        remoteCall12.invokeCtx( 'fetchCarts', function(resp) {
+                            console.log(resp);
+                            if(resp) {
+                                myCartData = resp;
+                                for(var i in cartDataRelation) {
+                                    var obj = cartDataRelation[i];
+                                    if(obj) {
+                                        var data = _.findWhere(myCartData, {"sfid":obj.cartId});
+                                        if(data) {
+                                            data["shipTo"] = obj["shipTo"] ? obj["shipTo"] : "";
+                                            data["shipFrom"] = obj["shipFrom"] ? obj["shipFrom"] : "";
+                                            data["lastCreate"] = obj["lastCreate"] ? obj["lastCreate"] : "";
+                                            data["cartWeight"]	= obj["cartWeight"]?obj["cartWeight"]:"";
+                                            data["sellerId"]	= obj["sellerId"]?obj["sellerId"]:"";
+                                            
+                                        }
+                                    }   
+                                }
+                                resetSearchFilter();
+                            }         
+	                   });
+                   	};
+            		/** 
+             		* search carts based on filter.
+            		**/
+            		myCartView.searchCarts=function(e){
+            			var shipToVal = $('#shipTo').val();
+			            var shipFromVal = $('#shipFrom').val();
+			            var searchData;
+			            if(!shipToVal && !shipFromVal){
+			                return;
+			            } else if(shipToVal && shipFromVal) {
+			                searchData= _.where(myCartData, {"shipFrom" : shipFromVal, "shipTo" :shipToVal});
+			            } else if(shipToVal && !shipFromVal) {
+			                searchData= _.where(myCartData, {"shipTo": shipToVal});
+			            } else {
+			                searchData= _.where(myCartData, {"shipFrom" : shipFromVal});
+			            }
+			            var cData = {"cartData" : searchData};
+			            insertData($('#MyCarts-data').html(), '.carts-data', cData);
+            		};
+            		/**
+             		* reset carts based on filter.
+            		**/
+            		myCartView.resetCarts=function(e){
+            			$('#shipTo').val('');
+			            $('#shipFrom').val('');
+			            isShipTo=false;
+			            isShipFrom=false;
+			            resetSearchFilter();
+            		};
+            		/**
+             		* change of shipTo filter.
+            		**/
+            		myCartView.changeShipTo=function(e){
+            			if(!isShipFrom && $('#shipTo').val()){
+                            isShipTo=true;
+                            var optionValue =$('#shipTo').val();
+                            $('#shipFrom').html('');
+                            var shipFromOptions=[];
+                            shipFromOptions.push("<option value=''>-- Select --</option>");
+                            var shipFromOfShipTo=shipToAndFrom[optionValue];
+                            for(var i=0;i<shipFromOfShipTo.length;i++){
+                                shipFromOptions.push("<option value='"+shipFromOfShipTo[i]+"'>"+shipFromOfShipTo[i]+"</option>");
+                            }
+                            $('#shipFrom').html(shipFromOptions);
+                        }
+            		};
+            		/**
+             		* change of shipFrom filter.
+            		**/
+            		myCartView.changeShipFrom=function(e){
+            			if(!isShipTo && $('#shipFrom').val()){
+                            isShipFrom=true;
+                            var optionValue =$('#shipFrom').val();
+                            var shipToOptions=[];
+                            $('#shipTo').html('');
+                            shipToOptions.push("<option value=''>-- Select --</option>");
+                            var shipToOfShipFrom=shipFromAndTo[optionValue];
+                            for(var i=0;i<shipToOfShipFrom.length;i++){
+                                shipToOptions.push("<option value='"+shipToOfShipFrom[i]+"'>"+shipToOfShipFrom[i]+"</option>");
+                            }
+                            $('#shipTo').html(shipToOptions);
+                            }
+            		};
+            		/**
+            		* binding click and change events.
+            		**/
+            		var events = myCartView.events;
+            		events["click .btn-search"]="searchCarts";
+            		events["click .btn-reset"]="resetCarts";
+            		events["change #shipTo"]="changeShipTo";
+            		events["change #shipFrom"]="changeShipFrom";
+            		events["click .gotoCartDetails"]="goToCart";
+            		
+			};
+		});			 	
+    </script>
+</apex:component>

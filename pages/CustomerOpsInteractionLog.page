@@ -1,0 +1,100 @@
+<apex:page sidebar="false" showHeader="false" standardController="Case" extensions="CustomerOpsInteractionLogExt" tabStyle="Task">   
+<apex:includeScript value="/support/console/38.0/integration.js"/>
+<apex:includeScript value="{!URLFOR($Resource.customerOpsInteractionLog, 'interactionLogScript.js')}"/>
+<style type="text/css">
+    #notesTextArea {
+    	width: 300px;
+    	height: 50px;
+    }
+    #saveButtonCenter {
+    	margin-left: 150px;
+    }
+</style>    <apex:form >
+        <apex:PageMessages id="messages" />
+    	<apex:pageBlock title="Interaction Log" >
+            <apex:pageBlockButtons location="Top">
+                <apex:commandButton id="saveButtonCenter" value="Save" action="{!save}" />
+                <!-- <apex:commandButton value="Save and New" action="{!saveNew}" /> -->
+                <apex:commandButton value="Clear Log" action="{!clear}" />
+            </apex:pageBlockButtons>
+            <apex:actionFunction action="{!updateTaskData}" name="updateTaskData" reRender="updateable">
+                <apex:param name="id" assignTo="{!case.Id}" value=""/>
+            </apex:actionFunction>            
+            <apex:actionFunction action="{!getRecordType}" name="getRecordType" reRender="updateRecord">
+                <apex:param name="recordType" value="" assignTo="{!caseRecordType}" />
+                <apex:param name="objectId" value=""/>
+            </apex:actionFunction>            
+            <apex:pageBlockSection columns="3">
+                <apex:outputPanel id="updateable">
+                    <apex:pageBlockSection columns="1">
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel >Name: </apex:outputLabel>
+                            <apex:inputField value="{!task.whoId}" />
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel >Subject: </apex:outputLabel>
+                            <apex:inputField value="{!task.Subject}" />
+                        </apex:pageBlockSectionItem>
+                    	<apex:pageBlockSectionItem >
+                        	<apex:outputLabel >Order #: </apex:outputLabel>
+                        	<apex:inputField id="orderNum" value="{!task.Order__c}" />
+                    	</apex:pageBlockSectionItem>  
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel >Related To: </apex:outputLabel>
+                            <apex:inputField value="{!task.whatId}" />
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+            	</apex:outputPanel>   
+                <apex:pageBlockSection id="updateRecord" columns="1">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >Activity Type: </apex:outputLabel>
+                        <apex:inputField id="ctrlPicklist" value="{!task.Activity_Type__c}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >Sub Type: </apex:outputLabel>
+                        <apex:inputField id="depPicklist" value="{!task.Activity_Sub_Type__c}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem id="activityReason">
+                        <apex:outputLabel rendered="{!showActivityReason}">Reason: </apex:outputLabel>
+                        <apex:inputField id="depPicklistReason" value="{!task.Activity_Reason__c}" rendered="{!showActivityReason}" />
+                    </apex:pageBlockSectionItem> 
+                </apex:pageBlockSection>
+                <apex:pageBlockSection columns="1">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >Status: </apex:outputLabel>
+                        <apex:inputField value="{!task.Status}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >Priority: </apex:outputLabel>
+                        <apex:inputField value="{!task.Priority}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >Notes: </apex:outputLabel>
+                        <apex:inputTextarea id="notesTextArea" value="{!task.Description}" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:pageBlockSection>         
+        </apex:pageBlock>
+    </apex:form>
+
+    <!-- SK - 10/3/2016: JavaScript to fetch Record Type ID from primary tab -->
+	<script type="text/javascript">
+    //window.onload = testGetFocusedPrimaryTabId;
+    /*function doGetFocusedPrimaryTabId() {
+        sforce.console.getFocusedPrimaryTabId(showTabId);
+    }
+    var showTabId = function showTabId(result) {
+        sforce.console.getPageInfo(result.id , showPageInfo);
+    };
+    var showPageInfo = function showPageInfo(result) {
+        var rtParam = 'RecordType=';
+        var recTypeId = 
+            result.pageInfo.substring(
+                result.pageInfo.indexOf(rtParam) + rtParam.length, 
+                result.pageInfo.indexOf("&"));
+        console.log("Selected Record Type Id: " + recTypeId);
+        getRecordType(recTypeId);
+    };*/
+	</script>
+
+</apex:page>

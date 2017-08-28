@@ -1,0 +1,5 @@
+<apex:page >
+    <c:cc_oo_Header />
+    <c:cc_oo_NavigationBar />
+    
+</apex:page>

@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object that ties Plant Products to Service Requests</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Credit_Issued_Doc__c</fullName>
+        <description>Credit Issued Doc #</description>
+        <externalId>false</externalId>
+        <label>Credit Issued Doc #</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Care_Group_Email__c</fullName>
+        <description>Customer Care Group Email from Shipping Plant</description>
+        <externalId>false</externalId>
+        <label>Customer Care Group Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Operations_Manager_Email_Manuf__c</fullName>
+        <description>Email for Customer Operations Manager on the Manufacturing Plant</description>
+        <externalId>false</externalId>
+        <label>Customer Operations Manager Email Manuf</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Operations_Manager_Email_Ship__c</fullName>
+        <description>Email for Customer Operations Manager on the Shipping Plant</description>
+        <externalId>false</externalId>
+        <label>Customer Operations Manager Email Ship</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Date_Product_Returned__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Product Returned</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Does_Lot_match_RGA__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Does Lot match RGA?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Does_Product_Quantity_match_RGA__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Does Product &amp; Quantity match RGA?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>If_Cross_Docked_Select_Location__c</fullName>
+        <description>When cross docked, select location</description>
+        <externalId>false</externalId>
+        <label>If Cross Docked, Select Location</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>FLDC</fullName>
+                    <default>false</default>
+                    <label>FLDC</label>
+                </value>
+                <value>
+                    <fullName>FWDC</fullName>
+                    <default>false</default>
+                    <label>FWDC</label>
+                </value>
+                <value>
+                    <fullName>HARR</fullName>
+                    <default>false</default>
+                    <label>HARR</label>
+                </value>
+                <value>
+                    <fullName>MHDC</fullName>
+                    <default>false</default>
+                    <label>MHDC</label>
+                </value>
+                <value>
+                    <fullName>MILF</fullName>
+                    <default>false</default>
+                    <label>MILF</label>
+                </value>
+                <value>
+                    <fullName>RIDC</fullName>
+                    <default>false</default>
+                    <label>RIDC</label>
+                </value>
+                <value>
+                    <fullName>RITD</fullName>
+                    <default>false</default>
+                    <label>RITD</label>
+                </value>
+                <value>
+                    <fullName>X</fullName>
+                    <default>false</default>
+                    <label>X</label>
+                </value>
+                <value>
+                    <fullName>M</fullName>
+                    <default>false</default>
+                    <label>M</label>
+                </value>
+                <value>
+                    <fullName>Y</fullName>
+                    <default>false</default>
+                    <label>Y</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>If_No_Note_Changes__c</fullName>
+        <externalId>false</externalId>
+        <label>If No, Note Changes</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>If_No_Note_Lot__c</fullName>
+        <externalId>false</externalId>
+        <label>If No, Note Lot</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Item_Number_Id__c</fullName>
+        <externalId>false</externalId>
+        <formula>Product__r.Item_Number_Id__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Item Number Id</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Item_Number__c</fullName>
+        <description>Item number of the Product selected</description>
+        <externalId>false</externalId>
+        <formula>Product__r.Item_2Nd_Item_Number__c</formula>
+        <label>Item Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lot_Code__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>include the ship date here if it is bulk shipment</inlineHelpText>
+        <label>Lot Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Manufacturing_Plant_Co_Man__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Determines if Manufacturing Plant is a Co-Man</description>
+        <externalId>false</externalId>
+        <label>Manufacturing Plant Co-Man?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Manufacturing_Plant_Unknown__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates if the Manufacturing Plant for the Service Request Product is unknown</description>
+        <externalId>false</externalId>
+        <label>Manufacturing Plant Unknown</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Manufacturing_Plant__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Manufacturing Plant</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Branch__c.Customer_Ops_Plant_Type__c</field>
+                <operation>equals</operation>
+                <value>Manufacturing, Co-Man, Both, Out of Scope</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Branch__c</referenceTo>
+        <relationshipLabel>Service Request Products</relationshipLabel>
+        <relationshipName>Service_Request_Products</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Net_Weight_Lbs__c</fullName>
+        <description>Field to capture Net Weight Lbs of the Product</description>
+        <externalId>false</externalId>
+        <formula>Product__r.Net_Weight_Lbs__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Net Weight Lbs</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Notes_on_Condition__c</fullName>
+        <externalId>false</externalId>
+        <label>Notes on Condition</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_Pallets__c</fullName>
+        <description>Number of pallets with the product being returned</description>
+        <externalId>false</externalId>
+        <label># of Pallets</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Nutritionist_Email_Field__c</fullName>
+        <description>Nutritionist Email for species affected</description>
+        <externalId>false</externalId>
+        <label>Nutritionist Email Field</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Plant_Manager_Email_Manufacturing__c</fullName>
+        <description>Email for Plant Manger on the Manufacturing Plant</description>
+        <externalId>false</externalId>
+        <label>Plant Manager Email Manufacturing</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Plant_Manager_Email_Shipping__c</fullName>
+        <description>Email for Plant Manager on the Shipping Plant</description>
+        <externalId>false</externalId>
+        <label>Plant Manager Email Shipping</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Plant_Supervisor_Email_Manufacturing__c</fullName>
+        <description>Email for Plant Supervisor on the Manufacturing Plant</description>
+        <externalId>false</externalId>
+        <label>Plant Supervisor Email Manufacturing</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Plant_Supervisor_Email_Shipping__c</fullName>
+        <description>Email  for Plant Supervisor on the Shipping Plant</description>
+        <externalId>false</externalId>
+        <label>Plant Supervisor Email Shipping</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Product_Description__c</fullName>
+        <description>Name and ID of the product selected</description>
+        <externalId>false</externalId>
+        <formula>Product__r.Name</formula>
+        <label>Product Description</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Product_Form__c</fullName>
+        <externalId>false</externalId>
+        <formula>Product__r.Product_Form_Desc__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Product Form</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Product_Formula_Code__c</fullName>
+        <externalId>false</externalId>
+        <formula>Product__r.Formula_Code__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Product Formula Code</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Product_Packaging_Type_Desc__c</fullName>
+        <description>Field to capture Product Packaging Desc from the Product</description>
+        <externalId>false</externalId>
+        <formula>Product__r.Product_Package_Type_Desc__c</formula>
+        <label>Product Packaging Type Desc</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Product_Returned__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Product Returned?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Product__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Product</label>
+        <referenceTo>Product2</referenceTo>
+        <relationshipLabel>Products</relationshipLabel>
+        <relationshipName>Service_Request_Products_Product</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Purina_Salesperson_Email_Field__c</fullName>
+        <description>Purina Sales Person email for Potential Liability Service Requests</description>
+        <externalId>false</externalId>
+        <label>Purina Salesperson Email Field</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Quality_Manager_Email_Manufacturing__c</fullName>
+        <description>Email  for Quality Manager on the Manufacturing Plant</description>
+        <externalId>false</externalId>
+        <label>Quality Manager Email Manufacturing</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Quality_Manager_Email_Shipping__c</fullName>
+        <description>Email  for Quality Manager on the Shipping Plant</description>
+        <externalId>false</externalId>
+        <label>Quality Manager Email Shipping</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Quality_Supervisor_Email_Manufacturing__c</fullName>
+        <description>Email  for Quality Supervisor on the Manufacturing Plant</description>
+        <externalId>false</externalId>
+        <label>Quality Supervisor Email Manufacturing</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Quality_Supervisor_Email_Shipping__c</fullName>
+        <description>Email  for Quality Supervisor on the Shipping Plant</description>
+        <externalId>false</externalId>
+        <label>Quality Supervisor Email Shipping</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Quantity__c</fullName>
+        <externalId>false</externalId>
+        <label>Quantity</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Return_Requested__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Return Requested?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Return_to_Stock_Indicate_Location__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Location the Stock is to be returned to</description>
+        <externalId>false</externalId>
+        <label>Return to Stock? (Indicate Location)</label>
+        <referenceTo>Branch__c</referenceTo>
+        <relationshipLabel>Service Request Products (Return to Stock? (Indicate Location))</relationshipLabel>
+        <relationshipName>Service_Request_Products1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Service_Request__c</fullName>
+        <externalId>false</externalId>
+        <label>Service Request</label>
+        <referenceTo>Case</referenceTo>
+        <relationshipLabel>Service Request Products</relationshipLabel>
+        <relationshipName>Service_Request_Products</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Shortage_Overage__c</fullName>
+        <description>Field captures whether there is a shortage or overage of the product.</description>
+        <externalId>false</externalId>
+        <label>Shortage/Overage</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Shortage</fullName>
+                    <default>false</default>
+                    <label>Shortage</label>
+                </value>
+                <value>
+                    <fullName>Overage</fullName>
+                    <default>false</default>
+                    <label>Overage</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Specie__c</fullName>
+        <externalId>false</externalId>
+        <formula>Product__r.Level_3_Desc__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Specie</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Weight__c</fullName>
+        <description>Total Weight of the product - net weight x quantity</description>
+        <externalId>false</externalId>
+        <label>Total Weight</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UoM_formula__c</fullName>
+        <externalId>false</externalId>
+        <formula>Product__r.Unit_Of_Measure_Primary__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>UoM</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Value__c</fullName>
+        <description>dollar value of the returned product</description>
+        <externalId>false</externalId>
+        <label>$ Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Veterinarian_Email_Field__c</fullName>
+        <description>Email for Veterinarian of affected species</description>
+        <externalId>false</externalId>
+        <label>Veterinarian Email Field</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <label>Service Request Product</label>
+    <nameField>
+        <displayFormat>SRP-{0000}</displayFormat>
+        <label>SR Product #</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Service Request Products</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Customer_Ops_SR_Product</fullName>
+        <active>true</active>
+        <label>Customer Ops-SR Product</label>
+        <picklistValues>
+            <picklist>If_Cross_Docked_Select_Location__c</picklist>
+            <values>
+                <fullName>FLDC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FWDC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HARR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>M</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MHDC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MILF</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RIDC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RITD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>X</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Y</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Shortage_Overage__c</picklist>
+            <values>
+                <fullName>Overage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shortage</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Manufacturing_Plant_Required</fullName>
+        <active>true</active>
+        <description>If &apos;Manufacturing Plant Unknown&apos; isn&apos;t checked, then the Shipping Plant is required</description>
+        <errorConditionFormula>Manufacturing_Plant_Unknown__c = FALSE 
+&amp;&amp; 
+ISBLANK( Manufacturing_Plant__c) 
+&amp;&amp;  
+RecordType.Name = &quot;Customer Ops-SR Product&quot;
+&amp;&amp;
+ISPICKVAL(Service_Request__r.Potential_Product_Liability__c, &quot;No&quot;)</errorConditionFormula>
+        <errorDisplayField>Manufacturing_Plant__c</errorDisplayField>
+        <errorMessage>Manufacturing Plant required</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

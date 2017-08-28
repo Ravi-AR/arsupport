@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>BARRY COUNTY FARMERS COOP-572858 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>BARRY COUNTY FARMERS COOP-572858 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>BARRYCOUNTYFARMERSCOOP572858PartnerManager</parentRole>
+</Role>

@@ -1,0 +1,12 @@
+<!--
+/**
+* Visualforce page that will add any custom javascript functions
+* 
+* @Date: 10.08.2015
+* @Author: Adeel Ahmad (Magnet 360)
+* 
+* @Updates:
+*/
+-->
+<apex:page contentType="text/javascript">
+</apex:page>

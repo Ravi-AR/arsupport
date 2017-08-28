@@ -1,0 +1,185 @@
+<apex:page sidebar="false" controller="SetQuestionsOrderController">
+<apex:includeScript value="{!URLFOR($Resource.Jquery, '/Jquery.1.10.2.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.Jquery, '/jquery-ui-1.10.4.js')}"/>
+
+<apex:stylesheet value="{!URLFOR($Resource.Jquery,'/css/all.css')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Jquery,'/css/demos.css')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Jquery,'/css/sortable.css')}"/>
+<style>
+    .ui-state-default{
+        list-style: decimal ;
+        padding: 5px;
+        margin: 5px;
+    }
+    .clsheader{
+        background-color:#eee;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+    }
+    .clsHead{
+        display: inline-block;
+        font-weight: bold;
+        width: 99%;
+        background-color: #690;
+        color: white;
+        padding: 6px;
+    }
+    .clsinactive{
+        text-decoration: line-through;
+    }
+    .clsStatus{
+        //float:right;
+    }
+    .clsQuestions {
+        display: inline-table;
+        width: 92%;
+    }
+</style>
+    <apex:sectionHeader title="Questions"/>
+    <apex:form id="frm">
+        <center>
+            <div style="margin-bottom:10px;">
+                <apex:commandButton value="New Question" action="/a0Y/e?retURL=/apex/SetQuestionsOrder" 
+                        id="btnNew"/>
+            </div>
+        </center>
+        <script>
+            function BindQuestions(){
+                $('#dvQA').empty();
+                Visualforce.remoting.Manager.invokeAction(
+                        '{!$RemoteAction.SetQuestionsOrderController.fnQuestionlist}',
+                function(result, event){
+                     if (event.status) {
+                        if(result != undefined){
+                            var strUL = '<div class="clsheader"><span class="clsHead">{animaltype}</span><div><ul class="clsMainUL" id="{ulid}">{4}</ul></div></div>';
+                            $.map(result, function( obj, i ) {
+                                var strMainli = '<li class="clsLisub ui-state-default" ><span dataid="{id}" class="clsQuestions {4inactive}"><a href="{1link}" target="_blank" style="color:blue;">{1}</a> - {2}</span><span><input type="button" style="width: 75px;" value="{1chkValue}" dataid="{id}" id="chkActive"/></span></li>';
+                                var strLI = '';
+                                $.map(obj, function( objNew, i ) {
+                                    var strLiReplace = strMainli;
+                                    if(objNew.IsActive__c) {
+                                        strLiReplace = strLiReplace.replace('{4inactive}','');
+                                        strLiReplace = strLiReplace.replace('{1chkValue}','Inactivate');
+                                    } else {
+                                        strLiReplace = strLiReplace.replace('{4inactive}','clsinactive');
+                                        strLiReplace = strLiReplace.replace('{1chkValue}','Activate');
+                                    }
+                                    strLiReplace = strLiReplace.replace('{id}',objNew.Id);
+                                    strLI = strLI + strLiReplace.replace('{id}',objNew.Id).replace('{1}',objNew.Name).replace('{2}',objNew.Question__c).replace('{1link}','/'+objNew.Id);
+                                    
+                                });
+                                var strdiv = strUL.replace('{animaltype}',i).replace('{ulid}',guid()).replace('{4}',strLI);
+                                $('#dvQA').append(strdiv);
+                            });
+                        }
+                     }else if (event.type === 'exception') {
+                            alert(event.message);
+                    }
+                });
+                setTimeout(function(){ 
+                    $('#dvQA').find('ul.clsMainUL').each(function(obj){
+                        $(this).sortable({
+                            axis: 'y',
+                            update: function(event, ui) {
+                                var arrlst = new Array();
+                                $.map($(ui.item[0]).closest('ul').find('span.clsQuestions'), function( obj, i ) {
+                                    var objq = new Object();
+                                    objq.Id = $(obj).attr('dataid');
+                                    objq.Order_Sequence__c = (i+1);
+                                    arrlst.push(objq);
+                                });
+                                setTimeout(function(){ UpdateQuestionsOrder(arrlst); }, 100);
+                            }
+                        });
+                    });
+                 
+                }, 1000);
+            };
+            
+            $(document).ready(function(){
+                BindQuestions();
+            });
+            
+            $(document).on('click','#chkActive',function () {
+                var blnActive = false;
+                if($(this).val() == 'Inactivate') {
+                    blnActive = false;
+                }
+                if($(this).val() == 'Activate') {
+                    blnActive = true;
+                }
+                var chkActive = $(this);
+                var objq = new Object();
+                objq.Id = $(this).attr('dataid');
+                objq.IsActive__c = blnActive;
+                Visualforce.remoting.Manager.invokeAction(
+                        '{!$RemoteAction.SetQuestionsOrderController.fnQuestionActive}',objq,
+                function(result, event){
+                    if (event.status) {
+                        if(result != undefined){
+                           alert('Record updated successfully.');
+                           debugger;
+                           if(blnActive) {
+                               $(chkActive).closest('li.clsLisub').find('span.clsQuestions').removeClass('clsinactive');
+                               $(chkActive).attr('value', 'Inactivate');
+                           } else {
+                               $(chkActive).closest('li.clsLisub').find('span.clsQuestions').addClass('clsinactive');
+                               $(chkActive).attr('value', 'Activate');
+                           }
+                        }
+                    }else if (event.type === 'exception') {
+                        alert(event.message);
+                    }
+                });
+                setTimeout(function(){ 
+                    $('#dvQA').find('ul.clsMainUL').each(function(obj){
+                        $(this).sortable({
+                            axis: 'y'
+                        });
+                    });
+                },1000);
+            });
+            
+            function guid() {
+                  function s4() {
+                    return Math.floor((1 + Math.random()) * 0x10000)
+                      .toString(16)
+                      .substring(1);
+                  }
+                  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                    s4() + '-' + s4() + s4() + s4();
+            };
+           
+           
+            function UpdateQuestionsOrder(lst){
+                Visualforce.remoting.Manager.invokeAction(
+                        '{!$RemoteAction.SetQuestionsOrderController.fnUpdateQuestionOrder}',lst,
+                function(result, event){
+                    if (event.status) {
+                        if(result != undefined){
+                           alert('Record reordered successfully.');
+                        }
+                    }else if (event.type === 'exception') {
+                        alert(event.message);
+                    }
+                });
+               
+            };
+        </script>
+        <style>
+            #ulQuestions { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+            #ulQuestions li { 
+                margin: 0 5px 5px 5px; font-size: 1.2em; height: 1.5em; 
+                background-color: #e6e6e6;
+                border: 1px solid #d3d3d3;
+                color: #555555;
+                font-weight: normal;
+                padding: 4px 0 0 5px;
+            }
+            html>body #ulQuestions li { height: 1.5em; line-height: 1.2em; }
+        </style>
+
+        <div id="dvQA"></div>
+         
+    </apex:form>
+</apex:page>

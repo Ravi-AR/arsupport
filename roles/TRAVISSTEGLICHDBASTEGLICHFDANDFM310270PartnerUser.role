@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>TRAVIS STEGLICH DBA STEGLICH FD AND FM-310270 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>TRAVIS STEGLICH DBA STEGLICH FD AND FM-310270 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>TRAVISSTEGLICHDBASTEGLICHFDANDFM310270PartnerManager</parentRole>
+</Role>

@@ -1,0 +1,124 @@
+<apex:component controller="LPDCR_SecondaryLearningCenterCntlr" allowDML="true">
+
+<apex:outputText rendered="{!init}"></apex:outputText>
+   <apex:attribute name="componentKey" 
+                    type="String" 
+                    assignTo="{!key}" 
+                    description="The key given to this component so the page can easily get access to it" />
+
+    <apex:attribute name="thisPageController" 
+                    type="LPDCR_SecondaryPageBaseController" 
+                    assignTo="{!pageController}" 
+                    required="true" 
+                    description="The controller for the page." />
+    
+    <apex:attribute name="speciesFilter" 
+                    description="Set of selected spcecies to filter results" 
+                    type="String[]"
+                    assignTo="{!species_filter}"
+                    required="false"/>
+                    
+    <apex:attribute name="fileFilter" 
+                    description="Set of selected file types to filter results" 
+                    type="String[]"
+                    assignTo="{!files_filter}"
+                    required="false"/>
+                    
+    <apex:attribute name="sortBy" 
+                    description="The selected Sort By option" 
+                    type="String"
+                    assignTo="{!sort_filter}"
+                    required="false"/>
+    <apex:attribute name="internalOnly" 
+                    description="Internal Only Check" 
+                    type="Boolean"
+                    assignTo="{!internal_only}"
+                    required="false"/>
+
+    <!-- HIDDEN VARIABLES USED TO RETAIN AND HIGHLIGHT THE FILTER OPTIONS -->    
+    <input type="hidden" value="{!sort_filter}" class="sortfield" />
+    <apex:repeat value="{!species_filter}" var="sp">
+        <input type="hidden" value="{!sp}" class="speciesfield" />
+    </apex:repeat>
+    <apex:repeat value="{!files_filter}" var="ft">
+        <input type="hidden" value="{!ft}" class="filetype" />
+    </apex:repeat> 
+   <input type="hidden" value="{!internal_only}" class="inttype" />  
+
+    <apex:actionFunction action="{!showDocumentList}" name="displayDocuments" rerender="filterContainerPanel,containerPanel,fileTypePanel" oncomplete="changeColor()" status="loader">
+        <apex:param name="docType" assignTo="{!document_type}" value="" />
+    </apex:actionFunction>
+    <apex:actionFunction action="{!hideDocumentList}" name="hideDocuments" rerender="filterContainerPanel,containerPanel" status="loader"/>
+    
+    <apex:outputPanel id="containerPanel">
+
+    <!-- START PANEL -->
+    <apex:outputPanel id="centerpanel" rendered="{!showLearningList }"> 
+    
+        <center><div class="col-sm-12 mrg_btm20 pad_btm20">                                                                   
+            <img src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/logo_talentlink-learningcenter.png')}" width="155" height="38" class=""/> 
+        </div></center>
+        <div class="clear"></div>
+        <div class="col-sm-11">
+            <p class="mrg_btm20">{!$Label.LPDCR_LearningCenter_Desc}</p>
+            <p><a class="col-sm-12 pad_lft_rgt txt_lft fnt12 pad_top10 " href="{!$Label.LPDCR_LearningCenter_LinkURL}" target="_blank"><b>{!$Label.LPDCR_LearningCenter_LinkText}</b></a></p>
+            <p><a href="#" id="center" onclick="displayDocuments('{!$Label.LPDCR_Talentlink_Subtab_Name}');" class="col-sm-12 pad_lft_rgt txt_lft fnt12 pad_top10 visit"><b>{!$Label.LPDCR_Learning_Center_Resource_Subtab_Name}</b></a>
+                </p>
+        </div>
+    </apex:outputPanel>
+    <!-- /END PANEL -->
+    
+    <!-- SHOW PANEL WITH COMPONENT TO DISPLAY THE LIST OF DOCUMENT RECORDS FOR THE SELECTED TYPE -->
+     <apex:outputPanel id="documentList" rendered="{!showDocumentList}">
+         <div class="col-sm-11 pad_rgt0">
+        <a href="#" onclick="hideDocuments();" class="col-sm-12 pad_rgt0 pull-right fnt14 text-right"><i class="glyphicon glyphicon-arrow-left"></i> Back</a>  </div>      
+        <div class="col-xs-11">
+           <table class="dataTable table tablehead" id="ThirdTable">
+                <thead>
+                <tr>
+                <th title="Title" class="sorting"></th>
+                </tr>
+                </thead>
+                <tbody>
+                   <apex:repeat id="ThirdTable1" value="{!learningDocList}" var="allObj">
+                         <tr>
+                              <td>
+                             
+                             <p class="mrg_btm10"><a href="{!allObj.URLLink}" target="_blank" class="wordWrap">
+                            <label class="clr_red cursor"><apex:outputText escape="false" value="{!allObj.DocumentName}" /></label></a>
+                            <span class="flt_rgt clr_gry text-right">
+                                <apex:outputText value="{0, date, MMM' 'd', 'yyyy}">
+                                    <apex:param value="{!allObj.DocumentsLastModified}" /> 
+                                </apex:outputText>
+                            </span>
+                         </p>
+                            </td>
+                         </tr>
+                     </apex:repeat>
+                 </tbody>
+            </table>
+        </div>
+        <script>
+            $('#ThirdTable').on( 'init.dt', function () {
+                    } ).DataTable({"searching":true, "bPaginate":true, "bInfo":true,
+                            "dom": "<'row mrg_btm20 '<'col-sm-12 pad_lft0 pad_rgt0'f>>" +
+                        "<'row'<'col-sm-6 mrg_btm20 pad_lft0'i><'col-sm-6 text-right pad_rgt0 mrg_btm20 hidden-xs'l>>" +
+                        "<'row'<'col-sm-12 pad_lft0 pad_rgt0'tr>>" +
+                        "<'row'<'col-sm-12 pad_lft0 pad_rgt0'p>>", "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                        language: {
+                                search: '<i class="glyphicon glyphicon-search sch_Icon"></i> _INPUT_',
+                                searchPlaceholder: "Search This Section"
+                            },
+                           "aaSorting": [ ] 
+                        }); 
+        </script>
+    </apex:outputPanel>
+    <!-- /END DOCUMENT LIST PANEL -->
+    
+    </apex:outputPanel>
+    <!-- /END contain panel -->
+    
+
+
+  
+</apex:component>

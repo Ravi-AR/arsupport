@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>WINDMILL FD AND PET SUPPLY CO-304719 Partner Manager</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>WINDMILL FD AND PET SUPPLY CO-304719 Partner Manager</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>System_Administrator</parentRole>
+</Role>

@@ -1,0 +1,470 @@
+<!-- 
+*********************************************************************************
+Author: Govinda Prasad P S
+Email: govinda.prasad@magnet360.com
+Created Date    : 11/15/2016
+Function    :  Visualforce page to display Business Builder Programm - Member.
+Version     : 1.0 
+*********************************************************************************
+--> 
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" id="page" controller="LPDCR_BBPLandingMemberController" action="{!initialize}">
+    <apex:form id="form">
+     <apex:composition template="LPDCR_CC_BaseTemplate" >
+        
+        <apex:define name="PageTitle">BUSINESS BUILDER PROGRAM - Member</apex:define>
+        <apex:define name="body">    
+         <!-- <apex:actionFunction name="changeAccount" action="{!updateAccount}" rerender="form" status="loader" immediate="true">
+            <apex:param name="selectedaccount" assignTo="{!checkedAccId}" value="" />
+        </apex:actionFunction> -->
+       <!-- <apex:actionFunction name="Getyear" action="{!createSSPYRecord}" rerender="form" status="loader" immediate="true" >
+           <apex:param name="selectyear" assignTo="{!selectedProgYearId}" value="" />
+        </apex:actionFunction> -->
+     <div class="row">
+         <div class="col-sm-12 mob_pads1">
+              <div class="">
+              <div class="col-sm-12 pad_all0">
+                  <c:LPDCR_SecondaryPageHeader title="Business Builder Program" id="pageTitleText" />
+              </div>
+          </div>
+            
+          <div class="col-sm-12">
+            <div class="row detailbanner">
+    <!-- Change account starts here-->
+               <!-- <div class="account">
+                <div class="col-xs-6 colwidth">
+                     <apex:outputPanel id="accname">
+                    <p class="accounttext"><span class="pull-left accountspan" id="selectedAccountName">{!selectedAcc.Name}</span></p> 
+                    </apex:outputPanel>
+                    </div>
+                    <div class="col-xs-6">
+                    <apex:outputPanel rendered="{!accLst.size>1}">
+                          <span class="changeaccount" style="text-decoration:none;"> | </span>
+                    </apex:outputPanel>
+                    
+                     <div class="btn-group">
+                         <apex:outputPanel rendered="{!accLst.size>1}">
+                          <button type="button" class="btn btn-link dropdown-toggle pull-right btnpadding" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           <span class="changeaccount">Change Account</span>
+                          </button>
+                       
+                      <div class="dropdown-menu accountdropdown ">
+                          <ul class="accountitems">
+                             <p class="chooseaccount">Choose an Account <span><button type="button" class="close" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button></span></p>
+                          <apex:repeat value="{!accLst}" var="acc"> 
+                              <li>
+                              <apex:outputPanel rendered="{!IF(selectedAcc.Name==acc.Name,true,false)}">
+                              <input type="radio" class="radioinput" name="account" value="{!acc.Id}" id="accountOpt" checked="checked">{!acc.Name}</input>
+                              </apex:outputPanel>
+                              <apex:outputPanel rendered="{!IF(selectedAcc.Name!=acc.Name && acc.BusinessBuilderProgramStatus__c != 'Ineligible' ,true,false)}">
+                              <input type="radio" class="radioinput" name="account" value="{!acc.Id}" id="accountOpt">{!acc.Name}</input>
+                              </apex:outputPanel>
+                             
+                             
+                              </li>
+                          </apex:repeat>
+                         </ul>
+                     
+                        <div class="dropdown-divider"></div>
+                       <input type="button" class="btn btn-block secodary-btn" onclick="GetselectedAccount()" value="Apply"/>
+                       
+                       
+                      </div> 
+                 </apex:outputPanel>   
+                 
+                 </div><!--btngrup--
+                    </div><!--col--
+                  </div><!--account--
+                  -->
+    <!-- Change account ends here-->
+                 <div class=" well">
+                 
+               <!--Program year panel starts-->
+                <div class="row">
+                    <div class="">
+                        <h5 class="col-xs-12"><b>Selling Support Dollars</b></h5>
+                        <apex:repeat value="{!AccVsYearDetails}" var="acc" >
+                            <div class="col-xs-12 col-sm-offset-2 col-sm-8">
+                            
+                            <apex:outputPanel id="ssProgPanel" rendered="{!IF(acc.showenrollMsg||acc.showAccount||acc.showTier||acc.showqualifyMsg||acc.balanceButNotEnrolled||acc.showAvailBlncMsg||acc.createNewPPY,true,false)}">
+                              
+                              <apex:outputPanel rendered="{!IF(activeBBProgramYrs==null,true,false)}">
+                                  Account Not Available
+                               </apex:outputPanel>
+                              
+                                <apex:outputPanel rendered="{!IF(activeBBProgramYrs!=null,true,false)}">
+                                     <table class="table">
+                                        <tr>
+                                            <td>   <apex:outputPanel id="programYear">
+                                             {!acc.programYear}
+                                               <!--<input type="hidden" id="selectedyear" value="{!acc.bbPYRec.id}"></input>-->
+                                          </apex:outputPanel>
+                                          </td>
+                                        <td class="text-right">
+                                          <apex:outputPanel id="tier" rendered="{!acc.showTier}">
+                                               {!acc.ssPYRec.BusinessBuilderProgramTier__c}
+                                          </apex:outputPanel>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdnoborder">
+                                            <apex:outputPanel id="Accountshowaccount" rendered="{!acc.showAccount}">
+                                                      Reimbursible through:<apex:outputText value="{0,date, MMM dd, yyyy}"> 
+                                                    <apex:param value="{!acc.programEndDate}" />
+                                                </apex:outputText>
+                                          </apex:outputPanel><!-- 3.0 added-->
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
+                                
+                               
+                        </apex:outputPanel><!-- year and Tier-->
+                        
+                         <apex:outputPanel id="yearone" rendered="{!acc.balanceButNotEnrolled}">
+                        <div class="col-xs-12">
+                                <div class="col-xs-6 col-sm-5 col-sm-offset-1 text-center"><b>Available Balance</b></div>
+                                <div class="col-sm-5 col-xs-6 text-center">
+                                    <apex:outputText rendered="{!IF(acc.ssPYRec!=null,true,false)}" value="{0, Number, Currency}">
+                                        <apex:param value="{!acc.availableBalance}" />
+                                    </apex:outputText>
+                                    
+                                    <apex:outputText rendered="{!IF(acc.ssPYRec==null,true,false)}" value="{0, Number, Currency}">
+                                        <apex:param value="{!0}" />
+                                    </apex:outputText> 
+                                </div>
+                            </div>
+                            
+                    </apex:outputPanel><!--4.0-->
+                    
+                   <!-- <apex:outputPanel id="EnrollMessage" rendered="{!IF(acc.showAvailBlncMsg,true,false)}">
+                         <center><b><br/>Your Selling Support Dollars Balance will be available 
+                          <span><apex:outputText value="{0,date, MMM dd, yyyy}"> 
+                          <apex:param value="{!acc.enrollStartDate}" />
+                         
+                          </apex:outputText></span>
+                          </b></center>
+                        </apex:outputPanel><!--1.0 and 5.0-->
+                        
+                     <apex:outputPanel id="yearthree" rendered="{!acc.showenrollMsg}">
+                        <div class="col-xs-12">
+                                <div class="col-xs-6 col-sm-5 col-sm-offset-1 text-center"><b>Available Balance</b></div>
+                                <div class="col-sm-5 col-xs-6 text-center">
+                        Available                        <apex:outputText value="{0,date, MMM dd, yyyy}"> 
+                          <apex:param value="{!acc.programStartDate}" />
+                         
+                          </apex:outputText>
+                                    
+                                     
+                            <p>&nbsp;</P>    </div>
+                            </div>
+                            
+                    </apex:outputPanel><!--4.0 and new-->
+                    
+                       <apex:outputPanel id="yearfour" rendered="{!acc.showAvailBlnc}">
+                        <div class="col-xs-12">
+                                <div class="col-xs-6 col-sm-5 col-sm-offset-1 text-center"><b>Available Balance</b></div>
+                                <div class="col-sm-5 col-xs-6 text-center">
+                                    <apex:outputText rendered="{!IF(acc.ssPYRec!=null,true,false)}" value="{0, Number, Currency}">
+                                        <apex:param value="{!acc.availableBalance}" />
+                                    </apex:outputText>
+                                    
+                                    <apex:outputText rendered="{!IF(acc.ssPYRec==null,true,false)}" value="{0, Number, Currency}">
+                                        <apex:param value="{!0}" />
+                                    </apex:outputText> 
+                                <p>&nbsp;</P> </div>
+                            </div>
+                            
+                    </apex:outputPanel><!--new condition LPDCR-1747-->
+                    
+                    <apex:outputPanel id="EnrollMessage" rendered="{!IF(acc.showAvailBlncMsg,true,false)}">
+                         <center><img src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/u234.png')}"/>&nbsp;<b>Your {!acc.enrollStartYear} Selling Support Dollars Balance will be available to use  
+                          <span><apex:outputText value="{0,date, MMM dd, yyyy}"> 
+                          <apex:param value="{!acc.programStartDate}" /><!--1584 Changed enrollStartDate to programStartDate-->
+                         
+                          </apex:outputText></span>
+                          </b></center>
+                        </apex:outputPanel><!--1.0 and 5.0-->
+                        
+                        
+                        <apex:outputPanel id="EnrollMessageone" rendered="{!acc.showenrollMsg}">
+                             <center><p>&nbsp;</p><img src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/u234.png')}"/> You are not enrolled for {!acc.enrollStartYear} Business Builder. <br/>
+                                <!--<apex:commandLink styleClass="btn btn-primary btnenroll" onclick="Getselectedyear('{!acc.bbPYRec.id}')" value="Enroll Now" id="clickHereToEnrollone" immediate="true">
+                                 </apex:commandLink>-->
+                                <!-- <apex:commandLink styleClass="btn btn-primary btnenroll" value="Enroll Now" action="{!createSSPYRecord}">
+                                    <apex:param name="selectyear"
+                                        value="{!acc.bbPYRec.id}"
+                                        assignTo="{!selectedProgYearId}"/>
+                                </apex:commandLink>-->
+                                <apex:outputPanel rendered="{!(!AccVsYearDetails[0].disableEnrollNow)}">
+                                    <a Class="btn btn-primary btnenroll" href="{!$Site.BaseUrl}/LPDCR_BBEnrollment?AccountId={!selectedAcc.Id}&BBYearId={!acc.bbPYRec.id}">Enroll Now</a> 
+                               </apex:outputPanel>
+                                 <apex:outputPanel rendered="{!AccVsYearDetails[0].disableEnrollNow}">
+                                    <a Class="btn btn-primary btnenroll disabled" href="{!$Site.BaseUrl}/LPDCR_BBEnrollment?AccountId={!selectedAcc.Id}&BBYearId={!acc.bbPYRec.id}">Enroll Now</a> 
+                               </apex:outputPanel>                                 
+                                 
+                            </center>
+                        </apex:outputPanel>  <!-- 1.0 -->
+                         
+                       
+                        <apex:outputPanel id="EnrollMessagetwo" rendered="{!acc.balanceButNotEnrolled }">
+                             <center><p>&nbsp;</p><img class="notificationicon" src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/u234.png')}"/> You are not enrolled for {!acc.enrollStartYear} Business Builder.<br/> <!--Your selling support dollars Balance will be available on 
+                                 <apex:outputText value="{0,date, MMM dd, yyyy}"> 
+                                      <apex:param value="{!acc.programStartDate}" /> 
+                                 </apex:outputText>. <br/>-->
+                                 <apex:outputPanel rendered="{!(!AccVsYearDetails[0].disableEnrollNow)}">
+                                 <a Class="btn btn-primary btnenroll" href="{!$Site.BaseUrl}/LPDCR_BBEnrollment?AccountId={!selectedAcc.Id}&BBYearId={!acc.bbPYRec.id}">Enroll Now</a> 
+                                 </apex:outputPanel>
+                                 <apex:outputPanel rendered="{!AccVsYearDetails[0].disableEnrollNow}">
+                                 <a Class="btn btn-primary btnenroll disabled" href="{!$Site.BaseUrl}/LPDCR_BBEnrollment?AccountId={!selectedAcc.Id}&BBYearId={!acc.bbPYRec.id}">Enroll Now</a> 
+                                 </apex:outputPanel>
+                            </center>
+                        </apex:outputPanel>    <!--2.0-->                     
+                               
+                          <apex:outputPanel id="QualificationMsg" rendered="{!acc.showqualifyMsg}">
+                              <center>  <br/>You did not have enough eligible points earned for a Selling Support Budget. <br/>
+                              <a href="{!URLFOR($Resource.LPDCR_CC_Assets, '/doc/BusinessBuilderFundsonepager_Final.pdf')}" download="{!URLFOR($Resource.LPDCR_Assets, '/doc/Business-Builder-Information.pdf')}" class="btn btn-primary btnenroll ">Learn More</a>
+                              </center> 
+                          </apex:outputPanel><!-- 3.0-->
+                          
+                          
+                           
+                           <apex:outputPanel id="year" rendered="{!acc.showAccount}">
+                            <div class="col-xs-12">
+                                <div class="col-xs-6 col-sm-5 text-center"><b>Available Balance</b></div>
+                                <div class="col-sm-5 col-xs-6 text-right">
+                                  <b> <apex:outputText rendered="{!IF(acc.ssPYRec!=null,true,false)}" value="{0, Number, Currency}">
+                                        <apex:param value="{!acc.availableBalance}" />
+                                    </apex:outputText>
+                                    
+                                    <apex:outputText rendered="{!IF(acc.ssPYRec==null,true,false)}" value="{0, Number, Currency}">
+                                        <apex:param value="{!0}" />
+                                    </apex:outputText> </b>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="col-xs-6 col-sm-5 text-center"><b>Pending Requests</b></div>
+                                <div class="col-sm-5 col-xs-6 text-right">
+                                    <b><apex:outputText rendered="{!IF(acc.ssPYRec!=null,true,false)}" value="{0, Number, Currency}">
+                                        <apex:param value="{!acc.ssPYRec.Total_Pending_Requests__c}" />
+                                    </apex:outputText></b>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="col-xs-6 col-sm-5 text-center"><b>Projected Balance</b></div>
+                                <div class="col-sm-5 col-xs-6 text-right">
+                                    <b><apex:outputText rendered="{!IF(acc.ssPYRec!=null,true,false)}" value="{0, Number, Currency}">
+                                        <apex:param value="{!acc.ssPYRec.Available_Balance__c}" />
+                                    </apex:outputText>
+                                    <apex:outputText rendered="{!IF(acc.ssPYRec==null,true,false)}" value="{0, Number, Currency}">
+                                        <apex:param value="{!0}" />
+                                    </apex:outputText></b>
+                                </div>
+                            </div>
+                              
+                        </apex:outputPanel><!--4.0-->
+                         
+                         <apex:outputPanel rendered="{!acc.showAccount}"> 
+                            <div class="col-xs-12 detailbanner">
+                            <center> 
+                            <apex:outputPanel rendered="{!IF(acc.ssPYRec.Available_Balance__c>0,true,false)}"> 
+                               <a href="{!$Site.BaseUrl}/LPDCR_ExpenseEdit?AccountId={!selectedAcc.Id}&bbId={!acc.bbPYRec.id}#/expense/{!selectedAcc.Id}/{!acc.bbPYRec.id}" class="btn btn-primary btn-block btnenroll" > Create Reimbursement Request</a>
+                            </apex:outputPanel> 
+                                <a href="{!$Site.BaseUrl}/LPDCR_Expenses?AccountId={!selectedAcc.Id}&BBYear={!acc.bbPYRec.id}" class="btn btn-primary btn-block btnenroll" > View Reimbursement Activity</a>
+                                <a href="{!$Site.BaseUrl}/LPDCR_BalanceAndSummary?selectedAccountId={!selectedAcc.Id}&BBYear={!acc.bbPYRec.id}" class="btn btn-primary btn-block btnenroll" > View Balance And Summary</a>
+                            </center>
+                            </div>
+                            </apex:outputPanel>  
+                           
+                           
+                           </apex:outputPanel><!--outer outputpanel-->
+                            
+                            </div>
+                        </apex:repeat>
+                    </div>
+                </div>
+                <!--Program year panel ends-->
+                 
+                                    <apex:actionStatus id="loader">
+                                        <apex:facet name="start">
+                                            <div class="loader">
+                                                <img src="/img/loading32.gif" alt="Loading..." />
+                                            </div>
+                                        </apex:facet>
+                                    </apex:actionStatus>
+                                    
+                <!--Account Balance Panel starts-->
+                <div class="row">
+                    <!--<div class="form-group">                    
+                        <apex:outputPanel id="year" rendered="{!IF((ssProgramYrAccDetails!=null && showAccount==true),true,false)}">
+                            <div class="col-xs-12">
+                                <div class="col-xs-6 col-sm-5 col-sm-offset-1 text-center"><b>Available Balance</b></div>
+                                <div class="col-sm-5 col-xs-6 text-center">
+                                    <apex:variable value="{!ssProgramYrAccDetails.Available_Balance__c}" var="avlbal"/>
+                                    <apex:variable value="{!ssProgramYrAccDetails.Total_Pending_Requests__c}" var="penbal"/>
+                                   <b> <apex:outputText rendered="{!IF(ssProgramYrAccDetails !=null,true,false)}" value="{0, Number, Currency}">
+                                        <apex:param value="{!avlbal + penbal}" />
+                                    </apex:outputText>
+                                    <apex:outputText rendered="{!IF(ssProgramYrAccDetails ==null,true,false)}" value="{0, Number, Currency}">
+                                        <apex:param value="{!0}" />
+                                    </apex:outputText></b>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="col-xs-6 col-sm-5 col-sm-offset-1 text-center"><b>Pending Requests</b></div>
+                                <div class="col-sm-5 col-xs-6 text-center">
+                                    <b><apex:outputText rendered="{!IF(ssProgramYrAccDetails !=null,true,false)}" value="{0, Number, Currency}">
+                                        <apex:param value="{!ssProgramYrAccDetails .Total_Pending_Requests__c}" />
+                                    </apex:outputText></b>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="col-xs-6 col-sm-5 col-sm-offset-1 text-center"><b>Projected Balance</b></div>
+                                <div class="col-sm-5 col-xs-6 text-center">
+                                    <b><apex:outputText rendered="{!IF(ssProgramYrAccDetails!=null,true,false)}" value="{0, Number, Currency}">
+                                        <apex:param value="{!ssProgramYrAccDetails.Available_Balance__c}" />
+                                    </apex:outputText>
+                                    <apex:outputText rendered="{!IF(ssProgramYrAccDetails ==null,true,false)}" value="{0, Number, Currency}">
+                                        <apex:param value="{!0}" />
+                                    </apex:outputText></b>
+                                </div>
+                            </div>
+                              
+                        </apex:outputPanel>
+                        
+                        
+                    </div>-->
+                    <!--<apex:outputPanel rendered="{!IF((ssProgramYrAccDetails!=null && showAccount==true),true,false)}"> 
+                <div class="col-xs-12 detailbanner">
+                   <a href="{!$Site.BaseUrl}/LPDCR_ExpenseEdit" class="btn btn-primary btn-block" > Create Reimbursement Request</a>
+                   
+                    <a href="{!$Site.BaseUrl}/LPDCR_Expenses" class="btn btn-primary btn-block" > View Reimbursement Activity</a>
+                </div>
+                </apex:outputPanel> -->
+                    
+                    
+                    
+                </div>
+                </div>
+                 
+                <div class="col-xs-12">
+                     <c:LPDCR_BBMaterials ></c:LPDCR_BBMaterials>
+                </div>
+                <div class="col-xs-12">
+                     <div>
+                     <!--   <a href="{!$Site.BaseUrl}/LPDCR_SellingSupportProgram" class="bbslink"> <u>Selling Support Program Details</u></a>-->
+                          <apex:repeat value="{!bbWrapperList}" var="bb">
+                             <apex:outputPanel rendered="{!IF(bb.cemObj.MetadataType__c=='Selling Support Program Details' ,true,false)}"> 
+                                <a target="_blank" class="bbslink" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file={!bb.docObj.Id}"><u>{!bb.cemObj.Document_Name__c}</u></a>
+                                <p>{!bb.cemObj.Description__c}</p>
+                            </apex:outputPanel>
+                           
+                          </apex:repeat> 
+                    </div>
+                    <hr/>
+                </div>
+                <div class="col-xs-12">
+                  
+                  <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
+                      <div class="panel panel-default">
+                        <div class="panel-heading" id="headingOne" role="tab">
+                          <h4 class="panel-title">
+                            <a aria-controls="collapseOne" aria-expanded="false" data-parent="#accordion" data-toggle="collapse" href="#collapseOne" role="button" class="collapsed">
+                             Reimbursement Forms <span class="glyphicon glyphicon-plus pull-right"></span>
+    
+                            </a>
+                          </h4>
+                        </div>
+                        <div aria-labelledby="headingOne" class="panel-collapse collapse" id="collapseOne" role="tabpanel" aria-expanded="false">
+                          <div class="panel-body"> 
+                          <p>You will find all Selling Support reimbursement forms here. Please submit your expenses on a regular basis to ensure timely reimbursement.</p>
+                       
+                         <apex:repeat value="{!bbWrapperList}" var="bb">
+                             <apex:outputPanel rendered="{!IF(bb.cemObj.MetadataType__c=='Reimbursement Form' ,true,false)}"> 
+                                <a target="_blank" class="bbslink" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file={!bb.docObj.Id}"><u>{!bb.cemObj.Document_Name__c}</u></a>
+                                <p>{!bb.cemObj.Description__c}</p>
+                            </apex:outputPanel>
+                           
+                          </apex:repeat>
+                         <!-- <apex:repeat value="{!bbWrapperList}" var="ba">
+                             <apex:outputPanel rendered="{!IF(ba.cemObj.MetadataType__c=='Reimbursement Form' ,true,false)}"> 
+                                <a target="_blank" class="bbslink" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file={!ba.docObj.Id}"><u>{!ba.cemObj.Document_Name__c}</u></a>
+                                <p>{!ba.cemObj.Description__c}</p>
+                            </apex:outputPanel>
+                           
+                          </apex:repeat>-->
+                               <!-- <p><a target="_blank" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file=015R0000000JquP"> 2016 Check R Board Days Form</a></p>
+                                  <p><a target="_blank" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file=015R0000000JquU"> 2016 Educational Event Beef Sales Checkpoint Reimbursement Form</a></p>
+                                  <p><a target="_blank" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file=015R0000000JquZ"> 2016 Events Marketing Reimbursement Form</a></p>
+                                  <p><a target="_blank" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file=015R0000000Jque"> 2016 Feeding Trials Reimbursement Form</a></p>
+                                  <p><a target="_blank" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file=015R0000000Jquj"> 2016 Pet Food Reimbursement Form</a></p>
+                                  <p><a target="_blank" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file=015R0000000Jquo"> 2017 Check R Board Days Enrollment Form</a></p>
+                                  <p><a target="_blank" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file=015R0000000Jqut"> 2017 Education Training Reimbursement Form</a></p>
+                                  <p><a target="_blank" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file=015R0000000Jquy"> 2017 Events Marketing Reimbursement Form</a></p>
+                                  <p><a target="_blank" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file=015R0000000Jqv3"> 2017 Feeding Trials Form</a></p>
+                                  <p><a target="_blank" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file=015R0000000Jqv8"> 2017 Pet Food Reimbursement Form</a></p>-->
+                                  
+                           
+                          </div>
+                        </div>
+                        </div>
+                        </div>
+                 </div>
+                 </div>
+                 
+            </div>
+             </div>
+                 </div>
+            
+            <!--End:Container-->
+            <script type="text/javascript">
+                   
+                   function GetselectedAccount(){
+                        //alert('$value--'+$("input[name='account']:checked").attr('value'));
+                        var selectedAccId = $("input[name='account']:checked").attr('value');
+                        //alert(selectedAccId);
+                        
+                        var urlString = '{!$Site.BaseUrl}/';
+                        window.location = urlString+'LPDCR_BBPLandingMember?selectedAccountId='+selectedAccId;
+                        
+                        //changeAccount($("input[name='account']:checked").attr('value'));
+                    }
+                    
+         </script>
+         <!--function Getselectedyear(id){
+                        Getyear(id);                      
+                    } -->
+        </apex:define>
+    </apex:composition>
+    </apex:form>
+    
+    <script>
+        $('.collapse').on('shown.bs.collapse', function(){
+        $(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+        }).on('hidden.bs.collapse', function(){
+        $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+        });
+            
+    </script>
+    
+    
+    <script>
+     $(document).ready(function(){
+      $('#bb').addClass("myactive");
+      $('#mbb').addClass("mobactive");
+    });
+ </script>
+    
+  
+ <style>.mob_pads1 {
+    padding: 15px 15px;
+}
+.row.detailbanner {
+    margin-top: 15px;
+}
+.media{background:url({!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_Header_BB)}); width:100%; height:133px; background-repeat: no-repeat;
+    background-size: contain;}</style>   
+</apex:page>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Reimbursement Request - Rework by ASM</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Purina_Swine_App_Letterhead</letterhead>
+    <name>Reimbursement Request - Rework by ASM</name>
+    <style>formalLetter</style>
+    <subject>Reimbursement Request - Rejected by ASM</subject>
+    <type>html</type>
+</EmailTemplate>

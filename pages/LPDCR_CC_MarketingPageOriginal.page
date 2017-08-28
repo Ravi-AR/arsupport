@@ -1,0 +1,94 @@
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="LPDCR_SecondaryPagePromotionsController" >
+ <apex:form id="form">
+    <apex:composition template="LPDCR_CC_BaseTemplate" >
+    <apex:define name="PageTitle">BALANCE and USE SUMMARY REPORT</apex:define>
+    <apex:define name="body">
+        
+    <!--<apex:attribute name="componentKey" 
+                    type="String" 
+                    assignTo="{!key}" 
+                    description="The key given to this component so the page can easily get access to it" />
+
+    <apex:attribute name="thisPageController" 
+                    type="LPDCR_SecondaryPageBaseController" 
+                    assignTo="{!pageController}" 
+                    required="true" 
+                    description="The controller for the page." />
+    
+    <apex:attribute name="speciesFilter" 
+                    description="Set of selected spcecies to filter results" 
+                    type="String[]"
+                    assignTo="{!species_filter}"
+                    required="false"/>
+
+    <apex:attribute name="searchTerm" 
+                    description="The search term to filter the results" 
+                    type="String"
+                    assignTo="{!search_term}"
+                    required="false"/>
+    
+    <p>Selected Species</p>
+    <apex:outputText value="{!species_filter}" />
+    <p>Search Term</p>
+    <apex:outputText value="{!search_term}" />
+    -->
+    <div class="col-sm-12">
+        <!--<apex:outputText value="{!promotionList}"/>-->
+      
+        <!--<apex:repeat value="{!promotionList}" var="promotion">
+            <p class="col-sm-8 clr_red pad_lft0"><apex:outputText >{!promotion.Headline}</apex:outputText></p>
+            <small><apex:outputText >{!promotion.CarouselTextArea}</apex:outputText></small>
+            
+        </apex:repeat>-->
+        <!--{!promotions.PurinaBusinessLink_Promotions[0].PurinaBusinessLink_Promotions_Z[0].PurinaBusinessLink_Promotions}-->
+
+   
+    
+        <h3 class="p_title clr7">Current Promotions</h3>
+        <p class="col-sm-8 clr_red pad_lft0">Purina Chick Days</p><p class="col-sm-4">Jan-Apr</p>
+        <p class="col-sm-8 clr_red pad_lft0">AntlerMax® Extreme Energy™ Supplement</p><p class="col-sm-4">Jan-Apr</p>  
+        <div class="clear pad_btm20"></div>
+        <h3 class="p_title clr7">Upcoming Promotions</h3>
+        <p class="col-sm-8 clr_red pad_lft0">Equine Spring Savings Event</p><p class="col-sm-4">Jan-Apr</p>
+        <p class="col-sm-8 clr_red pad_lft0">High Octane® Supplements Spring Offer</p><p class="col-sm-4">Jan-Apr</p>  
+        <div class="clear pad_btm20"></div>
+        
+            <h3 class="p_title clr7">{!$Label.LPDCR_All_Promotions}</h3>
+            
+            <!--<apex:pageBlock rendered="{!promotions!=null}">
+                <apex:pageBlockTable value="{!promotions.PurinaBusinessLink_Promotions[0].PurinaBusinessLink_Promotions}" var="promotion">
+                    <apex:column styleClass="clr_red pad_lft0"  value="{!promotion.Headline}"/>                   
+                </apex:pageBlockTable>
+            </apex:pageBlock>-->
+            <!--<apex:pageBlock >
+                <apex:pageBlockTable value="{!promotionList}" var="promotion">
+                    <apex:column styleClass="clr_red pad_lft0"  value="{!promotion.Headline}"/>
+                   
+                </apex:pageBlockTable>
+            </apex:pageBlock>-->
+                                     
+    </div>
+    
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+ </apex:define>
+    </apex:composition>
+ </apex:form>
+</apex:page>

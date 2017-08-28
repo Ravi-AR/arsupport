@@ -1,0 +1,9 @@
+Thank you for choosing Purina!  Our dedicated team will process your inquiry as soon as possible.
+
+- - Original Inquiry - -
+
+{!Case.Subject}
+
+{!Case.Description}
+
+{!Case.Thread_Id}

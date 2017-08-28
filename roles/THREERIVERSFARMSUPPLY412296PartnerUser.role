@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>THREE RIVERS FARM SUPPLY-412296 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>THREE RIVERS FARM SUPPLY-412296 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>THREERIVERSFARMSUPPLY412296PartnerManager</parentRole>
+</Role>

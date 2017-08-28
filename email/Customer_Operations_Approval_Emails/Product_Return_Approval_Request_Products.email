@@ -1,0 +1,62 @@
+<messaging:emailTemplate subject="Requesting Approval of Product Return" recipientType="User" relatedToType="Case">
+    <messaging:plainTextEmailBody >
+
+        Dear {!recipient.name},
+
+        Customer Care requires approval to return product to the plant.
+
+        Type APPROVE or REJECT in the response first line and comments in the second line. 
+
+        Details:
+        Service Request Number: {!relatedTo.CaseNumber} 
+        Issue Category: {!relatedTo.Issue_Category__c} 
+        Issue Sub-Category: {!relatedTo.Issue_Sub_Category__c}
+        Order Number: {!relatedTo.Sales_Order__c}
+
+        Subject: {!relatedTo.Subject}
+        
+    </messaging:plainTextEmailBody>
+    <messaging:htmlEmailBody >
+
+        <font size="4">
+        <p>Dear {!recipient.name},</p>
+
+        <p>Customer Care requires approval to return product to the plant.</p>
+
+        Click on the record link below or reply to this email and type <b>APPROVE</b> or <b>REJECT</b> in the first line and comments in the second line.<br></br>
+        <br></br>
+        Service Request Link:&nbsp;<apex:outputLink value="{!LEFT($Api.Partner_Server_URL_270,FIND('.com',$Api.Partner_Server_URL_270)+4)+relatedTo.id}"><apex:outputText value="{!LEFT($Api.Partner_Server_URL_270,FIND('.com',$Api.Partner_Server_URL_270)+4)+relatedTo.id}"/></apex:outputLink>
+        </font>
+
+        <p><h3><u>Details</u></h3></p>
+        
+        <b>Service Request Number:</b> {!relatedTo.CaseNumber} <br></br>
+        <b>Issue Category:</b> {!relatedTo.Issue_Category__c} <br></br>
+        <b>Issue Sub-Category:</b> {!relatedTo.Issue_Sub_Category__c} <br></br>
+        <b>Order Number:</b> {!relatedTo.Sales_Order__c} <br></br>
+        <br></br>
+        <b>Subject:</b> {!relatedTo.Subject}
+        <br></br>
+        <br></br>
+        <h3><u>Related Products</u></h3>
+        <table border="1">
+            <tr>
+                 <th>Product Name</th>
+                 <th>Item Number</th>
+                 <th>Quantity</th>
+                 <th>Lot Code</th>
+            </tr>
+            <apex:repeat var="product" value="{!relatedTo.Service_Request_Products__r}">
+                <tr>
+                    <td>
+                        <apex:outputlink value="{!LEFT($Api.Partner_Server_URL_270,FIND('.com',$Api.Partner_Server_URL_270)+4)+product.id}">
+                        {!product.Product__r.Name}</apex:outputlink>
+                    </td>
+                    <td>{!product.Item_Number__c}</td>
+                    <td>{!product.Quantity__c}</td>
+                    <td>{!product.Lot_Code__c}</td>
+                </tr>
+            </apex:repeat>
+        </table>
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

@@ -1,0 +1,26 @@
+<apex:page standardController="Feeding_Trial__c" showHeader="true" docType="html-4.01-strict">
+<div id="tabstrip" style="display:none;"> <ul> 
+<li class="k-state-active">Feeding Trial Track Sheets</li>
+</ul>
+<!-- Feeding Trial Track Sheets -->
+<div style="overflow:hidden;"> 
+<CRMC_PP:Grid ObjectName="Feeding_Trial_Track_Sheet__c" FKName="Feeding_Trial__c" FKValue="{!Feeding_Trial__c.Id}"  DelayLoad="false"  ViewID="a1Fj00000015cqe" 
+ EnableNewButton="true"  EnableNewInline="true"  EnableEdit="true"  EnableActions="true"  EnableFieldChooser="true" 
+ EnableStickyViews="true"  EnableToolbar="true"  EnableViews="true"  EnableFormatting="true"  EnableReadingPane="true" />
+ <CRMC_PP:DrillUp /> 
+ </div>
+
+
+
+</div>
+<script>
+$(document).ready(function() {
+    $("#tabstrip").kendoTabStrip({
+      activate: function(e){
+        setTimeout(function(){          $(window).resize();        });
+      }
+    });
+    $("#tabstrip").css("display", "block");
+});
+ </script>
+</apex:page>

@@ -1,0 +1,68 @@
+<messaging:emailTemplate subject="Service Request {!relatedTo.CaseNumber} has a Large Credit Amount Submitted for Approval" recipientType="User" relatedToType="Case">
+    <messaging:plainTextEmailBody >
+
+        A large credit in the range of {!relatedTo.Credit_Amount_Range__c} on Service Request {!relatedTo.CaseNumber} has been submitted for 
+        approval and is currently being reviewed. 
+
+
+        Details: 
+        Issue Category: {!relatedTo.Issue_Category__c} 
+        Issue Sub-Category: {!relatedTo.Issue_Sub_Category__c}
+        Invoice Number: {!relatedTo.Invoice__c} 
+
+        Account Name: {!relatedTo.Account.Name} 
+        Contact Name: {!relatedTo.Contact.Name} 
+
+        Credit Range: {!relatedTo.Credit_Amount_Range__c}
+
+        Subject: {!relatedTo.Subject}
+
+    </messaging:plainTextEmailBody>
+    <messaging:htmlEmailBody >
+
+        <font size="4">
+            <p>A large credit in the range of {!relatedTo.Credit_Amount_Range__c} on Service Request {!relatedTo.CaseNumber} has been submitted for 
+            approval and is currently being reviewed.</p>
+
+            Service Request Link:&nbsp;<apex:outputLink value="{!LEFT($Api.Partner_Server_URL_270,FIND('.com',$Api.Partner_Server_URL_270)+4)+relatedTo.id}"><apex:outputText value="{!LEFT($Api.Partner_Server_URL_270,FIND('.com',$Api.Partner_Server_URL_270)+4)+relatedTo.id}"/></apex:outputLink>
+        </font>
+
+        <p><h3><u>Details</u></h3></p> 
+        <b>Issue Category:</b> {!relatedTo.Issue_Category__c} <br></br>
+        <b>Issue Sub-Category:</b> {!relatedTo.Issue_Sub_Category__c} <br></br>
+        <b>Order Number:</b> {!relatedTo.Sales_Order__c} <br></br>
+        <br></br>
+        <b>Account Name:</b> {!relatedTo.Account.Name}<br></br> 
+        <b>Contact Name:</b> {!relatedTo.Contact.Name}<br></br> 
+        <br></br>
+        <b>Credit Range:</b> {!relatedTo.Credit_Amount_Range__c}
+        <br></br>
+        <br></br>
+        <b>Subject:</b> {!relatedTo.Subject}
+        <br></br>
+        <h3><u>Related Products</u></h3>
+       <table border="1">
+            <tr>
+                 <th>Product Name</th>
+                 <th>Item Number</th>
+                 <th>Quantity</th>
+                 <th>Lot Code</th>
+            </tr>
+            <apex:repeat var="product" value="{!relatedTo.Service_Request_Products__r}">
+                <tr>
+                    <td>
+                        <apex:outputlink value="{!LEFT($Api.Partner_Server_URL_270,FIND('.com',$Api.Partner_Server_URL_270)+4)+product.id}">
+                        {!product.Product__r.Name}</apex:outputlink>
+                    </td>
+                    <td>{!product.Item_Number__c}</td>
+                    <td><apex:outputText value="{0, number, integer}">
+                        <apex:param value="{!product.Quantity__c}" />
+                    </apex:outputText></td>
+                    <td>{!product.Lot_Code__c}</td>
+                </tr>
+            </apex:repeat>
+        </table>
+
+
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>TOLEDO FEED AND SEED INC-125297 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>TOLEDO FEED AND SEED INC-125297 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>TOLEDOFEEDANDSEEDINC125297PartnerManager</parentRole>
+</Role>

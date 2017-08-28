@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Bug/Fix</fullName>
+        <default>false</default>
+        <label>Bug/Fix</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Customer Feedback</fullName>
+        <default>false</default>
+        <label>Customer Feedback</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Customer Issue</fullName>
+        <default>false</default>
+        <label>Customer Issue</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Maintenance</fullName>
+        <default>false</default>
+        <label>Maintenance</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Enhancement</fullName>
+        <default>false</default>
+        <label>Enhancement</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Issue</fullName>
+        <default>false</default>
+        <label>Issue</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Project</fullName>
+        <default>false</default>
+        <label>Project</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Question</fullName>
+        <default>false</default>
+        <label>Question</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Training</fullName>
+        <default>false</default>
+        <label>Training</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Data Managemet</fullName>
+        <default>false</default>
+        <label>Data Managemet</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Password Reset</fullName>
+        <default>false</default>
+        <label>Password Reset</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </standardValue>
+</StandardValueSet>

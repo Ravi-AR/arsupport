@@ -1,0 +1,16 @@
+<!--<Page Name: cc_oo_OrderViewPreBook> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Saloni Kale                                9/21/2016                                    US:OO-196 Diabling E1 description on Order Confirmation and
+                                                                                       Order Review page
+----------------------------------------------------------------------------------------------------------------------
+-->
+
+<apex:page docType="html-5.0" sidebar="false" showHeader="false" standardStylesheets="false" applyHtmlTag="false">
+  <c:cc_oo_ProductName />
+ <!-- <c:cc_oo_OrderItems />-->
+ <c:cc_oo_OrderDetail />
+  <c:cc_oo_CommonTemplatesTotalSection />
+</apex:page>

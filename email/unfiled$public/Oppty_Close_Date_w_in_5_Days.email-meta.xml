@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email to the Oppty Owner within 5 days of Anticipated Close Date</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Oppty Close Date w/in 5 Days</name>
+    <style>none</style>
+    <subject>{!Opportunity.Account} - {!Opportunity.Name} is within 5 days of the Anticipated Close Date</subject>
+    <type>text</type>
+</EmailTemplate>

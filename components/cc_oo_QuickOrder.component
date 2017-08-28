@@ -1,0 +1,2339 @@
+<apex:component allowDML="true" controller="cc_oo_QuickOrderController">
+    <div class="quickorder_1_row_medium_container"/>
+    <script id="excel-upload-modal-template" type="text/template">
+        <div id="excel-upload-modal" class="info-modal-layout modal hide container-fluid hidden-phone" aria-labelledby="excel-upload-modal-label" aria-hidden="true">
+            <div class="span12 modal-header">
+                <button type="button" class="close btn-cancel" aria-hidden="true" onclick="isExcelUploadOpened = false">&times;</button>
+                <h3 class="modal-title" id="excel-upload-modal-label">{{pageLabelMap 'UploadQuickOrder'}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row-fluid">
+                    <div class="details-section">
+                        <!-- User story OO-2056 -->
+                        <div id="global-err-msg" class="global-error show-quick-order-error-msg general-error lipstick clear">{{pageLabelMap 'QuickOrderWarningMessage'}}</div>
+                        <div class="span12 no-margin-left">
+                            <strong class="step">{{pageLabelMap 'DownloadTemplate'}}</strong>
+                            <p class="step-detail">
+                                <span>1.&nbsp;</span>
+                                <a id="theLink" name="theLink" href="{!URLFOR($Resource.Excel_file,'Excel_file.csv')}" class="lipstick">{{pageLabelMap 'ClickHere'}}</a>
+                                <span>&nbsp;{{pageLabelMap 'DownloadExcelTemplate'}}</span>
+                            </p>
+                        </div>
+                        <div class="span12 no-margin-left">
+                            <strong class="step">{{pageLabelMap 'FillOrderTemplate'}}</strong>
+                            <p class="step-detail">
+                                <span>{{pageLabelMap 'ExcelInstructionsStep1'}}</span>
+                            </p>
+                            <p class="step-detail">
+                                <span>{{pageLabelMap 'ExcelInstructionsStep2'}}</span>
+                            </p>
+                            <p class="step-detail">
+                                <span>{{pageLabelMap 'ExcelInstructionsStep3'}}</span>
+                            </p>
+                            <p class="step-detail">
+                                <span>{{pageLabelMap 'ExcelInstructionsStep4'}}</span>
+                            </p>
+                            <p class="step-detail">
+                                <span>{{pageLabelMap 'ExcelInstructionsStep5'}}</span>
+                            </p>
+                        </div>
+                        <div class="span12 no-margin-left">
+                            <strong class="step">{{pageLabelMap 'UploadFile'}}</strong>
+                            <p class="step-detail">
+                                <span>{{pageLabelMap 'UploadFileStep1'}}</span>
+                            </p>
+                            <div class="step-detail pull-left" id="quick-order-file-upload">
+                                <span>{{pageLabelMap 'SelectFile'}}</span>
+                                <input type="file" id="attachmentFile" class="attachment-file" class="global-input"/>   
+                            </div>
+                            <span class="file-name">No file selected</span>
+                            <p class="clear step-detail">
+                                <span>{{pageLabelMap 'UploadFileStep2'}}</span>
+                            </p>
+                        </div>
+                        <div class="clear inline-error alert alert-error errorMsg modal-message"></div>
+                        <button class="btn btn-primary proceed uploadCsv" 
+                            onclick="javascript:uploadCSV(document.getElementById('attachmentFile'));" 
+                            type="button">{{pageLabelMap 'UploadNow'}}</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    
+    <script id = "quick-order-header" type="text/template">
+        <div class="container-fluid">
+            <div class="row-fluid cart-header">
+                <div class="span12">
+                    {{#if reOrder}}
+                        <h2 class="title screen-name">{{pageLabelMap "MyOrdersInc_Reorder"}}</h2>
+                    {{else}}
+                        <h2 class="title screen-name">{{pageLabelMap "QuickOrder"}}</h2>
+                    {{/if}}<br>
+                    {{#if globalErrorMessage}}
+                        <div id="global-err-msg" class="span12 clear lipstick no-margin-left">{{{globalErrorMessage}}}</div>
+                    {{else}}
+                        <div id="global-err-msg" class="span12 clear lipstick hide no-margin-left"></div>
+                    {{/if}}
+                    {{#if isDataLoaded}}
+                        <div class="span12 clear larger legends no-margin-left">
+                    {{else}}
+                        <div class="span12 clear larger legends hide no-margin-left">
+                    {{/if}}
+                        <span class="grey">{{pageLabelMap 'ProductTypes'}} &nbsp;</span>
+                        
+                        <span>
+                            <span class="packaged">&#9679; &nbsp;</span>
+                            <label class="">{{pageLabelMap 'Packaged'}} &nbsp;</label>
+                        </span>
+                        <span>
+                            <span class="bulk">&#9679; &nbsp;</span>
+                            <label class="">{{pageLabelMap 'Bulk'}} &nbsp;</label>
+                        </span>
+                        <span>
+                            <span class="liquid">&#9679; &nbsp;</span>
+                            <label class="">{{pageLabelMap 'Liquid'}} &nbsp;</label>
+                        </span>
+                        
+                    </div>
+                    <div class="span12 clear grey no-margin-left font18px no-margin-left">
+                    {{#if reOrder}}
+                        <div class="reorder-title-message no-margin-left clear">{{ pageLabelMap 'ReOrderTitleMessage' }}</div>
+                        <div class="reorder-message no-margin-left visible-desktop">
+                            <span class="larger pull-right legends hide">
+                        </div>
+                    {{else}}
+                        <div class="quick-order-title-message no-margin-left clear">{{ pageLabelMap 'QuickOrderTitleMessage' }}</div>
+                        <div class="quick-upload-message no-margin-left visible-desktop">
+                            <strong class="">{{pageLabelMap 'UploadPrefer'}}</strong>
+                            <span class="grey larger tab">{{pageLabelMap 'Usethis'}}&nbsp;</span>
+                            <a class="upload-click modalLauncher larger" onclick="openUploadPopUp()">{{pageLabelMap 'OrderTemplate'}}</a>
+                            {{>excelUpoad}}
+                            <span class="larger pull-right legends hide">
+                        </div>
+                    {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </script>
+
+    <script id="quickorder-template-desktop" type="text/template">
+
+    
+        <div class="row clear larger quick-order-list-header quick-order-content visible-desktop">
+            <strong class="span3">{{ pageLabelMap 'SKU'}}.</strong>
+            <div class="span4">
+                <strong class="span6">{{pageLabelMap 'MiniCart_Quantity'}}</strong>
+                <span class="span6 no-margin-left">
+                    <strong>{{pageLabelMap 'LeadTime'}}</strong><br/>
+                    <span class="smallest">({{pageLabelMap 'LeadTimeMeasure'}})</span>
+                </strong>
+            </div>
+            <strong class="span2">{{pageLabelMap 'Description'}}</strong>
+            <strong class="span3">{{pageLabelMap 'PriceOptions'}}</strong>
+        </div>
+
+        <div class="quickorder-rows quick-order-content">
+            {{>quickorderrow}}
+        </div>
+
+        <div class="row">
+            <button type="button" class="oo-add-more btn btn-secondary medium-btn">{{pageLabelMap 'QuickOrder_AddMore'}}</button>
+            <button type="button" disabled="disabled" class="oo-add-to-cart btn btn-primary medium-btn pull-right">{{pageLabelMap 'QuickOrder_AddToCart'}}</button>
+        </div>
+        <div class="warning-modal-layout">{{>navModal}}</div>
+        <div class="price-contract-details-container"></div>
+    </script>
+
+
+    <script id="quickorderrow-partial-desktop" type="text/template">
+        {{#each products}}
+        <div class="row" id="p{{this.prodIndex}}">
+            <div class="span3">
+                {{#if this.productDetails}}
+                    {{{ getProductNumberClasses this.productDetails.typeOfProduct this.productDetails.sku this.productDetails.errorMsg }}}
+                {{else}}
+                    <input type="text" class="span11 product-no global-input" name="productNo" value="{{this.productDetails.sku}}">
+                {{/if}}
+            </div>
+            <div class="span4">
+                <div class="span6 vcenter">
+                    <input type="text" class="span6 quantity global-input quantity-input" name="quantity" size="6" maxlength="6" value="{{this.productDetails.quantity}}" onkeypress="return isNumberKey(event)"/>
+                    <span class="span6 uom smaller grey">{{this.productDetails.UOMD}}</span>
+                </div>
+                <div class="span6 slight-margin-top lead-time spacing-left">{{this.productDetails.leadTime}}</div>
+            </div>
+            <div class="span2 slight-margin-top description">{{this.productDetails.shortDescription}}</div>
+            <div class="span3 slight-margin-top larger price-option">
+                {{#if this.productDetails.contracts }}
+                    <span class="list-price-detail span10 hide" data-index="p{{this.prodIndex}}"></span>
+                    <a class="price-contract-details span10 no-margin-left" data-index="p{{this.prodIndex}}">
+                    {{#if this.productDetails.priceOption}}
+                        <strong class="span8">{{this.productDetails.priceOption}}</strong>
+                    {{else}}
+                        <strong class="span8"></strong>
+                    {{/if}}
+                    </a>
+                {{else }}
+                    <span class="list-price-detail span10" data-index="p{{this.prodIndex}}">{{this.productDetails.priceOption}}</span>
+                    <a class="price-contract-details span10 hide no-margin-left" data-index="p{{this.prodIndex}}">
+                        <strong class="span8"></strong>
+                    </a>
+                {{/if}}
+                    <span class="span2 fa fa-spinner fa-2x hide"></span>
+                {{#if this.productDetails }}
+                    <span class="span2 remove icon-icons_delete lipstick"></span>
+                {{else}}
+                    <span class="span2 remove icon-icons_delete lipstick hide"></span>
+                {{/if}}                
+            </div>
+            
+            {{#if this.productDetails.errorMsg}}
+                <div class="clear lipstick inline-error error-msg">{{{this.productDetails.errorMsg }}}</div>
+            {{else}}
+                <div class="clear lipstick inline-error error-msg hide">{{{this.productDetails.errorMsg }}}</div>
+                {{#if this.productDetails.qtyErrorMsg}}
+                    <div class="clear info-msg grey-info hide">{{{this.productDetails.infoError }}}</div>
+                {{else}}
+                    {{#if this.productDetails.quantity}}
+                        <div class="clear info-msg grey-info hide">{{{this.productDetails.infoError }}}</div>
+                    {{else}}
+                        {{#if this.productDetails.infoError }}
+                            <div class="clear info-msg grey-info">{{{this.productDetails.infoError }}}</div>
+                        {{else}}
+                            <div class="clear info-msg grey-info hide">{{{this.productDetails.infoError }}}</div>
+                        {{/if}}
+                    {{/if}}
+                {{/if}}
+            {{/if}}
+            {{#if this.productDetails.qtyErrorMsg}}
+                <div class="clear lipstick inline-error quantity-error-msg">{{{this.productDetails.qtyErrorMsg }}}</div>
+            {{else}}
+                <div class="clear lipstick inline-error quantity-error-msg hide">{{{this.productDetails.qtyErrorMsg }}}</div>
+            {{/if}} 
+
+            
+        </div>
+        {{/each}}
+    </script>
+
+    <script id="quickorder-template-mobile" type="text/template">
+        <div class="row quickorder-header-container-mobile"></div>
+        
+        <div class="row quickorder-rows quick-order-content">{{>quickorderrow}}</div>
+
+        <div class="row quick-order-buttons">
+            <button type="button" class="oo-add-more btn btn-secondary medium-btn">{{pageLabelMap 'QuickOrder_AddMore'}}</button>
+            <button type="button" disabled="disabled" class="span8 center oo-add-to-cart btn btn-primary">{{pageLabelMap 'QuickOrder_AddToCart'}}</button>
+        </div>
+        <div class="warning-modal-layout">{{>navModal}}</div>
+        <div class="price-contract-details-container"></div>
+    </script>
+    <script id="quick-order-header-mobile" type="text/template">
+            {{#if reOrder}}
+                <h2 class="title screen-name">{{pageLabelMap "MyOrdersInc_Reorder"}}</h2>
+            {{else}}
+                <h2 class="title screen-name">{{pageLabelMap "QuickOrder"}}</h2>
+            {{/if}}<br>
+            {{#if isDataLoaded}}
+                <span class="larger legends">
+            {{else}}
+                <span class="larger legends hide">
+            {{/if}}
+            {{#if globalErrorMessage}}
+                <div id="global-err-msg" class="span12 clear lipstick no-margin-left">{{{globalErrorMessage}}}</div>
+            {{else}}
+                <div id="global-err-msg" class="span12 clear lipstick hide no-margin-left"></div>
+            {{/if}}
+            
+                
+                    <div class="span12 clear">
+                        <span class="grey">{{pageLabelMap 'ProductTypes'}} &nbsp;</span>
+                        <span class="packaged">&#9679; &nbsp;</span>
+                            <label class="">{{pageLabelMap 'Packaged'}} &nbsp;</label>
+                        </span>
+                        <span>
+                            <span class="bulk">&#9679; &nbsp;</span>
+                            <label class="">{{pageLabelMap 'Bulk'}} &nbsp;</label>
+                        </span>
+                        <span>
+                            <span class="liquid">&#9679; &nbsp;</span>
+                            <label class="">{{pageLabelMap 'Liquid'}} &nbsp;</label>
+                        </span>
+                    </div>
+            </span>
+            <div class="span12 clear grey font18px no-margin-left">
+                {{#if reOrder}}
+                    <div class="reorder-title-message">{{ pageLabelMap 'ReOrderTitleMessage' }}</div>
+                {{else}}
+                    <div class="quick-order-title-message">{{ pageLabelMap 'QuickOrderTitleMessage' }}</div>
+                {{/if}}
+            </div>
+    </script>
+    
+    <script id="quickorderrow-partial-mobile" type="text/template">
+        {{#each products}}
+        <div class="row quick-order-list-header" id="p{{this.prodIndex}}">
+            <div class="span12 clear">
+                <label class="span4">{{ pageLabelMap 'SKU'}}.</label>
+                {{#if this.productDetails}}
+                    {{{ getProductNumberClasses this.productDetails.typeOfProduct this.productDetails.sku this.productDetails.errorMsg}}}
+                {{else}}
+                    <input type="text" class="span8 product-no global-input" name="productNo" value="{{this.productDetails.sku}}"/>
+                {{/if}}
+            </div>
+            <div class="span12 fa fa-spinner fa-4x center hide"></div>
+            {{#if this.productDetails.errorMsg}}
+                <div class="clear lipstick inline-error error-msg">{{{this.productDetails.errorMsg }}}</div>
+            {{else}}
+                <div class="clear lipstick inline-error error-msg hide">{{{this.productDetails.errorMsg }}}</div>
+                {{#if this.productDetails.qtyErrorMsg}}
+                    <div class="clear info-msg hide">{{{this.productDetails.infoError }}}</div>
+                {{else}}
+                    {{#if this.productDetails.quantity}}
+                        <div class="clear info-msg hide">{{{this.productDetails.infoError }}}</div>
+                    {{else}}
+                        {{#if this.productDetails.infoError }}
+                            <div class="clear info-msg">{{{this.productDetails.infoError }}}</div>
+                        {{else}}
+                            <div class="clear info-msg hide">{{{this.productDetails.infoError }}}</div>
+                        {{/if}}
+                    {{/if}}
+                {{/if}}
+
+            {{/if}}
+
+            <div class="span12 clear no-margin-left">
+                <label class="span4">{{pageLabelMap 'MiniCart_Quantity'}}</label>
+                <div class="span8">
+                    <input type="text" class="span8 quantity global-input quantity-input" name="quantity" size="6" value="{{this.productDetails.quantity}}" onkeypress="return isNumberKey(event)"/>
+                    <div class="uom smaller grey">{{this.productDetails.UOMD}}</div>
+                </div>
+            </div>
+            {{#if this.productDetails.qtyErrorMsg }}
+                <div class="span12 clear no-margin-left lipstick inline-error quantity-error-msg">{{{this.productDetails.qtyErrorMsg }}}</div>
+            {{else}}
+                <div class="span12 clear no-margin-left lipstick inline-error quantity-error-msg hide"></div>
+            {{/if}}
+            
+            <div class="span12 clear no-margin-left">
+                <div class="span4">
+                    <label>{{pageLabelMap 'LeadTime'}}</label>
+                    <div>({{pageLabelMap 'LeadTimeMeasure'}})</div>
+                </div>
+                
+                <strong class="span8 lead-time">{{this.productDetails.leadTime}}</strong>
+            </div>
+            <div class="span12 clear no-margin-left">
+                <label class="span4">{{pageLabelMap 'Description'}}</label>
+                <strong class="span8 description">{{this.productDetails.shortDescription}}</strong>
+            </div>
+            <div class="span12 clear no-margin-left">
+                <label class="span4">{{pageLabelMap 'PriceOptions'}}</label>
+                <strong class="span8 price-option">
+                    {{#if this.productDetails.contracts }}
+                        <span class="list-price-detail span10 hide" data-index="p{{this.prodIndex}}"></span>
+                        <a class="price-contract-details span10 no-margin-left" data-index="p{{this.prodIndex}}">
+                            <strong>{{this.productDetails.priceOption}}</strong>
+                            
+                        </a>
+                    {{else}}
+                        <span class="list-price-detail span10" data-index="p{{this.prodIndex}}">{{this.productDetails.priceOption}}</span>
+                        <a class="price-contract-details span10 hide no-margin-left" data-index="p{{this.prodIndex}}">
+                            <strong>{{this.productDetails.priceOption}}</strong>
+                            
+                        </a>
+                    {{/if}}
+                </strong>
+            </div>
+            {{#if this.productDetails }}
+                <button class="clear btn btn-secondary pull-right remove">{{pageLabelMap 'Action_Remove'}}</button>
+            {{else}}
+                <button class="clear btn btn-secondary pull-right remove hide">{{pageLabelMap 'Action_Remove'}}</button>
+            {{/if}}
+        </div>
+        {{/each}}
+    </script>
+    <!-- OO-2554 begins here -->
+    <script id="OO-Warning-Model" type="text/template">
+        <div id="navigation-warning-modal" class="warning-modal-layout modal cancel-modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close btn-cancel" aria-hidden="true" data-dismiss="modal" onclick="isWarningModalOpened=false;">&times;</button>
+                <h3 class="modal-title">{{pageLabelMap 'SureContinue'}}</h3>
+            </div>
+            <div class="modal-body">
+                <p class="navigation-warning"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary btn-cancel"  aria-hidden="true" data-dismiss="modal" onclick="isWarningModalOpened=false;">{{ pageLabelMap 'Cancel'}}</button>
+                <button class="btn btn-primary btn-continue">{{ pageLabelMap 'Continue'}}</button>
+            </div>
+        </div>
+    </script>
+    <!-- OO-2554 ends here -->
+    
+        <div class="desktop-view"></div>
+    <script type="text/template" id="OO-Custom-pricing">
+        <div id="price-contract-details-modal" class="info-modal-layout modal hide container-fluid" aria-labelledby="contract-details-modal-label" aria-hidden="true">
+            
+            <div class="modal-header">
+                <button type="button" class="close btn-cancel" aria-hidden="true" data-dismiss="modal" onclick="isContracModalOpened = false;">&times;</button>
+                <h3 class="modal-title">{{pageLabelMap 'PriceOptions'}}</h3>
+            </div>
+            <div class="modal-body">
+
+                <div class="row-fluid custom-price">
+                <div class="span12 price-list clear">
+                    <div class="row list-price">
+                        <div class="span12">
+                            <!--<div class="span1">-->
+                                {{#if this.contracts.length }}
+                                    <input name="price" type="radio" value="list-price" id="list-price" class="global-input" data-index="{{this.index}}">
+                                    <strong class="custom-pricing" for="list-price">
+                                        <span>
+                                            <span></span>
+                                        </span>
+                                        {{pageLabelMap 'ProductDetails_ListPrice'}}
+                                    </strong>
+                                {{ else }}
+                                    <!--<div class="span1"></div>-->
+                                    <strong class="span10 custom-pricing">{{pageLabelMap 'ProductDetails_ListPrice'}}</strong>
+                                {{/if}}
+                            <!--</div> -->                      
+                        </div>
+                        <!-- {{#with this.listPrice}} -->
+                            {{#unless this.listPrice.onlyPallet }} 
+                                <div class="span12">
+                                    {{#if this.contracts.length }}
+                                        <div class="span1"></div>
+                                    {{/if}}
+                                    <div class="span10 custom-pricing">
+                                        <div class="span8">
+                                            <label>{{pageLabelMap 'Price'}}</label>
+                                            {{#if this.listPrice.isfreightincluded}}
+                                                <label class="pull-right inline-info price-state">{{pageLabelMap 'Contract_Freight_DLV'}}</label>
+                                            {{else}}
+                                                <label class="pull-right inline-info price-state">{{pageLabelMap 'Contract_Freight_FOB'}}</label>
+                                            {{/if}}
+                                        </div>
+                                        <div class="span4 price-value">
+                                            <strong>${{this.price.netListPrice}}</strong>
+                                            <strong class="span12 per-bag">per {{this.price.unitOfMeasureDesc}}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{/unless}}
+                            {{#if this.price.palletPrice }}
+                                <div class="span12">
+                                    {{#if this.contracts.length }}
+                                        <div class="span1"></div>
+                                    {{/if}}
+                                    <div class="span10 custom-pricing">
+                                        <div class="span8">
+                                            <label>{{pageLabelMap 'PalletPrice'}}</label>
+                                            <div class="span12 pallet-size">
+                                                <strong class="min-qty">{{this.palletSize}}&nbsp;{{this.price.unitOfMeasureDesc}}</strong>
+                                                 <span>{{ pageLabelMap 'perPallet' }} </span>
+                                            </div>                          
+                                        </div>
+                                        <div class="span4 price-value">
+                                            <strong>${{ this.price.palletPrice }}</strong>
+                                            <strong class="span12 per-bag">per {{this.price.unitOfMeasureDesc}}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{/if}}
+                        <!-- {{/with}} -->
+                    </div>           
+        
+                    {{#each this.contracts}}
+                        <div class="row contract-price">
+                            <div class="span12 clear">
+                                <!--<div class="span1">-->
+                                {{#if this.disableContract }}
+                                    <input name="price" type="radio" value="{{this.contractId}}" id="{{this.contractId}}" data-id="{{this.contractSFId}}" disabled="disabled" class="global-input" data-index="{{../this.index}}">
+                                    <strong class="custom-pricing disabled-radio" for="{{this.contractId}}">
+                                        <span>
+                                            <span></span>
+                                        </span>
+                                        {{pageLabelMap 'CartInc_ContractPrice'}}
+                                    </strong>
+                                {{else}}
+                                    <input name="price" type="radio" value="{{this.contractId}}" id="{{this.contractId}}" data-id="{{this.contractSFId}}" class="global-input" data-index="{{../this.index}}">
+                                    <strong class="custom-pricing" for="{{this.contractId}}">
+                                        <span>
+                                            <span></span>
+                                        </span>
+                                        {{pageLabelMap 'CartInc_ContractPrice'}}
+                                    </strong>
+                                {{/if}}
+                                <!--</div> -->
+                                
+                            </div>
+                            <div class="span12 clear">
+                                <div class="span1"></div>
+                                <div class="span10 custom-pricing">
+                                    <div class="span8">
+                                        <span class="clear per-bag">{{this.contractId}}</span>
+                                        {{#if this.contractDetails.isfreightincluded}}
+                                            <label class="pull-right inline-info price-state">{{pageLabelMap 'Contract_Freight_DLV'}}</label>
+                                        {{else}}
+                                            <label class="pull-right inline-info price-state">{{pageLabelMap 'Contract_Freight_FOB'}}</label>
+                                        {{/if}}
+                                        <div class="span12 clear pallet-size"><span>{{pageLabelMap 'Expires'}}: {{this.expiryDate}}</span></br>
+                                        {{#if (isEndUser this.jdeEndUser)}}
+                                            <span>End User: {{this.jdeEndUser}}</span>
+                                        {{/if}}
+                                        </div>
+                                    </div>
+                                    <div class="span4 price-value">
+                                        <strong>${{this.contractPrice}}</strong>
+                                        <strong class="span12 clear per-bag contract-uom">per {{this.unitOfMeasureDesc}}</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- US - 1773 -->
+                    
+                        <!--{{#if this.contractDetails.isfreightincluded}}
+                            <div class="span12 clear checkcontractMsg">
+                                <div class="span1"></div>
+                                <div class="span11">
+                                    <div class="inline-info font12px span8 contract-freight pull-left">{{pageLabelMap 'Contract_Freight'}}</div>
+                                </div>
+                            </div>
+                        {{/if}} -->
+                        <!-- US - 1773 -->                             
+
+                            <div class="span12 contract-details-collapse" data-toggle="collapse" data-target="#contractId-{{this.contractId}}">
+                                <div class="span1"></div>
+                                <div class="span1 detail-icon icon-icons_next lipstick"></div>
+                                <a  class="span10 contract-details" data-id="{{this.contractId}}" data-index="{{../this.index}}">
+                                    <strong>{{pageLabelMap 'ViewContractDetails'}}</strong>
+                                </a>
+                            </div>
+                            
+                            <div id="contractId-{{this.contractId}}" class="row clear collapse contract-details-info">
+                              <div class="span2"></div>
+                              <div class="span10">
+                                <div class="span12 clear">
+                                    <strong class="grey">{{pageLabelMap 'Contract'}}</strong>
+                                    <span class="value lipstick CtrId">{{ this.contractId }}</span>
+                                </div>
+                                <div class="span12 clear no-margin-left">
+                                    <label class="span6">{{pageLabelMap 'EffectiveDate'}}</label>
+                                    <strong class="span6 contractEffectiveDate">{{ this.contractDetails.effectiveDate }}</strong>
+                                </div>
+                                <div class="span12 no-margin-left">
+                                    <label class="span6">{{pageLabelMap 'ExpirationDate'}}</label>
+                                    <strong class="span6 contractExpirationDate">{{ this.expiryDate }}</strong>
+                                </div>
+                                
+                                {{#if (isEndUser this.jdeEndUser)}}
+                                    <div class="span12 no-margin-left">
+                                        <label class="span6">{{pageLabelMap 'EndUser'}}</label>
+                                        <strong class="span6 contractEndUser">{{ this.jdeEndUser }}</strong>
+                                    </div>
+                                {{/if}}
+                                <div class="span12 clear no-margin-left">
+                                    <label  class="span6">{{pageLabelMap 'ContractBalance'}}</label>
+                                    <strong class="span6 contractquantityAvailable">
+                                        {{#if this.contractDetails.availableBalance }} <!--US-2377-->
+                                            {{ this.contractDetails.availableBalance }} {{ this.contractDetails.UoMDesc }} 
+                                        {{/if}}
+                                    
+                                        {{#if this.contractDetails.AvailabilityQtyUoMContract}}
+                                            ({{this.contractDetails.AvailabilityQtyUoMContract}} {{this.contractDetails.contractUom}})
+                                        {{/if}}
+                                    </strong>
+                                </div>
+                                <div class="span12 clear no-margin-left">
+                                    <div class="last-updated grey span6 pallet-size">{{pageLabelMap 'LastUpdated'}}</div>  
+                                    <div class="contract-last-updated span6">{{ this.contractDetails.lastModifiedDate }}&nbsp;{{pageLabelMap 'CSTTimeZone'}}</div>    
+                                </div>
+                              </div>
+                            </div>
+                        </div>  
+                    {{/each}}
+                    <div class="clearfix"></div>
+                </div>
+                
+                <div class="span12 no-margin-left">
+                    <button type="button" class="oo-price-option-apply btn btn-primary medium-btn" disabled="disabled" data-index="{{this.index}}">{{pageLabelMap 'Apply'}}</button>
+                </div>
+              </div>
+            </div>
+        </div>      
+    </script>
+    <script type="text/template" id="busy-indicator">
+        <div class="loader center">
+            <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+            <!--<img src="{!URLFOR($Resource.CC_Purina_Theme_3, 'images/Spinning-Circle-Z.gif')}" class="spinner"/> -->
+        </div>
+    </script>
+
+    <div id="action-required-modal" class="warning-modal-layout modal hide container-fluid" aria-labelledby="contract-details-modal-label" aria-hidden="true">
+        <div class="modal-header contract-title">
+            <button type="button" class="contract close btn-cancel" aria-hidden="true" data-dismiss="modal">&times;</button>
+            <h5 class="modal-title"></h5>
+        </div>
+
+        <div class="modal-body action-required">
+            <span>Action is required on one or more lines. Please resolve before adding to the cart.</span>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary pull-right" data-dismiss="modal">OK</button>
+
+        </div>
+    </div>
+    
+    <div id="limit-exceeded-modal" class="warning-modal-layout modal hide container-fluid" aria-labelledby="contract-details-modal-label" aria-hidden="true">
+        <div class="modal-header contract-title">
+            <button type="button" class="contract close btn-cancel" aria-hidden="true" data-dismiss="modal">&times;</button>
+            <h5 class="modal-title"></h5>
+        </div>
+
+        <div class="modal-body action-required">
+            <span>The file exceeds the quick orders maximum limit of 100 lines. Please add the first 100 products to your cart before uploading the remaining products.</span>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary pull-right btn-cancel" data-dismiss="modal">OK</button>
+        </div>
+    </div>
+    
+    
+    <script>
+        function product(index) {
+            this.prodIndex = index;
+            this.productDetails;
+            //this.prodTypeOfProd; 
+        }
+
+        function cartItem(index, sku,cartGUID, category, productId, sellerId, quantity, price, isListPrice, uom, productType, contractId, leadTime,bagPrice, palletPrice,isfreightincluded ){
+            this.index = index;
+            this.sku = sku;
+            this.cartId = cartGUID;
+            this.category = category;
+            this.storeID = CCRZ.pagevars.storefrontName;
+            this.product = productId;
+            this.seller = sellerId;
+            this.quantity = quantity;
+            this.price = price;
+            this.unitPrice = price;
+            this.isListPrice = isListPrice;
+            this.bagPrice = bagPrice;
+            this.palletPrice = palletPrice;
+            //this.ccrz__SubAmount__c = price * quantity;
+            this.unitOfMeasure = uom;
+            this.productType = productType;
+            this.requestDate = new Date();
+            this.contractId = contractId;
+            this.leadTime = leadTime;
+            this.isfreightincluded=isfreightincluded;
+        }
+
+        //Global variables
+        var products = [];
+        var counter = 0;
+        var listCartItems = new Object();
+        var listExistingCartItems = new Array();//OO-2244
+        var listExistingSecondaryCartItems;//OO-2244
+        var allProducts = new Object();
+        var finalProducts = new Object();
+        var cartEncryptId,isErrorMessage=false;
+        var cartId, globalEncryptedCartId;
+        var shipToId, shipDDate;
+        var sellerId;
+        var selectedSellerSFID;
+        var selectedShipToId;
+        var cartType;
+        var quickOrderRowLimit ='{!$Label.cc_oo_quickOrderRowLimit}';
+        var minimumRowCount ='{!$Label.cc_oo_minimumRowCount}';
+        var regexInteger = /^[0-9]*$/gm;
+        var quantity_error_msg = ['Please enter a valid quantity.', 'Price not available at this moment. Please check back later.', 'Quant_Not_Full_Pallet'];
+        var reOrder=false, isDataLoaded = false;
+        var globalErrorMessage = '', currentView; 
+        var uniqueId=getSessionValue('contactId');
+        var selectedShipTo=uniqueId+'selectedShipTo',selectedPlant=uniqueId+'selectedPlant',shipDate=uniqueId+'shipDate';
+        var currentView, isWarningModalOpened = false,isContracModalOpened = false, pricingDetails, busyIndicator, isExcelUploadOpened = false, latestFileAttachment, excelError, sourceAttributes, quickView; 
+        Handlebars.registerHelper('getProductNumberClasses', function(prodType, productNo, productNoError){
+            var className = "";
+            if(prodType){
+                
+                prodType = prodType.toLowerCase();
+                if(prodType === "Bag".toLowerCase()){
+                     className = "packaged-product";               
+                } else if(prodType === "Bulk".toLowerCase()) {
+                    className = "bulk-product";
+                } else if(prodType === "Liquid".toLowerCase()) {
+                    className = "liquid-product";
+                }
+                if(productNoError) {
+                    className += " lipstick-border";
+                }
+            } else {
+                className = "lipstick-border";
+            }
+            var span_size;
+            if($(window).width() < 768)
+                span_size = "span8";
+            else
+                span_size = "span11";
+            return '<input type="text" class="'+span_size+' product-no '+className+'" name="productNo" value="'+productNo+'">'
+
+        });
+        //US OO-3222 Fix
+        function isNumberKey(evt){
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+        jQuery(function($){
+            //US-OO-2497
+            var orderId;
+            
+            var tempSid = $.urlParam('sid');
+            currentView = CCRZ.display.currentView;
+            $('body').append('<div class="busy-indicator hide"></div>');
+            
+            CCRZ.views.BusyIndicator = CCRZ.CloudCrazeView.extend({
+                viewName: "busyIndicator", 
+                templateBoth : CCRZ.util.template('busy-indicator'),
+                initialize: function() {
+                    this.$el = $('.busy-indicator');
+                    this.render();
+                },              
+                render : function() {
+                    var self = this;
+                    this.$el.html(self.templateBoth());
+                },
+                show : function() {
+                    this.$el.show();
+                },
+                hide: function() {
+                    this.$el.hide();
+                }
+            });
+            
+            CCRZ.models.QuickOrderModel = CCRZ.CloudCrazeModel.extend();
+            
+            CCRZ.collections.QuickOrderCollection = CCRZ.CloudCrazeCollection.extend({
+                model: CCRZ.models.QuickOrderModel,
+                getCartDetails: function(callback) {
+                    var selectedSellerSFID = getSessionValue(selectedPlant);
+                    var selectedShipToId = getSessionValue(selectedShipTo);
+                    var shipDateFromCookie = getSessionValue(shipDate);
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_QuickOrderController'});
+                    remoteCall.invokeCtx( 'getCartDetails', cartEncryptId, selectedSellerSFID, selectedShipToId, shipDateFromCookie, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                },
+                getOrderDetails : function(orderId, callback) {
+                    var selectedSellerSFID = getSessionValue(selectedPlant);
+                    var selectedShipToId = getSessionValue(selectedShipTo);
+                    var shipDateFromCookie = getSessionValue(shipDate);
+                    var cartId = CCRZ.pagevars.currentCartID;
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_QuickOrderController'});
+                    remoteCall.invokeCtx( 'getOrderDetails', orderId, selectedSellerSFID, selectedShipToId, shipDateFromCookie,cartId, function(resp) {
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false,timeout: 120000});
+                },
+                getProdDetails : function(mapProductsData, callback) {
+                    var selectedSellerSFID = getSessionValue(selectedPlant);
+                    var selectedShipToId = getSessionValue(selectedShipTo);
+                    var shipDateFromCookie = getSessionValue(shipDate);
+                    var cartId = CCRZ.pagevars.currentCartID;
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_QuickOrderController'});
+                    remoteCall.invokeCtx('getProductDetails', null, selectedSellerSFID, selectedShipToId, shipDDate,mapProductsData,cartId, function(resp) {
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false,timeout: 120000});
+                },
+                insertCartItems: function(listCartItemsString, redirectPath, finalProds, cartEncryptId, selectedSellerSFID, selectedShipToId, shipDateFromCookie,callback){
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_QuickOrderController'});
+                    remoteCall.invokeCtx( 'insertCartItems', listCartItemsString, redirectPath, finalProds, cartEncryptId, selectedSellerSFID, selectedShipToId,shipDateFromCookie, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                },
+            });
+            
+            CCRZ.views.QuickOrderView = CCRZ.CloudCrazeView.extend({
+                self: this,
+                
+                viewName: "quickOrderView",
+                desktopSelector: ".desktop-view",
+                mobileSelector: ".phone_center_column",
+                templateDesktop: CCRZ.util.template("quickorder-template-desktop"),
+                templatePhone: CCRZ.util.template("quickorder-template-mobile"),
+                initialize: function(modelData){
+                    this.model = modelData;
+                    if(CCRZ.display.isPhone()){
+                        this.$el = $(this.mobileSelector);
+                        this.renderPhone();
+                    } else {
+                        this.$el = $(this.desktopSelector);
+                        this.renderDesktop();
+                    }
+                },
+                events: {
+                    "keyup .product-no" : "productNoKeyUpHandler",
+                    "keyup .quantity": "quantityKeyUpHandler",
+                    "blur .product-no": function(e) {
+                        e.stopPropagation();
+                        this.showProductDetails(e.currentTarget);
+                    },
+                    "blur .quantity" : "quantityBlurHandler",
+                    "click .price-contract-details": "priceContractDetails",
+                    "click .remove": "deleteHandler",
+                    "click .oo-add-more": "addMoreData",
+                    "click .oo-add-to-cart": "addToCartHandler",
+                    "click input[type='radio']": "enableButtons",
+                    "click .oo-price-option-apply": "applySelection",
+                    "click .contract-details-collapse": "contractExpandCollapse"
+                },
+                
+                contractExpandCollapse: function(e) {
+                    e.stopPropagation();
+                    $(e.currentTarget).find('.detail-icon').toggleClass('icon-icons_next icon-icons_down');
+                    var target = e.currentTarget.dataset["target"];
+                    $(target).toggleClass("in"); 
+                },
+                applySelection: function(e) {
+                    var ele = e.currentTarget;
+                    e.stopPropagation();
+                    var rowIndex = ele.dataset["index"];
+                    var product = allProducts[rowIndex];
+                    var isListPrice;
+                    var contractId;
+                    var isfreightincluded;
+                    if(allProducts[rowIndex].selectedPriceOption == 'listprice'){
+                        isListPrice = true;
+                        allProducts[rowIndex].priceOption = 'List Price';
+                        isfreightincluded=allProducts[rowIndex].price.isfreightincluded;
+                    }else{
+                        isListPrice = false;
+                        contractId = allProducts[rowIndex].contractSFID;
+                        var contractDtls=_.findWhere(allProducts[rowIndex].contracts,{'contractSFId':allProducts[rowIndex].contractSFID});
+                        allProducts[rowIndex].priceOption = allProducts[rowIndex].selectedPriceOption;
+                        isfreightincluded=contractDtls.contractDetails.isfreightincluded;
+                    }
+                    var newCartItem = new cartItem(rowIndex, product.sku, cartId, '', product.productId, sellerId, product.quantity, product.price.netListPrice,
+                                                    isListPrice, product.UOM, product.typeOfProduct, contractId, product.leadTime,product.price.netListPrice, product.price.palletPrice,isfreightincluded);
+                    $('#price-contract-details-modal').modal('hide');
+                    $('div #'+ rowIndex).find('.price-option a strong').empty().html(allProducts[rowIndex].priceOption);
+                    var errorMsg = CCRZ.pagevars.pageLabels['Price_Not_Selected'];
+                                    
+                    listCartItems[rowIndex] = newCartItem;
+                    var error_msg_block = $('div #'+ rowIndex).find('.error-msg'); //OO-2167
+                    if(error_msg_block.html() === errorMsg){
+                        error_msg_block.hide();
+                        var obj = getParticularProduct(rowIndex);
+                        obj.productDetails.errorMsg = '';
+                        $('div #'+ rowIndex).find('.product-no').removeClass('lipstick-border');
+                    }
+                    isContracModalOpened = false;
+                },
+                enableButtons: function(e) {
+                    e.stopPropagation();
+                    $('.oo-price-option-apply').removeAttr('disabled');
+                    var ele = e.currentTarget;
+                    var rowIndex = ele.dataset["index"];
+                    if($(ele).attr('id') == 'list-price'){
+                        //selectedPriceOption = 'listprice';
+                        allProducts[rowIndex].selectedPriceOption = 'listprice';
+                    }else{
+                        allProducts[rowIndex].selectedPriceOption = $(ele).attr('id');
+                        allProducts[rowIndex].contractSFID = ele.dataset["id"];
+                    }
+                },
+                addToCartHandler: function(e) {
+                    e.stopPropagation();
+                    isErrorMessage=true;
+                    if(validateCartItems()){
+                        processCartItems();
+                        var finalProds = convertProductsMap();
+                        listCartItemsString = JSON.stringify(listCartItems);
+                        var selectedSellerSFID = getSessionValue(selectedPlant);
+                        var selectedShipToId = getSessionValue(selectedShipTo);
+                        var shipDateFromCookie = getSessionValue(shipDate);                        var cartEncryptId = CCRZ.pagevars.queryParams.cartID ? CCRZ.pagevars.queryParams.cartID : CCRZ.pagevars.queryParams.cartId;
+                        if(!cartEncryptId){
+                            cartEncryptId = globalEncryptedCartId;
+                        }
+                        var redirectPath = quickOrderRedirectUrl();
+                        this.model.insertCartItems(listCartItemsString, redirectPath, finalProds, cartEncryptId, selectedSellerSFID, selectedShipToId,shipDateFromCookie, function(resp) {
+                            if(resp && resp.success){
+                                var redirectPath = resp.data;
+                                window.location = redirectPath;
+                            }
+                        });
+                    } /*else {
+                        applyGlobalMsg('Action_Required', 'global-err-msg');
+                    }*/
+                },
+                addMoreData: function(e) {
+                    e.stopPropagation();
+                    var totalCount = Object.size(products);
+                    var lastIndex;
+                    if(products.length==0){
+                        lastIndex=0;
+                    }
+                    else{
+                        lastIndex = products[products.length - 1].prodIndex;
+                    }
+                    var newProducts = [];
+                    var j = lastIndex + 1;
+                    var iterator='{!$Label.cc_oo_iterator}';
+                    var k = parseInt(j) + parseInt(iterator);
+                    var count = totalCount;
+                    if(reOrder){
+                        quickOrderRowLimit=quickOrderRowLimit+10;
+                    }
+                    for( var i=j; i<k ; i++ ){
+                        count++;
+                        if(count <= quickOrderRowLimit){
+                            var object = new product(i);
+                            newProducts.push(object);
+                            products.push(object);
+                        }else{
+                            $(".oo-add-more").attr("disabled","disabled");
+                            break;
+                        }
+        
+                    }
+        
+                    var source;
+                    var prods = { 'products': newProducts };
+                    if($(window).width() < 768) {
+                        source   = $("#quickorderrow-partial-mobile").html()
+                    }else{
+                        source   = $("#quickorderrow-partial-desktop").html();
+                    }
+                    var htmlOutput = compileHandler( source, prods );
+                    $('.quickorder-rows').append(htmlOutput);
+                            
+                },
+                deleteHandler: function(e) {
+                    e.stopPropagation();
+                    $(".oo-add-more").removeAttr("disabled");
+                    var ele = e.currentTarget;
+                    var row = $(ele).closest('.row');
+                    var productIndex = row.attr('id');
+                    var action_req_error = false;
+                    //remove item from allProducts
+                    delete allProducts[productIndex];
+        
+                    //remove row from UI
+                    row.remove();
+        
+                    //remove item from rows array - products
+                    var index = productIndex.substr(1,productIndex.length-1);
+        
+                    $.each(products, function(key, value){
+                        if(value.prodIndex == index){
+                            products.splice(key, 1);
+                            return false;
+                        }
+                    });
+        
+                    //remove item from listCartItems
+                    if(listCartItems){
+                        if(listCartItems[productIndex]){
+                            delete listCartItems[productIndex];
+                        }
+                    }
+                    //$('#global-err-msg').hide();
+                    //globalErrorMessage = '';
+                    $('.remove').each(function() {
+                        var row = $(this).closest('.row');
+                        var productType;
+                        if(row.find('.product-no').hasClass('liquid-product'))
+                            productType = 'LIQUID';
+                        else if(row.find('.product-no').hasClass('bulk-product'))
+                            productType = 'BULK';
+                        else if(row.find('.product-no').hasClass('packaged-product'))
+                            productType = 'BAG';
+                        else
+                            productType = '';
+                        
+                        if(cartType && productType){
+                            if(productType.toLowerCase() != cartType.toLowerCase()){
+                                applyGlobalMsg('OO_AddToCart_Validate', 'global-err-msg');
+                                return false;
+                            }
+                         }
+                         removeGlobalMsg('OO_AddToCart_Validate', 'global-err-msg');
+                     });
+                     
+                     if(!$.isEmptyObject(allProducts)) {
+                        _.every(allProducts, function(value, key){
+                            if(value.errorMsg || value.errorMessage || value.qtyErrorMsg || value.quantityErrorMessage || value.priceOption === 'Select a Price') {
+                                applyGlobalMsg('Action_Required', 'global-err-msg');
+                                action_req_error = true;
+                                return false;
+                                
+                            }
+                        });
+                     }
+                     if(!action_req_error) {
+                        removeGlobalMsg('Action_Required', 'global-err-msg');
+                     }
+                     
+                     
+                },
+                priceContractDetails: function(e) { 
+                    e.stopPropagation();
+                    var ele = e.currentTarget;
+                    var rowIndex = ele.dataset["index"];            
+                    pricingDetails = _.findWhere(allProducts, {"index": allProducts[rowIndex].index});
+                    insertData($('#OO-Custom-pricing').html(), '.price-contract-details-container', pricingDetails);
+                    $('#price-contract-details-modal').modal({
+                        backdrop: 'static',
+                        keyboard: false,
+                        show: true
+                    });
+                    isContracModalOpened = true;
+                    if(listCartItems[rowIndex]){                        
+                        if(allProducts[rowIndex].priceOption.toLowerCase() != ("Select a price").toLowerCase()) {
+                            $('#price-contract-details-modal .oo-price-option-apply').removeAttr('disabled');
+                        }
+                        
+                        if(listCartItems[rowIndex].isListPrice == true){
+                            $('input[id="list-price"]').prop('checked',true);
+                        }else{
+                            var ctrtId = listCartItems[rowIndex].contractId;
+                            $('input[data-id="'+ ctrtId +'"]').prop('checked',true);
+                        }
+                    }       
+                },
+                productNoKeyUpHandler : function(e){
+                    e.stopPropagation();
+                    if(e.keyCode === 13) {
+                        e.preventDefault();
+                        var index = $('.product-no').index(e.currentTarget);
+                        $('.quantity').eq(index).focus();
+                        $('.oo-add-to-cart').attr('disabled','disabled');
+                        this.showProductDetails(e.currentTarget);
+                    } 
+                },
+                quantityKeyUpHandler : function(e) {
+                    e.stopPropagation();
+                    var ele = e.currentTarget;
+                    if(e.keyCode === 13) {
+                        e.preventDefault();
+                        var index = $('.quantity').index(ele)+1;
+                        $('.product-no').eq(index).focus();
+                        $(ele).blur();
+                    }
+                },
+                showProductDetails: function(ele) {
+                    // defect: OO-2411
+                    var productId = $(ele).val();
+                    if(productId!=null){
+                        productId = $(ele).val().trim();
+                        $(ele).val(productId);
+                    }
+                    // end of defect: OO-2411
+                    var productIndex = $(ele).closest('.row').attr('id');
+                    var selectedRow = $('#'+ productIndex);
+                    if(productId){
+                        var mapProduct = new Object();
+                        var selectedSellerSFID = getSessionValue(selectedPlant);
+                        var selectedShipToId = getSessionValue(selectedShipTo);
+                        mapProduct[productIndex] = productId;
+                        if(!allProducts[productIndex] || allProducts[productIndex]["sku"] !== productId) {
+                            selectedRow.find('.icon-icons_delete').hide();
+                            selectedRow.find(".fa-spinner").removeClass("hide");
+                            $('.oo-add-to-cart').attr('disabled','disabled');
+                            counter++;
+                            getProductDetails(mapProduct, selectedSellerSFID, selectedShipToId);
+                        } else {
+                        	$('.oo-add-to-cart').removeAttr('disabled'); 
+                        }
+                    }else{
+                        //Clear the pulled data if user erases the product number
+                        selectedRow.find('.info-msg').hide();
+                        selectedRow.find('.error-msg').hide();
+                        selectedRow.find('.quantity-error-msg').hide();
+                        selectedRow.find('.product-no').removeClass('bulk-product packaged-product liquid-product lipstick-border');
+                        selectedRow.find('.description').empty();
+                        selectedRow.find('.quantity').val('');
+                        selectedRow.find('.quantity').removeClass('lipstick-border');
+                        selectedRow.find('.list-price-detail').empty();
+                        selectedRow.find('.price-contract-details strong').empty();
+                        selectedRow.find('.icon-icons_delete').hide();
+                        selectedRow.find('.lead-time').empty();
+                        selectedRow.find('.uom').empty();
+        
+                        //remove item from listCartItems
+                        if(listCartItems){
+                            if(listCartItems[productIndex]){
+                                delete listCartItems[productIndex];
+                            }
+                        }
+                        if(allProducts){
+                            if(allProducts[productIndex]){
+                                delete allProducts[productIndex];
+                            }
+                        }
+                    }
+                },
+                quantityBlurHandler: function(e) {
+                    var ele = e.currentTarget;
+                    var quantity = $(ele).val();
+                    if(quantity){//OO-2412
+                        quantity = quantity.trim();
+                        $(ele).val(quantity);
+                    }//OO-2412 - Ends
+                    var productIndex = $(ele).closest('.row').attr('id');
+                    var selectedRow = $('#'+ productIndex);
+                    var productData=allProducts[productIndex];
+                    if(allProducts && allProducts[productIndex]) {
+                        var obj = getParticularProduct(productIndex);
+                        selectedRow.find('.info-msg').hide();
+                        if(quantity) {
+                            var prodErrorMessage = allProducts[productIndex].errorMessage;
+                            var isInvalidProduct = false;
+                            allProducts[productIndex].quantity = quantity;
+                            var productNumber = allProducts[productIndex].sku;
+                            var product = allProducts[productIndex];
+                            if(listCartItems){
+                                if(listCartItems[productIndex]){
+                                    listCartItems[productIndex].quantity = quantity;
+                                    obj.quantity = quantity;
+                                }
+                            }
+                            
+                            var status = true; 
+                            var localCartType = '';
+                            var cartItems = listExistingCartItems;
+                            var skuQtymap = {};
+                            var errorFlag = false;
+                            $.each(listCartItems, function(key, value) {
+                                if(!(listCartItems[key].sku in skuQtymap)){
+                                    skuQtymap[listCartItems[key].sku] =JSON.parse(JSON.stringify(allProducts[key])); 
+                                }
+                                else{
+                                    var qty = Number(listCartItems[key].quantity);
+                                    if(qty) {
+                                        skuQtymap[listCartItems[key].sku].quantity=Number(skuQtymap[listCartItems[key].sku].quantity)+qty;
+                                    } else {
+                                        skuQtymap[listCartItems[key].sku].quantity=Number(skuQtymap[listCartItems[key].sku].quantity);
+                                    }
+                                    
+                                }
+                                if(cartItems) {
+                                    for( var j=0; j<cartItems.length; j++ ){
+                                        var cartItemSKU = cartItems[j].ccrz__Product__r.ccrz__SKU__c;
+                                        if((cartItemSKU) in skuQtymap){
+                                            if((skuQtymap[cartItemSKU].quantity % skuQtymap[cartItemSKU].palletSize) == 0 && skuQtymap[cartItemSKU].fullPalletReq == 'true'){
+                                                delete skuQtymap[cartItemSKU];
+                                            }else if(skuQtymap[cartItemSKU].fullPalletReq == 'false'){
+                                                delete skuQtymap[cartItemSKU];
+                                            }   
+                                        }
+                                    }
+                                }
+                            });
+                            
+                            if(!prodErrorMessage) {
+                                if(validateQuantity(quantity) != 2){
+                                    status = false;                
+                                    var errorMsg = CCRZ.pagevars.pageLabels['Invalid_Quantity'];
+                                    selectedRow.find('.quantity').addClass('lipstick-border');
+                                    selectedRow.find('.quantity-error-msg').empty().html(errorMsg).show();
+                                    selectedRow.find('.icon-icons_delete').show();
+                                    obj.productDetails.qtyErrorMsg = errorMsg;                          
+                                    errorFlag = true;
+                                    return;
+                                } else {
+                                    var quantityErrorMessage;
+                                    productIndex = $(ele).closest('.row').attr('id');
+                                    if(listCartItems[productIndex] && !$.isEmptyObject(skuQtymap)) {
+                                        if(skuQtymap[listCartItems[productIndex].sku] && !skuQtymap[listCartItems[productIndex].sku].errorMessage){
+                                            var isPallet=skuQtymap[productNumber].fullPalletReq=='true'?true:false;
+                                            quantityErrorMessage=minRequirements(isPallet,Number(skuQtymap[productNumber].palletSize),skuQtymap[productNumber].typeOfProduct,Number(skuQtymap[productNumber].minQuantity),skuQtymap[productNumber].sku,true,Number(skuQtymap[productNumber].quantity),skuQtymap[productNumber].pUOM);
+                                        }
+                                    }
+                                    if(quantityErrorMessage) {
+                                        $(ele).addClass('lipstick-border');
+                                        selectedRow.find('.quantity-error-msg').empty().html(quantityErrorMessage).show();
+                                        selectedRow.find('.icon-icons_delete').show();
+                                        errorFlag = true;
+                                        obj.productDetails.qtyErrorMsg = quantityErrorMessage;
+                                        obj.productDetails.errorMsg = '';
+                                        return;
+                                    }
+                                }
+                            }
+                            if(prodErrorMessage) {
+                                selectedRow.find('.info-msg').hide();
+                                /*var product_error_msg_array = [CCRZ.pagevars.pageLabels['Invalid_Product_number'].toLowerCase(), 
+                                                                CCRZ.pagevars.pageLabels['JDEDownPirceMessage'].toLowerCase(), 
+                                                                CCRZ.pagevars.pageLabels['Prod_Disc_Replacement'].toLowerCase(),
+                                                                CCRZ.pagevars.pageLabels['Prod_Num_Not_Sold'].toLowerCase(),
+                                                                CCRZ.pagevars.pageLabels['Prod_Disc_Without_Replacement'].toLowerCase(),
+                                                                CCRZ.pagevars.pageLabels['Product_Unavailable'].toLowerCase(),
+                                                                CCRZ.pagevars.pageLabels['Product_Out_Of_Season'].toLowerCase()];
+                                if(jQuery.inArray(prodErrorMessage.toLowerCase(), product_error_msg_array) != -1) {
+                                    //selectedRow.find('.quantity').removeClass('lipstick-border');
+                                    //selectedRow.find('.quantity-error-msg').hide();
+                                    selectedRow.find('.product-no').addClass('lipstick-border');
+                                    selectedRow.find('.error-msg').html(prodErrorMessage).show();
+                                    obj.productDetails.errorMsg = prodErrorMessage;
+                                    //obj.productDetails.qtyErrorMsg = '';
+                                }
+                                else {
+                                    //selectedRow.find('.product-no').removeClass('lipstick-border');
+                                    //selectedRow.find('.error-msg').hide();
+                                    selectedRow.find('.quantity').addClass('lipstick-border');
+                                    selectedRow.find('.quantity-error-msg').empty().html(prodErrorMessage).show();
+                                    obj.productDetails.qtyErrorMsg = prodErrorMessage;
+                                    //obj.productDetails.errorMsg = '';
+                                }*/
+                                if((prodErrorMessage.toLowerCase() == CCRZ.pagevars.pageLabels['Invalid_Quantity'].toLowerCase()) || validateQuantity(quantity) != 2) {
+                                    var invalidQtyErrorMsg = CCRZ.pagevars.pageLabels['Invalid_Quantity'];
+                                    selectedRow.find('.quantity').addClass('lipstick-border');
+                                    selectedRow.find('.quantity-error-msg').empty().html(invalidQtyErrorMsg).show();
+                                    obj.productDetails.qtyErrorMsg = invalidQtyErrorMsg;
+                                } else {
+                                    selectedRow.find('.product-no').addClass('lipstick-border');
+                                    selectedRow.find('.error-msg').html(prodErrorMessage).show();
+                                    obj.productDetails.errorMsg = prodErrorMessage;
+                                    selectedRow.find('.quantity').removeClass('lipstick-border');
+                                    selectedRow.find('.quantity-error-msg').hide();
+                                    obj.productDetails.qtyErrorMsg = "";
+                                }
+                                
+                                   
+                            } else {
+                               obj.productDetails.qtyErrorMsg = '';
+                               obj.productDetails.errorMsg = '';
+                               selectedRow.find('.error-msg').hide();
+                               selectedRow.find('.quantity-error-msg').hide();
+                               selectedRow.find('.product-no').removeClass('lipstick-border');
+                               selectedRow.find('.quantity').removeClass('lipstick-border');
+                            } 
+                        } else {
+                                var errorMsg = CCRZ.pagevars.pageLabels['Invalid_Quantity'];
+                                selectedRow.find('.quantity').addClass('lipstick-border');
+                                selectedRow.find('.quantity-error-msg').empty().html(errorMsg).show();
+                                selectedRow.find('.icon-icons_delete').show();
+                                obj.productDetails.qtyErrorMsg = errorMsg;                          
+                                errorFlag = true;
+                        }
+                    }
+                    
+                },
+                renderDesktop: function() {
+                    this.setElement($(this.$el));
+                    this.$el.html(this.templateDesktop(this.model));
+                    this.loadTemplate();
+                    if(isExcelUploadOpened) {
+                        openUploadPopUp();
+                        if(latestFileAttachment) {
+                            $('.file-name').html(latestFileAttachment.name);
+                        }
+                        if(excelError) {
+                            $('.errorMsg').html(excelError).show();
+                        }
+                    }
+                    CCRZ.pubSub.trigger("view:"+this.viewName+":refresh", this);
+                },
+                renderPhone: function() {
+                    this.setElement($(this.$el));
+                    this.$el.html(this.templatePhone(this.model));
+                    this.loadTemplate();
+                    CCRZ.pubSub.trigger("view:"+this.viewName+":refresh", this);
+                },
+                viewChanged: function() {
+                    if(this.currentView !== CCRZ.display.currentView) {
+                        this.currentView = CCRZ.display.currentView;
+                        return true;
+                    }
+                    return false;
+                },
+                renderViewChanged: function() {
+                    CCRZ.display.setCurrentView();
+                    if(this.viewChanged()) {
+                        if(!CCRZ.display.isPhone()) {
+                            $(this.mobileSelector).html('');
+                        }
+                        if($(window).width() < 768) {
+                            this.$el = CCRZ.display.isPhone() ? $(this.mobileSelector) : $(this.desktopSelector);
+                            this.renderPhone();
+                            
+                        } else {
+                            this.$el = $(this.desktopSelector);
+                            this.renderDesktop();
+                        }
+                        var replaceName = reOrder ? "Reorder" : "Quick Order";
+                        $('#navigation-warning-modal .navigation-warning').text(String.format(CCRZ.pagevars.pageLabels["navigation-warning-message"], replaceName));
+                        if(isWarningModalOpened) {
+                            $('.modal-backdrop.in').remove();
+                            $('#navigation-warning-modal').modal('show');
+                            setSourceAttributes();
+                        }
+                        if(isContracModalOpened) {
+                            $('.modal-backdrop.in').remove();
+                            insertData($('#OO-Custom-pricing').html(), '.price-contract-details-container', pricingDetails);
+                            $('#price-contract-details-modal').modal('show').show();
+                        }
+                    }
+                },
+                loadTemplate: function() {
+                    var source, sourceHeader, placeHolder;
+                    var prods = { 'products': products };
+                    if(CCRZ.pagevars.queryParams.pageKey=='reorder'){
+                        orderId = sessionStorage.getItem("order");
+                        if(orderId) {
+                            reOrder = true;
+                        }
+                    }
+                    var reOrderPage = { 'reOrder': reOrder, "isDataLoaded": isDataLoaded, "globalErrorMessage": globalErrorMessage};
+                    
+                    if($(window).width() < 768) {
+                        source = $("#quickorderrow-partial-mobile").html();
+                        sourceHeader = $("#quick-order-header-mobile").html();
+                        placeHolder = CCRZ.display.isPhone() ? '.quickorder-header-container-mobile': '.home_slider';
+                    }
+                    else {
+                        source   = $("#quickorderrow-partial-desktop").html(); 
+                        sourceHeader = $("#quick-order-header").html();
+                        placeHolder = '.home_slider';
+                    }
+                    insertData(sourceHeader, placeHolder, reOrderPage);
+                    insertData(source, '.quickorder-rows', prods);  
+                    
+                    if(!($('#global-err-msg').text())) {
+                        $('#global-err-msg').hide();  
+                    }          
+                },
+                getCartDetails: function(){
+                    this.model.getCartDetails( function(resp) {
+                        if(resp && resp.success) {
+                            var respData = resp.data;
+                            if(respData[0]) {
+                                cartId = respData[0].Id;
+                                //OO-1180
+                                globalEncryptedCartId = respData[0].ccrz__EncryptedId__c;
+                                shipDDate = new Date(respData[0].ccrz__RequestDate__c);
+                                shipDDate = (Number(shipDDate.getMonth()) + 1) +'/' + shipDDate.getDate() + '/' +shipDDate.getFullYear(); 
+                                //OO-1180
+                                //OO-2244
+                                if(respData[0].ccrz__E_CartItems__r) {
+                                	listExistingCartItems = respData[0].ccrz__E_CartItems__r;
+                                } else {
+                                	listExistingCartItems = new Array();
+                                }
+                                
+                                if(!listExistingCartItems) {
+                                    cartType = '';
+                                }
+                                //OO-2244 -Ends
+                                $.each(respData[0].ccrz__E_CartItems__r, function(key, value){
+                                	if(value) {
+                                		if(value.ccrz__Product__r) {
+                                			cartType = value.ccrz__Product__r.cc_oo_TypeOfProduct__c;
+                                		}
+                                    	shipToId = value.cc_oo_ShipToAccount__c;
+                                	}
+                                    return;
+                                });
+                            }
+                            if(listExistingCartItems.length == 0 && respData.length == 1 ) {
+                                differentTypes = false;
+                            	cartType = ''
+                            }
+                            if(respData[1]){
+                                if(respData[1].cc_oo_SplitCartType__c == 'Secondary'){
+                                    listExistingSecondaryCartItems = respData[1].ccrz__E_CartItems__r;
+                                    if(listExistingSecondaryCartItems){
+                                        cartType= respData[1].ccrz__E_CartItems__r[0].ccrz__Product__r.cc_oo_TypeOfProduct__c ;
+                                    }
+                                    if(listExistingCartItems || listExistingSecondaryCartItems) {
+                                        listExistingCartItems = listExistingCartItems.concat(listExistingSecondaryCartItems);
+                                    } 
+                                }
+                            }
+                        }
+                    });
+                },
+                getOrderDetails: function(orderId) {
+                    busyIndicator.show();
+                    var self=this;
+                    this.model.getOrderDetails(orderId, function(resp){
+                        if(resp && resp.success) {
+                            if(resp.data.shippingDate) {
+                                setSessionValue(shipDate, resp.data.shippingDate);
+                            }
+                            self.model.getProdDetails(resp.data['mapProducts'], function(resp){
+                                if(resp && resp.success) {
+                                    var prodMapData={
+                                        "prodMap":resp.data
+                                    };
+                                    loadFileData(prodMapData);
+                                } else {
+                                    busyIndicator.hide();
+                                }
+                            });
+                        }
+                    });
+                }
+            }); 
+            if(!tempSid || tempSid=='null'){
+                var message='<fieldset class="confirmOrder"><p>'+ CCRZ.pagevars.pageLabels['OO_Shipto_Validate']+'</p></fieldset>';
+                $('.quickorder_1_row_medium_container').append(message);
+                $('.center_column.phone_center_column').append(message);
+                $('.right_column').hide();
+                $('.phone_center_mid').hide();
+            } else {                
+                //OO-1976 : Ability to re-order from past orders 
+                orderId=null;
+                if(CCRZ.pagevars.queryParams.pageKey=='reorder'){
+                    orderId = sessionStorage.getItem("order");
+                }
+                
+                var prodCollections  = new  CCRZ.collections.QuickOrderCollection();
+                for(var i=0;i<15;i++){
+                    var object = new product(i);
+                    products.push(object);
+                    prodCollections.add(new CCRZ.models.QuickOrderModel({
+                        "prodIndex": i,
+                        "productDetails" : {}
+                    }));
+                }
+                $('.span3.visible-desktop').addClass('quick-order-view');
+                                
+                //get cart details
+                cartEncryptId = CCRZ.pagevars.queryParams.cartID || CCRZ.pagevars.queryParams.cartId;
+                sellerId = getSessionValue(selectedPlant);
+                Handlebars.registerPartial("navModal", $("#OO-Warning-Model").html());
+                Handlebars.registerPartial("excelUpoad", $("#excel-upload-modal-template").html());
+                if($(window).width() < 768) {
+                    Handlebars.registerPartial("quickorderrow", $("#quickorderrow-partial-mobile").html());
+                } else {
+                    Handlebars.registerPartial("quickorderrow", $("#quickorderrow-partial-desktop").html());
+                }
+                
+                busyIndicator = new CCRZ.views.BusyIndicator();
+                quickView = new  CCRZ.views.QuickOrderView(prodCollections);
+                CCRZ.dynamicViews.push(quickView);
+                CCRZ.dynamicViews.push(busyIndicator);
+                quickView.getCartDetails();
+                if(orderId!=null && orderId!='undefined'){
+                    reOrder=true;
+                    quickView.getOrderDetails(orderId);
+                }
+                setActiveClass();
+                handleWarningModal();
+            }
+            
+        });
+        
+        
+        
+        function handleWarningModal() {
+            // 2554 changes
+            var clickMethod = {};
+            CCRZ.pubSub.on("view:Menu:refresh", function(view) {
+                clickMethod = {
+                    "menuType" : $.proxy(CCRZ.views.Menu.prototype.navClickHandler, CCRZ.views.Menu.prototype),
+                    "cartData" : $.proxy(CCRZ.views.Menu.prototype.cartPage, CCRZ.views.Menu.prototype.cartPage),
+                    "myAccounts" : $.proxy(myAccountPage, this),
+                    "prodSearch": $.proxy(CCRZ.views.Menu.prototype.productSearch, CCRZ.views.Menu.prototype),
+                    "homePage": $.proxy(CCRZ.views.Menu.prototype.goHome, CCRZ.views.Menu.prototype), 
+                    "shipToChange": $.proxy(CCRZ.views.Menu.prototype.openShipToModal, CCRZ.views.Menu.prototype),
+                    "contactUs" : $.proxy(CCRZ.views.headerView.prototype.contactUsPage, CCRZ.views.headerView.prototype),
+                    "productList": $.proxy(CCRZ.views.headerView.prototype.prodListPage, CCRZ.views.headerView.prototype),
+                };
+                var clickEvents = CCRZ.views.Menu.prototype.events;
+                view.undelegate('click', 'a.menuTypeURL', "");
+                view.undelegate('click', '.cart-data', "");
+                view.undelegate('click', '#doSearch', "");
+                view.undelegate('click', '.ship-to-change', "");
+                view.undelegate('click', '.brandLogo', "");
+                view.undelegate('click', '.csrEmailAddress', "");
+                view.undelegate('click', '.welcome', "");
+                $(document).off('click', '.ui-autocomplete .ui-menu-item');
+                $('a.menuTypeURL').attr('data-name', 'menuType').addClass('warningClick');
+                $('.welcome').attr('data-name', 'myAccounts').addClass('warningClick');
+                $('#doSearch').attr('data-name', 'prodSearch').addClass('warningClick');
+                $('.ship-to-change').attr('data-name', 'shipToChange').addClass('warningClick');
+                $('.brandLogo').attr('data-name', 'homePage').addClass('warningClick');
+                $('.csrEmailAddress').attr('data-name', 'contactUs').addClass('warningClick');
+                $('.cart-data').attr({'data-name': 'cartData', 'data-id': cartId}).addClass('warningClick');
+            });
+            
+            CCRZ.pubSub.on("view:cartView:refresh", function(view) {                
+                view.undelegate('click', '.loggedInAction', "");
+                $(document).off('click', '.ui-autocomplete .ui-menu-item');
+                $(document).off("click", ".mobile-categoryLink");
+                var cartId = CCRZ.pagevars.queryParams.cartID || CCRZ.pagevars.queryParams.cartId;
+                $('.loggedInAction').attr({'data-name': 'cartData', 'data-id': cartId}).addClass('warningClick');
+                
+            });
+            CCRZ.pubSub.on("view:headerView:refresh", function(view) {
+                view.undelegate('click', '.ship-to-change', "");
+                view.undelegate('click', '.brandLogo', "");
+                view.undelegate('click', '.csrEmailAddress', "");
+                view.undelegate('click', '.brandLogo', "");
+                view.undelegate("click", ".mobile-categoryLink", "");
+                view.undelegate('click', '.welcome', "");
+                $(document).off('click', '.ui-autocomplete .ui-menu-item');
+                $('.ship-to-change').attr('data-name', 'shipToChange').addClass('warningClick');
+                $('.brandLogo').attr('data-name', 'homePage').addClass('warningClick');
+                $('.welcome').attr('data-name', 'myAccounts').addClass('warningClick');
+                $('.csrEmailAddress').attr('data-name', 'contactUs').addClass('warningClick');
+            });
+            CCRZ.pubSub.on("view:cartHeaderView:refresh", function(view) {
+                $(document).off('click', '.ui-autocomplete .ui-menu-item');
+            });
+            $(document).off('click', '.warningClick').on('click', '.warningClick',function(e) {
+                if(!($.isEmptyObject(allProducts))) {
+                    if(!$(this).hasClass('dropdown-toggle')) { 
+                        e.stopPropagation();
+                        $('#navigation-warning-modal').modal('show');
+                        isWarningModalOpened = true;
+                        sourceAttributes = this.attributes;
+                        setSourceAttributes();
+                        return false;
+                    }
+                 } else {
+                    clickMethod[this.dataset["name"]](e);
+                 }
+            });
+            
+            /*$('#navigation-warning-modal').on("shown", function() {
+                if(CCRZ.display.isTablet()) {
+                    window.scrollTo(0,300);
+                }
+            });*/ 
+            
+            $(document).off('click', '#navigation-warning-modal .btn-continue').on('click', '#navigation-warning-modal .btn-continue', function(e){
+                e.stopPropagation();
+                $('#navigation-warning-modal').modal('hide');
+                isWarningModalOpened = false;
+                clickMethod[this.dataset["name"]](e);
+            });
+            var replaceName = reOrder ? "Reorder" : "Quick Order";
+            $('#navigation-warning-modal .navigation-warning').text(String.format(CCRZ.pagevars.pageLabels["navigation-warning-message"], replaceName));
+        }
+        
+        function setSourceAttributes() {
+            var destination = $('#navigation-warning-modal .btn-continue');
+            for (i = 0; i < sourceAttributes.length; i++) {
+                var a = sourceAttributes[i];
+                if(a.name.includes("data-")) {
+                    destination.attr(a.name, a.value);
+                }
+            }
+        }
+        
+        function setActiveClass() {
+            setTimeout(function() {
+                if($('.nav-collapse .nav li')[0]) {
+                    var navItem = sessionStorage.getItem("navItem");
+                    $('.nav-collapse .nav li').removeClass('active');
+                    $('li[data-menuid='+ navItem+']').addClass('active');
+                    $(document).off('click', '.ui-autocomplete .ui-menu-item');
+                } else {
+                    setActiveClass();                       
+                }
+            }, 1000);
+        };        
+        Handlebars.registerHelper('isEndUser', function (endUser) {
+            if(endUser == '' || endUser == null) {
+                return false;
+            }
+            return true;                   
+        });
+        // To get the cart details
+        //to get the information label
+        this.getInformationLabel=function(productData,productRow){
+            var palletSize=0;
+            var minimumQuan=0;
+            if(productData['minQuantity']){
+                minimumQuan=productData['minQuantity'];
+            }
+            if(productData['palletSize']){
+                palletSize=productData['palletSize']
+            }
+            var isPallet;
+            if(productData['fullPalletReq']==='true'){
+            isPallet=true;
+            }
+            else{
+                isPallet=false;
+            }
+            var obj = getParticularProduct(productData.index);
+            var informationLabel=minRequirements(isPallet,Number(palletSize),productData['typeOfProduct'],Number(minimumQuan),productData['sku'],false,0,productData['pUOM']);
+                if(informationLabel){
+                    var pallet_packaged= String.format(CCRZ.pagevars.pageLabels['pallet_packaged'],minimumQuan,productData['pUOM']);
+                    if(informationLabel===pallet_packaged || informationLabel===CCRZ.pagevars.pageLabels['packaged_message']){
+                            informationLabel += String.format(CCRZ.pagevars.pageLabels['Pallet_size'],palletSize,productData['pUOM']);
+                     }
+                    if(obj && obj.productDetails){
+                       obj.productDetails.infoError = informationLabel;
+                    }
+                    productRow.find('.info-msg').html(informationLabel).show();
+                    if((!isPallet) && Number(minimumQuan)==1){
+                             productRow.find('.info-msg').hide();
+                    }
+            } else {
+                if(obj && obj.productDetails){
+                    obj.productDetails.infoError = '';
+                }
+                productRow.find('.info-msg').hide();
+
+            }
+            
+        }
+        
+        function openUploadPopUp() {
+            $('.modal-backdrop.in').remove();
+            $('#excel-upload-modal').modal({
+                backdrop: 'static',
+                keyboard: false,
+                show: true
+            });
+            if(Object.size(allProducts) > 0) {
+                $('.show-quick-order-error-msg').show();
+            }
+            else {
+                $('.show-quick-order-error-msg').hide();
+            }
+            isExcelUploadOpened = true;
+        }
+        
+        // To get the product details
+        var productDetails;
+        shipDDate = getSessionValue(shipDate);
+        this.getProductDetails = function(mapProduct, selectedSellerSFID) {
+            var remoteCall = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_QuickOrderController'});
+            remoteCall.invokeCtx(
+                    'getProductDetails', mapProduct, selectedSellerSFID, selectedShipToId, shipDDate,null,globalEncryptedCartId, 
+                    function(resp){
+                        
+                        if(resp && resp.success) {
+                        	counter--;
+                        	console.log(counter);
+                            var respData = resp.data;
+                            productDetails = resp.data;
+                            if(isFileLoad == false){
+                                $.each(respData, function( key, value ) {
+                                    var productRow = $('#'+ key);
+                                    allProducts[key] = value;
+                                    productRow.find('.product-no').val(allProducts[key].sku);
+                                    var obj = getParticularProduct(key);
+                                    obj.productDetails = value;
+                                    productRow.find('.lead-time').empty().html(value.leadTime);
+                                    productRow.find('.description').empty().html(value.shortDescription);
+                                    productRow.find(".fa-spinner").addClass("hide");
+                                    if(counter == 0) {
+                                    	$('.oo-add-to-cart').removeAttr('disabled'); 
+                                    }
+                                    productRow.find('.icon-icons_delete').show();
+                                    var priceOptionTag = productRow.find('.price-option');
+                                    var priceOption = value.priceOption;
+                                    var productData=allProducts[key];
+                                    var error_message;
+                                    
+                                    if(priceOption){
+                                        priceOptionTag.show();
+                                        priceOption = priceOption.toLowerCase();
+                                        var listPriceTag = priceOptionTag.find('.list-price-detail');
+                                        var selectPriceTag = priceOptionTag.find('a');
+                                        if(priceOption === 'List Price'.toLowerCase()){
+                                            listPriceTag.empty().html(value.priceOption).show();
+                                            selectPriceTag.hide();
+                                        }else if(priceOption === 'Select a Price'.toLowerCase()){
+                                            selectPriceTag.show();
+                                            selectPriceTag.find('strong').empty().html(value.priceOption).show();
+                                            listPriceTag.hide();
+                                        }
+                                    }
+                                    
+                                    productRow.find('.uom').empty().html(value.UOMD);
+
+                                    error_message = value.errorMessage;
+                                    if(error_message){
+                                        if(jQuery.inArray(error_message, quantity_error_msg) ==0) {
+                                            //obj.productDetails.errorMsg = '';
+                                            obj.productDetails.qtyErrorMsg = error_message;
+                                            //productRow.find('.error-msg').hide();
+                                            productRow.find('.quantity-error-msg').empty().html(error_message).show(); 
+                                            productRow.find('.quantity').addClass("lipstick-border");
+                                            //productRow.find('.product-no').removeClass("lipstick-border");
+                                            
+                                        } 
+                                        else if(jQuery.inArray(error_message, quantity_error_msg) ==1){
+                                            obj.productDetails.errorMsg = error_message;
+                                            //obj.productDetails.qtyErrorMsg = '';
+                                            //productRow.find('.quantity-error-msg').hide();
+                                            productRow.find('.info-msg').hide();
+                                            productRow.find('.error-msg').empty().html(error_message).show();
+                                            productRow.find('.product-no').removeClass('bulk-product packaged-product liquid-product');
+                                            productRow.find('.product-no').addClass("lipstick-border");
+                                            
+                                        }
+                                        else {
+                                            obj.productDetails.errorMsg = error_message;
+                                            //obj.productDetails.qtyErrorMsg = '';
+                                            //productRow.find('.quantity-error-msg').hide();
+                                            productRow.find('.info-msg').hide();
+                                            productRow.find('.error-msg').empty().html(error_message).show();
+                                            productRow.find('.product-no').removeClass('bulk-product packaged-product liquid-product');
+                                            productRow.find('.product-no').addClass("lipstick-border");
+                                            //productRow.find('.quantity').removeClass("lipstick-border");
+                                            
+                                        }
+                                        productRow.find('.price-option').show();
+                                        productRow.find('.icon-icons_delete').show();
+                                        
+                                    }else{
+                                        obj.productDetails.errorMsg = '';
+                                        obj.productDetails.qtyErrorMsg = '';
+                                        productRow.find('.product-no').removeClass("lipstick-border");
+                                        productRow.find('.quantity').removeClass("lipstick-border");
+                                        productRow.find('.error-msg').hide();
+                                        productRow.find('.quantity-error-msg').hide();
+                                        productRow.find('.price-option').show();
+                                        getInformationLabel(allProducts[key],productRow);
+                                     }
+                                    
+
+                                    //Logic to set the legend colors
+                                    var typeOfProduct = value.typeOfProduct;
+                                    if(typeOfProduct){
+                                        $('.legends').show();
+                                        typeOfProduct = typeOfProduct.toLowerCase();
+                                        if(typeOfProduct === ('BAG').toLowerCase()){
+                                            productRow.find('.product-no').removeClass('bulk-product').removeClass('liquid-product').addClass('packaged-product');    
+                                        }else if(typeOfProduct === ('BULK').toLowerCase()){
+                                            productRow.find('.product-no').removeClass('packaged-product').removeClass('liquid-product').addClass('bulk-product');    
+                                        }else if(typeOfProduct === ('LIQUID').toLowerCase()){
+                                            productRow.find('.product-no').removeClass('bulk-product').removeClass('packaged-product').addClass('liquid-product');
+                                        }
+                                    }
+                                    else{
+                                        productRow.find('.product-no').removeClass('bulk-product').removeClass('packaged-product').removeClass('liquid-product');
+                                        $('.legends').hide();
+                                    }
+                                    //get Quantity
+                                    var qty = productRow.find('.quantity').val();
+                                    if(qty){
+                                        if(validateQuantity(qty) == 2){
+                                            allProducts[key].quantity = qty;
+                                        }
+                                        else{
+                                            if(!error_message) {
+                                                var errorMsg = CCRZ.pagevars.pageLabels['Invalid_Quantity'];
+                                                productRow.find('.quantity-error-msg').html(errorMsg).show();
+                                                productRow.find('.quantity').addClass("lipstick-border");
+                                                obj.productDetails.qtyErrorMsg = errorMsg;
+                                            }
+                                        }
+                                    }
+                                    productRow.find('.remove').show();
+                                    //Add to cart
+                                    addCartItem(key);
+
+                                    if(value.errorMessage){
+                                        var msg = CCRZ.pagevars.pageLabels['Invalid_Product_number'].toLowerCase();
+                                        if(value.errorMessage.toLowerCase() === msg){
+                                            //Clear the pulled data if user erases the product number
+                                            productRow.find('.product-no').removeClass('bulk-product').removeClass('packaged-product').removeClass('liquid-product');
+                                            productRow.find('.description').empty();
+                                            //productRow.find('.quantity').val('');
+                                            productRow.find('.list-price-detail').empty();
+                                            productRow.find('.price-contract-details strong').empty();
+                                            productRow.find('.lead-time').empty();
+                                            productRow.find('.uom').empty();
+
+                                            //remove item from listCartItems
+                                            /*if(listCartItems){
+                                                if(listCartItems[key]){
+                                                    delete listCartItems[key];
+                                                }
+                                            }
+                                            if(allProducts){
+                                                if(allProducts[key]){
+                                                    delete allProducts[key];
+                                                }
+                                            }*/
+                                        }
+                                    }
+                                    
+                                    //Check for cartType
+                                    if(cartType){
+                                        if(value.typeOfProduct){
+                                            if(value.typeOfProduct != cartType){
+                                                applyGlobalMsg('OO_AddToCart_Validate', 'global-err-msg');
+                                            }
+                                        }
+                                    }
+                                });
+                                isDataLoaded = true;    
+                            }else{
+                                loadFileData(respData);
+                                isDataLoaded = true;
+                            }  
+                                                      
+                        } else {
+                            busyIndicator.hide();
+                        }
+                            
+                    },   {buffer:false,escape:false,nmsp:false}
+                );
+        };
+        
+        function getParticularProduct(value) {
+            var index = parseInt(value.split('p')[1]);
+            var obj = _.findWhere(products, {"prodIndex": index});
+            return obj;
+        };
+        
+
+        function loadFileData(respData){
+            latestFileAttachment=null;
+            //Clear the previous array
+            $('.quickorder-rows').empty();
+            //Prepare fresh products list with the loaded data
+            var loadRecordsCount = Object.size(respData['prodMap']);
+            if(reOrder){
+                rowsCount = loadRecordsCount > minimumRowCount ? loadRecordsCount : minimumRowCount;
+            }
+            else{
+                rowsCount = loadRecordsCount > quickOrderRowLimit? quickOrderRowLimit : (loadRecordsCount > minimumRowCount ? loadRecordsCount : minimumRowCount);
+            }             
+            products = [];
+            if(rowsCount > 0){
+                for(i = 0; i< rowsCount ; i++ ){
+                    var object = new product(i);
+                    products.push(object);
+                }
+                //Populate the data
+                var source;
+                var prods = { 'products': products };
+                if($(window).width() < 768) {
+                     source = $("#quickorderrow-partial-mobile").html();
+                } else {
+                    source = $("#quickorderrow-partial-desktop").html();
+                }
+                var htmlOutput = compileHandler( source, prods );
+                $('.quickorder-rows').append(htmlOutput);
+            }//To add additional rows more than 15 - Ends
+
+            $.each(respData['prodMap'], function( key, value ) {
+                var productRow = $('#'+ key);
+                //productRow.find('.product-no').blur();
+                allProducts[key] = value;
+                var obj = getParticularProduct(key);
+                obj.productDetails = value;
+                productRow.find('.product-no').val(value.sku);
+                productRow.find('.quantity').val(value.quantity);
+                productRow.find('.lead-time').empty().html(value.leadTime);
+                productRow.find('.description').empty().html(value.shortDescription); 
+                //$('div #'+ key).find('.price-option a strong').empty().html(value.priceOption);
+                productRow.find('.uom').empty().html(value.UOMD);
+                productRow.find('.icon-icons_delete').show();
+                if(value.errorMessage){
+                        obj.productDetails.errorMsg = value.errorMessage; 
+                        if(!(value.errorMessage==quantity_error_msg[0])){
+                            productRow.find('.product-no').addClass('lipstick-border');
+                            productRow.find('.error-msg').empty().html(value.errorMessage).show();
+                        }
+                        productRow.find('.price-option').show();
+                        productRow.find('.icon-icons_delete').show();
+                }else{
+                    obj.productDetails.errorMsg = '';
+                    productRow.find('.error-msg').empty().hide();
+                    productRow.find('.product-no').removeClass('lipstick-border');
+                    getInformationLabel(allProducts[key],productRow);
+                }
+
+                /* with css */
+                var priceOptionTag = productRow.find('.price-option');
+                var priceOption = value.priceOption;
+                if(priceOption){
+                    priceOptionTag.show();
+                    priceOption = priceOption.toLowerCase();
+                    var listPriceTag = priceOptionTag.find('.list-price-detail');
+                    var selectPriceTag = priceOptionTag.find('a');
+                    if(priceOption === 'List Price'.toLowerCase()){
+                        listPriceTag.empty().html(value.priceOption).show();
+                        selectPriceTag.hide();
+                    }else if(priceOption === 'Select a Price'.toLowerCase()){
+                        selectPriceTag.show();
+                        selectPriceTag.find('strong').empty().html(value.priceOption).show();
+                        listPriceTag.hide();
+                    }
+                }
+                
+                productRow.find('.uom').empty().html(value.UOMD);
+                var typeOfProduct = value.typeOfProduct;
+                
+                if(typeOfProduct){
+                    $('.legends').show();
+                    typeOfProduct = typeOfProduct.toLowerCase();
+                    if(typeOfProduct === ('BAG').toLowerCase()){
+                        productRow.find('.product-no').addClass('packaged-product');    
+                    }else if(typeOfProduct === ('BULK').toLowerCase()){
+                        productRow.find('.product-no').addClass('bulk-product');    
+                    }else if(typeOfProduct === ('LIQUID').toLowerCase()){
+                        productRow.find('.product-no').addClass('liquid-product');
+                    }
+               }
+                /* with css */
+                addCartItem(key);
+                productRow.find('.quantity').blur();                
+            });
+            $('.oo-add-to-cart').removeAttr('disabled');
+            isFileLoad = false;
+            isDataLoaded = true;
+            busyIndicator.hide();
+        }
+
+
+        function applyValidationMsg(pageLabelName, location){
+            var errorMsg = CCRZ.pagevars.pageLabels[pageLabelName].format(allProducts[location].minQuantity);
+            $('div #'+ location).find('.error-msg').empty().html(errorMsg);
+            $('div #'+ location).find('.icon-icons_delete').show();
+        }
+
+        function applyGlobalMsg(pageLabelName, location){
+            var errorMsg = CCRZ.pagevars.pageLabels[pageLabelName];
+            
+            if(location === 'global-err-msg') {
+                var global_error_msg_block = $('#global-err-msg').html();
+                if((global_error_msg_block.indexOf(errorMsg) >=0)) {
+                    $('#global-err-msg').show();
+                } else {
+                    $('#global-err-msg').prepend('<div class="global-error">'+errorMsg+'</div>').show();
+                }
+                window.scrollTo(0,0);
+                globalErrorMessage = $('#global-err-msg').html();
+            } else {
+                $('#'+ location).html(errorMsg).show();
+            }
+        }
+        
+        function removeGlobalMsg(pageLabelName, location) {
+            var errorMsg = CCRZ.pagevars.pageLabels[pageLabelName];
+            if(location === 'global-err-msg') {
+                var global_error_msg_block = $('#global-err-msg').html();
+                if((global_error_msg_block.indexOf(errorMsg) >=0)) {
+                    $('.global-error:contains('+errorMsg+')').remove();
+                    globalErrorMessage = $('#global-err-msg').html();
+                }
+            }
+        }
+
+        String.prototype.format = function(){
+           var content = this;
+           for (var i=0; i < arguments.length; i++)
+           {
+                var replacement = '{' + i + '}';
+                content = content.replace(replacement, arguments[i]);  
+           }
+           return content;
+        };
+
+        
+        function validateQuantity(quantity){
+            if(quantity){
+                if(quantity.toString().match(/^\d+$/)){
+                    if(quantity != 0 && quantity != '0'){
+                        return 2;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+            }
+        }
+
+        $(document).off('click', '.contract.close').on('click', '.contract.close', function(e){
+            e.stopPropagation();
+            $('#price-contract-details-modal').modal('show');
+        });
+
+        /**
+         *  Quick Order link  - OO-1540
+        **/
+        var quickOrderRedirectUrl = function(){
+            var cartId = CCRZ.pagevars.queryParams.cartID || CCRZ.pagevars.queryParams.cartId;
+            if(!cartId){
+                cartId = globalEncryptedCartId;
+            }
+            var url = CCRZ.pagevars.currSiteURL + "ccrz__Cart?cartId=" + cartId + getCSRQueryString();
+            return url;
+        };
+
+        function convertProductsMap(){
+            if(allProducts){
+                $.each(allProducts, function(key, value){
+                    finalProducts[value.sku] = value; 
+                });
+                return JSON.stringify(finalProducts);
+            }
+        }
+
+        /*
+            Method to check the repeatative products in Quick Order form 
+        **/
+        var processCartItems = function(){
+            var newlistCartItems = new Object();    
+            if(Object.size(listCartItems) > 1){
+                
+                $.each(listCartItems, function(key, value){
+                    var newItem = value.isListPrice? newlistCartItems[value.sku+';listprice'] : newlistCartItems[value.sku+';'+value.contractId];
+                    if(newItem){
+                        if(value.isListPrice == true){
+                            if(value.isListPrice == newlistCartItems[value.sku+';listprice'].isListPrice){
+                                var qty1 = Number(listCartItems[key].quantity);
+                                var qty2 = Number(newlistCartItems[value.sku+';listprice'].quantity);
+                                var sum = qty1 + qty2;
+                                var oldIndex = newlistCartItems[value.sku+';listprice'].index;
+                                listCartItems[oldIndex].quantity = sum;
+                                delete listCartItems[key];
+                            }
+                        }else if(value.isListPrice == false){
+                            if(value.contractId == newlistCartItems[value.sku+ ';'+value.contractId].contractId){
+                                var qty1 = Number(listCartItems[key].quantity);
+                                var qty2 = Number(newlistCartItems[value.sku+ ';'+value.contractId].quantity);
+                                var sum = qty1 + qty2;
+                                var oldIndex = newlistCartItems[value.sku+ ';'+value.contractId].index;
+                                listCartItems[oldIndex].quantity = sum;
+                                delete listCartItems[key];
+                            }              
+                        }
+                    }else{
+                        if(value.isListPrice == true){
+                            newlistCartItems[value.sku + ';listprice'] = value;
+                        }else if(value.isListPrice == false){
+                            newlistCartItems[value.sku + ';'+ value.contractId] = value;
+                        }
+                    }
+                });
+            }
+
+            //OO-2244 - check for existing cartItems
+            var mapExistingCartItems = processExistingCartItems();
+            if(mapExistingCartItems){
+                $.each(listCartItems, function(key, value){
+                    var existingCartItem = value.isListPrice? mapExistingCartItems[value.sku+';listprice'] : mapExistingCartItems[value.sku+';'+value.contractId];
+                    if(existingCartItem){
+                        if(value.isListPrice == true){
+                            if(value.isListPrice == existingCartItem.cc_oo_IsListPrice__c){
+                                var qty1 = Number(listCartItems[key].quantity);
+                                var qty2 = Number(existingCartItem.ccrz__Quantity__c);
+                                var sum = qty1 + qty2;
+                                //var oldIndex = newlistCartItems[value.sku+';listprice'].index;
+                                listCartItems[key].quantity = sum;
+                                listCartItems[key].Id = existingCartItem.Id;
+                            }
+                        }else if(value.isListPrice == false){
+                            if(value.contractId == existingCartItem.cc_oo_ContractPrice__c){
+                                var qty1 = Number(listCartItems[key].quantity);
+                                var qty2 = Number(existingCartItem.ccrz__Quantity__c);
+                                var sum = qty1 + qty2;
+                                //var oldIndex = newlistCartItems[value.sku+ ';'+value.contractId].index;
+                                listCartItems[key].quantity = sum;
+                                listCartItems[key].Id = existingCartItem.Id;
+                                //delete listCartItems[key];
+                            }              
+                        }
+                    }
+                });
+            }
+            //OO-2244 - check for existing cartItems - Ends
+        }
+
+        /*
+            //OO-2244
+            Method to check the repeatative products in Quick Order form 
+        **/
+        var processExistingCartItems = function(){            
+            var newlistExistingCartItems = new Object();    
+            if(Object.size(listExistingCartItems) > 0){//OO-2673
+                $.each(listExistingCartItems, function(key, value){
+	                if(value && value.ccrz__Product__r) {
+	                	var cartItemSKU = value.ccrz__Product__r.ccrz__SKU__c;
+	                }
+                    
+                    if(value.cc_oo_IsListPrice__c == true){
+                        newlistExistingCartItems[cartItemSKU + ';listprice'] = value;
+                    }else if(value.cc_oo_IsListPrice__c == false){
+                        var contractName = value.cc_oo_ContractPrice__c;
+                        newlistExistingCartItems[cartItemSKU + ';' + contractName] = value;   
+                    }                    
+                });
+            }
+            return newlistExistingCartItems;
+        }
+
+        /*
+            CartItems validation
+        **/
+        var validateCartItems = function(){
+            
+            if(Object.size(listCartItems) > 0){
+
+                var status = true; 
+                var localCartType = '';
+                var cartItems = listExistingCartItems;
+                var skuQtymap ={};
+                var errorFlag = false, differentTypes = false, inlineError = false;
+               
+                 $.each(listCartItems, function(key, value){
+                    if(!(listCartItems[key].sku in skuQtymap)){
+                        skuQtymap[listCartItems[key].sku] = JSON.parse(JSON.stringify(allProducts[key]));
+                    }
+                    else{
+                        var qty = Number(listCartItems[key].quantity);
+                        if(qty && Number(skuQtymap[listCartItems[key].sku].quantity)) {
+                            skuQtymap[listCartItems[key].sku].quantity=Number(skuQtymap[listCartItems[key].sku].quantity)+qty;
+                        } else if(qty) {
+                            skuQtymap[listCartItems[key].sku].quantity=qty;
+                        }
+                    }
+                    if(cartItems){
+                        for( var j=0; j<cartItems.length; j++ ){
+                            var cartItemSKU = cartItems[j].ccrz__Product__r.ccrz__SKU__c;
+                            if((cartItemSKU) in skuQtymap){
+                                if((skuQtymap[cartItemSKU].quantity % skuQtymap[cartItemSKU].palletSize) == 0 && skuQtymap[cartItemSKU].fullPalletReq == 'true'){
+                                    delete skuQtymap[cartItemSKU];
+                                }else if(skuQtymap[cartItemSKU].fullPalletReq == 'false'){
+                                    delete skuQtymap[cartItemSKU];
+                                }   
+                            }
+                        }
+                    }
+                 });
+                 $.each(skuQtymap,function(key,value){
+                    if(!skuQtymap[key].errorMessage){
+                        var isPallet=skuQtymap[key].fullPalletReq=='true'?true:false;
+                        skuQtymap[key].quantityErrorMessage=minRequirements(isPallet,Number(skuQtymap[key].palletSize),skuQtymap[key].typeOfProduct,Number(skuQtymap[key].minQuantity),skuQtymap[key].sku,true,Number(skuQtymap[key].quantity),skuQtymap[key].pUOM);
+                    }
+                 });
+                $.each(listCartItems, function(key, value){
+                    var prodMessage=allProducts[key].errorMessage;
+                    var productRow = $('#'+ key);
+                    productRow.find('.info-msg').hide();
+                    if(value.productType && !localCartType){
+                        localCartType = value.productType;
+                        if(cartType){
+                            if(cartType != localCartType){
+                                status = false;
+                                applyGlobalMsg('OO_AddToCart_Validate', 'global-err-msg');
+                                errorFlag = true;
+                                differentTypes = true;
+                            }
+                        }   
+                    }else if(localCartType && localCartType!=undefined ){
+                        if(value.productType){ 
+                            if(localCartType.toLowerCase() != value.productType.toLowerCase()){
+                                status = false;
+                                applyGlobalMsg('OO_AddToCart_Validate', 'global-err-msg');
+                                errorFlag = true;
+                                differentTypes = true;
+                            }
+                        }
+                    }
+                if(!prodMessage){
+                    var obj_item = getParticularProduct(key);
+                    if(!value.quantity || value.quantity == 0 || validateQuantity(value.quantity) != 2){
+                        var errorMsg = CCRZ.pagevars.pageLabels['Invalid_Quantity'];
+                        productRow.find('.quantity').addClass('lipstick-border');
+                        productRow.find('.quantity-error-msg').empty().html(errorMsg).show();
+                        obj_item.productDetails.qtyErrorMsg = errorMsg;
+                        applyGlobalMsg('Action_Required', 'global-err-msg');
+                        status = false;
+                        errorFlag = true;
+                        inlineError = true;
+                    }
+                    
+                    else if(!value.isListPrice){
+                        if(!value.contractId){
+                            status = false;
+                            productRow.find('.quantity').removeClass('lipstick-border');
+                            var errorMsg = CCRZ.pagevars.pageLabels['Price_Not_Selected'];
+                            productRow.find('.error-msg').empty().html(errorMsg).show();
+                            obj_item.productDetails.errorMsg = errorMsg;
+                            productRow.find('.icon-icons_delete').show();
+                            applyGlobalMsg('Action_Required', 'global-err-msg');
+                            errorFlag = true;
+                            inlineError = true;
+                        }
+                    }
+                    else if(!$.isEmptyObject(skuQtymap) && skuQtymap[listCartItems[key].sku] && (skuQtymap[listCartItems[key].sku].errorMsg || skuQtymap[listCartItems[key].sku].errorMessage || skuQtymap[listCartItems[key].sku].qtyErrorMsg || skuQtymap[listCartItems[key].sku].quantityErrorMessage)) {
+                        status = false;
+                        applyGlobalMsg('Action_Required', 'global-err-msg');
+                        var item_quantityErrorMessage = skuQtymap[listCartItems[key].sku].quantityErrorMessage || skuQtymap[listCartItems[key].sku].qtyErrorMsg;
+                        if(item_quantityErrorMessage) {
+                            productRow.find('.quantity').addClass('lipstick-border');
+                            productRow.find('.quantity-error-msg').html(item_quantityErrorMessage).show();
+                            obj_item.productDetails.qtyErrorMsg = item_quantityErrorMessage;
+                        }
+                        errorFlag = true;
+                        inlineError = true;
+                    }
+                  }
+                  else{ errorFlag = true;
+                        status=false;
+                        applyGlobalMsg('Action_Required', 'global-err-msg');
+                        inlineError = true;
+                  }
+                  if(!errorFlag) {
+                      $('#global-err-msg').hide();
+                      globalErrorMessage = '';
+                  }
+                  if(!differentTypes) {
+                    removeGlobalMsg('OO_AddToCart_Validate', 'global-err-msg');
+                  }
+                  if(!inlineError) {
+                    removeGlobalMsg('Action_Required', 'global-err-msg');
+                  }
+                });
+                return status;
+            }else{
+                removeGlobalMsg('OO_AddToCart_Validate', 'global-err-msg');
+                applyGlobalMsg('Action_Required', 'global-err-msg');
+                return false;
+            }
+        }
+        
+        
+        
+
+        function addCartItem(rowIndex){
+            var product = allProducts[rowIndex];
+            var isListPrice;
+            var contractId = '';
+            var netListPrice = '';
+            var itemPalletPrice = '';
+            var isfreightincluded = false;
+            if(product.price){
+                netListPrice = product.price.netListPrice;
+                itemPalletPrice = product.price.palletPrice;
+            }
+            if(allProducts[rowIndex].priceOption == 'List Price'){
+                isListPrice = true;
+                contractId = '';
+            }
+            if(allProducts[rowIndex] && allProducts[rowIndex].price && !allProducts[rowIndex].price.isfreightincluded) {
+                isfreightincluded = allProducts[rowIndex].price.isfreightincluded;
+            }
+            
+            var newCartItem = new cartItem(rowIndex, product.sku,cartId, '', product.productId, sellerId, product.quantity, netListPrice, 
+                                            isListPrice, product.UOM, product.typeOfProduct, contractId, product.leadTime,netListPrice, itemPalletPrice,isfreightincluded);
+            listCartItems[rowIndex] = newCartItem;
+        }
+
+        var selectedPriceOption, contractSFID;
+        
+        Object.size = function(obj) {
+            var size = 0, key;
+            for (key in obj) {
+                if (obj.hasOwnProperty(key)) size++;
+            }
+            return size;
+        };
+        
+
+        /*****************************************************Shivani Code ************************************************/
+
+        $(document).off('change','#attachmentFile').on('change','#attachmentFile',function (e) {
+            if(this.value.length) {
+                latestFileAttachment = this.files[0];
+                var selectedFileName = this.value.split('/').pop().split('\\').pop();
+                $('.file-name').html(selectedFileName);
+                $('.errorMsg').hide();
+            }
+        });
+
+        var globalData;
+        var isFileLoad = false;
+        function uploadCSV(event) {
+            removeGlobalMsg('Action_Required', 'global-err-msg');
+            if(latestFileAttachment){
+                var file = latestFileAttachment;
+            }
+            isFileLoad = true;
+            if(file){
+                reader = new FileReader();
+                reader.onloadend= function(event) {
+                    globalData=event.target.result;
+                    remoteInvoke(file); 
+                };
+                reader.readAsText(file);
+    
+                function remoteInvoke(dataFile) {
+                    var regex = new RegExp(/\.(csv)$/i);
+                    busyIndicator.show();
+                    var filename=dataFile.name;
+                    if(regex.test(filename)) {
+                        var cartId = CCRZ.pagevars.currentCartID;
+                        var remoteCall = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_QuickOrderController'});
+                        remoteCall.invokeCtx(
+                            'parseCSV',globalData ,filename, selectedSellerSFID, selectedShipToId, shipDDate,cartId ,
+                            function(resp){
+                                if(resp) {
+                                    var msg;
+                                    var msg=resp.data['errorMsg'];
+                                    if(msg){
+                                        excelError = msg;
+                                        $('.errorMsg').html(msg).show();
+                                        busyIndicator.hide();
+                                    }else{      
+                                        msg=resp.data['maxLineMsg'];
+                                        if(msg) {
+                                            $("#limit-exceeded-modal").modal('show');
+                                        }
+                                        excelError = '';
+                                        $('.errorMsg').hide();
+                                        $('.file-name').html('No file selected');
+                                        $('#attachmentFile').val('');
+                                        $('#excel-upload-modal').modal('hide');
+                                        isExcelUploadOpened = false;
+                                        loadFileData(resp.data);
+                                    }
+                                } else {
+                                    busyIndicator.hide();
+                                    excelError = CCRZ.pagevars.pageLabels["SystemError"];
+                                    $('.errorMsg').html(excelError).show();
+                                }
+                            }, {buffer:false,escape:false,nmsp:false,timeout: 120000}); 
+                       } else {
+                            excelError = CCRZ.pagevars.pageLabels["Invalid_File"];
+                            $('.errorMsg').html(excelError).show();
+                            busyIndicator.hide();
+                       }
+                    }
+                } else {
+                    excelError = CCRZ.pagevars.pageLabels["Upload_Msg"];
+                    $('.errorMsg').html(excelError).show();
+                }
+        }
+        
+        $(document).off('click', '.btn-cancel').on('click', '.btn-cancel', function(e) {
+            e.stopPropagation();
+            $('.errorMsg').html('').hide();
+            $('.file-name').html('No file selected');
+            $('#attachmentFile').val('');
+            $('#excel-upload-modal').modal('hide');
+            latestFileAttachment = null;
+        });
+        
+        $(document).off("hidden", "#excel-upload-modal").on("hidden", "#excel-upload-modal", function() {
+            isFileLoad = false;
+        });
+        
+        /*****************************************************Shivani Code ************************************************/
+    </script>
+</apex:component>

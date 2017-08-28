@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Maps product to available quantity</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>cc_oo_External_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>External_ID</label>
+        <length>64</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>cc_oo_IsOnlyPalletProduct__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Only Pallet Product</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>cc_oo_LeadTime__c</fullName>
+        <externalId>false</externalId>
+        <label>Lead Time</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>cc_oo_MinQuantity__c</fullName>
+        <externalId>false</externalId>
+        <label>CC OO MinQuantity</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>cc_oo_PalletSize__c</fullName>
+        <externalId>false</externalId>
+        <label>CC OO Pallet Size</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>cc_oo_Seller__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>CC OO Seller</label>
+        <referenceTo>ccrz__E_Seller__c</referenceTo>
+        <relationshipLabel>CC Product Inventory Items</relationshipLabel>
+        <relationshipName>CC_Product_Inventory_Items</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>cc_oo_ShippingWeight__c</fullName>
+        <externalId>false</externalId>
+        <label>CC OO ShippingWeight</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>cc_oo_dw_checksum__c</fullName>
+        <externalId>false</externalId>
+        <label>DWchecksum</label>
+        <length>32</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ccrz__AvailabilityMessageRT__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Rich text field for Availability Messages such as &quot;Available&quot; or &quot;BackOrder&quot;.</description>
+        <externalId>false</externalId>
+        <label>Availability Message RT</label>
+        <length>256</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ccrz__AvailabilityMessage__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Availability Messages such as &quot;Available&quot; or &quot;BackOrder&quot;.</description>
+        <externalId>false</externalId>
+        <label>Availability Message</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__InventoryLocationCode__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Location code for inventory warehouse.</description>
+        <externalId>false</externalId>
+        <label>Inventory Location code</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ccrz__ProductItem__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Product for which the inventory is being specified</description>
+        <externalId>false</externalId>
+        <label>Product Item</label>
+        <referenceTo>ccrz__E_Product__c</referenceTo>
+        <relationshipLabel>Product Inventory Items</relationshipLabel>
+        <relationshipName>Product_Inventory_Items</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ccrz__QtyAvailable__c</fullName>
+        <defaultValue>100</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Numeric quantity corresponding to the inventory level</description>
+        <externalId>false</externalId>
+        <label>Qty Available</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ccrz__Status__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Inventory item status</description>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>In Stock</fullName>
+                    <default>false</default>
+                    <label>In Stock</label>
+                </value>
+                <value>
+                    <fullName>Out of Stock</fullName>
+                    <default>false</default>
+                    <label>Out of Stock</label>
+                </value>
+                <value>
+                    <fullName>Pre Order</fullName>
+                    <default>false</default>
+                    <label>Pre Order</label>
+                </value>
+                <value>
+                    <fullName>Back Order</fullName>
+                    <default>false</default>
+                    <label>Back Order</label>
+                </value>
+                <value>
+                    <fullName>Available</fullName>
+                    <default>false</default>
+                    <label>Available</label>
+                </value>
+                <value>
+                    <fullName>Out of Season</fullName>
+                    <default>false</default>
+                    <label>Out of Season</label>
+                </value>
+                <value>
+                    <fullName>Discontinued</fullName>
+                    <default>false</default>
+                    <label>Discontinued</label>
+                </value>
+                <value>
+                    <fullName>Replaced</fullName>
+                    <default>false</default>
+                    <label>Replaced</label>
+                </value>
+                <value>
+                    <fullName>Unavailable</fullName>
+                    <default>false</default>
+                    <label>Unavailable</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>CC Product Inventory Item</label>
+    <listViews>
+        <fullName>ccrz__All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>ProductInventoryItem Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>CC Product Inventory Items</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

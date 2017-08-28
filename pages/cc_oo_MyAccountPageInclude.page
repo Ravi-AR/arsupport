@@ -1,0 +1,16 @@
+<!--<Component Name: cc_oo_MyAccountPage> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+
+Shrivaths Kulkarni                         9/22/2016                                   US-244 hide price                                                                
+Rajesh W									10/5/2016									US:OO-312 Hide my Invoices like
+Samruddhi Gokhale                           10/17/2016                                    US:OO-771 Dev-the shipping address and corresponding billing address should appear in the contact information.
+-->
+<apex:page docType="html-5.0" sidebar="false" showHeader="false" standardStylesheets="false" applyHtmlTag="false">
+    <c:cc_oo_MyAccountOrdersRD />
+    <c:cc_oo_MyAccountCarts />
+    <c:cc_oo_MyAccountNavRD />
+    <c:cc_oo_MyAccountContactInfo />
+</apex:page>

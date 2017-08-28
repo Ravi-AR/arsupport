@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CAMPAIGN_NAME</field>
+    </columns>
+    <columns>
+        <field>Campaign.Date_of_Event__c</field>
+    </columns>
+    <columns>
+        <field>END_DATE</field>
+    </columns>
+    <columns>
+        <field>Campaign.Associated_Dealer__c</field>
+    </columns>
+    <columns>
+        <field>Campaign.Sub_type__c</field>
+    </columns>
+    <columns>
+        <field>Campaign.Specie_Focus__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Campaign.Sub_type__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Horse 60 Day Trial</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Horse 60 Day Trial Rpt w/ Assoc Dealer</name>
+    <params>
+        <name>scopeid</name>
+        <value></value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CampaignList</reportType>
+    <scope>orgAll</scope>
+    <showDetails>true</showDetails>
+    <sortColumn>END_DATE</sortColumn>
+    <sortOrder>Asc</sortOrder>
+</Report>

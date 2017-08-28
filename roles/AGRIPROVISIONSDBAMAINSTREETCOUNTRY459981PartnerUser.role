@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>AGRI PROVISIONS DBA MAIN STREET COUNTRY-459981 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>AGRI PROVISIONS DBA MAIN STREET COUNTRY-459981 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>AGRIPROVISIONSDBAMAINSTREETCOUNTRY459981PartnerManager</parentRole>
+</Role>

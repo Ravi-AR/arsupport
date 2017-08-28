@@ -1,0 +1,32 @@
+<!-- 
+*********************************************************************************
+Author: Adeel Ahmad
+Email: adeel.ahmad@magnet360.com
+Created Date    : 09/01/2016
+Function    :  Visualforce component to display main navigation accross the Purina Partner Community.
+Version     : 1.0 
+*********************************************************************************
+--> 
+<apex:component >
+ <div class="row">
+    <div class="col-lg-12">
+        <nav class="navbar navbar-default main-nav collapse navbar-collapse" id="main-navigation">
+            <div class="container-fluid">
+                <div class="">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{!$Site.Prefix}/LPDCR_PromotionsList">Events</a></li>
+                        <li><a href="{!$Site.Prefix}/LPDCR_PromotionsList">Promotions</a></li>
+                        <li><a href="{!$Site.Prefix}/LPDCR_MyAccounts">Accounts</a></li>
+                        <!--<li><a href="{!$Site.Prefix}/LPDCR_MyProfile">My Profile</a></li>
+                        <li><a href="{!$Site.Prefix}/LPDCR_MyAccounts">My Accounts</a></li>
+                        <li><a href="{!$Site.Prefix}/LPDCR_VIPPOints">VIP Points</a></li>
+                        <li><a href="{!$Site.Prefix}/LPDCR_Expenses">AMA Selling Support Dollars</a></li>
+                        <li><a href="{!$Site.Prefix}/LPDCR_OrdersShipments">Orders &amp; Shipments</a></li>
+                        <li><a href="{!$Site.Prefix}/LPDCR_PromotionsList">Promotions</a></li>-->
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </div>
+</div> <!-- END:Navigation row -->
+</apex:component>

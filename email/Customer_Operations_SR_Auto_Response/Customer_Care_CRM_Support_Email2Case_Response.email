@@ -1,0 +1,15 @@
+<font face="arial">Thank you for contacting the Purina CRM Support team. Your inquiry is important to us. <br/>
+<br />Case #<b>{!Case.CaseNumber}</b> has been assigned to this inquiry.<br/>
+<br/>
+<br/>
+Purina CRM Support
+</font>
+<br/>
+<br/>
+
+
+
+
+<div style="font-size: 7pt">
+{!Case.Thread_Id}
+</div>

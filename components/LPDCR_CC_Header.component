@@ -1,0 +1,421 @@
+<!-- 
+*********************************************************************************
+Author: Govinda Prasad P S
+Email: govinda.prasad@magnet360.com
+Created Date    : 03/03/2017
+Function    :  Visualforce page to display Header.
+Version     : 1.0 
+*********************************************************************************
+-->
+<apex:component layout="none" controller="LPDCR_CC_Header_Controller" allowDML="true">
+
+<apex:outputText rendered="{!init}" />
+
+<!--desktop header-->
+<div class="header_wrapper mob_expeseclass hidden-print navbar-fixed-top">
+  <div class="container-fluid headertop">
+     <table class="table tablehead">
+         <tr>
+               <td class="logotd"><a href="{!URLFOR($Page.LPDCR_CC_HomePage)}" class="logoimg mob_class">
+                 <img src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/homered.svg')}" width="28" />
+                <span class="headertext r16">Customer Community</span></a> 
+                </td>
+                <td class="mob_pad_lft10">
+                  <apex:outputPanel rendered="{!IF(($CurrentPage.Name=='LPDCR_ExpenseEdit' || $CurrentPage.Name=='LPDCR_Expenses' || $CurrentPage.Name=='LPDCR_BalanceAndSummary' || $CurrentPage.Name=='LPDCR_BBEnrollment' || $CurrentPage.Name=='LPDCR_BBConfirmation' || $CurrentPage.Name=='LPDCR_CC_ContactUs_Confirmation'),false,true)}">
+                  <c:LPDCR_ChangeAccount />  
+                  </apex:outputPanel>
+                            
+                </td>
+             <td>
+                 <table class="table tablehead textalign mob_class">
+                     <tr >
+                          <td class="dropdown" ><span class="placeHolder" data-toggle="dropdown" href="#" role="button">My Links Resources </span>
+                          <img src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/icon-resources.svg')}" class="iconsize" data-toggle="dropdown" href="#" role="button"/><!--<i class="dropdown-toggle glyphicon glyphicon-th icon" data-toggle="dropdown" href="#" role="button" ></i>-->
+                              <ul class="dropdown-menu dropdown-menuhead res_ScrrolDesk">
+                                  <apex:repeat value="{!resources}" var="res" id="theResources">
+                                      <li>
+                                         <apex:outputLink target="_blank" rendered="{!IF(NOT(IsBlank(res.myAppUrl)), 'true', 'false')}"
+                                                          value="{!res.myAppUrl}">{!res.app_title}</apex:outputLink>
+                                      </li>
+                                  </apex:repeat>
+                                  <!--
+                                  <li><a href="#">WIN AG</a></li>
+                                  <li><a href="#">MEMBER SERVICE</a></li>
+                                  -->
+                                </ul>
+                           </td>
+                           <td><a class="contact-a" style="text-decoration:none" href="{!URLFOR($Page.LPDCR_CC_ContactUs)}"><span class="headericontext">Contact</span><img src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/icon-contact.svg')}" class="iconsize"/><!--<i class="dropdown-toggle glyphicon glyphicon-question-sign icon" ></i>--></a></td>
+                          <td class="dropdown" ><span class="headericontext"><apex:outputText value="Welcome, {!$User.FirstName}" /></span><img src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/icon-profile.svg')}" class="iconsize" data-toggle="dropdown" href="#" role="button"/><!--<i class="dropdown-toggle glyphicon glyphicon-user icon" data-toggle="dropdown" href="#" role="button" ></i>-->
+                          <div class="dropdown-menu dropdown-menuhead paddiv drop_rgt">
+                                  <p>Business Link ID: <apex:outputText value="{!current_user.FederationIdentifier}" /></p>
+                                  <p class="text-color"><apex:outputText value="{!current_user.Name}" /></p>
+                                  <!--<p class="text-color"><apex:outputText value="{!current_user.MobilePhone}"/></p>-->
+                                  <p><a href="{!my_profile_url}" target="_blank">Update My Profile</a></p>
+                                  <a href="{!logout_url}">LOGOUT</a> 
+                                </div>
+                           </td>
+                      </tr>
+                 </table>
+             </td>
+         </tr>
+      </table>
+       
+  </div>
+       <nav class="navbar navbar-default mob_class">
+            <div class="container-fluid pad_lft0">
+              <div class="navbar-header ">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navigation1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="glyphicon glyphicon-menu-hamburger fnt18" aria-hidden="true"></span>
+                </button> <!-- END:ToggleButton (only for mobile devices) -->
+                
+             </div>
+             <div id="main-navigation1" class="navbar-collapse collapse pad_lft0 pad_rgt0" aria-expanded="false">
+              <ul class="nav navbar-nav ccnav navSelect rgtALign dsktNav">
+                  <li class="pad_lft0 txt_upper mrg_lft0 bmClass pad_11" id="bm"> 
+                   <apex:outputLink styleClass="pad_lft0 wid100p liLength mrg_lft0 removeApex" value="{!URLFOR($Page.LPDCR_CC_Business_Management)}" rendered="{!bbm}">{!$Label.LPDCR_Business_Management_Component_Name}</apex:outputLink>
+                   </li>
+                   
+                 
+                   <li id="bb" class="txt_upper wid100p bbClass pad_11">
+                    <!-- <apex:outputPanel rendered="{!IF(selectedAcc.ParentId != null, TRUE, FALSE)}">
+                   <apex:outputLink styleClass="wid100p disabled" value="{!URLFOR($Page.LPDCR_BBPLandingMember)}" rendered="{!bb}" >{!$Label.LPDCR_Business_Builder_Component_Name}</apex:outputLink>
+                   </apex:outputPanel>-->
+                   
+                 
+                   <apex:outputLink styleClass="wid100p liLength removeApex" value="{!URLFOR($Page.LPDCR_BBPLandingMember)}" rendered="{!IF(TEXT($User.UserType) != 'Standard' && bb,TRUE,FALSE)}" >{!$Label.LPDCR_Business_Builder_Component_Name}</apex:outputLink>
+                   <!--<apex:outputLink styleClass="wid100p liLength removeApex" disabled="true" rendered="{!IF(TEXT($User.UserType) == 'Standard' && bb,TRUE,FALSE)}" >{!$Label.LPDCR_Business_Builder_Component_Name}</apex:outputLink>-->
+                   </li>
+                   
+                   <li id="pi" class="txt_upper pClass pad_11">
+                   <apex:outputLink styleClass="wid100p liLength" value="{!URLFOR($Page.LPDCR_CC_ProductPage)}" rendered="{!pi}">{!$Label.LPDCR_Products_Component_Name}</apex:outputLink>
+                   </li>  
+                   <li class="txt_upper mrkt_traning mClass pad_11" id="mp">
+                   <apex:outputLink styleClass="pad_top20 dis_inlinelock pad_btm20 liLength removeApex" value="{!URLFOR($Page.LPDCR_CC_MarketingPage)}" rendered="{!mm}">{!$Label.LPDCR_Marketing_Component_Name}</apex:outputLink>
+                  </li>  
+                   <li id="ep" class="txt_upper mrkt_traning eClass pad_11">
+                   <apex:outputLink styleClass="pad_top20 wid100p liLength pad_btm20 removeApex" value="{!URLFOR($Page.LPDCR_CC_VIP)}" rendered="{!ep}">{!$Label.LPDCR_Events_Component_Name}</apex:outputLink>
+                  </li>
+                   <li class="txt_upper mrkt_traning tClass pad_11" id="tr">
+                   <apex:outputLink styleClass="pad_top20 dis_inlinelock pad_btm20 liLength removeApex" value="{!URLFOR($Page.LPDCR_CC_TrainingPage)}" rendered="{!tt}">{!$Label.LPDCR_Training_Component_Name}</apex:outputLink>
+                  </li> 
+                   <li class="search iClass pad_11">
+                       <div class="liLength">
+                        <span class="placeHolder1">
+                            <input type="text" id="searchterm" name="butAssignProd" placeholder=" Site Search" class="inputborder clr_white outline_none"/>
+                        </span>
+                        <i class="glyphicon glyphicon-search icon searchicon cursor" onclick="Searchterm()"></i>
+                        </div>
+                   </li>
+                   <li class="pad_rgt0 cartborder oClass pad_11">
+                       
+                         <apex:outputPanel styleClass="liLength"  rendered="{!IF((TEXT($User.UserType) == 'Standard' && oo && purina_data != null && purina_data.myAppUrl != null), true, false)}">
+                             <a href="{!purina_data.myAppUrl}" target="_blank"><apex:image StyleClass="padding-remove pad_rgt0 iconsize" url="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/icon-cart.svg')}"/></a>
+                         </apex:outputPanel>
+                         
+                         <!-- IF THE USE HAS ACCESS TO THE NEW CC ONLINE ORDE COMMUNITY -->
+                         <apex:outputPanel styleClass="liLength"  rendered="{!IF((TEXT($User.UserType) != 'Standard') && oo && purinaOO_data != null && purinaOO_data.app_code != null, true, false)}">                  
+                              <a href="{!purinaOO_data.myAppUrl}" target="_blank"><apex:image StyleClass="padding-remove pad_rgt0 iconsize" url="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/icon-cart.svg')}"/></a>
+                         </apex:outputPanel>
+                         
+                         <!-- IF THE USER DOES NOT HAVE ACCESS TO THE NEW CC ONLINE ORDER BUT HAS ACCESS TO THE LEGACY ONLINE ORDER APPLICATION -->
+                         <apex:outputPanel styleClass="liLength" rendered="{!IF((TEXT($User.UserType) != 'Standard') && (purinaOO_data == null || purinaOO_data.app_code == null) && is_order_accessible, true, false)}">
+                              <a href="{!order_data.myAppUrl}" target="_blank"><apex:image StyleClass="padding-remove pad_rgt0 iconsize" url="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/icon-cart.svg')}"/></a>
+                         </apex:outputPanel>
+                       
+                       <!--<apex:image rendered="{!oo}" StyleClass="padding-remove pad_rgt0 iconsize liLength removeApex" url="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/icon-cart.svg')}"/>-->
+                   </li>
+                   
+               </ul>
+            </div><!--/.nav-collapse -->
+          </div><!--/.container-fluid -->
+        </nav>
+</div><!--/desktop header-->
+
+<!--###### MOBILE HEADER ######-->
+<div class="header_wrapper hidden-md hidden-lg">
+      <apex:outputPanel rendered="{!IF(($CurrentPage.Name=='LPDCR_CC_HomePage')|| ($CurrentPage.Name=='LPDCR_BalanceAndSummary')||($CurrentPage.Name=='LPDCR_BBPLandingMember')||($CurrentPage.Name=='LPDCR_CC_ContactUs'),true,false)}">
+         <!--<div style="background-color:#fff">
+       <c:LPDCR_ChangeAccount /> 
+    </div>-->
+    </apex:outputPanel>
+      <nav class="navbar mobilenav navbar-default navbar-fixed-top {!IF(($CurrentPage.Name=='LPDCR_ExpenseEdit' || $CurrentPage.Name=='LPDCR_Expenses' || $CurrentPage.Name=='LPDCR_BalanceAndSummary'), 'mobilenav-topgapremove','')} ">
+            <div class="container-fluid">            
+              <div class=""><!-- navbar-header is removed for alignemnt issue-->
+                <table class="table tablemobile">
+                    <tr>
+                        <td>
+                            <table class="table tablemobile">
+                                <tr>
+                                    <td>                                        
+                                        <button type="button" class="navbar-toggle mobilemenu collapsed m_hamburger" data-toggle="collapse" data-target="#main-navigation" aria-expanded="false">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="glyphicon glyphicon-menu-hamburger fnt30" aria-hidden="true"></span>
+                                        </button> <!-- END:ToggleButton (only for mobile devices) -->
+                                    </td>
+                                    <td class="dropdown" >
+                                            <img src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/icon-resources-white.svg')}" class="iconsize wh30" data-toggle="dropdown" href="#" role="button"/>
+                                              <ul class="dropdown-menu dropdown-menuhead res_Scrrol">
+                                                  <apex:repeat value="{!resources}" var="res" id="theResourcesMobile">
+                                                      <li>
+                                                         <apex:outputLink target="_blank" rendered="{!IF(NOT(IsBlank(res.myAppUrl)), 'true', 'false')}"
+                                                                          value="{!res.myAppUrl}">{!res.app_title}</apex:outputLink>
+                                                      </li>
+                                                  </apex:repeat>
+                                                  
+                                                </ul>
+                                    </td>
+                                    <td class="dropdown">
+                                        <img src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/icon-profile-white.svg')}" class="iconsize wh30" data-toggle="dropdown" href="#" role="button"/>
+                                          <div class="dropdown-menu dropdown-menuhead paddiv drop_rgt">
+                                                  <p class="text-color">Business Link ID: <apex:outputText value="{!current_user.FederationIdentifier}" /></p>
+                                                  <p class="text-color"><apex:outputText value="{!current_user.Name}" /></p>
+                                                
+                                                  <p><a href="{!my_profile_url}" target="_blank">Update My Profile</a></p> 
+                                                  <a href="{!logout_url}">LOGOUT</a>
+                                        </div>
+                                   </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <a href="{!$Site.BaseUrl}/LPDCR_CC_HomePage"><img src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/home.png')}" alt="" class="homeimage"/></a>
+                        </td>
+                        <td>
+                            <table class="table tablemobile">
+                                <tr>
+                                    <td>
+                                         <a  href="{!$Site.BaseUrl}/LPDCR_CC_ContactUs"><img src="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/icon-contact-white.svg')}" class="iconsize wh30"/></a>
+                                    </td>
+                                    <td>
+                                         <apex:outputPanel styleClass="liLength removeApex" rendered="{!IF((TEXT($User.UserType) == 'Standard' && oo && purina_data != null && purina_data.myAppUrl != null), true, false)}">
+                                             <a href="{!purina_data.myAppUrl}" target="_blank" class="padding-remove"><apex:image StyleClass="padding-remove pad_rgt0 iconsize" url="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/icon-cart.svg')}"/></a>
+                                         </apex:outputPanel>
+                                         <apex:outputPanel styleClass="liLength removeApex" rendered="{!IF((TEXT($User.UserType) != 'Standard'), true, false)}">                  
+                                             <apex:outputPanel rendered="{!IF(purinaOO_data != null && oo && purinaOO_data.app_code != null , true, false)}">
+                                                  <a href="{!purinaOO_data.myAppUrl}" target="_blank" class="padding-remove"><apex:image styleClass="padding-remove pad_rgt0 iconsize" url="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/icon-cart.svg')}"/></a>
+                                             </apex:outputPanel>
+                                             <apex:outputPanel rendered="{!IF((purinaOO_data == null || purinaOO_data.app_code == null) && is_order_accessible, true, false)}">
+                                                  <a href="{!order_data.myAppUrl}" target="_blank" class="padding-remove"><apex:image styleClass="padding-remove pad_rgt0 iconsize" url="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/icon-cart.svg')}"/></a>
+                                             </apex:outputPanel>                             
+                                         </apex:outputPanel>
+                                    
+                                        <!--<a href="#" class="padding-remove">
+                                            <apex:image rendered="{!oo}" url="{!URLFOR($Resource.LPDCR_CC_Assets, '/img/icon-cart.svg')}" Styleclass="iconsize wh30"/>
+                                        
+                                        </a>-->
+                                    </td>
+                                    <td>
+                                     <i class="glyphicon glyphicon-search icon searchicon fnt30 mob_searchIcon cursor"></i>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                   
+                </table>
+            </div>
+            
+            
+             <div id="main-navigation" class="navbar-collapse collapse mobileulnav" aria-expanded="false">
+             
+              <ul class="nav navbar-nav navbar-right ccnav mobileulnavul">
+                    <li id="mbm" class="txt_upper">
+                    <apex:outputLink value="{!URLFOR($Page.LPDCR_CC_Business_Management)}" rendered="{!bbm}">{!$Label.LPDCR_Business_Management_Component_Name}</apex:outputLink>
+                    </li>
+                    <li id="mbb" class="txt_upper">
+                    <apex:outputLink value="{!URLFOR($Page.LPDCR_BBPLandingMember)}" rendered="{!bb}">{!$Label.LPDCR_Business_Builder_Component_Name}</apex:outputLink>
+                    </li>
+                    <li id="mpi" class="txt_upper">
+                     <apex:outputLink value="{!URLFOR($Page.LPDCR_CC_ProductPage)}" rendered="{!pi}">{!$Label.LPDCR_Products_Component_Name}</apex:outputLink>
+                    </li>
+                    <li class="dropdown txt_upper" id="mmp">
+                    <apex:outputLink value="{!URLFOR($Page.LPDCR_CC_MarketingPage)}" rendered="{!mm}">{!$Label.LPDCR_Marketing_Component_Name}</apex:outputLink>
+                    </li>
+                    <li id="mep" class="txt_upper">
+                     <apex:outputLink value="{!URLFOR($Page.LPDCR_CC_VIP)}" rendered="{!ep}">{!$Label.LPDCR_Events_Component_Name}</apex:outputLink>
+                    </li>
+                    <li class="dropdown txt_upper" id="mtr">
+                    <apex:outputLink value="{!URLFOR($Page.LPDCR_CC_TrainingPage)}" rendered="{!tt}">{!$Label.LPDCR_Training_Component_Name}</apex:outputLink>
+                    </li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div><!--/.container-fluid -->
+        </nav>
+</div><!--/Mobile header-->
+
+    <div class="wid100 s_bg">
+        <div class="liLength">
+            <span class="placeHolder1">
+                <input class="inputborder clr_white outline_none wid90 txtval mrg_top10" id="" name="butAssignProd" placeholder=" Site Search" type="text"/>
+            </span>
+            <i class="glyphicon glyphicon-chevron-right icon searchicon cursor Sarrow" onclick="Searchterm1()"></i>
+        </div>
+    </div>
+    
+<style>
+.maxWidth {
+    max-width: 220px !important;
+}
+@media (min-width: 768px)
+    {
+    .navbar-nav {
+        float: right !important;
+        margin: 0;
+    }
+    }
+  .disabled{  
+    color: #aaaaaa !important;
+    cursor: not-allowed;
+    }
+   .s_bg{background:#911a1e;position: fixed;top: 94px; padding:10px;    z-index: 2;} 
+   .Sarrow{font-size: 20px;font-weight: normal; top: 0px; float:right}
+   .mobileulnav{z-index: 4 !important}
+</style>
+
+<!--<script type="text/javascript">
+                   
+                   function GetselectedAccount(){
+                        //alert('$value--'+$("input[name='account']:checked").attr('value'));
+                        var selectedAccId = $("input[name='account']:checked").attr('value');
+                        //alert(selectedAccId);
+                        
+                        var urlString = '{!$Site.BaseUrl}/';
+                        window.location = urlString+'LPDCR_CC_HomePage?selectedAccountId='+selectedAccId;
+                        
+                        //changeAccount($("input[name='account']:checked").attr('value'));
+                    }
+                    
+         </script>-->
+         
+
+          <script src="{!URLFOR($Resource.LPDCR_CC_Assets, 'js/jquery_v310.js')}"></script> 
+          <script>
+             $(document).ready(function () {                
+                
+              
+                
+                
+                
+                  jQuery('body').bind('touchstart', function(e) {
+                    if(jQuery(e.target).closest('.navbar').length == 0) {
+                        // click happened outside of .navbar, so hide
+                        var opened = jQuery('.navbar-collapse').hasClass('collapse in');
+                        if ( opened === true ) {
+                            jQuery('.navbar-collapse').collapse('hide');
+                        }
+                    }
+                });
+                
+                 jQuery('.navbar').bind('click', function(e) {
+                    
+                        var opened = jQuery('.navbar-collapse').hasClass('collapse in');
+                        if ( opened === true ) {
+                            jQuery('.navbar-collapse').collapse('hide');
+                        }
+                    
+                });
+                
+                var x = document.getElementsByClassName("liLength");
+                
+                if( x.length > 0 && x.length <8) {
+                    //alert(x.length);
+                    $('.rgtALign').addClass('flt_rgt');
+                }
+                else{
+                    //alert("else");
+                    $('.rgtALign').removeClass('flt_rgt');
+                    console.log("Total Count" + $('.liLength').length );
+                }
+                
+               $('.s_bg').hide();
+                $('.mob_searchIcon').click(function(){
+                    $('.s_bg').slideToggle();
+                });            
+                
+                
+            });
+            
+            $(document).ready(function(){
+                var bm = $('.bmClass');var bb = $('.bbClass');var prd = $('.pClass');var mkt = $('.mClass'); var ep = $('.eClass');var trng = $('.tClass');var onle = $('.oClass');
+                if(bm.children().length > 0) { $('.bmClass').show();} else {$('.bmClass').hide();}
+                if(bb.children().length > 0) { $('.bbClass').show();} else {$('.bbClass').hide();}
+                
+                if(prd.children().length > 0) { $('.pClass').show();} else {$('.pClass').hide();}
+                
+                if(mkt.children().length > 0) { $('.mClass').show();} else {$('.mClass').hide();}                
+                if(ep.children().length > 0) { $('.eClass').show();} else {$('.eClass').hide();}
+                if(trng.children().length > 0) { $('.tClass').show();} else {$('.tClass').hide();}
+                if(onle.children().length > 0) { $('.oClass').show();} else {$('.oClass').hide();}
+
+            });
+            
+          </script>
+
+            <script>
+            function onKeyup_TxtFieldcom(e)
+            {
+                var keynum;
+                if(window.event) // IE 
+                {
+                     keynum = e.keyCode;
+                }
+            
+                if(keynum == 13) 
+                { 
+                     redirct();
+                     return false; 
+                } 
+            }
+            
+            </script>
+          
+         <style>.wid100p{width:100px}</style>
+         
+
+        <script type="text/javascript">
+            function Searchterm(){
+                 var term= $("#searchterm").val();
+                 var urlString = '{!$Site.BaseUrl}/';
+                 window.location = urlString+'LPDCR_SearchOverview?term='+term; //urlString+'LPDCR_SearchOverview?term='+term;
+             } 
+             
+             function Searchterm1(){
+                 var term= $(".txtval").val();
+                 var urlString = '{!$Site.BaseUrl}/';
+                 window.location = urlString+'LPDCR_SearchOverview?term='+term; //urlString+'LPDCR_SearchOverview?term='+term;
+             } 
+             
+             
+             $(function(){                
+                 $('.txtval').keypress(function (e) {
+                 var key = e.which;
+                 if(key == 13)  // the enter key code
+                  {
+                    $('input[name = butAssignProd]').click();
+                     var term= $(".txtval").val();
+                     var urlString = '{!$Site.BaseUrl}/';
+                     window.location = urlString+'LPDCR_SearchOverview?term='+term;
+                     return false;  
+                  }
+                }); 
+            });
+             
+             $(function(){                
+                 $('#searchterm').keypress(function (e) {
+                 var key = e.which;
+                 if(key == 13)  // the enter key code
+                  {
+                    $('input[name = butAssignProd]').click();
+                     var term= $("#searchterm").val();
+                     var urlString = '{!$Site.BaseUrl}/';
+                     window.location = urlString+'LPDCR_SearchOverview?term='+term;
+                     return false;  
+                  }
+                }); 
+            });
+                 
+         </script> 
+
+         
+</apex:component>

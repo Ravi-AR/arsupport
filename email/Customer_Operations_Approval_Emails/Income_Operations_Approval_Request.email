@@ -1,0 +1,19 @@
+The Service Request {!Case.CaseNumber} requires your approval for the credit amount of {!Case.Credit_Amount_Range__c}. 
+
+Please type APPROVE or REJECT in the response first line and comments in the second line. 
+
+
+Details
+
+Service Request Title: {!Case.Subject} 
+Issue Category: {!Case.Issue_Category__c} 
+Issue Sub-Category: {!Case.Issue_Sub_Category__c} 
+
+Product: {!Service_Request_Product__c.00NP00000010XCu}
+Item Number:{!Service_Request_Product__c.Item_Number__c}
+Quantity:{!Service_Request_Product__c.Quantity__c}
+
+Account Name: {!Case.Account} 
+Contact Name: {!Case.Contact} 
+
+Credit Amount Range: {!Case.Credit_Amount_Range__c}

@@ -1,0 +1,58 @@
+<apex:component controller="LPDCR_ChangeAccountController" allowDML="true">
+<apex:outputText rendered="{!init}" />
+
+  <div class="accountcc hgt44 l16">
+  
+    <div class="col-xs-10 col-sm-6 colwidth maxWidth pad_lft0">
+         <apex:outputPanel id="accname">
+        <p class="accounttextcc"><span class="pull-left accountspan" id="selectedAccountName">{!selectedAcc.Name}</span></p> 
+        </apex:outputPanel>
+        </div>
+        <div class="col-xs-2 col-sm-5 widAuto pad_lft0 pad_rgt0 pad_top0">
+        <apex:outputPanel rendered="{!IF(accLst!=null && accLst.size>1, true, false)}">
+              <span class="changeaccountcc hidden-xs" style="text-decoration:none; padding-right:4px">|</span>
+        </apex:outputPanel>
+        
+         <div class="btn-group mediabtn">
+             <apex:outputPanel rendered="{!IF(accLst!=null && accLst.size>1, true, false)}">
+              <button type="button" class="btn btn-link dropdown-toggle pull-right btnpadding" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <span class="changeaccountcc">Change</span>
+              </button>
+           
+          <div class="dropdown-menu accountdropdown ">
+              <ul class="accountitems">
+                 <p class="chooseaccount">Choose an Account <span><button type="button" class="close" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button></span></p>
+              <apex:repeat value="{!accLst}" var="acc"> 
+                  <li>
+                  <apex:outputPanel rendered="{!IF(selectedAcc.Name==acc.Name && acc.ParentId != null,true,false)}">
+                  <input type="radio" class="radioinput" name="account" value="{!acc.Id}" id="accountOpt" checked="checked">{!acc.Name}<span class="clr_red">*</span></input>
+                  </apex:outputPanel>
+                  
+                  <apex:outputPanel rendered="{!IF(selectedAcc.Name==acc.Name && acc.ParentId == null,true,false)}">
+                  <input type="radio" class="radioinput" name="account" value="{!acc.Id}" id="accountOpt" checked="checked">{!acc.Name}</input>
+                  </apex:outputPanel>
+                  
+                  <apex:outputPanel rendered="{!IF(selectedAcc.Name!=acc.Name &&  acc.ParentId == null && acc.BusinessBuilderProgramStatus__c != 'Ineligible' ,true,false)}">
+                  <input type="radio" class="radioinput" name="account" onchange="GetselectedAccount()" value="{!acc.Id}" id="accountOpt">{!acc.Name}</input>
+                  </apex:outputPanel>
+                  
+                  <apex:outputPanel rendered="{!IF(selectedAcc.Name!=acc.Name && acc.ParentId != null ,true,false)}"><!--&& acc.BusinessBuilderProgramStatus__c != 'Ineligible' -->
+                  <input type="radio" class="radioinput" name="account" onchange="GetselectedAccount()" value="{!acc.Id}" id="accountOpt">{!acc.Name}<span class="clr_red">*</span></input>
+                  </apex:outputPanel> 
+                 
+                  </li>
+                  
+              </apex:repeat>
+              <li><span class="clr_red">*</span> Not applicable with Business Builder</li>
+             </ul>
+                <div class="dropdown-divider"></div>
+              <!-- <input type="button" class="btn btn-block secodary-btn" onclick="GetselectedAccount()" value="Apply"/>-->
+          </div> 
+     </apex:outputPanel>   
+     
+     </div><!--btngrup-->
+        </div><!--col-->
+      </div><!--accountcc-->
+</apex:component>

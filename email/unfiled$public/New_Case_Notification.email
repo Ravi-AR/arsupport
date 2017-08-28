@@ -1,0 +1,28 @@
+Dear {!Case.Management_Peer_Request__c},
+
+Please provide assistance with the following Case:
+
+Case Type: {!Case.Type}
+Case Status: {!Case.Status}
+Description: {!Case.Description}
+Case Link: {!Case.Link}
+
+
+Related to:
+Account Number: {!Case.Account_Number__c}
+Account Name: {!Case.Account}
+Account Mailing Name: {!Case.Account}
+Account Phone: {!Case.Account}
+
+
+Contact Name: {!Case.Contact}
+Contact Role: {!Case.Contact_Role__c}
+Contact Type: {!Case.Contact_Type__c}
+Contact Phone: {!Case.Contact_Phone__c}
+Contact Mobile Phone: {!Case.Contact_Mobile_Phone__c}
+
+
+Opportunity: {!Case.Opportunity__c}
+
+Thank you,
+{!Case.OwnerFullName}

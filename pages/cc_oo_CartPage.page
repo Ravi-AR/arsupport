@@ -1,0 +1,22 @@
+<!--<Component Name: cc_oo_cartpage> 
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Shrivaths                                9/15/2016                                    US:OO - 244 Hide prices on products in the online ordering 
+                                                                                              system for pre orders
+Piyali                                   9/15/2016                                    US:OO - 261 Disable the ability to manually enter promotions 
+                                                                                              in the online ordering system when placing a pre book order
+-->
+
+<apex:page docType="html-5.0" sidebar="false" showHeader="false" standardStylesheets="false" applyHtmlTag="false">
+    
+    <c:cc_oo_ProductName />
+    <c:cc_oo_MyCart />
+    <!-- "CartDetail-ActionTotals-View" overriden -->
+    <!-- OO-244, OO-261  -->
+    <c:cc_oo_CartIncRD2 />
+    <c:cc_oo_CartDetail />
+    <c:cc_oo_CommonTemplatesTotalSection />
+    
+
+</apex:page>

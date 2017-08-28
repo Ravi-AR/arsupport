@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>Override My Link URL&apos;s if needed</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>App_Code__c</fullName>
+        <description>Application Code for the My Link that you want to override the URL</description>
+        <externalId>false</externalId>
+        <label>App_Code</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Is_Active__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Is this override active - if not then it will be ignored.</description>
+        <externalId>false</externalId>
+        <label>Is Active</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Ovr_App_Portal_Url__c</fullName>
+        <description>The Override App Portal URL to use instead of the returned app_portal_url</description>
+        <externalId>false</externalId>
+        <label>Ovr_App_Portal_Url</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Ovr_App_Url__c</fullName>
+        <description>The Override App URL value to use instead of the existing App_Url value</description>
+        <externalId>false</externalId>
+        <label>Ovr_App_Url</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>LOLMyLinksCalloutOverrides</label>
+    <visibility>Public</visibility>
+</CustomObject>

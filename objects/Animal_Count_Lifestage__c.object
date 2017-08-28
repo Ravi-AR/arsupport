@@ -1,0 +1,802 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>For capturing the count and lifestage by specifies for a Retail Producer Account or Prospect.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <description>Account to which the Count and Lifestages are related.</description>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Animal Count &amp; Lifestages</relationshipLabel>
+        <relationshipName>Animal_Count_Lifestages</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Animal_Count__c</fullName>
+        <externalId>false</externalId>
+        <label>Animal Count</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Animal_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Animal Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Cattle</fullName>
+                    <default>false</default>
+                    <label>Cattle</label>
+                </value>
+                <value>
+                    <fullName>Companion</fullName>
+                    <default>false</default>
+                    <label>Companion</label>
+                </value>
+                <value>
+                    <fullName>Dairy</fullName>
+                    <default>false</default>
+                    <label>Dairy</label>
+                </value>
+                <value>
+                    <fullName>Deer</fullName>
+                    <default>false</default>
+                    <label>Deer</label>
+                </value>
+                <value>
+                    <fullName>Horse</fullName>
+                    <default>false</default>
+                    <label>Horse</label>
+                </value>
+                <value>
+                    <fullName>Pet</fullName>
+                    <default>false</default>
+                    <label>Pet</label>
+                </value>
+                <value>
+                    <fullName>Poultry</fullName>
+                    <default>false</default>
+                    <label>Poultry</label>
+                </value>
+                <value>
+                    <fullName>Show</fullName>
+                    <default>false</default>
+                    <label>Show</label>
+                </value>
+                <value>
+                    <fullName>Swine</fullName>
+                    <default>false</default>
+                    <label>Swine</label>
+                </value>
+                <value>
+                    <fullName>Bee Colonies</fullName>
+                    <default>false</default>
+                    <label>Bee Colonies</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Animals_Served__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>The amount of Animals Fed compared to the Animal Count</description>
+        <externalId>false</externalId>
+        <label>Animals Fed</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lifestage__c</fullName>
+        <description>Dependent picklist for Animal Type.</description>
+        <externalId>false</externalId>
+        <label>Lifestage</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Animal_Type__c</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Aqua</fullName>
+                    <default>false</default>
+                    <label>Aqua</label>
+                </value>
+                <value>
+                    <fullName>Back Grounder</fullName>
+                    <default>false</default>
+                    <label>Back Grounder</label>
+                </value>
+                <value>
+                    <fullName>Boarding Kennel</fullName>
+                    <default>false</default>
+                    <label>Boarding Kennel</label>
+                </value>
+                <value>
+                    <fullName>Breeder Operation</fullName>
+                    <default>false</default>
+                    <label>Breeder Operation</label>
+                </value>
+                <value>
+                    <fullName>Breeding Stallion</fullName>
+                    <default>false</default>
+                    <label>Breeding Stallion</label>
+                </value>
+                <value>
+                    <fullName>Brood Mares</fullName>
+                    <default>false</default>
+                    <label>Brood Mares</label>
+                </value>
+                <value>
+                    <fullName>Caged Bird</fullName>
+                    <default>false</default>
+                    <label>Caged Bird</label>
+                </value>
+                <value>
+                    <fullName>Calf Milk Replacer</fullName>
+                    <default>false</default>
+                    <label>Calf Milk Replacer</label>
+                </value>
+                <value>
+                    <fullName>Cattle</fullName>
+                    <default>false</default>
+                    <label>Cattle</label>
+                </value>
+                <value>
+                    <fullName>Commercial Cow</fullName>
+                    <default>false</default>
+                    <label>Commercial Cow</label>
+                </value>
+                <value>
+                    <fullName>Deer-Elk</fullName>
+                    <default>false</default>
+                    <label>Deer-Elk</label>
+                </value>
+                <value>
+                    <fullName>Exotics</fullName>
+                    <default>false</default>
+                    <label>Exotics</label>
+                </value>
+                <value>
+                    <fullName>Family Flock</fullName>
+                    <default>false</default>
+                    <label>Family Flock</label>
+                </value>
+                <value>
+                    <fullName>Fed Cattle</fullName>
+                    <default>false</default>
+                    <label>Fed Cattle</label>
+                </value>
+                <value>
+                    <fullName>Foals</fullName>
+                    <default>false</default>
+                    <label>Foals</label>
+                </value>
+                <value>
+                    <fullName>Free Range Property</fullName>
+                    <default>false</default>
+                    <label>Free Range Property</label>
+                </value>
+                <value>
+                    <fullName>Goat</fullName>
+                    <default>false</default>
+                    <label>Goat</label>
+                </value>
+                <value>
+                    <fullName>Grower</fullName>
+                    <default>false</default>
+                    <label>Grower</label>
+                </value>
+                <value>
+                    <fullName>Heifer</fullName>
+                    <default>false</default>
+                    <label>Heifer</label>
+                </value>
+                <value>
+                    <fullName>Hogs</fullName>
+                    <default>false</default>
+                    <label>Hogs</label>
+                </value>
+                <value>
+                    <fullName>Lactation</fullName>
+                    <default>false</default>
+                    <label>Lactation</label>
+                </value>
+                <value>
+                    <fullName>Nursery</fullName>
+                    <default>false</default>
+                    <label>Nursery</label>
+                </value>
+                <value>
+                    <fullName>PB Cow Bull</fullName>
+                    <default>false</default>
+                    <label>PB Cow Bull</label>
+                </value>
+                <value>
+                    <fullName>Poultry</fullName>
+                    <default>false</default>
+                    <label>Poultry</label>
+                </value>
+                <value>
+                    <fullName>Hunting Preserve</fullName>
+                    <default>false</default>
+                    <label>Hunting Preserve</label>
+                </value>
+                <value>
+                    <fullName>Rabbit</fullName>
+                    <default>false</default>
+                    <label>Rabbit</label>
+                </value>
+                <value>
+                    <fullName>Sheep</fullName>
+                    <default>false</default>
+                    <label>Sheep</label>
+                </value>
+                <value>
+                    <fullName>Show Performance</fullName>
+                    <default>false</default>
+                    <label>Show Performance</label>
+                </value>
+                <value>
+                    <fullName>Sow/Boar Replacement</fullName>
+                    <default>false</default>
+                    <label>Sow/Boar Replacement</label>
+                </value>
+                <value>
+                    <fullName>Sporting/ Show Dogs</fullName>
+                    <default>false</default>
+                    <label>Sporting/ Show Dogs</label>
+                </value>
+                <value>
+                    <fullName>Starter</fullName>
+                    <default>false</default>
+                    <label>Starter</label>
+                </value>
+                <value>
+                    <fullName>Stocker</fullName>
+                    <default>false</default>
+                    <label>Stocker</label>
+                </value>
+                <value>
+                    <fullName>Weaning</fullName>
+                    <default>false</default>
+                    <label>Weaning</label>
+                </value>
+                <value>
+                    <fullName>Finisher</fullName>
+                    <default>false</default>
+                    <label>Finisher</label>
+                </value>
+                <value>
+                    <fullName>Grower Finish</fullName>
+                    <default>false</default>
+                    <label>Grower Finish</label>
+                </value>
+                <value>
+                    <fullName>Turkey</fullName>
+                    <default>false</default>
+                    <label>Turkey</label>
+                </value>
+                <value>
+                    <fullName>Broilers</fullName>
+                    <default>false</default>
+                    <label>Broilers</label>
+                </value>
+                <value>
+                    <fullName>Layers</fullName>
+                    <default>false</default>
+                    <label>Layers</label>
+                </value>
+                <value>
+                    <fullName>Duck/Goose</fullName>
+                    <default>false</default>
+                    <label>Duck/Goose</label>
+                </value>
+                <value>
+                    <fullName>Game Birds</fullName>
+                    <default>false</default>
+                    <label>Game Birds</label>
+                </value>
+                <value>
+                    <fullName>N/A</fullName>
+                    <default>false</default>
+                    <label>N/A</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Horse</controllingFieldValue>
+                <valueName>Breeding Stallion</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Horse</controllingFieldValue>
+                <valueName>Brood Mares</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Horse</controllingFieldValue>
+                <valueName>Foals</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Horse</controllingFieldValue>
+                <valueName>Show Performance</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Horse</controllingFieldValue>
+                <valueName>Weaning</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cattle</controllingFieldValue>
+                <valueName>Back Grounder</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cattle</controllingFieldValue>
+                <valueName>Commercial Cow</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cattle</controllingFieldValue>
+                <valueName>Fed Cattle</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cattle</controllingFieldValue>
+                <valueName>PB Cow Bull</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cattle</controllingFieldValue>
+                <valueName>Stocker</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Dairy</controllingFieldValue>
+                <valueName>Calf Milk Replacer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Dairy</controllingFieldValue>
+                <valueName>Grower</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Dairy</controllingFieldValue>
+                <valueName>Heifer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Dairy</controllingFieldValue>
+                <valueName>Lactation</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Dairy</controllingFieldValue>
+                <valueName>Starter</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bee Colonies</controllingFieldValue>
+                <valueName>N/A</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Swine</controllingFieldValue>
+                <valueName>Nursery</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Swine</controllingFieldValue>
+                <valueName>Sow/Boar Replacement</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Swine</controllingFieldValue>
+                <valueName>Grower Finish</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Companion</controllingFieldValue>
+                <valueName>Aqua</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Companion</controllingFieldValue>
+                <valueName>Caged Bird</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Companion</controllingFieldValue>
+                <valueName>Deer-Elk</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Companion</controllingFieldValue>
+                <valueName>Exotics</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Companion</controllingFieldValue>
+                <valueName>Family Flock</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Companion</controllingFieldValue>
+                <controllingFieldValue>Show</controllingFieldValue>
+                <valueName>Goat</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Companion</controllingFieldValue>
+                <controllingFieldValue>Show</controllingFieldValue>
+                <valueName>Rabbit</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Companion</controllingFieldValue>
+                <controllingFieldValue>Show</controllingFieldValue>
+                <valueName>Sheep</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Show</controllingFieldValue>
+                <valueName>Cattle</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Show</controllingFieldValue>
+                <valueName>Hogs</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Show</controllingFieldValue>
+                <valueName>Poultry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Deer</controllingFieldValue>
+                <controllingFieldValue>Pet</controllingFieldValue>
+                <valueName>Breeder Operation</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Deer</controllingFieldValue>
+                <valueName>Free Range Property</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Deer</controllingFieldValue>
+                <valueName>Hunting Preserve</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pet</controllingFieldValue>
+                <valueName>Boarding Kennel</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pet</controllingFieldValue>
+                <valueName>Sporting/ Show Dogs</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Poultry</controllingFieldValue>
+                <valueName>Turkey</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Poultry</controllingFieldValue>
+                <valueName>Broilers</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Poultry</controllingFieldValue>
+                <valueName>Layers</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Poultry</controllingFieldValue>
+                <valueName>Duck/Goose</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Poultry</controllingFieldValue>
+                <valueName>Game Birds</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <label>Animal Count &amp; Lifestage</label>
+    <nameField>
+        <displayFormat>ACL-{00000}</displayFormat>
+        <label>Count/Lifestage ID</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Animal Counts &amp; Lifestages</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Producer_Count_Lifestages</fullName>
+        <active>true</active>
+        <description>Includes Lifestages fields for Retail or Direct Producer records.</description>
+        <label>Producer Count &amp; Lifestages</label>
+        <picklistValues>
+            <picklist>Animal_Type__c</picklist>
+            <values>
+                <fullName>Bee Colonies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Companion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Poultry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Lifestage__c</picklist>
+            <values>
+                <fullName>Aqua</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Back Grounder</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Boarding Kennel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Breeder Operation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Breeding Stallion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Broilers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Brood Mares</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Caged Bird</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Calf Milk Replacer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Commercial Cow</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deer-Elk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Duck%2FGoose</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Exotics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family Flock</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fed Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finisher</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Foals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Free Range Property</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Game Birds</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Goat</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grower</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grower Finish</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Heifer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hogs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hunting Preserve</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lactation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Layers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nursery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PB Cow Bull</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Poultry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rabbit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sheep</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show Performance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sow%2FBoar Replacement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sporting%2F Show Dogs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Starter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Stocker</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Turkey</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weaning</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>Account__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Animal_Type__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Animal_Count__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Lifestage__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Animal_Type__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Animal_Count__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Lifestage__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Animal_Type__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Animal_Count__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Lifestage__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>Animal_Type__c</searchFilterFields>
+        <searchFilterFields>Animal_Count__c</searchFilterFields>
+        <searchFilterFields>Lifestage__c</searchFilterFields>
+        <searchResultsAdditionalFields>Animal_Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Animal_Count__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Lifestage__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <fullName>Animals_Fed_Less_Than_Animal_Count</fullName>
+        <active>true</active>
+        <description>Animals Fed must be less than the Animal Count</description>
+        <errorConditionFormula>RecordType.Name = &quot;Producer Count &amp; Lifestages&quot;
+&amp;&amp; 
+Animals_Served__c &gt; Animal_Count__c</errorConditionFormula>
+        <errorMessage>Animals Fed cannot be greater than the Animal count</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

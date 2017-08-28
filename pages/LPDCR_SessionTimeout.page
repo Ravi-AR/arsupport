@@ -1,0 +1,6 @@
+<apex:page controller="LPDCR_SessionTimeoutController" action="{!redirectToLogoutPage}">
+<h1>Your session has expired. Please login again.</h1>
+
+
+
+</apex:page>

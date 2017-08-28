@@ -1,0 +1,160 @@
+<!--
+/**
+* Visualforce page to display tips list view, User can attach one/multiple tips and sends as attachment to FPC Account
+*
+* @Date: 10.27.2015
+* @Author: Adeel Ahmad (Magnet 360)
+*
+* @Updates:
+*/
+-->
+
+<apex:page applyHtmlTag="false" applyBodyTag="false" showHeader="false" docType="html-5.0"  sidebar="false" standardController="Tip__c" extensions="LMSA_ManagementTipsController" standardStylesheets="false" cache="true" expires="600">
+<apex:remoteObjects >
+	<apex:remoteObjectModel name="Tip__c" jsShorthand="Tips" fields="Name,Id,RecordTypeId">
+		<!-- <apex:remoteObjectField name="Phone__c" jsShorthand="Phone"/> -->
+	</apex:remoteObjectModel>
+</apex:remoteObjects>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+	<link rel="stylesheet" type="text/css" href="{!$Page.LMSA_Style}" />
+	<link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.LMSA_FontAwesome, 'css/font-awesome.min.css')}" />
+	<link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.LMSA_Assets, 'css/bootstrap.min.css')}" />
+
+	<style>
+		body{
+			background: #ffffff !important;
+		}
+		.lookupInput img {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="management_tip_pg container-fluid">
+		<div class="row">
+			<div class="col-xs-7">
+				<h1 class="tip_h1">Management Tips</h1>
+			</div>
+			<div class="col-xs-5" style="text-align:right;">
+				<input type="button" class="btn1 btn-primary" value="Select Tips" onclick="addSelectedTipIds();" style="margin-top: 16px;" />
+			</div>
+		</div>
+		<div class="row" style="margin-top:5px; margin-bottom:5px;">
+			<div class="col-xs-12">
+				<apex:pageMessages id="msgs" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- <apex:enhancedList listId="{!$Setup.Org_Settings__c.Management_Tip_List_View_Id__c}" height="350" rowsPerPage="25" customizable="False" oncomplete="setCheckboxes();" /> -->
+
+			    <table id="tipsTable" class="table table-bordered">
+			    	<colgroup>
+			    		<col width="30" />
+			    		<col width="auto" />
+			    	</colgroup>
+			    	<thead>
+			    		<tr>
+							<td>
+								<input type="checkbox" id="allBox" />
+							</td>
+							<td>
+								<strong>Name</strong>
+							</td>
+			    		</tr>
+			    	</thead>
+			    	<tbody id="tipsBody">
+			    	</tbody>
+			    </table>
+
+			</div>
+		</div>
+		<input id="chk_val" type="hidden" /> <!-- input that will contains all selected tip ids -->
+
+		<apex:outputPanel layout="block" id="contactSelection" style="padding:0 15px;">
+			<apex:outputPanel styleClass="row list_div" layout="block" rendered="{!tips.size > 0}">
+				<apex:outputPanel id="tipList" layout="block" styleClass="row" rendered="{!tips.size > 0}">
+					<div class="col-xs-12">
+						<label class="margin-contact1">Selected Tips</label>
+					</div>
+					<apex:repeat value="{!tips}" var="t">
+						<div class="col-xs-12 tip_rec">
+							<h5 class="tip_title bold block h1margin">{!t.Name}</h5>
+							<span class="tip_desc block border span_padding">{!t.Tip__c}</span>
+						</div>
+					</apex:repeat>
+				</apex:outputPanel>
+				<apex:outputPanel layout="block" styleClass="row" rendered="{!tips.size > 0}">
+					<apex:form >
+						<div class="col-xs-12 margin-contact">
+							<label>Choose Facility Producer</label>
+							<apex:inputField value="{!contactRecord.Producer_Facility__c}" id="producer_facility" styleClass="form-control">
+								<c:LMSA_AutoComplete objectname="Account" autocomplete_textbox="{!$Component.producer_facility}" dependentField=".dependent-contact" />
+							</apex:inputField>
+						</div>
+						<div class="col-xs-12 margin-contact">
+							<label>Choose Contact</label>
+							<apex:inputField value="{!contactRecord.Contact__c}" id="contact" styleClass="form-control dependent-contact">
+								<c:LMSA_AutoComplete objectname="Contact" autocomplete_textbox="{!$Component.contact}" filterField="{!$Component.producer_facility}" />
+							</apex:inputField>
+						</div>
+
+						<div class="col-xs-12" style="margin-top:15px;">
+							<input type="button" class="btn1 btn-primary col-xs-12" data-toggle="modal" data-target="#confirmModal" value="Send Email" />
+						</div>
+
+						<!-- Confirm Modal -->
+						<div class="modal fade confirmModal" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header"></div>
+									<div class="modal-footer text-center">
+	                                  	<h4 class="modal-title padding5">Are you sure you want to send this?</h4>
+	                                  	<apex:commandButton styleClass="btn1 btn-primary"  value="Yes" action="{!sendAttachmentEmail}" status="status" />
+	                                  	<button type="button" class="btn1 btn-default" data-dismiss="modal"> No </button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Confirm Modal end-->
+					</apex:form>
+				</apex:outputPanel>
+			</apex:outputPanel>
+		</apex:outputPanel>
+	</div> <!-- /Container-fluid -->
+
+	<apex:form >
+		<apex:actionFunction action="{!addSelectedTips}" name="addTipRecords" reRender="contactSelection" status="status" oncomplete="scrollToBottom();">
+			<apex:param value="" name="selectedTips" assignTo="{!selectedTips}" />
+		</apex:actionFunction>
+	</apex:form>
+
+	<apex:actionstatus id="status">
+		<apex:facet name="start">
+			<div class="search_loading">
+				<div class="waitingSearchDiv" id="el_loading">
+					<div class="">
+						<img class="waitingImage" src="/img/loading.gif" />
+						<span class="waitingDescription">Loading....</span>
+					</div>
+				</div>
+			</div>
+		</apex:facet>
+	</apex:actionstatus>
+
+	<!-- <div style="width:100%; float:left; height:300px;"></div> -->
+
+	<script type="text/javascript" src="{!URLFOR($Resource.LMSA_Assets, 'js/jquery-1.11.3.min.js')}"></script>
+	<script type="text/javascript" src="{!URLFOR($Resource.LMSA_Assets, 'js/bootstrap.min.js')}"></script>
+    <script type="text/javascript" src="{!URLFOR($Resource.LMSA_Assets, 'js/app.js')}"></script>
+
+	<script type="text/javascript">
+		fetchTips('{!$Setup.Org_Settings__c.Management_Tip_List_View_Id__c}');
+        iosDoubleTapFix();
+        iosPageJumpFix();
+	</script>
+</body>
+</html>
+</apex:page>

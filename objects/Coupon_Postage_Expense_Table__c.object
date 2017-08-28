@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>Coupon Postage Expense Table for number of Coupons</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Estimated_Weight_oz__c</fullName>
+        <description>Estimated postage weight based on number of coupons</description>
+        <externalId>false</externalId>
+        <label>Estimated Weight (oz.)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Maximum_of_Coupons__c</fullName>
+        <description>Maximum Number of Coupons</description>
+        <externalId>false</externalId>
+        <label>Maximum # of Coupons</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Minimum_of_Coupons__c</fullName>
+        <description>Minimum Number of Coupons for Postage</description>
+        <externalId>false</externalId>
+        <label>Minimum # of Coupons</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Postage_Expense__c</fullName>
+        <description>Amount for Postage</description>
+        <externalId>false</externalId>
+        <label>Postage Expense</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <label>Coupon Postage Expense Table</label>
+    <visibility>Protected</visibility>
+</CustomObject>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HomePageComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <body>Requests to waive small shipment charge, send to:&lt;br&gt;&lt;a href=&quot;mailto:SmallShipmentSurcharge@landolakes.com&quot;&gt;&lt;span style=&quot;color: #FF0000;&quot;&gt;&lt;u&gt;SmallShipmentSurcharge@landolakes.com&lt;/u&gt;&lt;/span&gt;&lt;/a&gt;&lt;br&gt;Customer Financial Services (Accounts Receivables/Credit Managers), send to:&lt;br&gt;&lt;u&gt;&lt;a href=&quot;mailto:customerfinancialservices@landolakes.com&quot;&gt;&lt;span style=&quot;color: #FF0000;&quot;&gt;customerfinancialservices@landolakes.com&lt;/span&gt;&lt;/a&gt;&lt;/u&gt;&lt;br&gt;VFD-related documents/inquires/requests, send to:&lt;br&gt;&lt;a href=&quot;mailto:SmallShipmentSurcharge@landolakes.com&quot;&gt;&lt;span style=&quot;color: #FF0000;&quot;&gt;&lt;u&gt;PurinaAODandVFD@landolakes.com&lt;/u&gt;&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt; </body>
+    <pageComponentType>htmlArea</pageComponentType>
+    <width>wide</width>
+</HomePageComponent>

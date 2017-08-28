@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>MADISON PET AND GARDEN-303453 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>MADISON PET AND GARDEN-303453 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>MADISONPETANDGARDEN303453PartnerManager</parentRole>
+</Role>

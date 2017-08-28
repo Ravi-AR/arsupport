@@ -1,0 +1,10 @@
+<apex:page standardController="Program_Evaluation__c" >
+    <script type="text/javascript" >
+    if( (typeof sforce != 'undefined') && sforce != null) {
+        sforce.one.navigateToURL('/apex/LMSA_ProgramEvaluation?id={!Program_Evaluation__c.Id}');
+    }
+    else {
+        window.location.href = '/{!Program_Evaluation__c.Id}?nooverride=1';
+    }
+    </script>
+</apex:page>

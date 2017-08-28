@@ -1,0 +1,89 @@
+/*
+This file is generated and isn't the actual source code for this
+managed global class.
+This read-only file shows the class's global constructors,
+methods, variables, and properties.
+To enable code to compile, all methods return null.
+*/
+global virtual class cc_hk_UserInterface implements ccrz.cc_if_api {
+    global static String HEAD_CONTENT;
+    global static String HK_ID;
+    global static String PARAM_STOREFRONT;
+    global static String STANDARD_META_VIEWPORT;
+    global cc_hk_UserInterface() {
+
+    }
+    global virtual String ccrzIncludes() {
+        return null;
+    }
+    global static ccrz.cc_hk_UserInterface getInstance(Map<String,Object> inputData) {
+        return null;
+    }
+    global virtual Map<String,Object> headContent(Map<String,Object> inpData) {
+        return null;
+    }
+    global virtual String metaContent() {
+        return null;
+    }
+    global static String pageConfigCSSIncludes() {
+        return null;
+    }
+    global static String pageConfigJSIncludes() {
+        return null;
+    }
+    global static String resourcePath(String resourceName, String elementPath) {
+        return null;
+    }
+    global virtual void setDaoObject(ccrz.cc_if_dao obj) {
+
+    }
+    global virtual void setServiceObject(ccrz.cc_if_service obj) {
+
+    }
+    global virtual void setStorefrontSettings(Map<String,Object> storeSettings) {
+
+    }
+    global virtual String standardIncludes() {
+        return null;
+    }
+    global virtual String standardRespondJS() {
+        return null;
+    }
+    global virtual String standardUIProperties() {
+        return null;
+    }
+    global static String themeResourcePath(String elementPath) {
+        return null;
+    }
+global virtual class v001 extends ccrz.cc_hk_UserInterface {
+    global v001() {
+
+    }
+    global override String standardIncludes() {
+        return null;
+    }
+    global override String standardRespondJS() {
+        return null;
+    }
+}
+global virtual class v002 extends ccrz.cc_hk_UserInterface {
+    global Boolean minified {
+        get;
+    }
+    global v002() {
+
+    }
+    global override String ccrzIncludes() {
+        return null;
+    }
+    global override String standardIncludes() {
+        return null;
+    }
+    global override String standardRespondJS() {
+        return null;
+    }
+    global override String standardUIProperties() {
+        return null;
+    }
+}
+}

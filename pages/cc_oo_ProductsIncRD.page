@@ -1,0 +1,18 @@
+<!--<Page Name: cc_oo_ProductsIncRD> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Saloni Kale                                9/6/2016                                    US:OO-90 Created and added getProductsDetails() method
+                                                                                       which will give the long description in product list page
+                                                                                       US:OO-196 Disable the product Name and Product No if the 
+                                                                                       order type is 'prebook'
+Shrivaths                                9/15/2016                                    US:OO - 244 Hide prices                                                                                       
+-->
+<apex:page docType="html-5.0" sidebar="false" showHeader="false" standardStylesheets="false" applyHtmlTag="false">
+    <c:cc_oo_ProductName />
+    <c:cc_oo_ProductsIncRD />
+    <c:cc_oo_ProductListFilters />
+    <!-- Added cc_oo_ProductListBanner for Prebook Homepage banner -->  
+    <c:cc_oo_ProductListBanner />
+</apex:page>

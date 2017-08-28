@@ -1,0 +1,102 @@
+<apex:page contentType="text/css" cache="false">
+h2.mainTitle
+{
+    display: block;
+    font-size: 17px;
+    line-height: 30px;
+    width: 200px;
+}
+<!-- *************** File Button Style *********************** -->    
+.upload {
+    position: relative;
+    margin: 0 auto 15px auto;
+
+    width: 100%;
+    height: 50px;
+
+    border-radius: 5px;
+    cursor:pointer;
+}
+
+input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    cursor: pointer;
+    moz-opacity: 0;
+    opacity: 0;
+}
+
+a.library_btn {
+    width: 100%;
+    height: 35px;
+    float: left;
+    background: none repeat scroll 0 0 #ffffff;
+    border: 1px solid #00a651;
+    border-radius: 5px;
+    color: #00a651 !important;
+    display: table-cell;
+    padding: 5px 2px;
+    text-align: center;
+    text-decoration: none !important;
+    vertical-align: middle;
+    cursor:pointer;
+}
+    
+.lbl{
+    margin-top: -20px;
+    color: red;
+    padding-left: 3px;
+    }   
+    
+.loading
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color:rgba(0, 0, 0, 0.2);
+    z-index:100;
+    
+}    
+
+.loading img
+{
+    position:relative;
+    top:50%;
+}
+
+.file_sep
+{
+    clear: both;
+    display: block;
+    float: left;
+    margin: 5px 0;
+    width: 100%;
+    position:relative;
+}
+
+.remove_attachement
+{
+    position: absolute;
+    right: -2px;
+    top: -5px;
+    width:18px;
+    height:18px;
+}
+
+a.add_more
+{
+    text-align: right;
+    float: right;
+    color: #337ab7;
+    font-weight: normal;
+}
+    
+.file-input
+{
+    padding-left:2px !important;
+    padding-right:2px !important;
+}
+    
+</apex:page>

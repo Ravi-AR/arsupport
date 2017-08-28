@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Rework line item notification</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Purina_Swine_App_Letterhead</letterhead>
+    <name>Rework Line Item Notification</name>
+    <style>freeForm</style>
+    <subject>Business Builder Reimbursement Request – Additional information requested</subject>
+    <textOnly>Thank you for participating in the Purina Business Builder Program. All or part of your Business Builder Reimbursement Request is being returned to you. There could be several reasons for this return, including seeking additional information or requesting missing receipts.
+
+To see the processing error, please navigate back to the Business Builder Community page. The items needing attention have been saved for you to review.
+
+If the line item was a part of a larger request, we have submitted the approved line items for reimbursement.
+
+Details of Reimbursement Rework Request:
+Reimbursement # {!AMASellingSupportExpense__c.Name}
+Account Number # {!AMASellingSupportExpense__c.Account_Number__c}
+
+Thank you for your business.  We look forward to supporting your growth and success.
+
+If you have additional questions, please contact customer service at businessbuildersupport@landolakes.com or 1-855-333-3565.</textOnly>
+    <type>html</type>
+</EmailTemplate>

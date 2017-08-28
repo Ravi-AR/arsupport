@@ -1,0 +1,46 @@
+<apex:page standardController="Animal_Count_Lifestage__c" extensions="Account_Error_AnimalCount" >
+    <script type="text/javascript">
+    
+    	var ret_url = window.location.href;
+    
+        function redirectBack(){
+            window.location = window.location.href;
+        }
+
+        $(document).ready(function(){
+            var temp = 0;
+            $('.createanimal .errorMsg').each(function(){
+                console.log('hit me ');
+                temp++;
+            });
+
+            if(temp > 0){
+                $('.createanimal').show();
+                $('.toggleanimal').hide();
+            }else{
+                global = 'yes';
+            }
+        });
+    </script>
+
+    <apex:form id="createAnC_form" >
+    <apex:pageBlock >
+
+        <div class="toggleanimal" >
+            <apex:commandButton styleClass="toggleanimal" value="Create Animal Count & Lifestage" onclick="return showAnimalsCreate()"/>
+        </div>
+
+        <div  class="createanimal" style="display:none" >
+            <apex:pageBlockSection >
+                <apex:inputField value="{!Animal_Count_Lifestage__c.Animal_Type__c}" required="true" />
+                <apex:inputField value="{!Animal_Count_Lifestage__c.Lifestage__c}" />
+                <apex:inputField value="{!Animal_Count_Lifestage__c.Animal_Count__c}" required="true" />
+                <apex:inputField value="{!Animal_Count_Lifestage__c.Animals_Served__c}" />
+                <apex:inputHidden value="{!Animal_Count_Lifestage__c.Account__c}" />
+
+                <apex:commandButton value="Save" action="{!Tsave}"  />
+            </apex:pageBlockSection>
+        </div>
+    </apex:pageBlock>
+	</apex:form>
+</apex:page>

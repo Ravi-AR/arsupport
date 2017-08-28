@@ -1,0 +1,26 @@
+<!-- 
+*********************************************************************************
+Author: Adeel Ahmad
+Email: adeel.ahmad@magnet360.com
+Created Date    : 09/01/2016 
+Function    :  Visualforce component to display footer content.
+Version     : 1.0 
+*********************************************************************************
+--> 
+<apex:component layout="none">
+    <footer class="">
+        <div class="">
+            <div class="footerdiv">
+            <center>
+                <a href="{!$Site.Prefix}/apex/LPDCR_Homepage"><img src="{!URLFOR($Resource.LPDCR_Assets, '/img/LOL-logo.png')}" class="img-responsive logo" /></a>
+                <div class="col-xs-12 right">   
+                    © {!YEAR(TODAY())}  Purina Animal Nutrition LLC.<br/>All Rights Reserved.
+                </div>
+                <div class="col-xs-12 right">   
+                    <a href="https://www.landolakesinc.com/Privacy-Policy">Privacy &amp; Terms</a> | <a href="https://www.landolakesinc.com/California-Supply-Chains-Act">CA Supply Chains Act</a>
+                </div>
+                </center>
+            </div>
+        </div>
+    </footer>
+</apex:component>

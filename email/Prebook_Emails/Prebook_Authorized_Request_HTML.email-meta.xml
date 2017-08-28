@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Purina_Letterhead_Template</letterhead>
+    <name>Prebook Authorized Request HTML</name>
+    <style>freeForm</style>
+    <subject>Prebook Authorized Request from Salesforce</subject>
+    <textOnly>Hello!
+{!Contact.LastModifiedBy} is requesting {!Contact.FirstName} {!Contact.LastName} to be switched to a Prebook authorized contact in Salesforce.
+
+Details:
+Contact Email: {!Contact.Email}
+Contact Phone: {!Contact.Phone__c}
+
+
+Please change the record type of this contact (to Prebook Authorized), and set them up as a User.
+
+Please notify them this is complete.
+
+Thank you!
+
+{!Contact.Link}</textOnly>
+    <type>html</type>
+</EmailTemplate>

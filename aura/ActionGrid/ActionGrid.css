@@ -1,0 +1,14 @@
+.THIS {
+}
+
+.THIS .container {
+    min-height:400px; 
+    min-width:400px; 
+    width:100%;
+}
+
+.THIS .iframe {
+    height:100%; 
+    width:100%;
+    border: none;
+}

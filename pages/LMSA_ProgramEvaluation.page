@@ -1,0 +1,547 @@
+<!--
+/**
+* Visualforce page to Create facility walk thru (LMSA-44)
+* 
+* @Date: 10.26.2015
+* @Author: Adeel Ahmad (Magnet 360)
+* 
+* @Updates:
+* @Date: 10.30.2015
+* @Author: Bryan Anderson (Magnet 360)
+* Changes made based on comments on LMSA-150
+*/
+--> 
+
+
+<apex:page applyBodyTag="false" applyHtmlTag="false" sidebar="false" showHeader="false" standardController="Program_Evaluation__c" extensions="LMSA_ProgramEvaluationController" standardStylesheets="false" docType="html-5.0" cache="true" expires="600">
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.LMSA_FontAwesome, 'css/font-awesome.min.css')}" />
+    <link rel="stylesheet" type="text/css" href="{!$Page.LMSA_Style}" /> 
+    <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.LMSA_Assets, 'css/bootstrap.min.css')}" />
+    <style>
+        .lookupIcon{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <apex:form id="theform" >
+        <div class="container-fluid program_evaluation">
+            <div class="row facility_header">
+                <div class="col-xs-3">
+                    <button type="button" class="btn btn1 btn-default" onclick="cancel();">Cancel</button>
+                </div>
+                <div class="col-xs-9 text-right" >
+					<apex:outputPanel id="commandbtnstop">
+                        <input type="button" class="btn1 btn-email" data-toggle="modal" data-target="#confirmModal" value="Email" />
+                        <apex:commandButton value="Clone" status="status" styleClass="btn1 btn-save" action="{!cloneRecord}" reRender="msgs,isRecordSavedid" rendered="{!isRecordSaved}" oncomplete="$('input.choose_one').removeClass('input_disbale').removeAttr('disabled','disabled' ).val('');document.body.scrollTop = 0;" /> 
+                        <apex:commandButton value="Save" status="status" styleClass="btn1 btn-primary" action="{!saveRecord}" reRender="msgs,isRecordSavedid,commandbtnstop,commandbtnsbot,diffAdgInput,ucAvgWtOut" oncomplete="disableImprovementField({!isRecordSaved});document.body.scrollTop = 0;" /> 
+	                </apex:outputPanel>
+                </div>
+            </div>   <!-- @Ends facility_header -->             
+            <div class="row">
+                <div class="col-xs-12">
+                    <apex:pageMessages id="msgs" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="accordion">
+                        <li class="parent_li">
+                            <a class="toggle" href="javascript:void(0);">Facility &amp; Contact</a>
+                            <ul class="inner show">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <label>Facility Producer Account</label>
+                                            <apex:inputField value="{!progEvaluation.Producer_Facility__c}" id="producer_facility" styleClass="form-control">
+                                                <c:LMSA_AutoComplete objectname="Account" autocomplete_textbox="{!$Component.producer_facility}" dependentField=".dependent-contact" />
+                                            </apex:inputField>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <label>Contact</label>
+                                            <apex:inputField value="{!progEvaluation.Contact__c}" id="evaluation_contact" styleClass="form-control dependent-contact">
+                                                <c:LMSA_AutoComplete objectname="Contact" autocomplete_textbox="{!$Component.evaluation_contact}" filterField="{!$Component.producer_facility}" />
+                                            </apex:inputField>
+                                        </div>
+                                    </div>                                    
+                                </li> <!-- @Ends step1 - Current Feed Program -->
+                            </ul>
+                        </li> <!-- /li.parent_li -->
+                        <li class="parent_li">
+                            <a class="toggle" href="javascript:void(0);">STEP 1: Current Feed Program</a>
+                            <ul class="inner show">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-xs-6"><span class="option_title">Diet Name</span></div>
+                                        <div class="col-xs-3 no-padding-left"><span class="option_title">LBS</span></div>
+                                        <div class="col-xs-3 no-padding-left"><span class ="option_title">$/LB DIET</span></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <apex:inputField value="{!progEvaluation.Diet_Name_1__c}" 
+                                            styleClass="form-control {!$ObjectType.Program_Evaluation__c.Fields.Diet_Name_1__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.Lbs_1__c}" 
+                                            styleClass="form-control number_input round_1p {!$ObjectType.Program_Evaluation__c.Fields.Lbs_1__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.lb_diet_1__c}" 
+                                            styleClass="form-control number_input dollar_sign {!$ObjectType.Program_Evaluation__c.Fields.lb_diet_1__c.Type}" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <apex:inputField value="{!progEvaluation.Diet_Name_2__c}" 
+                                            styleClass="form-control {!$ObjectType.Program_Evaluation__c.Fields.Diet_Name_2__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.Lbs_2__c}" 
+                                            styleClass="form-control number_input round_1p {!$ObjectType.Program_Evaluation__c.Fields.Lbs_2__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.lb_diet_2__c}" 
+                                            styleClass="form-control number_input dollar_sign {!$ObjectType.Program_Evaluation__c.Fields.lb_diet_2__c.Type}" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <apex:inputField value="{!progEvaluation.Diet_Name_3__c}" 
+                                            styleClass="form-control {!$ObjectType.Program_Evaluation__c.Fields.Diet_Name_3__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.Lbs_3__c}" 
+                                            styleClass="form-control number_input round_1p {!$ObjectType.Program_Evaluation__c.Fields.Lbs_3__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.lb_diet_3__c}" 
+                                            styleClass="form-control number_input dollar_sign {!$ObjectType.Program_Evaluation__c.Fields.lb_diet_3__c.Type}" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <apex:inputField value="{!progEvaluation.Diet_Name_4__c}" 
+                                            styleClass="form-control {!$ObjectType.Program_Evaluation__c.Fields.Diet_Name_4__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.Lbs_4__c}" 
+                                            styleClass="form-control number_input round_1p {!$ObjectType.Program_Evaluation__c.Fields.Lbs_4__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.lb_diet_4__c}" 
+                                            styleClass="form-control number_input dollar_sign {!$ObjectType.Program_Evaluation__c.Fields.lb_diet_4__c.Type}" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <apex:inputField value="{!progEvaluation.Diet_Name_5__c}" 
+                                            styleClass="form-control {!$ObjectType.Program_Evaluation__c.Fields.Diet_Name_5__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.Lbs_5__c}" 
+                                            styleClass="form-control number_input round_1p {!$ObjectType.Program_Evaluation__c.Fields.Lbs_5__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.lb_diet_5__c}" 
+                                            styleClass="form-control number_input dollar_sign {!$ObjectType.Program_Evaluation__c.Fields.lb_diet_5__c.Type}" />
+                                        </div>
+                                    </div>
+                                </li> <!-- @Ends step1 - Current Feed Program -->
+                            </ul>
+                        </li> <!-- /li.parent_li -->
+                        <li class="parent_li">
+                            <a class="toggle" href="javascript:void(0);">STEP 2: Current Pig Info</a>
+                            <ul class="inner show">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-xs-6 text-center"><span class="option_title">Number of Pigs In</span></div>
+                                        <div class="col-xs-6 text-center"><span class="option_title">Number of Pigs Out</span></div>
+                                    </div>
+                                    <div class="row margin-bottom">
+                                        <div class="col-xs-6">
+                                            <apex:inputField value="{!progEvaluation.pigs_in__c}" 
+                                            styleClass="form-control pigs_in1 {!$ObjectType.Program_Evaluation__c.Fields.pigs_in__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <apex:inputField value="{!progEvaluation.pigs_out_currentprogram__c}" styleClass="form-control pigs_out1 {!$ObjectType.Program_Evaluation__c.Fields.pigs_out_currentprogram__c.Type}" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4 text-center">
+                                            <span class="result_title"># DEAD</span>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <span class="result_title">% DEAD</span>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <span class="result_title">% OF FULL VALUE</span>
+                                        </div>
+                                    </div>
+                                    <div class="row margin-bottom">
+                                        <div class="col-xs-4 padding_right">
+                                            <div class="label label-default result radius_left dead_no1"><apex:outputField value="{!progEvaluation.number_dead__c}" /> </div>
+                                        </div>
+                                        <div class="col-xs-4 padding_left padding_right">
+                                            <div class="label label-default result  dead_perc1"><apex:outputField value="{!progEvaluation.percent_dead__c}" /></div>
+                                        </div>
+                                        <div class="col-xs-4 padding_left">
+                                            <div class="label label-default result radius_right alive_perc1"><apex:outputField value="{!progEvaluation.Percent_Full_Value__c}" /></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6 text-center"><span class="option_title">Avg Weight In</span></div>
+                                        <div class="col-xs-6 text-center"><span class="option_title">Avg Weight Out</span></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <apex:inputField value="{!progEvaluation.avg_wt_in__c}" 
+                                            styleClass="form-control {!$ObjectType.Program_Evaluation__c.Fields.avg_wt_in__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <apex:inputField value="{!progEvaluation.avg_wt_out__c}" 
+                                            styleClass="form-control {!$ObjectType.Program_Evaluation__c.Fields.avg_wt_out__c.Type}" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <span class="result_title">DAYS ON FEED</span>
+                                        </div>
+                                    </div>
+                                    <div class="row margin-bottom">
+                                        <div class="col-xs-4 col-xs-offset-4">
+                                            <apex:inputField value="{!progEvaluation.days_on_feed__c}" 
+                                            styleClass="form-control {!$ObjectType.Program_Evaluation__c.Fields.days_on_feed__c.Type}" />
+                                        </div>
+                                    </div>
+                                </li> <!-- @Ends step1 - Current Feed Program -->
+                            </ul>
+                        </li> <!-- /li.parent_li -->
+                        <li class="parent_li">
+                            <a class="toggle" href="javascript:void(0);">STEP 3: UltraCare Feed Program</a>
+                            <ul class="inner show">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-xs-6"><span class="option_title">Diet Name</span></div>
+                                        <div class="col-xs-3 no-padding-left"><span class="option_title">LBS</span></div>
+                                        <div class="col-xs-3 no-padding-left"><span class ="option_title">$/LB DIET</span></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <apex:inputField value="{!progEvaluation.UC_Diet_Name_1__c}" 
+                                            styleClass="form-control {!$ObjectType.Program_Evaluation__c.Fields.UC_Diet_Name_1__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.UC_lbs_1__c}" 
+                                            styleClass="form-control number_input round_1p {!$ObjectType.Program_Evaluation__c.Fields.UC_lbs_1__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.UC_lb_diet_1__c}" 
+                                            styleClass="form-control number_input dollar_sign {!$ObjectType.Program_Evaluation__c.Fields.UC_lb_diet_1__c.Type}" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <apex:inputField value="{!progEvaluation.UC_Diet_Name_2__c}" 
+                                            styleClass="form-control {!$ObjectType.Program_Evaluation__c.Fields.UC_Diet_Name_2__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.UC_Lbs_2__c}" 
+                                            styleClass="form-control number_input round_1p {!$ObjectType.Program_Evaluation__c.Fields.UC_Lbs_2__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.UC_lb_diet_2__c}" 
+                                            styleClass="form-control number_input dollar_sign {!$ObjectType.Program_Evaluation__c.Fields.UC_lb_diet_2__c.Type}" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <apex:inputField value="{!progEvaluation.UC_Diet_Name_3__c}" 
+                                            styleClass="form-control {!$ObjectType.Program_Evaluation__c.Fields.UC_Diet_Name_3__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.UC_lbs_3__c}" 
+                                            styleClass="form-control number_input round_1p {!$ObjectType.Program_Evaluation__c.Fields.UC_lbs_3__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.UC_lb_diet_3__c}" 
+                                            styleClass="form-control number_input dollar_sign {!$ObjectType.Program_Evaluation__c.Fields.UC_lb_diet_3__c.Type}" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <apex:inputField value="{!progEvaluation.UC_Diet_Name_4__c}" 
+                                            styleClass="form-control {!$ObjectType.Program_Evaluation__c.Fields.UC_Diet_Name_4__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.UC_Lbs_4__c}" 
+                                            styleClass="form-control number_input round_1p {!$ObjectType.Program_Evaluation__c.Fields.UC_Lbs_4__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.UC_lb_diet_4__c}" 
+                                            styleClass="form-control number_input dollar_sign {!$ObjectType.Program_Evaluation__c.Fields.UC_lb_diet_4__c.Type}" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <apex:inputField value="{!progEvaluation.UC_Diet_Name_5__c}" 
+                                            styleClass="form-control {!$ObjectType.Program_Evaluation__c.Fields.UC_Diet_Name_5__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.UC_Lbs_5__c}" 
+                                            styleClass="form-control number_input round_1p {!$ObjectType.Program_Evaluation__c.Fields.UC_Lbs_5__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-3 no-padding-left">
+                                            <apex:inputField value="{!progEvaluation.UC_lb_diet_5__c}" 
+                                            styleClass="form-control number_input dollar_sign {!$ObjectType.Program_Evaluation__c.Fields.UC_lb_diet_5__c.Type}" />
+                                        </div>
+                                    </div>
+                                </li> <!-- @Ends step1 - Current Feed Program -->
+                            </ul>
+                        </li> <!-- /li.parent_li -->
+                        <li class="parent_li">
+                            <a class="toggle" href="javascript:void(0);">STEP 4: UltraCare Feed Info</a>
+                            <ul class="inner show">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-xs-6 text-center"><span class="option_title">NUMBER OF PIGS IN</span></div>
+                                        <div class="col-xs-6 text-center"><span class="option_title">NUMBER OF PIGS OUT</span></div>
+                                    </div>
+                                    <div class="row margin-bottom">
+                                        <div class="col-xs-6">
+                                            <apex:inputField value="{!progEvaluation.UC_pigs_in__c}" 
+                                            styleClass="form-control pigs_in {!$ObjectType.Program_Evaluation__c.Fields.UC_pigs_in__c.Type}" />
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <apex:inputField value="{!progEvaluation.UC_pigs_out__c}" 
+                                            styleClass="form-control pigs_out {!$ObjectType.Program_Evaluation__c.Fields.UC_pigs_out__c.Type}" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4 text-center">
+                                            <span class="result_title"># DEAD</span>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <span class="result_title">% DEAD</span>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <span class="result_title">% OF FULL VALUE</span>
+                                        </div>
+                                    </div>
+                                    <div class="row margin-bottom">
+                                        <div class="col-xs-4 padding_right">
+                                            <div class="label label-default result radius_left dead_no"><apex:outputField value="{!progEvaluation.UC_number_dead__c}" /></div>
+                                        </div>
+                                        <div class="col-xs-4 padding_left padding_right">
+                                            <div class="label label-default result  dead_perc"><apex:outputField value="{!progEvaluation.UC_percent_dead__c}" /></div>
+                                        </div>
+                                        <div class="col-xs-4 padding_left">
+                                            <div class="label label-default result radius_right alive_perc"><apex:outputField value="{!progEvaluation.UC_Percent_Full_Value__c}" /></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <span class="option_title">AVG WEIGHT IN</span>
+                                        </div>
+                                    </div>
+                                    <div class="row margin-bottom">
+                                        <div class="col-xs-12">
+                                            <apex:inputField value="{!progEvaluation.UC_avg_wt_in__c}" 
+                                            styleClass="form-control choose_one1 {!$ObjectType.Program_Evaluation__c.Fields.UC_avg_wt_in__c.Type}" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <span class="result_title">DAYS ON FEED</span>
+                                        </div>
+                                    </div>
+                                    <div class="row margin-bottom">
+                                        <div class="col-xs-4 col-xs-offset-4">
+                                            <apex:inputField value="{!progEvaluation.UC_days_on_feed__c}" 
+                                            styleClass="form-control {!$ObjectType.Program_Evaluation__c.Fields.UC_days_on_feed__c.Type}" />
+                                        </div>
+                                    </div>
+                                    <div class="row div_color margin-bottom">
+                                        <div class="col-xs-12 text-center font-title margin-bottom">
+                                            Improvement : Percentage or Total?
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-6 text-center">
+                                                <span class ="green-font">ADG IMPROVEMENT</span>
+                                            </div>
+                                            <div class="col-xs-6 text-center">
+                                                <span class="green-font">AVG WEIGHT OUT</span>
+                                            </div>
+                                        </div>
+                                        <div class="row margin-bottom" style="padding-left: 20px;padding-right: 20px;">
+                                            <div class="col-xs-6">
+                                                <apex:inputField id="diffAdgInput" value="{!progEvaluation.Diff_ADG_Input__c}" 
+                                                styleClass="form-control choose_one {!$ObjectType.Program_Evaluation__c.Fields.Diff_ADG_Input__c.Type}" />
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <apex:inputField id="ucAvgWtOut" value="{!progEvaluation.UC_avg_wt_out__c}" 
+                                                styleClass="form-control choose_one {!$ObjectType.Program_Evaluation__c.Fields.UC_avg_wt_out__c.Type}" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row margin-bottom">
+                                            <div class="col-xs-12 text-center font-title">
+                                                Choose one
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li> <!-- @Ends step4 - Current Feed Program -->
+                            </ul>
+                        </li> <!-- /li.parent_li -->
+                        
+                        <li class="results_container">
+                            <apex:outputPanel id="isRecordSavedid" >
+                                <apex:outputPanel layout="block" rendered="{!isRecordSaved}" >
+                            <!--<apex:outputPanel layout="none" rendered="{!isRecordSaved}">-->
+                                
+                                    <a class="toggle" href="javascript:void(0);">Program Evaluator Results 
+                                    </a>
+                                    <ul class="inner show">
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-xs-6"></div>
+                                                <div class="col-xs-3 text-right"><span class="option_title">CURRENT</span></div>
+                                                <div class="col-xs-3 text-right"><span class="option_title">ULTRACARE</span></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-6 text-right"><span class="option_title">% FULL VALUE</span></div>
+                                                <div class="col-xs-3 text-right"><apex:outputField value="{!progEvaluation.Percent_Full_Value__c}" /></div>
+                                                <div class="col-xs-3 text-right"><apex:outputField value="{!progEvaluation.UC_Percent_Full_Value__c}" /></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-6 text-right"><span class="option_title">ADG</span></div>
+                                                <div class="col-xs-3 text-right">
+                                                    <apex:outputField value="{!progEvaluation.Current_Program_ADG__c}" />
+                                                </div>
+                                                <div class="col-xs-3 text-right">
+                                                    <apex:outputField value="{!progEvaluation.UltraCare_ADG__c}" />
+                                                </div>
+                                            </div>
+                                            <div class="row  margin-bottom">
+                                                <div class="col-xs-6 text-right"><span class="option_title">DIFF ADG (%)</span></div>
+                                                <div class="col-xs-6 text-right">
+                                                    <div class="label label-default result text-align field-diff-adg-percent">
+                                                        <apex:outputField value="{!progEvaluation.Diff_ADG__c}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-6 text-right"><span class="option_title">TOTAL FEED (LBS)</span></div>
+                                                <div class="col-xs-3 text-right"><apex:outputField value="{!progEvaluation.Current_Program_Total_Feed_Lbs__c}" /></div>
+                                                <div class="col-xs-3 text-right"><apex:outputField value="{!progEvaluation.Ultracare_Total_Feed_Lbs__c}" /></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-6 text-right"><span class="option_title">TOTAL FEED ($)</span></div>
+                                                <div class="col-xs-3 text-right"><apex:outputField value="{!progEvaluation.Current_Program_Total_Feed_Dollar__c}" /></div>
+                                                <div class="col-xs-3 text-right"><apex:outputField value="{!progEvaluation.Total_Feed_Cost_Ultracare__c}" /></div>
+                                            </div>
+                                            <div class="row  margin-bottom">
+                                                <div class="col-xs-6 text-right"><span class="option_title">FEED / GAIN</span></div>
+                                                <div class="col-xs-3 text-right">
+                                                    <apex:outputField value="{!progEvaluation.Current_Program_Feed_Gain__c}" />
+                                                </div>
+                                                <div class="col-xs-3 text-right">
+                                                    <apex:outputField value="{!progEvaluation.UltraCare_Feed_Gain__c}" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-6 text-right"><span class="option_title">DIFF FEED : GAIN</span></div>
+                                                <div class="col-xs-6 text-right">
+                                                    <div class="label label-default result  text-align">
+                                                        <apex:outputField value="{!progEvaluation.Feed_Gain_Difference__c}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-6 text-right"><span class="option_title">$ / LB GAIN</span></div>
+                                                <div class="col-xs-3 text-right"><apex:outputField value="{!progEvaluation.Current_Program_lb_gain__c}" /></div>
+                                                <div class="col-xs-3 text-right"><apex:outputField value="{!progEvaluation.UltraCare_Program_lb_gain__c}" /></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-6 text-right"><span class="option_title">DIFF $ / LB GAIN</span></div>
+                                                <div class="col-xs-6 text-right">
+                                                    <div class="label label-default result  text-align">
+                                                        <apex:outputField value="{!progEvaluation.Lb_Gain_Difference__c}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li> <!-- @Ends step5 - Current Feed Program -->
+                                    </ul>
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+                        </li> <!-- /li.parent_li -->
+                    </ul> <!-- /ul.accordian -->
+                </div> <!-- /col-xs-12 -->
+            </div> <!-- /row -->  
+            <div class="row facility_header">
+                <div class="col-xs-3">
+                    <button type="button" class="btn btn1 btn-default" onclick="cancel();">Cancel</button>
+                </div>
+                <div class="col-xs-9 text-right">
+                    <apex:outputPanel id="commandbtnsbot">
+                        <input type="button" class="btn1 btn-email" data-toggle="modal" data-target="#confirmModal" value="Email" />
+                        <apex:commandButton value="Clone" status="status" styleClass="btn1 btn-save" action="{!cloneRecord}" reRender="msgs,isRecordSavedid" rendered="{!isRecordSaved}" oncomplete="$('input.choose_one').removeClass('input_disbale').removeAttr('disabled','disabled' ).val('');document.body.scrollTop = 0;" /> 
+                        <apex:commandButton value="Save" status="status" styleClass="btn1 btn-primary" action="{!saveRecord}" reRender="msgs,isRecordSavedid,commandbtnstop,commandbtnsbot,diffAdgInput,ucAvgWtOut" oncomplete="disableImprovementField({!isRecordSaved});document.body.scrollTop = 0;" /> 
+	                </apex:outputPanel>
+                </div>
+            </div>   <!-- @Ends facility_header -->                      
+        </div> <!-- /container-fluid -->     
+        <!-- Confirm Modal -->
+        <div class="modal fade confirmModal" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header"></div>
+                    <div class="modal-footer text-center">
+                        <h4 class="modal-title padding5">Are you sure you want to send this?</h4>
+                        <apex:commandButton value="Yes" styleClass="btn1 btn-primary" action="{!sendEmail}" reRender="msgs" onComplete="$('#confirmModal').modal('hide');"/>
+                        <button type="button" class="btn1 btn-default" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </apex:form>
+
+    <!-- Form to populate on cancel button click -->
+    <apex:form >
+        <apex:actionFunction name="cancel" action="{!cancel}">
+        </apex:actionFunction>
+    </apex:form>
+
+    <apex:actionstatus id="status">
+        <apex:facet name="start">
+            <div class="search_loading">
+                <div class="waitingSearchDiv" id="el_loading">
+                    <div class="">
+                        <img class="waitingImage" src="/img/loading.gif" />
+                        <span class="waitingDescription">Loading....</span>
+                    </div>
+                </div>
+            </div>    
+        </apex:facet>
+    </apex:actionstatus>
+
+    <script type="text/javascript" src="{!URLFOR($Resource.LMSA_Assets, 'js/jquery-1.11.3.min.js')}"></script>
+    <script type="text/javascript" src="{!URLFOR($Resource.LMSA_Assets, 'js/bootstrap.min.js')}"></script>
+    <script type="text/javascript" src="{!URLFOR($Resource.LMSA_Assets, 'js/app.js')}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            initProgEval();
+            initNumberInput();
+            disableImprovementField({!isRecordSaved});
+        });
+
+        iosDoubleTapFix();
+        iosPageJumpFix();
+    </script>
+</body>
+</html>
+</apex:page>

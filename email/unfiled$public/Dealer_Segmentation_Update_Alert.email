@@ -1,0 +1,9 @@
+Dear {!Dealer_Segmentation__c.Sales_Specialist2__c}, 
+
+Please update the Dealer Segmentation information for: 
+
+Dealer Name: {!Dealer_Segmentation__c.Dealer_Name__c} 
+Dealer AB#: {!Dealer_Segmentation__c.Dealer_AB__c} 
+Current Segmentation: {!Dealer_Segmentation__c.Link}
+
+Thank you.

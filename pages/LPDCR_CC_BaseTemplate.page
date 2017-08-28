@@ -1,0 +1,67 @@
+<!-- 
+*********************************************************************************
+Author: Govinda Prasad P S
+Email: govinda.prasad@magnet360.com
+Created Date    : 03/3/2017
+Function    :  Template for the Customer Community.
+Version     : 1.0 
+*********************************************************************************
+--> 
+<apex:page showHeader="false" sidebar="false" applyBodyTag="false" applyHtmlTag="false" standardStylesheets="false">
+    <html lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link href="{!URLFOR($Resource.LPDCR_Assets, 'libs/bootstrap/css/bootstrap.min.css')}" rel="stylesheet" />
+            <link href="{!URLFOR($Resource.LPDCR_Assets, 'libs/font-awesome/css/font-awesome.min.css')}" rel="stylesheet" />
+            <link href="{!URLFOR($Resource.LPDCR_Assets, 'css/styles.css')}" rel="stylesheet" />
+            <link href="{!URLFOR($Resource.LPDCR_CC_Assets, 'css/ccstyles.css')}" rel="stylesheet" />
+            <link href="{!URLFOR($Resource.LPDCR_CC_Assets, 'css/circle.css')}" rel="stylesheet" />
+            <link href="{!URLFOR($Resource.LPDCR_CC_Assets, 'css/tooltip.css')}" rel="stylesheet" />
+            <link href="{!URLFOR($Resource.LPDCR_CC_Assets, 'css/barchart.css')}" rel="stylesheet" />
+            <!--<link href="{!URLFOR($Resource.LPDCR_CC_Assets, 'css/fortAwesome.css')}" rel="stylesheet" />
+            <link href="https://use.fortawesome.com/kits/b72fc924/publications/latest/woff.css" rel="stylesheet" />-->
+            
+            <title>MyPurinaMills -&nbsp;<apex:insert name="PageTitle" /></title>
+        </head>
+        <body class="{!IF(($CurrentPage.Name=='LPDCR_ExpenseEdit' || $CurrentPage.Name=='LPDCR_Expenses' || $CurrentPage.Name=='LPDCR_BalanceAndSummary'), 'body-topgap-mobile','')} ">
+        
+            <!-- Page Begins -->
+            <div class="wrapper">
+                <div class="body clearfix">
+                    <!-- Header component -->
+                    <c:LPDCR_CC_Header />
+                    
+                    <!-- Defining Body -->
+                    <div class="content container-fluid">
+                        <apex:insert name="body" />
+                    </div>
+                </div>
+
+            </div>
+            <!-- @End Page -->
+
+                            <!-- Footer Component -->
+                <c:LPDCR_CC_Footer />
+            
+        </body>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+        <script src="{!URLFOR($Resource.LPDCR_Assets, 'libs/bootstrap/js/bootstrap.min.js')}"></script>
+        <script src="{!URLFOR($Page.LPDCR_JS)}"></script>
+        <script>
+        $(document).ready(function(){
+             $(".tooltip1").mouseover(function(){
+                $('.tooltiptext').show();
+            });
+            $(".btn_cls").click(function(){
+                $('.tooltiptext').hide();
+            });
+        });
+        </script> 
+        
+         
+    </html>   
+</apex:page>

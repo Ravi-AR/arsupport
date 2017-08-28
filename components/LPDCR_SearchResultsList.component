@@ -1,0 +1,240 @@
+<apex:component controller="LPDCR_SearchResultsListController" allowDML="true">
+    <apex:attribute name="componentKey" 
+                    type="String" 
+                    assignTo="{!key}" 
+                    description="The key given to this component so the page can easily get access to it" />
+ 
+    <apex:attribute name="thisPageController" 
+                    type="LPDCR_SecondaryPageBaseController" 
+                    assignTo="{!pageController}" 
+                    required="true" 
+                    description="The controller for the page." />
+    
+    <apex:attribute name="searchTerm" 
+                    type="String" 
+                    assignTo="{!search_term}" 
+                    required="false" 
+                    description="The string used in the global search" />
+    
+    <apex:attribute name="searchCategory" 
+                    type="String" 
+                    assignTo="{!search_category}" 
+                    required="false" 
+                    default="Documents"
+                    description="The category used to group the search results, and which will be displayed" />
+                   
+    <p class="fnt12">Showing results for <b><apex:outputText value="'{!search_term}'" /></b> in <b><apex:outputText value="'{!search_category}'" /></b></p>
+
+    <apex:outputPanel id="resultsSection">
+        <apex:outputText value="Searching..." rendered="{!IF(results == null && promotions == null && events == null,true,false)}" />
+        
+        <apex:outputPanel styleClass="col-sm-11 pad_lft0 pad_rgt0 mrg_top20" rendered="{!IF( filtered_results != null, true, false)}" id="documentsSection" layout="block">
+ <!--  Kentico Document Types -->
+            <div class="col-sm-12 pad_lft0 pad_rgt0 pad_top10">
+                <apex:outputPanel rendered="{!filtered_results != null && filtered_results.size > 0}" id="documentsSectionkentico">
+                   <!-- {!filtered_results.size} results found-->
+                     <table class="dataTable table tablehead" id="firstTable1">
+                        <thead>
+                            <tr>
+                                <th title="Title" class="sorting"></th>
+                            </tr>
+                        </thead>
+                         <tbody>
+                             <apex:repeat value="{!filtered_results}" var="record">                                    
+                                <tr>
+                                   <td>
+                                       <p>
+                                        <apex:image url="{!record.URLLink}" width="150" height="100" rendered="{!record.IsWebVisibleFile && search_category == 'Images'}"/>
+                                        <apex:image url="{!URLFOR($Resource.LPDCR_CC_Assets, 'img/Image_not_available.png')}" width="150"  rendered="{!!record.IsWebVisibleFile && search_category == 'Images'}"/>
+                                        <label class="clr_red mrg_btm0 pad_lft20">
+                                          <apex:outputLink value="{!record.URLLink}" target="_blank">
+                                              <apex:outputText value="{!record.DocumentName}" escape="false" />
+                                          </apex:outputLink>
+                                        </label>
+                                        <span class="flt_rgt clr_gry">
+                                            <apex:outputText value="{0, date, MMM' 'd', 'yyyy}">
+                                                <apex:param value="{!record.DocumentsLastModified}" /> 
+                                            </apex:outputText>
+                                        </span>
+                                    </p>
+                                  </td>
+                              </tr>
+                            </apex:repeat>
+                        </tbody>
+                    </table>    
+                    <script>
+                          
+                            $('#firstTable1').on( 'init.dt', function () {
+                                    } ).DataTable({"searching":true, "bPaginate":true, "bInfo":true,
+                            "dom": "<'mrg_btm20 '<'col-sm-12 pad_lft0 pad_rgt0'f>>" +
+                        "<<'col-sm-6 mrg_btm20 mrg_top20 pad_lft0'i><'col-sm-6 text-right mrg_btm20 mrg_top20 hidden-xs pad_rgt0'l>>" +
+                        "<<'col-sm-12 pad_lft0 pad_rgt0'tr>>" +
+                        "<<'col-sm-12 pad_lft0 pad_rgt0'p>>", "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                        language: {
+                        search: '<i class="glyphicon glyphicon-search sch_Icon"></i> _INPUT_',
+                        searchPlaceholder: "Search This Section"
+                    },
+                     "aaSorting": [ ]
+                        }); 
+                       
+                     
+                  </script>
+                    
+                             
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!filtered_results != null && filtered_results.size == 0}" >
+                    No results found.
+                </apex:outputPanel>
+                
+            </div>
+        </apex:outputPanel>
+     
+ <!-- Kentico Promotion Types -->
+        <apex:outputPanel styleClass="col-sm-11 pad_lft0 pad_rgt0 mrg_top20" rendered="{!IF(filtered_promotions != null, true, false)}" id="promotionSection" layout="block" onclick="oncompl()"> 
+            <div class="col-sm-12 pad_lft0 pad_rgt0 pad_top10">
+                <apex:outputPanel rendered="{!filtered_promotions != null && filtered_promotions.size > 0}" >
+                   <!-- {!filtered_promotions.size} results found-->
+                   <table class="dataTable table tablehead" id="firstTable1">
+                        <thead>
+                            <tr>
+                                <th title="Title" class="sorting"></th>
+                            </tr>
+                        </thead>
+                         <tbody>
+                               <apex:repeat value="{!filtered_promotions}" var="promotion"> 
+                                <tr>
+                                  <td>                                   
+                                     <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" id="headingOne" role="tab">
+                                                <h4 class="panel-title">
+                                                    <p aria-controls="123CP" aria-expanded="false" data-parent="#accordion" data-toggle="collapse" href="#{!promotion.PromotionsID}123CP" role="button" class="clrred collapsed">
+                                                    <a class="wid60 flt_lft clr_blk80 txt_none fnt14"><span class="glyphicon glyphicon-plus pull-left mrg_rgt10"></span>{!promotion.Headline}</a>
+                                                    <span class="pull-right text-right clrgreay wid40 pad_lft10">
+                                                        <apex:outputText value="{0,date,MMM dd}">
+                                                            <apex:param value="{!promotion.StartDate}" /> 
+                                                        </apex:outputText>
+                                                        &nbsp; - &nbsp;
+                                                        <apex:outputText value="{0,date,MMM dd}">
+                                                            <apex:param value="{!promotion.ExpirationDate}" /> 
+                                                        </apex:outputText>
+                                                    </span>
+                                                    </p>
+                                                    <div class="clear"></div>
+                                                </h4>
+                                            </div>
+                                            <div aria-labelledby="headingOne" class="panel-collapse collapse" id="{!promotion.PromotionsID}123CP" role="tabpanel" aria-expanded="false">
+                                                <div class="panel-body"> 
+                                                 <apex:outputText value="{!promotion.WYSIWYG}" escape="false"></apex:outputText> 
+                                                 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!--  /END container -->
+                                    <div class="clear"></div>
+                                  </td>
+                               </tr>
+                            </apex:repeat>
+                        </tbody>
+                     </table>
+                         <script>
+                           
+                            $('#firstTable1').on( 'init.dt', function () {
+                                    } ).DataTable({"searching":true, "bPaginate":true, "bInfo":true,
+                            "dom": "<'mrg_btm20 '<'col-sm-12 pad_lft0 pad_rgt0'f>>" +
+                        "<<'col-sm-6 mrg_btm20 mrg_top20 pad_lft0'i><'col-sm-6 text-right mrg_btm20 mrg_top20 hidden-xs pad_rgt0'l>>" +
+                        "<<'col-sm-12 pad_lft0 pad_rgt0'tr>>" +
+                        "<<'col-sm-12 pad_lft0 pad_rgt0'p>>", "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                        language: {
+                        search: '<i class="glyphicon glyphicon-search sch_Icon"></i> _INPUT_',
+                        searchPlaceholder: "Search This Section"
+                    },
+                     "aaSorting": [ ]
+                        }); 
+                        
+                  </script>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!filtered_promotions != null && filtered_promotions.size == 0}" >
+                    No results found
+                </apex:outputPanel>
+            </div>
+        </apex:outputPanel>
+        
+<!-- Salesforce Event Type -->
+        <apex:outputPanel styleClass="col-sm-11 pad_lft0 pad_rgt0 mrg_top20" rendered="{!IF(filtered_events != null, true, false)}" id="eventSection" layout="block"> 
+            <div class="col-sm-12 pad_lft0 pad_rgt0 pad_top10">
+                <apex:outputPanel rendered="{!filtered_events != null && filtered_events.size > 0}" >
+                    <!--{!filtered_events.size} results found-->
+                    <table class="dataTable table tablehead" id="firstTable1">
+                        <thead>
+                            <tr>
+                                <th title="Title" class="sorting"></th>
+                            </tr>
+                        </thead>
+                         <tbody>
+                             <apex:repeat value="{!filtered_events}" var="event">
+                                 <tr>
+                                     <td>                                    
+                                        <p><label class="clr_red mrg_btm0"><apex:outputField value="{!event.Name}"/></label> 
+                                        <span class="flt_rgt clr_gry"><apex:outputField value="{!event.Event_Date_Range__c}" /></span></p>
+                                        <p class="col-sm-10 pad_lft0 txt_jfy">
+                                            <apex:outputField value="{!event.Short_Description__c}" />                                                        
+                                        </p>
+                                        <div class="clear"></div>
+                                     </td>
+                                 </tr>
+                             </apex:repeat>
+                          </tbody>
+                        </table> 
+                            <script>
+                          
+                           
+                           $('#firstTable1').on( 'init.dt', function () {
+                                    } ).DataTable({"searching":true, "bPaginate":true, "bInfo":true,
+                            "dom": "<'mrg_btm20 '<'col-sm-12 pad_lft0 pad_rgt0'f>>" +
+                        "<<'col-sm-6 mrg_btm20 mrg_top20 pad_lft0'i><'col-sm-6 text-right mrg_btm20 mrg_top20 hidden-xs pad_rgt0'l>>" +
+                        "<<'col-sm-12 pad_lft0 pad_rgt0'tr>>" +
+                        "<<'col-sm-12 pad_lft0 pad_rgt0'p>>", "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                        language: {
+                        search: '<i class="glyphicon glyphicon-search sch_Icon"></i> _INPUT_',
+                        searchPlaceholder: "Search This Section"
+                    },
+                     "aaSorting": [ ]
+                        }); 
+                        
+                  </script>        
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!filtered_events != null && filtered_events.size == 0}" >
+                    No results found.
+                </apex:outputPanel>
+            </div>
+        </apex:outputPanel>
+        
+    </apex:outputPanel><!-- /END ResultsSection -->
+    
+    <apex:actionFunction action="{!doSearch}" name="doSearch" status="myEventStatus" rerender="resultsSection,fileTypePanel" />
+    
+   
+
+    
+    <script>
+        $(document).ready(function () {
+    
+            doSearch();
+            
+           
+        });
+        
+        function oncompl(){
+         $('.collapse').on('shown.bs.collapse', function(){
+      
+        $(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+        }).on('hidden.bs.collapse', function(){
+        $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+        });
+        }
+    </script>
+    
+  
+
+</apex:component>

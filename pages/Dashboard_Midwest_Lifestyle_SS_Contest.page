@@ -1,0 +1,34 @@
+<apex:page >
+<table>
+
+<tr><td valign="top"><b>Contest Rules </b></td></tr>
+
+<tr><td valign="top">Opportunities must be created between July 1, 2015 – October 31, 2015.</td></tr>
+
+<tr><td valign="top"> &nbsp; </td></tr>
+
+<tr><td valign="top">Tracking and winners will be based on combining two rankings.  Ranking the number of sales opportunities entered and the number
+of sales activities entered that are tied to these opportunities.  We will add the two rankings together to determine the winners (lowest number rank wins).  
+In case of a tie, the person with the largest quantity of "Closed Won" opportunities wins.</td></tr>
+
+<tr><td valign="top"> &nbsp; </td></tr>
+
+<tr><td valign="top">An overall winner will be determined from the number of points available
+from opportunities that are moved to Closed Won.  To qualify as Closed Won, the opportunity will need to show at least one field sales
+activity tied to it.</td></tr> 
+
+<tr><td valign="top"> &nbsp; </td></tr> 
+
+<tr><td valign="top">Special recognition to the user who has the most total points on Closed Won opportunities.  
+Payouts will be awareded at the Fall Sales Conference in Louisville KY.</td></tr>
+
+
+<tr><td valign="top"> &nbsp; </td></tr> 
+<tr><td valign="top"> $200 -- 1st Place</td></tr> 
+<tr><td valign="top"> $150 -- 2nd Place</td></tr> 
+<tr><td valign="top"> $100 -- 3rd Place </td></tr> 
+<tr><td valign="top"> $400 -- Overall Closed Won VIP Point Winner  </td></tr> 
+
+
+</table>
+</apex:page>

@@ -1,0 +1,301 @@
+<apex:page standardController="Account" extensions="Account_Error_Page_Controller">
+
+    <style type="text/css">
+        .custPopup{
+            background-color: white;
+            border-width: 2px;
+            border-style: solid;
+            z-index: 9999;
+            left: 50%;
+            padding:10px;
+            position: absolute;
+        
+            /* These are the 3 css properties you will need to change so the popup 
+            displays in the center of the screen. First set the width. Then set 
+            margin-left to negative half of what the width is. You can add 
+            the height property for a fixed size pop up if you want.*/
+        
+            width: 800px;
+            margin-left: -250px;
+            top:100px;
+        }
+        .popupBackground{
+            background-color:black;
+            opacity: 0.20;
+            filter: alpha(opacity = 20);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9998;
+        }
+
+    </style>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" />
+
+<script type="text/javascript">
+    
+    function showAnimalsCreate(){
+        $('.toggleanimal').hide();
+        $('.createanimal').show();
+        return false;
+    }
+    
+    function showOpportunityCreate(){
+        $('.toggleOpportunity').hide();
+        $('.createOpportunity').show();
+        $('[id$=createOpportunity]').show();
+        return false;
+    }
+
+    function showCreateContact(){
+        $('.toggleContact').hide();
+        $('.createContact').show();
+        return false;
+    }
+
+    function validateOpportunity(){
+        // alert(   $('[id$=cl_date]').val() );
+        var Error = true;
+        var bad_fields ='';
+        if($('[id$=cl_date]').val() == null || $('[id$=cl_date]').val() == undefined || $('[id$=cl_date]').val() == ''){
+            Error = false;
+            bad_fields += '*Close Date ';
+        }
+        if($('[id$=op_name]').val() == null || $('[id$=op_name]').val() == undefined || $('[id$=op_name]').val() == ''){
+            Error = false;
+            bad_fields += '*Opportunity Name ';
+        }
+        if($('[id$=op_snam]').val() == null || $('[id$=op_snam]').val() == undefined || $('[id$=op_snam]').val() == ''){
+            Error = false;
+            bad_fields += '*Stage ';
+        }
+        if($('[id$=op_type]').val() == null || $('[id$=op_type]').val() == undefined || $('[id$=op_type]').val() == ''){
+            Error = false;
+            bad_fields += '*Type ';
+        }
+        if($('[id$=op_poin]').val() == null || $('[id$=op_poin]').val() == undefined || $('[id$=op_poin]').val() == ''){
+            Error = false;
+            bad_fields += '*Annual Points ';
+        }
+        if($('[id$=op_spec]').val() == null || $('[id$=op_spec]').val() == undefined || $('[id$=op_spec]').val() == ''){
+            Error = false;
+            bad_fields += '*Animal Type ';
+        }
+        if($('[id$=op_head]').val() == null || $('[id$=op_head]').val() == undefined || $('[id$=op_head]').val() == ''){
+            Error = false;
+            bad_fields += '*Total Head ';
+        }
+
+
+        // var htmlString = $( this ).html();
+        // $( this ).text( htmlString );
+
+        if(Error == false){
+            var htmlstr = 'Required fields must be filled out: ';
+            htmlstr += bad_fields;
+            $('[id$=opp_err]').text(htmlstr);
+            $('[id$=opp_err]').show();
+
+        }else{
+            $('[id$=opp_err]').hide();
+        }
+        return Error;
+        // ('[id$=cEmail]')
+    }
+
+</script>
+    <!-- --Account Error Page-- -->
+
+        <!-- <apex:form > -->
+        <apex:pageBlock title="Account Information" >
+            <apex:pageBlockSection >
+                <apex:outputField value="{!current_account.Name}" />
+            </apex:pageBlockSection>
+            <!-- <apex:outputText value="" /> -->
+            <p style="color:red; font-size:14px;">{!ErrorMessage}</p>
+            <p style="color:green; font-size:14px;">{!successMessage}</p>
+        </apex:pageBlock>
+            
+        <!-- <div class="createContact" style="display:none"> -->
+        <div class="createContact" style="display:none;">
+               <apex:include pageName="Account_Error_createContact" rendered="{!NOT(contact_exists)}"/>
+        </div>
+
+        <!-- CONTACT INFORMATION SECTION  -->
+        <apex:form >
+            <apex:pageBlock title="Contact information">
+
+                <apex:pageBlockSection rendered="{!contact_exists}">
+                    <apex:outputField value="{!current_contact.Name}" />
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection rendered="{!rel_contacts}" columns="1">
+
+                    <apex:pageBlockTable rendered="{!rel_contacts}" id="contact_table" value="{!related_contacts}" var="con">
+                        <apex:column headerValue="Choose Contact" >
+                            <apex:commandLink value="Select" action="{!selectContact}" >
+                                <apex:param name="sel_conid" value="{!con.id}" assignTo="{!sel_conid}" />
+                            </apex:commandLink>
+                        </apex:column>
+                        <apex:column headerValue="Contact Name">
+                            <apex:outputField value="{!con.Name}" />
+                        </apex:column>
+
+                        <apex:column headerValue="Phone">
+                            <apex:outputField value="{!con.Phone}" />
+                        </apex:column>
+
+                        <apex:column headerValue="Email" >
+                            <apex:outputField value="{!con.Email}" />
+                        </apex:column>
+
+                    </apex:pageBlockTable>
+
+                </apex:pageBlockSection>
+
+                
+                <!-- CREATE A NEW CONTACT RELATED TO THE ACCOUNT  -->
+                <apex:pageBlockSection >
+
+                    <div class="toggleContact" >
+                        <apex:commandButton rendered="{!NOT(contact_exists)}" styleClass="toggleContact" value="Create New Contact" onclick="return showCreateContact()"/>
+                    </div>
+                
+                </apex:pageBlockSection>
+
+            </apex:pageBlock>
+        </apex:form>    
+
+        <apex:form >
+            <apex:pageBlock title="Related Opportunities" rendered="{!NotInfluencer}">
+    
+                <div id="opp_err" style="display:none; color:red; font-size:14px;"></div>
+                <!-- <apex:pageBlockTable id="opp_table" value="{!opps}" var="opp"> -->
+                <apex:pageBlockTable id="opp_table" value="{!OppList}" var="o">
+                    <apex:column headerValue="Opportunity Name">
+                        <apex:outputField value="{!o.opp.Name}" />
+                    </apex:column>
+                    <apex:column headerValue="Close Date">
+                        <apex:outputField value="{!o.opp.CloseDate}" />
+                    </apex:column>
+                    <apex:column headerValue="Stage">
+                        <apex:outputField value="{!o.opp.StageName}" />
+                    </apex:column>
+                    <apex:column headerValue="Type" >
+                        <apex:outputField value="{!o.opp.Type}" />
+                    </apex:column>
+                    <apex:column headerValue="Total Head" >
+                        <apex:outputField value="{!o.opp.Total_Head__c}" />
+                    </apex:column>
+                </apex:pageBlockTable>
+                
+                <!-- <div class="toggleOpportunity" >
+                    <apex:commandButton value="Create Opportunity" onclick="return showOpportunityCreate()"/>
+                </div> -->
+
+            </apex:pageBlock>
+        </apex:form>
+
+            <!-- CREATE OPPORTUNITY SECTION  -->
+            <!-- <div class="createOpportunity" style="display:none;"  > -->
+            <!-- style="display:none;" -->
+           <apex:include pageName="Account_Error_createOpportunity" rendered="true"/>
+            <!-- </div> -->
+            
+            <apex:form >
+                <apex:pageBlock title="Related Animal Count & Lifestage">
+                    <apex:pageBlockTable id="animal_table" value="{!animal_counts}" var="ann">
+                    
+                        <apex:column headerValue="Animals Type">
+                            <apex:outputField value="{!ann.Animal_Type__c}" />
+                        </apex:column>
+
+                        <apex:column headerValue="Lifestage">
+                            <apex:outputField value="{!ann.Lifestage__c}" />
+                        </apex:column>
+
+                        <apex:column headerValue="Name">
+                            <apex:outputField value="{!ann.Name}" />
+                        </apex:column>
+
+                        <apex:column headerValue="Animal Count">
+                            <apex:outputField value="{!ann.Animal_Count__c}" />
+                        </apex:column>
+
+                        <apex:column headerValue="Animals Fed">
+                            <apex:outputField value="{!ann.Animals_Served__c}" />
+                        </apex:column>
+
+                    </apex:pageBlockTable>
+
+                    <!-- <div class="toggleanimal" > 
+                        <apex:inputHidden />
+                        <apex:inputHidden />
+                            <apex:commandButton styleClass="toggleanimal" value="Create Animal Count & Lifestage" onclick="return showAnimalsCreate()"/>        
+                    </div> -->
+                 
+            </apex:pageBlock> 
+            <!-- CREATE ANIMAL COUNTS -->
+        </apex:form>
+
+        <!-- <div class="createanimal" style="display:none"> -->
+        <apex:include pageName="CreateAnimalCountLife" />
+        <!-- </div> -->
+        
+        <apex:form >
+        <apex:pageBlock >
+           <apex:pageBlockSection >
+                <apex:inputHidden />
+                <apex:inputHidden />
+                <apex:commandButton rendered="{!informationGood && NotInfluencer}" value="Nominate VIP" action="{!showPopUp}" />
+                <apex:commandButton rendered="{!informationGood && NOT(NotInfluencer)}" value="Nominate VIP" action="{!registerVIP}" />
+            </apex:pageBlockSection>
+
+        </apex:pageBlock>
+        </apex:form>
+
+<!-- POPUP BLOCK TO SELECT OPPORTUNITIES FROM  -->
+    
+        <apex:pageBlock >
+            <apex:outputPanel rendered="{!displayPopUp}">
+                <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPopUp}"/>
+                <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayPopUp}">
+                    <apex:form >        
+                    <apex:pageBlockTable id="opp_table" value="{!OppList}" var="o">
+                        <!-- OppList -->
+                        <apex:column >
+                            <apex:inputCheckbox value="{!o.selected}"  />
+                        </apex:column>
+        
+                        <apex:column headerValue="Opportunity Name">
+                            <apex:outputField value="{!o.opp.Name}" />
+                        </apex:column>
+        
+                        <apex:column headerValue="Close Date">
+                            <apex:outputField value="{!o.opp.CloseDate}" />
+                        </apex:column>
+        
+                        <apex:column headerValue="Stage">
+                            <apex:outputField value="{!o.opp.StageName}" />
+                        </apex:column>
+        
+                    </apex:pageBlockTable>
+                    
+                    <div style="color:red; font-size:14px;">
+                        {!popUpError}
+                    </div>
+
+                    <br/>
+                        <apex:commandButton value="Continue" action="{!registerVIP}" />
+                        <apex:commandButton value="Cancel" action="{!closePopUp}" />
+                    </apex:form>
+
+                    <apex:include pageName="Account_Error_UpdateLifeStage" rendered="{!NOT(ListHasLifeStage) && hasSelectedOpps}"/>
+                    </apex:outputPanel>
+            </apex:outputPanel>
+        </apex:pageBlock>
+
+</apex:page>

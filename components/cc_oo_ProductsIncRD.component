@@ -1,0 +1,733 @@
+<!--<Component Name: cc_oo_ProductsIncRD> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Saloni Kale                                9/6/2016                                    US:OO-90 Created and added getProductsDetails() method
+                                                                                       which will give the long description in product list page
+----------------------------------------------------------------------------------------------------------------------
+Shrivaths Kulkarni                         9/16/2016                                   US-243 hide price for prebook flow   
+----------------------------------------------------------------------------------------------------------------------
+Shivani Singh                              9/16/2016                                   US-137 Hide the ability to sort by price in the product list                                                               
+------------------------------------------------------------------------------------------------------
+Rajesh Walawalkar                          9/28/2016                                   US-312 Hide Add to wishlist button for prebook
+---------------------------------------------------------------------------------------------------------------------------------------------
+Murtaza Beejwala                           10/24/2016                                  US-59 Show vfd flag for vfd Flagged Product.
+---------------------------------------------------------------------------------------------------------------------------------------------
+Piyali Mukherjee                           10/25/2016                                  US-339 The system will not allow user to add two types of product in the cart
+---------------------------------------------------------------------------------------------------------------------------------------------
+Rajesh W                                  10/28/2016                                  US-325 Show Lead time for product
+---------------------------------------------------------------------------------------------------------------------------------------------
+Gurleen Kaur                              11/11/2016                                  US-144 Hide Lead time
+Shivani Singh                             01/25/2017                                   US:OO-2042 View details in seasonal (related) and replacement (discontinued) products
+-->
+<apex:component controller="cc_oo_ProductsIncRDController">
+    <!-- populated with CCRZ.prodView.items instance of CCRZ.collections.productItemCollection -->
+    <style type="text/css">
+    
+    /*.btn.slim.pickWish, .btn.slim.dropdown-toggle {
+        float:  left;
+    }*/
+   
+    </style>
+    <script id="OO-productListBrowser" type="text/template">
+        
+        {{#if (isNotPreBook)}}
+            <h2 class="title">{{pageLabelMap 'ProductsInc_OnlineOrderProduct'}}</h2>
+        {{else}}
+            <h2 class="title">{{pageLabelMap 'ProductsInc_PrebookProduct'}}</h2>
+        {{/if}}
+        
+        <div class="products_1_row_medium row-fluid">
+            {{#each this}}
+                <div class="products_1_row_medium_item {{this.prodBean.id}} productList product-block" oo-prod-id="{{this.prodBean.id}}" data-sku="{{this.prodBean.sku}}">
+                    <div class="alert alert-error messagingSection-{{this.prodBean.id}}-Error" style="display: none"></div>
+                    <div class="alert alert-info messagingSection-{{this.prodBean.id}}-Info" style="display: none"></div>
+                    <div class="product_listing_viewport">
+                        <!--{{#if (isNotPreBook)}}
+                            <a href="javascript:void(0);" class="productName" data-sku="{{this.prodBean.sku}}" > 
+                                {{displayImage this.mediaWrapper 'prodList' alt=this.prodBean.name}}
+                            </a>
+                        {{ else }}
+                            {{displayImage this.mediaWrapper 'prodList' alt=this.prodBean.name}}                            
+                        {{/if}}
+                        -->
+                        {{#ifStoreSetting 'DevMode__c'}}
+                            <!-- display search ranking number in results list -->
+                            <div class="rankDisplayWrapper"><span class="rankDisplay">Rank: {{searchRanking}}{{sequence}}</span></div>
+                        {{/ifStoreSetting}}
+                    </div>
+                    <div class="span12 clear product-desc lipstick" >
+                        <span class="span7">
+                            <img class="brand_logo span2 hide" data-sku="{{this.prodBean.sku}}" src="#" />
+							<span class="span10 product-desc-title">
+                                <strong>{{{ productName this.prodBean }}}</strong>
+                                <div class="oo_E2Description" data-id="{{this.prodBean.sku}}"></div>
+                            </span>
+                        </span>
+                        <!--<div class="span5 hide hidden-vfd icon-icons_vfd_regulated_feed pull-right" title="CAUTION: Federal law restricts medicated feed containing this veterinary feed directive (VFD) drug to use by or on the order of a licensed veterinarian." href="#" data-id="{{this.prodBean.id}}">
+                            <label>{{pageLabelMap 'VFDRegulatedFeed'}}</label>
+                        </div>
+                        -->
+                        <div class="span5 hide hidden-vfd vfd-icon pull-right">
+                            <div class="icon-icons_vfd_regulated_feed pull-left" title="CAUTION: Federal law restricts medicated feed containing this veterinary feed directive (VFD) drug to use by or on the order of a licensed veterinarian." href="#" data-id="{{this.prodBean.id}}"></div>
+                            <label class="pull-left">{{pageLabelMap 'VFDRegulatedFeed'}}</label>
+                        </div>
+                    </div>
+                    <div class="span12 product-container">
+                        <div class="span4">
+                            {{#if (isNotPreBook)}}
+                                <a href="javascript:void(0);" class="productName" data-sku="{{this.prodBean.sku}}" > 
+                                    {{displayImage this.mediaWrapper 'prodList' alt=""}}
+                                </a>
+
+								<!--<a href="javascript:void(0);" class="productName" data-sku="{{this.prodBean.sku}}" > 
+                                    {{#if this.mediaWrapper.mediaName}}
+                                      	<img src="{{this.mediaWrapper.mediaName}}" class="prodList" />
+									{{else}}
+                                        <img class="prodList en_US noImg" />
+                                    {{/if}}
+                                </a>-->
+                            {{ else }}
+                                {{displayImage this.mediaWrapper 'prodList' alt=this.prodBean.name}}                            
+                            {{/if}}
+                        </div>
+                        <div class="span8 product-desc">
+                            
+                            {{#if this.prodBean.shortDesc}}
+                                {{#ifDisplay 'PL.DsplShortDesc'}}
+                                    <div class="span12">{{unescape this.prodBean.shortDesc}}</div>
+                                {{/ifDisplay}}
+                                <br/>
+                                <br/>
+                            {{/if}}
+                            
+                            <div class="span12 no-margin-left description hide">
+                                {{#ifDisplay 'PL.DsplAddtInfo'}}
+                                    <strong><a class="included_items" href="#additional_info{{this.prodBean.sku}}" id="additionalInfoLink" data-toggle="modal">{{pageLabelMap 'ProductsInc_AdditionalInfo'}}</a></strong>
+                                    <br/>
+                                                                
+                                    <div id="additional_info{{this.prodBean.sku}}" class="info-modal-layout additional-info modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                                            <h3 id="myModalLabel">{{this.prodBean.name}} {{pageLabelMap 'ProductsInc_MiscDetails'}}</h3>
+                                        </div>
+                                        <div class="modal-body" style="padding: 15px;">
+                                            {{#if this.miscDetails}}
+                                                {{this.miscDetails}}<br/><br/>
+                                            {{/if}}
+                                            {{#ifDisplay 'PL.DsplAddtlSku'}}
+                                                <strong>{{pageLabelMap 'SKU'}}:</strong>&nbsp;{{this.prodBean.sku}}<br/><br/>
+                                            {{/ifDisplay}}
+                                        
+                                            <div class="oo_longDesc" data-id="{{this.prodBean.sku}}">
+                                                {{this.prodBean.shortDesc}}<br/><br/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{/ifDisplay}}
+                            </div>
+                            {{#ifDisplay 'PL.DsplSku'}}
+                            <!--<p class="skuDisp"><strong>{{pageLabelMap 'SKU'}}:</strong>&nbsp;{{this.prodBean.sku}}</p>-->
+                            <div class="span12 skuDisp clear">
+                                <label>{{pageLabelMap 'SKU'}}:</label>
+                                <strong class="value">{{this.prodBean.sku}}</strong>
+                            </div>
+                            {{/ifDisplay}}
+                    
+                            {{#ifDisplay 'PL.DsplUOM'}}
+                                <!--<p class="uomDisp"><strong>{{pageLabelMap 'ProductDetails_UnitOfMeasure'}}:</strong>&nbsp;{{pageLabelPrefixMap 'UOM_' this.prodBean.UnitOfMeasure}}</p>-->
+                                <div class="span12 uomDisp clear"  data-id="{{this.prodBean.sku}}">
+                                    <label>{{pageLabelMap 'ProductDetails_UnitOfMeasure'}}: </label>
+                                    <strong class="value uomDisplay data-id="{{this.prodBean.id}}"></strong>  
+                                </div>
+                            {{/ifDisplay}}
+                            <!--<p class="oo_leadTime" data-id="{{this.prodBean.id}}"></p>-->
+                            <div class="span12 leadTime clear" data-id="{{this.prodBean.sku}}">
+                                <label>{{pageLabelMap 'LeadTime'}}:</label>
+                                <strong class="value oo_leadTime" data-id="{{this.prodBean.id}}"></strong>    
+                            </div>
+
+                            <!--{{#ifDisplay 'PL.DsplSpec'}}
+                                {{#each this.ccproduct.productSpecList}}
+                                    <span><p class="specDisp"><strong>{{this.specName}}</strong>&nbsp;{{this.specValue}}</p></span>
+                                {{/each}}
+                            {{/ifDisplay}}-->
+
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <!--
+                    {{#if (isNotPreBook)}}  //OO-243
+                        {{#ifDisplay 'PL.DsplListPrc'}}
+                            {{#if this.showPricing}}
+                                {{#if this.basePrice}}
+                                    <p class="listpDisp"><span><strong>{{pageLabelMap 'ProductsInc_ListPrice'}}</strong><del>{{price this.basePrice}}</del></span></p>
+                                 {{/if}}
+                            {{/if}}
+                        {{/ifDisplay}}
+                        {{#ifDisplay 'PL.DsplPrc'}}
+                            {{#if this.showNewSubscriptionSelection}}
+                                    <p><span><strong class="price priceSubscription">{{pageLabelMap 'Prod_SubsListPrice' (price this.price) (price this.minSubPrice) (price this.maxSubPrice)}}</strong></span></p>
+                            {{else}}
+                                // check if it is a range price for aggregated product
+                                {{#if this.maxPrice}}
+                                    <p><span><strong class="price">{{displayRangePrice 'ProductDetails_PriceRangeFormat' this.minPrice this.maxPrice}}</strong></span></p>
+                                {{else}}
+                                    {{#if this.displayPrice}}
+                                        <p class="price displayPrice">
+                                            {{pageLabelPrefixMap 'DisplayPrice_' this.displayPrice}}
+                                        </p>
+                                    {{else}}
+                                        {{#if this.showPricing}}
+                                            {{#if this.price}}
+                                                
+                                                    <p><span><strong class="price oo_hidePrice">{{price this.price}}</strong></span></p>
+                                                
+                                            {{/if}}
+                                        {{/if}}
+                                    {{/if}}
+                                {{/if}}
+                            {{/if}}
+
+                        {{/ifDisplay}}
+                        {{#ifDisplay 'PL.DsplSvPrc'}}
+                            {{#if this.showPricing}}
+                                {{#if this.savings}}
+                                    <p class="saveDisp"><span><strong>{{pageLabelMap 'ProductsInc_YouSave'}}</strong>{{price this.savings}}</span><p>
+                                {{/if}}
+                            {{/if}}
+                        {{/ifDisplay}}
+                    {{/if}}
+                    -->
+
+                    {{#ifDisplay 'PL.DsplAvlb' }}
+                        {{#ifEquals this.inventory '0'}}
+                            <p class="availDisp">{{pageLabelMap 'ProductDetail_NotAvailable1'}} {{pageLabelMap 'ProductDetail_NotAvailable2'}}</p>
+                        {{/ifEquals}}
+                    {{/ifDisplay}}
+                    <input type="hidden" value="{{this.inventory}}" id="qtyAvail_{{this.prodBean.id}}" name="qtyAvail_{{this.prodBean.id}}" />
+                    <p class="included_items"></p>
+                    {{#unless this.showNewSubscriptionSelection}}
+                    <!--{{#if this.canAddtoCart}}-->
+                    {{#unless (isNotPreBook)}}
+                        {{#ifDisplay 'PL.DsplAddCart' }}
+                                <p class="plus_minus">
+                                    {{#if this.qtySkipIncrement}}
+                                        <input type="button" value="{{pageLabelMap 'Prod_QtyDecrFF'}}" class="plus_minus minusFF">
+                                    {{/if}}
+                                    {{#ifEquals this.qtySingleIncrement 1}}
+                                    <input type="text" name="qty" value="1" class="input-text entry plus_minus" maxlength="7" />
+                                    {{else}}
+                                        <input type="button" value="{{pageLabelMap 'Prod_QtyDecrSingle'}}" class="  plus_minus minus">
+                                    <input type="text" readonly="true" name="qty" value="0" class="entry plus_minus" maxlength="7" />
+                                        <input type="button" value="{{pageLabelMap 'Prod_QtyIncrSingle'}}" class="plus_minus plus">
+                                    {{/ifEquals}}
+                                    {{#if this.qtySkipIncrement}}
+                                        <input type="button" value="{{pageLabelMap 'Prod_QtyIncrFF'}}" class="plus_minus plusFF">
+                                    {{/if}}
+                                    <input type="hidden" name="qtyIncrement" value="{{this.qtySingleIncrement}}" class="item_qtyIncrement" />
+                                    <input type="hidden" name="qtySkipIncrement" value="{{this.qtySkipIncrement}}" class="item_qtySkipIncrement" />
+                                </p>
+                                {{#if this.prodBean.showSubscriptionSelection}}
+                                    <p class="subscription_selection">{{pageLabelMap 'Subscribe_And_Save_Label'}}
+                                        <select class="subscriptionFrequencySelection" data-subscription="{{this.prodBean.sku}}">
+                                            {{#each this.prodBean.subscriptionFrequencies}}
+                                            <option value="{{safeQuote this}}">{{pageLabelMapMultiString 'Subscribe_And_Save_' this}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </p>
+                                {{/if}}
+                                {{#each this.prodBean.compositeSubscriptions}}
+                                    <p class="subscription_selection">{{pageLabelMap 'Subscribe_And_Save_Label_Composite' this.name this.sku}}
+                                        <select class="subscriptionFrequencySelection" data-subscription="{{this.sku}}">
+                                            {{#each this.subscriptionFrequencies}}
+                                            <option value="{{safeQuote this}}">{{pageLabelMapMultiString 'Subscribe_And_Save_' this}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </p>
+                                {{/each}}
+                                <p class="wishFinder" data-sku="{{this.prodBean.sku}}">
+                                        <span>
+                                            <!-- US - 339 - modify addtocart button fucntionality -->
+                                            <!-- <button type="button" class="btn btn-primary add_to_cart_desktop_button" data-id="{{this.prodBean.id}}" data-seller="{{this.sellerID}}" data-inventory="{{this.productInventory}}">{{pageLabelMap 'Component_MiniwishList_AddToCart'}}</button> -->
+                                            <button type="button" class="oo-add-to-cart btn btn-primary" data-id="{{this.prodBean.id}}" sku="{{this.prodBean.sku}}" data-seller="{{this.sellerID}}" data-inventory="{{this.productInventory}}">{{pageLabelMap 'Component_MiniwishList_AddToCart'}}</button>
+                                        </span>
+                                    {{#ifNotEquals this.prodBean.ProductType 'Aggregated'}}
+                                        <!-- US:OO-3123 hide product search and wish buttons-->
+                                        {{#if (isNotPreBook)}} 
+                                            <span class="wishButtons"></span>
+                                         {{/if}}
+                                    {{/ifNotEquals}}
+                                </p>
+                        {{/ifDisplay}}
+                    {{/unless}}
+                    {{else}}
+                        <p class="wishFinder" data-sku="{{this.prodBean.sku}}">
+                        {{#listFind this.prodBean.ProductType 'Aggregated|Dynamic Kit' false }}
+                            {{#if (isNotPreBook)}}
+                               <span class="wishButtons"></span>
+                             {{/if}}
+                        {{/listFind}}
+                        </p>
+                    <!--{{/if}}-->
+                    {{/unless}}
+                    <div data-id="{{this.prodBean.sku}}" class="clear global-error alert alert-error modal-message product-discontinued availability-message"></div>
+                    
+                </div>
+            {{/each}}
+        </div>
+        
+    </script>
+    <!-- populated with CCRZ.pageView.navData instance of CCRZ.models.productPaginationModel -->
+    <script id="OO-navigationPanelDesktop" type="text/template">
+        <div class="pagination_row_1">
+            <div class="pagination_container">
+                <p>
+                    {{pageLabelMap 'ProductsInc_Items'}} {{startIndex}} - {{endIndex}} {{pageLabelMap 'ProductsInc_of'}} {{totalCount}} {{pageLabelMap 'ProductsInc_total'}}
+                </p>
+                <span class="page_links">
+                    {{pageLabelMap 'ProductDetailsInc_Page'}}
+                    {{#if hasPrevious}}
+                        <a href="#" class="firstAction">{{pageLabelMap 'ProductsInc_First'}}</a>
+                        <a href="#" class="previousAction pageAction">{{pageLabelMap 'ProductsInc_Previous'}}</a>
+                    {{/if}}
+
+                    {{#for this.startPage this.lastPage 1}}
+                        {{#ifEquals this ../currPage}}
+                            {{safeQuote this}}
+                        {{else}}
+                            <a href="#" class="gotoPage" data-id="{{safeQuote this}}">{{safeQuote this}}</a>
+                        {{/ifEquals}}
+                    {{/for}}
+
+                    {{#if hasNext}}
+                        <a href="#" class="nextAction pageAction">{{pageLabelMap 'ProductsInc_Next'}}</a>
+                        <a href="#" class="lastAction">{{pageLabelMap 'ProductsInc_Last'}}</a>
+                    {{/if}}
+                </span>
+                <span class="right_align">
+                     {{pageLabelMap 'ProductsInc_show'}}
+                     <select class="sizeAction">
+                        <option value="5" {{#ifEquals this.pageSize 5 }} selected {{/ifEquals}} >5</option>
+                        <option value="10" {{#ifEquals this.pageSize 10 }} selected {{/ifEquals}} >10</option>
+                        <option value="25" {{#ifEquals this.pageSize 25 }} selected {{/ifEquals}} >25</option>
+                        <option value="50" {{#ifEquals this.pageSize 50 }} selected {{/ifEquals}} >50</option>
+                     </select>
+                     {{pageLabelMap 'ProductsInc_PerPage'}}
+                </span>
+            </div>
+        </div>
+        <div class="pagination_row_2">
+            <div class="pagination_container"> 
+                {{pageLabelMap 'ProductsInc_Sortby'}}&nbsp;
+                <a href="#" class="resortAction" data-id="{{#if wasSearch}}ranking{{else}}sequence{{/if}}">{{pageLabelMap 'ProductsInc_Relevance'}}</a>&nbsp;|&nbsp;
+                <a href="#" class="resortAction" data-id="name">{{pageLabelMap 'ProductsInc_Name'}}</a>&nbsp;|&nbsp;
+                <a href="#" class="resortAction" data-id="startDate">{{pageLabelMap 'ProductsInc_Newest'}}</a>&nbsp;
+                <!--<a href="#" class="resortAction sortByPrice" data-id="price">{{pageLabelMap 'Price'}}</a>-->
+            </div>
+        </div>
+    </script>
+    
+    <!-- Enabling E1 description on Phone -->
+    <script id="OO-productListPhone" type="text/template">
+        {{#if (isNotPreBook)}}
+            <h2 class="heading">{{pageLabelMap 'ProductsInc_OnlineOrderProduct'}}</h2>
+        {{else}}
+            <h2 class="heading">{{pageLabelMap 'ProductsInc_PrebookProduct'}}</h2>
+        {{/if}}
+        <div class="products_1_row_medium">
+            {{#each this}}
+                <div class="products_1_row_medium_item {{this.prodBean.id}} productList" oo-prod-id="{{this.prodBean.id}}" data-sku="{{this.prodBean.sku}}">
+                    <div class="alert alert-error messagingSection-{{this.prodBean.id}}-Error" style="display: none"></div>
+                    <div class="alert alert-info messagingSection-{{this.prodBean.id}}-Info" style="display: none"></div>
+                    <div class="product_listing_viewport"></div>
+                    
+                    <h2 class="title cart-mobile-title row clear product-desc">
+                        <span class="span8">
+                            <img class="brand_logo span2 pull-left hide" data-sku="{{this.prodBean.sku}}" src="#" />
+							<span class="span10 product-desc-title">
+                                <strong>{{{ productName this.prodBean }}}</strong><br/>
+                                <div class="oo_E2Description" data-id="{{this.prodBean.sku}}"></div>
+                            </span>
+                        </span>
+                        <div class="span4 hide hidden-vfd icon-icons_vfd_regulated_feed pull-right" title="CAUTION: Federal law restricts medicated feed containing this veterinary feed directive (VFD) drug to use by or on the order of a licensed veterinarian." href="#" data-id="{{this.prodBean.id}}"></div>
+                    </h2>
+                    
+                    {{#if (isNotPreBook)}}
+                        <a href="javascript:void(0);" class="productName" data-sku="{{this.prodBean.sku}}" > 
+                            {{displayImage this.mediaWrapper 'prodList' alt=""}}
+                        </a>
+                    {{ else }}
+                        {{displayImage this.mediaWrapper 'prodList' alt=this.prodBean.name}}                            
+                    {{/if}}
+
+                    
+                    <div class="span12 clear product-desc">
+                       {{#if this.prodBean.shortDesc}} 
+                            {{#ifDisplay 'PL.DsplShortDesc'}}
+                                <div class="span12">{{unescape this.prodBean.shortDesc}}</div>
+                                <br/>
+                            {{/ifDisplay}}
+                       {{/if}}
+                            
+                        <div class="span12 clear no-margin-left description hide">    
+                            {{#ifDisplay 'PL.DsplAddtInfo'}}
+                                <strong><a class="included_items" href="#additional_info{{this.prodBean.sku}}" id="additionalInfoLink" data-toggle="modal">{{pageLabelMap 'ProductsInc_AdditionalInfo'}}</a></strong>
+                                <br/>
+                                                                
+                                <div id="additional_info{{this.prodBean.sku}}" class="info-modal-layout additional-info modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h3 id="myModalLabel">{{this.prodBean.name}} {{pageLabelMap 'ProductsInc_MiscDetails'}}</h3>
+                                    </div>
+                                    <div class="modal-body" style="padding: 15px;">
+                                        {{#if this.miscDetails}}
+                                            {{this.miscDetails}}<br/><br/>
+                                        {{/if}}
+                                        {{#ifDisplay 'PL.DsplAddtlSku'}}
+                                            <strong>{{pageLabelMap 'SKU'}}:</strong>&nbsp;{{this.prodBean.sku}}<br/><br/>
+                                        {{/ifDisplay}}
+                                        
+                                        <div class="oo_longDesc" data-id="{{this.prodBean.sku}}">
+                                            {{this.prodBean.shortDesc}}<br/><br/>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{/ifDisplay}}
+                        </div>
+                        {{#ifDisplay 'PL.DsplSku'}}
+                        <!--<p class="skuDisp"><strong>{{pageLabelMap 'SKU'}}:</strong>&nbsp;{{this.prodBean.sku}}</p>-->
+                        <div class="span12 clear skuDisp">
+                            <label class="span4">{{pageLabelMap 'SKU'}}</label>
+                            <strong class="value span8">{{this.prodBean.sku}}</strong>
+                        </div>
+                        {{/ifDisplay}}
+                    
+                        {{#ifDisplay 'PL.DsplUOM'}}
+                            <!--<p class="uomDisp"><strong>{{pageLabelMap 'ProductDetails_UnitOfMeasure'}}:</strong>&nbsp;{{pageLabelPrefixMap 'UOM_' this.prodBean.UnitOfMeasure}}</p>-->
+                            <div class="span12 uomDisp clear" data-id="{{this.prodBean.sku}}">
+                                <label class="span4">{{pageLabelMap 'ProductDetails_UnitOfMeasure'}}</label>
+                                <strong class="value span8 uomDisplay" data-id="{{this.prodBean.id}}"></strong>  
+                            </div>
+                        {{/ifDisplay}}
+                        <!--<p class="oo_leadTime clear" data-id="{{this.prodBean.id}}"></p>-->
+                        <div class="span12 leadTime" data-id="{{this.prodBean.sku}}">
+                            <label class="span4">{{pageLabelMap 'LeadTime'}}</label>
+                            <strong class="value span8 oo_leadTime" data-id="{{this.prodBean.id}}"></strong>    
+                        </div>
+
+                        {{#ifDisplay 'PL.DsplSpec'}}
+                            {{#each this.ccproduct.productSpecList}}
+                                <span><p class="specDisp"><strong>{{this.specName}}</strong>&nbsp;{{this.specValue}}</p></span>
+                            {{/each}}
+                        {{/ifDisplay}}
+
+                    </div>
+                    <!--
+                    {{#if (isNotPreBook)}}
+                        {{#ifDisplay 'PL.DsplListPrc'}}
+                            {{#if this.showPricing}}
+                                {{#if this.basePrice}}
+                                    <p><span><del>{{price this.basePrice}}</del></span></p>
+                                {{/if}}
+                            {{/if}}
+                        {{/ifDisplay}}
+                        {{#ifDisplay 'PL.DsplPrc'}}
+                            {{#if this.showNewSubscriptionSelection}}
+                                    <p><span><strong class="price priceSubscription">{{pageLabelMap 'Prod_SubsListPrice' (price this.price) (price this.minSubPrice) (price this.maxSubPrice)}}</strong></span></p>
+                            {{else}}
+                                // check if it is a range price for aggregated product
+                                {{#if this.maxPrice}}
+                                    <p><span><strong class="price">{{displayRangePrice 'ProductDetails_PriceRangeFormat' this.minPrice this.maxPrice}}</strong></span></p>
+                                {{else}}
+                                    {{#if this.displayPrice}}
+                                        <p class="price displayPrice">
+                                            {{pageLabelPrefixMap 'DisplayPrice_' this.displayPrice}}
+                                        </p>
+                                    {{else}}
+                                        {{#if this.showPricing}}
+                                            {{#if this.price}}
+                                                <p><span><strong class="price oo_hidePrice">{{price this.price}}</strong></span></p>
+                                            {{/if}}
+                                        {{/if}}
+                                    {{/if}}
+                                {{/if}}
+                            {{/if}}
+                        {{/ifDisplay}}
+                                        
+                        {{#ifDisplay 'PL.DsplSvPrc'}}
+                            {{#if this.showPricing}}
+                                {{#if this.savings}}
+                                    <p><span><strong>{{pageLabelMap 'YouSave'}}</strong>{{price this.savings}}</span><p>
+                                {{/if}}
+                            {{/if}}
+                        {{/ifDisplay}}
+                    {{/if}} 
+                    -->
+                    {{#unless this.showNewSubscriptionSelection}}
+                    <!--{{#if this.canAddtoCart}}-->
+                    {{#unless (isNotPreBook)}}
+                        {{#ifDisplay 'PL.DsplAddCart' }}
+                            <p class="plus_minus">
+                                {{#if this.qtySkipIncrement}}
+                                    <input type="button" value="{{pageLabelMap 'Prod_QtyDecrFF'}}" class="plus_minus minusFF">
+                                {{/if}}
+                                <input type="button" value="{{pageLabelMap 'Prod_QtyDecrSingle'}}" class="plus_minus minus">
+                                {{#ifNotEquals this.qtySingleIncrement 1}}
+                                    <input type="text" readonly="true" name="qty" value="0" class="plus_minus entry" maxlength="7" />
+                                {{else}}
+                                    <input type="text" name="qty" value="1" class="input-text plus_minus entry" maxlength="7" />
+                                {{/ifNotEquals}}
+                                <input type="button" value="{{pageLabelMap 'Prod_QtyIncrSingle'}}" class="plus_minus plus">
+                                {{#if this.qtySkipIncrement}}
+                                    <input type="button" value="{{pageLabelMap 'Prod_QtyIncrFF'}}" class="plus_minus plusFF">
+                                {{/if}}
+                                <input type="hidden" name="qtyIncrement" value="{{this.qtySingleIncrement}}" class="item_qtyIncrement" />
+                                <input type="hidden" name="qtySkipIncrement" value="{{this.qtySkipIncrement}}" class="item_qtySkipIncrement" />
+                                {{#if this.prodBean.showSubscriptionSelection}}
+                                    <p class="subscription_selection">{{pageLabelMap 'Subscribe_And_Save_Label'}}
+                                        <select class="subscriptionFrequencySelection" data-subscription="{{this.prodBean.sku}}">
+                                            {{#each this.prodBean.subscriptionFrequencies}}
+                                            <option value="{{safeQuote this}}">{{pageLabelMapMultiString 'Subscribe_And_Save_' this}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </p>
+                                {{/if}}
+                                {{#each this.prodBean.compositeSubscriptions}}
+                                    <p class="subscription_selection">{{pageLabelMap 'Subscribe_And_Save_Label_Composite' this.name this.sku}}
+                                        <select class="subscriptionFrequencySelection" data-subscription="{{this.prodBean.sku}}">
+                                            {{#each this.subscriptionFrequencies}}
+                                            <option value="{{safeQuote this}}">{{pageLabelMapMultiString 'Subscribe_And_Save_' this}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </p>
+                                {{/each}}
+                            </p>
+                            <p>
+                                <!-- US - 339 - modify addtocart button fucntionality -->
+                                <!-- <button type="button" class="btn btn-primary addItem" data-id="{{this.prodBean.id}}" data-seller="{{this.sellerID}}" data-inventory="{{this.productInventory}}">{{pageLabelMap 'ProductsInc_AddToCart'}}</button> -->
+                                <button type="button" class="oo-add-to-cart btn btn-primary" data-id="{{this.prodBean.id}}" sku="{{this.prodBean.sku}}" data-seller="{{this.sellerID}}" data-inventory="{{this.productInventory}}">{{pageLabelMap 'ProductsInc_AddToCart'}}</button>
+                            </p>
+                        {{/ifDisplay}}
+                    {{/unless}}
+                    {{/unless}}
+                    <div class="wishFinder" data-sku="{{this.prodBean.sku}}">
+                        {{#listFind this.prodBean.ProductType 'Aggregated|Dynamic Kit' false }}
+                            {{#if (isNotPreBook)}} 
+                              <p class="wishButtons"></p>
+                            {{/if}}
+                        {{/listFind}}
+                    </div>
+                    <div data-id="{{this.prodBean.sku}}" class="clear global-error alert alert-error modal-message product-discontinued availability-message"></div>
+                    
+                </div>
+            {{/each}}
+        </div>
+    </script>
+    <script id="OO-No-Products" type="text/template" >
+		<h1 class="no-product-exist hide">{{ pageLabelMap "NoProductsExists"}}</h1>
+	</script>
+    
+    <script type="text/javascript">
+        jQuery(function($) {
+            CCRZ.uiProperties.productListView.desktop.tmpl = 'OO-productListBrowser';
+            CCRZ.uiProperties.productListView.phone.tmpl = 'OO-productListPhone'
+            CCRZ.uiProperties.productPaginationView.desktop.tmpl='OO-navigationPanelDesktop';
+            
+            var isSameShipto = $.urlParam('isSameShipto');
+            var isAdditionalInfoOpened = false, currentAddInfoItem;
+            CCRZ.pagevars.queryParams.fromSearch = true;
+            var timeData;
+            
+            CCRZ.pubSub.on('view:productListView:refresh', function(theView){
+            	noProducts.hide();
+                // OO-47 begins here
+                sessionStorage.setItem("operation", CCRZ.pagevars.queryParams.operation);
+                // OO-47 ends here
+                $('.maincategory_name').hide();
+                if(CCRZ.pagevars.orderType && CCRZ.pagevars.orderType.toLowerCase() === ("preBook").toLowerCase()) {
+                    $('.home_slider').hide();
+                }
+                
+                var encCartId = CCRZ.pagevars.queryParams.cartID ? CCRZ.pagevars.queryParams.cartID  : CCRZ.pagevars.queryParams.cartId;
+                if(isSameShipto == "true" || (encCartId == undefined || encCartId == '{}' || encCartId == '') ) {
+                    $(".oo-add-to-cart").attr("disabled","disabled");
+                }
+
+                var prodids=[];
+                $('.productList').each(function(evt){                
+                    var productId = $(this).attr('oo-prod-id');
+                    prodids.push(productId);                  
+                });
+        
+                var remoteCall = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_ProductsIncRDController'});
+                remoteCall.invokeCtx(
+                    'getVfdFlag',prodids,
+                    function(resp){
+                        if(resp && resp.success) { 
+                            $('.productList').each(function() {
+                                var pid=$(this).attr('oo-prod-id');
+                                var respData = resp.data;
+                                if(respData) {
+                                    var dataflag = respData[pid];
+                                    if(dataflag){
+                                        $(this).find('.hidden-vfd').show();         
+                                    }
+                                }
+                            });
+                        }
+                    }, {buffer:false,escape:false,nmsp:false}
+                ); 
+                // Creating product list data
+                var productListData = CCRZ.plistData;
+                var productIds = [];
+                // Adding the product Ids
+                $.each( productListData.jsonProductEntryData, function( index, value ){
+                    productIds.push(value.sfid);
+                });
+                var targetDiv = $('#realTimePricing');
+                var remoteData;
+                // Remote Invocation function call and calling the controller and method
+                callProducts = function(){
+                	var remoteActionCallForProducts = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_ProductsIncRDController'});
+                    remoteActionCallForProducts.invokeCtx('getProductsDetails', productIds, function(resp) {
+	                    if(resp && resp.data){
+	                        if(resp.success){
+	                            remoteData = resp.data;
+	                            
+	                            $('.oo_longDesc').each( function(){
+	                                var productSKU = $(this).attr('data-id');
+	                                var productLongDescription = remoteData[productSKU].ccrz__LongDesc__c;
+	                                // Showing the value of long Description on the pop up window
+	                                if(productLongDescription) {
+	                                    $(this).html(productLongDescription);
+	                                    $(this).closest('.description').show();
+	                                }
+	                            });
+	                            $('.productList').each( function(){
+	                                var productSKU = $(this).attr('data-sku');
+	                                if(remoteData[productSKU].cc_oo_BrandCode__c){
+	                                	$(this).find('.product-desc-title').removeClass('no_brand_logo');
+	                                	if(remoteData[productSKU].cc_oo_BrandCode__r) {
+	                                		$(this).find('img.brand_logo').attr("src",remoteData[productSKU].cc_oo_BrandCode__r.cc_oo_LogoURL__c).show();
+	                                	}
+	                                    
+	                                     if($(this).find('.prodList').hasClass('noImg'))
+	                                    {	
+	                                    	$(this).find('.prodList').removeClass('noImg');
+	                                    	if(remoteData[productSKU].cc_oo_BrandCode__r) {
+	                                			$(this).find('.prodList').attr("src",remoteData[productSKU].cc_oo_BrandCode__r.cc_oo_LogoURL__c);
+	                                		}
+	                                    }
+	                                } else {
+	                                	$(this).find('img.brand_logo').hide();
+	                                	$(this).find('.product-desc-title').addClass('no_brand_logo');
+	                                }
+	                                $(this).find('.oo_E2Description').html(remoteData[productSKU].cc_oo_Second_Description__c);
+	                                var message=null;
+	                                var status= remoteData[productSKU].ccrz__AlternateName__c;
+	                                if(status=='Replaced'){
+	                                    message = CCRZ.pagevars.pageLabels["ProductList_ReplacedProduct"];
+	                                }
+	                                else if(status=='Out of Season'){
+	                                       message = CCRZ.pagevars.pageLabels["ProductList_SeasonalProduct"];
+	                                }
+	                                else if(status=='Unavailable'){
+	                                       message = CCRZ.pagevars.pageLabels["ProductList_AlternateProduct"];
+	                                }
+	                                else if(status=='Discontinued'){
+	                                    message = CCRZ.pagevars.pageLabels["Product_DiscontinuedProduct"];
+	                                }
+	                                if(message){
+	                                	$(this).find('.availability-message').html(message).show();
+	                                }
+	                                if(status!='Available'){
+	                                    $(this).find('.leadTime').hide();
+	                                    $(this).find('.oo_hidePrice').hide();
+	                                }
+	                                var message1 = remoteData[productSKU].cc_oo_UoMDesc__c;
+	                                $(this).find('.uomDisplay').text(message1);
+	                            });
+	                            
+	                        }
+	                    }
+	                }, {buffer:false,escape:false,nmsp:false});
+                };
+                // Calling the function
+              	callProducts();
+                
+                //Call Lead time function
+                getLeadTime = function(){
+                     var remoteActionCallForProductsLeadTime = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_ProductsIncRDController'});
+                     remoteActionCallForProductsLeadTime.invokeCtx('getProductsLeadTime', productIds, function(resp){ 
+	                     if(resp){
+	                         if(resp.success){
+	                             if(resp.data){
+	                                 var mainData = resp.data;
+	                                 $('.oo_leadTime').each( function(){
+	                                     var productId = $(this).attr('data-id');
+	                                     var leadTime = mainData[productId];
+	                                     $(this).text(leadTime + ' ' + CCRZ.pagevars.pageLabels['LeadTimeMeasure']);
+	                                 });
+	                             }
+	                         }
+	                      }
+	                 }, {buffer:false,escape:false,nmsp:false});
+                };
+                getLeadTime();
+                 
+                //215 -  to show the message
+                var tempSid = $.urlParam('sid');
+                if(tempSid == undefined || tempSid == 'undefined' || tempSid == '' || tempSid == null || tempSid == 'null'){
+                    var message = '<fieldset class="confirmOrder"><p> You are not eligible to place a Prebook Commitment until you select a Ship To location and Plant location. </p></fieldset>';
+                    $('.products_1_row_medium_container').append(message);
+                }   
+                
+                $('.additional-info').on("show", function(e) {
+                    isAdditionalInfoOpened = true;
+                    currentAddInfoItem = $(this).attr("id");
+                });
+                     
+                $('.additional-info').on("hide", function(e) {
+                    isAdditionalInfoOpened = false;
+                    $('.modal-backdrop').remove();
+                }); 
+                
+                if(isAdditionalInfoOpened) {
+                    $('#'+currentAddInfoItem).modal('show').show();
+                }
+                
+            });
+            
+            CCRZ.views.noProductsView = CCRZ.CloudCrazeView.extend({
+            	viewName : "noProductsView",
+                templateBoth : CCRZ.util.template('OO-No-Products'),
+                selector : ".maincategory_desc",
+                initialize: function() {
+                    this.render();
+                },
+                render : function() {
+                	this.$el = $(this.selector);
+                	this.hide();
+                	if(CCRZ.prodView) {
+            			if(CCRZ.prodView.items.length === 0) {
+                    		this.$el.html(this.templateBoth());
+                    		this.show();
+                    	}
+                    }
+                },
+                hide: function() {
+                	this.$el.find('.no-product-exist').hide();
+                },
+                show: function() {
+                	this.$el.find('.no-product-exist').show();
+                }                
+            });            
+            var noProducts = new CCRZ.views.noProductsView();
+			CCRZ.dynamicViews.push(noProducts);
+        });        
+     </script>
+</apex:component>

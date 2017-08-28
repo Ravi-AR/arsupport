@@ -1,0 +1,492 @@
+<apex:page sidebar="false" showHeader="false"  controller="icAgentConsole.incAgentConsoleController" >
+
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/MetaTag.js')}"/>
+
+  <script type="text/javascript">
+    IC_Localization = {
+    accept: "{!JSENCODE($Label.icagentconsole__accept)}",
+    active: "{!JSENCODE($Label.icagentconsole__active)}",
+    activeCallShouldBePutOnHold: "{!JSENCODE($Label.icagentconsole__activecallshouldbeputonhold)}",
+    acw: "{!JSENCODE($Label.icagentconsole__acw)}",
+    addCall: "{!JSENCODE($Label.icagentconsole__addcall)}",
+    addChat: "{!JSENCODE($Label.icagentconsole__addchat)}",
+    addChatErrorAttempt: "{!JSENCODE($Label.icagentconsole__addchaterrorattempt)}",
+    addfeedbackAttempt: "{!JSENCODE($Label.icagentconsole__addfeedbackattempt)}",
+    address: "{!JSENCODE($Label.icagentconsole__address)}",
+    addressBook: "{!JSENCODE($Label.icagentconsole__addressbook)}",
+    addressBooks: "{!JSENCODE($Label.icagentconsole__addressbooks)}",
+    agent: "{!JSENCODE($Label.icagentconsole__agent)}",
+    agents: "{!JSENCODE($Label.icagentconsole__agents)}",
+    agentDialLegErrorAttempt: "{!JSENCODE($Label.icagentconsole__agentdiallegerrorattempt)}",
+    agentEndLegErrorAttempt: "{!JSENCODE($Label.icagentconsole__agentendlegerrorattempt)}",
+    agentHasLeftTheChat: "{!JSENCODE($Label.icagentconsole__agenthasleftthechat)}",
+    agentInfo: "{!JSENCODE($Label.icagentconsole__agentinfo)}",
+    agentLegConnected: "{!JSENCODE($Label.icagentconsole__agentlegconnected)}",
+    agentLegDialing: "{!JSENCODE($Label.icagentconsole__agentlegdialing)}",
+    agentLegDisconnected: "{!JSENCODE($Label.icagentconsole__agentlegdisconnected)}",
+    agentLegID: "{!JSENCODE($Label.icagentconsole__agentlegid)}",
+    agentStateChangeErrorAttempt: "{!JSENCODE($Label.icagentconsole__agentstatechangeerrorattempt)}",
+    agentID: "{!JSENCODE($Label.icagentconsole__agentid)}",
+    agentName: "{!JSENCODE($Label.icagentconsole__agentname)}",
+    alertMessageEmailNotDelivered: "{!JSENCODE($Label.icagentconsole__alertmessageemailnotdelivered)}",
+    alertMessageEndContact: "{!JSENCODE($Label.icagentconsole__alertmessageendcontact)}",
+    alertMessageHOP: "{!JSENCODE($Label.icagentconsole__alertmessagehop)}",
+    alertMessageLogout: "{!JSENCODE($Label.icagentconsole__alertmessagelogout)}",
+    alertMessageNotInitMail: "{!JSENCODE($Label.icagentconsole__alertmessagenotinitmail)}",
+    alertMessageSendMail1: "{!JSENCODE($Label.icagentconsole__alertmessagesendmail1)}",
+    alertMessageSendMail2: "{!JSENCODE($Label.icagentconsole__alertmessagesendmail2)}",
+    alignCenter: "{!JSENCODE($Label.icagentconsole__aligncenter)}",
+    alignLeft: "{!JSENCODE($Label.icagentconsole__alignleft)}",
+    alignRight: "{!JSENCODE($Label.icagentconsole__alignright)}",
+    allAgents: "{!JSENCODE($Label.icagentconsole__allagents)}",
+    allFieldsAreRequired: "{!JSENCODE($Label.icagentconsole__allfieldsarerequired)}",
+    allSkills: "{!JSENCODE($Label.icagentconsole__allskills)}",
+    allTeams: "{!JSENCODE($Label.icagentconsole__allteams)}",
+    areYouSure: "{!JSENCODE($Label.icagentconsole__areyousure)}",
+    attachment: "{!JSENCODE($Label.icagentconsole__attachment)}",
+    attachmentError: "{!JSENCODE($Label.icagentconsole__attachmenterror)}",
+    attachmentError1: "{!JSENCODE($Label.icagentconsole__attachmenterror1)}",
+    available: "{!JSENCODE($Label.icagentconsole__available)}",
+    backSpace: "{!JSENCODE($Label.icagentconsole__backspace)}",
+    bcc: "{!JSENCODE($Label.icagentconsole__bcc)}",
+    bold: "{!JSENCODE($Label.icagentconsole__bold)}",
+    bulletedList: "{!JSENCODE($Label.icagentconsole__bulletedlist)}",
+    call: "{!JSENCODE($Label.icagentconsole__call)}",
+    callAbandoned: "{!JSENCODE($Label.icagentconsole__callabandoned)}",
+    callRinging: "{!JSENCODE($Label.icagentconsole__callringing)}",
+    callsRinging: "{!JSENCODE($Label.icagentconsole__callsringing)}",
+    callInProgressNotReauthenticate: "{!JSENCODE($Label.icagentconsole__callinprogressnotreauthenticate)}",
+    callerID: "{!JSENCODE($Label.icagentconsole__callerid)}",
+    cancel: "{!JSENCODE($Label.icagentconsole__cancel)}",
+    category: "{!JSENCODE($Label.icagentconsole__category)}",
+    cc: "{!JSENCODE($Label.icagentconsole__cc)}",
+    chat: "{!JSENCODE($Label.icagentconsole__chat)}",
+    chatContactWaiting: "{!JSENCODE($Label.icagentconsole__chatcontactwaiting)}",
+    chatNotes: "{!JSENCODE($Label.icagentconsole__chatnotes)}",
+    chatSessionEnded: "{!JSENCODE($Label.icagentconsole__chatsessionended)}",
+    close: "{!JSENCODE($Label.icagentconsole__close)}",
+    comments: "{!JSENCODE($Label.icagentconsole__comments)}",
+    confTheExistingCalls: "{!JSENCODE($Label.icagentconsole__conftheexistingcalls)}",
+    conference: "{!JSENCODE($Label.icagentconsole__conference)}",
+    conferenceErrorAttempt: "{!JSENCODE($Label.icagentconsole__conferenceerrorattempt)}",
+    consultRequest: "{!JSENCODE($Label.icagentconsole__consultrequest)}",
+    consultRequestWaiting: "{!JSENCODE($Label.icagentconsole__consultrequestwaiting)}",
+    contact: "{!JSENCODE($Label.icagentconsole__contact)}",
+    contactDispErrorAttempt: "{!JSENCODE($Label.icagentconsole__contactdisperrorattempt)}",
+    contactEndErrorAttempt: "{!JSENCODE($Label.icagentconsole__contactenderrorattempt)}",
+    contactHistory: "{!JSENCODE($Label.icagentconsole__contacthistory)}",
+    contactRequiresConfirmation: "{!JSENCODE($Label.icagentconsole__contactrequiresconfirmation)}",
+    currentContactErrorAttempt: "{!JSENCODE($Label.icagentconsole__currentcontacterrorattempt)}",
+    currentContacts: "{!JSENCODE($Label.icagentconsole__currentcontacts)}",
+    currentTime: "{!JSENCODE($Label.icagentconsole__currenttime)}",
+    customUrlPop: "{!JSENCODE($Label.icagentconsole__customurlpop)}",
+    date: "{!JSENCODE($Label.icagentconsole__date)}",
+    dateRange: "{!JSENCODE($Label.icagentconsole__daterange)}",
+    dateTime: "{!JSENCODE($Label.icagentconsole__datetime)}",
+    dial: "{!JSENCODE($Label.icagentconsole__dial)}",
+    dialAgentErrorAttempt: "{!JSENCODE($Label.icagentconsole__dialagenterrorattempt)}",
+    dialErrorAttempt: "{!JSENCODE($Label.icagentconsole__dialerrorattempt)}",
+    dialing: "{!JSENCODE($Label.icagentconsole__dialing)}",
+    dialPad: "{!JSENCODE($Label.icagentconsole__dialpad)}",
+    dialSkillErrorAttempt: "{!JSENCODE($Label.icagentconsole__dialskillerrorattempt)}",
+    dialerLoginErrorAttempt: "{!JSENCODE($Label.icagentconsole__dialerloginerrorattempt)}",
+    dialerLogoutErrorAttempt: "{!JSENCODE($Label.icagentconsole__dialerlogouterrorattempt)}",
+    discard: "{!JSENCODE($Label.icagentconsole__discard)}",
+    discarded: "{!JSENCODE($Label.icagentconsole__discarded)}",
+    disconnect: "{!JSENCODE($Label.icagentconsole__disconnect)}",
+    disconnected: "{!JSENCODE($Label.icagentconsole__disconnected)}",
+    disposition: "{!JSENCODE($Label.icagentconsole__disposition)}",
+    dispSubmitBtn: "{!JSENCODE($Label.icagentconsole__dispsubmitbtn)}",
+    doYouAcceptIt: "{!JSENCODE($Label.icagentconsole__doyouacceptit)}",
+    done: "{!JSENCODE($Label.icagentconsole__done)}",
+    downloadLog: "{!JSENCODE($Label.icagentconsole__downloadlog)}",
+    edit: "{!JSENCODE($Label.icagentconsole__edit)}",
+    email: "{!JSENCODE($Label.icagentconsole__email)}",
+    emailNotes: "{!JSENCODE($Label.icagentconsole__emailnotes)}",
+    endDate: "{!JSENCODE($Label.icagentconsole__enddate)}",
+    enterAmount: "{!JSENCODE($Label.icagentconsole__enteramount)}",
+    enterComments: "{!JSENCODE($Label.icagentconsole__entercomments)}",
+    enterMessage: "{!JSENCODE($Label.icagentconsole__entermessage)}",
+    enterTheAmount: "{!JSENCODE($Label.icagentconsole__entertheamount)}",
+    enterValidDate: "{!JSENCODE($Label.icagentconsole__entervaliddate)}",
+    enterValidPhoneNumber: "{!JSENCODE($Label.icagentconsole__entervalidphonenumber)}",
+    errorMsgBadMailId: "{!JSENCODE($Label.icagentconsole__errormsgbadmailid)}",
+    errorMsgReqToAddr: "{!JSENCODE($Label.icagentconsole__errormsgreqtoaddr)}",
+    errorMsgUnexpected: "{!JSENCODE($Label.icagentconsole__errormsgunexpected)}",
+    fax: "{!JSENCODE($Label.icagentconsole__fax)}",
+    feedback: "{!JSENCODE($Label.icagentconsole__feedback)}",
+    filter: "{!JSENCODE($Label.icagentconsole__filter)}",
+    first: "{!JSENCODE($Label.icagentconsole__first)}",
+    font: "{!JSENCODE($Label.icagentconsole__font)}",
+    fontSize: "{!JSENCODE($Label.icagentconsole__fontsize)}",
+    form: "{!JSENCODE($Label.icagentconsole__form)}",
+    forward: "{!JSENCODE($Label.icagentconsole__forward)}",
+    forwardShortForm: "{!JSENCODE($Label.icagentconsole__forwardshortform)}",
+    forwardTo: "{!JSENCODE($Label.icagentconsole__forwardto)}",
+    from: "{!JSENCODE($Label.icagentconsole__from)}",
+    getNextErrorAttempt: "{!JSENCODE($Label.icagentconsole__getnexterrorattempt)}",
+    handlingContactErrorAttempt: "{!JSENCODE($Label.icagentconsole__handlingcontacterrorattempt)}",
+    heldPartyAbandoned: "{!JSENCODE($Label.icagentconsole__heldpartyabandoned)}",
+    help: "{!JSENCODE($Label.icagentconsole__help)}",
+    highlightColor: "{!JSENCODE($Label.icagentconsole__highlightcolor)}",
+    hold: "{!JSENCODE($Label.icagentconsole__hold)}",
+    holdCurrentWorkItemContact: "{!JSENCODE($Label.icagentconsole__holdcurrentworkitemcontact)}",
+    holdErrorAttempt: "{!JSENCODE($Label.icagentconsole__holderrorattempt)}",
+    holding: "{!JSENCODE($Label.icagentconsole__holding)}",
+    hyperlink: "{!JSENCODE($Label.icagentconsole__hyperlink)}",
+    inContactAgentPassword: "{!JSENCODE($Label.icagentconsole__incontactagentpassword)}",
+    inContactAgentPhone: "{!JSENCODE($Label.icagentconsole__incontactagentphone)}",
+    inContactAgentStationID: "{!JSENCODE($Label.icagentconsole__incontactagentstationid)}",
+    inbound: "{!JSENCODE($Label.icagentconsole__inbound)}",
+    inboundConsult: "{!JSENCODE($Label.icagentconsole__inboundconsult)}",
+    inboundContact: "{!JSENCODE($Label.icagentconsole__inboundcontact)}",
+    incomingWorkItem: "{!JSENCODE($Label.icagentconsole__incomingworkitem)}",
+    incontactAgentName: "{!JSENCODE($Label.icagentconsole__incontactagentname)}",
+    information: "{!JSENCODE($Label.icagentconsole__information)}",
+    insert: "{!JSENCODE($Label.icagentconsole__insert)}",
+    insertHyperLink: "{!JSENCODE($Label.icagentconsole__inserthyperlink)}",
+    interrupted: "{!JSENCODE($Label.icagentconsole__interrupted)}",
+    invalidSFDCOrigin: "{!JSENCODE($Label.icagentconsole__invalidsfdcorigin)}",
+    italic: "{!JSENCODE($Label.icagentconsole__italic)}",
+    joined: "{!JSENCODE($Label.icagentconsole__joined)}",
+    joinedSessionAlreadyInProgress: "{!JSENCODE($Label.icagentconsole__joinedsessionalreadyinprogress)}",
+    justify: "{!JSENCODE($Label.icagentconsole__justify)}",
+    keypadTones: "{!JSENCODE($Label.icagentconsole__keypadtones)}",
+    last: "{!JSENCODE($Label.icagentconsole__last)}",
+    loading: "{!JSENCODE($Label.icagentconsole__loading)}",
+    logLevel: "{!JSENCODE($Label.icagentconsole__loglevel)}",
+    loggedIn: "{!JSENCODE($Label.icagentconsole__loggedin)}",
+    loggedOut: "{!JSENCODE($Label.icagentconsole__loggedout)}",
+    loggingIn: "{!JSENCODE($Label.icagentconsole__loggingin)}",
+    login: "{!JSENCODE($Label.icagentconsole__login)}",
+    loginFailedError: "{!JSENCODE($Label.icagentconsole__loginfailederror)}",
+    logout: "{!JSENCODE($Label.icagentconsole__logout)}",
+    machine: "{!JSENCODE($Label.icagentconsole__machine)}",
+    mask: "{!JSENCODE($Label.icagentconsole__mask)}",
+    message: "{!JSENCODE($Label.icagentconsole__message)}",
+    mute: "{!JSENCODE($Label.icagentconsole__mute)}",
+    unmute: "{!JSENCODE($Label.icagentconsole__unmute)}",
+    muteErrorAttempt: "{!JSENCODE($Label.icagentconsole__muteerrorattempt)}",
+    nextStateTooltip: "{!JSENCODE($Label.icagentconsole__nextstatetooltip)}",
+    noPorts: "{!JSENCODE($Label.icagentconsole__noports)}",
+    no: "{!JSENCODE($Label.icagentconsole__no)}",
+    noDataFound: "{!JSENCODE($Label.icagentconsole__nodatafound)}",
+    notes: "{!JSENCODE($Label.icagentconsole__notes)}",
+    ok: "{!JSENCODE($Label.icagentconsole__ok)}",
+    options: "{!JSENCODE($Label.icagentconsole__options)}",
+    outbound: "{!JSENCODE($Label.icagentconsole__outbound)}",
+    outboundConsult: "{!JSENCODE($Label.icagentconsole__outboundconsult)}",
+    outboundContact: "{!JSENCODE($Label.icagentconsole__outboundcontact)}",
+    passwordRequired: "{!JSENCODE($Label.icagentconsole__passwordrequired)}",
+    paused: "{!JSENCODE($Label.icagentconsole__paused)}",
+    personalConnection: "{!JSENCODE($Label.icagentconsole__personalconnection)}",
+    personalConnectionPending: "{!JSENCODE($Label.icagentconsole__personalconnectionpending)}",
+    personalQueue: "{!JSENCODE($Label.icagentconsole__personalqueue)}",
+    phone: "{!JSENCODE($Label.icagentconsole__phone)}",
+    phoneNumberIsNotValid: "{!JSENCODE($Label.icagentconsole__phonenumberisnotvalid)}",
+    phoneNumberOrStationIDRequired: "{!JSENCODE($Label.icagentconsole__phonenumberorstationidrequired)}",
+    phoneCall: "{!JSENCODE($Label.icagentconsole__phonecall)}",
+    phoneNumber: "{!JSENCODE($Label.icagentconsole__phonenumber)}",
+    popin: "{!JSENCODE($Label.icagentconsole__popin)}",
+    popout: "{!JSENCODE($Label.icagentconsole__popout)}",
+    priority: "{!JSENCODE($Label.icagentconsole__priority)}",
+    queue: "{!JSENCODE($Label.icagentconsole__queue)}",
+    quickResponse: "{!JSENCODE($Label.icagentconsole__quickresponse)}",
+    record: "{!JSENCODE($Label.icagentconsole__record)}",
+    recordingInProgress: "{!JSENCODE($Label.icagentconsole__recordinginprogress)}",
+    recordInventoryLow: "{!JSENCODE($Label.icagentconsole__recordinventorylow)}",
+    reject: "{!JSENCODE($Label.icagentconsole__reject)}",
+    replaceVariables: "{!JSENCODE($Label.icagentconsole__replacevariables)}",
+    reply: "{!JSENCODE($Label.icagentconsole__reply)}",
+    replyAction: "{!JSENCODE($Label.icagentconsole__replyaction)}",
+    replyAll: "{!JSENCODE($Label.icagentconsole__replyall)}",
+    replyShortForm: "{!JSENCODE($Label.icagentconsole__replyshortform)}",
+    results: "{!JSENCODE($Label.icagentconsole__results)}",
+    resume: "{!JSENCODE($Label.icagentconsole__resume)}",
+    resumeErrorAttempt: "{!JSENCODE($Label.icagentconsole__resumeerrorattempt)}",
+    ringing: "{!JSENCODE($Label.icagentconsole__ringing)}",
+    save: "{!JSENCODE($Label.icagentconsole__save)}",
+    search: "{!JSENCODE($Label.icagentconsole__search)}",
+    select: "{!JSENCODE($Label.icagentconsole__select)}",
+    selectDateRange: "{!JSENCODE($Label.icagentconsole__selectdaterange)}",
+    selectDisposition: "{!JSENCODE($Label.icagentconsole__selectdisposition)}",
+    selectOutboundSkills: "{!JSENCODE($Label.icagentconsole__selectoutboundskills)}",
+    selectTheDisposition: "{!JSENCODE($Label.icagentconsole__selectthedisposition)}",
+    selectWhat: "{!JSENCODE($Label.icagentconsole__selectwhat)}",
+    selectWho: "{!JSENCODE($Label.icagentconsole__selectwho)}",
+    send: "{!JSENCODE($Label.icagentconsole__send)}",
+    sendDTMFTonesError: "{!JSENCODE($Label.icagentconsole__senddtmftoneserror)}",
+    sent: "{!JSENCODE($Label.icagentconsole__sent)}",
+    sessionEnded: "{!JSENCODE($Label.icagentconsole__sessionended)}",
+    sessionErrorEnd: "{!JSENCODE($Label.icagentconsole__sessionerrorend)}",
+    sessionID: "{!JSENCODE($Label.icagentconsole__sessionid)}",
+    showAllTimes: "{!JSENCODE($Label.icagentconsole__showalltimes)}",
+    skillCacheErrorAttempt: "{!JSENCODE($Label.icagentconsole__skillcacheerrorattempt)}",
+    skillName: "{!JSENCODE($Label.icagentconsole__skillname)}",
+    skillNotOpenError: "{!JSENCODE($Label.icagentconsole__skillnotopenerror)}",
+    skillQueue: "{!JSENCODE($Label.icagentconsole__skillqueue)}",
+    skills: "{!JSENCODE($Label.icagentconsole__skills)}",
+    skill: "{!JSENCODE($Label.icagentconsole__skill)}",
+    skillList: "{!JSENCODE($Label.icagentconsole__skilllist)}",
+    startDate: "{!JSENCODE($Label.icagentconsole__startdate)}",
+    state: "{!JSENCODE($Label.icagentconsole__state)}",
+    station: "{!JSENCODE($Label.icagentconsole__station)}",
+    stationID: "{!JSENCODE($Label.icagentconsole__stationid)}",
+    stationIDErrorAttempt: "{!JSENCODE($Label.icagentconsole__stationiderrorattempt)}",
+    subject: "{!JSENCODE($Label.icagentconsole__subject)}",
+    submit: "{!JSENCODE($Label.icagentconsole__submit)}",
+    submitFeedback: "{!JSENCODE($Label.icagentconsole__submitfeedback)}",
+    system: "{!JSENCODE($Label.icagentconsole__system)}",
+    systemAdmin: "{!JSENCODE($Label.icagentconsole__systemadmin)}",
+    team: "{!JSENCODE($Label.icagentconsole__team)}",
+    textColor: "{!JSENCODE($Label.icagentconsole__textcolor)}",
+    textToDisplay: "{!JSENCODE($Label.icagentconsole__texttodisplay)}",
+    thisWeek: "{!JSENCODE($Label.icagentconsole__thisweek)}",
+    to: "{!JSENCODE($Label.icagentconsole__to)}",
+    toTransferSelectAnAgentOrSkill: "{!JSENCODE($Label.icagentconsole__totransferselectanagentorskill)}",
+    today: "{!JSENCODE($Label.icagentconsole__today)}",
+    tools: "{!JSENCODE($Label.icagentconsole__tools)}",
+    transfer: "{!JSENCODE($Label.icagentconsole__transfer)}",
+    transferChatAgentErrorAttempt: "{!JSENCODE($Label.icagentconsole__transferchatagenterrorattempt)}",
+    transferChatSkillErrorAttempt: "{!JSENCODE($Label.icagentconsole__transferchatskillerrorattempt)}",
+    transferErrorAttempt: "{!JSENCODE($Label.icagentconsole__transfererrorattempt)}",
+    transferWIAgentErrorAttempt: "{!JSENCODE($Label.icagentconsole__transferwiagenterrorattempt)}",
+    transferWISkillErrorAttempt: "{!JSENCODE($Label.icagentconsole__transferwiskillerrorattempt)}",
+    unavailable: "{!JSENCODE($Label.icagentconsole__unavailable)}",
+    underline: "{!JSENCODE($Label.icagentconsole__underline)}",
+    unmask: "{!JSENCODE($Label.icagentconsole__unmask)}",
+    unmuteErrorAttempt: "{!JSENCODE($Label.icagentconsole__unmuteerrorattempt)}",
+    usernameIsNotValid: "{!JSENCODE($Label.icagentconsole__usernameisnotvalid)}",
+    usernameRequired: "{!JSENCODE($Label.icagentconsole__usernamerequired)}",
+    valueOne: "{!JSENCODE($Label.icagentconsole__valueone)}",
+    valueTwo: "{!JSENCODE($Label.icagentconsole__valuetwo)}",
+    wait: "{!JSENCODE($Label.icagentconsole__wait)}",
+    waitTime: "{!JSENCODE($Label.icagentconsole__waittime)}",
+    webServer: "{!JSENCODE($Label.icagentconsole__webserver)}",
+    what: "{!JSENCODE($Label.icagentconsole__what)}",
+    who: "{!JSENCODE($Label.icagentconsole__who)}",
+    workItem: "{!JSENCODE($Label.icagentconsole__workitem)}",
+    yes: "{!JSENCODE($Label.icagentconsole__yes)}",
+    you: "{!JSENCODE($Label.icagentconsole__you)}",
+    popScreen: "{!JSENCODE($Label.icagentconsole__popscreen)}",
+    contactNumberErrorAttempt: "{!JSENCODE($Label.icagentconsole__contactnumbererrorattempt)}",
+    preview: "{!JSENCODE($Label.icagentconsole__preview)}",
+    masking: "{!JSENCODE($Label.icagentconsole__masking)}",
+    answeringMachine: "{!JSENCODE($Label.icagentconsole__answeringmachine)}",
+    rejected: "{!JSENCODE($Label.icagentconsole__rejected)}",
+    badNumber: "{!JSENCODE($Label.icagentconsole__badnumber)}",
+    noAnswer: "{!JSENCODE($Label.icagentconsole__noanswer)}",
+    transferComplete: "{!JSENCODE($Label.icagentconsole__transfercomplete)}",
+    agentConfiguration: "{!JSENCODE($Label.icagentconsole__agentconfiguration)}",
+    agentConfigEntity: "{!JSENCODE($Label.icagentconsole__agentconfigentity)}",
+    agentConfigField: "{!JSENCODE($Label.icagentconsole__agentconfigfield)}",
+    campaign: "{!JSENCODE($Label.icagentconsole__campaign)}",
+    eventlabel: "{!JSENCODE($Label.icagentconsole__event)}",
+    task: "{!JSENCODE($Label.icagentconsole__task)}",
+    user: "{!JSENCODE($Label.icagentconsole__user)}",
+    account: "{!JSENCODE($Label.icagentconsole__account)}",
+    caselabel: "{!JSENCODE($Label.icagentconsole__case)}",
+    opportunity: "{!JSENCODE($Label.icagentconsole__opportunity)}",
+    lead: "{!JSENCODE($Label.icagentconsole__lead)}",
+    comment: "{!JSENCODE($Label.icagentconsole__comment)}",
+    minute: "{!JSENCODE($Label.icagentconsole__minute)}",
+    info: "{!JSENCODE($Label.icagentconsole__info)}",
+    all: "{!JSENCODE($Label.icagentconsole__all)}",
+    trace: "{!JSENCODE($Label.icagentconsole__trace)}",
+    debug: "{!JSENCODE($Label.icagentconsole__debug)}",
+    error: "{!JSENCODE($Label.icagentconsole__error)}",
+    fatal: "{!JSENCODE($Label.icagentconsole__fatal)}",
+    off: "{!JSENCODE($Label.icagentconsole__off)}",
+    warn: "{!JSENCODE($Label.icagentconsole__warn)}",
+    sfdcCase: "{!JSENCODE($Label.icagentconsole__sfdccase)}",
+    sfdcQuery: "{!JSENCODE($Label.icagentconsole__sfdcquery)}",
+    loginFailedErrorAttempt: "{!JSENCODE($Label.icagentconsole__loginfailederrorattempt)}",
+    pwdErrorAttempt: "{!JSENCODE($Label.icagentconsole__pwderrorattempt)}",
+    phoneErrorAttempt: "{!JSENCODE($Label.icagentconsole__phoneerrorattempt)}",
+    appErrorAttempt: "{!JSENCODE($Label.icagentconsole__apperrorattempt)}",
+    remoteErrorAttempt: "{!JSENCODE($Label.icagentconsole__remoteerrorattempt)}",
+    userSettingErrorAttempt: "{!JSENCODE($Label.icagentconsole__usersettingerrorattempt)}",
+    customSearch: "{!JSENCODE($Label.icagentconsole__customsearch)}",
+    softphoneErrorAttempt: "{!JSENCODE($Label.icagentconsole__softphoneerrorattempt)}",
+    contactSearchErrorAttempt: "{!JSENCODE($Label.icagentconsole__contactsearcherrorattempt)}",
+    callSearchErrorAttempt: "{!JSENCODE($Label.icagentconsole__callsearcherrorattempt)}",
+    contactProcessErrorAttempt: "{!JSENCODE($Label.icagentconsole__contactprocesserrorattempt)}",
+    callProcessErrorAttempt: "{!JSENCODE($Label.icagentconsole__callprocesserrorattempt)}",
+    apexErrorAttempt: "{!JSENCODE($Label.icagentconsole__apexerrorattempt)}",
+    apexDefaultErrorAttempt: "{!JSENCODE($Label.icagentconsole__apexdefaulterrorattempt)}",
+    time: "{!JSENCODE($Label.icagentconsole__time)}",
+    hour: "{!JSENCODE($Label.icagentconsole__hour)}",
+    hours: "{!JSENCODE($Label.icagentconsole__hours)}",
+    defaultlabel: "{!JSENCODE($Label.icagentconsole__default)}",
+    popScreenRunapp: "{!JSENCODE($Label.icagentconsole__popscreenrunapp)}",
+    popScreenTask: "{!JSENCODE($Label.icagentconsole__popscreentask)}",
+    popScreenIndicator: "{!JSENCODE($Label.icagentconsole__popscreenindicator)}",
+    popScreenContactSearch: "{!JSENCODE($Label.icagentconsole__popscreencontactsearch)}",
+    popScreenContactResult: "{!JSENCODE($Label.icagentconsole__popscreencontactresult)}",
+    getAllSkillsErrorAttempt: "{!JSENCODE($Label.icagentconsole__getallskillserrorattempt)}",
+    getAgentsSkillsErrorAttempt: "{!JSENCODE($Label.icagentconsole__getagentsskillserrorattempt)}",
+    getAgentSkillAssignmentsErrorAttempt: "{!JSENCODE($Label.icagentconsole__getagentskillassignmentserrorattempt)}",
+    getAllUnavailableCodesErrorAttempt: "{!JSENCODE($Label.icagentconsole__getallunavailablecodeserrorattempt)}",
+    getTeamsErrorAttempt: "{!JSENCODE($Label.icagentconsole__getteamserrorattempt)}",
+    getAgentInfoErrorAttempt: "{!JSENCODE($Label.icagentconsole__getagentinfoerrorattempt)}",
+    getTeamUnavailableCodesErrorAttempt: "{!JSENCODE($Label.icagentconsole__getteamunavailablecodeserrorattempt)}",
+    getAddressBookByTeamErrorAttempt: "{!JSENCODE($Label.icagentconsole__getaddressbookbyteamerrorattempt)}",
+    getAddressBookByAgentErrorAttempt: "{!JSENCODE($Label.icagentconsole__getaddressbookbyagenterrorattempt)}",
+    errorToFetchQuickReply: "{!JSENCODE($Label.icagentconsole__errortofetchquickreply)}",
+    noObjectsFound: "{!JSENCODE($Label.icagentconsole__noobjectsfound)}",
+    fieldsEmpty: "{!JSENCODE($Label.icagentconsole__fieldsempty)}",
+    ctrl_C_ToCopy: "{!JSENCODE($Label.icagentconsole__ctrl_c_tocopy)}",
+    none: "{!JSENCODE($Label.icagentconsole__none)}",
+    unknownAgent: "{!JSENCODE($Label.icagentconsole__unknownagent)}",
+    voicemail: "{!JSENCODE($Label.icagentconsole__voicemail)}",
+    getAgentStateCacheError: "{!JSENCODE($Label.icagentconsole__getagentstatecacheerror)}",
+    additionalDisp: "{!JSENCODE($Label.icagentconsole__additionaldisp)}",
+    salesforceAgent: "{!JSENCODE($Label.icagentconsole__salesforceagent)}",
+    version: "{!JSENCODE($Label.icagentconsole__version)}",
+    dialPadTooltipTxt: "{!JSENCODE($Label.icagentconsole__dialpadtooltiptxt)}",
+    agentListTooltipTxt: "{!JSENCODE($Label.icagentconsole__agentlisttooltiptxt)}",
+    skillListTooltipTxt: "{!JSENCODE($Label.icagentconsole__skilllisttooltiptxt)}",
+    addressBookTooltipTxt: "{!JSENCODE($Label.icagentconsole__addressbooktooltiptxt)}",
+    contactHistoryTooltipTxt: "{!JSENCODE($Label.icagentconsole__contacthistorytooltiptxt)}",
+    agentInfoToolitipTxt: "{!JSENCODE($Label.icagentconsole__agentinfotoolitiptxt)}",
+    more: "{!JSENCODE($Label.icagentconsole__more)}",
+    busy: "{!JSENCODE($Label.icagentconsole__busy)}",
+    away: "{!JSENCODE($Label.icagentconsole__away)}",
+    doNotDisturb: "{!JSENCODE($Label.icagentconsole__donotdisturb)}",
+    offline: "{!JSENCODE($Label.icagentconsole__offline)}",
+    parkedEmail: "{!JSENCODE($Label.icagentconsole__parkedemail)}",
+    parkEmail: "{!JSENCODE($Label.icagentconsole__parkemail)}",
+    unParkEmail: "{!JSENCODE($Label.icagentconsole__unparkemail)}",
+    parked: "{!JSENCODE($Label.icagentconsole__parked)}",
+    loadAgainErrorAttempt: "{!JSENCODE($Label.icagentconsole__loadagainerrorattempt)}",
+    inbox: "{!JSENCODE($Label.icagentconsole__inbox)}",
+    days: "{!JSENCODE($Label.icagentconsole__days)}",
+    unparkNow: "{!JSENCODE($Label.icagentconsole__unparknow)}",
+    unparkToQueue: "{!JSENCODE($Label.icagentconsole__unparktoqueue)}",
+    typingMsg: "{!JSENCODE($Label.icagentconsole__typingmsg)}",
+    enteredTheText: "{!JSENCODE($Label.icagentconsole__enteredthetext)}",
+    requeue: "{!JSENCODE($Label.icagentconsole__requeue)}",
+    dateTimeDesc: "{!JSENCODE($Label.icagentconsole__datetimedesc)}",
+    dateTimeAsc: "{!JSENCODE($Label.icagentconsole__datetimeasc)}",
+    emailsSelected: "{!JSENCODE($Label.icagentconsole__emailsselected)}",
+    sun: "{!JSENCODE($Label.icagentconsole__sun)}",
+    mon: "{!JSENCODE($Label.icagentconsole__mon)}",
+    tue: "{!JSENCODE($Label.icagentconsole__tue)}",
+    wed: "{!JSENCODE($Label.icagentconsole__wed)}",
+    thu: "{!JSENCODE($Label.icagentconsole__thu)}",
+    fri: "{!JSENCODE($Label.icagentconsole__fri)}",
+    sat: "{!JSENCODE($Label.icagentconsole__sat)}",
+    inboxSizeExceeded: "{!JSENCODE($Label.icagentconsole__inboxsizeexceeded)}",
+    tags: "{!JSENCODE($Label.icagentconsole__tags)}",
+    errorToGetSkillTags: "{!JSENCODE($Label.icagentconsole__errortogetskilltags)}",
+    addTags: "{!JSENCODE($Label.icagentconsole__addtags)}",
+    begin: "{!JSENCODE($Label.icagentconsole__begin)}",
+    end: "{!JSENCODE($Label.icagentconsole__end)}"
+    }
+  </script>
+
+
+  <apex:stylesheet value="{!URLFOR($Resource.icAgentConsole__AgentConsoleApp, 'css/jquery.mCustomScrollbar.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.icAgentConsole__AgentConsoleApp, 'js/lib/SlickGrid/css/slick.grid.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.icAgentConsole__AgentConsoleApp, 'css/CustomScrollBar.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.icAgentConsole__AgentConsoleApp, 'css/Combobox.css')}"/>
+
+  <apex:stylesheet value="{!URLFOR($Resource.icAgentConsole__AgentConsoleApp, 'css/AgentConsolePopout.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.icAgentConsole__AgentConsoleApp, 'css/jquery-ui-themes/jquery-ui.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.icAgentConsole__AgentConsoleApp, 'css/EmailEditor.css')}"/>
+
+  <apex:outputPanel rendered="{!isLightningMode}">
+    <apex:stylesheet value="{!URLFOR($Resource.icAgentConsole__AgentConsoleApp, 'css/lightning/AgentConsolePopoutLightning.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.icAgentConsole__AgentConsoleApp, 'css/lightning/CommitmentPopoutLightning.css')}"/>
+  </apex:outputPanel>
+
+  <!-- Include scripts for salesforce integration -->
+  <script src="/support/api/36.0/interaction.js" type="text/javascript"/>
+  <script src="/soap/ajax/36.0/connection.js" type="text/javascript"/>
+
+  <!-- Third party libraries -->
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/base64-string-v1.1.0.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/lz-string-1.3.3.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/log4javascript.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/jquery-1.10.2.min.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/jquery-migrate-1.2.1.min.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/jquery-base64.js')}"/>
+  <!--<script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/jquery-ui-1.10.3.min.js')}"/>-->
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/jquery-ui.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/jquery.event.drag-2.2.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/jquery.mCustomScrollbar.concat.min.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/jquery-ui-timepicker.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/SlickGrid/js/slick.core.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/SlickGrid/js/slick.grid.custom.modified.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/SlickGrid/js/slick.dataview.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/SlickGrid/plugins/slick.cellrangedecorator.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/SlickGrid/plugins/slick.cellrangeselector.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/SlickGrid/plugins/slick.cellselectionmodel.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/DateTimeExtensions.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/tinymce/tinymce.min.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/lib/FileSaver.min.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/data/jquery.icxdr.js')}"/>
+  <!-- Agent Console App -->
+  <!--<script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/data/jquery.icxdr.js')}"/>-->
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/common/SessionStorageAppender.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/common/Util.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/common/PersistentList.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/common/PersistentQueue.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/AutoCompleteComboBox.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/ComboboxControl.js')}"/>
+
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/data/Salesforce.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/data/AgentConsoleDataStore.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/DispositionControl.js')}"/>
+
+  <!-- Load custom control / widgets -->
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/SkillListControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/AgentListControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/AddressBookControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/ContactHistoryControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/AgentInformationControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/AgentStateControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/DialPadControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/ContactResultControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/MultiCallControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/popout/MultiCallPopoutControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/AcceptRejectPanel.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/ConsultAcceptReject.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/ChatAcceptRejectControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/ChatContactControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/popout/ChatPopoutContactControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/popout/ChatPopoutMessageEditor.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/popout/QuickReplyPopoutControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/popout/EmailPopoutContactControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/popout/EmailAddressPopoutControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/popout/ContactResultPopoutControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/common/AgentConsoleLocale.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/TagsControl.js')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/app/AgentIndicatorControl.js')}"/>
+  <!-- Load UI container last -->
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/popout/PopoutContainer.js')}"/>
+
+  <script type="text/javascript" src="{!URLFOR($Resource.AgentConsoleApp, 'js/common/EventErrorMessages.js')}"/>
+
+  <div id="agentConsolePopoutContainer" />
+
+  <script type="text/javascript">
+    var j1102 = jQuery.noConflict();
+
+    j1102(document).ready(function ($) {
+    $('#agentConsolePopoutContainer').popout({
+    timezoneOffset: parseInt({!JSENCODE(timezoneOffset)}),
+    localeCode: '{!JSENCODE(localeCode)}',
+    langCode: '{!JSENCODE(langCode)}',
+    resourceBase: '{!JSENCODE($Resource.AgentConsoleApp)}',
+    agentConsoleVersion: '{!JSENCODE(agentConsoleVersion)}',
+    sfMode: '{!JSENCODE($CurrentPage.parameters.mode)}',
+    isTooltipEnabled: {!isTooltipEnabled}
+    });
+
+    });
+
+
+  </script>
+
+</apex:page>

@@ -1,0 +1,160 @@
+<apex:page controller="LPDCR_CC_MarketingPageController" action="{!initCachedData}" docType="html-5.0" showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" >
+
+ <apex:form id="form">
+
+    <apex:composition template="LPDCR_CC_BaseTemplate" >
+        <apex:define name="PageTitle">Marketing</apex:define>
+        <apex:define name="body">
+           
+            <div class="wrapper">    
+                <div class="row equalHgt">
+                     <div class="col-sm-12 pad_all">
+                         <!-- START: MAIN PAGE BODY -->
+                         <div class="wrapper cc_homepage pagenation_promation">
+                           <div class="row">
+                               <div class="col-sm-12 mob_pads1">
+                                  <div class="row">
+                                      <div class="col-sm-12 pad_all0 ">
+                                          <c:LPDCR_SecondaryPageHeader title="{!JSENCODE(page_title)}" id="pageTitleText" />
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-sm-12 mob_pads">
+                                          <div class="panel with-nav-tabs panel-default">
+                                               <div class="panel-heading col-sm-3">
+                                                    <ul class="nav nav-tabs lft_menu">
+                                                        <li class="wid100 {!IF($CurrentPage.parameters.subtab == 'Promotions' || $CurrentPage.parameters.subtab == '', 'active','')}"><a href="#Promotions" onclick="setTitle('Promotions');" data-toggle="tab" class="lia txt_upper">{!JSENCODE($Label.LPDCR_Promotions_Subtab_Name)}</a></li>
+                                                        <li class="wid100 {!IF($CurrentPage.parameters.subtab == 'MediaTools','active','')}"><a href="#MediaTools" onclick="setTitle('MediaTools');" data-toggle="tab" class="lia txt_upper">{!JSENCODE($Label.LPDCR_Media_Tools_Subtab_Name)}</a></li>
+                                                        <li class="wid100 {!IF($CurrentPage.parameters.subtab == 'Merchandising', 'active','')}"><a href="#Merchandising" onclick="setTitle('Merchandising');" data-toggle="tab" class="lia txt_upper">{!JSENCODE($Label.LPDCR_Merchandising_Subtab_Name)}</a></li>
+                                                    </ul>
+                                                    <apex:actionFunction action="{!setPageTitle}" name="setTitle" rerender="pageTitleText,filterPanel,componentPanel" status="loader">
+                                                        <apex:param name="title" assignTo="{!selected_title}" value="" />
+                                                    </apex:actionFunction>
+                                                    
+                                                    <apex:outputPanel layout="block" styleClass="col-sm-12 pad_lft_rgt accBg pad_btm20" id="filterPanel" >
+                                                       
+                                                       <c:LPDCR_SecondaryPageFilters componentKey="filtersComponent" 
+                                                                                     thisPageController="{!this}"
+                                                                                     rerenderList="componentPanel,documentList"
+                                                                                     compName="{!page_title}"/>
+                                                    </apex:outputPanel>
+                                                    
+                                                </div>
+                                                
+                                                 <div class="panel-body col-sm-9 pad_lft10 zeroPad">
+                                                    <div class="tab-content bgWht flt_lft wid100">
+                                                    
+                                                        <!-- MAIN BODY COMPONENTS CORRESPONDING TO EACH OF THE SUBTAB LINKS -->
+                                                        <apex:outputPanel id="componentPanel"> 
+                                                        <!-- PROMOTIONS-->
+                                                        <div class="tab-pane fade {!IF(page_title == $Label.LPDCR_Promotions_Subtab_Name || $CurrentPage.parameters.subtab == 'Promotions' || $CurrentPage.parameters.subtab == '', 'active in','')}" id="Promotions">
+                                                            <apex:outputPanel id="promotionsPanel" rendered="{!IF(page_title == $Label.LPDCR_Promotions_Subtab_Name,true,false)}">
+                                                               <c:LPDCR_SecondaryPagePromotionsBody componentKey="promotionsComponent" 
+                                                                                                    thisPageController="{!this}"
+                                                                                                    speciesFilter="{!SpecieList}"
+                                                                                                    sortBy="{!SortBy}"
+                                                                                                    internalOnly="{!InternalUserCheck}"/>
+                                                            </apex:outputPanel>
+                                                        </div>
+                                                        
+                                                        <!-- MEDIA TOOLS -->
+                                                        <div class="tab-pane fade {!IF(page_title == $Label.LPDCR_Media_Tools_Subtab_Name || $CurrentPage.parameters.subtab == 'MediaTools','active in','')}" id="MediaTools">
+                                                           <apex:outputPanel id="mediaToolsPanel" rendered="{!IF(page_title == $Label.LPDCR_Media_Tools_Subtab_Name,true,false)}">
+                                                               <c:LPDCR_SecondaryPageMediaToolsBody componentKey="mediaToolsComponent" 
+                                                                                                    thisPageController="{!this}"
+                                                                                                    speciesFilter="{!SpecieList}"
+                                                                                                    fileFilter="{!FileTypeFilter}"
+                                                                                                    sortBy="{!SortBy}"/>
+                                                           </apex:outputPanel>
+                                                        </div>
+                                                        
+                                                        <!-- MERCHANDISING -->
+                                                        <div class="tab-pane fade {!IF(page_title == $Label.LPDCR_Merchandising_Subtab_Name,'active in','')}" id="Merchandising">
+                                                           <apex:outputPanel id="merchandisingPanel" rendered="{!IF(page_title == $Label.LPDCR_Merchandising_Subtab_Name,true,false)}">
+                                                               <c:LPDCR_SecondaryPageMerchandisingBody componentKey="merchandisingComponent" 
+                                                                                                       thisPageController="{!this}"
+                                                                                                       speciesFilter="{!SpecieList}"
+                                                                                                       fileFilter="{!FileTypeFilter}"
+                                                                                                       searchTerm="{!search_term}"
+                                                                                                       sortBy="{!SortBy}"/>
+                                                               
+                                                           </apex:outputPanel>
+                                                       </div>
+
+                                                       </apex:outputPanel>
+                                                        
+                                                    </div>
+                                                 </div>
+                                          
+                                          </div>                      
+                                      </div>
+                                  </div>
+                               </div>
+                           </div>
+                      </div>
+                     
+                         
+                         <!--  /END: MAIN PAGE BODY -->
+                     </div>
+                </div>
+                
+            </div>
+            <!-- Loader code starts here -->
+                 <apex:actionStatus id="loader">
+                    <apex:facet name="start">
+                        <div class="loadercover">
+                         </div>
+                         <div class="loaderfirst">
+                             <div class="loadersec">
+                            <img src="/img/loading32.gif" class="loaderimage" />
+                         </div>
+                        </div>   
+                    </apex:facet>
+                </apex:actionStatus>
+            <!-- Loader code ends here-->
+        </apex:define>
+    </apex:composition>
+ </apex:form>
+ 
+<script>
+  $('.collapse').on('shown.bs.collapse', function(){
+      
+        $(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+        }).on('hidden.bs.collapse', function(){
+        $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+        });
+ </script>
+<script src="{!URLFOR($Resource.LPDCR_CC_Assets, 'js/datable.js')}"></script> 
+ <script src="{!URLFOR($Resource.LPDCR_CC_Assets, 'js/bootstrap_datable.js')}"></script>
+
+  
+    <script type="text/javascript">
+                   
+                   function GetselectedAccount(){
+                        //alert('$value--'+$("input[name='account']:checked").attr('value'));
+                        var selectedAccId = $("input[name='account']:checked").attr('value');
+                        //alert(selectedAccId);
+                        
+                        var urlString = '{!$Site.BaseUrl}/';
+                        window.location = urlString+'LPDCR_CC_MarketingPage?selectedAccountId='+selectedAccId;
+                        
+                        //changeAccount($("input[name='account']:checked").attr('value'));
+                    }
+                    
+         </script>
+<style>
+
+    .paddingtext{padding: 20px 0 0 0px;font-weight:bold;}
+    .row{margin:0px;}
+    .pad_all{padding:0px !important}
+    .pad_lft_rgt{padding-left:0px !important;padding-right:0px !important}
+</style>
+<script>
+     $(document).ready(function(){
+      $('#mp').addClass("myactive");
+      $('#mmp').addClass("mobactive");
+    });
+ </script>
+ <style>.media{background:url({!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_Header_Marketing)}); width:100%; height:133px; background-repeat: no-repeat;
+    background-size: contain;}</style>
+</apex:page>

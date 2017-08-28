@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>true</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This custom object is used to input data for on-farm assessments. Specifically, the Dairy Sales team is using an on-farm survey in a mobile app called Fast Field forms, and that data is mapped into this custom object.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Assessments</relationshipLabel>
+        <relationshipName>Assessments</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>AgeFirstBreeding__c</fullName>
+        <description>AgeFirstBreeding maps to FFF Heifer Assessment &gt; Age_First_Breeding</description>
+        <externalId>false</externalId>
+        <label>Age at First Breeding</label>
+        <length>15</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AgeHayIntroduced__c</fullName>
+        <description>Age Hay is Introduced maps to FFF Calf Assessment &gt; Age_Hay_Introduced</description>
+        <externalId>false</externalId>
+        <label>Age Hay is Introduced</label>
+        <length>15</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AgeTMRStarted__c</fullName>
+        <description>Age TMR is Started maps to FFF Heifer Assessment &gt; Age_TMR_Started</description>
+        <externalId>false</externalId>
+        <label>Age TMR is Started</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssessmentType__c</fullName>
+        <description>Field is used to denote which type of Fast Field Forms Dairy assessment is being created, a &quot;Full Assessment&quot; or a &quot;Quick Check&quot;</description>
+        <externalId>false</externalId>
+        <label>Assessment Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AutoFeedersUsed__c</fullName>
+        <description>Auto-feeders Used maps to FFF Calf Assessment &gt; AutoFeeders_Used </description>
+        <externalId>false</externalId>
+        <label>Auto-feeders Used</label>
+        <length>5</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AverageWeight3rdLact__c</fullName>
+        <description>Average Weight of 3rd+ Lactation maps to FFF Heifer Assessment &gt; Average_Weight_3rdLact</description>
+        <externalId>false</externalId>
+        <label>Average Weight of 3rd+ Lactation</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Average_Weight_Breeding__c</fullName>
+        <description>Average Weight at Breeding maps to FFF Heifer Assessment &gt; Average_Weight_Breeding</description>
+        <externalId>false</externalId>
+        <label>Average Weight at Breeding</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Breed__c</fullName>
+        <description>Breed maps to Milking Cow Assessment &gt; Breed</description>
+        <externalId>false</externalId>
+        <label>Breed</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Butterfat__c</fullName>
+        <description>Butterfat maps to Milking Cow Assessment &gt; Butterfat</description>
+        <externalId>false</externalId>
+        <label>Butterfat</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ColostrumUsed__c</fullName>
+        <description>Colostrum Used maps to FFF Calf Assessment &gt; Colostrum_Used </description>
+        <externalId>false</externalId>
+        <label>Colostrum Used</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CurrentADGBirthPreFresh__c</fullName>
+        <description>Current average daily gain, birth to pre-fresh maps to FFF Calf Assessment &gt; Current_ADG_Birth_PreFresh</description>
+        <externalId>false</externalId>
+        <label>Current ADG birth to pre-fresh</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CurrentADGBirthWeaning__c</fullName>
+        <description>Current average daily gain, birth to weaning maps to FFF Calf Assessment &gt; Current_ADG_Birth_Weaning</description>
+        <externalId>false</externalId>
+        <label>Current ADG Birth - Weaning</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CurrentAgeFirstCalving__c</fullName>
+        <description>Current Age First Calving maps to FFF Calf Assessment &gt; Current_Age_First_Calving</description>
+        <externalId>false</externalId>
+        <label>Current Age First Calving</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CurrentWeaningAge__c</fullName>
+        <description>Current Weaning Age maps to FFF Calf Assessment &gt; Current_Weaning_Age</description>
+        <externalId>false</externalId>
+        <label>Current Weaning Age</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FastFieldFormsUserName__c</fullName>
+        <description>Maps to Fast Field Forms &quot;fullName&quot; field to list the user name of the person who performed the assessment.</description>
+        <externalId>false</externalId>
+        <label>Fast Field Forms User Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FastFieldSubmissionID__c</fullName>
+        <description>Fast Field Form ID which maps to the FFF field &quot;SubmitId&quot;</description>
+        <externalId>false</externalId>
+        <label>Fast Field Submission ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FeedingFrequency__c</fullName>
+        <description>Feeding frequency maps to FFF Calf Assessment &gt; Feeding_Frequency</description>
+        <externalId>false</externalId>
+        <label>Feeding Frequency</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FeedingRateSummer__c</fullName>
+        <description>Feeding Rate Summer maps to FFF Calf Assessment &gt; Feeding_Rate_Summer</description>
+        <externalId>false</externalId>
+        <label>Feeding Rate Summer</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FeedingRateWinter__c</fullName>
+        <description>Feeding Rate Winter maps to FFF Calf Assessment &gt; Feeding_Rate_Winter</description>
+        <externalId>false</externalId>
+        <label>Feeding Rate Winter</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FermentedForagesStored__c</fullName>
+        <description>How are Fermented Forages Stored maps to Forage Storage Questions &gt; Fermented_Forages_Stored</description>
+        <externalId>false</externalId>
+        <label>How are Fermented Forages Stored</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FirstServiceConceptionRate__c</fullName>
+        <description>First Service Conception Rate maps to FFF Heifer Assessment &gt; First_Service_Conception_Rate</description>
+        <externalId>false</externalId>
+        <label>First Service Conception Rate</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Herd_Tank_Average__c</fullName>
+        <description>Herd Tank Average maps to Milking Cow Assessment &gt; Herd_Tank_Average</description>
+        <externalId>false</externalId>
+        <label>Herd Tank Average</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MilkReplacerOrMilk__c</fullName>
+        <description>Milk Replacer or Milk maps to FFF Calf Assessment &gt; Milk_Replacer_or_Milk</description>
+        <externalId>false</externalId>
+        <label>Milk Replacer or Milk</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MilkingFrequency__c</fullName>
+        <description>Milking Frequency maps to Milking Cow Assessment &gt; Milking_Frequency</description>
+        <externalId>false</externalId>
+        <label>Milking Frequency</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MilkingSystem__c</fullName>
+        <description>Milking System maps to Milking Cow Assessment &gt; Milking_System</description>
+        <externalId>false</externalId>
+        <label>Milking System</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NoMilkingAnimals__c</fullName>
+        <description>No. of Milking Animals maps to Milking Cow Assessment &gt; No_Milking_Animals</description>
+        <externalId>false</externalId>
+        <label>No. of Milking Animals</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NumCalvesMilk__c</fullName>
+        <description>Number of calves on milk/milk replacer maps to FFF Calf Assessment &gt; Num_Calves_Milk</description>
+        <externalId>false</externalId>
+        <label>Number Calves on Milk/Milk Replacer</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NumCalvesPostWean__c</fullName>
+        <description>Number of calves post-weaned – breeding  maps to FFF Calf Assessment &gt; Num_Calves_PostWean</description>
+        <externalId>false</externalId>
+        <label>Number Calves Post-Weaned - Breeding</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NumHeifersBreedingPreFresh__c</fullName>
+        <description>Number of heifers, breading age to pre-fresh maps to FFF Calf Assessment &gt; Num_Heifers_Breeding_PreFresh</description>
+        <externalId>false</externalId>
+        <label>Number Heifer Breeding Age - Pre-Fresh</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PrimaryHousingType__c</fullName>
+        <description>Primary Housing Type maps to FFF Calf Assessment &gt; Primary_Housing_Type</description>
+        <externalId>false</externalId>
+        <label>Primary Housing Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Protein__c</fullName>
+        <description>Protein maps to Milking Cow Assessment &gt; Protein</description>
+        <externalId>false</externalId>
+        <label>Protein</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QuartsColostrumFed__c</fullName>
+        <description>QuartsColostrumFed maps to FFF Calf Assessment &gt; Quarts_Colostrum_Fed </description>
+        <externalId>false</externalId>
+        <label>Quarts of Colostrum Fed</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SCC__c</fullName>
+        <description>SCC maps to Milking Cow Assessment &gt; SCC</description>
+        <externalId>false</externalId>
+        <label>SCC</label>
+        <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SupplementalbSTUsed__c</fullName>
+        <description>Is Supplemental bST Used maps to Milking Cow Assessment &gt; Supplemental_bST_Used</description>
+        <externalId>false</externalId>
+        <label>Is Supplemental bST Used</label>
+        <length>5</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TypeofAlfalfa__c</fullName>
+        <description>Type of Alfalfa maps to Alfalfa Values &gt; Type_of_Alfalfa</description>
+        <externalId>false</externalId>
+        <label>Type of Alfalfa</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TypeofCornSilage__c</fullName>
+        <description>Type of Corn Silage maps to Corn Silage Values &gt; Type_of_Corn_Silage</description>
+        <externalId>false</externalId>
+        <label>Type of Corn Silage</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Assessment</label>
+    <nameField>
+        <label>Assessment Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Assessments</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Dairy</fullName>
+        <active>true</active>
+        <description>Used to distinguish this is a Dairy assessment</description>
+        <label>Dairy</label>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,27 @@
+<apex:page >
+
+<b>Additional Reports</b>
+
+<table>
+
+<tr><td valign="top">01 &nbsp; </td><td valign="top"><a target="_top" href="https://lolanimalnutrition.force.com/partnercommunity/00Oj0000004OYIZ">Accounts Activities Last 30 Days (Completed and Opened)</a></td></tr>
+<tr><td valign="top">02 &nbsp; </td><td valign="top"><a target="_top" href="https://lolanimalnutrition.force.com/partnercommunity/00Oj0000004NsRf">Account Currently Buying From</a></td></tr>
+
+
+
+</table>
+
+<p>
+</p>
+
+<b>Previous Year Reports</b>
+
+<table>
+
+<tr><td valign="top">01 &nbsp; </td><td valign="top"><a target="_top" href="/partnercommunity/00Oj0000004NajP">Activities Completed || Prev Yr</a></td></tr>
+
+<tr><td valign="top">02 &nbsp; </td><td valign="top"><a target="_top" href="/partnercommunity/00Oj0000004NajQ">Animal Opportunities Closed Won || Prev Year</a></td></tr>
+
+<tr><td valign="top">03 &nbsp; </td><td valign="top"><a target="_top" href="/partnercommunity/00Oj0000004OCHe">Agronomy Opportunities Closed Won || Prev Year</a></td></tr>
+</table>
+</apex:page>

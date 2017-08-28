@@ -1,0 +1,19 @@
+<apex:page >
+<table>
+
+<tr><td valign="top"><b>Contest Rules </b></td></tr>
+
+<tr><td valign="top">Identify 15 key opportunities in Salesforce.com by August 1 as your key priority prospects.
+  Enter sales activities toward these opportunities to track progress in CRM.  
+  Earn $1.00 per point on actual sales to an opportunity that is Closed Won between August 1 and November 30.  
+Gift Cards will be awarded in December on money earned.</td></tr>
+
+<tr><td valign="top"> &nbsp; </td></tr>
+
+<tr><td valign="top">Recognition at the next sales conference.  First, second and third place plaque for highest amount of money earned.
+An overall winner of $100 for the leader in pipeline management.  This will be the most number of points that have flowed through 
+Salesforce.com between August 1 - November 30. Snapshot of points in the pipeline on November 30.</td></tr>
+
+
+</table>
+</apex:page>

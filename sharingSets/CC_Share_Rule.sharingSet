@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <accessMappings>
+        <accessLevel>Read</accessLevel>
+        <object>Account</object>
+        <objectField>Parent</objectField>
+        <userField>Account</userField>
+    </accessMappings>
+    <name>CC Share Rule</name>
+    <profiles>cloudcraze customer community user</profiles>
+</SharingSet>

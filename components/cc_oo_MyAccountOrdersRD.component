@@ -1,0 +1,1040 @@
+<!--<Component Name: cc_oo_MyAccountOrdersRD> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                       Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+
+Shrivaths Kulkarni                         9/22/2016                                   US-244 hide price 
+Samruddhi Gokhale                          9/27/2016                                   OO-213  User will not see the 'Actions' column under my orders and my carts for prebooked orders. 
+Samruddhi Gokhale                          10/27/2016                                   US-520 Amend Button Functionality
+Samruddhi Gokhale                          11/09/2016                                  OO- 524 Online ordering system must not allow customers to cancel an order after 
+                                                                                        cut-off for the longest lead time item in the order.
+Saloni Kale                                12/14/2016                                  OO-1447                                                                                         
+-->
+<apex:component allowDML="true" controller="cc_oo_MyAccountOrdersController">
+    <script id="OO-MyAccount-MyOrders-Desktop" type="text/template">
+        <h2 class="title">{{pageLabelMap 'MyAccount_MyOrders'}}</h2>
+        <div class="alert alert-error messagingSection-orderhistory-Error" style="display: none"></div>
+        <div class="alert alert-info messagingSection-orderhistory-Info" style="display: none"></div>
+        <div class="main_content_large_solo_container">
+                {{#ifDisplay 'srch.ord'}}
+                <form id="searchOrderForm" class="searchOrderForm">
+                <div class="row filter-form-row">
+                    <div class="span6">
+                        <input type="text"  name="searchOrderInput" value="{{searchOrder}}" class="border-radius-5px global-input searchOrderInput input-text span6" placeholder="{{pageLabelMap 'MyOrdersInc_SearchOrders'}}"/>
+                        <select name="searchOrderStatus" value="{{searchOrderStatus}}" class="span6 global-select">
+                            <option value="">{{pageLabelMap 'MyOrdersInc_AllOrderStatus'}}</option> 
+                            {{#each this.orderStatusOpts}}
+                                <option value="{{this.value}}" {{#ifEquals ../searchOrderStatus this.value}} selected {{/ifEquals}}>{{this.label}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="span6 order-date-range">
+                        <span class="span12 label-dp">Order Date Range</span>
+                        <div class="span12 margin-none">                            
+                            <div class="span6">
+                                <!--<span>{{pageLabelMap 'MyOrdersInc_SearchFrom'}}</span> -->
+                                <input name="fromDateStr" value="{{this.fromDateStr}}" class="requestedDate fromDate global-datepicker border-radius-5px" placeholder="{{pageLabelMap 'MyOrdersInc_SearchFrom'}}">
+                            </div>
+                            <div class="span6 to-date">
+                                <!--<span>{{pageLabelMap 'MyOrdersInc_SearchTo'}}&nbsp;</span>-->
+                                <input name="toDateStr" value="{{this.toDateStr}}" class="requestedDate toDate global-datepicker border-radius-5px" placeholder="{{pageLabelMap 'MyOrdersInc_SearchTo'}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Filter section to show Ship To and Ship From on My Orders page --><br>
+                <div class="row clear">
+                    <div class="span6">
+                        <div class="span6">
+                            <span>{{pageLabelMap 'MyAccount_ShipTo'}}</span>
+                            <select id="ship-to-orders" name="shipTo" class="global-select border-radius-5px width100p">
+                                <option value=''>{{pageLabelMap 'MyAccount_ShipTo'}}</option>
+                            </select> 
+                        </div>
+                        <div class="span6">
+                            <span>{{pageLabelMap 'MyAccount_ShipFrom'}}</span>
+                            <select id="ship-from-orders" name="shipFrom" class="global-select border-radius-5px width100p">
+                                <option value=''>{{pageLabelMap 'MyAccount_ShipFrom'}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="span6 btn-wrap center">
+                        <button type="button" class="btn-secondary resetOrderCustom">{{pageLabelMap 'MyOrdersButton_ResetOrders'}}</button>
+                        <button type="button" class="hide btn-secondary resetOrder">{{pageLabelMap 'MyOrdersButton_ResetOrders'}}</button>
+                        <button type="button" class="btn-primary searchOrderCustom">{{pageLabelMap 'MyOrdersButton_SearchOrders'}}</button>
+                        <button type="button" class="btn-primary hide searchOrder">{{pageLabelMap 'MyOrdersButton_SearchOrders'}}</button>
+                    </div>
+                </div>
+            </form>
+            {{/ifDisplay}}
+            <div class="orderPaginationSec" />
+            <div id="modalSec"></div>   
+            <table id="orderTable" class="table table-hover shopping_cart">
+               <thead>
+                    <tr class="even">
+                        <td class="right_align">{{pageLabelMap 'MyOrdersInc_OrderNumber'}}</td>
+                        <!--<td class="right_align">JDE Order Number</td> -->
+                        {{#ifDisplay 'MO.DsplExtOrderNumber'}} <td class="right_align">{{pageLabelMap 'ExternalOrderID'}}</td> {{/ifDisplay}}
+                        {{#ifDisplay 'MO.DsplPONumber'}} <td class="right_align">{{pageLabelMap 'PO Number'}}</td> {{/ifDisplay}}
+                        <td class="right_align hidden-tablet">{{pageLabelMap 'MyOrdersInc_OrderDate'}}</td>
+                        <td class="right_align">{{pageLabelMap 'Order_ShipDate'}}</td>
+                        <td class="right_align">{{pageLabelMap 'Order_Weight'}} {{pageLabelMap 'Order_Label'}}</td>
+                        {{#if (isNotPreBook)}}<td class="right_align hidden-tablet">{{pageLabelMap 'MyOrdersInc_OrderAmount'}}</td>{{/if}}
+                        <td class="right_align">{{pageLabelMap 'MyOrdersInc_Status'}}</td>
+                        <!--<td class="right_align jde-numeric">{{pageLabelMap 'MyOrderNumeric'}}</td>-->
+                        {{#ifStoreSetting 'Filter_Orders_Based_on_Owner__c'}}&nbsp;{{else}}<td class="right_align ord_owner_hdr">{{pageLabelMap 'MyOrdersInc_Owner'}}</td>{{/ifStoreSetting}}
+                        {{#ifDisplay 'MO.ShActOnOrd'}}
+                        {{#if (isNotPreBook)}}
+                            <td class="right_align">{{pageLabelMap 'MyCartsInc_Actions'}}</td>
+                        {{/if}}
+                    
+                        {{/ifDisplay}}
+                    </tr>
+               </thead>
+               <tbody class="orders-data">
+						{{#each this.orderList}} 
+            				{{#with this}} 
+                			<tr class="odd myAccOrderRows jdeOrderClass" data-id="{{sfid}}" {{sfid}}">
+                        		<td class="right_align"><a href="#" data-id="{{encryptedId}}" class="gotoOrderDetails" data-columnType="JDEOrderNumber"  data-columnType="JDEOrderNumber">{{name}}</a></td>
+                        			<!-- <td class="right_align" data-columnType="JDEOrderNumber"></td> -->
+                        			{{#ifDisplay 'MO.DsplExtOrderNumber'}} <td class="right_align">{{externalOrderId}}</td> {{/ifDisplay}}
+                        			{{#ifDisplay 'MO.DsplPONumber'}} <td class="right_align">{{poNumber}}</td> {{/ifDisplay}}
+                        			<td class="right_align hidden-tablet">{{orderDateStr}}</td>
+                        			<td class="right_align">{{requestDate}}</td>
+                        			<td class="right_align">{{orderNumberAsString}}</td>
+                        			{{#if (isNotPreBook)}}<td class="right_align hidden-tablet">{{price totalAmount currencyIsoCode}}</td>{{/if}}
+                        			<td class="right_align">{{pageLabelMap status}}</td>
+                        			<!--<td class="right_align jde-numeric-value"></td>-->
+                        
+                        			{{#ifStoreSetting 'Filter_Orders_Based_on_Owner__c'}}&nbsp;{{else}}<td class="right_align ord_owner">{{ownerName}}</td>{{/ifStoreSetting}}
+                        			{{#if (isNotPreBook)}} 
+                            {{#ifDisplay 'MO.ShActOnOrd'}}
+                            	<td class="right_align">
+                                {{#ifDisplay 'MO.ShReOrdBt'}}
+                                    {{#if this.canReOrder}}
+                                        <button type="button" class="btn btn-primary reorder-custom" data-id="{{sfid}}" value="{{pageLabelMap 'MyOrdersInc_Reorder'}}">{{pageLabelMap 'MyOrdersInc_Reorder'}}</button>
+                                    {{/if}}
+                                {{/ifDisplay}}
+                                
+                                        {{#if this.canAmend}}
+                                                <button type="button" class="btn btn-primary amendProcess" data-id="{{sfid}}" data-mode="Edit" value="{{pageLabelMap 'Amend'}}">{{pageLabelMap 'Amend'}}</button>
+                                            {{else}}
+                                                <button disabled type="button" class="btn btn-primary amendProcess" data-id="{{sfid}}" data-mode="Edit" value="{{pageLabelMap 'Amend'}}">{{pageLabelMap 'Amend'}}</button>
+                                        {{/if}}
+											{{#if this.canCancel}}
+                                            	<button type="button" class="btn btn-primary promptCancel" data-id="{{sfid}}" data-mode="Cancel" value="{{pageLabelMap 'Cancel'}}">{{pageLabelMap 'Cancel'}}</button>
+                                        	{{else}}
+                                            	<button disabled type="button" class="btn btn-primary promptCancel" data-id="{{sfid}}" data-mode="Cancel" value="{{pageLabelMap 'Cancel'}}">{{pageLabelMap 'Cancel'}}</button>
+                                			{{/if}}
+                            		</td>
+                            	{{/ifDisplay}}
+                        	{{/if}}
+                    	</tr>
+            	{{/with}}
+        	{{/each}}
+          </tbody>
+            </table>
+    </script>
+
+    <script id="OO-MyAccount-MyOrders-Mobile" type="text/template">
+        <div class="checkout_container">
+            <h2 class="title">{{pageLabelMap 'MyAccount_OrderHistory'}}</h2>
+            <form id="searchOrderForm" class="searchOrderForm">
+                <div class="row-fluid slight-margin-top">
+                {{#ifDisplay 'srch.ord'}}
+                    <div class="span12 clear marginBottom10px">
+                        <input type="text"  name="searchOrderInput" value="{{searchOrder}}" class="global-input span12 searchOrderInput input-text height28px" placeholder="{{pageLabelMap 'MyOrdersInc_SearchOrders'}}"/>
+                    </div>
+                    <div class="span12 clear marginBottom10px">
+                        <select name="searchOrderStatus" id="searchOrderStatus"  class="global-select span12 height28px">
+                            <option value="">{{pageLabelMap 'MyOrdersInc_AllOrderStatus'}}</option> 
+                            {{#each this.orderStatusOpts}}
+                                <option value="{{this.value}}" {{#ifEquals ../searchOrderStatus this.value}} selected {{/ifEquals}}>{{this.label}}</option>
+                            {{/each}}                 
+                        </select>
+                    </div>
+                <div class="span12 clear height28px marginBottom10px">
+                    <span class="span4">{{pageLabelMap 'MyAccount_ShipTo'}}</span>
+                        <select class="global-select span8 height28px" id="ship-to-orders" name="shipTo">
+                            <option value="">-- Select --</option>
+                        </select>
+                </div> 
+                <div class="span12 clear marginBottom10px">
+                    <span class="span4">{{pageLabelMap 'MyAccount_ShipFrom'}}</span>
+                        <select class="global-select span8 height28px" id="ship-from-orders" name="shipFrom" >
+                            <option value="">-- Select --</option>
+                        </select>
+                </div>
+                <div class="span12 clear marginBottom10px spacing-left">
+                    <strong>{{pageLabelMap 'OrderDateRange'}}</strong>
+                </div>
+                <div class="span12 clear marginBottom10px">
+                        <span class="span4 spacing-left">{{pageLabelMap 'MyOrdersInc_SearchFrom'}}&nbsp;</span>
+                        <input name="fromDateStr" value="{{this.fromDateStr}}" class="global-datepicker requestedDate fromDate span8 height28px">&nbsp;
+                </div>
+                <div class="span12 clear marginBottom10px">
+                        <span class="span4 spacing-left">{{pageLabelMap 'MyOrdersInc_SearchTo'}}&nbsp;</span>
+                        <input name="toDateStr" value="{{this.toDateStr}}" class="global-datepicker requestedDate toDate span8 height28px">&nbsp;
+                </div>
+                <div class="span12 clear center">
+                    <button type="button" class="offset1 btn-secondary resetOrderCustom">{{pageLabelMap 'MyOrdersButton_ResetOrders'}}</button>
+                    <button type="button" class="btn-primary searchOrderCustom">{{pageLabelMap 'MyOrdersButton_SearchOrders'}}</button>
+                    <button type="button" class="hide btn-secondary resetOrder">{{pageLabelMap 'MyOrdersButton_ResetOrders'}}</button>
+                    <button type="button" class="btn-primary hide searchOrder">{{pageLabelMap 'MyOrdersButton_SearchOrders'}}</button>
+                </div>
+            {{/ifDisplay}}
+            </div>
+            </form>
+            <div class="checkout_detail">
+                <div class="checkout_detail_item orders-mobiledata">
+				{{#each this.orderList}}
+					 <div class="order_history_info myAccOrderRows jdeOrderClass" data-id="{{sfid}}" {{sfid}}>
+                            <div class="arrow"><a href="#" data-id="{{encryptedId}}" class="gotoOrderDetails">></a></div>
+                            <div class="info clear"><strong>{{pageLabelMap 'MyOrdersInc_OrderNumber'}}:&nbsp;</strong><a href="#" data-id="{{encryptedId}}" class="gotoOrderDetails gotoOrderDetailsMobile" data-columnType="JDEOrderNumber">{{name}}</a></div>
+                            <!--<div class="info"><strong>JDE Order Number:&nbsp;</strong><span data-columnType="JDEOrderNumber"></div> -->
+                            {{#ifDisplay 'MO.DsplExtOrderNumber'}} <div class="info clear"><strong>{{pageLabelMap 'ExternalOrderID'}}:&nbsp;</strong>{{externalOrderId}}</div> {{/ifDisplay}}
+                            {{#ifDisplay 'MO.DsplPONumber'}} <div class="info"><strong>{{pageLabelMap 'PO Number'}}:&nbsp;</strong>{{poNumber}}</div> {{/ifDisplay}}
+                            <!--<div class="info clear"><strong>{{pageLabelMap 'MyOrdersInc_OrderDate'}}:&nbsp;</strong>{{orderDateStr}}</div>-->
+                            <div class="info clear"><strong>{{pageLabelMap 'Order_ShipDate'}}:&nbsp;</strong>{{requestDate}}</div>
+                            <div class="info clear"><strong>{{pageLabelMap 'Order_Weight'}}:&nbsp;</strong>{{orderNumberAsString}}</div>
+                            <div class="info clear"><strong>{{pageLabelMap 'MyOrdersInc_Status'}}:&nbsp;</strong>{{pageLabelMap status}}</div>
+                            <!--<div class="info jde-numeric"><strong>{{pageLabelMap 'MyOrderNumeric'}}:&nbsp;</strong><span class="jde-numeric-value"></span></div>-->
+                            <!--{{#if (isNotPreBook)}}<div class="info clear"><strong>{{pageLabelMap 'MyOrdersInc_OrderAmount'}}:&nbsp;</strong>{{price totalAmount}}</div>{{/if}}-->
+                            {{#ifStoreSetting 'Filter_Orders_Based_on_Owner__c'}}&nbsp;{{else}}<div class="info clear ord_owner_hdr"><strong>{{pageLabelMap 'MyOrdersInc_Owner'}}:&nbsp;</strong><span class="ord_owner">{{ownerName}}</span></div>{{/ifStoreSetting}}
+                            {{#if (isNotPreBook)}} 
+                                {{#ifDisplay 'MO.ShActOnOrd'}}
+                                    <div class="info clear span12">
+                                        {{#ifDisplay 'MO.ShReOrdBt'}}
+                                            {{#if this.canReOrder}}
+                                                <button type="button" class="btn btn-primary remove reorder-custom pull-left" data-id="{{sfid}}" value="{{pageLabelMap 'MyOrdersInc_Reorder'}}">{{pageLabelMap 'MyOrdersInc_Reorder'}}</button>
+                                            {{/if}} 
+                                        {{/ifDisplay}}
+                                            {{#ifDisplay 'MO.ShAmdBt'}}
+                                                {{#if this.canAmend}}
+                                                        <button type="button" class="btn btn-primary amendProcess pull-left" data-id="{{sfid}}" data-mode="Edit" value="{{pageLabelMap 'Amend'}}">{{pageLabelMap 'Amend'}}</button>
+                                                    {{else}}
+                                                        <button disabled type="button" class="btn btn-primary amendProcess pull-left" data-id="{{sfid}}" data-mode="Edit" value="{{pageLabelMap 'Amend'}}">{{pageLabelMap 'Amend'}}</button>
+                                                {{/if}}
+                                            {{/ifDisplay}}
+                                            {{#ifDisplay 'MO.ShCanBt'}}
+                                                {{#if this.canCancel}}
+                                                    <button type="button" class="btn btn-primary remove promptCancel pull-left" data-id="{{sfid}}" data-mode="Cancel" value="{{pageLabelMap 'Cancel'}}">{{pageLabelMap 'Cancel'}}</button>
+                                                {{else}}
+                                                    <button disabled type="button" class="btn btn-primary remove promptCancel pull-left" data-id="{{sfid}}" data-mode="Cancel" value="{{pageLabelMap 'Cancel'}}">{{pageLabelMap 'Cancel'}}</button>
+                                                {{/if}}
+                                            {{/ifDisplay}}
+                                        </div>
+                                {{/ifDisplay}}
+                            {{/if}}
+                        </div>
+                </div>
+			{{/each}}
+            </div>
+            <div class="orderPaginationSecPhone" />
+            <div id="modalSec"></div>
+    </div>
+    </script>
+    <script type="text/template" id="MyOrders-mobiledata">
+            {{#each (filterMyData orderData)}} 
+                {{#with this.attributes}}
+                    {{#ifEquals this.status 'Amended'}}         
+                    {{else}}
+                        <div class="order_history_info myAccOrderRows jdeOrderClass" data-id="{{sfid}}" {{sfid}}>
+                            <div class="arrow"><a href="#" data-id="{{encryptedId}}" class="gotoOrderDetails">></a></div>
+                            <div class="info clear"><strong>{{pageLabelMap 'MyOrdersInc_OrderNumber'}}:&nbsp;</strong><a href="#" data-id="{{encryptedId}}" class="gotoOrderDetails gotoOrderDetailsMobile" data-columnType="JDEOrderNumber">{{name}}</a></div>
+                            <!--<div class="info"><strong>JDE Order Number:&nbsp;</strong><span data-columnType="JDEOrderNumber"></div> -->
+                            {{#ifDisplay 'MO.DsplExtOrderNumber'}} <div class="info clear"><strong>{{pageLabelMap 'ExternalOrderID'}}:&nbsp;</strong>{{externalOrderId}}</div> {{/ifDisplay}}
+                            {{#ifDisplay 'MO.DsplPONumber'}} <div class="info"><strong>{{pageLabelMap 'PO Number'}}:&nbsp;</strong>{{poNumber}}</div> {{/ifDisplay}}
+                            <!--<div class="info clear"><strong>{{pageLabelMap 'MyOrdersInc_OrderDate'}}:&nbsp;</strong>{{orderDateStr}}</div>-->
+                            <div class="info clear"><strong>{{pageLabelMap 'Order_ShipDate'}}:&nbsp;</strong>{{requestDate}}</div>
+                            <div class="info clear"><strong>{{pageLabelMap 'Order_Weight'}}:&nbsp;</strong>{{orderWeight}}</div>
+                            <div class="info clear"><strong>{{pageLabelMap 'MyOrdersInc_Status'}}:&nbsp;</strong>{{pageLabelMap status}}</div>
+                            <!--<div class="info jde-numeric"><strong>{{pageLabelMap 'MyOrderNumeric'}}:&nbsp;</strong><span class="jde-numeric-value"></span></div>-->
+                            <!--{{#if (isNotPreBook)}}<div class="info clear"><strong>{{pageLabelMap 'MyOrdersInc_OrderAmount'}}:&nbsp;</strong>{{price totalAmount}}</div>{{/if}}-->
+                            {{#ifStoreSetting 'Filter_Orders_Based_on_Owner__c'}}&nbsp;{{else}}<div class="info clear ord_owner_hdr"><strong>{{pageLabelMap 'MyOrdersInc_Owner'}}:&nbsp;</strong><span class="ord_owner">{{ownerName}}</span></div>{{/ifStoreSetting}}
+                            {{#if (isNotPreBook)}} 
+                                {{#ifDisplay 'MO.ShActOnOrd'}}
+                                    <div class="info clear span12">
+                                        {{#ifDisplay 'MO.ShReOrdBt'}}
+                                            {{#if this.canReOrder}}
+                                                <button type="button" class="btn btn-primary remove reorder-custom pull-left" data-id="{{sfid}}" value="{{pageLabelMap 'MyOrdersInc_Reorder'}}">{{pageLabelMap 'MyOrdersInc_Reorder'}}</button>
+                                            {{/if}} 
+                                        {{/ifDisplay}}
+                                        {{#if this.canCancel}}
+                                            {{#ifDisplay 'MO.ShAmdBt'}}
+                                                {{#if this.canAmend}}
+                                                    {{#ifEquals this.ShowAmdCancelBtn 'true'}}
+                                                        <button type="button" class="btn btn-primary amendProcess pull-left" data-id="{{sfid}}" data-mode="Edit" value="{{pageLabelMap 'Amend'}}">{{pageLabelMap 'Amend'}}</button>
+                                                    {{else}}
+                                                        <button disabled type="button" class="btn btn-primary amendProcess pull-left" data-id="{{sfid}}" data-mode="Edit" value="{{pageLabelMap 'Amend'}}">{{pageLabelMap 'Amend'}}</button>
+                                                    {{/ifEquals}}
+                                                {{/if}}
+                                            {{/ifDisplay}}
+                                            {{#ifDisplay 'MO.ShCanBt'}}
+                                                {{#ifEquals this.ShowAmdCancelBtn 'true'}}
+                                                    <button type="button" class="btn btn-primary remove promptCancel pull-left" data-id="{{sfid}}" data-mode="Cancel" value="{{pageLabelMap 'Cancel'}}">{{pageLabelMap 'Cancel'}}</button>
+                                                {{else}}
+                                                    <button disabled type="button" class="btn btn-primary remove promptCancel pull-left" data-id="{{sfid}}" data-mode="Cancel" value="{{pageLabelMap 'Cancel'}}">{{pageLabelMap 'Cancel'}}</button>
+                                                {{/ifEquals}}
+                                            {{/ifDisplay}}
+                                        {{/if}}
+                                        </div>
+                                {{/ifDisplay}}
+                            {{/if}}
+                        </div>
+                    {{/ifEquals}}
+                {{/with}}        
+            {{/each}}
+    </script>
+    <script type="text/template" id="MyOrders-data">
+        {{#each (filterMyData orderData)}} 
+            {{#with this.attributes}} 
+                {{#ifEquals this.status 'Amended'}}         
+                {{else}}
+                <tr class="odd myAccOrderRows jdeOrderClass" data-id="{{sfid}}" {{sfid}}">
+                        <td class="right_align"><a href="#" data-id="{{encryptedId}}" class="gotoOrderDetails" data-columnType="JDEOrderNumber"  data-columnType="JDEOrderNumber">{{name}}</a></td>
+                        <!-- <td class="right_align" data-columnType="JDEOrderNumber"></td> -->
+                        {{#ifDisplay 'MO.DsplExtOrderNumber'}} <td class="right_align">{{externalOrderId}}</td> {{/ifDisplay}}
+                        {{#ifDisplay 'MO.DsplPONumber'}} <td class="right_align">{{poNumber}}</td> {{/ifDisplay}}
+                        <td class="right_align hidden-tablet">{{orderDateStr}}</td>
+                        <td class="right_align">{{requestDate}}</td>
+                        <td class="right_align">{{orderWeight}}</td>
+                        {{#if (isNotPreBook)}}<td class="right_align hidden-tablet">{{price totalAmount currencyIsoCode}}</td>{{/if}}
+                        <td class="right_align">{{pageLabelMap status}}</td>
+                        <!--<td class="right_align jde-numeric-value"></td>-->
+                        
+                        {{#ifStoreSetting 'Filter_Orders_Based_on_Owner__c'}}&nbsp;{{else}}<td class="right_align ord_owner">{{ownerName}}</td>{{/ifStoreSetting}}
+                        {{#if (isNotPreBook)}} 
+                            {{#ifDisplay 'MO.ShActOnOrd'}}
+                            <td class="right_align">
+                                {{#ifDisplay 'MO.ShReOrdBt'}}
+                                    {{#if this.canReOrder}}
+                                        <button type="button" class="btn btn-primary reorder-custom" data-id="{{sfid}}" value="{{pageLabelMap 'MyOrdersInc_Reorder'}}">{{pageLabelMap 'MyOrdersInc_Reorder'}}</button>
+                                    {{/if}}
+                                {{/ifDisplay}}
+                                {{#if this.canCancel}}
+                                    {{#ifDisplay 'MO.ShAmdBt'}}
+                                        {{#if this.canAmend}}
+                                            {{#ifEquals this.ShowAmdCancelBtn 'true'}}
+                                                <button type="button" class="btn btn-primary amendProcess" data-id="{{sfid}}" data-mode="Edit" value="{{pageLabelMap 'Amend'}}">{{pageLabelMap 'Amend'}}</button>
+                                            {{else}}
+                                                <button disabled type="button" class="btn btn-primary amendProcess" data-id="{{sfid}}" data-mode="Edit" value="{{pageLabelMap 'Amend'}}">{{pageLabelMap 'Amend'}}</button>
+                                            {{/ifEquals}}
+                                        {{/if}}
+                                    {{/ifDisplay}}
+                                    {{#ifDisplay 'MO.ShCanBt'}}
+                                        {{#ifEquals this.ShowAmdCancelBtn 'true'}}
+                                            <button type="button" class="btn btn-primary promptCancel" data-id="{{sfid}}" data-mode="Cancel" value="{{pageLabelMap 'Cancel'}}">{{pageLabelMap 'Cancel'}}</button>
+                                        {{else}}
+                                            <button disabled type="button" class="btn btn-primary promptCancel" data-id="{{sfid}}" data-mode="Cancel" value="{{pageLabelMap 'Cancel'}}">{{pageLabelMap 'Cancel'}}</button>
+                                        {{/ifEquals}}
+                                    {{/ifDisplay}}
+                                {{/if}}
+                            </td>
+                            {{/ifDisplay}}
+                        {{/if}}
+                    </tr>
+                {{/ifEquals}}
+            {{/with}}
+        {{/each}}
+    </script>
+<script id="OO-navigationPanelPhone" type="text/template">
+    {{#with paginatorData}}
+        <div class="load_more">
+            {{#if hasPrevious}}
+                <input type="button" class="firstAction load_more_button" value="{{pageLabelMap 'PaginatorFirstMobile'}}">
+                <input type="button" class="previousAction load_more_button" value="{{pageLabelMap 'PaginatorPreviousMobile'}}">
+            {{/if}}
+            {{#if hasNext}}
+                <input type="button" class="nextAction load_more_button" value="{{pageLabelMap 'PaginatorNextMobile'}}">
+                <input type="button" class="lastAction load_more_button" value="{{pageLabelMap 'PaginatorLastMobile'}}">
+            {{/if}}
+        </div>
+    {{/with}}
+</script>
+<script id="OO-navigationPanelDesktop" type="text/template">
+{{#with paginatorData}}
+  <div class="pagination_row_1">
+   <div class="pagination_container">
+    <p class="paginatorItems">
+     {{pageLabelMap 'PaginatorItems'}} {{startItem}} - {{endItem}} {{pageLabelMap 'PaginatorOf'}} {{totalRecords}} {{pageLabelMap 'PaginatorTotal'}}
+    </p>
+    <span class="page_links">
+     <span class="paginatorPageLabel">
+     {{pageLabelMap 'PaginatorPage'}}
+     </span>
+     {{#if hasPrevious}}
+      <a href="#" class="firstAction">{{pageLabelMap 'PaginatorFirst'}}</a>
+      <a href="#" class="previousAction pageAction">{{pageLabelMap 'PaginatorPrevious'}}</a>
+     {{else}}
+      <span class="firstAction">{{pageLabelMap 'PaginatorFirst'}}</span>
+      <span class="previousAction pageAction">{{pageLabelMap 'PaginatorPrevious'}}</span>
+     {{/if}}
+
+     {{#for startPage endPage 1}}
+      {{#ifEquals this ../currentPage}}
+       {{safeQuote this}}
+      {{else}}
+       <a href="#" class="gotoPage" data-id="{{safeQuote this}}">{{safeQuote this}}</a>
+      {{/ifEquals}}
+     {{/for}}
+     {{#if hasNext}}
+      <a href="#" class="nextAction pageAction">{{pageLabelMap 'PaginatorNext'}}</a>
+      <a href="#" class="lastAction">{{pageLabelMap 'PaginatorLast'}}</a>
+     {{else}}
+      <span class="nextAction pageAction">{{pageLabelMap 'PaginatorNext'}}</span>
+      <span class="lastAction">{{pageLabelMap 'PaginatorLast'}}</span>
+     {{/if}}
+    </span>
+    <span class="right_align itemsPerPage">
+     <span class="paginatorShow">
+     {{pageLabelMap 'PaginatorShow'}}
+     </span>
+     <select class="sizeAction">
+      {{#each this.itemsPerPagePLValues}}
+       <option value="{{safeQuote this}}" {{#ifEquals ../pageSize this}} selected {{/ifEquals}}>{{safeQuote this}}</option>
+      {{/each}}
+     </select>
+     <span class="paginatorPerPage">
+     {{pageLabelMap 'PaginatorPerPage'}}
+     </span>
+    </span>
+   </div>
+  </div>
+{{/with}}
+ </script>
+    <script id="OO-MyAccount-MyOrders-CancelDialog" type="text/template">
+        <div id="cancelMod_{{sfid}}" class="warning-modal-layout modal cancel-modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close btn-cancel oo-shipdate-change-cancel" aria-hidden="true" data-dismiss="modal">&times;
+                </button>
+                <h3 class="modal-title">{{pageLabelMap 'SureContinue'}}</h3>
+            </div>
+            <div class="modal-body">
+                {{#ifEquals this.mode 'Edit'}}
+                    <p>{{pageLabelMap 'Edit_Prompt'}}</p>
+                {{else}}
+                <p class="cancelOrder">{{cancelMessage}}</p>
+                {{/ifEquals}}
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-cancel closeModal" data-id="{{sfid}}" value="{{pageLabelMap 'Dialog_No'}}">No</button>
+                    <button type="button" class="btn btn-primary amendInit" data-id="{{sfid}}" data-mode="{{mode}}" value="{{pageLabelMap 'Yes'}}">Yes</button>
+                </div>
+        </div>
+    </script>
+    <script type="text/javascript">
+        var orderIdList = [],mobileVersion=false,firstRemoteCall=true,isSearch=false,setReset=false;
+        var shipToSelected, formData,shipFromSelected,firstTime=false,isShipTo=false,isShipFrom=false,fromDate,toDate,searchMobile,searchMobileStatus,isMobileSearch=false,shipToSelectedMobile,shipFromSelectedMobile,mobileVersion;
+        var fullCollection=[],tempMobileCollection=[];
+         var isOrderNotRefreshed=true,currentOrderView;
+         var uniqueId=getSessionValue('contactId');
+         var selectedShipTo=uniqueId+'selectedShipTo',selectedPlant=uniqueId+'selectedPlant',shipDate=uniqueId+'shipDate'; 
+         var shipDateFromCookie = getSessionValue(shipDate);
+        jQuery(function($) {
+            CCRZ.uiProperties.myOrdersView.desktop.tmpl = 'OO-MyAccount-MyOrders-Desktop';  
+            CCRZ.uiProperties.myOrdersView.phone.tmpl = 'OO-MyAccount-MyOrders-Mobile';
+            CCRZ.uiProperties.myOrdersView.cancelModal.tmpl = 'OO-MyAccount-MyOrders-CancelDialog';
+            var shipTo, shipFrom, shipToAndFrom, shipFromAndTo, cartDataOrderRelation, isDropdownEmpty = true,shipToOrderOptions=[], shipFromOrderOptions=[],orderStatusMobile=[],orderStatusMobileOptions=[];            
+                $(document).off('click', '.acctStep3').on('click', '.acctStep3', function(e) {
+                    if(!isOrderNotRefreshed){
+                        CCRZ.views.myOrdersView.prototype.customFilterReset(e);
+                    }
+                });
+                //var orderId = $(this).attr('data-id');            
+            CCRZ.pubSub.on('view:myOrdersView:refresh', function(theView) {
+                if(isOrderNotRefreshed||currentOrderView!=CCRZ.display.currentView){
+                    currentOrderView=CCRZ.display.currentView;
+                    isOrderNotRefreshed=false;
+                    shipToSelected='';
+                    shipFromSelected='';
+                    var navItem = sessionStorage.getItem("navItem");
+                    $('.nav-collapse .nav li').removeClass('active');
+                    $('li[data-menuid='+ navItem+']').addClass('active');
+                    setOrderViewData(CCRZ.collections.OrderList.prototype,CCRZ.views.myOrdersView.prototype,theView);
+                    firstRemoteCall=true;
+                    theView.setElement(theView.$el);
+                    theView.render();
+                    return;
+                }
+                if($('#ship-to-orders')[0] && !isOrderNotRefreshed && firstRemoteCall){
+                    CCRZ.views.myOrdersView.prototype.getAllShipValues();
+                    firstRemoteCall=false;
+                }
+                else if($('#ship-to-orders')[0] && !isOrderNotRefreshed){
+                	setDropdownValues();
+                    /*if(isSearch){
+                        var halfCollectionReturn=[];
+                        setDropdownValues();
+                        var halfCollection=[];
+                            halfCollection=_.clone(CCRZ.orderPaginatorView.model.fullCollection.models);
+                            setViewData();
+                            var tempHalfCollection=[];
+                            if(halfCollection.length){
+                                var j=0;
+                                for(var i=0;i<halfCollection.length;i++){
+                                    if(_.findWhere(fullCollection,{'id':halfCollection[i].id})){
+                                        tempHalfCollection[j]=_.findWhere(fullCollection,{'id':halfCollection[i].id});
+                                        j++;
+                                    }
+                                }
+                                halfCollection=tempHalfCollection;
+                            }
+                            if((shipToSelected) || (shipFromSelected)){
+                                for(var i=0;i<halfCollection.length;i++){
+                                    for(var j=0;j<fullCollection.length;j++){
+                                        if(halfCollection[i]['id']==fullCollection[j]['id']){
+                                            halfCollectionReturn.push(fullCollection[j]);
+                                            break;     
+                                        }
+                                    }
+                                 }
+                              } 
+                            else{
+                                var oData = {"orderData" : halfCollection};
+                                if(mobileVersion){
+                                    insertData($('#MyOrders-mobiledata').html(), '.orders-mobiledata', oData);
+                                }
+                                else{
+                                    insertData($('#MyOrders-data').html(), '.orders-data', oData);
+                                    $('#orderTable').show();
+                                    $('.orderPaginationSec').show();
+                                }
+                            }
+                            if((shipToSelected) || (shipFromSelected)){
+                                    var searchData;
+                                    if(shipToSelected && shipFromSelected){
+                                        searchData = _.where(halfCollectionReturn, {"shipTo" : shipToSelected, "shipFrom" :shipFromSelected});
+                                    }
+                                    else if(shipToSelected){
+                                        searchData = _.where(halfCollectionReturn, {"shipTo": shipToSelected});
+                                    }
+                                    else{ 
+                                        searchData = _.where(halfCollectionReturn, {"shipFrom": shipFromSelected});
+                                    }
+                                    var oData = {"orderData" : searchData};
+                                    if(mobileVersion){
+                                        insertData($('#MyOrders-mobiledata').html(), '.orders-mobiledata', oData);
+                                    }
+                                    else{
+                                        insertData($('#MyOrders-data').html(), '.orders-data', oData);
+                                    }
+                                }
+                        }
+                        else{   
+                            if(setReset){
+                                setDropdownValues();
+                                setViewData();
+                                resetSearchFilter();
+                                setReset=false;
+                            }  
+                            else{
+                                setDropdownValues();       
+                                setViewData();
+                                var oData = {"orderData" : fullCollection};
+                                if(mobileVersion){
+                                    insertData($('#MyOrders-mobiledata').html(), '.orders-mobiledata', oData);
+                                }
+                                else{
+                                    insertData($('#MyOrders-data').html(), '.orders-data', oData);
+                                }
+                            }
+                        }*/
+                    }
+            });
+            var setOrderViewData=function(myOrderCollection,myOrderView,view){
+                //var shipTo, shipFrom, shipToAndFrom, shipFromAndTo, cartDataOrderRelation,shipToSelected, formData,shipFromSelected,firstTime=false,isShipTo=false,isShipFrom=false,fromDate,toDate,searchMobile,searchMobileStatus,isMobileSearch=false,shipToSelectedMobile,shipFromSelectedMobile,
+                //fullCollection=[],tempMobileCollection=[],isDropdownEmpty = true,shipToOrderOptions=[], shipFromOrderOptions=[],orderStatusMobile=[],orderStatusMobileOptions=[];       
+                mobileVersion=CCRZ.display.isPhone();
+                myOrderCollection.controllerName="cc_oo_MyAccountOrdersController";
+                
+                /** 
+                * Setting drop down values for select options
+                * @selectedValue:String value selected
+                * @selection:Boolean shipTo or shipFrom selection
+                **/
+                var dropDownChange=function(selectedValue,selection){
+                    var isShip=false;
+                    if(selection){
+                        shipToSelected=selectedValue;
+                        if(!isShipFrom && selectedValue){
+                            isShipTo=true;
+                            isShip=true;
+                        }   
+                    } else {
+                        shipFromSelected=selectedValue;
+                        if( !isShipTo && selectedValue ){
+                            isShipFrom=true;
+                            isShip=true;
+                        }
+                    }
+                    if(isShip){
+                        var shipOptions=[];
+                        shipOptions.push("<option value=''>-- Select --</option>");
+                        var selectedArray=selection?shipToAndFrom[selectedValue]:shipFromAndTo[selectedValue];
+                        for(var i=0;i<selectedArray.length;i++) {
+                            shipOptions.push("<option value='"+selectedArray[i]+"'>"+selectedArray[i]+"</option>");
+                        }
+                        var dropDown=selection?$('#ship-from-orders'):$('#ship-to-orders');
+                        dropDown.empty().html(shipOptions);
+                    } else if(!selectedValue) {
+                        if((selection && isShipTo) || (!selection && isShipFrom)) {
+                            var shipOptions=[];
+                            shipOptions.push("<option value=''>-- Select --</option>");
+                            var selectedArray=selection?shipFrom:shipTo;
+                            for(var i=0;i<selectedArray.length;i++) {
+                                shipOptions.push("<option value='"+selectedArray[i]+"'>"+selectedArray[i]+"</option>");
+                            }
+                            var dropDown=selection?$('#ship-from-orders'):$('#ship-to-orders');
+                            dropDown.empty().html(shipOptions);
+                        }
+                        
+                    }  
+                };
+                /**
+                * Remote Call for getting all the myorder ship details
+                * @param callback : function Callback function to be executed as soon as we receive response from server.
+                **/
+                myOrderCollection.getAllShipValues = function(callback){
+                    var remoteCall1 = _.extend(CCRZ.RemoteInvocation,{className: myOrderCollection.controllerName});
+                       remoteCall1.invokeCtx('getAllShipValues',function(resp){
+                            callback(resp);
+                        }, {buffer:false,escape:false,nmsp:false});
+                };
+                /**
+                * Remote Call for calling reOrder functionality
+                * @param callback : function Callback function to be executed as soon as we receive response from server.
+                **/
+                myOrderCollection.getReorderUrl = function(orderId,cartId,shipToNumber,selectedSellerSFID,shipDateFromCookie,callback){
+                    var remoteCall2 = _.extend(CCRZ.RemoteInvocation,{className: myOrderCollection.controllerName});
+                       remoteCall2.invokeCtx('getReorderUrl',orderId,cartId,shipToNumber,selectedSellerSFID,shipDateFromCookie,function(resp){
+                            callback(resp);
+                        }, {buffer:false,escape:false,nmsp:false});
+                };
+                /**
+                * Remote Call for updating the cancel order.
+                * @param callback : function Callback function to be executed as soon as we receive response from server.
+                **/
+                myOrderCollection.updateOrder = function(orderId,reasonCode,callback){
+                    var remoteCall3 = _.extend(CCRZ.RemoteInvocation,{className: myOrderCollection.controllerName});
+                       remoteCall3.invokeCtx('updateOrder', orderId, reasonCode,function(resp){
+                            callback(resp);
+                        }, {buffer:false,escape:false,nmsp:false});
+                };
+                /**
+                * Remote Call for updating the cancel order.
+                * @param callback : function Callback function to be executed as soon as we receive response from server.
+                **/
+                myOrderCollection.cancelOrder = function(orderId,callback){
+                    var remoteCall4 = _.extend(CCRZ.RemoteInvocation,{className: myOrderCollection.controllerName});
+                       remoteCall4.invokeCtx('cancelOrder', orderId,function(resp){
+                            callback(resp);
+                        }, {buffer:false,escape:false,nmsp:false});
+                };
+                /**
+                * Remote Call for updating the cancel order.
+                * @param callback : function Callback function to be executed as soon as we receive response from server.
+                **/
+                myOrderCollection.amendOrder = function(orderId,callback){
+                    var remoteCall5 = _.extend(CCRZ.RemoteInvocation,{className: myOrderCollection.controllerName});
+                       remoteCall5.invokeCtx('amendOrder', orderId,function(resp){
+                            callback(resp);
+                        }, {buffer:false,escape:false,nmsp:false});
+                };
+                /**
+                * Returns order ship details info.
+                **/
+                myOrderView.getAllShipValues=function() {
+                    myOrderCollection.getAllShipValues(function(resp) {
+                        if(resp && resp.success){
+                            shipTo=resp.data['shipTo'];
+                            shipFrom=resp.data['shipFrom'];
+                           // orderStatusMobile=['orderStatusOptions'];
+                            shipToAndFrom=resp.data['shipToAndFrom'];
+                            shipFromAndTo=resp.data['shipFromAndTo'];
+                            //cartDataOrderRelation = resp.data['orderData'];
+                            setDropdownValues();
+                            isDropdownEmpty = false;
+                                //setViewData();
+                                //resetSearchFilter();
+                        }
+                    });
+                };
+                /**
+                * Reorder functionality call.
+                **/
+                myOrderView.getReorderUrl=function(event) {
+                    var orderId = $(event.currentTarget).attr('data-id');
+                    var cartId=CCRZ.pagevars.currentCartID;
+                    var shipToNumber = getSessionValue(selectedShipTo);
+                    var selectedSellerSFID = getSessionValue(selectedPlant);
+                    var shipDateFromCookie = getSessionValue(shipDate);
+                    sessionStorage.setItem("order", orderId);
+                    myOrderCollection.getReorderUrl(orderId,cartId,shipToNumber,selectedSellerSFID,shipDateFromCookie,function(resp) {
+                        if(resp.success){ 
+                                var url= resp.data['url'];
+                                if(resp.data['orderSid'] && resp.data['orderAccNumber']){
+                                    setSessionValue(selectedPlant, resp.data['orderSid']);
+                                    setSessionValue(selectedShipTo, resp.data['orderAccNumber']);
+                                    var disabledOrderDates=resp.data['disabledOrderDates'];
+                                    var defaultOrderDisable = ['* * * 0,6'];
+                                    var datesOrderAvailable = disabledOrderDates && disabledOrderDates.length;
+                                    var disableOrderDates = datesOrderAvailable ? disabledOrderDates.concat(defaultOrderDisable) : defaultOrderDisable;
+                                    sessionStorage.setItem('disabledDates', JSON.stringify(disableOrderDates));
+                                }
+                                
+                                window.location.href=url;
+                            }
+                    });
+                };
+                /**
+                * Cancelled order functionality.
+                **/
+                myOrderView.updateOrder=function(event) {
+                    event.preventDefault();
+                    var portalUser=CCRZ.pagevars.portalUserId; 
+                    var reasonCode;     
+                    if(portalUser){
+                        reasonCode=$('#select :selected').text();
+                    }
+                    else{  
+                        reasonCode='S13 Customer Accommodation';
+                    }
+                    var orderId = $(event.currentTarget).attr('data-id');
+                    myOrderCollection.updateOrder(orderId,reasonCode,function(resp) {
+                        if(resp.success){ 
+                            console.log('Order Details Saved Successfully');
+                        }
+                    });
+                };
+                /**
+                * Cacelling amend pop up message.
+                **/
+                myOrderView.cancelOrder=function(event) {
+                    var orderId = $(event.currentTarget).attr('data-id');
+                    myOrderCollection.cancelOrder(orderId,function(resp) {
+                        if(resp.success && resp.data){
+                            location.reload();
+                        }else{
+                            location.reload();
+                        }
+                    });
+                };
+                /**
+                * Amending the Order.
+                **/
+                myOrderView.amendOrder=function(event) {
+                    var orderId = $(event.currentTarget).attr('data-id');
+                    myOrderCollection.amendOrder(orderId,function(resp) {
+                        if(resp.success){ 
+                           var encCartId = resp.data['newCartId'];
+                           var requestedDate=resp.data['requestedDate'];
+                           CCRZ.pagevars.currentCartID = encCartId;
+                           CCRZ.pagevars.queryParams.cartId = encCartId;
+                           CCRZ.pagevars.sid = resp.data['selectedSellerId'];
+                           CCRZ.pubSub.trigger('cartChange', encCartId); 
+                           setSessionValue('oldShipTo',getSessionValue(selectedShipTo));
+                           setSessionValue('oldShipFrom',getSessionValue(selectedPlant));
+                           setSessionValue('oldShipDate',getSessionValue(shipDate));
+                           setSessionValue('oldDisableDates',getSessionValue('disabledDates'));
+                           setSessionValue(shipDate,requestedDate);
+                           if(resp.data['disabledAmendDates']){
+                               var disabledAmendDates=resp.data['disabledAmendDates'];
+                                    var defaultAmendDisable = ['* * * 0,6'];
+                                    var datesAmendAvailable = disabledAmendDates && disabledAmendDates.length;
+                                    var disableAmendDates = datesAmendAvailable ? disabledAmendDates.concat(defaultAmendDisable) : defaultAmendDisable;
+                                    setSessionValue('disabledDates', JSON.stringify(disableAmendDates));
+                               }
+                          
+                           cartDetails(encCartId);
+                        }
+                    });
+                };
+                /**
+                * Prompt cancel modal.
+                **/
+                var message;
+                myOrderView.promptCancel=function(e) {
+                    e.preventDefault();
+                    var id = e.currentTarget.dataset["id"];
+                    // OO-521
+                    var currentRow = $('.myAccOrderRows[data-id="'+ id +'"]');
+                    var jdeOrderNumber
+                    if(CCRZ.display.isPhone()) {
+                        jdeOrderNumber =   $(currentRow).find('.gotoOrderDetailsMobile').text();
+                    } else {
+                        jdeOrderNumber =   $(currentRow).find('.gotoOrderDetails').text();
+                    }
+                    
+                    message = CCRZ.pagevars.pageLabels['Confirm_Cancel'] + jdeOrderNumber + '?';
+                    // OO-521 End
+                    var cancelModal = $('#cancelMod_'+id);
+                    //OO-521
+                    cancelModal.find('.cancelOrder').html(message);
+                    view.cancelCustomEntity(e);
+                   // new CCRZ.views.orderCancel(function() {                         
+                     //   $(cancelModal).modal({ keyboard: false, backdrop: 'static', show: true });
+                    //});
+                    // OO-521 End
+                    //cancelModal.modal('show');
+                }
+                myOrderView.cancelCustomEntity=function(event){
+                    var objLink = $(event.target);
+                    var id = objLink.data("id");
+                    var mode = objLink.data("mode");
+                    var selList = this.orderList.get(id);
+                    selList.attributes.cancelMessage=message;
+                    if (selList) {
+                        selList.set('mode', mode);
+                        this.openModal(selList);
+                    }
+                }
+                /**
+                * binding change functionality of shipTo.
+                **/
+                myOrderView.changeShipToOrders=function(e) {
+                    var optionValue =$(e.currentTarget).val();
+                    dropDownChange(optionValue,true);
+                }
+                /**
+                * binding change functionality of shipTo.
+                **/
+                myOrderView.changeShipFromOrders=function(e) {
+                    var optionValue =$(e.currentTarget).val();
+                    dropDownChange(optionValue,false);
+                }
+                /**
+                * search functionality call.
+                **/
+                myOrderView.customFilterSearch=function(e){
+                    isSearch=true;
+                    shipFromSelected=$("#ship-from-orders option:selected").val();
+                    shipToSelected=$("#ship-to-orders option:selected").val();
+                    CCRZ.orderPaginatorView.model.state.currentPage=1;
+                    $('.searchOrder').trigger('click');
+                }
+                /**
+                * reset functionality call.
+                **/
+                myOrderView.customFilterReset=function(e){
+                    //isSearch=false;
+                    shipToSelected='';
+                    shipFromSelected='';
+                    isDropdownEmpty=true; 
+                    isShipTo=false; 
+                    isShipFrom=false;
+                    setReset=true;
+                    //resetSearchFilter();
+                    setDropdownValues();
+                    $('.resetOrder').trigger('click');
+                }
+                /**
+                *setting calendar format.
+                **/
+                myOrderView.updateDatePicker=function() {
+                    var dateFormat = CCRZ.pagevars.pageLabels['Date_Format'];
+                    $(".requestedDate").Zebra_DatePicker({ 
+	                    show_other_months: false,
+	                    readonly_element: true,
+	                    show_select_today: false,
+	                    first_day_of_week: 0,
+	                    format: dateFormat,
+	                    onOpen: function(e) {
+	                    	var datepickerPos = $(e).offset();
+	                    	var topPosition = datepickerPos.top + 35;
+	                    	var leftPosition = datepickerPos.left - 35;
+	                    	$('.Zebra_DatePicker').css({'z-index': '99999', left: leftPosition+"px", top: topPosition+"px" });
+	                    }
+                    })
+                };
+                /**
+                * binding click and change events.
+                **/
+                var events = myOrderView.events;
+                events["click .amendProcess"]="amendOrder";
+                events["click .amendInit"]="cancelOrder";
+                events["click .reorder-custom"]="getReorderUrl";
+                events["click .ordercancel"]="updateOrder";
+                events["click .promptCancel"]="promptCancel";
+                events["change #ship-to-orders"]="changeShipToOrders";
+                events["change #ship-from-orders"]="changeShipFromOrders";
+                events["click .searchOrderCustom"]="customFilterSearch";
+                events["click .resetOrderCustom"]="customFilterReset";
+                events["focus .requestedDate"]= function(e){
+                	e.currentTarget.blur();
+                };
+                /**
+                * Binding desktop filters to mobile.
+                **/
+                myOrderView.renderPhone=function(){
+                    if(this.dataReady) {
+                      var v = this;
+                      v.data = {};
+                      formData = v.orderList.searchFormData || {};
+                      //populate search order form data
+                      v.data.searchOrder = formData.searchOrderInput;
+                      v.data.searchOrderStatus = formData.searchOrderStatus;
+                      v.data.fromDateStr = formData.fromDateStr;
+                      v.data.toDateStr = formData.toDateStr;
+                      v.data.orderList = v.orderList.toJSON();
+                      v.data.orderStatusOpts = CCRZ.searchForm.jsonOrderStatusOptions;
+                      v.$el.html(v.templatePhone(v.data));
+                    }
+                }
+            };
+            
+            /**
+                *setting data on load functionality
+                **/
+                var setViewData=function(){
+                    fullCollection=_.clone(CCRZ.orderPaginatorView.model.fullCollection.models);
+                    for(var i=0;i<cartDataOrderRelation.length;i++){
+                        for(var j=0;j<fullCollection.length;j++){
+                            if(cartDataOrderRelation[i]['orderId']==fullCollection[j]['id']){
+                                fullCollection[j]['shipTo']=cartDataOrderRelation[i]['shipTo'];
+                                fullCollection[j]['shipFrom']=cartDataOrderRelation[i]['shipFrom'];
+                                fullCollection[j].attributes['orderWeight']=cartDataOrderRelation[i]['orderWeight'];
+                                fullCollection[j].attributes['name']=cartDataOrderRelation[i]['JDE_OrderNumber']?cartDataOrderRelation[i]['JDE_OrderNumber']:fullCollection[j].attributes['name'];
+                                fullCollection[j].attributes['ShowAmdCancelBtn']=cartDataOrderRelation[i]['ShowAmdCancelBtn'];
+                                fullCollection[j].attributes['JDE_Numeric_Status']=cartDataOrderRelation[i]['JDE_Numeric_Status'];
+                                break;
+                            }  
+                        }
+                    }
+                }
+            /**
+                *setting dropdown values
+                **/
+                var setDropdownValues = function() {
+                    if(shipTo && shipFrom) {
+                        shipToOrderOptions = [], shipFromOrderOptions = [],orderStatusMobileOptions=[];
+                        shipToOrderOptions.push("<option value=''>-- Select --</option>");
+                        for(var i=0;i<shipTo.length;i++){
+                            if( shipToSelected === shipTo[i] ){
+                                shipToOrderOptions.push("<option value='"+shipTo[i]+"' selected='selected'>"+shipTo[i]+"</option>");
+                            } else {
+                                shipToOrderOptions.push("<option value='"+shipTo[i]+"'>"+shipTo[i]+"</option>");
+                            }
+                        }
+                        $('#ship-to-orders').empty().html(shipToOrderOptions);
+                        shipFromOrderOptions.push("<option value=''>-- Select --</option>");
+                        for(i=0;i<shipFrom.length;i++){
+                            if(shipFromSelected === shipFrom[i]) {
+                                shipFromOrderOptions.push("<option value='"+shipFrom[i]+"' selected='selected'>"+shipFrom[i]+"</option>");
+                            } else {
+                                shipFromOrderOptions.push("<option value='"+shipFrom[i]+"'>"+shipFrom[i]+"</option>");
+                            }
+                        }
+                        $('#ship-from-orders').empty().html(shipFromOrderOptions);
+                        if(isShipTo){
+                            $('#ship-to-orders').change();
+                            if(shipFromSelected){
+                                $('#ship-from-orders').val(shipFromSelected);
+                            }
+                        }
+                        else if(isShipFrom){
+                            $('#ship-from-orders').change();
+                            if(shipToSelected){
+                                $('#ship-to-orders').val(shipToSelected);
+                            }
+                        }
+                        
+                        /*for(var i in cartDataOrderRelation) {
+                            var obj = cartDataOrderRelation[i];
+                            obj.shipTo = obj.shipTo || "";
+                            obj.shipFrom = obj.shipFrom || "";
+                            console.log("cartId:"+obj.cartId);
+                            $("tr[data-id='"+obj.orderId+"']").attr({"data-shipTo": obj.shipTo, "data-shipFrom": obj.shipFrom});
+                        }*/
+                    }
+                };
+                /**
+                *reset search filter
+                **/
+                var resetSearchFilter = function() {
+                    CCRZ.orderPaginatorView.model.state.currentPage=1; 
+                    var oData = {"orderData" : fullCollection};
+                    if(mobileVersion){
+                    insertData($('#MyOrders-mobiledata').html(), '.orders-mobiledata', oData);
+                    }
+                    else{
+                    insertData($('#MyOrders-data').html(), '.orders-data', oData);
+                    }  
+                };               
+        });
+              
+        Handlebars.registerHelper("isCSR", function(){
+            var portalUserId = CCRZ.pagevars.portalUserId;
+            if(portalUserId)
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
+        });
+        Handlebars.registerHelper("filterMyData", function(inputList){ 
+            var totalRecords=inputList.length;
+            var pageSize =      CCRZ.orderPaginatorView.model.state.pageSize;
+            var currentPageNo = CCRZ.orderPaginatorView.model.state.currentPage;
+            var startItem   =   CCRZ.orderPaginatorView.model.state.startItem;
+            var lastIndex;
+            var index=startItem-1;
+            if(totalRecords>currentPageNo*pageSize){
+                lastIndex=currentPageNo*pageSize;
+            }
+            else{
+                lastIndex=totalRecords;
+            }
+            var returnList = inputList.slice(index,lastIndex);
+            CCRZ.orderPaginatorView.model.state.totalRecords=totalRecords;
+            if(totalRecords>(currentPageNo*pageSize)){
+                CCRZ.orderPaginatorView.model.state.hasNext = true;
+            }
+            else{
+                CCRZ.orderPaginatorView.model.state.hasNext = false;
+            }
+            if(totalRecords<=pageSize){
+                CCRZ.orderPaginatorView.model.state.endItem = totalRecords;
+                CCRZ.orderPaginatorView.model.state.endPage = 1;
+            }
+            else if(totalRecords>pageSize&&totalRecords<=(2*pageSize)){
+                CCRZ.orderPaginatorView.model.state.endPage =2;
+                CCRZ.orderPaginatorView.model.state.endItem =lastIndex;
+            }
+            else{
+                CCRZ.orderPaginatorView.model.state.endPage=3;
+                CCRZ.orderPaginatorView.model.state.endItem =lastIndex;
+            }
+            var multiplePage=totalRecords%pageSize;
+            var divisionPage=totalRecords/10;
+            if(multiplePage==0){
+                CCRZ.orderPaginatorView.model.state.lastPage =divisionPage;
+                CCRZ.orderPaginatorView.model.state.totalPages =divisionPage;
+            }
+            else{
+                CCRZ.orderPaginatorView.model.state.lastPage =Math.ceil(divisionPage);
+                CCRZ.orderPaginatorView.model.state.totalPages =Math.ceil(divisionPage);
+            }   
+            var paginatorData=CCRZ.orderPaginatorView.model.state;
+            if(paginatorData.endItem==0){
+                paginatorData.startItem=0;
+            }
+            var paginatorData=CCRZ.orderPaginatorView.model.state;
+            if(paginatorData.endItem==0){
+                paginatorData.startItem=0;
+            }
+            var oData = {"paginatorData" : paginatorData};
+            if(mobileVersion){
+                insertData($('#OO-navigationPanelPhone').html(), '.orderPaginationSecPhone', oData);
+                
+            }
+            else{
+                insertData($('#OO-navigationPanelDesktop').html(), '.orderPaginationSec', oData);
+            }                  
+            return returnList;
+        });
+    </script>
+</apex:component>

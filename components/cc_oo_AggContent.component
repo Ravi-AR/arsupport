@@ -1,0 +1,71 @@
+<apex:component id="aggContentScript">
+    <script id="OO-ProductDetail-AggContent-Desktop" type="text/template">
+        <div class="product_detail_viewport" id="photoContainer">
+            <div>{{displayImage this.product.mediaWrapper 'mainProdImage prodDetail'}}</div>
+
+            {{#if this.mediaWrappers.[Alternate Images]}}
+            <div class="altImages">
+                <img class="alternate" src="{{productImage ../product.mediaWrapper}}" data-id="{{../product.mediaWrapper.altMessage}}"/>
+                {{#each this.mediaWrappers.[Alternate Images]}}
+                <img class="alternate" src="{{productImage this}}" data-id="{{this.altMessage}}"/>
+                {{/each}}
+            </div>
+            {{/if}}
+        </div>
+        <p class="product_title">{{this.product.prodBean.name}}</p>
+        {{#ifDisplay 'PD.DsplSku'}}
+        <p><span><strong>{{pageLabelMap 'ProductDetailsInc_SKU'}}</strong></span><span class="pd_sku">{{{getSKU this.product.prodBean.sku}}}</span></p> 
+        {{/ifDisplay}}
+        {{#ifDisplay 'PD.DsplUOM'}}
+        <p><span><strong>{{pageLabelMap 'ProductDetails_UnitOfMeasure'}}</strong>&nbsp;{{pageLabelPrefixMap 'UOM_' this.product.prodBean.UnitOfMeasure}}</span></p>
+        {{/ifDisplay}}
+        {{#ifDisplay 'PD.DsplAvlb'}}
+        <p class="availability_message">
+            <span><strong>{{pageLabelMap 'ProductDetails_Availability'}}</strong></span>
+            {{#ifStoreSetting 'InventoryCheckFlag__c'}}
+            <span class="value">{{this.product.inventory}}</span>
+            {{else}}
+            <span class="value">{{pageLabelMap this.product.availMsg}}</span>
+            {{/ifStoreSetting}}
+        </p>
+        {{/ifDisplay}}
+        {{#if this.product.showPricing}}
+        {{#ifDisplay 'PD.DsplPrc'}}
+        {{#if this.product.price}}
+        <p><span>
+                        {{#ifDisplay 'PD.DsplListPrc'}}
+                            {{#if this.product.basePrice}}
+                                <del class="pd_base">{{price this.product.basePrice}}</del>&nbsp;
+                            {{/if}}
+                        {{/ifDisplay}}
+                        <strong class="price">{{pageLabelMap 'Price'}}&nbsp;{{price this.product.price}}</strong>
+                    </span></p>
+        {{/if}}
+        {{/ifDisplay}}
+        {{#ifDisplay 'PD.DsplSvPrc'}}
+        {{#if this.product.savings}}
+        <p><span><strong>{{pageLabelMap 'YouSave'}}</strong>{{price this.product.savings}}</span><p>
+            {{/if}}
+            {{/ifDisplay}}
+            {{/if}}
+            {{#ifEquals product.prodBean.ProductType 'Aggregated'}}
+            {{#ifDisplay 'PD.DsplPrc'}}
+        <p><strong class="price">
+            {{pageLabelMap 'Price'}}&nbsp;{{displayRangePrice 'ProductDetails_PriceRangeFormat' this.minPrice this.maxPrice}}
+        </strong></p>
+        {{/ifDisplay}}
+        {{/ifEquals}}
+        {{#ifDisplay 'PR.Enabled'}}
+        {{/ifDisplay}}
+    </script>
+    <script>
+        jQuery(function($) {
+            CCRZ.uiProperties.aggregateView.partials.mainContentDesktop = '#OO-ProductDetail-AggContent-Desktop';
+        });
+        Handlebars.registerHelper("getSKU", function(SKU){
+            if(SKU != undefined)
+                return SKU.replace("PAL", "").replace("BG","");
+            return SKU;
+        });
+    </script>
+</apex:component>

@@ -1,0 +1,7 @@
+<apex:page docType="html-5.0" sidebar="false" showHeader="false" standardStylesheets="false" applyHtmlTag="false" >
+ <!--  <c:cc_oo_HomePageBanner />-->
+ <!--<c:cc_oo_MiniWishList /> -->
+ <c:cc_oo_featuredProducts />
+ 
+ <!-- Test -->
+</apex:page>

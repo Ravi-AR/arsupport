@@ -1,0 +1,48 @@
+<!--
+*********************************************************************************
+Author: Adeel Ahmad
+Email: adeel.ahmad@magnet360.com
+Created Date    : 09/01/2016
+Function    :   Visualforce component to display header content
+Version     : 1.0
+*********************************************************************************
+-->
+<apex:component layout="none" controller="LPDCR_HomePageController" allowDML="true">
+<div class="header_wrapper">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+        </button> <!-- END:ToggleButton (only for mobile devices) -->
+        <a href="{!$Page.LPDCR_Homepage}" class="navbar-brand">
+         <img src="{!URLFOR($Resource.LPDCR_Assets, '/img/community-logo.png')}" class="img-responsive hidden-sm hidden-xs " />
+         <img src="{!URLFOR($Resource.LPDCR_Assets, '/img/community-logo2-320.png')}" class="img-responsive hidden-md hidden-lg" />
+       </a>
+     </div>
+     <div id="main-navigation" class="navbar-collapse collapse" aria-expanded="false">
+      <ul class="nav navbar-nav navbar-right">
+       <li><a href="{!URLFOR($Page.LPDCR_CC_HomePage)}">Home</a>
+           <!--<a href="{!$Site.Prefix}/LPDCR_CC_HomePage?selectedAccountId={!selectedAcc}">Home</a>-->
+       </li>
+       <li>
+           <a href="{!URLFOR($Page.LPDCR_PromotionsList)}">Promotions</a>
+       </li>
+        <!--<apex:outputPanel rendered="{!IF((accObj.size>0 && ((accobj[0].Member_Type_catcode1__c == '010-Cooperative' || accobj[0].Member_Type_catcode1__c == '071-Independent Retailer') 
+||(( accobj[0].Member_Type_catcode1__c =='CO' || accobj[0].Member_Type_catcode1__c == 'IN')&& accobj[0].AR_customer_group_JDE__C =='RE'))) ,true,false)}" layout="none">--> <!-- LPDCR-1720 10/01/2017-->
+            <apex:outputPanel rendered="{!IF(accObj.size>0 && accobj[0].BusinessBuilderProgramStatus__c != 'Ineligible' ,true,false)}" layout="none">   <!--LPDCR-1523  12/01/2017-->
+          <!--<li><a href="{!URLFOR($Page.LPDCR_Expenses)}">Selling Support Summary</a></li>-->
+          <li><a href="{!URLFOR($Page.LPDCR_BBPLandingMember)}">Business Builder</a></li>
+        </apex:outputPanel>
+        
+
+        <!--<li><a href="{!URLFOR($Page.LPDCR_ExpenseEdit)}">AMA Selling Support Dollars Submit Request</a></li>-->
+        <!--<li><a href="{!$Site.Prefix}/LPDCR_OrdersShipments">Orders &amp; Shipments</a></li>
+        <li><a href="{!$Site.Prefix}/LPDCR_PromotionsList">Promotions</a></li>-->
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container-fluid -->
+</nav>
+</div>
+</apex:component>

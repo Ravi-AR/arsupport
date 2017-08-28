@@ -1,0 +1,2236 @@
+<!--<Component Name: cc_oo_MyCart> 
+<Summary>
+----------------------------------------------------------------------------------------------------------------------
+Author                                      Date                                           Description
+----------------------------------------------------------------------------------------------------------------------
+Saloni Kale                                9/20/2016                                    US:OO-196 Diabling E1 description on Cart Page
+Rajesh W                                   9/22/2016                                    OO-349 Bug fix - Extra space added for consistency
+Rajesh W                                   9/28/2016                                    OO-312 - Hide Product Search and add to wishlist button
+Saloni Kale                                9/30/2016                                    OO-372 - Adding E2 description on the cart page
+----------------------------------------------------------------------------------------------------------------------
+-->
+
+<apex:component allowDML="true" controller="cc_oo_CartController">
+    <script id="OO-CartItemDetail-View-Desktop" type="text/template"> 
+        {{#with this.attributes}}
+        {{#ifEquals itemStatus 'Invalid'}}
+        <div class="alert alert-error">
+            <div class="span6">
+            <p class="item_title">
+            {{#if (isNotPreBook)}}
+                    <a href="#" class="prodLink" data-id="{{parentSku}}">{{mockProduct.name}}</a><!-- OO-183 Defect fix {{displayProductName 'Aggregate_Display' displayProductBean.name mockProduct.name }}</a> -->
+            {{else}}    
+                {{mockProduct.name}}
+            {{/if}} 
+            <div class="oo_E2Description" data-id="{{this.mockProduct.sku}}" ></div>
+            </p>
+            <p><span><strong>{{pageLabelMap 'SKU'}}:</strong> {{mockProduct.sku}}</span></p>
+            {{#if showSubProdTerm}}
+                <p><label class="subscriptionSummary">{{insertTokens cartDisplayName displayName (price price) (price SubAmount) (price recurringPrice) (price recurringPriceSubAmount) (pageLabelPrefixMap 'Subscriptions_Frequency_' orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' installmentFrequencyUOM) orderFrequency installmentFrequency installmentCount orderCount}}</span></label></p>
+            {{/if}}
+            </div>
+
+            <button type="button" class="btn btn-secondary deleteItem remove-cart-button" data-dismiss="modal" aria-hidden="true" data-id="{{itemID}}" >{{pageLabelMap 'Action_Delete'}}</button>
+        </div> 
+        {{else}}
+        <!--<div class="quantity" data-id="{{itemID}}">
+            {{#ifNotEquals cartItemType 'Coupon'}}
+            <p class="section2 plus_minus" data-id="{{itemID}}">
+                {{> cartItemsQty}}
+            </p>
+            {{/ifNotEquals}}
+            {{#if (isNotPreBook)}}
+                <div class="price">
+                    <p class="price">
+                        {{#if price}}
+                                    <div class="span12 clear">
+                                        <label class="span8 listPrice hide">{{pageLabelMap 'CartInc_Price'}}</label>
+                                        <label class="span8 contractPrice hide">{{pageLabelMap 'CartInc_ContractPrice'}}</label>
+                                        <strong class="span4">{{{price price}}}</strong>
+                                        <strong class="span4 contractNumber"></strong>
+                                        <a class="span10 contract-details"><strong>View Contract Details</strong></a>
+                                        
+                                    </div>
+                         {{/if}}
+                        <strong>{{pageLabelMap 'CartInc_Total'}}: {{{price itemTotal}}}</strong>
+                    </p>
+                </div>
+            {{/if}}
+        </div>-->
+        {{#ifEquals cartItemType 'Coupon'}}
+        <p class="item_title coupon_title" data-id="{{mockProduct.sku}}">
+            <span class="couponCartLabel">{{pageLabelMap 'CartInc_AppliedCoupon'}}</span>{{mockProduct.name}}
+        </p>
+        {{else}}
+        <div class="cart-items row-fluid">
+            <!--Title band-->
+            <!--<h2 class="title">
+                <strong>{{{ productName mockProduct }}}</strong>
+                <p class="oo_E2Description" data-id="{{this.mockProduct.sku}}"></p>
+            </h2>-->
+            
+            <div class="span12 detail-container">
+                <!--Product image-->
+                <div class="cart_item_viewport span1"> 
+                    {{#if (isNotPreBook)}}
+                        <a href="#" class="prodLink" data-id="{{this.mockProduct.sku}}"> 
+                            {{{displayImage mediaWrapper 'cart'}}}
+                        </a>
+                    {{ else }}
+                        {{{displayImage mediaWrapper 'cart'}}}                          
+                    {{/if}}      
+                </div>
+                
+                <div class="span11">
+                    
+                    <!-- top -->
+                    <div class="span12 clear font16px"> 
+                        <span class="span10 product-title-desktop">         
+                            <strong class="">{{{ productName mockProduct }}}</strong><br/>          
+                            <span class="oo_E2Description" data-id="{{this.mockProduct.sku}}"></span>           
+                        </span>         
+                        <div class="span5 hide hidden-vfd vfd-icon pull-right" data-id="{{this.mockProduct.id}}">           
+                            <label class="pull-right">{{pageLabelMap 'VFDRegulatedFeed'}}</label>
+                            <div class="icon-icons_vfd_regulated_feed pull-right" title="CAUTION: Federal law restricts medicated feed containing this veterinary feed directive (VFD) drug to use by or on the order of a licensed veterinarian." href="#" ></div>         
+                                        
+                        </div>          
+                    </div>
+                
+                
+                    <!-- middle -->
+                    <div class="span12 clear cart-links item-details">
+
+                        <!--info column-->
+                        <div class="span3 item-column-child info-col">
+                            <div class="span12">
+                            {{#if showIncludedItems }}
+                                <a href="#included_items{{itemID}}" class="includedItemsLink" id="includedItemsLink{{itemID}}" data-desktop="true" data-toggle="modal" data-id="{{itemID}}">{{pageLabelMap 'CartInc_IncludedItems'}}</a>
+                                {{#ifDisplay 'C.DsplAddtInfo'}} <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>{{/ifDisplay}}
+                                {{> includedDisplay}}
+                            {{/if}}
+                            {{#ifDisplay 'C.DsplAddtInfo'}}
+                                <a class="included_items additional-info additionalAnchorDisable{{this.mockProduct.sku}}" href="#additional_info{{itemID}}" id="additionalInfoLink{{this.mockProduct.sku}}" data-toggle="modal">{{pageLabelMap 'AdditionalInfo'}}</a>
+                                    {{#ifDisplay 'C.DsplComments'}} <span class="additionalDisable{{this.mockProduct.sku}}">&nbsp;&nbsp;|&nbsp;&nbsp;</span>{{/ifDisplay}}
+                                    {{> cartItemAdditional}}
+                            {{/ifDisplay}}
+                            {{#ifDisplay 'C.DsplComments'}}
+                                <a  href="#comments_{{itemID}}" id="commentsLink_{{itemID}}" data-toggle="modal" class="commentsLink" data-id={{itemID}}>{{pageLabelMap 'add_note'}}</a>
+                                {{> cartItemComment}}
+                            {{/ifDisplay}}
+                            </div>
+
+                            <div class="span12">
+                                <div class="span12 clear">
+                                    <label>{{pageLabelMap 'SKU'}}:</label>
+                                    <strong class="value spacing-left">{{{getSKU mockProduct.sku}}}</strong>
+                                </div>
+                    
+                                <div class="span12 clear">
+                                    <label>{{pageLabelMap 'LeadTime'}}:</label>
+                                    <strong class="oo_leadTime value spacing-left" data-id="{{this.mockProduct.id}}"></strong>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!--quantity column-->
+                        <div class="span3 item-column-child quantity-col">
+                            {{#ifNotEquals cartItemType 'Coupon'}}
+                                <strong class="span12 section2 plus_minus center" data-id="{{itemID}}">
+                                    {{> cartItemsQty}}
+                                </strong>
+                
+                            {{/ifNotEquals}}
+                        </div>
+
+                        <!--update/delete column-->
+                        <div class="span3 item-column-child button-col item-details">
+                            <!--{{#ifNotEquals cartItemType 'Coupon'}}
+                            <div class="span12">
+                                <div class="span4">
+                                    <label>{{pageLabelMap 'Quantity'}}</label>
+                                    <br/>
+                                </div>
+                                <strong class="span8 section2 plus_minus" data-id="{{itemID}}">
+                                    {{> cartItemsQty}}
+                                </strong>
+                            </div>
+                            {{/ifNotEquals}}-->
+    
+                            <!-- apply delete buttons -->
+                            <div class="span12 center button-wrap">
+                                <button class="cta-link-red cart-button-links update-cart-button" name="" type="button" data-id="{{this.mockProduct.sku}}" data-cid="{{itemID}}" >{{pageLabelMap 'CartInc_Update'}}</button>
+                                <button type="button" class="cta-link-red cart-button-links deleteItem tab remove-cart-button" data-dismiss="modal" aria-hidden="true" data-id="{{itemID}}" >{{pageLabelMap 'Action_Delete'}}</button>
+                            </div>
+                        </div>
+                                        
+
+                        <!--prices column-->
+                        <div class="span3 prices price-col item-column-child" data-cid="{{itemID}}">
+                            {{#if (isNotPreBook)}}
+                                {{#if price}}
+                                    <div class="span12 base-price">
+                                        <div class="span8 list-price hide">
+                                            <label>{{pageLabelMap 'CartInc_Price'}}</label>
+                                            <label class="pull-right inline-info list-price-freight price-state hide"></label>
+                                        </div>
+                                        <div class="span8 contract-price hide">
+                                            <label>{{pageLabelMap 'CartInc_ContractPrice'}}</label>
+                                            <label class="pull-right inline-info contract-price-freight price-state hide"></label>
+                                            <div class="contract-info hide">
+                                                <strong class="contract-number pallet-size"></strong><br/>
+                                                <span class="contract-expire pallet-size">Expires: <strong class="contract-expire-date pallet-size"></strong></span></br>
+                                                <span class="contract-expire pallet-size">End User:<strong class="contract-end-user pallet-size"></strong></span>
+                                            </div>
+                                        </div>
+                                        <strong class="span4">{{{price price}}}</strong>
+                                    </div>
+                                    <div class="span12 contract-info hide">
+                                        <a class="span12 contract-details no-margin-left" data-cid="{{itemID}}"><strong>View Contract Details</strong></a>
+                                    </div>
+                                {{/if}}
+                                <!--{{#if absoluteDiscount}}
+                                    <div class="span12 clear">
+                                        <label class="span8">{{pageLabelMap 'YouSave'}}</label>
+                                        <strong class="span4">{{{price absoluteDiscount}}}</strong>
+                                    </div>
+                                {{/if}}-->
+                                <div class="span12 clear larger total-price">
+                                    <span class="span8">{{pageLabelMap 'MiniCart_Total_Price'}}</span>
+                                    <span class="span4">{{{price itemTotal}}}</span>
+                                </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                    
+                
+                    <!-- bottom  
+                    <div class="span12 clear item-details">
+                        <div class="span6 pull-left button-wrap">
+                            <button class="cta-link-red cart-button-links update-cart-button" name="" type="button" data-id="{{this.mockProduct.sku}}" data-cid="{{itemID}}" >{{pageLabelMap 'CartInc_Update'}}</button>
+                            <button type="button" class="cta-link-red cart-button-links deleteItem tab remove-cart-button" data-dismiss="modal" aria-hidden="true" data-id="{{itemID}}" >{{pageLabelMap 'Action_Delete'}}</button>
+                        </div>
+                    </div>-->
+                    
+                    
+                </div>
+    
+            </div>
+            <!-- 2708 -->
+            <div class="span12 alert alert-error inline-error no-margin-left modal-message hide contract-validation" data-id="{{itemID}}"></div>
+            <div class="span12 alert alert-error inline-error no-margin-left modal-message hide price-validation" data-id="{{itemID}}"></div>
+            <div class="span12 alert alert-error inline-error no-margin-left pallet-qty-error hide" data-id="{{this.mockProduct.sku}}" data-cid="{{itemID}}"></div>
+            
+            <div class="span12 modal-message inline-info validate-msg hide"></div>
+            <div class="span12 modal-message inline-info validate-msg-save hide"></div>
+            
+        </div>
+            
+
+
+        {{#if showSubProdTerm}}
+        <p>
+                            <span>
+                                {{insertTokens cartDisplayName displayName (price price) (price SubAmount) (price recurringPrice) (price recurringPriceSubAmount) (pageLabelPrefixMap 'Subscriptions_Frequency_' orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' installmentFrequencyUOM) orderFrequency installmentFrequency installmentCount orderCount}}
+                            </span>
+        </p>
+        {{else}}
+        {{#if this.isSubscription}}
+        <p class="subscriptionSummary">{{subscriptionSummary 'Cart_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+        {{/if}}
+        {{/if}}
+ 
+        {{#each minorLines}}
+            {{#if showSubProdTerm}}
+                <p><label class="subscriptionSummary">{{insertTokens cartDisplayName displayName (price price) (price SubAmount) (price recurringPrice) (price recurringPriceSubAmount) (pageLabelPrefixMap 'Subscriptions_Frequency_' orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' installmentFrequencyUOM) orderFrequency installmentFrequency installmentCount orderCount}}</span></label></p>
+            {{else}}
+                {{#if this.isSubscription}}
+                    <p class="subscriptionSummary">{{subscriptionSummary 'Cart_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                {{/if}}
+            {{/if}}
+        {{/each}}
+        <!--<div class=" wishFinder" data-sku="{{mockProduct.sku}}">
+            {{#unless showSubProdTerm}}
+            {{#if (isNotPreBook)}} 
+               <div class="wishButtons"></div>
+            {{/if}}
+            {{/unless}}
+        </div>-->
+        {{/ifEquals}}
+
+        {{#if this.displPrice}}
+            <div class="alert alert-error messagingSection-{{itemID}}-Error" style="display: block; font-size: medium;background-color: #FFFFFF"><strong>{{pageLabelMap 'upsellMessage' lessQty}} {{price unitPrice }}</strong></div>
+        {{/if}}
+        {{#if this.displSavings}}
+            <div class="alert alert-error messagingSection-{{itemID}}-Error" style="display: block; font-size: medium;background-color: #FFFFFF"><strong>{{savingsHelper 'savingsMessage' unitPriceDelta}}</strong></div>
+        {{/if}}
+        <div class="alert alert-info messagingSection-{{itemID}}-Info" style="display: none"></div>
+        {{/ifEquals}}
+        {{/with}}
+        <div class="contract-details-container"></div>
+        <div class="ammend-warning"></div>
+        <div class="date-warning"></div>
+        <div class="delete-warning"></div>
+    </script>
+    <!-- OO-1180 -->
+    <script id="shipdate-change-dialog" type="text/template">
+    <div id="shipdate-change-modal" class="warning-modal-layout modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="shipdate-change-modal-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close btn-cancel oo-shipdate-change-cancel" aria-hidden="true" data-old-date="{{oldDate}}">&times;
+            </button>
+            <h3 class="modal-title">{{pageLabelMap 'SureContinue'}}</h3>
+        </div>
+        <div class="modal-body">
+            <div class="cart-shipdate-change">{{pageLabelMap 'Cart_ShipDateChange'}}</div>
+        </div>
+        <div class="modal-footer">
+            <button class="oo-shipdate-change-cancel btn btn-secondary btn-cancel" data-old-date="{{oldDate}}">{{pageLabelMap 'Cancel'}}</button>
+            <button class="oo-shipdate-change btn btn-primary" data-new-date="{{newDate}}">{{pageLabelMap 'Confirm'}}</button>
+        </div>
+    </div>
+    </script>
+    <!-- OO-1180 -->
+    <script id="OO-cart-split-template-mobile" type="text/template">
+        <div class="row-fluid cart-header">
+                <div class="split-cart-panel span12">
+                        {{#if this.primaryCart.isActive }}
+                            <div class="cart-button primary-cart active row">
+                        {{else}}
+                            <div class="cart-button primary-cart row">
+                        {{/if}}
+                                <a class="cart-data span12 clear" data-id= "{{this.primaryCart.cartId}}">
+                                    <strong class="pull-left span6">CART 1</strong>
+                                    
+                                        <span class="spacing-left span6">
+                                            <span class="span12">{{this.primaryCart.noOfItems}} item(s) </span>
+                                            <span class="cart-weight span12 no-margin-left">{{this.primaryCart.weight}} lb</span>
+                                        </span>
+                                        
+                                </a>
+                            </div>
+                        {{#if this.secondaryCart }}
+                            {{#if this.secondaryCart.isActive }}
+                                <div class="cart-button secondary-cart active row">
+                            {{else}}
+                                <div class="cart-button secondary-cart row">
+                            {{/if}}
+                                    <a class="cart-data span12 clear" data-id= "{{this.secondaryCart.cartId}}">
+                                        <strong class="pull-left span6">CART 2</strong>
+                                        
+                                        
+                                        <span class="spacing-left span6">
+                                            <span class="span12">{{this.secondaryCart.noOfItems}} item(s) </span> 
+                                            <span class="cart-weight span12 no-margin-left">{{this.secondaryCart.weight}} lb</span>
+                                        </span>
+                                    </a>
+                                </div>
+                        {{/if}}
+                </div>
+                <div class="span12 no-margin-left">
+                    <br>
+            <div class="span12 inline-error alert alert-error modal-message hide contract-validation">
+            </div><!-- OO-1180 -->
+                {{#if this.secondaryCart}}
+                   
+                        {{#unless this.fromOrderInfo}}
+                             <div class="span12 inline-info modal-message general-error">{{pageLabelMap 'order_splitcart'}}</div>
+                        {{/unless}}   
+                    {{#if this.pickUpCutOffTime}}
+                         <div class="span12 inline-info modal-message general-error">
+                            {{pageLabelMap 'order_pickcutoff'}} {{this.pickUpCutOffTime}}
+                        </div> 
+                        <div class="span12 inline-info modal-message general-error">
+                            {{pageLabelMap 'order_deliverycutoff'}} {{this.deliveryCutOffTime}}
+                        </div>
+                        {{#if this.fromOrderInfo}}
+                         <div class="span12 inline-info modal-message general-error">
+                            {{pageLabelMap 'order_itemscutoff'}}
+                        </div>
+                        {{/if}}
+                    {{else}}
+                         <div class="span12 inline-info modal-message general-error">
+                            {{pageLabelMap 'order_cutoff'}} {{this.cutOffTime}}
+                        </div>
+                    {{/if}}
+                {{else}}
+                    {{#if this.pickUpCutOffTime}}
+                        <div class="span12 inline-info general-error lipstick modal-message no-margin-left order-cutOff">
+                            {{pageLabelMap 'order_pickcutoff'}} {{this.pickUpCutOffTime}}
+                        </div>
+                        <div class="span12 inline-info general-error lipstick modal-message no-margin-left order-cutOff">
+                            {{pageLabelMap 'order_deliverycutoff'}} {{this.deliveryCutOffTime}}
+                        </div>
+                    {{else if this.cutOffTime }}
+                        <div class="span12 inline-info general-error lipstick modal-message no-margin-left order-cutOff">
+                            {{pageLabelMap 'order_cutoff'}} {{this.cutOffTime}}
+                        </div>
+                    {{/if}}
+                 {{/if}}
+                <br>
+                    <span class="grey cart-scheduled">These products are scheduled to ship on</span>
+                    <br><br>
+                    <span class="tab">
+                        {{#if this.primaryCart.isActive }}
+                            <input name="requestedDateStr" class="global-datepicker requestedDate"/>
+                        {{else}}
+                            <input name="requestedDateStr" class="global-datepicker requestedDate" disabled="disabled">
+                        {{/if}}
+                    </span>
+                </div>
+                {{#if this.isShipDateExtended}}
+                    <div class="span12 inline-info grey isShipDateExtended">{{pageLabelMap 'isShipDateExtended'}}</div>
+                {{/if}}
+                <div class="span12 inline-error modal-message invalid-quantity hide" data-id="{{this.mockProduct.sku}}" data-cid="{{itemID}}"/>
+                <div class="span12">
+                    
+                    <strong class="span12 shopping-cart-header no-margin-left">
+                        {{#if this.primaryCart.isActive }}
+                            SHOPPING CART 1
+                        {{else}}
+                            SHOPPING CART 2
+                        {{/if}}
+                    </strong>
+                </div>
+            </div>
+       <div class="date-warning header-date"></div> 
+    </script>
+
+    <!-- Disabling E1 description and product images for Mobile View -->
+    <script id="OO-CartItemDetail-View-Mobile" type="text/template">
+        {{#with this.attributes}}
+            {{#ifEquals itemStatus 'Invalid'}}
+                <div class="alert alert-error">
+                
+                    <div class="cart_1_row_medium_viewport">
+                        {{#if (isNotPreBook)}}
+                            <a href="javascript:void(0);" class="productName prodLink" data-id="{{mockProduct.sku}}" > 
+                                {{{displayImage mediaWrapper 'cart'}}}
+                            </a>
+                        {{else}}
+                            {{{displayImage mediaWrapper 'cart'}}}
+                        {{/if}}
+                    </div>
+                    <!--<p><a href="#" class="prodLink" data-id="{{mockProduct.sku}}">{{displayProductName 'Aggregate_Display' displayProductBean.name mockProduct.name }}</a></p>-->
+                    {{{ productName mockProduct }}}
+                    <div class="oo_E2Description hide" data-id="{{this.mockProduct.sku}}"></div>
+                    <p>Product No: {{mockProduct.sku}}</p>
+                    <p class="oo_leadTime" data-id="{{this.mockProduct.id}}"></p>
+                    <div class="clear"></div>
+                    <button type="button" class="btn btn-secondary remove remove-cart-button" data-id="{{itemID}}">{{pageLabelMap 'Action_Delete'}}</button>
+                </div>
+            {{else}}
+
+                    <div class="cart-items row-fluid">
+                        <div class="span12">
+                            <h2 class="title cart-mobile-title row clear" data-target="#{{mockProduct.sku}}{{itemID}}" ><!-- OO-2067 -->
+                                <span class="span2 detail-icon icon-icons_next" data-parent="title"></span>
+                                <span class="span10 product-title-mobile">
+                                    <strong class="product-name">{{{ productName mockProduct }}}</strong><br/>
+                                    <span class="oo_E2Description hide" data-id="{{this.mockProduct.sku}}"></span>
+                                </span>
+                                <div class="span2 hide hidden-vfd icon-icons_vfd_regulated_feed pull-right" title="CAUTION: Federal law restricts medicated feed containing this veterinary feed directive (VFD) drug to use by or on the order of a licensed veterinarian." href="#" data-id="{{this.mockProduct.id}}"></div>
+                            </h2>
+                            
+                            <div class="span12 collapse-container cart_1_row_medium_viewport" id="{{mockProduct.sku}}{{itemID}}"><!-- OO-2067 -->
+                                {{#ifNotEquals cartItemType 'Coupon'}}
+                                    {{#if (isNotPreBook)}}
+                                        <div>
+                                            <a href="javascript:void(0);" class="productName prodLink" data-id="{{mockProduct.sku}}" > 
+                                                {{{displayImage mediaWrapper 'cart'}}}
+                                            </a>
+                                        </div>
+                                    {{else}}
+                                        <p>{{{displayImage mediaWrapper 'cart'}}}</p>
+                                    {{/if}}
+                                {{/ifNotEquals}}
+                                <br/>
+                                <div class="cart-links span12 clear">
+                                    {{#ifDisplay 'C.DsplAddtInfo'}}
+                                        <strong><a class="included_items additional-info additionalAnchorDisable{{this.mockProduct.sku}}" href="#additional_info{{itemID}}" id="additionalInfoLink{{this.mockProduct.sku}}" data-toggle="modal">{{pageLabelMap 'AdditionalInfo'}}</a></strong>
+                                        <span class="additionalDisable{{this.mockProduct.sku}}">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                                        {{> cartItemAdditional}}
+                                    {{/ifDisplay}}
+                                    {{#ifDisplay 'C.DsplComments'}}
+                                        <!-- <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span> -->
+                                        <strong><a href="#comments_{{itemID}}" id="commentsLink_{{itemID}}" class="commentsLink" data-toggle="modal" data-id={{itemID}}>{{pageLabelMap 'add_note'}}</a></strong>
+                                        {{> cartItemComment}}
+                                    {{/ifDisplay}}
+                                </div>
+                            </div>
+                            <div class="detail-container row">
+                                <div class="span12 clear">
+                                    <label class="span4">{{pageLabelMap 'SKU'}}</label>
+                                    <strong class="span8">{{{getSKU mockProduct.sku}}}</strong>
+                                </div>
+
+                                <div class="span12 clear"> 
+                                    <label class="span4">{{pageLabelMap 'LeadTime'}}</label>
+                                    <strong class="oo_leadTime span8" data-id="{{this.mockProduct.id}}"></strong>
+                                </div>
+                    
+                                {{#ifNotEquals cartItemType 'Coupon'}}
+                                    <div class="span12 clear">
+                                        <div class="span4">
+                                            <label>{{pageLabelMap 'Quantity'}}</label>
+                                            <div id="palletSize" class="pallet-size minimum-qty hide"  data-id="{{this.mockProduct.sku}}" data-cid="{{itemID}}">
+                                            </div>
+                                        </div>
+                                        <strong class="span8 section2 plus_minus" data-id="{{itemID}}">
+                                            {{> cartItemsQty}}
+                                        </strong>
+                                    </div>
+                                {{/ifNotEquals}}
+                                <br/>
+                                <div class="span6 prices" data-cid="{{itemID}}">
+                                {{#if (isNotPreBook)}}
+                                    {{#if price}}
+                                        <div class="span12">
+                                            <div class="span8 list-price hide">
+                                                <label>{{pageLabelMap 'CartInc_Price'}}</label>
+                                                <label class="pull-right inline-info list-price-freight price-state hide"></label>
+                                            </div>
+                                            <div class="span8 contract-price hide">
+                                                <label>{{pageLabelMap 'CartInc_ContractPrice'}}</label>
+                                                <label class="pull-right inline-info contract-price-freight price-state hide"></label>
+                                                <div class="span12 clear contract-info hide">
+                                                    <strong class="contract-number pallet-size"></strong><br/>
+                                                    <span class="contract-expire pallet-size">Expires: <strong class="contract-expire-date pallet-size"></strong></span><br/>
+                                                    <span class="contract-expire pallet-size">End User: <strong class="contract-end-user pallet-size"></strong></span>
+                                                    <a class="contract-details span12" data-cid="{{itemID}}"><strong>View Contract Details</strong></a>
+                                                    
+                                                </div>                                                  
+                                            </div>
+                                            <strong class="span8">{{{price price}}}</strong>
+                                        </div>                                        
+                                    {{/if}}
+                                    {{#if absoluteDiscount}}
+                                        <div class="span12 clear">
+                                            <label class="span4">{{pageLabelMap 'YouSave'}}</label>
+                                            <strong class="span8">{{{price absoluteDiscount}}}</strong>
+                                        </div>
+                                    {{/if}}                                    
+                                {{/if}}
+                                </div>
+                            </div>
+                            <div class="light-border span12 clear">
+                                <strong class="span8">{{pageLabelMap 'MiniCart_Total_Price'}}</strong>
+                                <strong class="span8">{{{price itemTotal}}}</strong>
+                            </div>
+                            <div class="span12 modal-message validate-msg-save hide"></div>
+                            <!-- 2708 -->
+                            <div class="span12 alert inline-error alert-error modal-message hide contract-validation" data-id="{{itemID}}"></div>
+                            <div class="span12 alert alert-error inline-error no-margin-left modal-message hide price-validation" data-id="{{itemID}}"></div>
+                            <div class="span12 alert inline-error alert-error no-margin-left pallet-qty-error hide" value="{{quantity}}" data-id="{{this.mockProduct.sku}}" data-cid="{{itemID}}">
+                            </div>
+                            <div class="span12 modal-message validate-msg hide">  </div>
+                            <div class="span12 action-buttons clear center">
+                                <button class="btn btn-primary update-cart-button wide-btn" name="" type="button"  value="{{quantity}}" data-id="{{this.mockProduct.sku}}" data-minQty="" data-cid="{{itemID}}">{{pageLabelMap 'CartInc_Update'}}</button>
+                                <br/><br/>
+                                <button type="button" class="btn btn-secondary deleteItem wide-btn remove-cart-button" data-dismiss="modal" aria-hidden="true" data-id="{{itemID}}" >{{pageLabelMap 'Action_Delete'}}</button>
+                            </div>
+                        </div>
+
+                <!--
+                
+                {{#ifNotEquals cartItemType 'Coupon'}}
+                    <p>Product No: {{mockProduct.sku}}</p>
+                    <p class="included_items">
+                        {{#if showIncludedItems }}
+                            <a href="#included_items{{itemID}}" class="includedItemsLink" id="includedItemsLink{{itemID}}" data-desktop="false" data-toggle="modal" data-id="{{itemID}}">{{pageLabelMap 'CartInc_IncludedItems'}}</a>
+                            {{#ifDisplay 'C.DsplAddtInfo'}} |{{/ifDisplay}}
+                        {{/if}}
+                        {{#ifDisplay 'C.DsplAddtInfo'}}
+                            <a class="included_items additionalAnchorDisable{{this.mockProduct.sku}}" href="#additional_info{{itemID}}" id="additionalInfoLink{{this.mockProduct.sku}}" data-toggle="modal">{{pageLabelMap 'AdditionalInfo'}}</a>
+                            {{#ifDisplay 'C.DsplComments'}}<span class="additionalDisable{{this.mockProduct.sku}}">&nbsp;&nbsp;|&nbsp;&nbsp;</span>{{/ifDisplay}}
+                        {{/ifDisplay}}
+                        {{#ifDisplay 'C.DsplComments'}}
+                            <a href="#comments_{{itemID}}" id="commentsLink_{{itemID}}" class="commentsLink" data-toggle="modal" data-id="{{itemID}}">{{pageLabelMap 'add_note'}}</a>
+                        {{/ifDisplay}}  
+                        {{#if showIncludedItems }}
+                            {{> includedDisplay}}
+                        {{/if}}
+                        {{#ifDisplay 'C.DsplAddtInfo'}}
+                            {{> cartItemAdditional}}
+                        {{/ifDisplay}}
+                        {{#ifDisplay 'C.DsplComments'}}
+                            {{> cartItemComment}}
+                        {{/ifDisplay}}
+                {{/ifNotEquals}}
+                {{#if showSubProdTerm}}
+                    <p><label class="subscriptionSummary">{{insertTokens cartDisplayName displayName (price price) (price SubAmount) (price recurringPrice) (price recurringPriceSubAmount) (pageLabelPrefixMap 'Subscriptions_Frequency_' orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' installmentFrequencyUOM) orderFrequency installmentFrequency installmentCount orderCount}}</span></label></p>
+                {{else}}
+                    {{#if this.isSubscription}}
+                       <p class="subscriptionSummary">{{subscriptionSummary 'Cart_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                    {{/if}}
+                {{/if}}
+                {{#each minorLines}}
+                    {{#if showSubProdTerm}}
+                        <p><label class="subscriptionSummary">{{insertTokens cartDisplayName displayName (price price) (price SubAmount) (price recurringPrice) (price recurringPriceSubAmount) (pageLabelPrefixMap 'Subscriptions_Frequency_' orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' installmentFrequencyUOM) orderFrequency installmentFrequency installmentCount orderCount}}</span></label></p>
+                    {{else}}
+                        {{#if this.isSubscription}}
+                            <p class="subscriptionSummary">{{subscriptionSummary 'Cart_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                        {{/if}}
+                    {{/if}}
+                {{/each}}
+                <div class="clear"></div>
+
+                
+
+
+
+
+                {{#if (isNotPreBook)}}
+                <div class="cart_figures">
+                    {{#ifNotEquals cartItemType 'Coupon'}}                      
+                        <div class="section1">{{pageLabelMap 'CartInc_Price'}}:</div>
+                        <div class="section2">{{pageLabelMap 'YouSave'}}:</div>
+                    {{/ifNotEquals}}
+                    <div class="section3">{{pageLabelMap 'CartInc_Total'}}:</div>
+                    {{#ifNotEquals cartItemType 'Coupon'}}                      
+                        <div class="section1">
+                            <strong>{{price price}}</strong>
+                        </div>
+                        <div class="section2">
+                            <strong>{{price absoluteDiscount}}</strong>
+                        </div>
+                    {{/ifNotEquals}}
+
+                    <div class="section3 totalAmount">
+                        <strong class="price">{{price itemTotal}}</strong>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                {{/if}}
+                {{#ifNotEquals cartItemType 'Coupon'}}                      
+                    <div class="section2 plus_minus" data-id="{{itemID}}">
+                        {{> cartItemsQty}}
+                        <button type="button" class="btn btn-secondary remove removeItemButton" data-id="{{itemID}}">{{pageLabelMap 'Action_Delete'}}</button>
+                    </div>
+                                {{#unless showSubProdTerm}}
+                        <div class=" wishFinder" data-sku="{{mockProduct.sku}}">
+                            {{#if (isNotPreBook)}} 
+                              <div class="sectionWide wishButtons"></div>
+                            {{/if}}
+                        </div>
+                                {{/unless}}
+                {{/ifNotEquals}}
+                <div class="alert alert-error messagingSection-{{itemID}}-Error" style="display: none"></div>
+                <div class="alert alert-info messagingSection-{{itemID}}-Info" style="display: none"></div>
+                -->
+                
+            {{/ifEquals}}
+        {{/with}}
+        <div class="contract-details-container"></div>
+        <div class="ammend-warning"></div>
+        <div class="date-warning"></div>
+        <div class="delete-warning"></div>
+    </script>
+    
+    <script id="OO-CartItemDetail-Qty-View" type="text/template">
+          {{#if qtySkipIncrement}}
+           <input type="button" value="{{pageLabelMap 'Prod_QtyDecrFF'}}" class="plus_minus minus-button" data-id="{{this.mockProduct.sku}}"  data-cid="{{itemID}}">
+          {{/if}}
+          <input id="entry_{{itemID}}" type="button" value="{{pageLabelMap 'Prod_QtyDecrSingle'}}" class="plus_minus minus-button btn btn-primary" data-id="{{this.mockProduct.sku}}" data-cid="{{itemID}}" style="padding:0;">
+          {{#ifEquals qtyIncrement 1}}
+           <input id="entry_{{itemID}}" type="text" name="qty" value="{{quantity}}" class="input-text entry plus_minus" maxlength="6" data-id="{{this.mockProduct.sku}}" data-minQty="1" data-cid="{{itemID}}"/>
+          {{else}}
+           <input id="entry_{{itemID}}" type="text" readonly="true" name="qty" value="{{quantity}}" class="input-text entry plus_minus" maxlength="6" data-id="{{this.mockProduct.sku}}" data-minQty="" data-cid="{{itemID}}"/>
+          {{/ifEquals}}
+
+          <input id="entry_{{itemID}}" type="button" value="{{pageLabelMap 'Prod_QtyIncrSingle'}}" class="plus_minus plus-button btn btn-primary" data-id="{{this.mockProduct.sku}}" data-minQty="1" style="padding:0;" data-cid="{{itemID}}">
+          {{#if qtySkipIncrement}}
+           <input type="button" value="{{pageLabelMap 'Prod_QtyIncrFF'}}" class="plus_minus plus-button" data-id="{{this.mockProduct.sku}}" data-minQty="" data-cid="{{itemID}}">
+          {{/if}}
+          <input type="hidden" name="qtyIncrement" value="{{qtyIncrement}}" class="item_qtyIncrement" />
+          <input type="hidden" name="qtySkipIncrement" value="{{qtySkipIncrement}}" class="item_qtySkipIncrement" /><br/>
+        <div class="span12 unit-of-measure lipstick center" data-id="{{this.mockProduct.sku}}" data-cid="{{itemID}}"></div>
+          <p><div class="span12 oo_numOfPallet center" data-id="{{this.mockProduct.sku}}" data-cid="{{itemID}}"></div></p>
+          <div id="palletSize" class="pallet-size minimum-qty hidden-phone hide" data-id="{{this.mockProduct.sku}}" data-cid="{{itemID}}">
+          </div>
+ </script>
+ 
+    <script id="contract-details-modal-template" type="text/template">
+        <div id="contract-details-modal" class="info-modal-layout modal hide container-fluid" aria-labelledby="contract-details-modal-label" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close btn-cancel">x</button>
+                <h3 class="modal-title">{{pageLabelMap 'ContractDetails'}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row-fluid">    
+                    <div class="row contract-details-section">
+                        <div class="span12">
+                            <label class="span4">{{pageLabelMap 'Contract'}}</label>
+                            <strong class="span8 value">{{ this.contractNumber }}</strong>
+                        </div>
+                        <div class="span12">
+                            <label class="span4 clear">{{pageLabelMap 'EffectiveDate'}}</label>
+                            <strong class="span8 contractEffectiveDate">
+                                {{#if this.contractDetails.contractEffectiveDate }} 
+                                    {{ this.contractDetails.contractEffectiveDate }} 
+                                {{/if}}
+                            </strong>
+                        </div>
+    
+                        <div class="span12">
+                            <label class="span4">{{pageLabelMap 'ExpirationDate'}}</label>
+                            <strong class="span8 contractExpirationDate">
+                                {{#if this.contractExpireDate }}
+                                    {{ this.contractExpireDate }}
+                                {{/if}}
+                            </strong>
+                        </div>
+                        {{#if this.contractEndUser }}
+                         <div class="span12">
+                            <label class="span4">{{pageLabelMap 'EndUser'}}</label>
+                            <strong class="span8 contractExpirationDate">
+                                    {{ this.contractEndUser }}
+                            </strong>
+                        </div>
+                        {{/if}}
+    
+                        <div class="span12">
+    
+                            <div class="span4">
+                                <label>{{pageLabelMap 'ContractBalance'}}</label>
+                                <div class="last-updated grey">{{pageLabelMap 'LastUpdated'}}</div>   
+                            </div>
+                            
+                            <div class="span8">
+                                <strong class="contractquantityAvailable">
+                                    {{#if this.contractDetails.contractBalance }} <!--US-2377-->
+                                        {{ this.contractDetails.contractBalance }} {{ this.UOMDesc }} 
+                                    {{/if}}
+                                    
+                                    {{#if this.contractDetails.AvailabilityQtyUoMContract}}
+                                        ({{this.contractDetails.AvailabilityQtyUoMContract}} {{this.contractDetails.contractUom}})
+                                    {{/if}}
+                                </strong>
+                                <div class="contract-last-updated">
+                                    {{#if this.contractDetails.lastUpdated }}
+                                        {{ this.contractDetails.lastUpdated }}&nbsp;{{pageLabelMap 'CSTTimeZone'}}
+                                    {{/if}}
+                                </div>    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    
+    <!--  US 1890 starts -->
+    <script id="delete-warning-dialog" type="text/template">
+        <div id="delete-warning-modal" class="warning-modal-layout modal cancel-modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close btn-cancel">&times;</button>
+                <h3 class="modal-title">{{pageLabelMap 'SureContinue'}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="delete-warning">{{pageLabelMap 'Delete-warning'}}</div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary btn-cancel">{{pageLabelMap 'Cancel'}}</button>
+                <button class="btn btn-primary btn-delete-item">{{pageLabelMap 'Delete'}}</button>
+            </div>
+        </div>
+    </script>
+    
+     <!-- US-2339 -->
+    <script id="cancel-ammend-warning-dialog" type="text/template">
+        <div id="cancel-ammend-warning-modal" class="warning-modal-layout modal cancel-modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close btn-cancel" aria-hidden="true">&times;</button>
+                <h3 class="modal-title">{{pageLabelMap 'cancelAmend'}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="amend-cancel-warning">{{pageLabelMap 'Amend-cancel-warning'}}</div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary btn-cancel"  aria-hidden="true">{{pageLabelMap 'No'}}</button>
+                <button class="btn btn-primary btn-yes-amend-item">{{pageLabelMap 'Yes'}}</button>
+            </div>
+        </div>
+    </script>
+     <!-- US-2339 -->
+    <!--  US 1890 end -->
+    
+    <script id="ShoppingCartContract-Dialog" type="text/template">
+        <div id="prod-contract-modal" class="warning-modal-layout modal cancel-modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close btn-split-cancel" aria-hidden="true">&times;</button>
+                <h3 id="myModalLabels" class="modal-title">&nbsp;</h3>
+            </div>
+            <div class="modal-body">
+                <div class="contract-selection"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary btn-split-cancel">Cancel</button>
+                <button class="btn btn-primary btn-split">Split</button>
+            </div>
+        </div>
+    </script>
+    <!--  US 1719 starts -->
+    <script type="text/template" id="shopping-cart-split">
+        <div class="container-fluid">
+            <div class="row-fluid cart-header">
+
+                <!-- Shopping cart tabs -->
+                <div class="span12 clear shopping-cart-tabs-wrap">
+                    <div class="split-cart-panel span6">
+                        <div class="span12 shopping-cart-tabs">
+                            {{#if this.primaryCart.isActive }}
+                                <div class="cart-button margin-bottom-none primary-cart active span6">
+                            {{else}}
+                                <div class="cart-button margin-bottom-none primary-cart span6">
+                            {{/if}}
+                                    <a class="cart-data span12 clear" data-id= "{{this.primaryCart.cartId}}">
+                                        <strong class="pull-left span4">CART 1</strong>
+                                        <span class="spacing-left span6">
+                                            <span class="span12">{{this.primaryCart.noOfItems}} item(s) </span>
+                                            <span class="cart-weight span12 no-margin-left">{{this.primaryCart.weight}} lb</span>
+                                        </span>
+                                        {{#if this.primaryCart.isActive}}
+                                            <span class="icon-icons_cart pull-right span2"></span>
+                                        {{/if}}
+                                    </a>
+                                </div>
+                            {{#if this.secondaryCart }}
+                                {{#if this.secondaryCart.isActive }}
+                                    <div class="cart-button margin-bottom-none secondary-cart active span6">
+                                {{else}}
+                                    <div class="cart-button margin-bottom-none secondary-cart span6">
+                                {{/if}}
+                                        <a class="cart-data span12 clear" data-id= "{{this.secondaryCart.cartId}}">
+                                            <strong class="pull-left span4">CART 2</strong>
+                                            
+                                            <span class="spacing-left span6">
+                                                <span class="span12">{{this.secondaryCart.noOfItems}} item(s) </span> 
+                                                <span class="cart-weight span12 no-margin-left">{{this.secondaryCart.weight}} lb</span>
+                                            </span>
+                                            {{#if this.secondaryCart.isActive}}
+                                                <span class="icon-icons_cart pull-right span2"></span>
+                                            {{/if}}
+                                        </a>
+                                    </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                    <br>
+                </div><!-- Shopping cart tabs End -->
+
+                <!-- Shopping cart errors/info -->
+                <div class="span12 clear ">
+                    <!-- 2408 -->
+                        {{#if this.secondaryCart}}
+                            <div class="span12 modal-message border-none inline-info padding-none no-margin-left general-error">
+                            {{#unless this.fromOrderInfo}}
+                                {{pageLabelMap 'order_splitcart'}}
+                            {{/unless}} 
+                            </div>
+                            
+                            {{#if this.pickUpCutOffTime}}
+                                <div class="span12 modal-message border-none inline-info padding-none no-margin-left general-error">
+                                    {{pageLabelMap 'order_pickcutoff'}} {{this.pickUpCutOffTime}}
+                                </div>
+                                <div class="span12 modal-message border-none inline-info padding-none no-margin-left general-error">
+                                    {{pageLabelMap 'order_deliverycutoff'}} {{this.deliveryCutOffTime}}
+                                </div>
+                                    {{#if this.fromOrderInfo}}
+                                        <div class="span12 modal-message border-none inline-info padding-none no-margin-left general-error">
+                                            {{pageLabelMap 'order_itemscutoff'}}
+                                        </div>
+                                    {{/if}}
+                            {{else}}
+                                <div class="span12 modal-message border-none inline-info padding-none no-margin-left general-error">
+                                    {{pageLabelMap 'order_cutoff'}} {{this.cutOffTime}}
+                                </div>
+                            {{/if}}
+                        
+                            </div>
+                        {{else}}
+                            <br>
+                        {{#if this.pickUpCutOffTime}}
+                            <div class="span12 general-error border-none info-alert lipstick inline-info modal-message padding-none no-margin-left order-cutOff">
+                                {{pageLabelMap 'order_pickcutoff'}} {{this.pickUpCutOffTime}}
+                            </div>
+                            <div class="span12 general-error border-none info-alert lipstick inline-info modal-message padding-none no-margin-left order-cutOff">
+                                {{pageLabelMap 'order_deliverycutoff'}} {{this.deliveryCutOffTime}}
+                            </div>
+                        {{else if this.cutOffTime }}
+                            <div class="span12 general-error border-none info-alert lipstick inline-info modal-message padding-none no-margin-left order-cutOff">
+                                {{pageLabelMap 'order_cutoff'}} {{this.cutOffTime}}
+                            </div>
+                        {{/if}}
+                            
+                    {{/if}}
+                    <h1 class="span12 shopping-cart-header no-margin-left">
+                        {{#if this.primaryCart.isActive }}
+                            SHOPPING CART 1
+                        {{else}}
+                            SHOPPING CART 2
+                        {{/if}}
+                    </h1> 
+
+                    <div class="span12">
+                        <span class="grey cart-scheduled">These products are scheduled to ship on </span>
+                        <span class="">
+                            {{#if this.primaryCart.isActive }}
+                                <input name="requestedDateStr" class="requestedDate global-datepicker"/>
+                            {{else}}
+                                <input name="requestedDateStr" class="requestedDate global-datepicker" disabled="disabled">
+                            {{/if}}
+                        </span>
+                    </div>
+                    {{#if this.isShipDateExtended}}
+                    <div class="span12 inline-info grey isShipDateExtended">{{pageLabelMap 'isShipDateExtended'}}</div>
+                {{/if}}
+                    <div class="span12 inline-error modal-message invalid-quantity hide" data-id="{{this.mockProduct.sku}}" data-cid="{{itemID}}"/>
+                </div><!-- Shopping cart errors/info End-->
+            </div>
+        </div>
+        <div class="date-warning header-date"></div>
+    </script>
+    
+    <script id="OO-CartItemDetail-Additional-View" type="text/template">
+        <div id="additional_info{{itemID}}" class="info-modal-layout additional-info modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h3 id="myModalLabel">{{mockProduct.name}}<!-- OO-183 Defect fix {{displayProductName 'Aggregate_Display' displayProductBean.name mockProduct.name }}</a>--> {{pageLabelMap 'ProductsInc_MiscDetails'}}</h3>
+                
+            </div>
+            
+            <div class="modal-body" style="padding: 15px;">
+                
+                {{#if miscDetails}}
+                    {{miscDetails}}<br/><br/>
+                {{/if}}
+                
+                {{#ifDisplay 'C.DsplAddtlSku'}}
+                    <strong>{{pageLabelMap 'SKU'}}:</strong>&nbsp;{{{getSKU mockProduct.sku}}}<br/><br/>
+                
+                {{/ifDisplay}}
+                
+                <!--{{#ifDisplay 'C.DsplAddtlShortDesc'}}
+                    {{unescape mockProduct.shortDesc}}<br/><br/>
+                {{/ifDisplay}}-->
+                <!-- OO-121 - Inserted div with class oo_longDesc and commented short description -->
+                <div class="oo_longDesc" data-id="{{this.mockProduct.sku}}"></div>
+            </div>
+            <!--<div class="oo_E2Description" data-id="{{this.mockProduct.sku}}"></div>-->
+        </div>
+        
+    </script>
+    
+
+    <!--  US 1719 ends -->
+    <script type="text/javascript">
+        var itemToDelete;
+        var objLinkDelete;
+        var viewToDelete;
+        var showSplitMsg,isFirstRemoteCall=true;
+        var counter = 0;
+        var isViewRefreshed=false;isViewRenderedTwice = false;
+        jQuery(function($) {
+            CCRZ.uiProperties.CartDetailView.partials.cartItemsDesktop = '#OO-CartItemDetail-View-Desktop'; 
+            CCRZ.uiProperties.CartDetailView.partials.cartItemsMobile = '#OO-CartItemDetail-View-Mobile';
+            CCRZ.uiProperties.CartDetailView.partials.cartItemsQty = '#OO-CartItemDetail-Qty-View';
+            CCRZ.uiProperties.CartDetailView.partials.cartItemAdditional = '#OO-CartItemDetail-Additional-View';
+            
+            $('#categories-right-nav').hide();
+            $('.span3.visible-desktop').addClass('shopping-cart');
+            var isNotRefreshed=true, currentView;
+            var globalPrimaryCartId = CCRZ.pagevars.queryParams.cartID || CCRZ.pagevars.queryParams.cartId;
+            var uniqueId=getSessionValue('contactId');
+            var selectedShipTo=uniqueId+'selectedShipTo',selectedPlant=uniqueId+'selectedPlant',shipDate=uniqueId+'shipDate';
+            $('.contentBody .row-fluid > .span9').addClass('width100p');    
+            var notesData = [], isDeleteOpened = false, currentCartItemId = '', contractModel, isContractModelOpened = false, dateModel, isDateModalOpened = false, isCancelAmmendOpened = false, currentAddNote, isAddNoteOpened = false, isAdditionalInfoOpened = false, currentAddInfoItem, addInfoItem="";
+            
+            CCRZ.pubSub.on('view:CartDetailView:refresh', function(theView) {           
+                var updateNote=CCRZ.pagevars.pageLabels['update_note'];
+                var addNote=CCRZ.pagevars.pageLabels['add_note'];
+                var encCartId = CCRZ.pagevars.queryParams.cartID || CCRZ.pagevars.queryParams.cartId;
+                if(!encCartId){
+                    $('.shopping_cart button').attr('disabled', 'disabled');
+                }
+                $('.Zebra_DatePicker').addClass("dp_hidden");
+                var cartDetailView = CCRZ.views.CartDetailView.prototype;
+                if(isNotRefreshed || currentView !== CCRZ.display.currentView) {
+                    isNotRefreshed = false;
+                    currentView = CCRZ.display.currentView;
+                    cartDetailsData(CCRZ.models.CartDetail.prototype, cartDetailView, theView);
+                    if(CCRZ.display.isPhone()) {
+                        theView.setElement($(CCRZ.uiProperties.CartDetailView.phone.selector));
+                    } else {
+                        theView.setElement($(CCRZ.uiProperties.CartDetailView.desktop.selector));
+                    }
+                }
+                
+                cartDetailView.getVfdStatus();                                
+                cartDetailView.loadCartHeader();
+                cartDetailView.getCartType();
+                cartDetailView.checkForMinimumWeight();
+                cartDetailView.getLeadTime();                       
+                cartDetailView.callProducts();
+                cartDetailView.getTotalWeight();
+                  
+                if(isFirstRemoteCall && $('.cart_item_list')[0]){
+                    isFirstRemoteCall=false;
+                    if(CCRZ.cartDetailModel.attributes.cartItems && CCRZ.cartDetailModel.attributes.cartItems != 'undefined') {
+                        var cartItemIds=CCRZ.cartDetailModel.attributes.cartItems.models;
+                        for(var i=0;i<cartItemIds.length;i++){
+                        var obj={};
+                        if($('.commentField'+cartItemIds[i].id).val()){
+                            obj['notes']=$('.commentField'+cartItemIds[i].id).val();
+                            obj['cartItemId']=cartItemIds[i].id;
+                            notesData.push(obj);
+                            $('#commentsLink_'+cartItemIds[i].id).html(updateNote);
+                        }
+                        else{
+                            obj['notes']='';
+                            obj['cartItemId']=cartItemIds[i].id;
+                            notesData.push(obj);
+                            }
+                        }
+                    }
+                }
+                
+                
+                // User story : 372 To add E2 description on the cart page
+                $('.cartContainer h1').hide();
+                
+                for(var i=0;i<notesData.length;i++){
+                    if(notesData[i].notes){
+                        $('#commentsLink_'+notesData[i].cartItemId).html(updateNote);
+                    }
+                    $('.commentField'+notesData[i].cartItemId).val(notesData[i].notes);
+                }
+                $('.add-note-popup').on("show", function(e) {
+                    currentAddNote = $(this).attr('id');
+                    isAddNoteOpened = true;
+                    var value = $(this).find('.global-textarea').val();
+                    addInfoItem =   addInfoItem || value;                                        
+                    $(this).find('.global-textarea').val(addInfoItem);
+                });
+                
+                $('.add-note-popup').on("hidden", function(e) {
+                    for(var i=0;i<notesData.length;i++) {
+                        $('.commentField'+notesData[i].cartItemId).val(notesData[i].notes);
+                    }
+                    addInfoItem = "";
+                    isAddNoteOpened = false;
+                });
+                $('.additional-info').on("show", function(e) {
+                    isAdditionalInfoOpened = true;
+                    currentAddInfoItem = $(this).attr("id");
+                });
+                     
+                $('.additional-info').on("hide", function(e) {
+                    isAdditionalInfoOpened = false;
+                });
+                     
+                if(isContractModelOpened) {
+                    openContractModal();
+                }
+                if(isDeleteOpened) {
+                    openDeleteModalPopup();                     
+                }
+                if(CCRZ.cartDetailModel.attributes.cartItems.models.length) {
+                    if(isDateModalOpened) {
+                        openDateChangeModal();
+                    }
+                }
+                if(isCancelAmmendOpened) {
+                    openCancelAmmendModal();
+                }
+                if(isAddNoteOpened) {
+                    $('.modal-backdrop').remove();
+                    $('#'+currentAddNote).modal('show').show();
+                }
+                if(isAdditionalInfoOpened) {
+                    $('.modal-backdrop').remove();
+                    $('#'+currentAddInfoItem).modal('show').show();
+                }
+                // setting on click events
+                //CCRZ.pubSub.trigger('cartChange', CCRZ.pagevars.currentCartID);
+                setTimeout(function(){
+                    CCRZ.pagevars.currentCartID = globalPrimaryCartId;
+                }, 2000);
+                                
+            });
+            
+            var openDeleteModalPopup = function(){
+                $('.delete-warning').html("");
+                var deleteWarningModal = new CCRZ.views.removeItemModal(function() { 
+                    $('.modal-backdrop').remove();                        
+                    $('#delete-warning-modal').modal({ keyboard: false, backdrop: 'static', show: true });
+                    isDeleteOpened = true;
+                 });
+            };
+            
+            var openContractModal = function(){
+                $('.contract-details-container').html("");
+                var contractModalDialog = new CCRZ.views.contractDetailsView(contractModel, function() {
+                    $('.modal-backdrop').remove();
+                    $('#contract-details-modal').modal({ keyboard: false, backdrop: 'static', show: true });
+                    isContractModelOpened = true;
+                });
+            };
+            
+            var openDateChangeModal = function() {
+                $('.date-warning').html("");
+                var dateChangeModal = new CCRZ.views.dateChangeView(dateModel, function() {
+                    $('.modal-backdrop').remove();
+                    $('#shipdate-change-modal').modal({
+                        backdrop: 'static',
+                        keyboard: false,
+                        show: true
+                    });
+                    isDateModalOpened = true;
+                });
+            };
+            
+            var openCancelAmmendModal = function() {
+                $('.ammend-warning').html("");
+                var ammendCancelModal = new CCRZ.views.warningAmmendModal( function() {
+                    $('.modal-backdrop').remove();
+                    $('#cancel-ammend-warning-modal').modal({
+                        keyboard: false,
+                        backdrop: 'static',
+                        show: true
+                    });
+                    isCancelAmmendOpened = true;
+                });
+            };
+            
+            
+            if(($(window).width() <= 799) && ($(window).width() >= 585)){
+                $('.cart-button').addClass('span5');
+            }
+            $('.cart-data strong').show();
+            
+            var cartDetailsData = function(cartDetailModel, cartDetailView, theView) {
+                var prodInvData, skuQtymap,cartItemQty,isItemPresent=false;
+                var prodIds=[], isConfirmed = false, cartQty = {}, updateClicked = false; 
+                var newDate, oldDate, currentShipDate, saveNote;//OO-1180
+                $('.hidden-vfd').each(function(evt){
+                    prodIds.push(this.dataset["id"]);                    
+                });
+                
+                cartDetailModel.controllerName = 'cc_oo_CartController';
+                
+                cartDetailModel.getVfdStatus = function(callback) {
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className: cartDetailModel.controllerName});
+                    remoteCall.invokeCtx('getVfdFlag',prodIds, function(resp) {
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+                
+                cartDetailModel.getCartHeaderDetails = function(cartLoadId, callback) {
+                    var sellerId  = CCRZ.pagevars.sid;
+                    var shipTo = getSessionValue(selectedShipTo);
+                    var selectedShipDate = getSessionValue(shipDate);
+                    var fromOrderInfo=CCRZ.pagevars.queryParams['fromOrderInfo'] || false;
+                    var remoteActionCallForCart = _.extend(CCRZ.RemoteInvocation,{className: cartDetailModel.controllerName});
+                    remoteActionCallForCart.invokeCtx( 'getCartDetails', sellerId, shipTo, cartLoadId,fromOrderInfo,selectedShipDate, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+                
+                cartDetailModel.getLeadTime = function(callback){
+                    var remoteActionCallForProductsLeadTime = _.extend(CCRZ.RemoteInvocation,{className:cartDetailModel.controllerName});
+                    remoteActionCallForProductsLeadTime.invokeCtx( 'getProductsLeadTime', prodIds, function(resp){ 
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+                
+                cartDetailModel.getProductDetails = function(cartId, callback) {
+                    var remoteActionCallForProducts = _.extend(CCRZ.RemoteInvocation,{className:cartDetailModel.controllerName});
+                    remoteActionCallForProducts.invokeCtx( 'getProductsDetails', cartId, CCRZ.pagevars.sid, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+                
+                cartDetailModel.getProductInventoryDetails = function(cartId, callback) {
+                    var remoteActionCall = _.extend(CCRZ.RemoteInvocation,{className: cartDetailModel.controllerName});
+                    remoteActionCall.invokeCtx( 'getProductInventoryDtls', cartId , function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false})
+                };
+                
+                cartDetailModel.validateContractQty = function(obj, cartQty, callback) {
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className: cartDetailModel.controllerName});
+                    remoteCall.invokeCtx( 'validateContractQuantity',obj, cartQty, function(resp) {
+                        callback(resp);
+                    },{buffer:false,escape:false,nmsp:false});
+                };
+                
+                cartDetailModel.ammendItems = function(callback) {
+                    var sid=getSessionValue(selectedPlant);
+                    var shipToId = getSessionValue(selectedShipTo);
+                    var cartId=CCRZ.pagevars.currentCartID;
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_CartController'});
+                    remoteCall.invokeCtx( 'DeleteAmendedCart',sid,shipToId,cartId, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+                
+                cartDetailModel.getTotalWeight = function(callback) {
+                    var remoteActionCallWeight = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_CartController'});
+                    var cartIdForWeight=CCRZ.pagevars.currentCartID;
+                    remoteActionCallWeight.invokeCtx( 'getTotalWeight',cartIdForWeight, function(resp){
+                        callback(resp);
+                    },{buffer:false,escape:false,nmsp:false});
+                };
+                
+                cartDetailModel.validateOrderMinimumWeight = function(cartItemMap, callback) {
+                    var cartId = CCRZ.cartDetailModel.attributes.sfid;
+                    var remoteActionCallForCartType = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_CartIncRDController'});
+                    remoteActionCallForCartType.invokeCtx('validateOrderMinimumWeight', cartId, cartItemMap, function(resp) {
+                        callback(resp);
+                    },{buffer:false,escape:false,nmsp:false});
+                };
+                
+                cartDetailModel.getCartType = function(callback) {
+                    var cartId = CCRZ.cartDetailModel.attributes.sfid;
+                    var remoteActionCallForCartType = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_CartIncRDController'});
+                    remoteActionCallForCartType.invokeCtx('getCartType', cartId, function(resp){
+                        callback(resp);
+                    },{buffer:false,escape:false,nmsp:false});
+                };
+                
+                cartDetailModel.checkForMinimumWeight = function(callback) {
+                    var cartId = CCRZ.cartDetailModel.attributes.sfid;
+                    //OO-796(OO-333) Minimum weight message display
+                    var remoteActionCallForMinimumWeight = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_CartIncRDController'});
+                    remoteActionCallForMinimumWeight.invokeCtx( 'checkForMinimumWeight', cartId, function(resp){
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+
+                cartDetailView.getVfdStatus = function() {
+                    cartDetailModel.getVfdStatus( function(resp){
+                        if(resp && resp.success) { 
+                            $('.hidden-vfd').each(function() {
+                                var prodId = $(this).data("id");
+                                var respData = resp.data;
+                                var dataflag = respData[prodId];
+                                if(dataflag) {
+                                    $(this).parent().children('.product-title-mobile').removeClass('span10').addClass('span8');
+                                    $(this).parent().children('.product-title-desktop').removeClass('span10').addClass('span7');
+                                    $(this).show();        
+                                }
+                           });
+                        }
+                    });
+                };
+                
+                
+                cartDetailView.loadCartHeader = function() {
+                    var cartLoadId= CCRZ.pagevars.queryParams.cartID || CCRZ.pagevars.queryParams.cartId;
+                    cartDetailModel.getCartHeaderDetails(cartLoadId, function(resp) {
+                        if(resp && resp.success){
+                            var data = resp.data;
+                            //var headerData = new CCRZ.models.CartSplitModel(data);
+                            if(data.secondaryCart && !$.isEmptyObject(data.secondaryCart)) {
+                                if(data.secondaryCart.cartId === data.primaryCart.cartId) {
+                                	var loadingContainer = $('<div class="loadingContainer"></div>');
+                                    loadingContainer.appendTo($('body')).show();
+                                    cartDetailsPage(data.primaryCart.cartId);
+                                    return;
+                                }
+                                data.secondaryCart.isActive = data.secondaryCart.cartId === cartLoadId;
+                                if (data.secondaryCart.isActive) { 
+                                    $('.check-out-btn').attr('disabled', 'disabled');   
+                                }
+                            }
+                            //US - 2408
+                            if(!data.secondaryCart && cartLoadId != data.primaryCart.cartId) {
+                                //CCRZ.pagevars.queryParams.cartId == data.primaryCart.cartId;
+                                var loadingContainer = $('<div class="loadingContainer"></div>');
+                                loadingContainer.appendTo($('body')).show();
+                                cartDetailsPage(data.primaryCart.cartId); 
+                                return; 
+                            }
+                            if(data.isShipDateExtended) {
+                                counter++;
+                            }
+                            if(counter > 0 && !data.secondaryCart && !data.isShipDateExtended) {
+                                data.isShipDateExtended = true;
+                                isViewRenderedTwice = false;
+                            } 
+                            if(!data.primaryCartItemsList) {
+                                data.isShipDateExtended = false;
+                            }
+                            var headerData = new CCRZ.models.CartSplitModel(data);
+                            //US-2408  
+                            
+                            if(data.primaryCart && !$.isEmptyObject(data.primaryCart)) {
+                                //defect#OO-4206
+                                $('.total-weight-msg').addClass('hide');
+                                if(!data.primaryCart.noOfItems <=0){
+                                    $('.total-weight-msg').removeClass('hide');
+                                }//defect#OO-4206-end
+                                var leastDate = data.primaryCart.leastDate;
+                                var disableDate = sessionStorage.getItem('disabledDates');
+                                var disableDates=JSON.parse(disableDate);
+                                data.primaryCart.isActive = data.primaryCart.cartId === cartLoadId;
+                                var splitView = new CCRZ.views.CartSplitView(headerData);
+                                if(CCRZ.cartDetailModel.attributes.cartItems.models.length) {
+                                    $('.header-date').remove();
+                                } else {
+                                    if(isDateModalOpened) {
+                                        openDateChangeModal();
+                                    }
+                                }
+                               if(data.isShipDateExtended){
+                                    if(data.primaryCart.date){
+                                        setSessionValue(shipDate, data.primaryCart.date); 
+                                    }
+                                }
+
+                                $('.requestedDate').Zebra_DatePicker({
+                                    format:'m/d/Y',
+                                    first_day_of_week:0,
+                                    show_clear_date: false,
+                                    disabled_dates: disableDates,
+                                    direction: [leastDate, false],  
+                                    onSelect: function(date, inst){
+                                        //splitCarts(date);
+                                        //OO-1180 -  Starts
+                                        if(date){
+                                            newDate = date;
+                                        }
+                                        
+                                        if(data.primaryCart){
+                                            if(data.primaryCart.date){
+                                                oldDate = data.primaryCart.date;
+                                                currentShipDate = data.primaryCart.date;
+                                            }
+                                        }
+                                        var oldD = new Date(oldDate);
+                                        var newD = new Date(newDate);
+    
+                                        if(oldD.getTime() !==  newD.getTime()) {                                            
+                                            dateModel = new CCRZ.models.dateChangeModel({
+                                                "newDate": date,
+                                                "oldDate": oldDate
+                                            });
+                                            openDateChangeModal();
+                                            
+                                        }
+                                        //OO-1180- Ends
+    
+                                    }
+                                });
+                            }
+                            else{
+                                $('.total-weight-msg').addClass('hide');
+                            }
+                            
+                            //$('.check-out-2-cart').hide();
+                            if( cartLoadId != data.primaryCart.cartId){
+                                if(data.secondaryCart && data.secondaryCart != 'undefined') {
+                                    $('.requestedDate').val(changeDateForm(data.secondaryCart.date));
+                                }
+                                 //defect-OO-2172
+                                if(CCRZ.cartDetailModel.attributes.cartItems && CCRZ.cartDetailModel.attributes.cartItems.length) {
+                                    $('.check-out-2-cart').removeClass('hide');
+                                }
+                                $('#customPageLabel').html(CCRZ.pagevars.pageLabels['Secondary_Cart']+":" );
+                            } else {
+                                    $('.requestedDate').val(changeDateForm(data.primaryCart.date)); 
+                                    //defect-OO-2079
+                                    //defect-OO-2079
+                                    $('.check-out-2-cart').addClass('hide');
+                            }
+                            //OO-2223
+                            //only show message on Primary cart page when secondary car exist and contains all the items
+                            //$('#splitCartMsg').hide(); 
+                            //defect#4346 and 4332     
+                            if(data.secondaryCart && (CCRZ.pagevars.queryParams.cartId === data.primaryCart.cartId)){
+                                if(data.primaryCart.noOfItems <=0 && data.secondaryCart.noOfItems >=1){
+                                    $('#splitCartMsg').removeClass('hide'); 
+                                }
+                            }
+                            setCartData(data);
+                            globalPrimaryCartId = data.primaryCart.cartId;
+                            
+                            if(cartLoadId == globalPrimaryCartId && (data.secondaryCart || !data.secondaryCart || data.secondaryCart == 'undefined')) {
+                                if(isViewRefreshed) {
+                                    isViewRefreshed=false;
+                                    var loadingContainer = $('<div class="loadingContainer"></div>');
+                                    loadingContainer.appendTo($('body')).show();
+                                    CCRZ.cartDetailView.model.fetch(false, function(response){
+                                        isViewRenderedTwice = true;
+                                        CCRZ.cartDetailView.render();
+                                        loadingContainer.remove();
+                                   });
+                                }
+                            }
+                           
+                        }
+                    });
+                        
+                };
+
+                cartDetailView.getLeadTime = function() {
+                    cartDetailModel.getLeadTime( function(resp) {
+                        if(resp && resp.data){
+                            var mainData = resp.data;
+                            $('.oo_leadTime').each( function(){
+                                var productId = $(this).attr('data-id');
+                                var leadTime = mainData[productId];
+                                $(this).html(leadTime + ' ' + CCRZ.pagevars.pageLabels['LeadTimeMeasure']);
+                            });
+                        }
+                    });
+                };
+                
+                
+                
+                cartDetailView.callProducts = function() {
+                    var cartId = CCRZ.cartDetailView.model.attributes.sfid;
+                    // Calling the controller class 'cc_oo_CartIncRD2Controller' and the method 'getProductsDetails' having the parameter 'productIds'
+                    cartDetailModel.getProductDetails( cartId, function(resp) {
+                        if(resp && resp.data && resp.success) {
+                            var remoteData = resp.data;
+                            // Adding long description in div 'oo_longDesc'
+                            $('.oo_longDesc').each( function(){
+                                var productSKU = $(this).attr('data-id');
+                                var productLongDescription = resp.data[productSKU].ccrz__Product__r.ccrz__LongDesc__c;
+                                if(!productLongDescription) {
+                                    $('#additionalInfoLink'+productSKU).hide();
+                                    $('.additionalDisable'+productSKU).hide();
+                                    $('.additionalAnchorDisable'+productSKU).hide();
+                                } else {
+                                    $(this).html(productLongDescription);
+                                }
+                            });
+                            $('.oo_E2Description').each( function(){
+                                var productSKU = $(this).attr('data-id');
+                                var e2Description = remoteData[productSKU].ccrz__Product__r.cc_oo_Second_Description__c;                                                
+                                $(this).html(e2Description);
+                            });
+                            $('.price-validation').each( function() {
+                                var priceCartId=this.dataset["id"];
+                                var errorStatus=resp.data[priceCartId];
+                                if(errorStatus && errorStatus!=undefined){
+                                    $(this).html(errorStatus).show();
+                                }else{
+                                    $(this).hide();
+                                } 
+                           });
+                        }
+                    });
+                    var isAmendedCart=false;
+                    var self = this;
+                    cartDetailModel.getProductInventoryDetails(cartId, function(resp){
+                        if(resp && resp.success) {
+                            prodInvData  = resp.data;
+                            isAmendedCart= prodInvData['isAmendedCart'];
+                            if(isAmendedCart){
+                                $('.cancel-shopping').show();
+                            }else{
+                               $('.cancel-shopping').hide();
+                            }
+                            //To disable the minus button
+                            $('.input-text.entry.plus_minus').each(function(){
+                                var productSku = $(this).attr("data-id");
+                                var cartItemId=$(this).attr('data-cid');
+                                var inputField = $('.entry.plus_minus[data-cid="'+cartItemId+'"]');
+                                var diffQuantity = prodInvData[cartItemId]['diffQuantity'];
+                                var palletValue = prodInvData[cartItemId]['palletValue'];
+                                var savePrice = prodInvData[cartItemId]['savePrice'];
+                                var minOrder = prodInvData[cartItemId]['MinOrder'];
+                                //defect-OO-2727
+                                if(minOrder==null || isNaN(minOrder) || minOrder==undefined){
+                                    minOrder=1;
+                                }
+                                var uomdesc=prodInvData[cartItemId]['UOMDesc'];
+                                var quomdesc=prodInvData[cartItemId]['qUOMDesc'];
+                                inputField[0].dataset["minQty"] = minOrder;
+                                cartDetailView.totalQtyFunction(productSku);
+                                var prdQty=skuQtymap[productSku];
+                                if(prdQty<= minOrder || (inputField.val())<=1){
+                                    $('.minus-button[data-cid="'+cartItemId+'"]').attr('disabled','disabled');
+                                }
+                                //var isOnlyListPrice = JSON.parse(prodInvData[cartItemId]['isListPrice']);
+                                /*if( diffQuantity && palletValue ){
+                                    var message = CCRZ.pagevars.pageLabels['Quantity_Validation'];
+                                    message = String.format(message,diffQuantity,palletValue);
+                                    $('.cart_item.' + cartItemId).find('.validate-msg').html(message).show();
+                                }*/
+                               $('.unit-of-measure[data-cid="'+cartItemId+'"]').html(quomdesc);
+                            });
+            
+                            //To show the number of pallet
+                            $('.oo_numOfPallet').each( function(){
+                                var productSku = $(this).attr("data-id");
+                                var cartItemId=$(this).attr('data-cid');
+                                var numOfPallet = prodInvData[cartItemId]['numOfPallet'];
+                                var typeOfProduct = prodInvData[cartItemId]['typeOfProduct'];
+                                if((typeOfProduct=='BAG')&&(numOfPallet!=''|| numOfPallet!= 'undefined'|| numOfPallet!=null)){
+                                    $(this).empty().html(numOfPallet);
+                                }
+                            });
+                            
+                            //To show the contract information
+                            $('.prices').each(function(){
+                                var cartItemId= $(this).attr("data-cid");
+                                var isListPrice = JSON.parse(prodInvData[cartItemId]['isListPrice']);
+                                var contractNumber = prodInvData[cartItemId]['contractNumber'];
+                                var contractExpireDate= prodInvData[cartItemId]['contractExpireDate'];
+                                var contractEndUser = prodInvData[cartItemId]['contractEndUser']; 
+                                var isfreightincluded=prodInvData[cartItemId]['isfreightincluded'];
+                                if(isListPrice){
+                                    $(this).find('.list-price').show();
+                                    if(isfreightincluded){
+                                        $(this).find('.list-price-freight').html(CCRZ.pagevars.pageLabels["Contract_Freight_DLV"]).show();
+                                    }
+                                    else{
+                                        $(this).find('.list-price-freight').html(CCRZ.pagevars.pageLabels["Contract_Freight_FOB"]).show();  
+                                    }
+                                } else{
+                                    $(this).find('.contract-price').show();
+                                    $(this).find('.contract-number').html(contractNumber);
+                                    $(this).find('.contract-expire-date').html(contractExpireDate);
+                                    if(isfreightincluded){
+                                        $(this).find('.contract-price-freight').html(CCRZ.pagevars.pageLabels["Contract_Freight_DLV"]).show();
+                                    }
+                                    else{
+                                        $(this).find('.contract-price-freight').html(CCRZ.pagevars.pageLabels["Contract_Freight_FOB"]).show();  
+                                    }
+                                    if(contractEndUser != null && contractEndUser != '') {
+                                        $(this).find('.contract-end-user').html(contractEndUser);
+                                    } else {
+                                        $(this).find('.contract-end-user').parent().hide();
+                                    }  
+                                    $(this).find('.contract-info').show();
+                                }
+                            });
+            
+                            /*if(updateClicked) {
+                                $('.input-text.entry.plus_minus').each(function(){
+                                    var cartItemId = $(this).attr("data-cid");
+                                    var isOnlyListPrice = JSON.parse(prodInvData[cartItemId]['isListPrice']);
+                                    var remainder = JSON.parse(prodInvData[cartItemId]['isRemainder']);
+                                    var priceSavePerBag = prodInvData[cartItemId]['PriceSave'];
+                                    priceSavePerBag = priceSavePerBag ? JSON.parse(priceSavePerBag) : priceSavePerBag;
+                                    if(isOnlyListPrice && remainder){                       
+                                        var message = CCRZ.pagevars.pageLabels['Price_Save_Message'];
+                                        message = String.format(message, priceSavePerBag);
+                                        $('.cart_item.' + cartItemId).find('.validate-msg-save').html(message).show();
+                                    }
+                                 });
+                                updateClicked = false;
+                            }*/
+                        }
+                    });
+                };
+                
+                cartDetailView.getTotalWeight = function(){
+                    cartDetailModel.getTotalWeight( function(resp) {
+                        if(resp){  
+                            var totalWeight=resp.data;
+                            $('.totalWeight').text(totalWeight+" lb");
+                            if(totalWeight>0){
+                                $('.total-weight-msg').removeClass('hide');
+                                $('.totalWeight1').text(totalWeight+" lb ");
+                            } else {
+                                $('.total-weight-msg').addClass('hide');
+                            }
+                            $('.totalWeightMobile').text("("+totalWeight+" lb)");
+                        }
+                    });
+                };
+                 
+                // Calling the controller class 'cc_oo_CartIncRD2Controller' and the method 'getProductsDetails' having the parameter 'productIds'
+                cartDetailView.getCartType = function() {
+                    cartDetailModel.getCartType( function(resp) {
+                       if(resp) { 
+                           if(resp.success){
+                               // OO - 244 - hide price details if the cart is of Pre-Book flow
+                               $('p.price').remove();
+                               // OO - 261 - hide the promotion discount code table if the cart is of Pre-Book flow
+                               //$('.discount_code_container').remove();
+                            }
+                        }
+                    });
+                };
+                
+                cartDetailView.checkForMinimumWeight = function() {
+                    cartDetailModel.checkForMinimumWeight ( function(resp) {
+                        if(resp && resp.success && resp.data) {
+                            var min_wgt_msg_array = resp.data.split("<br>");
+                            var all_messages = "";
+                            _.each(min_wgt_msg_array, function(msg){
+                                if(msg) {
+                                all_messages += "<div class='global-warning'>"+msg+"</div>";
+                                }
+                            });
+                            $('.minimum-weight-msg').removeClass('hide').empty().html(all_messages);
+                        } else {
+                            $('.minimum-weight-msg').remove();
+                        }
+                    });
+                };
+                
+                cartDetailView.verifyCartData = function(e, flag, ele) {
+                    var isError = false, minQty,palletSize,isFullPalletReq,uom,typeOfProduct, self = this;
+                    var seller  = CCRZ.pagevars.sid;
+                    $('.pallet-qty-error').each( function() {
+                        var productSku = $(this).attr("data-id");
+                        var cartItemId=$(this).attr("data-cid");
+                        var inputField = $('.entry.plus_minus[data-cid="'+cartItemId+'"]');
+                        var palletError = $('.pallet-qty-error[data-cid="'+cartItemId+'"]');
+                        palletError.hide();
+                        self.totalQtyFunction(productSku);
+                        var prdQty=skuQtymap[productSku];
+                        var value = parseInt(inputField.val());
+                        cartQty[cartItemId] = value;
+                        //OO-1569 -  check for the availibility 
+                        var isFullPalletReq = false;
+                        if(prodInvData[cartItemId] != null && prodInvData[cartItemId] != ''){
+                            isFullPalletReq = JSON.parse(prodInvData[cartItemId]['fullPalletReq']);
+                            minQty=prodInvData[cartItemId]['MinQuantity'];
+                            if(minQty==null || isNaN(minQty) || minQty==undefined){
+                                minQty=0;
+                            }
+                            uom=prodInvData[cartItemId]['UOM'];
+                            var pUOM=prodInvData[cartItemId]['pUOM'];
+                            var uomDesc=prodInvData[cartItemId]['UOMDesc'];
+                            if(!uomDesc){
+                                uomDesc='UOM';
+                            }
+                            typeOfProduct=prodInvData[cartItemId]['typeOfProduct'];
+                            palletSize=prodInvData[cartItemId]['PalletSize'];
+                        }
+                        if(isFullPalletReq){
+                              var informationLabel= minRequirements(isFullPalletReq,palletSize,typeOfProduct,minQty,productSku,true,value,pUOM);
+                        }else{
+                              var informationLabel= minRequirements(isFullPalletReq,palletSize,typeOfProduct,minQty,productSku,true,prdQty,pUOM);
+                        }
+
+                        if(informationLabel){
+                            palletError.html(informationLabel).show();
+                            isError = true;
+                        }
+                    });
+                    
+                    if(isError){
+                        return false;
+                    } else {
+                        //if(flag) {
+                            var cartItemsId = e.currentTarget.dataset["cid"];
+                            var obj ={};
+                            var shipDDate = $('.requestedDate').val();//OO-1180
+                            if(cartItemsId) {
+                                var qty = parseInt($('.entry.plus_minus[data-cid="'+cartItemsId+'"]').val());
+                                var productSku = e.currentTarget.dataset["id"];
+                                var contractId = prodInvData[cartItemsId]['contractNumber'];
+                    
+                                obj = { 
+                                    "sellerId": seller,
+                                    "cartId": cartItemsId,
+                                    "quantity": qty,
+                                    "contractId": contractId,
+                                    "sku": productSku, 
+                                    "isGlobal": false,
+                                    "shipDate": shipDDate
+                                };
+                            } else {
+                                obj = {
+                                    "sellerId" : seller,
+                                    "cartId" : CCRZ.pagevars.queryParams.cartID || CCRZ.pagevars.queryParams.cartId,
+                                    "isGlobal" : true,
+                                    "quantity" : "",
+                                    "contractId" : "",
+                                    "sku" : "",
+                                    "shipDate" : shipDDate
+                                };
+                            }
+                           
+                            //if(contractId || obj["isGlobal"]) {
+                                cartDetailModel.validateContractQty(obj, cartQty, function(resp) {
+                                    //2708
+                                    if(resp && resp.success){  //OO-1180
+                                        //var status = resp.data['shipDateContractValidation'];
+                                        $('.contract-validation').each( function() {
+                                            var contractItemId=this.dataset["id"];
+                                            var status=resp.data[contractItemId];
+                                            if(status && status!=undefined){
+                                                $(this).html(status).show();
+                                                $('.price-validation').hide();
+                                            }else{
+                                                $(this).hide();
+                                            } 
+                                         });
+                                    }//OO-1180 - Ends   
+                                    /* if(resp && resp.success) {
+                                        //US - 1891
+                                        var prodContractModal = $('#prod-contract-modal');
+                                        if(!prodContractModal[0]) {
+                                            var isContractInvalid = $($('#ShoppingCartContract-Dialog').html());
+                                            $(isContractInvalid).appendTo($('body'));
+                                            isContractInvalid.find('.contract-selection').html(CCRZ.pagevars.pageLabels['Contract_Selection']);
+                                            prodContractModal = $('#prod-contract-modal');
+                                            obj = resp.data;                                           
+                                        }
+                                        prodContractModal.find('.btn-split').attr('data-obj', JSON.stringify(obj)); 
+                                        prodContractModal.find('.btn-split-cancel').attr('data-obj', JSON.stringify(obj));
+                                        prodContractModal.modal('show');
+                                    }*/ 
+                                    else {
+                                        flag ? CCRZ.cartDetailView.saveCart(e) : CCRZ.cartDetailView.goToCheckout(e);
+                                    }
+                                    //2708
+                                 });
+                            //} else {
+                                //flag ? CCRZ.cartDetailView.saveCart(e) : CCRZ.cartDetailView.goToCheckout(e);
+                            //}
+                         //} else {
+                            
+                         //}
+                    }
+                };
+                
+                cartDetailView.totalQtyFunction = function(sku) {
+                    var cartItems=CCRZ.cartDetailModel.attributes.cartItems.models;
+                    skuQtymap =[];
+                    cartItemQty=[];
+                    for( var j=0; j<cartItems.length; j++ ){
+                        var qty= Number(cartItems[j].attributes.quantity);
+                        cartItemQty[cartItems[j].attributes.itemID]= Number(qty);
+                        if(!(cartItems[j].attributes.mockProduct.sku in skuQtymap)){ 
+                            skuQtymap[cartItems[j].attributes.mockProduct.sku] = qty;
+                        } else {
+                            var prevQty = Number(skuQtymap[cartItems[j].attributes.mockProduct.sku]);
+                            var qty= Number(cartItems[j].attributes.quantity);
+                            isItemPresent=true;
+                            var totalQty = Number(prevQty) + Number(qty);
+                            skuQtymap[cartItems[j].attributes.mockProduct.sku] =Number(totalQty);
+                        }
+                    }
+                };            
+                
+                cartDetailView.updateButtonHandler = function(e) {
+                    CCRZ.pagevars.currentCartID = CCRZ.pagevars.queryParams.cartID || CCRZ.pagevars.queryParams.cartId;
+                    updateClicked = true;                    
+                    this.verifyCartData(e, true, this);
+                };
+                
+                cartDetailView.incrementHandler = function(e) {
+                    e.preventDefault();
+                    var prodId = e.currentTarget.dataset["id"];
+                    cartDetailView.totalQtyFunction(prodId);
+                    var prdQty=skuQtymap[prodId];
+                    var cartItemId= e.currentTarget.dataset["cid"];
+                    var prvqty=cartItemQty[cartItemId];
+                    var cartItems=CCRZ.cartDetailModel.attributes.cartItems.models;
+                    var inputField = $('.entry.plus_minus[data-cid="'+cartItemId+'"]');
+                    var minQty =parseInt(prodInvData[cartItemId]['MinQuantity']);
+                    var minOrder=prodInvData[cartItemId]['MinOrder'];
+                    //defect-OO-2727
+                    if(minOrder==null || isNaN(minOrder) || minOrder==undefined){
+                        minOrder=1;
+                    }
+                    var palletsize=prodInvData[cartItemId]['PalletSize'];
+                    var value = parseInt(inputField.val());  
+                    var isFullPalletReq=prodInvData[cartItemId]['fullPalletReq'];
+                    if(isFullPalletReq){
+                        value +=palletsize;
+                    }else {
+                        value+=1;
+                    }
+                    var diffqty=value-prvqty;
+                    var total = prdQty+diffqty;
+                    //OO-1592 updated the id reference as cart item id
+                    if(total > minOrder ){
+                        $('.minus-button[data-cid="'+cartItemId+'"]').removeAttr('disabled');//OO-1592
+                    }else{
+                        $('.minus-button[data-cid="'+cartItemId+'"]').attr('disabled','disabled');// OO-1592
+                    }
+                    inputField.val(value);
+                    var cartItems=CCRZ.cartDetailModel.attributes.cartItems.models;
+                    
+                    for(var i=0;i<cartItems.length;i++){
+                        if(cartItems[i].id == cartItemId){
+                            cartItems[i].attributes.quantity=value;
+                            break;
+                        }                       
+                    }
+                    CCRZ.cartDetailView.params.hasChanged = true;
+                };
+                
+                cartDetailView.decrementHandler = function(e) {
+                    e.preventDefault();
+                    var prodId =  e.currentTarget.dataset["id"];
+                    cartDetailView.totalQtyFunction(prodId);
+                    var prdQty=skuQtymap[prodId];
+                    var cartItemId = e.currentTarget.dataset["cid"];
+                    var prvqty=cartItemQty[cartItemId];
+                    //OO-1592 updated the id reference as cart item id
+                    var inputField = $('.entry.plus_minus[data-cid="'+cartItemId+'"]');
+                    var minQty = parseInt(prodInvData[cartItemId]['MinQuantity']);
+                    var minOrder=prodInvData[cartItemId]['MinOrder'];
+                    //defect-OO-2727
+                    if(minOrder==null || isNaN(minOrder) || minOrder==undefined){
+                        minOrder=1;
+                    }
+                    var palletsize=prodInvData[cartItemId]['PalletSize'];
+                    var value = parseInt(inputField.val());
+                    var isFullPalletReq=prodInvData[cartItemId]['fullPalletReq'];
+                    if(isFullPalletReq){
+                        if(value-minOrder >0){
+                            value -=palletsize;
+                        }
+                    } else {
+                        if(value-1 >0){
+                            value -=1;
+                        }
+                    }
+                    var diffqty=prvqty-value;
+                    var total = prdQty-diffqty;
+                    if(value<=1){
+                        $('.minus-button[data-cid="'+cartItemId+'"]').attr('disabled','disabled');
+                    }
+                    if( total <= minOrder ||value<1 ){
+                        $('.minus-button[data-cid="'+cartItemId+'"]').attr('disabled','disabled');
+                        if(!isItemPresent){
+                            value = minOrder;
+                        }
+                    }
+                
+                    inputField.val(value);
+                    var cartItems=CCRZ.cartDetailModel.attributes.cartItems.models;
+                    var cartItemId= e.currentTarget.dataset["cid"];
+                    for(var i=0;i<cartItems.length;i++){
+                        if(cartItems[i].id == cartItemId) {
+                            cartItems[i].attributes.quantity=value;
+                            break;
+                        }                       
+                    }
+                    CCRZ.cartDetailView.params.hasChanged = true;
+                };
+                
+                cartDetailView.removeButtonHandler = function(e) {
+                    if(isConfirmed){
+                        CCRZ.pagevars.currentCartID = CCRZ.pagevars.queryParams.cartID || CCRZ.pagevars.queryParams.cartId;
+                        CCRZ.cartDetailView.removeItem(e);
+                        isViewRefreshed=true;
+                        isConfirmed = false;
+                        isNotRefreshed=true;
+                    }
+                    else {
+                        currentCartItemId = e.currentTarget.dataset["id"];
+                        openDeleteModalPopup();
+                    }                    
+                };
+                
+                cartDetailView.deleteHandler = function(e) {
+                    isConfirmed = true;
+                    $('#delete-warning-modal').modal('hide');
+                    isDeleteOpened = false;
+                    $(".remove-cart-button[data-id='" + currentCartItemId + "']").click();
+                };
+                
+                cartDetailView.titleClickHandler = function(e) {
+                    var ele = $(e.currentTarget);
+                    ele.find('.oo_E2Description').toggleClass('show hide');
+                    ele.find('.detail-icon').toggleClass('icon-icons_next icon-icons_down');
+                    $(ele.data('target')).toggleClass('collapse');
+                };
+                
+                cartDetailView.contractDetailsHandler =  function(e) {
+                    var cartItemId=e.currentTarget.dataset["cid"];
+                    contractModel = new CCRZ.models.contractDetailModel(prodInvData[cartItemId]);
+                    openContractModal();                    
+                };
+                
+                cartDetailView.cancelShoppingHandler = function(e) {
+                    openCancelAmmendModal();
+                    
+                };
+                
+                cartDetailView.ammendItems = function(e) {
+                    cartDetailModel.ammendItems( function(resp) {
+                        if(resp && resp.success) { 
+                             respDataMap=resp.data;
+                             setSessionValue(selectedShipTo,getSessionValue('oldShipTo'));
+                             setSessionValue(selectedPlant,getSessionValue('oldShipFrom'));
+                             setSessionValue(shipDate,getSessionValue('oldShipDate'));
+                             setSessionValue('disabledDates',getSessionValue('oldDisableDates'));
+                             var url=respDataMap['url'];
+                             url = url.replace('&sid='+CCRZ.pagevars.queryParams.sid, '&sid='+getSessionValue('oldShipFrom'));
+                             removeSessionItem('oldShipTo');
+                             removeSessionItem('oldShipFrom');
+                             removeSessionItem('oldShipDate');
+                             removeSessionItem('oldDisableDates');
+                             var encCartId=respDataMap['encCartId'];
+                             CCRZ.pagevars.currentCartID = encCartId;
+                             CCRZ.pagevars.queryParams.cartId = encCartId;
+                             CCRZ.pubSub.trigger('cartChange', encCartId); 
+                             document.location=url;
+                        }
+                    });
+                };
+                
+                cartDetailView.submitHandler = function(e) {
+                    var cartItemMap = {}; 
+                    $('.input-text.entry.plus_minus').each(function() {
+                        var currentCartItemId = $(this).parent().parent().attr('data-id');
+                        cartItemMap[currentCartItemId] = $(this).val();
+                    });
+                    
+                    var minOrderMessage = $(''+CCRZ.pagevars.pageLabels["MinimumWeightPrebook"]+'</span>');
+                    var isVisible = false;
+                    
+                    cartDetailModel.validateOrderMinimumWeight(cartItemMap, function(resp) {
+                        if(resp) {
+                            if(resp.success){
+                                CCRZ.cartDetailView.goToCheckout();
+                                if(isVisible) {
+                                    //OO-1325 - to hide the complete message
+                                    $('.messagingSection-Error').empty();
+                                }
+                            } else {
+                                if(!isVisible){
+                                    CCRZ.pubSub.trigger('cartChange', CCRZ.pagevars.currentCartID);
+                                    var message = '<span class="min-error">' + CCRZ.pagevars.pageLabels["MinimumWeightPrebook"] + 'You need to add ' + resp.data + ' lbs</span>';
+                                    $('.messagingSection-Error').html(message).show();
+                                    isVisible = true;
+                                }
+                                window.scroll(0,0);
+                            }                            
+                        }
+                    });
+                };
+                
+                cartDetailView.commentsLinkHandler = function(e) {
+                    var itemId = e.currentTarget.dataset["id"];
+                    saveNote = $('.commentField'+itemId).val();
+                };
+                
+                cartDetailView.closeClickHandler = function(e) {
+                    var itemId=e.currentTarget.dataset["id"];
+                    $('.commentField'+itemId).val(saveNote);    
+                };
+                
+                cartDetailView.continueShopping = function(e) {
+                    e.preventDefault();
+                    var encCartId = CCRZ.pagevars.queryParams.cartID || CCRZ.pagevars.queryParams.cartId;
+                    //window.location = CCRZ.pages.products + '?cartId='+ encCartId + '&' + getCSRQueryString();
+                    //Defect#OO-3227
+                     window.location = CCRZ.pages.homePage + '?viewState=ListView&cartId='+ encCartId + '&' + getCSRQueryString();
+                     //Defect#OO-3227
+                };
+                
+                cartDetailModel.saveComments = function(cartItemId, notes, callback) {
+                    var remoteActionCallForComment = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_CartIncRDController'});
+                    remoteActionCallForComment.invokeCtx( 'saveNotes', cartItemId, notes, function(resp) {
+                        callback(resp);
+                    }, {buffer:false,escape:false,nmsp:false});
+                };
+                
+                cartDetailView.saveComments = function(e) {
+                    e.preventDefault();
+                    theView.updateItemComment(e);
+                    var cartItemId  = e.currentTarget.dataset["id"];
+                    var notes = $('.commentField'+cartItemId).val();
+                    notes = notes || "";
+                    addInfoItem = notes;
+                    var update_note=CCRZ.pagevars.pageLabels['update_note'];
+                    var add_note=CCRZ.pagevars.pageLabels['add_note'];
+                    
+                    
+                    // Calling the controller class 'cc_oo_CartIncRDController' and the method 'saveNotes' having the parameter 'productIds'
+                    cartDetailModel.saveComments( cartItemId, notes, function(resp) {
+                        if(resp && resp.success) {
+                            if(notes!=''){
+                                $('#commentsLink_'+cartItemId).html(update_note);
+                            } else {
+                                $('#commentsLink_'+cartItemId).html(add_note);
+                            } 
+                            var obj = _.findWhere(notesData, {"cartItemId" : cartItemId});
+                            if(obj) {
+                                obj["notes"] = notes;
+                            }
+                        }
+                        $('#comments_'+cartItemId).modal('hide');
+                    });
+                };
+                
+                cartDetailView.checkComments = function(e) {
+                    addInfoItem = e.currentTarget.value || "";
+                };
+                
+                cartDetailView.blurHandler = function(e) { 
+                    $('.alert.alert-warning.messagingAction-Warning').addClass('force-hide');
+                    $('.invalid-quantity').hide();
+                };
+                
+                //defect#3727
+                cartDetailView.keyUpHandler = function(e) { 
+                        e.preventDefault();
+                        var reg = new RegExp('^(0|[1-9][0-9]*)$');
+                        var cartItemId=e.currentTarget.dataset["cid"];
+                        var value=$(e.currentTarget).val();
+                        if(!reg.test(value)|| value==0){
+                            $('.invalid-quantity').text(CCRZ.pagevars.pageLabels["OO_Invalid_qty"]).show();
+                            var palletError = $('.pallet-qty-error[data-cid="'+cartItemId+'"]');
+                            palletError.hide();
+                        }else{
+                             $('.invalid-quantity').hide();
+                        }
+                }; //defect#3727
+                
+                
+                var events = cartDetailView.events;
+                events["click .update-cart-button"] = "updateButtonHandler";
+                events["click .plus-button"] = "incrementHandler";
+                events["click .minus-button"] = "decrementHandler";
+                events["click .btn-delete-item"] = "deleteHandler";
+                events["click .remove-cart-button"] = "removeButtonHandler";
+                events["keyup .entry.plus_minus"] = "keyUpHandler";
+                events["blur .entry.plus_minus"] = "blurHandler";
+                events["click .check-out-btn"] = function(e) {
+                    cartDetailView.verifyCartData(e, false, this);
+                };
+                events["click .title"] = "titleClickHandler";
+                events["click .contract-details"] = "contractDetailsHandler";
+                events["click .cancel-shopping"] = "cancelShoppingHandler";
+                events["click .submit-button"] = "submitHandler";
+                events["click .commentsLink"] = "commentsLinkHandler";
+                events["click .close"] = "closeClickHandler";
+                events["click .continue-shopping"] = "continueShopping";
+                events["click .saveComment"] = "saveComments";
+                events["keyup .global-textarea"] = "checkComments";
+            };
+            
+            var changeDateForm=function(shipDate){
+                var newFormatDate = new Date(shipDate);
+                var month=newFormatDate.getMonth()+1;
+                if(month<10){
+                    month="0"+month;
+                }
+                var date=newFormatDate.getDate();
+                if(date<10){
+                    date="0"+date;
+                }
+                var year=newFormatDate.getFullYear();
+                newFormatDate=month+"/"+date+"/"+year;
+                return newFormatDate;
+            };
+            
+            CCRZ.models.CartSplitModel = CCRZ.CloudCrazeModel.extend();
+            
+            CCRZ.views.CartSplitView = CCRZ.CloudCrazeView.extend({
+                viewName : "contactUsView",
+                templateDesktop : CCRZ.util.template("shopping-cart-split"),
+                templatePhone : CCRZ.util.template("OO-cart-split-template-mobile"),
+                desktopSelector : ".home_slider",
+                phoneSelector : "#shopping-cart-split-header",
+                
+                initialize: function(modelData) {
+                    this.dataSet = modelData;
+                    this.render();
+                },
+                renderDesktop : function() {
+                    var self = this;
+                    this.$el = $(this.desktopSelector);
+                    this.setElement(this.$el);
+                    this.$el.html(this.templateDesktop(this.dataSet.toJSON()));
+                    CCRZ.pubSub.trigger("view:"+this.viewName+":refresh", this);
+                },
+                renderPhone : function() {
+                    var self = this;
+                    this.$el = $(this.phoneSelector);
+                    this.setElement(this.$el);
+                    this.$el.html(this.templatePhone(this.dataSet.toJSON()));
+                    CCRZ.pubSub.trigger("view:"+this.viewName+":refresh", this);
+                },
+                viewChanged: function() {
+                    if(this.currentView !== CCRZ.display.currentView) {
+                        this.currentView = CCRZ.display.currentView;
+                        return true;
+                    }
+                    return false;
+                },
+                renderViewChanged: function() {
+                    CCRZ.display.setCurrentView();
+                    if(this.viewChanged()) {
+                        this.render(this.dataSet);
+                    }
+                },
+                events: { 
+                    "click .cart-data" : function(e) { 
+                        cartDetailsPage(e.currentTarget.dataset["id"]);
+                    },
+                    "focus .requestedDate" : function(e){
+                        e.currentTarget.blur();
+                    }
+                }
+            });
+            
+            CCRZ.models.dateChangeModel = CCRZ.CloudCrazeModel.extend();
+            
+            CCRZ.views.dateChangeView = CCRZ.CloudCrazeView.extend({
+                viewName : "dateChangeView",
+                templateBoth : CCRZ.util.template('shipdate-change-dialog'),
+                initialize: function(modelData, callback) {
+                    this.render(modelData, callback);
+                },
+                events : {
+                    "click .oo-shipdate-change-cancel": "cancelClick",
+                    "click .oo-shipdate-change" : "splitCarts"
+                },
+                render : function(modelData, callback) {
+                    this.dataSet = modelData;
+                    this.setElement($(".date-warning"));
+                    var v = this;
+                    v.$el.html(v.templateBoth(this.dataSet.toJSON()));
+                    callback();
+                    CCRZ.pubSub.trigger("view:"+this.viewName+":refresh", this);
+                },
+                cancelClick : function(e) {
+                    $('#shipdate-change-modal').modal('hide');
+                    $('.requestedDate').val(e.currentTarget.dataset.oldDate);
+                    isDateModalOpened = false;
+                },
+                splitCarts: function(e) {
+                    //Code for splitting carts.
+                    var cartId = CCRZ.pagevars.queryParams.cartID || CCRZ.pagevars.queryParams.cartId;
+                    var remoteCall =  _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_CartController'});
+                    remoteCall.invokeCtx('splitProductOnDate',cartId, e.currentTarget.dataset.newDate, function(resp) {
+                        if(resp && resp.success) {
+                            cartDetailsPage(cartId);
+                            setSessionValue(shipDate, e.currentTarget.dataset.newDate);
+                        }                       
+                    }, {buffer:false,escape:false,nmsp:false});
+            
+                }
+            });
+            
+            CCRZ.views.removeItemModal = CCRZ.CloudCrazeView.extend({
+                viewName : "removeItemModal",
+                templateBoth : CCRZ.util.template('delete-warning-dialog'),
+                selector : ".delete-warning",
+                initialize: function(callback) {
+                    this.render(callback);
+                },
+                events :{
+                    "click .btn-delete-item" : "deleteHandler",
+                    "click .btn-cancel": "cancelHandler"
+                },
+                render : function(callback) {
+                    this.setElement($(this.selector));
+                    var v = this;
+                    v.$el.html(v.templateBoth());
+                    callback();
+                    CCRZ.pubSub.trigger("view:"+this.viewName+":refresh", this);
+                },
+                deleteHandler : function(e) {
+                    CCRZ.views.CartDetailView.prototype.deleteHandler(e);
+                },
+                cancelHandler: function(e) {
+                    $('#delete-warning-modal').modal('hide');
+                    isDeleteOpened = false;
+                }
+            });
+            
+            CCRZ.views.warningAmmendModal = CCRZ.CloudCrazeView.extend({
+                viewName : "warningAmmendModal",
+                templateBoth : CCRZ.util.template('cancel-ammend-warning-dialog'),
+                selector : ".ammend-warning",
+                initialize: function(callback) {
+                    this.render(callback);
+                },
+                events :{
+                    "click .btn-yes-amend-item": "ammendItems",
+                    "click .btn-cancel": "cancelHandler"
+                },
+                render : function(callback) {
+                    this.setElement($(this.selector));
+                    var v = this;
+                    v.$el.html(v.templateBoth());
+                    callback();
+                    CCRZ.pubSub.trigger("view:"+this.viewName+":refresh", this);
+                },
+                ammendItems : function(e) {
+                    CCRZ.views.CartDetailView.prototype.ammendItems(e);
+                },
+                cancelHandler: function(e) {
+                    $('#cancel-ammend-warning-modal').modal('hide');
+                    isCancelAmmendOpened = false;
+                }
+            });
+             
+            CCRZ.models.contractDetailModel = CCRZ.CloudCrazeModel.extend();
+            
+            CCRZ.views.contractDetailsView = CCRZ.CloudCrazeView.extend({
+                viewName : "contractDetailsModal",
+                templateBoth : CCRZ.util.template('contract-details-modal-template'),
+                selector : ".contract-details-container",
+                initialize: function(modelData, callback) {
+                    this.render(modelData, callback);
+                },
+                events: {
+                    "click .btn-cancel": "cancelHandler"
+                },
+                render : function(modelData,callback) {
+                    this.dataSet = modelData;
+                    this.setElement($(this.selector));
+                    var v = this;
+                    v.$el.html(v.templateBoth(this.dataSet.toJSON()));
+                    callback();
+                    CCRZ.pubSub.trigger("view:"+this.viewName+":refresh", this);
+                },
+                cancelHandler: function() {
+                    $('#contract-details-modal').modal('hide');
+                    isContractModelOpened = false;
+                }
+            });
+            
+            
+            // Remote Action function call starts from here
+                    
+            
+            
+            
+           //End of user story 372 adding e2 description. 
+            // User story OO-307 Disable link for E1 description for Pre-order.
+            var orderType = $.urlParam("orderType");
+            Handlebars.registerHelper('prodLink', function (prodData) {
+                return (orderType && orderType.toLowerCase() === ("prebook").toLowerCase()) ? 
+                '<h2>'+mockProduct.name+'</h2></p>' : 
+                '<p><a href="javascript:void(0);" class="prodLink" data-sku="'+mockProduct.sku+'">'+mockProduct.name+'</a></p>';                    
+            });
+            
+            /* US - 1891
+                var modalSplitClickHandler = function(methodName, obj) {
+                    var remoteCall = _.extend(CCRZ.RemoteInvocation,{className:'cc_oo_CartController'});
+                    remoteCall.invokeCtx( methodName ,obj, function(resp){
+                        if(resp && resp.success) {
+                            sessionStorage.setItem('quantity', resp.data['quantity']);
+                            productDetails(obj.sku);
+                        }
+                    }, {buffer:false,escape:false,nmsp:false}); 
+                      
+                };
+                $(document).off('click','.btn-split').on('click','.btn-split',function(e){
+                    modalSplitClickHandler('splitContract', JSON.parse($(this).attr("data-obj")));
+                    $('#prod-contract-modal').modal('hide');
+               });
+               
+                $(document).off('click','.btn-split-cancel').on('click','.btn-split-cancel',function(e){
+                    modalSplitClickHandler('cancelContract', JSON.parse($(this).attr("data-obj"))); 
+                    $('#prod-contract-modal').modal('hide'); 
+               });
+            */
+        });
+        Handlebars.registerHelper("getSKU", function(SKU){
+            return SKU.replace("PAL", "").replace("BG","");
+        });
+               
+    </script>
+</apex:component>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>AMASellingSupportExpense__c$DealerAccount__c.Name</field>
+    </columns>
+    <columns>
+        <field>AMASellingSupportExpense__c$UltimateParentAR__c.Account_External_ID_JDE__c</field>
+    </columns>
+    <columns>
+        <field>AMASellingSupportExpense__c$Selling_Support_Program_Year__c.SellingSupportExternalId__c</field>
+    </columns>
+    <columns>
+        <field>AMASellingSupportExpense__c$Record_Type_ID__c</field>
+    </columns>
+    <columns>
+        <field>AMASellingSupportExpense__c$SalesOperationsBalanceAdjustment__c</field>
+    </columns>
+    <description>Balance Adjustment Template LPDCR 573</description>
+    <filter>
+        <criteriaItems>
+            <column>AMASellingSupportExpense__c$DealerAccount__c.Parent.AccountNumber</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>AMASellingSupportExpense__c$Type__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Balance Adjustment</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Balance Adjustment Template</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>AMA_Expenses__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>AMASellingSupportExpense__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

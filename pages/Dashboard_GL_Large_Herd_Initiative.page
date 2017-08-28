@@ -1,0 +1,8 @@
+<apex:page >
+<table>
+
+<tr><td valign="top"><font color="Navy" size="+1"><i>The purpose of this dashboard is to track results for the Great Lakes Region Large Herd Initiative. This initiative will improve the footprint of large dairies in the Great Lakes Region.</i></font></td></tr>
+
+
+</table>
+</apex:page>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>PMI Contact Us Email Template for Contacts</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>PMI Contact Us Contact Email Template</name>
+    <style>none</style>
+    <subject>PMI Contact Us || From:  {!Contact.Name}</subject>
+    <type>text</type>
+</EmailTemplate>

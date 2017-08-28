@@ -1,0 +1,106 @@
+<apex:component controller="LPDCR_BLCarousel" allowDML="true">
+    <apex:attribute name="bgColor"
+                    type="String"
+                    description="The style class for the background color of the component"
+                    required="false"
+                    default="bg_wht" />
+                    
+<apex:outputText rendered="{!init}" />
+     <div class="col-sm-12 {!bgColor} pad_lft_rgt pad_all0">        
+         <div class="panel with-nav-tabs panel-default">
+                 <div id="carousel-promotions" class="carousel slide" data-ride="carousel">                     
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner" role="listbox" id="slide1">
+                         
+                       <apex:repeat value="{!carouselDataList}" var="carousel">
+                           
+                          <div class="item">
+                                <!-- IF THE DOCUMENT TYPE = VIDEO, SHOW THE VIDEO -->
+                                <apex:outputPanel id="videoSlide" rendered="{!IF(carousel.DocumentType == 'Video' && !IsBlank(carousel.CarouselURLLink), true, false)}" >
+                                    <div align="center">
+                                        <video  loop="true" controls="true" width="100%" height="300px">
+                                           <source src="{!carousel.CarouselURLLink}" />
+                                           Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </apex:outputPanel>
+                                <!-- IF THE DOCUMENT TYPE != VIDEO, SHOW THE IMAGE -->
+                                <apex:outputPanel id="imageSlide" rendered="{!IF(carousel.DocumentType != 'Video', true, false)}" >
+                                   
+                                    <apex:outputPanel rendered="{!(carousel != null && carousel.CarouselImage != null)}">
+                                        <apex:image StyleClass="img-responsive caro"  width="735px" url="{!carousel.CarouselImage}" alt="{!carousel.CarouselHeadline}"/>
+                                     </apex:outputPanel>
+                                     <div class="crsl">
+                                        <apex:outputPanel rendered="{!carousel.CarouselHeadline != null}">
+                                            <p class="pos_rel ctitle"><b>{!carousel.CarouselHeadline}</b></p>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!carousel.CarouselTextArea != null}" styleClass="hidden-xs">
+                                             <apex:outputText styleClass="fnt10 pos_rel pad_btm20 dis_inlineblock" value="{!carousel.CarouselTextArea}" escape="false"></apex:outputText> <br/>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!IF( carousel.CarouselURLLink != null, true, false)}">
+                                            <apex:outputLink styleClass="pos_rel" value="{!carousel.CarouselURLLink}" target="_blank">{!carousel.CarouselButtonText}</apex:outputLink> 
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!IF( carousel.CarouselURLLink == null && carousel.CarouselDocumentLink != null && carousel.CarouselButtonLink == null, true, false)}">
+                                            <apex:outputLink styleClass="pos_rel" value="{!carousel.CarouselDocumentLink}" target="_blank">{!carousel.CarouselButtonText}</apex:outputLink> 
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!IF( carousel.CarouselURLLink == null && carousel.CarouselDocumentLink == null && carousel.CarouselButtonLink != null, true, false)}">
+                                            <button class="pos_rel btn_act" onclick="window.open('{!carousel.CarouselButtonLink}');return false;" target="_blank">{!carousel.CarouselButtonText}</button> 
+                                        </apex:outputPanel> 
+                                     </div>
+                                 </apex:outputPanel>
+                           </div>
+                        </apex:repeat>
+                  </div>  
+                     
+                     <!-- Controls -->
+                        <div class="col-sm-2 col-xs-4 flt_rgt contrls">
+                           <a class="left carousel-control previ" href="#carousel-promotions" role="button" data-slide="prev">
+                           <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">Previous</span>
+                          </a>                          
+                          <ol class="carousel-indicators" style="z-index:1 !important" id="dots">
+                          
+                            <apex:repeat value="{!carouselDataList}" var="dot">
+                           <li data-target="#myCarousel" data-slide-to="dot.PromotionsID" class=""></li>
+                            </apex:repeat>
+                            
+                          </ol>
+                          <a class="right carousel-control" href="#carousel-promotions" role="button" data-slide="next">                               
+                           <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> <span class="sr-only">Next</span>
+                         </a>
+                         </div>                      
+                   </div> 
+                   
+        </div>
+     </div>    
+     
+     <script>
+  window.onload = function() {
+    var childNodes = document.getElementById('slide1').childNodes;
+    childNodes[1].className = "item active";   
+    var childdots = document.getElementById('dots').childNodes;
+    childdots[1].className = "active";
+  }      
+</script> 
+<style>.carousel-inner{min-height: 290px;}
+  .crsl{
+    position: absolute;
+    z-index: 9999999999;
+    color: #fff;
+    top: 25px;
+    width: 94%;
+    text-align: right;
+    right: 30px;
+    }
+  .ctitle{
+      font-size:20px;
+  }
+  .carousel-inner>.item>img, .carousel-inner>.item>a>img{
+  width:735px !important;
+  height:340px !important;
+  }
+  .img-responsive.caro, .thumbnail>img, .thumbnail a>img, .carousel-inner>.item>img, .carousel-inner>.item>a>img{
+  height:340px !important;
+  }
+</style> 
+
+</apex:component>

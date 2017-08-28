@@ -1,0 +1,4354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>AddCampaign</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AdvancedSetup</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Campaign_Default</fullName>
+        <fields>Name</fields>
+        <fields>RecordTypeId</fields>
+        <fields>Type</fields>
+        <fields>Date_of_Event__c</fields>
+        <fields>Sub_type__c</fields>
+        <label>Campaign Default</label>
+    </compactLayouts>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <fields>
+        <fullName>ActualCost</fullName>
+    </fields>
+    <fields>
+        <fullName>Agency_of_Record__c</fullName>
+        <description>Marketing agency that is working with Purina on this marketing initiative.</description>
+        <externalId>false</externalId>
+        <label>Agency of Record</label>
+        <required>false</required>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>McCord</fullName>
+                    <default>false</default>
+                    <label>McCord</label>
+                </value>
+                <value>
+                    <fullName>Filament</fullName>
+                    <default>false</default>
+                    <label>Filament</label>
+                </value>
+                <value>
+                    <fullName>Colle + McVoy</fullName>
+                    <default>false</default>
+                    <label>Colle + McVoy</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Allow_13to17__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>A standard age gate of 18 or older exists for collecting user information.  If this event involves minors and you wish to allow them to participate, check this box.</description>
+        <externalId>false</externalId>
+        <label>Allow 13 - 17 Year Olds to Participate</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AmountAllOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>AmountWonOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>Associated_Dealer_18_Digit_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>Associated_Dealer__r.X18_Digit_Account_ID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Associated Dealer 18 Digit ID</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Associated_Dealer_Account_Number__c</fullName>
+        <externalId>false</externalId>
+        <formula>Associated_Dealer__r.AccountNumber</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Associated Dealer Account Number</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Associated_Dealer_Mapping_Zip__c</fullName>
+        <externalId>false</externalId>
+        <formula>Associated_Dealer__r.BillingPostalCode</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Associated Dealer Mapping Zip</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Associated_Dealer__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup to Accounts that are Dealer-Coop Records.</description>
+        <externalId>false</externalId>
+        <label>Associated Dealer</label>
+        <lookupFilter>
+            <active>true</active>
+            <errorMessage>The Account selected is not a Dealer-Coop Account.</errorMessage>
+            <filterItems>
+                <field>Account.RecordType.Name</field>
+                <operation>contains</operation>
+                <value>Dealer</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Customer Events</relationshipLabel>
+        <relationshipName>Customer_Events</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Attended_Count__c</fullName>
+        <description>Rolls up the number of campaign members where the member status is &quot;Attended&quot;.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Counts the number of campaign members where the status is &quot;Attended&quot;</inlineHelpText>
+        <label>Attended Count</label>
+        <summaryFilterItems>
+            <field>CampaignMember.Status</field>
+            <operation>equals</operation>
+            <value>Attended</value>
+        </summaryFilterItems>
+        <summaryForeignKey>CampaignMember.CampaignId</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Brochure_Content__c</fullName>
+        <description>Content to be used in the Dealer Community</description>
+        <externalId>false</externalId>
+        <label>Brochure Content</label>
+        <length>32768</length>
+        <type>Html</type>
+        <visibleLines>50</visibleLines>
+    </fields>
+    <fields>
+        <fullName>BudgetedCost</fullName>
+    </fields>
+    <fields>
+        <fullName>Call_To_Action_Button_Text__c</fullName>
+        <description>Will hold the button label.</description>
+        <externalId>false</externalId>
+        <label>Call To Action Button Text</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Call_To_Action_URL__c</fullName>
+        <externalId>false</externalId>
+        <label>Call To Action URL</label>
+        <required>false</required>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>CampaignMemberRecordTypeId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Canceled_Count__c</fullName>
+        <description>Rolls up the number of campaign members where the member status is &quot;Canceled&quot; or &quot;Sent&quot;. The &quot;sent&quot; status is included because the FARM custom code does not update the campaign member status to &quot;Canceled&quot;.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Counts the number of campaign members where the status is &quot;Canceled&quot;</inlineHelpText>
+        <label>Canceled Count</label>
+        <summaryFilterItems>
+            <field>CampaignMember.Status</field>
+            <operation>equals</operation>
+            <value>Canceled, Sent</value>
+        </summaryFilterItems>
+        <summaryForeignKey>CampaignMember.CampaignId</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Confirm_Laptop_Zip_Code__c</fullName>
+        <externalId>false</externalId>
+        <formula>&quot;http://bit.ly/1OlmuF2&quot;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Confirm Laptop Zip Code</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Curr_Year_Ind_Date_of_Event__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(Text(Year( Date_of_Event__c )) = text(Year(today())),&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Curr Year Ind (Date of Event)</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Current_Week_Indicator_Date_of_Event__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(and( 
+Date_of_Event__c &gt;=  First_Day_of_Current_Week__c  , 
+Date_of_Event__c &lt;=  Last_Day_of_Current_Week__c ) ,&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Current Week Indicator (Date of Event)</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Current_Week_Indicator_End_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(and( 
+EndDate &gt;=  First_Day_of_Current_Week__c  , 
+EndDate &lt;=  Last_Day_of_Current_Week__c ),&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Current Week Indicator (End Date)</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Event_Count__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(isblank( Id ),0,1)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Customer Event Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Date_Range__c</fullName>
+        <description>Date Range for the Promotion</description>
+        <externalId>false</externalId>
+        <formula>CASE(MONTH( Promotion_Start_Date__c ),
+1, &quot;Jan&quot;,
+2, &quot;Feb&quot;,
+3, &quot;Mar&quot;, 
+4, &quot;Apr&quot;, 
+5, &quot;May&quot;, 
+6, &quot;Jun&quot;,
+7, &quot;Jul&quot;,
+8, &quot;Aug&quot;,
+9, &quot;Sep&quot;,
+10, &quot;Oct&quot;,
+11, &quot;Nov&quot;,
+12, &quot;Dec&quot;,
+&quot;None&quot;)&amp;&quot; &quot;&amp;TEXT(DAY(Promotion_Start_Date__c))&amp;&quot; - &quot;&amp; CASE(MONTH( Promotion_End_Date__c ),
+1, &quot;Jan&quot;,
+2, &quot;Feb&quot;,
+3, &quot;Mar&quot;, 
+4, &quot;Apr&quot;, 
+5, &quot;May&quot;, 
+6, &quot;Jun&quot;,
+7, &quot;Jul&quot;,
+8, &quot;Aug&quot;,
+9, &quot;Sep&quot;,
+10, &quot;Oct&quot;,
+11, &quot;Nov&quot;,
+12, &quot;Dec&quot;,
+&quot;None&quot;)&amp;&quot; &quot;&amp;TEXT(DAY(Promotion_End_Date__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Date Range</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Date_of_Event_Indicator__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(
+
+and(Date_of_Event__c  &lt;= Today()+1,
+EndDate &gt;= TODAY () -1),&quot;Yes&quot;,
+
+if(
+and(Date_of_Event__c  &lt;= Today()+2,
+EndDate &gt;= TODAY() -1),&quot;Yes&quot;,
+
+if(
+and(Date_of_Event__c  = Today(),
+EndDate = TODAY()),&quot;Yes&quot;,
+
+if(
+and(Date_of_Event__c  = Today() +1,
+EndDate = TODAY() +1),&quot;Yes&quot;,
+
+&quot;No&quot;
+
+
+))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Date of Event Indicator</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Date_of_Event_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(Date_of_Event__c) &amp; &quot; &quot; &amp; Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Date of Event || Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Date_of_Event__c</fullName>
+        <description>Date the event will be held</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Farm VIP Event: Date of the VIP Event
+Customer Event: Date of the National, Regional, or Local Event
+Engagement Campaign: Start date of the campaign</inlineHelpText>
+        <label>Date of Event</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+    </fields>
+    <fields>
+        <fullName>Determines_whether_the_email_sends_the_w__c</fullName>
+        <description>Determines whether the email sends the week before the event.</description>
+        <externalId>false</externalId>
+        <label>Determines whether the email sends the w</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Digigraph_Active__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used for Digigraph API Calls</description>
+        <externalId>false</externalId>
+        <label>Digigraph Active</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Display_Order__c</fullName>
+        <description>Display Order</description>
+        <externalId>false</externalId>
+        <label>Display Order</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Display_in_Dealer_Community__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates if the Customer Event should display in the Dealer Community</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked, this Customer Event will display in the Dealer Community</inlineHelpText>
+        <label>Display in Dealer Community</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Distribution_Strategy__c</fullName>
+        <description>Area to include information on distribution strategy for campaign</description>
+        <externalId>false</externalId>
+        <label>Distribution Strategy</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EndDate</fullName>
+    </fields>
+    <fields>
+        <fullName>Event_Date_Range__c</fullName>
+        <description>Date Ranges for Farm VIP Events</description>
+        <externalId>false</externalId>
+        <formula>CASE(MONTH(Date_of_Event__c), 
+1, &quot;Jan&quot;, 
+2, &quot;Feb&quot;, 
+3, &quot;Mar&quot;, 
+4, &quot;Apr&quot;, 
+5, &quot;May&quot;, 
+6, &quot;Jun&quot;, 
+7, &quot;Jul&quot;, 
+8, &quot;Aug&quot;, 
+9, &quot;Sep&quot;, 
+10, &quot;Oct&quot;, 
+11, &quot;Nov&quot;, 
+12, &quot;Dec&quot;, 
+&quot;None&quot;)&amp; &quot; &quot;&amp;TEXT(DAY(Date_of_Event__c)) &amp; ( IF(Date_of_Event__c = EndDate, &quot;&quot;, &quot; - &quot;&amp; CASE(MONTH(EndDate), 
+1, &quot;Jan&quot;, 
+2, &quot;Feb&quot;, 
+3, &quot;Mar&quot;, 
+4, &quot;Apr&quot;, 
+5, &quot;May&quot;, 
+6, &quot;Jun&quot;, 
+7, &quot;Jul&quot;, 
+8, &quot;Aug&quot;, 
+9, &quot;Sep&quot;, 
+10, &quot;Oct&quot;, 
+11, &quot;Nov&quot;, 
+12, &quot;Dec&quot;, 
+&quot;None&quot;)&amp;&quot; &quot;&amp;TEXT(DAY(EndDate)) ) )</formula>
+        <label>Event Date Range</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Event_ID__c</fullName>
+        <description>Salesforce Case-safe 18 Digit ID</description>
+        <externalId>false</externalId>
+        <formula>CASESAFEID(Id)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Event ID</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Event_ID_number__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter Dr. Mike Event ID if applicable</inlineHelpText>
+        <label>Event ID</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Event_Location__c</fullName>
+        <description>City and State the event will be held</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the City and State the event will be held. **Example: Shoreview, MN**</inlineHelpText>
+        <label>Event City, State</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Event_Objective__c</fullName>
+        <description>Area to include the primary objective of the event</description>
+        <externalId>false</externalId>
+        <label>Event Objective</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Event_SubCategory__c</fullName>
+        <description>Sub Category based on the Category for the Event</description>
+        <externalId>false</externalId>
+        <label>Event SubCategory</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Chick Days</fullName>
+                    <default>false</default>
+                    <label>Chick Days</label>
+                </value>
+                <value>
+                    <fullName>Mega Calf &amp; Heifer VIP</fullName>
+                    <default>false</default>
+                    <label>Mega Calf &amp; Heifer VIP</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Event_Zip__c</fullName>
+        <description>Event&apos;s 7 digit zip code</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicate the Event&apos;s 7-digit zip code.</inlineHelpText>
+        <label>Event Zip</label>
+        <length>7</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExpectedResponse</fullName>
+    </fields>
+    <fields>
+        <fullName>ExpectedRevenue</fullName>
+    </fields>
+    <fields>
+        <fullName>ExternalVisibilityEndDate__c</fullName>
+        <description>End Date where the record will be visible to External users. Such as Dealer Community Users.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>End Date where the record will be visible to External users. Such as Dealer Community Users.</inlineHelpText>
+        <label>External Visibility End Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ExternalVisibilityStartDate__c</fullName>
+        <description>Start Date where the record will be visible to External users. Such as Dealer Community Users.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Start Date where the record will be visible to External users. Such as Dealer Community Users.</inlineHelpText>
+        <label>External Visibility Start Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>FARM_VIP_Newsletter_Null__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Lthe FARM VIP Newsletter information has been loaded into Salesforce.com for Contacts.</description>
+        <externalId>false</externalId>
+        <label>Farm VIP Newsletter Load || Null</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Farm_VIP_Newsletter_Load_Not_Null__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This checkbox indicates if the FARM VIP Newsletter information has been loaded into Salesforce.com for Contacts.</description>
+        <externalId>false</externalId>
+        <label>Farm VIP Newsletter Load || Not Null</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>First_Day_2_Weeks_Ago__c</fullName>
+        <externalId>false</externalId>
+        <formula>(TODAY()- 7) - 
+CASE( 
+MOD((TODAY()-7) - DATE( 1900, 1, 7 ), 7 ), 
+0,7, 
+1,8, 
+2,9, 
+3,10, 
+4,11, 
+5,12, 
+13)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>First Day 2 Weeks Ago</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>First_Day_of_Current_Week__c</fullName>
+        <externalId>false</externalId>
+        <formula>(TODAY()+7) - 
+CASE( 
+MOD(TODAY() - DATE( 1900, 1, 7 ), 7 ), 
+0,7, 
+1,8, 
+2,9, 
+3,10, 
+4,11, 
+5,12, 
+13)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>First Day of Current Week</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>First_Day_of_Last_Week__c</fullName>
+        <externalId>false</externalId>
+        <formula>TODAY() - 
+CASE( 
+MOD(TODAY() - DATE( 1900, 1, 7 ), 7 ), 
+0,7, 
+1,8, 
+2,9, 
+3,10, 
+4,11, 
+5,12, 
+13)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>First Day of Last Week</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Have_Booth__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicator if event will have a booth</description>
+        <externalId>false</externalId>
+        <label>Have Booth</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>HierarchyActualCost</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyAmountAllOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyAmountWonOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyBudgetedCost</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyExpectedRevenue</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfContacts</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfConvertedLeads</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfLeads</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfResponses</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfWonOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberSent</fullName>
+    </fields>
+    <fields>
+        <fullName>Image__c</fullName>
+        <description>Image used for the Event Sub Category</description>
+        <externalId>false</externalId>
+        <formula>IF(
+ISPICKVAL(Event_SubCategory__c,&apos;ChickDays&apos;),
+IMAGE(&apos;/resource/1475473908000/LPDCR_Assets/img/chickdays.jpg&apos;,&quot; &quot;),&quot;&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Image</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsActive</fullName>
+    </fields>
+    <fields>
+        <fullName>IsEventCreated__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Is Event Created</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Laptop_Digigraph_Web_Address__c</fullName>
+        <externalId>false</externalId>
+        <formula>&quot;http://bit.ly/20xcM8r&quot;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Laptop - Digigraph Web Address</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Last_Day_2_Weeks_Ago__c</fullName>
+        <externalId>false</externalId>
+        <formula>(TODAY()- 7 ) - 
+CASE( 
+MOD((TODAY()-7) - DATE( 1900, 1, 7 ), 7 ), 
+0,1, 
+1,2, 
+2,3, 
+3,4, 
+4,5, 
+5,6, 
+7)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Last Day 2 Weeks Ago</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Last_Day_of_Current_Week__c</fullName>
+        <externalId>false</externalId>
+        <formula>(TODAY()+ 7 ) - 
+CASE( 
+MOD((TODAY()-7) - DATE( 1900, 1, 7 ), 7 ), 
+0,1, 
+1,2, 
+2,3, 
+3,4, 
+4,5, 
+5,6, 
+7)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Last Day of Current Week</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Last_Day_of_Last_Week__c</fullName>
+        <externalId>false</externalId>
+        <formula>TODAY() - 
+CASE( 
+MOD((TODAY()-7) - DATE( 1900, 1, 7 ), 7 ), 
+0,1, 
+1,2, 
+2,3, 
+3,4, 
+4,5, 
+5,6, 
+7)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Last Day of Last Week</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Last_Updated_Date_Time__c</fullName>
+        <externalId>false</externalId>
+        <formula>LastModifiedDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Last Updated Date/Time</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Maximum_Registrants__c</fullName>
+        <description>Maximum number of registrants allowed for event</description>
+        <externalId>false</externalId>
+        <label>Maximum Registrants</label>
+        <precision>7</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Minimum_Registrants__c</fullName>
+        <description>Minimum number of registrants allowed for event</description>
+        <externalId>false</externalId>
+        <label>Minimum Registrants</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name</fullName>
+    </fields>
+    <fields>
+        <fullName>Name_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>Name &amp; &quot; &quot; &amp; Text(Date_of_Event__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Name &amp; Date</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Newsletter_Not_Null__c</fullName>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(&quot;00Oj0000000PVGi?pv0=&quot;&amp; X18_Digit_Customer_Event_ID__c ,&quot;Newsletter Not Null || &quot; &amp;Name,&quot;_self&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Newsletter || Not Null</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Newsletter_Null__c</fullName>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(&quot;00Oj0000000PVDF?pv0=&quot;&amp; X18_Digit_Customer_Event_ID__c ,&quot;Newsletter Null || &quot; &amp;Name,&quot;_self&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Newsletter || Null</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_Show_Count__c</fullName>
+        <description>Rolls up the number of campaign members where the member status is &quot;No Show&quot;.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Counts the number of campaign members where the status is &quot;No Show&quot;</inlineHelpText>
+        <label>No Show Count</label>
+        <summaryFilterItems>
+            <field>CampaignMember.Status</field>
+            <operation>equals</operation>
+            <value>No Show</value>
+        </summaryFilterItems>
+        <summaryForeignKey>CampaignMember.CampaignId</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>NumberOfContacts</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfConvertedLeads</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfLeads</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfResponses</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfWonOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberSent</fullName>
+    </fields>
+    <fields>
+        <fullName>Number_of_Attendees__c</fullName>
+        <description>Total Number of expected attendees for event</description>
+        <externalId>false</externalId>
+        <label>Number of Attendees</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OwnerId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Owner_s_Email_Address__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner.Email</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Owner&apos;s Email Address</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Owner_s_Profile__c</fullName>
+        <description>Record owner&apos;s profile</description>
+        <externalId>false</externalId>
+        <formula>Owner.Profile.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Owner&apos;s Profile</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Owner_s_Role__c</fullName>
+        <description>The record owner&apos;s role.</description>
+        <externalId>false</externalId>
+        <formula>Owner.UserRole.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Owner&apos;s Role</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Owner_s_Sales_Division__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(Owner.Sales_Division__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Owner&apos;s Sales Division</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Owner_s_Sales_Region__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(Owner.Sales_Region__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Owner&apos;s Sales Region</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ParentId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Phone_Digigraph_Web_Address__c</fullName>
+        <externalId>false</externalId>
+        <formula>&quot;http://bit.ly/1PLVIGQ&quot;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Phone - Digigraph Web Address</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Pre_Book_Date_Range__c</fullName>
+        <description>Date Range for the Pre-Book Promotion based on the Start Date and End Date</description>
+        <externalId>false</externalId>
+        <formula>CASE(MONTH( Pre_Book_Start_Date__c ), 
+1, &quot;Jan&quot;, 
+2, &quot;Feb&quot;, 
+3, &quot;Mar&quot;, 
+4, &quot;Apr&quot;, 
+5, &quot;May&quot;, 
+6, &quot;Jun&quot;, 
+7, &quot;Jul&quot;, 
+8, &quot;Aug&quot;, 
+9, &quot;Sep&quot;, 
+10, &quot;Oct&quot;, 
+11, &quot;Nov&quot;, 
+12, &quot;Dec&quot;, 
+&quot;None&quot;)&amp;&quot; &quot;&amp;TEXT(DAY(Pre_Book_Start_Date__c))&amp;&quot; - &quot;&amp; CASE(MONTH( Pre_Book_End_Date__c ), 
+1, &quot;Jan&quot;, 
+2, &quot;Feb&quot;, 
+3, &quot;Mar&quot;, 
+4, &quot;Apr&quot;, 
+5, &quot;May&quot;, 
+6, &quot;Jun&quot;, 
+7, &quot;Jul&quot;, 
+8, &quot;Aug&quot;, 
+9, &quot;Sep&quot;, 
+10, &quot;Oct&quot;, 
+11, &quot;Nov&quot;, 
+12, &quot;Dec&quot;, 
+&quot;None&quot;)&amp;&quot; &quot;&amp;TEXT(DAY(Pre_Book_End_Date__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Pre-Book Date Range</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Pre_Book_Discount_Code__c</fullName>
+        <description>Promotions (non-product)</description>
+        <externalId>false</externalId>
+        <label>Pre-Book Discount Code</label>
+        <length>10</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Pre_Book_End_Date__c</fullName>
+        <description>Promotions (non-product)</description>
+        <externalId>false</externalId>
+        <label>Pre-Book End Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Pre_Book_Start_Date__c</fullName>
+        <description>Promotions (non-product)</description>
+        <externalId>false</externalId>
+        <label>Pre-Book Start Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Promotion_Description__c</fullName>
+        <description>Promotion (non-product)</description>
+        <externalId>false</externalId>
+        <label>Promotion Description</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Promotion_Discount_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>Promotion Discount Code</label>
+        <length>10</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Promotion_End_Date__c</fullName>
+        <description>Promotions (non-product)</description>
+        <externalId>false</externalId>
+        <label>Promotion End Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Promotion_Start_Date__c</fullName>
+        <description>Promotion related (non-product)</description>
+        <externalId>false</externalId>
+        <label>Promotion Start Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Region_Picklist__c</fullName>
+        <description>Picklist for Event Region</description>
+        <externalId>false</externalId>
+        <label>Event Region</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Northeast</fullName>
+                    <default>false</default>
+                    <label>Northeast</label>
+                </value>
+                <value>
+                    <fullName>Southern</fullName>
+                    <default>false</default>
+                    <label>Southern</label>
+                </value>
+                <value>
+                    <fullName>Upper Midwest</fullName>
+                    <default>false</default>
+                    <label>Upper Midwest</label>
+                </value>
+                <value>
+                    <fullName>CBD</fullName>
+                    <default>false</default>
+                    <label>CBD</label>
+                </value>
+                <value>
+                    <fullName>Feed</fullName>
+                    <default>false</default>
+                    <label>Feed</label>
+                </value>
+                <value>
+                    <fullName>Dealer Business Dev</fullName>
+                    <default>false</default>
+                    <label>Dealer Business Dev</label>
+                </value>
+                <value>
+                    <fullName>National Retail Exotics</fullName>
+                    <default>false</default>
+                    <label>National Retail Exotics</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Region__c</fullName>
+        <description>Region field will be filled in on the Customer Event if it is a Local Customer Event based on the users Sales Region</description>
+        <externalId>false</externalId>
+        <label>Region (Owner)</label>
+        <length>50</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Registered_Based_on_Max_Capacity__c</fullName>
+        <description>The total campaign members with the status of &quot;Registered&quot; divided by the maximum registrants.</description>
+        <externalId>false</externalId>
+        <formula>If(Registered_Count__c =0,0,Registered_Count__c / Maximum_Registrants__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>% Registered Based on Max Capacity</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Registered_Count__c</fullName>
+        <description>Rolls up the number of campaign members where the member status is &quot;Registered&quot;.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Counts the number of campaign members where the status is &quot;registered&quot;</inlineHelpText>
+        <label>Registered Count</label>
+        <summaryFilterItems>
+            <field>CampaignMember.Status</field>
+            <operation>equals</operation>
+            <value>Registered</value>
+        </summaryFilterItems>
+        <summaryForeignKey>CampaignMember.CampaignId</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Registration_Closes__c</fullName>
+        <description>The date the event closes for accepting new nomination requests.</description>
+        <externalId>false</externalId>
+        <formula>Date_of_Event__c - 14</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Registration Closes</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Registration_Opens__c</fullName>
+        <description>Date registration opens for event.  This field is populated via the process builder then the record is created.  The Registration Opens is populated with this:  [Campaign].Date_of_Event__c - 90</description>
+        <externalId>false</externalId>
+        <label>Registration Opens</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Rollup_Annual_Points__c</fullName>
+        <description>Rollup summary of annual points that have been rolled up from all opportunities related to this campaign, and for all children&apos;s campaigns annual points.</description>
+        <externalId>false</externalId>
+        <label>Rollup Annual Points</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Rollup_Annual_Tons__c</fullName>
+        <description>Rollup summary of annual tons that have been rolled up from all opportunities related to this campaign, and for all children&apos;s campaigns annual tons.</description>
+        <externalId>false</externalId>
+        <label>Rollup Annual Tons</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Rollup_Won_Points__c</fullName>
+        <description>total points rolled up from all child opportunities that have a status of closed won.</description>
+        <externalId>false</externalId>
+        <label>Rollup Won Points</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Rollup_Won_Tons__c</fullName>
+        <description>total tons rolled up from all child opportunities that have a status of closed won.</description>
+        <externalId>false</externalId>
+        <label>Rollup Won Tons</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Area_Indicator__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(text( $User.Sales_Division__c) =  Owner_s_Sales_Division__c , &quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Area Indicator</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Division_Indicator__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(
+ Text(Owner.Sales_Division__c) =  Text($User.Sales_Division__c) ,&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Division Indicator</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Send_Pre_Event_Email__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicator whether or not to sent pre-event email</description>
+        <externalId>false</externalId>
+        <label>Send Pre-Event Email</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Send_Registration_Confirmation_Email__c</fullName>
+        <description>Determines whether the Registration Confirmation email sends.</description>
+        <externalId>false</externalId>
+        <label>Send Registration Confirmation Email</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Send_Thank_You_for_Attending_Email__c</fullName>
+        <description>Determines whether to send a &quot;Thank You for Attending&quot; Email.</description>
+        <externalId>false</externalId>
+        <label>Send Thank You for Attending Email</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Send_Week_Before_Event_Email__c</fullName>
+        <description>Determines whether the email sends the week before the event.</description>
+        <externalId>false</externalId>
+        <label>Send Week Before Event Email</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Short_Description__c</fullName>
+        <description>Description of the Farm VIP Event that will display in the Customer Community</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Farm VIP Event that will display in the Customer Community</inlineHelpText>
+        <label>Dealer Facing Description</label>
+        <length>32768</length>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Show_in_Digigraph_Offline__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(
+RecordType.Name = &quot;Customer Events&quot;  &amp;&amp;  text(Sub_type__c)  &lt;&gt; &quot;Horse 60 Day Trial&quot; || RecordType.Name = &quot;National/Regional Events&quot;,&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Show in Digigraph Offline</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Specie_Focus__c</fullName>
+        <description>Specie focus for campaign</description>
+        <externalId>false</externalId>
+        <label>Specie Focus</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Cattle</fullName>
+                    <default>false</default>
+                    <label>Cattle</label>
+                </value>
+                <value>
+                    <fullName>Companion</fullName>
+                    <default>false</default>
+                    <label>Companion</label>
+                </value>
+                <value>
+                    <fullName>Dairy</fullName>
+                    <default>false</default>
+                    <label>Dairy</label>
+                </value>
+                <value>
+                    <fullName>Flock</fullName>
+                    <default>false</default>
+                    <label>Flock</label>
+                </value>
+                <value>
+                    <fullName>Horse</fullName>
+                    <default>false</default>
+                    <label>Horse</label>
+                </value>
+                <value>
+                    <fullName>Pet</fullName>
+                    <default>false</default>
+                    <label>Pet</label>
+                </value>
+                <value>
+                    <fullName>Show</fullName>
+                    <default>false</default>
+                    <label>Show</label>
+                </value>
+                <value>
+                    <fullName>Swine</fullName>
+                    <default>false</default>
+                    <label>Swine</label>
+                </value>
+                <value>
+                    <fullName>Education &amp; Training</fullName>
+                    <default>false</default>
+                    <label>Education &amp; Training</label>
+                </value>
+                <value>
+                    <fullName>General</fullName>
+                    <default>false</default>
+                    <label>General</label>
+                </value>
+                <value>
+                    <fullName>Influencer</fullName>
+                    <default>false</default>
+                    <label>Influencer</label>
+                </value>
+                <value>
+                    <fullName>University/Recruiting</fullName>
+                    <default>false</default>
+                    <label>University/Recruiting</label>
+                </value>
+                <value>
+                    <fullName>Dreamforce</fullName>
+                    <default>false</default>
+                    <label>Dreamforce</label>
+                </value>
+                <value>
+                    <fullName>Backyard Poultry</fullName>
+                    <default>false</default>
+                    <label>Backyard Poultry</label>
+                </value>
+                <value>
+                    <fullName>Dairy - Young Animal</fullName>
+                    <default>false</default>
+                    <label>Dairy - Young Animal</label>
+                </value>
+                <value>
+                    <fullName>Dairy - Transition &amp; Lactating Cow</fullName>
+                    <default>false</default>
+                    <label>Dairy - Transition &amp; Lactating Cow</label>
+                </value>
+                <value>
+                    <fullName>Deer &amp; Elk</fullName>
+                    <default>false</default>
+                    <label>Deer &amp; Elk</label>
+                </value>
+                <value>
+                    <fullName>Fish &amp; Aqua</fullName>
+                    <default>false</default>
+                    <label>Fish &amp; Aqua</label>
+                </value>
+                <value>
+                    <fullName>Goat</fullName>
+                    <default>false</default>
+                    <label>Goat</label>
+                </value>
+                <value>
+                    <fullName>Mazuri</fullName>
+                    <default>false</default>
+                    <label>Mazuri</label>
+                </value>
+                <value>
+                    <fullName>PMI Pet</fullName>
+                    <default>false</default>
+                    <label>PMI Pet</label>
+                </value>
+                <value>
+                    <fullName>Rabbit</fullName>
+                    <default>false</default>
+                    <label>Rabbit</label>
+                </value>
+                <value>
+                    <fullName>Swine - Commercial</fullName>
+                    <default>false</default>
+                    <label>Swine - Commercial</label>
+                </value>
+                <value>
+                    <fullName>Swine - Retail</fullName>
+                    <default>false</default>
+                    <label>Swine - Retail</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Species_Sub_Focus__c</fullName>
+        <description>The species sub-focus at an event.</description>
+        <externalId>false</externalId>
+        <label>Species Sub-Focus</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Cattle</fullName>
+                    <default>false</default>
+                    <label>Cattle</label>
+                </value>
+                <value>
+                    <fullName>Companion</fullName>
+                    <default>false</default>
+                    <label>Companion</label>
+                </value>
+                <value>
+                    <fullName>Dairy</fullName>
+                    <default>false</default>
+                    <label>Dairy</label>
+                </value>
+                <value>
+                    <fullName>Flock</fullName>
+                    <default>false</default>
+                    <label>Flock</label>
+                </value>
+                <value>
+                    <fullName>Horse</fullName>
+                    <default>false</default>
+                    <label>Horse</label>
+                </value>
+                <value>
+                    <fullName>Pet</fullName>
+                    <default>false</default>
+                    <label>Pet</label>
+                </value>
+                <value>
+                    <fullName>Show</fullName>
+                    <default>false</default>
+                    <label>Show</label>
+                </value>
+                <value>
+                    <fullName>Swine</fullName>
+                    <default>false</default>
+                    <label>Swine</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>StartDate</fullName>
+    </fields>
+    <fields>
+        <fullName>Status</fullName>
+        <inlineHelpText>For nFarm VIP Events, time based workflow will do the following:  Updates the status of the Farm VIP Event to &quot;Registration Closed&quot;  seven  days before the Date of Event.</inlineHelpText>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Sub_type__c</fullName>
+        <description>Further categorization for campaign (based on Campaign Type)</description>
+        <externalId>false</externalId>
+        <label>Sub-type</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Calf and Heifer</fullName>
+                    <default>false</default>
+                    <label>Calf and Heifer</label>
+                </value>
+                <value>
+                    <fullName>Cattle Great Starts Program</fullName>
+                    <default>false</default>
+                    <label>Cattle Great Starts Program</label>
+                </value>
+                <value>
+                    <fullName>Cattle Mineral Meetings</fullName>
+                    <default>false</default>
+                    <label>Cattle Mineral Meetings</label>
+                </value>
+                <value>
+                    <fullName>Check-R-Board Days</fullName>
+                    <default>false</default>
+                    <label>Check-R-Board Days</label>
+                </value>
+                <value>
+                    <fullName>Chick Days</fullName>
+                    <default>false</default>
+                    <label>Chick Days</label>
+                </value>
+                <value>
+                    <fullName>Dairy – Cool Cow Promotion</fullName>
+                    <default>false</default>
+                    <label>Dairy – Cool Cow Promotion</label>
+                </value>
+                <value>
+                    <fullName>Double Dog Bowl Dare</fullName>
+                    <default>false</default>
+                    <label>Double Dog Bowl Dare</label>
+                </value>
+                <value>
+                    <fullName>Equine Plus Program</fullName>
+                    <default>false</default>
+                    <label>Equine Plus Program</label>
+                </value>
+                <value>
+                    <fullName>Flocktober</fullName>
+                    <default>false</default>
+                    <label>Flocktober</label>
+                </value>
+                <value>
+                    <fullName>Horse 60 Day Trial</fullName>
+                    <default>false</default>
+                    <label>Horse 60 Day Trial</label>
+                </value>
+                <value>
+                    <fullName>Horse Owner Workshop (HOW Event)</fullName>
+                    <default>false</default>
+                    <label>Horse Owner Workshop (HOW Event)</label>
+                </value>
+                <value>
+                    <fullName>Other Cattle local promos/meeting events</fullName>
+                    <default>false</default>
+                    <label>Other Cattle local promos/meeting events</label>
+                </value>
+                <value>
+                    <fullName>Other Dairy local meeting events</fullName>
+                    <default>false</default>
+                    <label>Other Dairy local meeting events</label>
+                </value>
+                <value>
+                    <fullName>Other Event</fullName>
+                    <default>false</default>
+                    <label>Other Event</label>
+                </value>
+                <value>
+                    <fullName>Other Flock local promos/meeting event</fullName>
+                    <default>false</default>
+                    <label>Other Flock local promos/meeting event</label>
+                </value>
+                <value>
+                    <fullName>Other Horse local promos/meeting events</fullName>
+                    <default>false</default>
+                    <label>Other Horse local promos/meeting events</label>
+                </value>
+                <value>
+                    <fullName>Other Pet local promo/dealer event</fullName>
+                    <default>false</default>
+                    <label>Other Pet local promo/dealer event</label>
+                </value>
+                <value>
+                    <fullName>Other Swine local meeting events</fullName>
+                    <default>false</default>
+                    <label>Other Swine local meeting events</label>
+                </value>
+                <value>
+                    <fullName>Pet Ambassador Event</fullName>
+                    <default>false</default>
+                    <label>Pet Ambassador Event</label>
+                </value>
+                <value>
+                    <fullName>Producer Meeting</fullName>
+                    <default>false</default>
+                    <label>Producer Meeting</label>
+                </value>
+                <value>
+                    <fullName>Purina Bucks</fullName>
+                    <default>false</default>
+                    <label>Purina Bucks</label>
+                </value>
+                <value>
+                    <fullName>Purina Feed Frenzy</fullName>
+                    <default>false</default>
+                    <label>Purina Feed Frenzy</label>
+                </value>
+                <value>
+                    <fullName>Purina Proud</fullName>
+                    <default>false</default>
+                    <label>Purina Proud</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Text_Message__c</fullName>
+        <externalId>false</externalId>
+        <formula>&quot;PURINA&quot;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Text Message</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Text_To__c</fullName>
+        <externalId>false</externalId>
+        <formula>&quot;95323&quot;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Text To</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Today_2_Indicator__c</fullName>
+        <externalId>false</externalId>
+        <formula>If( Date_of_Event__c &gt; TODAY() +2,&quot;Yes&quot;, &quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Today + 2 Indicator</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Today_Minus_2__c</fullName>
+        <externalId>false</externalId>
+        <formula>Today() - 2</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Today - 2 Indicator</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Total_Converted_Producers__c</fullName>
+        <description>Number of producers that converted from Farm VIP Event</description>
+        <externalId>false</externalId>
+        <label>Total Converted Producers</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Count__c</fullName>
+        <description>The total count of campaign members for this campaign. This includes campaign members of all statuses.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The total count of campaign members for this campaign</inlineHelpText>
+        <label>Total Count</label>
+        <summaryForeignKey>CampaignMember.CampaignId</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Leads_and_Contacts__c</fullName>
+        <description>This field shows the sum of Contacts and Leads associated to this event.</description>
+        <externalId>false</externalId>
+        <formula>NumberOfContacts +  NumberOfLeads</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>This field shows the sum of Contacts and Leads associated to this event.</inlineHelpText>
+        <label>Total Leads and Contacts</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Type</fullName>
+        <inlineHelpText>Enter the type of Meeting you are hosting</inlineHelpText>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Visibility_End_Date__c</fullName>
+        <description>Promotions (non-product)</description>
+        <externalId>false</externalId>
+        <label>Visibility End Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Visibility_Start_Date__c</fullName>
+        <description>Promotion (non-product)</description>
+        <externalId>false</externalId>
+        <label>Visibility Start Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>X18_Digit_Customer_Event_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASESAFEID(Id)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>18 Digit Customer Event ID</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X18_Digit_Event_Owner_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner.X18_Digit_User_ID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>18 Digit Event Owner ID</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X1_Week_Ago_Indicator_Date_of_Event__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(and( 
+Date_of_Event__c &gt;=  First_Day_of_Last_Week__c  , 
+Date_of_Event__c &lt;=  Last_Day_of_Last_Week__c) ,&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>1 Week Ago Indicator (Date of Event)</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X1_Week_Ago_Indicator_End_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(and( 
+EndDate &gt;=  First_Day_of_Last_Week__c  , 
+EndDate &lt;=  Last_Day_of_Last_Week__c ),&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>1 Week Ago Indicator (End Date)</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X2_Weeks_Ago_Indicator_Date_of_Event__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(and(
+ Date_of_Event__c  &gt;=  First_Day_2_Weeks_Ago__c ,
+ Date_of_Event__c  &lt;=  Last_Day_2_Weeks_Ago__c ),&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>2 Weeks Ago Indicator (Date of Event)</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X2_Weeks_Ago_Indicator_End_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(and(
+   EndDate  &gt;=  First_Day_2_Weeks_Ago__c ,
+   EndDate  &lt;=  Last_Day_2_Weeks_Ago__c ),&quot;Yes&quot;,&quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>2 Weeks Ago Indicator (End Date)</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X7_Days_Prior_to_Event_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>Date_of_Event__c -7</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>7 Days Prior to Event Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Year_of_Event__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text(Year( Date_of_Event__c ))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Year of Event</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>of_Won_Opportunities__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(
+ NumberOfOpportunities =0,0,NumberOfWonOpportunities / NumberOfOpportunities
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>% of Won Opportunities</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <type>Percent</type>
+    </fields>
+    <listViews>
+        <fullName>AllActiveCampaigns</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>Specie_Focus__c</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>Event_Location__c</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>Number_of_Attendees__c</columns>
+        <columns>Associated_Dealer__c</columns>
+        <columns>CORE.USERS.LAST_NAME</columns>
+        <columns>CAMPAIGN.CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Digigraph_Active__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All Active Customer Events</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Customer_Events_LAST_Month</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>Specie_Focus__c</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>Event_Location__c</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>Number_of_Attendees__c</columns>
+        <columns>Associated_Dealer__c</columns>
+        <columns>CORE.USERS.LAST_NAME</columns>
+        <columns>CAMPAIGN.CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Date_of_Event__c</field>
+            <operation>equals</operation>
+            <value>LAST_MONTH</value>
+        </filters>
+        <filters>
+            <field>CAMPAIGN.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Campaign.Customer_Events,Campaign.National_Regional_Events</value>
+        </filters>
+        <label>All Customer Events Last Month</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Customer_Events_Next_Month</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>Specie_Focus__c</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>Event_Location__c</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>Number_of_Attendees__c</columns>
+        <columns>Associated_Dealer__c</columns>
+        <columns>CORE.USERS.LAST_NAME</columns>
+        <columns>CAMPAIGN.CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Date_of_Event__c</field>
+            <operation>equals</operation>
+            <value>NEXT_MONTH</value>
+        </filters>
+        <filters>
+            <field>CAMPAIGN.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Campaign.Customer_Events,Campaign.National_Regional_Events</value>
+        </filters>
+        <label>All Customer Events Next Month</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Customer_Events_This_Month</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>Specie_Focus__c</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>Event_Location__c</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>Number_of_Attendees__c</columns>
+        <columns>Associated_Dealer__c</columns>
+        <columns>CORE.USERS.LAST_NAME</columns>
+        <columns>CAMPAIGN.CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Date_of_Event__c</field>
+            <operation>equals</operation>
+            <value>THIS_MONTH</value>
+        </filters>
+        <filters>
+            <field>CAMPAIGN.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Campaign.Customer_Events,Campaign.National_Regional_Events</value>
+        </filters>
+        <label>All Customer Events This Month</label>
+    </listViews>
+    <listViews>
+        <fullName>Cancelled_Events</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>Sub_type__c</columns>
+        <columns>Specie_Focus__c</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>Event_Location__c</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>Number_of_Attendees__c</columns>
+        <columns>Associated_Dealer__c</columns>
+        <columns>CAMPAIGN.RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.STATUS</field>
+            <operation>equals</operation>
+            <value>Canceled</value>
+        </filters>
+        <label>Canceled Events</label>
+    </listViews>
+    <listViews>
+        <fullName>Completed_Events</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>Sub_type__c</columns>
+        <columns>Specie_Focus__c</columns>
+        <columns>Event_Location__c</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>Number_of_Attendees__c</columns>
+        <columns>Associated_Dealer__c</columns>
+        <columns>CAMPAIGN.RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.STATUS</field>
+            <operation>equals</operation>
+            <value>Completed</value>
+        </filters>
+        <label>Completed Events</label>
+    </listViews>
+    <listViews>
+        <fullName>Dairy_Customer_Events</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>Specie_Focus__c</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>Event_Location__c</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>Number_of_Attendees__c</columns>
+        <columns>Associated_Dealer__c</columns>
+        <columns>CORE.USERS.LAST_NAME</columns>
+        <columns>CAMPAIGN.CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Campaign.Customer_Events,Campaign.National_Regional_Events</value>
+        </filters>
+        <filters>
+            <field>Specie_Focus__c</field>
+            <operation>equals</operation>
+            <value>Dairy</value>
+        </filters>
+        <label>Dairy Customer Events</label>
+        <sharedTo>
+            <group>Jill_Bonham</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Engagement_Campaign</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>Specie_Focus__c</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>Number_of_Attendees__c</columns>
+        <columns>Total_Leads_and_Contacts__c</columns>
+        <columns>CAMPAIGN.START_DATE</columns>
+        <columns>CAMPAIGN.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Campaign.Engagement_Campaign</value>
+        </filters>
+        <label>Engagement Campaigns</label>
+        <sharedTo>
+            <role>National_Retail_Exotics_Marketing</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Farm_VIP_Events_Future</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>Specie_Focus__c</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Campaign.Farm_VIP_Event</value>
+        </filters>
+        <filters>
+            <field>Date_of_Event__c</field>
+            <operation>greaterThan</operation>
+            <value>TODAY</value>
+        </filters>
+        <label>Farm VIP Events - Future</label>
+        <sharedTo>
+            <group>Farm_VIP_Event_Managers</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Farm_VIP_Events_Past</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>Specie_Focus__c</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>Number_of_Attendees__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Campaign.Farm_VIP_Event</value>
+        </filters>
+        <filters>
+            <field>Date_of_Event__c</field>
+            <operation>lessThan</operation>
+            <value>TODAY</value>
+        </filters>
+        <label>Farm VIP Events - Past</label>
+        <sharedTo>
+            <group>Farm_VIP_Event_Managers</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Farm_VIP_s_Completed_Load_Newsletter</fullName>
+        <booleanFilter>1 AND 2 AND (3 or 4)</booleanFilter>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>Number_of_Attendees__c</columns>
+        <columns>FARM_VIP_Newsletter_Null__c</columns>
+        <columns>Farm_VIP_Newsletter_Load_Not_Null__c</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>CAMPAIGN.RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.STATUS</field>
+            <operation>equals</operation>
+            <value>Completed</value>
+        </filters>
+        <filters>
+            <field>CAMPAIGN.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Campaign.Farm_VIP_Event</value>
+        </filters>
+        <filters>
+            <field>FARM_VIP_Newsletter_Null__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>Farm_VIP_Newsletter_Load_Not_Null__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <label>Farm VIP&apos;s Completed - Load Newsletter</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>My_Customer_Events</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>Sub_type__c</columns>
+        <columns>Specie_Focus__c</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>Event_Location__c</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>Number_of_Attendees__c</columns>
+        <columns>Associated_Dealer__c</columns>
+        <columns>CORE.USERS.LAST_NAME</columns>
+        <filterScope>Mine</filterScope>
+        <label>My Customer Events</label>
+    </listViews>
+    <listViews>
+        <fullName>Planned_Events</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>Sub_type__c</columns>
+        <columns>Specie_Focus__c</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>Event_Location__c</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>Number_of_Attendees__c</columns>
+        <columns>Associated_Dealer__c</columns>
+        <columns>CAMPAIGN.RECORDTYPE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.STATUS</field>
+            <operation>equals</operation>
+            <value>Planned</value>
+        </filters>
+        <label>Planned Events</label>
+    </listViews>
+    <listViews>
+        <fullName>Regional_National_Events</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>Specie_Focus__c</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>Event_Location__c</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>Number_of_Attendees__c</columns>
+        <columns>Associated_Dealer_18_Digit_ID__c</columns>
+        <columns>CORE.USERS.LAST_NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Campaign.National_Regional_Events</value>
+        </filters>
+        <label>Regional/National Events</label>
+    </listViews>
+    <listViews>
+        <fullName>Registration_Closed_Events</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>Specie_Focus__c</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.BUDGETED_COST</columns>
+        <columns>CAMPAIGN.ACTUAL_COST</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>CAMPAIGN.RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.STATUS</field>
+            <operation>equals</operation>
+            <value>Registration Closed</value>
+        </filters>
+        <label>Registration Closed VIP Events</label>
+    </listViews>
+    <listViews>
+        <fullName>Registration_Open_Events</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>Specie_Focus__c</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>CAMPAIGN.RECORDTYPE</columns>
+        <columns>Registration_Opens__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.STATUS</field>
+            <operation>equals</operation>
+            <value>Registration Open</value>
+        </filters>
+        <label>Registration Open  VIP Events</label>
+    </listViews>
+    <listViews>
+        <fullName>Registration_Open_VIP_Capacity_100</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>Specie_Focus__c</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>Registration_Opens__c</columns>
+        <columns>Registration_Closes__c</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>Maximum_Registrants__c</columns>
+        <columns>Registered_Count__c</columns>
+        <columns>Registered_Based_on_Max_Capacity__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Campaign.Farm_VIP_Event</value>
+        </filters>
+        <filters>
+            <field>CAMPAIGN.STATUS</field>
+            <operation>equals</operation>
+            <value>Registration Open</value>
+        </filters>
+        <filters>
+            <field>Registered_Based_on_Max_Capacity__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>100</value>
+        </filters>
+        <label>Registration Open VIP || Capacity 100+ %</label>
+        <sharedTo>
+            <group>FARM_VIP_Gretchen_Richard_Rod</group>
+            <group>Farm_VIP_Event_Managers</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Registration_Open_VIP_Capacity_80</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>Specie_Focus__c</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>Registration_Opens__c</columns>
+        <columns>Registration_Closes__c</columns>
+        <columns>Date_of_Event__c</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>Maximum_Registrants__c</columns>
+        <columns>Registered_Count__c</columns>
+        <columns>Registered_Based_on_Max_Capacity__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Campaign.Farm_VIP_Event</value>
+        </filters>
+        <filters>
+            <field>CAMPAIGN.STATUS</field>
+            <operation>equals</operation>
+            <value>Registration Open</value>
+        </filters>
+        <filters>
+            <field>Registered_Based_on_Max_Capacity__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>80</value>
+        </filters>
+        <label>Registration Open VIP || Capacity 80+ %</label>
+        <sharedTo>
+            <group>FARM_VIP_Gretchen_Richard_Rod</group>
+            <group>Farm_VIP_Event_Managers</group>
+        </sharedTo>
+    </listViews>
+    <recordTypes>
+        <fullName>Business_Builder_Promotions</fullName>
+        <active>true</active>
+        <description>Business Builder Promotions</description>
+        <label>Business Builder Promotions</label>
+        <picklistValues>
+            <picklist>Agency_of_Record__c</picklist>
+            <values>
+                <fullName>Colle %2B McVoy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Filament</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>McCord</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Region_Picklist__c</picklist>
+            <values>
+                <fullName>CBD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dealer Business Dev</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>National Retail Exotics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Northeast</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Southern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upper Midwest</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Specie_Focus__c</picklist>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Companion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education %26 Training</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flock</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Influencer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>University%2FRecruiting</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Species_Sub_Focus__c</picklist>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Companion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flock</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Canceled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Planned</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Registration Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Registration Open</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sub_type__c</picklist>
+            <values>
+                <fullName>Calf and Heifer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Great Starts Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Mineral Meetings</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Check-R-Board Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chick Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy %E2%80%93 Cool Cow Promotion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Equine Plus Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flocktober</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse 60 Day Trial</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse Owner Workshop %28HOW Event%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Cattle local promos%2Fmeeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Dairy local meeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Flock local promos%2Fmeeting event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Horse local promos%2Fmeeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Swine local meeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Producer Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purina Bucks</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purina Feed Frenzy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purina Proud</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Animal Lifecycle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Great Starts Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Mineral Meetings</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Owner Workshop %28COW Event%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Check-R-Board Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chick Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cross-species</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy %E2%80%93 Cool Cow Promotion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dealer%2FTraining VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Elite%2FRed Carpet VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Equine Plus Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Farm VIP Events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flocktober</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse Owner Workshop %28HOW Event%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Local</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>National</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>National VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Newsletters</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Cattle local promos%2Fmeeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Dairy local meeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Flock local promos%2Fmeeting event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Horse local promos%2Fmeeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Swine local meeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Producer Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purina Bucks</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Regional</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Regional Farm VIP %28PhD Virtual Session%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Regional VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shopping Basket</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Customer_Events</fullName>
+        <active>true</active>
+        <description>Local Events</description>
+        <label>Customer Events</label>
+        <picklistValues>
+            <picklist>Agency_of_Record__c</picklist>
+            <values>
+                <fullName>Filament</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>McCord</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Region_Picklist__c</picklist>
+            <values>
+                <fullName>CBD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dealer Business Dev</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Northeast</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Southern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upper Midwest</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Specie_Focus__c</picklist>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Companion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flock</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Influencer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>University%2FRecruiting</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Species_Sub_Focus__c</picklist>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Companion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flock</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Canceled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Planned</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sub_type__c</picklist>
+            <values>
+                <fullName>Calf and Heifer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Great Starts Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Mineral Meetings</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Check-R-Board Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chick Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy %E2%80%93 Cool Cow Promotion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Double Dog Bowl Dare</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Equine Plus Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flocktober</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse 60 Day Trial</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse Owner Workshop %28HOW Event%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Cattle local promos%2Fmeeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Dairy local meeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Flock local promos%2Fmeeting event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Horse local promos%2Fmeeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Pet local promo%2Fdealer event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Swine local meeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pet Ambassador Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Producer Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purina Bucks</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purina Feed Frenzy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purina Proud</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Local</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Engagement_Campaign</fullName>
+        <active>true</active>
+        <description>Newsletters, Promotional Campaigns, etc</description>
+        <label>Engagement Campaign</label>
+        <picklistValues>
+            <picklist>Agency_of_Record__c</picklist>
+            <values>
+                <fullName>Colle %2B McVoy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Filament</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>McCord</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Region_Picklist__c</picklist>
+            <values>
+                <fullName>CBD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dealer Business Dev</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>National Retail Exotics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Northeast</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Southern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upper Midwest</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Specie_Focus__c</picklist>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Companion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education %26 Training</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flock</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Influencer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Species_Sub_Focus__c</picklist>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Companion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flock</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Canceled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Planned</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sub_type__c</picklist>
+            <values>
+                <fullName>Calf and Heifer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Great Starts Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Mineral Meetings</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Check-R-Board Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chick Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy %E2%80%93 Cool Cow Promotion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Equine Plus Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flocktober</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse 60 Day Trial</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse Owner Workshop %28HOW Event%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Cattle local promos%2Fmeeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Dairy local meeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Flock local promos%2Fmeeting event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Horse local promos%2Fmeeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Swine local meeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Producer Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purina Bucks</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Animal Lifecycle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cross-species</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Newsletters</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Shopping Basket</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Farm_VIP_Event</fullName>
+        <active>true</active>
+        <description>Record Type that will capture details for Farm VIP Events</description>
+        <label>Farm VIP Event</label>
+        <picklistValues>
+            <picklist>Agency_of_Record__c</picklist>
+            <values>
+                <fullName>McCord</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Region_Picklist__c</picklist>
+            <values>
+                <fullName>CBD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dealer Business Dev</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Northeast</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Southern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upper Midwest</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Send_Registration_Confirmation_Email__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Send_Thank_You_for_Attending_Email__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Send_Week_Before_Event_Email__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Specie_Focus__c</picklist>
+            <values>
+                <fullName>Backyard Poultry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy - Transition %26 Lactating Cow</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy - Young Animal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deer %26 Elk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education %26 Training</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fish %26 Aqua</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Goat</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Influencer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mazuri</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PMI Pet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rabbit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine - Commercial</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine - Retail</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Species_Sub_Focus__c</picklist>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Companion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flock</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Canceled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Planned</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Registration Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Registration Open</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sub_type__c</picklist>
+            <values>
+                <fullName>Calf and Heifer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Great Starts Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Mineral Meetings</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Check-R-Board Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chick Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy %E2%80%93 Cool Cow Promotion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Equine Plus Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flocktober</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse 60 Day Trial</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse Owner Workshop %28HOW Event%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Cattle local promos%2Fmeeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Dairy local meeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Flock local promos%2Fmeeting event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Horse local promos%2Fmeeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Swine local meeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Producer Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purina Bucks</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Dealer%2FTraining VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Elite%2FRed Carpet VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>National VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Regional VIP</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>National_Regional_Events</fullName>
+        <active>true</active>
+        <description>National and Regional Events</description>
+        <label>National/Regional Events</label>
+        <picklistValues>
+            <picklist>Agency_of_Record__c</picklist>
+            <values>
+                <fullName>Filament</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>McCord</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Region_Picklist__c</picklist>
+            <values>
+                <fullName>CBD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dealer Business Dev</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>National Retail Exotics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Northeast</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Southern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upper Midwest</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Specie_Focus__c</picklist>
+            <values>
+                <fullName>Backyard Poultry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy - Transition %26 Lactating Cow</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy - Young Animal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deer %26 Elk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education %26 Training</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fish %26 Aqua</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Goat</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Influencer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mazuri</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PMI Pet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rabbit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine - Commercial</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine - Retail</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Species_Sub_Focus__c</picklist>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Companion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flock</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Canceled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Planned</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sub_type__c</picklist>
+            <values>
+                <fullName>Calf and Heifer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Great Starts Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Mineral Meetings</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Check-R-Board Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chick Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy %E2%80%93 Cool Cow Promotion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Equine Plus Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flocktober</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse 60 Day Trial</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse Owner Workshop %28HOW Event%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Cattle local promos%2Fmeeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Dairy local meeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Flock local promos%2Fmeeting event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Horse local promos%2Fmeeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Swine local meeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Producer Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purina Bucks</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>National</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Regional</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>PromotionsPrebooking</fullName>
+        <active>true</active>
+        <description>Used for managing all Promotions and Pre-Booking</description>
+        <label>Promotions and Pre-Booking</label>
+        <picklistValues>
+            <picklist>Agency_of_Record__c</picklist>
+            <values>
+                <fullName>Colle %2B McVoy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Filament</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>McCord</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Region_Picklist__c</picklist>
+            <values>
+                <fullName>CBD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dealer Business Dev</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>National Retail Exotics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Northeast</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Southern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upper Midwest</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Specie_Focus__c</picklist>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Companion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education %26 Training</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flock</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Influencer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>University%2FRecruiting</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Species_Sub_Focus__c</picklist>
+            <values>
+                <fullName>Cattle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Companion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flock</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swine</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Canceled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Planned</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Registration Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Registration Open</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sub_type__c</picklist>
+            <values>
+                <fullName>Calf and Heifer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Great Starts Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Mineral Meetings</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Check-R-Board Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chick Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy %E2%80%93 Cool Cow Promotion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Equine Plus Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flocktober</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse 60 Day Trial</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse Owner Workshop %28HOW Event%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Cattle local promos%2Fmeeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Dairy local meeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Flock local promos%2Fmeeting event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Horse local promos%2Fmeeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Swine local meeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Producer Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purina Bucks</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purina Feed Frenzy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purina Proud</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Animal Lifecycle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Great Starts Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Mineral Meetings</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cattle Owner Workshop %28COW Event%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Check-R-Board Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chick Days</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cross-species</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dairy %E2%80%93 Cool Cow Promotion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dealer%2FTraining VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Elite%2FRed Carpet VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Equine Plus Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Farm VIP Events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flocktober</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Horse Owner Workshop %28HOW Event%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Local</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>National</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>National VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Newsletters</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Cattle local promos%2Fmeeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Dairy local meeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Flock local promos%2Fmeeting event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Horse local promos%2Fmeeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Swine local meeting events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Producer Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purina Bucks</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Regional</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Regional Farm VIP %28PhD Virtual Session%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Regional VIP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shopping Basket</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>CAMPAIGN.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CAMPAIGN.CAMPAIGN_TYPE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Sub_type__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Date_of_Event__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CAMPAIGN.END_DATE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Event_Location__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CAMPAIGN.STATUS</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Number_of_Attendees__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Associated_Dealer__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CORE.USERS.LAST_NAME</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>CAMPAIGN.NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CAMPAIGN.CAMPAIGN_TYPE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Sub_type__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Date_of_Event__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CAMPAIGN.END_DATE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Event_Location__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Specie_Focus__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CAMPAIGN.STATUS</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CAMPAIGN.RECORDTYPE</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CAMPAIGN.NAME</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.CAMPAIGN_TYPE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Sub_type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Date_of_Event__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.END_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Event_Location__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.STATUS</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Associated_Dealer__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <validationRules>
+        <fullName>Campaign_Name_Not_PMI_Brands_Local_Event</fullName>
+        <active>true</active>
+        <description>If the campaign record type is &quot;Customer Event&quot;, then the campaign name should not include &quot;Exclusive&quot;, &quot;Infinia&quot; or &quot;Red Flannel&quot; when the Specie is not Pet and the Specie Subtype is Pet.</description>
+        <errorConditionFormula>And( 
+RecordTypeId = &quot;012j0000000zFvz&quot;, 
+text( Specie_Focus__c ) &lt;&gt; &quot;Pet&quot;, 
+text( Species_Sub_Focus__c ) = &quot;Pet&quot;, 
+Or( 
+CONTAINS(Name, &quot;Red Flannel&quot;), 
+CONTAINS(Name, &quot;Exclusive&quot;), 
+CONTAINS(Name, &quot;Infinia&quot;)) 
+)</errorConditionFormula>
+        <errorDisplayField>Name</errorDisplayField>
+        <errorMessage>The event name cannot contain a PMI Nutrition brand name.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Customer_Events_Invalid_Dates</fullName>
+        <active>true</active>
+        <description>For Customer Events, the End Date of the Event cannot be before the Start Date.</description>
+        <errorConditionFormula>and( 
+RecordTypeId=&quot;012j0000000zFvz&quot;, 
+EndDate &lt; Date_of_Event__c 
+)</errorConditionFormula>
+        <errorDisplayField>EndDate</errorDisplayField>
+        <errorMessage>End Date cannot occur before the start date of the event.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Farm_VIP_Community_Fields_Required</fullName>
+        <active>true</active>
+        <description>&apos;Dealer Facing Description&apos; and &apos;Event City, State&apos; Required when Display in Dealer Community is TRUE for Farm VIP Events</description>
+        <errorConditionFormula>AND(
+ RecordType.Name = &apos;Farm VIP Event&apos;,
+ Display_in_Dealer_Community__c = TRUE, 
+ OR(
+  ISBLANK(Short_Description__c),
+  ISBLANK(Event_Location__c))
+  )</errorConditionFormula>
+        <errorMessage>&apos;Dealer Facing Description&apos; and &apos;Event City, State&apos; are required before displaying the Customer Event in the Customer Community</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>If_Regional_Event_Region_Included</fullName>
+        <active>true</active>
+        <description>If Regional Event, the Event Region must be included</description>
+        <errorConditionFormula>AND( RecordType.Name = &quot;National/Regional Events&quot;, ISPICKVAL( Type , &quot;Regional&quot;),  ISBLANK( TEXT( Region_Picklist__c ) ) )</errorConditionFormula>
+        <errorDisplayField>Region_Picklist__c</errorDisplayField>
+        <errorMessage>Please include the Event Region for this Regional Event</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>National_Community_Fields_Required</fullName>
+        <active>true</active>
+        <description>&apos;Dealer Facing Description&apos; and &apos;Event City, State&apos; Required when Display in Dealer Community is TRUE for National/Regional Events</description>
+        <errorConditionFormula>AND(
+ RecordType.Name = &apos;National/Regional Events&apos;,
+ Display_in_Dealer_Community__c = TRUE, 
+  OR(
+  ISBLANK(Short_Description__c),
+  ISBLANK(Event_Location__c))
+  )</errorConditionFormula>
+        <errorMessage>&apos;Dealer Facing Description&apos;,  and &apos;Event City, State&apos; are required before displaying the Customer Event in the Customer Community</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Zip_Code_Cannot_be_00000</fullName>
+        <active>true</active>
+        <description>Only System Administrators can enter the zip code of &quot;00000&quot;</description>
+        <errorConditionFormula>And(
+or(
+Event_Zip__c =&quot;00000&quot;,
+Event_Zip__c =&quot;0000&quot;,
+Event_Zip__c =&quot;000&quot;,
+Event_Zip__c =&quot;00&quot;,
+Event_Zip__c =&quot;0&quot;),
+Not($Profile.Name = &quot;System Administrator&quot;)
+)</errorConditionFormula>
+        <errorDisplayField>Event_Zip__c</errorDisplayField>
+        <errorMessage>This is not a valid zip code.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Account_Animal_Counts</fullName>
+        <availability>online</availability>
+        <description>Accounts and Animal Counts</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Account &amp; Animal Counts</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oj0000004Uy1r?pv0={!Campaign.X18_Digit_Customer_Event_ID__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>All_Tons_Points</fullName>
+        <availability>online</availability>
+        <description>Link to view all opportunities with Tons &amp; Points related to campaign</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>All Tons &amp; Points</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oj0000004Krer?pv0={!Campaign.Name}&amp;pv1={!Campaign.Name}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Attendee_Shirt_Sizes</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Attendee Shirt Sizes</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oj0000000KsuW?pv0={!Campaign.Id}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Contacts_with_Questions_Answers</fullName>
+        <availability>online</availability>
+        <description>Contacts with Questions &amp; Answers</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Contacts with Questions &amp; Answers</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oj0000000KOXy?pv0={!Campaign.X18_Digit_Customer_Event_ID__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Converted_Producers</fullName>
+        <availability>online</availability>
+        <description>Opens a report showing the converted producers related to this specific VIP event</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Converted Producers</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oj0000004Krf3?pv0={!Campaign.Name}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Customer_Event_Link</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Customer Event Members</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oj0000004NeuW?pv0={!Campaign.X18_Digit_Customer_Event_ID__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Farm_VIP_Event_Master_List</fullName>
+        <availability>online</availability>
+        <description>Master list of attendees for Farm VIP</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Farm VIP Event Master List</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oj0000004Krh2?pv0={!Campaign.X18_Digit_Customer_Event_ID__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Leads_with_Questions_Answers</fullName>
+        <availability>online</availability>
+        <description>Leads with Questions &amp; Answers</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Leads with Questions &amp; Answers</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oj0000000KORs?pv0={!Campaign.X18_Digit_Customer_Event_ID__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Members_w_FARM_VIP_Registration_Manual_Adds_Not_Included</fullName>
+        <availability>online</availability>
+        <description>Members with FARM VIP Registration (If Members were added manually, they will not be in this list)</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Members w/ FARM VIP Registration - Manual Adds Not Included</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oj0000000irhz?pv0={!Campaign.X18_Digit_Customer_Event_ID__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Opportunities</fullName>
+        <availability>online</availability>
+        <description>The opportunities related to a customer event.</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Opportunities</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oj0000004Uy39?pv0={!Campaign.X18_Digit_Customer_Event_ID__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>ViewAllEventMembers</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>500</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>View All Event Members</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/camp/rptcmpgncalldown.jsp?scope=1&amp;scopeid={!Campaign.Name}</url>
+        <width>500</width>
+    </webLinks>
+    <webLinks>
+        <fullName>ViewEventInfluenceReport</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>500</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>View Event Influence Report</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/00O?rt=117&amp;break0=CAN&amp;scope=1&amp;scopeid_lkid={!Campaign.Id}&amp;scopeid={!Campaign.Name}&amp;c=CAN&amp;c=MR&amp;c=PCS&amp;c=CFN&amp;c=RN&amp;c=ON&amp;c=OA&amp;c=OS&amp;c=OCD&amp;c=AN&amp;s=OA&amp;duel0=CAN%2CMR%2CCFN%2CRN%2CAN%2CON%2CPCS%2COS%2COCD%2COA&amp;details=yes&amp;format=t</url>
+        <width>500</width>
+    </webLinks>
+    <webLinks>
+        <fullName>Won_Tons_Points</fullName>
+        <availability>online</availability>
+        <description>Link to view all Won opportunities with Tons &amp; Points related to campaign</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Won Tons &amp; Points</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oj0000004Kret?pv0={!Campaign.Name}&amp;pv1={!Campaign.Name}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>et4ae5__Send_ExactTarget_Email</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send Marketing Cloud Email</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/19.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/15.0/apex.js&quot;)}
+try
+{
+var urlPrefix = sforce.apex.execute(&quot;et4ae5/jsButtonMethods&quot;,&quot;namespace&quot;, {});
+var theUrl = &quot;https://&quot;+urlPrefix+&quot;/apex/singleSendETEmail?campaignId={!CASESAFEID( Campaign.Id )}&quot;;
+parent.location.href = theUrl;
+}
+catch (e)
+{
+var theUrl = &quot;/apex/singleSendETEmail?campaignId={!CASESAFEID( Campaign.Id )}&quot;;
+parent.location.href = theUrl;
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>et4ae5__ViewCampaignInfluenceReport</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>500</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>View Campaign Influence Report</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/00O?rt=117&amp;break0=CAN&amp;scope=1&amp;scopeid_lkid={!Campaign.Id}&amp;scopeid={!Campaign.Name}&amp;c=CAN&amp;c=MR&amp;c=PCS&amp;c=CFN&amp;c=RN&amp;c=ON&amp;c=OA&amp;c=OS&amp;c=OCD&amp;c=AN&amp;s=OA&amp;duel0=CAN%2CMR%2CCFN%2CRN%2CAN%2CON%2CPCS%2COS%2COCD%2COA&amp;details=yes&amp;format=t</url>
+        <width>500</width>
+    </webLinks>
+</CustomObject>

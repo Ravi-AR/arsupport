@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>ESSEX COUNTY CO-OP INC-314903 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>ESSEX COUNTY CO-OP INC-314903 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>ESSEXCOUNTYCOOPINC314903PartnerManager</parentRole>
+</Role>

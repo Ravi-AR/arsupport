@@ -1,0 +1,8 @@
+<!-- 
+ @Author: Magnet 360
+ @Date: Jul 6, 2017 
+ @Jira: LPDCR-2029
+ 
+ @Update: 07/25/2017 : Magnet 360 : Page is deprecated. Do not use.
+ -->
+<apex:page sidebar="false" showheader="false" controller="LPDCR_DealerVIPPointsTonsExportCntrlr" cache="true" contentType="text/csv#VIPPointsAndTonsReport.csv" >{!csv_string}</apex:page>

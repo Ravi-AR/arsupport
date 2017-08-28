@@ -1,0 +1,30 @@
+<apex:component controller="LPDCR_BBPLandingMemberController">
+  <!-- Begin Default Content REMOVE THIS -->
+  <div class="row ">
+                 <div class="col-xs-12 ">
+                    <h4><b>Business Builder Materials</b></h4>
+                  <!--    <div>
+                       <a target="_blank" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file=015R0000000JcrH" class="bbslink"> <span class="fa fa-file-pdf-o pdf"></span> <u>2016 Business Builder Navigator</u></a>
+                 -->
+                <apex:repeat value="{!bbWrapperList}" var="bb">
+                 <apex:outputPanel rendered="{!IF(bb.cemObj.MetadataType__c=='Business Builder Material',true,false)}"> 
+                        <a target="_blank" class="bbslink" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file={!bb.docObj.Id}"><span class="fa fa-file-pdf-o pdf"></span> <u>{!bb.cemObj.Document_Name__c}</u></a>
+                        <p>{!bb.cemObj.Description__c}</p>
+                        </apex:outputPanel>
+                 </apex:repeat>
+                 <!-- <a target="_blank" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file=015R0000000JquK" class="bbslink"> <span class="fa fa-file-pdf-o pdf"></span> <u>2017 Business Builder Navigator</u></a>
+                      
+                          <p>The Business Builder Navigator brochure is your reference guide to the Purina Business Builder program. The Navigator provides program details, including VIP event dates, Business Link access, annual planning calendars, online learning opportunities, promotional and print material from the eStore, and more.</p>
+                    </div>
+                    <hr/>
+                 <div>
+                        <a target="_blank" href="{!$Site.BaseUrl}/servlet/servlet.FileDownload?file=015R0000000JqvS" class="bbslink"> <span class="fa fa-file-pdf-o pdf"></span> <u>First Semester Programs</u></a>
+                        <p>The Business Builder First Semester Programs brochure features all marketing programs, promotions and events that are available to you during the first half of the calendar year (Jan-June).</p>
+                    </div>-->
+                    <hr/>
+                    
+                 </div>
+                 
+                  </div><!--end row--> 
+  <!-- End Default Content REMOVE THIS -->
+</apex:component>

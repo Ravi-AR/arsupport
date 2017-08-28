@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>creator</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Title</field>
+        <field>CreatedDate</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>bjfischer@landolakes.com</name>
+                <type>user</type>
+            </approver>
+            <approver>
+                <name>cavolk@landolakes.com</name>
+                <type>user</type>
+            </approver>
+            <approver>
+                <name>cdlevasseur@landolakes.com</name>
+                <type>user</type>
+            </approver>
+            <approver>
+                <name>gmovall@landolakes.com</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>User.Profile</field>
+                <operation>equals</operation>
+                <value>Consumer Group</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Consumer Group Approval</label>
+        <name>Consumer_Group_Approval2</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>cavolk@landolakes.com</name>
+                <type>user</type>
+            </approver>
+            <approver>
+                <name>cdlevasseur@landolakes.com</name>
+                <type>user</type>
+            </approver>
+            <approver>
+                <name>gmovall@landolakes.com</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <booleanFilter>1 OR 2 OR 3 OR 4</booleanFilter>
+            <criteriaItems>
+                <field>User.Profile</field>
+                <operation>equals</operation>
+                <value>Customer Care</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>User.Profile</field>
+                <operation>equals</operation>
+                <value>Customer Operations</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>User.Profile</field>
+                <operation>equals</operation>
+                <value>Customer Care Manager</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>User.Profile</field>
+                <operation>equals</operation>
+                <value>Customer Operations Manager</value>
+            </criteriaItems>
+        </entryCriteria>
+        <label>Customer Ops/Customer Care Approval</label>
+        <name>Customer_Ops_Customer_Care_Approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>Work Instruction Approval for Christy and Ginger CCR, COR, COM, CCM</description>
+    <emailTemplate>Customer_Operations_Approval_Emails/Approval_for_Knowledge_Article</emailTemplate>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <criteriaItems>
+            <field>User.Profile</field>
+            <operation>notEqual</operation>
+            <value>System Administrator</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Publish_Work_Instructions</name>
+            <type>KnowledgePublish</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>true</finalApprovalRecordLock>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <label>Work Instuc Approval Christy and Ginger</label>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>false</showApprovalHistory>
+</ApprovalProcess>

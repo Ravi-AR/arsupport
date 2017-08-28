@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>CLALLAM COOPERATIVE ASSN, INC-370890 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>CLALLAM COOPERATIVE ASSN, INC-370890 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>CLALLAMCOOPERATIVEASSNINC370890PartnerManager</parentRole>
+</Role>

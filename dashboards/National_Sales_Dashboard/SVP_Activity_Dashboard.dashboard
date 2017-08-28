@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dashboard xmlns="http://soap.sforce.com/2006/04/metadata">
+    <backgroundEndColor>#FFFFFF</backgroundEndColor>
+    <backgroundFadeDirection>Diagonal</backgroundFadeDirection>
+    <backgroundStartColor>#FFFFFF</backgroundStartColor>
+    <dashboardFilters>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>CBD</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Northeast</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Southern</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Upper Midwest</values>
+        </dashboardFilterOptions>
+        <name>Sales Region</name>
+    </dashboardFilters>
+    <dashboardFilters>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>National Dairy</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>National Swine &amp; Poultry</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>New York Dairy</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Pacific Northwest Dairy</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Southwest Dairy CBD</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Swine-Poultry CBD</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Great Lakes Dairy</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Great Lakes Lifestyle</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Great Lakes Swine</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Keystone Dairy</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Northeast Lifestyle</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Great West</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Mid-South Lifestyle</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Red River Area</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>South Central Lifestyle</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Southern Coast Lifestyle</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Southern Dairy</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Hawaii</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Heartland</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Iowa</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Midwest Lifestyle</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>North Central</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>West Pacific Coast</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Wisconsin CBD</values>
+        </dashboardFilterOptions>
+        <name>Sales Division</name>
+    </dashboardFilters>
+    <dashboardFilters>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Sales Call</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Support Call</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Sales Call,Support Call</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>Event</values>
+        </dashboardFilterOptions>
+        <name>Type</name>
+    </dashboardFilters>
+    <dashboardType>SpecifiedUser</dashboardType>
+    <description>This dashboard counts &quot;Open&quot; and &quot;Completed&quot; activities, but does not count activities from the Inside Sales users.</description>
+    <isGridLayout>false</isGridLayout>
+    <leftSection>
+        <columnSize>Wide</columnSize>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <column>Activity.Activity_Count__c</column>
+            </chartSummary>
+            <componentType>Metric</componentType>
+            <dashboardFilterColumns>
+                <column>Activity.Created_By_Region__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Created_by_Sales_Division__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Type2__c</column>
+            </dashboardFilterColumns>
+            <displayUnits>Integer</displayUnits>
+            <header>Sales Specialist &amp; LPS Activities</header>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#C25454</indicatorLowColor>
+            <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
+            <metricLabel>Curr Year Activities for SS&apos;s &amp; LPS&apos;s</metricLabel>
+            <report>Sales_VP_Activity_Dashboard_Rpts/Sales_VP_01_01_Curr_Yr_Activities</report>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartSummary>
+                <aggregate>Sum</aggregate>
+                <column>Activity.Activity_Count__c</column>
+            </chartSummary>
+            <componentType>Metric</componentType>
+            <dashboardFilterColumns>
+                <column>Activity.Created_By_Region__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Created_by_Sales_Division__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Type2__c</column>
+            </dashboardFilterColumns>
+            <displayUnits>Integer</displayUnits>
+            <footer>As of August 1, 2017, the total Sales Specialist, Technical Sales Specialist and LPS count is 466.</footer>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#C25454</indicatorLowColor>
+            <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
+            <metricLabel>Prev Year Activities for SS&apos;s &amp; LPS&apos;s</metricLabel>
+            <report>Sales_VP_Activity_Dashboard_Rpts/Sales_VP_01_02_Prev_Yr_Activities</report>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+            <componentType>Table</componentType>
+            <dashboardFilterColumns>
+                <column>Activity.Created_By_Region__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Created_by_Sales_Division__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Type2__c</column>
+            </dashboardFilterColumns>
+            <dashboardTableColumn>
+                <column>DUE_DATE</column>
+            </dashboardTableColumn>
+            <dashboardTableColumn>
+                <aggregateType>Sum</aggregateType>
+                <calculatePercent>false</calculatePercent>
+                <column>Activity.Activity_Count_Curr_Yr__c</column>
+                <showTotal>true</showTotal>
+            </dashboardTableColumn>
+            <dashboardTableColumn>
+                <aggregateType>Sum</aggregateType>
+                <calculatePercent>false</calculatePercent>
+                <column>Activity.Activity_Count_Prev_Yr__c</column>
+                <showTotal>true</showTotal>
+            </dashboardTableColumn>
+            <dashboardTableColumn>
+                <calculatePercent>false</calculatePercent>
+                <column>FORMULA1</column>
+                <showTotal>false</showTotal>
+            </dashboardTableColumn>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>false</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#C25454</indicatorLowColor>
+            <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
+            <report>Sales_VP_Activity_Dashboard_Rpts/Sales_VP_01_03_All_Activities</report>
+            <showPicturesOnTables>true</showPicturesOnTables>
+            <title>Sales Specialist &amp; LPS Activities</title>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartAxisRange>Auto</chartAxisRange>
+            <chartSummary>
+                <axisBinding>y</axisBinding>
+                <column>FORMULA1</column>
+            </chartSummary>
+            <componentType>Column</componentType>
+            <dashboardFilterColumns>
+                <column>Activity.Created_By_Region__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Created_by_Sales_Division__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Type2__c</column>
+            </dashboardFilterColumns>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>true</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <enableHover>false</enableHover>
+            <expandOthers>false</expandOthers>
+            <groupingColumn>DUE_DATE</groupingColumn>
+            <legendPosition>Bottom</legendPosition>
+            <report>Sales_VP_Activity_Dashboard_Rpts/Sales_VP_01_03_All_Activities</report>
+            <showPercentage>false</showPercentage>
+            <showValues>true</showValues>
+            <sortBy>RowLabelAscending</sortBy>
+            <title>% Change</title>
+            <useReportChart>false</useReportChart>
+        </components>
+    </leftSection>
+    <middleSection>
+        <columnSize>Wide</columnSize>
+        <components>
+            <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+            <componentType>Metric</componentType>
+            <dashboardFilterColumns>
+                <column>Activity.Created_By_Region__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Created_by_Sales_Division__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Type2__c</column>
+            </dashboardFilterColumns>
+            <displayUnits>Integer</displayUnits>
+            <header>Sales Specialist Activities</header>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#C25454</indicatorLowColor>
+            <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
+            <metricLabel>Curr Yr Activities for SS&apos;s</metricLabel>
+            <report>Sales_VP_Activity_Dashboard_Rpts/Sales_VP_02_01_Curr_Yr_Activities</report>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+            <componentType>Metric</componentType>
+            <dashboardFilterColumns>
+                <column>Activity.Created_By_Region__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Created_by_Sales_Division__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Type2__c</column>
+            </dashboardFilterColumns>
+            <displayUnits>Integer</displayUnits>
+            <footer>As of August 1, 2017, the total Sales Specialist and Technical Sales Specialist count is 251.</footer>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#C25454</indicatorLowColor>
+            <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
+            <metricLabel>Prev Yr Activities for SS&apos;s</metricLabel>
+            <report>Sales_VP_Activity_Dashboard_Rpts/Sales_VP_02_02_Prev_Yr_Activities</report>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+            <componentType>Table</componentType>
+            <dashboardFilterColumns>
+                <column>Activity.Created_By_Region__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Created_by_Sales_Division__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Type2__c</column>
+            </dashboardFilterColumns>
+            <dashboardTableColumn>
+                <column>DUE_DATE</column>
+            </dashboardTableColumn>
+            <dashboardTableColumn>
+                <aggregateType>Sum</aggregateType>
+                <calculatePercent>false</calculatePercent>
+                <column>Activity.Activity_Count_Curr_Yr__c</column>
+                <showTotal>true</showTotal>
+            </dashboardTableColumn>
+            <dashboardTableColumn>
+                <aggregateType>Sum</aggregateType>
+                <calculatePercent>false</calculatePercent>
+                <column>Activity.Activity_Count_Prev_Yr__c</column>
+                <showTotal>true</showTotal>
+            </dashboardTableColumn>
+            <dashboardTableColumn>
+                <calculatePercent>false</calculatePercent>
+                <column>FORMULA1</column>
+                <showTotal>false</showTotal>
+            </dashboardTableColumn>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>false</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#C25454</indicatorLowColor>
+            <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
+            <report>Sales_VP_Activity_Dashboard_Rpts/Sales_VP_02_03_All_Activities_SS</report>
+            <showPicturesOnTables>true</showPicturesOnTables>
+            <title>Sales Specialist Activities</title>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartAxisRange>Auto</chartAxisRange>
+            <chartSummary>
+                <axisBinding>y</axisBinding>
+                <column>FORMULA1</column>
+            </chartSummary>
+            <componentType>Column</componentType>
+            <dashboardFilterColumns>
+                <column>Activity.Created_By_Region__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Created_by_Sales_Division__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Type2__c</column>
+            </dashboardFilterColumns>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>true</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <enableHover>false</enableHover>
+            <expandOthers>false</expandOthers>
+            <groupingColumn>DUE_DATE</groupingColumn>
+            <legendPosition>Bottom</legendPosition>
+            <report>Sales_VP_Activity_Dashboard_Rpts/Sales_VP_02_03_All_Activities_SS</report>
+            <showPercentage>false</showPercentage>
+            <showValues>true</showValues>
+            <sortBy>RowLabelAscending</sortBy>
+            <title>% Change</title>
+            <useReportChart>false</useReportChart>
+        </components>
+    </middleSection>
+    <rightSection>
+        <columnSize>Wide</columnSize>
+        <components>
+            <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+            <componentType>Metric</componentType>
+            <dashboardFilterColumns>
+                <column>Activity.Created_By_Region__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Created_by_Sales_Division__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Type2__c</column>
+            </dashboardFilterColumns>
+            <displayUnits>Integer</displayUnits>
+            <header>LPS Activities</header>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#C25454</indicatorLowColor>
+            <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
+            <metricLabel>Curr Yr Activities for LPS&apos;s</metricLabel>
+            <report>Sales_VP_Activity_Dashboard_Rpts/Sales_VP_03_01_Curr_Yr_Activities</report>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+            <componentType>Metric</componentType>
+            <dashboardFilterColumns>
+                <column>Activity.Created_By_Region__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Created_by_Sales_Division__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Type2__c</column>
+            </dashboardFilterColumns>
+            <displayUnits>Integer</displayUnits>
+            <footer>As of August 1, 2017, the total LPS count is 215.</footer>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#C25454</indicatorLowColor>
+            <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
+            <metricLabel>Prev Yr Activities for LPS&apos;s</metricLabel>
+            <report>Sales_VP_Activity_Dashboard_Rpts/Sales_VP_03_02_Prev_Yr_Activities</report>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+            <componentType>Table</componentType>
+            <dashboardFilterColumns>
+                <column>Activity.Created_By_Region__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Created_by_Sales_Division__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Type2__c</column>
+            </dashboardFilterColumns>
+            <dashboardTableColumn>
+                <column>DUE_DATE</column>
+            </dashboardTableColumn>
+            <dashboardTableColumn>
+                <aggregateType>Sum</aggregateType>
+                <calculatePercent>false</calculatePercent>
+                <column>Activity.Activity_Count_Curr_Yr__c</column>
+                <showTotal>true</showTotal>
+            </dashboardTableColumn>
+            <dashboardTableColumn>
+                <aggregateType>Sum</aggregateType>
+                <calculatePercent>false</calculatePercent>
+                <column>Activity.Activity_Count_Prev_Yr__c</column>
+                <showTotal>true</showTotal>
+            </dashboardTableColumn>
+            <dashboardTableColumn>
+                <calculatePercent>false</calculatePercent>
+                <column>FORMULA1</column>
+                <showTotal>false</showTotal>
+            </dashboardTableColumn>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>false</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <indicatorHighColor>#54C254</indicatorHighColor>
+            <indicatorLowColor>#C25454</indicatorLowColor>
+            <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
+            <report>Sales_VP_Activity_Dashboard_Rpts/Sales_VP_03_03_All_Activities_LPS</report>
+            <showPicturesOnTables>true</showPicturesOnTables>
+            <title>LPS Activities</title>
+        </components>
+        <components>
+            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <chartAxisRange>Auto</chartAxisRange>
+            <chartSummary>
+                <axisBinding>y</axisBinding>
+                <column>FORMULA1</column>
+            </chartSummary>
+            <componentType>Column</componentType>
+            <dashboardFilterColumns>
+                <column>Activity.Created_By_Region__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Created_by_Sales_Division__c</column>
+            </dashboardFilterColumns>
+            <dashboardFilterColumns>
+                <column>Activity.Type2__c</column>
+            </dashboardFilterColumns>
+            <displayUnits>Integer</displayUnits>
+            <drillEnabled>true</drillEnabled>
+            <drillToDetailEnabled>false</drillToDetailEnabled>
+            <enableHover>false</enableHover>
+            <expandOthers>false</expandOthers>
+            <groupingColumn>DUE_DATE</groupingColumn>
+            <legendPosition>Bottom</legendPosition>
+            <report>Sales_VP_Activity_Dashboard_Rpts/Sales_VP_03_03_All_Activities_LPS</report>
+            <showPercentage>false</showPercentage>
+            <showValues>true</showValues>
+            <sortBy>RowLabelAscending</sortBy>
+            <title>% Change</title>
+            <useReportChart>false</useReportChart>
+        </components>
+    </rightSection>
+    <runningUser>bdgier@landolakes.com</runningUser>
+    <textColor>#000000</textColor>
+    <title>SVP || Activity Dashboard</title>
+    <titleColor>#000000</titleColor>
+    <titleSize>12</titleSize>
+</Dashboard>

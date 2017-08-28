@@ -1,0 +1,1474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Information about each Sales Team Member</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Activities_Within_Last_30_Days__c</fullName>
+        <description>The number of activities created within the last 30 days.</description>
+        <externalId>false</externalId>
+        <label>Activities Within Last 30 Days</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Avg_Sales_Calls_Day_Curr_Yr__c</fullName>
+        <externalId>false</externalId>
+        <formula>Sales_Calls_Curr_Yr__c / Curr_Year_Working_Days__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Avg Sales Calls/Day</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Avg_Support_Calls_Day_Curr_Yr__c</fullName>
+        <externalId>false</externalId>
+        <formula>Support_Calls_Curr_Yr__c / Curr_Year_Working_Days__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Avg Support Calls/Day</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Curr_Year_Working_Days__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(AND((5 - (CASE(MOD( DATE( YEAR( TODAY() ), 1, 1 ) - DATE(1900, 1, 6), 7), 0, 0, 1, 5, 2, 5, 3, 4, 4, 3, 5, 2, 6, 1, 0)) &lt; (CASE(MOD( Today() - DATE(1900, 1, 6), 7), 0, 0, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 0)) ), 
+((( Today() - DATE( YEAR( TODAY() ), 1, 1 ) ) + 1) &lt; 7)), 
+((CASE(MOD( Today() - DATE(1900, 1, 6), 7), 0, 0, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 0)) - (5 - (CASE(MOD( DATE( YEAR( TODAY() ), 1, 1 ) - DATE(1900, 1, 6), 7), 0, 0, 1, 5, 2, 5, 3, 4, 4, 3, 5, 2, 6, 1, 0)))), 
+(((FLOOR((( Today() - DATE( YEAR( TODAY() ), 1, 1 ) ) - (CASE(MOD( DATE( YEAR( TODAY() ), 1, 1 ) - DATE(1900, 1, 6), 7), 0, 0, 1, 6, 2, 5, 3, 4, 4, 3, 5, 2, 6, 1, 0))) / 7)) * 5) + 
+(CASE(MOD( DATE( YEAR( TODAY() ), 1, 1 ) - DATE(1900, 1, 6), 7), 0, 0, 1, 5, 2, 5, 3, 4, 4, 3, 5, 2, 6, 1, 0)) + 
+(CASE(MOD( Today() - DATE(1900, 1, 6), 7), 0, 0, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 0))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Curr Year Working Days</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Current_Month__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(text(Month(today())), &quot;1&quot;, &quot;January&quot;, &quot;2&quot;, &quot;February&quot;, &quot;3&quot;, &quot;March&quot;, &quot;4&quot;, &quot;April&quot;, &quot;5&quot;, &quot;May&quot;, &quot;6&quot;, &quot;June&quot;, &quot;7&quot;, &quot;July&quot;, &quot;8&quot;, &quot;August&quot;, &quot;9&quot;, &quot;September&quot;, &quot;10&quot;,&quot;October&quot;, &quot;11&quot;, &quot;November&quot;, &quot;12&quot;, &quot;December&quot;, &quot;N/A&quot;)&amp;&quot; &quot;&amp; text(Year (Today()))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Current Month</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Date_Last_Updated__c</fullName>
+        <description>Date Last Updated</description>
+        <externalId>false</externalId>
+        <label>Date Last Updated</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Email_Address__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner:User.Email</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Email Address</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Employee_Number__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner:User.EmployeeNumber</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Employee Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FIRST_DAY_TWO_WEEKS_AGO__c</fullName>
+        <externalId>false</externalId>
+        <formula>(TODAY()- 7) - 
+CASE( 
+MOD((TODAY()-7) - DATE( 1900, 1, 7 ), 7 ), 
+0,7, 
+1,8, 
+2,9, 
+3,10, 
+4,11, 
+5,12, 
+13)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>First Day Two Weeks Ago</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>First_Day_of_Current_Week__c</fullName>
+        <externalId>false</externalId>
+        <formula>(TODAY()+7) - 
+CASE( 
+MOD(TODAY() - DATE( 1900, 1, 7 ), 7 ), 
+0,7, 
+1,8, 
+2,9, 
+3,10, 
+4,11, 
+5,12, 
+13)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>First Day of Current Week</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>First_Day_of_Last_Week__c</fullName>
+        <externalId>false</externalId>
+        <formula>TODAY() - 
+CASE( 
+MOD(TODAY() - DATE( 1900, 1, 7 ), 7 ), 
+0,7, 
+1,8, 
+2,9, 
+3,10, 
+4,11, 
+5,12, 
+13)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>First Day of Last Week</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Function__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(Owner:User.Function__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Function</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Last_Day_2_Weeks_Ago__c</fullName>
+        <externalId>false</externalId>
+        <formula>(TODAY()- 7 ) - 
+CASE( 
+MOD((TODAY()-7) - DATE( 1900, 1, 7 ), 7 ), 
+0,1, 
+1,2, 
+2,3, 
+3,4, 
+4,5, 
+5,6, 
+7)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Last Day 2 Weeks Ago</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Last_Day_of_Last_Week__c</fullName>
+        <externalId>false</externalId>
+        <formula>TODAY() - 
+CASE( 
+MOD(TODAY() - DATE( 1900, 1, 7 ), 7 ), 
+0,1, 
+1,2, 
+2,3, 
+3,4, 
+4,5, 
+5,6, 
+7)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Last Day of Last Week</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Manager__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner:User.Manager.FirstName  &amp;&quot; &quot;&amp; Owner:User.Manager.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Manager</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Manager_s_Email__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner:User.Manager.Email</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Manager&apos;s Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunities_Created__c</fullName>
+        <externalId>false</externalId>
+        <formula>Oppty_Created_Type_Add_On__c +  Oppty_Created_Type_New_Business__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Opportunities Created</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Oppty_Created_Type_Add_On__c</fullName>
+        <description>The number of opportunities created for the current year where the Type is &quot;Add-on Business&quot;.</description>
+        <externalId>false</externalId>
+        <label>Oppty Created || Type &quot;Add On&quot;</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Oppty_Created_Type_New_Business__c</fullName>
+        <description>The number of opportunities created for the current year where the &quot;Type&quot; is New Business</description>
+        <externalId>false</externalId>
+        <label>Oppty Created || Type &quot;New Business&quot;</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Owner_18_Digit_Id__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner:User.X18_Digit_User_ID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Owner 18 Digit Id</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Previous_Month__c</fullName>
+        <externalId>false</externalId>
+        <formula>Case(Text(Month(DATE(YEAR(TODAY()),MONTH(TODAY()) - 1,1))), &quot;1&quot;, &quot;January&quot;, &quot;2&quot;, &quot;February&quot;, &quot;3&quot;, &quot;March&quot;, &quot;4&quot;, &quot;April&quot;, &quot;5&quot;, &quot;May&quot;, &quot;6&quot;, &quot;June&quot;, &quot;7&quot;, &quot;July&quot;, &quot;8&quot;, &quot;August&quot;, &quot;9&quot;, &quot;September&quot;, &quot;10&quot;,&quot;October&quot;, &quot;11&quot;, &quot;November&quot;, &quot;12&quot;, &quot;December&quot;, &quot;N/A&quot;)&amp;&quot; &quot;&amp; text(Year (Today()))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Previous Month</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Calls_Curr_Yr__c</fullName>
+        <description>The number of sales calls for the current year.</description>
+        <externalId>false</externalId>
+        <label>Sales Calls</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Division__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(Owner:User.Sales_Division__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Division</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Member_18_Digit_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASESAFEID(Id)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Member 18 Digit ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Region__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(Owner:User.Sales_Region__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Region</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner:User.Status_Current__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Support_Calls_Curr_Yr__c</fullName>
+        <description>The number of support calls for the current year.</description>
+        <externalId>false</externalId>
+        <label>Support Calls</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Won_Oppty_Type_Add_On__c</fullName>
+        <description>Won Opportunities with the Type of  &quot;Add On&quot; that were created during the current year.</description>
+        <externalId>false</externalId>
+        <label>Won Oppty || Type &quot;Add On&quot;</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Won_Oppty_Type_New__c</fullName>
+        <description>The number of opportunities created during the current year in the stage of &quot;Closed Won&quot; with the Type of &quot;New&quot;</description>
+        <externalId>false</externalId>
+        <label>Won Oppty || Type &quot;New&quot;</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Sales Team</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>CBD_New_York_Dairy</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>New York Dairy</value>
+        </filters>
+        <label>CBD || New York Dairy</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>CBD_Pacific_Northwest_Dairy</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Pacific Northwest Dairy</value>
+        </filters>
+        <label>CBD || Pacific Northwest Dairy</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>CBD_Southwest_Dairy_CBD</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Southwest Dairy CBD</value>
+        </filters>
+        <label>CBD || Southwest Dairy CBD</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>CBD_Swine_Poultry_CBD</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Swine-Poultry CBD</value>
+        </filters>
+        <label>CBD || Swine-Poultry CBD</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Dealer_Business_Dev</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Dealer Business Dev</value>
+        </filters>
+        <label>Dealer Business Dev</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Inactive_Sales_Team_Members</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <columns>Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Inactive</value>
+        </filters>
+        <label>Inactive Sales Team Members</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Inside_Sales</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Inside Sales</value>
+        </filters>
+        <label>Inside Sales</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>MRE_Animal_Milk_Products</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Animal Milk Products</value>
+        </filters>
+        <label>MRE || Animal Milk Products</label>
+        <sharedTo>
+            <group>MRE_Animal_Milk_Manager</group>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>MRR_Milk_Products</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Milk Products</value>
+        </filters>
+        <label>MRE || Milk Products</label>
+        <sharedTo>
+            <group>MRE_Animal_Milk_Manager</group>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>My_Team</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>My Team</label>
+    </listViews>
+    <listViews>
+        <fullName>National_Retail_Exotics</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>National Retail Exotics</value>
+        </filters>
+        <label>National Retail Exotics</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Northeast_Great_Lakes_Dairy</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Great Lakes Dairy</value>
+        </filters>
+        <label>Northeast || Great Lakes Dairy</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Northeast_Great_Lakes_Lifestyle</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Great Lakes Lifestyle</value>
+        </filters>
+        <label>Northeast || Great Lakes Lifestyle</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Northeast_Great_Lakes_Swine_Spring</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Great Lakes Swine</value>
+        </filters>
+        <label>Northeast || Great Lakes Swine || Spring</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Northeast_Keystone_Dairy</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Keystone Dairy</value>
+        </filters>
+        <label>Northeast || Keystone Dairy</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Northeast_Northeast_Lifestyle</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Northeast Lifestyle</value>
+        </filters>
+        <label>Northeast || Northeast Lifestyle</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>South_Great_West</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Great West</value>
+        </filters>
+        <label>South || Great West</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>South_Mid_South_Lifestyle</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Mid_South Lifestyle</value>
+        </filters>
+        <label>South || Mid-South Lifestyle</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>South_Red_River_Area</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Red River Area</value>
+        </filters>
+        <label>South || Red River Area</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>South_South_Central_Lifestyle</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>South Central Lifestyle</value>
+        </filters>
+        <label>South || South Central Lifestyle</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>South_Southern_Coast_Lifestyle</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Southern Coast Lifestyle</value>
+        </filters>
+        <label>South || Southern Coast Lifestyle</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>South_Southern_Dairy</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Southern Dairy</value>
+        </filters>
+        <label>South || Southern Dairy</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>UMW_Hawaii</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Hawaii</value>
+        </filters>
+        <label>UMW || Hawaii</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>UMW_Heartland</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Heartland</value>
+        </filters>
+        <label>UMW || Heartland</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>UMW_Iowa</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Iowa</value>
+        </filters>
+        <label>UMW || Iowa</label>
+        <sharedTo>
+            <group>UMW_Iowa_ASM</group>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>UMW_Iowa_LPS</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Iowa</value>
+        </filters>
+        <filters>
+            <field>Function__c</field>
+            <operation>equals</operation>
+            <value>LPS</value>
+        </filters>
+        <label>UMW || Iowa || LPS</label>
+        <sharedTo>
+            <group>UMW_Iowa_ASM</group>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>UMW_Iowa_Sales_Specialist</fullName>
+        <booleanFilter>1 AND (2 or 3)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Iowa</value>
+        </filters>
+        <filters>
+            <field>Function__c</field>
+            <operation>equals</operation>
+            <value>Sales Specialist</value>
+        </filters>
+        <filters>
+            <field>Function__c</field>
+            <operation>equals</operation>
+            <value>Technical Sales Spec</value>
+        </filters>
+        <label>UMW || Iowa || Sales Specialist</label>
+        <sharedTo>
+            <group>UMW_Iowa_ASM</group>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>UMW_Midwest_Lifestyle</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Midwest Lifestyle</value>
+        </filters>
+        <label>UMW || Midwest Lifestyle</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>UMW_North_Central</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>North Central</value>
+        </filters>
+        <label>UMW || North Central</label>
+        <sharedTo>
+            <group>UMW_North_Central_AMS</group>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>UMW_North_Central_LPS</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>North Central</value>
+        </filters>
+        <filters>
+            <field>Function__c</field>
+            <operation>equals</operation>
+            <value>LPS</value>
+        </filters>
+        <label>UMW || North Central || LPS</label>
+        <sharedTo>
+            <group>UMW_North_Central_AMS</group>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>UMW_North_Central_Sales_Specialist</fullName>
+        <booleanFilter>1 AND (2 or 3)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>North Central</value>
+        </filters>
+        <filters>
+            <field>Function__c</field>
+            <operation>equals</operation>
+            <value>Sales Specialist</value>
+        </filters>
+        <filters>
+            <field>Function__c</field>
+            <operation>equals</operation>
+            <value>Technical Sales Spec</value>
+        </filters>
+        <label>UMW || North Central || Sales Specialist</label>
+        <sharedTo>
+            <group>UMW_North_Central_AMS</group>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>UMW_West_Pacific_Coast</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>West Pacific Coast</value>
+        </filters>
+        <label>UMW || West Pacific Coast</label>
+        <sharedTo>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>UMW_Wisconsin_CBD</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Wisconsin CBD</value>
+        </filters>
+        <label>UMW || Wisconsin CBD</label>
+        <sharedTo>
+            <group>UMW_Wisconsin_CBD_AMS</group>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>UMW_Wisconsin_CBD_LPS</fullName>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Wisconsin CBD</value>
+        </filters>
+        <filters>
+            <field>Function__c</field>
+            <operation>contains</operation>
+            <value>LPS</value>
+        </filters>
+        <label>UMW || Wisconsin CBD || LPS</label>
+        <sharedTo>
+            <group>UMW_Wisconsin_CBD_AMS</group>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>UMW_Wisconsin_CBD_Sales_Specialist</fullName>
+        <booleanFilter>1 AND (2 or 3)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Function__c</columns>
+        <columns>Manager__c</columns>
+        <columns>Sales_Division__c</columns>
+        <columns>Sales_Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sales_Division__c</field>
+            <operation>equals</operation>
+            <value>Wisconsin CBD</value>
+        </filters>
+        <filters>
+            <field>Function__c</field>
+            <operation>equals</operation>
+            <value>Sales Specialist</value>
+        </filters>
+        <filters>
+            <field>Function__c</field>
+            <operation>equals</operation>
+            <value>Technical Sales Spec</value>
+        </filters>
+        <label>UMW || Wisconsin CBD || Sales Specialist</label>
+        <sharedTo>
+            <group>UMW_Wisconsin_CBD_AMS</group>
+            <role>System_Administrator</role>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <label>Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Sales Team</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Animal_Milk</fullName>
+        <active>true</active>
+        <description>Animal Milk Manager</description>
+        <label>Animal Milk || Mgr</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Animal_Milk_Sales</fullName>
+        <active>true</active>
+        <description>Animal Milk Sales</description>
+        <label>Animal Milk || Sales</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Milk_Products_Mgr</fullName>
+        <active>true</active>
+        <description>Products Manager</description>
+        <label>Milk Products || Mgr</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Milk_Products_User</fullName>
+        <active>true</active>
+        <description>Milk Products User</description>
+        <label>Milk Products || User</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Purina_ASM</fullName>
+        <active>true</active>
+        <description>Purina Area Sales Manager</description>
+        <label>Purina || ASM</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Purina_LPS</fullName>
+        <active>true</active>
+        <description>Purina LPS</description>
+        <label>Purina || LPS</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Purina_Sales_Specialist</fullName>
+        <active>true</active>
+        <description>Purina Sales Specialist</description>
+        <label>Purina || Sales Specialist</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Technical_Services</fullName>
+        <active>true</active>
+        <description>Technical Services (Dari Brown)</description>
+        <label>Technical Services</label>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>Function__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Manager__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Sales_Division__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Sales_Region__c</customTabListAdditionalFields>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <lookupDialogsAdditionalFields>Function__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Manager__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Sales_Division__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Sales_Region__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Function__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Manager__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Sales_Division__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Sales_Region__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>Function__c</searchFilterFields>
+        <searchFilterFields>Manager__c</searchFilterFields>
+        <searchFilterFields>Sales_Division__c</searchFilterFields>
+        <searchFilterFields>Sales_Region__c</searchFilterFields>
+        <searchResultsAdditionalFields>Function__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Manager__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Sales_Division__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Sales_Region__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <visibility>Public</visibility>
+    <webLinks>
+        <fullName>Current_Month_Activity_Email</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Current Month Activity Email</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>https://composer.congamerge.com
+?sessionId={!API.Session_ID}
+&amp;serverUrl={!API.Partner_Server_URL_290}
+&amp;id={!Sales_Team__c.Id}
+&amp;ReportId=00Oj0000004NdK2?pv0={!Sales_Team__c.Owner_18_Digit_Id__c}
+&amp;CongaEmailTemplateID=a0Fj0000004Ha7i
+&amp;BML={!Sales_Team__c.Name}+Activity+Report
+&amp;OFN={!Sales_Team__c.Name}+Activity+Report+Month+of+{!Sales_Team__c.Current_Month__c}
+&amp;LG3=2
+&amp;DS7=2</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Current_Month_Activity_Report</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Current Month Activity Report</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oj0000004NdK2?pv0={!Sales_Team__c.Owner_18_Digit_Id__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Current_Week_s_Activity_Email2</fullName>
+        <availability>online</availability>
+        <description>Current Week&apos;s Activity Report used for Sales Specialist and address to Area Sales Manager</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Current Week&apos;s Activity Email.</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>https://composer.congamerge.com
+?sessionId={!API.Session_ID}
+&amp;serverUrl={!API.Partner_Server_URL_290}
+&amp;id={!Sales_Team__c.Id}
+&amp;ReportId=00Oj0000004D5vd?pv0={!Sales_Team__c.Owner_18_Digit_Id__c}
+&amp;CongaEmailTemplateID=a0Fj0000003EN1W
+&amp;BML={!Sales_Team__c.Name}+Activity+Report
+&amp;OFN={!Sales_Team__c.Name}+Activity+Report+Week+of+{!Sales_Team__c.First_Day_of_Current_Week__c}
+&amp;LG3=2
+&amp;DS7=2</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Current_Week_s_Activity_Report</fullName>
+        <availability>online</availability>
+        <description>The Activity Report for the Current Week.</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Current Week&apos;s Activity Report</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oj0000004D5vd?pv0={!Sales_Team__c.Owner_18_Digit_Id__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Current_Week_s_Activity_Report_email</fullName>
+        <availability>online</availability>
+        <description>Current Weeks Email CongaMerge Email</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Current Week&apos;s Activity Email</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>https://composer.congamerge.com
+?sessionId={!API.Session_ID}
+&amp;serverUrl={!API.Partner_Server_URL_290}
+&amp;id={!Sales_Team__c.Id}
+&amp;ReportId=00Oj0000004D5vd?pv0={!Sales_Team__c.Owner_18_Digit_Id__c}
+&amp;CongaEmailTemplateID=a0Fj0000003EN1W
+&amp;EmailAdditionalTo={!Sales_Team__c.Email_Address__c}
+&amp;BML={!Sales_Team__c.Name}+Activity+Report
+&amp;OFN={!Sales_Team__c.Name}+Activity+Report+Week+of+{!Sales_Team__c.First_Day_of_Current_Week__c}
+&amp;LG3=2
+&amp;DS7=2</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Last_Week_s_Activity_Email2</fullName>
+        <availability>online</availability>
+        <description>Conga Merge email generates which contains the users activities for the last week.</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Last Week&apos;s Activity Email.</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>https://composer.congamerge.com
+?sessionId={!API.Session_ID}
+&amp;serverUrl={!API.Partner_Server_URL_290}
+&amp;id={!Sales_Team__c.Id}
+&amp;ReportId=00Oj0000004K8oT?pv0={!Sales_Team__c.Owner_18_Digit_Id__c}
+&amp;CongaEmailTemplateID=a0Fj00000031ZgD
+&amp;BML={!Sales_Team__c.Name}+Activity+Report
+&amp;OFN={!Sales_Team__c.Name}+Activity+Report+Week+of+{!Sales_Team__c.First_Day_of_Last_Week__c}
+&amp;LG3=2
+&amp;DS7=2</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Last_Week_s_Activity_Report</fullName>
+        <availability>online</availability>
+        <description>Last Week&apos;s Activity Report</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Last Week&apos;s Activity Report</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oj0000004K8oT?pv0={!Sales_Team__c.Owner_18_Digit_Id__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Last_Week_s_Activity_Report_Email</fullName>
+        <availability>online</availability>
+        <description>Conga Merge email generates which contains the users activities for the last week.</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Last Week&apos;s Activity Email</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>https://composer.congamerge.com
+?sessionId={!API.Session_ID}
+&amp;serverUrl={!API.Partner_Server_URL_290}
+&amp;id={!Sales_Team__c.Id}
+&amp;ReportId=00Oj0000004K8oT?pv0={!Sales_Team__c.Owner_18_Digit_Id__c}
+&amp;CongaEmailTemplateID=a0Fj00000031ZgD
+&amp;EmailAdditionalTo={!Sales_Team__c.Email_Address__c}
+&amp;BML={!Sales_Team__c.Name}+Activity+Report
+&amp;OFN={!Sales_Team__c.Name}+Activity+Report+Week+of+{!Sales_Team__c.First_Day_of_Last_Week__c}
+&amp;LG3=2
+&amp;DS7=2</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Previous_Month_Activity_Email</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Previous Month Activity Email</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>https://composer.congamerge.com
+?sessionId={!API.Session_ID}
+&amp;serverUrl={!API.Partner_Server_URL_290}
+&amp;id={!Sales_Team__c.Id}
+&amp;ReportId=00Oj0000004NdK7?pv0={!Sales_Team__c.Owner_18_Digit_Id__c}
+&amp;CongaEmailTemplateID=a0Fj0000004Ha7n
+&amp;BML={!Sales_Team__c.Name}+Activity+Report
+&amp;OFN={!Sales_Team__c.Name}+Activity+Report+Month+of+{!Sales_Team__c.Previous_Month__c}
+&amp;LG3=2
+&amp;DS7=2</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Previous_Month_Activity_Report</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Previous Month Activity Report</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oj0000004NdK7?pv0={!Sales_Team__c.Owner_18_Digit_Id__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>X2_Weeks_Ago_Activity_Email2</fullName>
+        <availability>online</availability>
+        <description>Activity report email for two weeks ago (CongaMege)</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>2 Weeks Ago Activity Email.</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>https://composer.congamerge.com
+?sessionId={!API.Session_ID}
+&amp;serverUrl={!API.Partner_Server_URL_290}
+&amp;id={!Sales_Team__c.Id}
+&amp;ReportId=00Oj0000004D6up?pv0={!Sales_Team__c.Owner_18_Digit_Id__c}
+&amp;CongaEmailTemplateID=a0Fj0000003EN1b
+&amp;BML={!Sales_Team__c.Name}+Activity+Report
+&amp;OFN={!Sales_Team__c.Name}+Activity+Report+Week+of+{!Sales_Team__c.FIRST_DAY_TWO_WEEKS_AGO__c}
+&amp;LG3=2
+&amp;DS7=2</url>
+    </webLinks>
+    <webLinks>
+        <fullName>X2_Weeks_Ago_Activity_Report</fullName>
+        <availability>online</availability>
+        <description>Activity Report from two weeks ago.</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>2 Weeks Ago Activity Report</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oj0000004D6up?pv0={!Sales_Team__c.Owner_18_Digit_Id__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>X2_Weeks_Ago_Activity_Report_Email</fullName>
+        <availability>online</availability>
+        <description>Activity report email for two weeks ago (CongaMege)</description>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>2 Weeks Ago Activity Email</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>https://composer.congamerge.com
+?sessionId={!API.Session_ID}
+&amp;serverUrl={!API.Partner_Server_URL_290}
+&amp;id={!Sales_Team__c.Id}
+&amp;ReportId=00Oj0000004D6up?pv0={!Sales_Team__c.Owner_18_Digit_Id__c}
+&amp;CongaEmailTemplateID=a0Fj0000003EN1b
+&amp;EmailAdditionalTo={!Sales_Team__c.Email_Address__c}
+&amp;BML={!Sales_Team__c.Name}+Activity+Report
+&amp;OFN={!Sales_Team__c.Name}+Activity+Report+Week+of+{!Sales_Team__c.FIRST_DAY_TWO_WEEKS_AGO__c}
+&amp;LG3=2
+&amp;DS7=2</url>
+    </webLinks>
+    <webLinks>
+        <fullName>YTD_Activity_Report</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>YTD Activity Report</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oj0000004NdKC?pv0={!Sales_Team__c.Owner_18_Digit_Id__c}</url>
+    </webLinks>
+</CustomObject>

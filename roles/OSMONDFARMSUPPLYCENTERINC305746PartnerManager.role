@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>OSMOND FARM SUPPLY CENTER INC.-305746 Partner Manager</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>OSMOND FARM SUPPLY CENTER INC.-305746 Partner Manager</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>System_Administrator</parentRole>
+</Role>

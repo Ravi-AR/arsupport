@@ -1,0 +1,97 @@
+<apex:component >
+    <!--<script id="Review-Cart-Desktop-Lol" type="text/template">
+
+        <div id="cart_items_container reviewSection" class="">
+            <div class="cart_item_list">
+                {{#each this.cartItems}}
+                    <div class="cart_item">
+                        <div class="price">
+                            {{#ifNotEquals this.cartItemType 'Coupon'}}
+                                <p>{{pageLabelMap 'CartInc_Qty'}}: {{this.quantity}}</p>
+                            {{/ifNotEquals}}
+                            <p class="price">
+                                {{#ifNotEquals this.cartItemType 'Coupon'}}
+                                    {{#if this.price}}
+                                        {{pageLabelMap 'CartInc_Price'}}: {{{price this.price}}}<br/>
+                                    {{/if}}
+                                    {{#if this.absoluteDiscount}}
+                                        {{#ifGreater this.absoluteDiscount 0}}
+                                            <span>{{pageLabelMap 'Checkout_YouSave'}}: {{{price this.absoluteDiscount}}}</span><br/>
+                                        {{/ifGreater}}
+                                        {{#ifLessThan this.absoluteDiscount 0}}
+                                            <span>{{pageLabelMap 'CartInc_Surcharge'}}: {{{priceAbs this.absoluteDiscount}}}</span><br/>
+                                        {{/ifLessThan}}
+                                    {{/if}}
+                                {{/ifNotEquals}}
+                                <strong>{{pageLabelMap 'CartInc_Total'}}: {{{price this.itemTotal}}}</strong>
+                            </p>
+                        </div>
+                        {{#ifNotEquals this.cartItemType 'Coupon'}}
+                            <div class="cart_item_viewport">
+                                {{{displayImage this.mediaWrapper 'orderReview'}}}
+                            </div>
+                            <p class="item_title">
+                                {{displayProductName 'Aggregate_Display' displayProductBean.name mockProduct.name }}
+                            </p>
+                            <p><span><strong>{{pageLabelMap 'Checkout_SKU'}}:</strong> {{this.mockProduct.sku}}</span></p>
+                            {{#if this.showSubProdTerm}}
+                                <p class="subscriptionSummary">
+                                    <span>
+                                        {{insertTokens this.orderDisplayName this.displayName (price this.price) (price this.SubAmount) (price this.recurringPrice) (price this.recurringPriceSubAmount) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.installmentFrequencyUOM) this.orderFrequency this.installmentFrequency this.installmentCount this.orderCount}}
+                                    </span>
+                                </p>
+                            {{else}}
+                                {{#if this.isSubscription}}
+                                    <p class="subscriptionSummary">{{subscriptionSummary 'Cart_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                                {{/if}}
+                            {{/if}}
+                            {{#each minorLines}}
+                                {{#if this.showSubProdTerm}}
+                                    <p class="subscriptionSummary">{{insertTokens this.orderDisplayName this.displayName (price this.price) (price this.SubAmount) (price this.price) (price this.SubAmount) (price this.recurringPrice) (price this.recurringPriceSubAmount) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.orderFrequencyUOM) (pageLabelPrefixMap 'Subscriptions_Frequency_' this.installmentFrequencyUOM) this.orderFrequency this.installmentFrequency this.installmentCount this.orderCount}}</p>
+                                {{else}}
+                                    {{#if this.isSubscription}}
+                                        <p class="subscriptionSummary">{{subscriptionSummary 'Cart_Subscription_' this.subscriptionFrequency mockProduct.sku itemTotal}}</p>
+                                    {{/if}}
+                                {{/if}}
+                            {{/each}}
+                            {{#if this.minorLines }}
+                                <p><a href="#included_items{{this.itemID}}" id="includedItemsLink" data-toggle="modal" data-id="{{this.itemID}}">{{pageLabelMap 'IncludedItems'}}</a></p>
+                                {{> includedDisplay}}
+                            {{/if}}
+                        {{/ifNotEquals}}
+                        {{#ifEquals this.cartItemType 'Coupon'}}
+                            <p class="item_title coupon_title" data-id="{{this.mockProduct.sku}}">
+                                <span class="couponReviewLabel">{{pageLabelMap 'CartInc_AppliedCoupon'}}</span> {{this.mockProduct.name}}
+                            </p>
+                        {{/ifEquals}}
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class="row">
+            {{#each splitData}}
+              <div class="row-fluid">
+                <fieldset>
+                  <legend>{{this.type}}</legend>
+                  <div class="span12">
+                    <ul>
+                        {{#each this.prodData}}
+                            <li>{{this.prodName}}</li> 
+                       {{/each}}        
+                    </ul>
+                  </div>
+                </fieldset>
+              </div>
+            {{/each}}
+        </div>
+        <div class="clear"></div>
+        {{> totalsSection}}
+    </script>
+    
+    <script>
+    CCRZ.uiProperties.OrderReviewView.partial.totalsSection ='#Review-Cart-Desktop-Lol';
+    </script>-->
+    
+    
+
+</apex:component>

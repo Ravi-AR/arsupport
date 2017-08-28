@@ -1,0 +1,98 @@
+<!-- ********************************** --->
+<!-- Visualforce temaplte to upload case via mobile with attachments
+     Author : adeel.ahmad@magnet360.com
+     Date   : 01-23-2015
+<!-- ********************************** --->
+
+<apex:page controller="CreateCaseController" showHeader="false" sidebar="false" applyBodyTag="false" applyHtmlTag="false" standardStylesheets="true" >
+    <apex:composition template="LOLBaseTemplate">
+        <apex:define name="pageTitle">New Case</apex:define>
+        <apex:define name="body">
+            <div class="row" style="position:relative;"> 
+                <apex:form styleClass="form-horizontal" onsubmit="return validateCaseCreation();"> 
+                    <div class="form-group">
+                        <apex:pageMessages /> 
+                    </div>
+                    
+                    <div class="loading hide">
+                        <img src="/img/loading.gif" />                   
+                    </div>
+                    
+                    <apex:pageBlock title="Create Case"  >
+                        <apex:repeat value="{!fields}" var="f" >
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <apex:outputLabel value="{!f.Label}" />
+                                </div>
+                                <div class="col-xs-12">
+                                    <apex:inputField value="{!newCase[f.fieldPath]}" styleClass="form-control" />
+                                </div>
+                            </div>    
+                        </apex:repeat>
+                        <div class="form-group">
+                            <label class="col-xs-12">
+                                Attach Photo
+                                <a href="javascript:void(0)" onClick="addAttachment()" class="add_more">Add More Files</a>
+                            </label>
+                            <div class="col-xs-12">
+                                <div class="upload">
+                                    <apex:variable value="{!1}" var="rowNum"/>
+                                    <apex:repeat value="{!attachments}" var="att">
+                                        <div class="file_sep">
+                                            <apex:inputFile value="{!att.body}"  filename="{!att.name}" styleclass="form-control file-input"/>
+                                            <a href="javascript:void(0)" class="library_btn">Take Picture or Choose from Library</a>
+                                            <apex:outputPanel rendered="{!NOT(rowNum == 1)}" layout="none">
+                                            <span class="remove_attachement">
+                                                <a href="javascript:void(0)"><img src="{!$Resource.DeleteIcon}" /></a>
+                                            </span>                                            
+                                            </apex:outputPanel>
+                                        </div>
+                                        
+                                        <apex:variable var="rowNum" value="{!rowNum + 1}"/>                                        
+                                    </apex:repeat>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                          <!--      <apex:commandButton value="SUBMIT CASE" action="{!SubmitCase}" styleClass="btn col-xs-12 form-submit"/> -->
+                          <apex:actionRegion >
+                                <apex:commandButton value="SUBMIT CASE"  action="{!SubmitCase}" styleClass="btn col-xs-12 form-submit"/>
+                                </apex:actionRegion>
+                            </div>
+                        </div>
+                        
+                    </apex:pageBlock>
+                    
+                </apex:form>
+            </div>
+            <script>
+            function validateCaseCreation()
+            {
+                $('.loading').show();
+                $('.loading').removeClass('hide');
+            }
+            $(document).ready(function(){
+                $(".upload").each(function(){
+                    $(".file_sep:not(:first)", this).hide();
+                });
+                
+                $('.remove_attachement a').each(function(){
+                    $(this).click(function(){
+                        var $input = $(this).parent().parent().find('.file-input');
+                        $input.replaceWith($input.val('').clone(true));
+                        $(this).parent().parent().hide();
+                        $(this).parent().parent().clone(true).insertAfter( ".file_sep:hidden:first" );
+                        $(this).parent().parent().remove();
+                    });
+                });
+            });
+            
+            function addAttachment(){
+                 $('.file_sep:hidden:first').show();
+            }
+            </script>
+        </apex:define>
+    </apex:composition>
+</apex:page>

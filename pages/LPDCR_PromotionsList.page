@@ -1,0 +1,42 @@
+<!-- 
+*********************************************************************************
+Author: Govinda Prasad P S
+Email: govinda.prasad@magnet360.com
+Created Date    : 9/30/2016
+Function    :  Visualforce page to display List of Promotional Records.
+Version     : 1.0 
+*********************************************************************************
+--> 
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" controller="LPDCR_PromotionListController">
+   <apex:composition template="LPDCR_BaseTemplate">
+      <apex:define name="PageTitle">Promotions</apex:define> 
+      <apex:define name="body">  
+      <div class="title_wrapper">
+          <div class="container-fluid">
+             <h3 class="page_title">Promotions</h3>
+          </div>
+          </div>
+      <div class="container-fluid content_wrapper">   
+      
+     <div class="row">
+          <div class="col-lg-12 topheadergap">
+           <h5>See what promotions Purina has to offer.</h5>
+            <!--<div class="panel panel-default promotionlist" id="panel1">               
+                  
+                  <table class="table">
+
+                      <apex:repeat value="{!Campaigns}" var="camObj">       
+                          <tr>
+                              <td><a href="/apex/LPDCR_PromotionsDetail?Id={!camObj.Id}">{!camObj.Name}</a></td>
+                               <td class="date">{!camObj.Date_Range__c}</td>   
+                          </tr>                           
+                      </apex:repeat>
+                  </table>
+                 </div> -->
+                 <c:LPDCR_CampaignListComponent />
+             </div>  
+           </div><!--end row--> 
+           </div> 
+      </apex:define>
+   </apex:composition>
+</apex:page>

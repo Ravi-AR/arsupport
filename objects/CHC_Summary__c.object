@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object to hold the summary records per account for the CHC report</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Average_Per_Month__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Speed (Average per month x 18)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Speed (Average per month x 18)</inlineHelpText>
+        <label>Speed</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CHC_Level__c</fullName>
+        <description>Indicates display text for CHC trip status</description>
+        <externalId>false</externalId>
+        <formula>IF(ISPICKVAL(Trip_Win_Level__c ,&quot;BRONZE&quot;), &quot;BRONZE&quot;, 
+IF(ISPICKVAL(Trip_Win_Level__c,&quot;SILVER&quot;), &quot;SILVER&quot;,  
+IF(ISPICKVAL(Trip_Win_Level__c, &quot;GOLD&quot;) , &quot;GOLD&quot;,
+IF(Double_or_95_000_Pts_Gold__c = &quot;DOUBLE GOLD&quot;, &quot;DOUBLE GOLD&quot;,
+IF(Double_or_95_000_Pts_Gold__c = &quot;TOTAL PTS GOLD&quot;, &quot;TOTAL PTS GOLD&quot;,
+IF( X47_500_Pts_with_Growth_Gold__c = &quot;TOTAL PTS GOLD&quot;, &quot;TOTAL PTS GOLD&quot;,
+&quot;&quot;))))))</formula>
+        <inlineHelpText>This is the text that is shown to the Community user for CHC trip status</inlineHelpText>
+        <label>CHC Level</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Current_Growth__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Performance minus Base</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Performance minus Base</inlineHelpText>
+        <label>Current Growth</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Double_or_95_000_Pts_Gold__c</fullName>
+        <description>If value is present, values include be DOUBLE  GOLD or TOTAL PTS GOLD from CHC Report</description>
+        <externalId>false</externalId>
+        <label>Double or 95,000 Pts Gold</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Parent_FD_1_Account__c</fullName>
+        <description>The parent account in the FD 1 hierarchy the summary is associated to</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The parent account in the FD 1 hierarchy the summary is associated to</inlineHelpText>
+        <label>Parent FD 1 Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>CHC Summaries</relationshipLabel>
+        <relationshipName>CHC_Summaries</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Points_for_Bronze__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Total points needed for Bronze trip level</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Total points needed for Bronze trip level</inlineHelpText>
+        <label>Points for Bronze</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Points_for_Gold__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Total points needed for Gold trip level</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Total points needed for Gold trip level</inlineHelpText>
+        <label>Points for Gold</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Points_for_Silver__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Total points needed for Silver trip level</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Total points needed for Silver trip level</inlineHelpText>
+        <label>Points for Silver</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Summary_Date__c</fullName>
+        <description>The date the summary information is recorded</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date the summary information is recorded</inlineHelpText>
+        <label>Summary Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Total_Base_Points__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>The total or minimum base points for the account</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The total or minimum base points for the account</inlineHelpText>
+        <label>Total Base Points</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Performance_Points__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>The total performance points for the account</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The total performance points for the account</inlineHelpText>
+        <label>Total Performance Points</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Trip_Win_Level__c</fullName>
+        <description>Bronze, Silver, or Gold</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Bronze, Silver, or Gold</inlineHelpText>
+        <label>Trip Win Level</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>BRONZE</fullName>
+                    <default>false</default>
+                    <label>BRONZE</label>
+                </value>
+                <value>
+                    <fullName>SILVER</fullName>
+                    <default>false</default>
+                    <label>SILVER</label>
+                </value>
+                <value>
+                    <fullName>GOLD</fullName>
+                    <default>false</default>
+                    <label>GOLD</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Ultimate_FD_1_Parent_Account__c</fullName>
+        <description>Indicates the top level parent in the FD1 hierarchy that the summary values will rollup to.</description>
+        <externalId>false</externalId>
+        <formula>IF( Parent_FD_1_Account__r.Is_FD1_Ultimate_Parent__c, Parent_FD_1_Account__c, Parent_FD_1_Account__r.Ultimate_FD_1_Parent_Account__c )</formula>
+        <inlineHelpText>Indicates the top level parent in the FD1 hierarchy that the summary values will rollup to.</inlineHelpText>
+        <label>Ultimate FD 1 Parent Account</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X47_500_Pts_with_Growth_Gold__c</fullName>
+        <description>If value is present, value should be TOTAL PTS GOLD from CHC Report</description>
+        <externalId>false</externalId>
+        <label>47,500 Pts with Growth Gold</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>CHC Summary</label>
+    <nameField>
+        <displayFormat>CHC-{0000}</displayFormat>
+        <label>CHC Summary Id</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>CHC Summary</pluralLabel>
+    <recordTypes>
+        <fullName>Standard</fullName>
+        <active>true</active>
+        <description>CHC Trip Summary Information</description>
+        <label>Standard</label>
+        <picklistValues>
+            <picklist>Trip_Win_Level__c</picklist>
+            <values>
+                <fullName>BRONZE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GOLD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SILVER</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

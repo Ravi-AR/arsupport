@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>CRAIG MOSS DBA WISE FEED-543854 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>CRAIG MOSS DBA WISE FEED-543854 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>CRAIGMOSSDBAWISEFEED543854PartnerManager</parentRole>
+</Role>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>BUTLERLAND CATTLE LLC DBA H AND H FEEDS-381838 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>BUTLERLAND CATTLE LLC DBA H AND H FEEDS-381838 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>BUTLERLANDCATTLELLCDBAHANDHFEEDS381838PartnerManager</parentRole>
+</Role>

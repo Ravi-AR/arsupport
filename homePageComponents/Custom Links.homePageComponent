@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HomePageComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <body>&lt;div&gt; &lt;/div&gt;
+
+&lt;div&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;a href=&quot;http://www.purinamills.com&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;Purina Mills&lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/div&gt;
+
+&lt;div&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;a href=&quot;http://www.purinamills.com/login&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;Purina Business Link&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.mazuri.com&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;Mazuri Sales&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://lolmdm.hcl.com/LOL_MDM/Transaction/ReqLanding&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;Account Changes&lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;a href=&quot;https://feedlabeling.landolakes.com/my.policy&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;Feed Labels&lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;a href=&quot;http://isucm002ucm-pd.ent.lolcentral.com/cs/idcplg?IdcService=GET_DOC_PAGE&amp;amp;Action=GetTemplatePage&amp;amp;Page=STANDARD_QUERY_PAGE&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;u&gt;Invoice Image&lt;/u&gt;&lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;br&gt; &lt;/div&gt;</body>
+    <pageComponentType>htmlArea</pageComponentType>
+    <width>wide</width>
+</HomePageComponent>

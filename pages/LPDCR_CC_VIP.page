@@ -1,0 +1,154 @@
+<apex:page controller="LPDCR_CC_VIP_Controller" action="{!initCachedData}" docType="html-5.0" showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" >
+ <apex:form id="form">
+
+    <apex:composition template="LPDCR_CC_BaseTemplate" >
+        <apex:define name="PageTitle">Event Planning</apex:define>
+        <apex:define name="body">
+   
+            <div class="wrapper">    
+                <div class="row equalHgt">
+                     <div class="col-sm-12 pad_all">
+                         <!-- START: MAIN PAGE BODY -->
+                         <div class="wrapper cc_homepage pagenation_promation">
+                           <div class="row">
+                               <div class="col-sm-12 mob_pads">
+                                  <div class="row">
+                                      <div class="col-sm-12 pad_all0 mob_pad">
+                                          <c:LPDCR_SecondaryPageHeader title="{!JSENCODE(page_title)}" id="pageTitleText" />
+                                         
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-sm-12 mob_pads">
+                                          <div class="panel with-nav-tabs panel-default">
+                                               <div class="panel-heading col-sm-3">
+                                                   <ul class="nav nav-tabs lft_menu">
+                                                        <li class="wid100 {!IF($CurrentPage.parameters.subtab == 'FarmVIP' || $CurrentPage.parameters.subtab == '', 'active','')}"><a href="#FarmVIP" onclick="setTitle('FarmVIP');" data-toggle="tab" class="lia txt_upper">{!JSENCODE($Label.LPDCR_Farm_VIP_Subtab_Name)}</a></li>
+                                                        <li class="wid100 {!IF($CurrentPage.parameters.subtab == 'NationalEvents', 'active','')}"><a href="#NationalEvents" onclick="setTitle('NationalEvents');" data-toggle="tab" class="lia txt_upper">{!JSENCODE($Label.LPDCR_National_Events_Subtab_Name)}</a></li>
+                                                        <!--<li class="wid100 {!IF($CurrentPage.parameters.subtab == 'LocalEvents', 'active','')}"><a href="#LocalEvents" onclick="setTitle('LocalEvents');" data-toggle="tab" class="lia txt_upper">{!JSENCODE($Label.LPDCR_Local_Events_Subtab_Name)}</a></li>-->
+                                                        <li class="wid100 {!IF($CurrentPage.parameters.subtab == 'PlanningResources', 'active','')}"><a href="#PlanningResources" onclick="setTitle('PlanningResources');" data-toggle="tab" class="lia txt_upper">{!JSENCODE($Label.LPDCR_Planning_Resources_Subtab_Name)}</a></li>
+                                                    </ul>
+                                                    
+                                                    <apex:actionFunction action="{!setPageTitle}" name="setTitle" rerender="pageTitleText,filterPanel,componentPanel" status="loader">
+                                                        <apex:param name="title" assignTo="{!selected_title}" value="" />
+                                                    </apex:actionFunction>
+
+                                                    <div class="col-sm-12 pad_lft_rgt accBg">
+                                                     <apex:outputPanel layout="block" styleClass="col-sm-12 pad_lft_rgt accBg pad_btm20" id="filterPanel" >
+                                                       <c:LPDCR_SecondaryPageFilters componentKey="filtersComponent" 
+                                                                                     thisPageController="{!this}"
+                                                                                     rerenderList="componentPanel,documentList"
+                                                                                     compName="{!page_title}"/>
+                                                     </apex:outputPanel>
+                                                    </div>
+                                                    
+                                                </div>
+                                                 <div class="panel-body col-sm-9 pad_lft10 zeroPad mob_pad">
+                                                    <div class="tab-content bgWht flt_lft wid100">
+                                                        
+                                                        <!-- MAIN BODY COMPONENTS CORRESPONDING TO EACH OF THE SUBTAB LINKS -->
+                                                        <apex:outputPanel id="componentPanel">
+                                                        <!-- VIP - THE FARM -->
+                                                        <div class="tab-pane fade {!IF(page_title == $Label.LPDCR_Farm_VIP_Subtab_Name,'active in','')}" id="FarmVIP">
+                                                            <apex:outputPanel id="vipEventsPanel" rendered="{!IF(page_title == $Label.LPDCR_Farm_VIP_Subtab_Name,true,false)}">
+                                                               <c:LPDCR_SecondaryVIPFarm componentKey="vipEventsComponent"
+                                                                                          thisPageController="{!this}"
+                                                                                          speciesFilter="{!SpecieList}" 
+                                                                                          sortBy="{!SortBy}"
+                                                                                          internalOnly="{!InternalUserCheck}"/>
+                                                            </apex:outputPanel>
+                                                        </div>
+                                                        <!-- National Events -->
+                                                        <div class="tab-pane fade {!IF(page_title == $Label.LPDCR_National_Events_Subtab_Name,'active in','')}" id="NationalEvents">
+                                                            <apex:outputPanel id="nationalEventsPanel" rendered="{!IF(page_title == $Label.LPDCR_National_Events_Subtab_Name,true,false)}">
+                                                           
+                                                               <c:LPDCR_SecondaryNationalEvents componentKey="nationalEventsComponent"
+                                                                                          thisPageController="{!this}"
+                                                                                          speciesFilter="{!SpecieList}" 
+                                                                                           sortBy="{!SortBy}"
+                                                                                           internalOnly="{!InternalUserCheck}"/>
+                                                            </apex:outputPanel>
+                                                        </div>
+                                                        <!-- Local Events -->
+                                                        <!--<div class="tab-pane fade" id="LocalEvents">
+                                                            <apex:outputPanel id="localEventsPanel" >
+                                                               <c:LPDCR_SecondaryLocalEvents componentKey="localEventsComponent"
+                                                                                          thisPageController="{!this}"
+                                                                                          speciesFilter="{!SpecieList}" />
+                                                            </apex:outputPanel>
+                                                        </div>-->
+                                                         <!-- PLANNING RESOURCES-->
+                                                        <div class="tab-pane fade {!IF(page_title == $Label.LPDCR_Planning_Resources_Subtab_Name,'active in','')}" id="PlanningResources">
+                                                            <apex:outputPanel id="planningPanel" rendered="{!IF(page_title == $Label.LPDCR_Planning_Resources_Subtab_Name,true,false)}">
+                                                               <c:LPDCR_SecondaryPlanningResources componentKey="eventPlansComponent"
+                                                                                                       thisPageController="{!this}"
+                                                                                                       speciesFilter="{!SpecieList}"
+                                                                                                       fileFilter="{!FileTypeFilter}"
+                                                                                                       sortBy="{!SortBy}" />
+                                                            </apex:outputPanel>
+                                                        </div>
+                                                        </apex:outputPanel>
+                                                    </div>
+                                                 </div>
+                                          
+                                          </div>                      
+                                      </div>
+                                  </div>
+                               </div>
+                           </div>
+                      </div>
+                     
+                     </div>
+                </div>
+                
+            </div>
+                <!-- Loader code starts here -->
+                <apex:actionStatus id="loader">
+                    <apex:facet name="start">
+                        <div class="loadercover">
+                        </div>
+                        <div class="loaderfirst">
+                            <div class="loadersec">
+                                <img src="/img/loading32.gif" class="loaderimage" />
+                            </div>
+                        </div>   
+                    </apex:facet>
+                </apex:actionStatus>
+            <!-- Loader code ends here-->
+        </apex:define>
+    </apex:composition>
+ </apex:form>
+
+<style>
+
+    .paddingtext{padding: 20px 0 0 0px;font-weight:bold;}
+    .row{margin:0px;}
+    .pad_all{padding:0px !important}
+    .pad_lft_rgt{padding-left:0px !important;padding-right:0px !important}
+</style>
+<script src="{!URLFOR($Resource.LPDCR_CC_Assets, 'js/datable.js')}"></script> 
+ <script src="{!URLFOR($Resource.LPDCR_CC_Assets, 'js/bootstrap_datable.js')}"></script>
+
+    <script>
+         $(document).ready(function(){
+          $('#ep').addClass("myactive");
+          $('#mep').addClass("mobactive");
+        });
+     </script>
+      <script type="text/javascript">
+                   
+                   function GetselectedAccount(){
+                        //alert('$value--'+$("input[name='account']:checked").attr('value'));
+                        var selectedAccId = $("input[name='account']:checked").attr('value');
+                        //alert(selectedAccId);
+                        
+                        var urlString = '{!$Site.BaseUrl}/';
+                        window.location = urlString+'LPDCR_CC_VIP?selectedAccountId='+selectedAccId;
+                        
+                        //changeAccount($("input[name='account']:checked").attr('value'));
+                    }
+                    
+         </script>
+         <style>.media{background:url({!URLFOR($Resource.LPDCR_CC_Assets, $Label.LPDCR_Header_Events)}); width:100%; height:133px; background-repeat: no-repeat;
+    background-size: contain;}</style>
+</apex:page>

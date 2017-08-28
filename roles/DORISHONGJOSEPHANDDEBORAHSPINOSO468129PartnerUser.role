@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>DORIS HONG,JOSEPH AND DEBORAH SPINOSO-468129 Partner User</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>DORIS HONG,JOSEPH AND DEBORAH SPINOSO-468129 Partner User</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>DORISHONGJOSEPHANDDEBORAHSPINOSO468129PartnerManager</parentRole>
+</Role>
