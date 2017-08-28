@@ -31951,6 +31951,1198 @@
         <field>pi__Pardot_Scoring_Category__c.pi__Pardot_Account_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <layoutAssignments>
+        <layout>AAKCS__Campaign_Status_Default_Value__c-AAKCS__Campaign Status Default Value Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AAKCS__Campaign_Status_Default__c-AAKCS__Campaign Status Default Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AMASellingSupportExpenseLineItem__c-Reimbursement Request Line Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AMASellingSupportExpenseLineItem__c-Reimbursement Request Line Item Layout</layout>
+        <recordType>AMASellingSupportExpenseLineItem__c.Standard</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AMASellingSupportExpense__c-Dealer Reimbursement View</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AMASellingSupportExpense__c-Dealer Reimbursement View</layout>
+        <recordType>AMASellingSupportExpense__c.Balance_Adjustment</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AMASellingSupportExpense__c-Dealer Reimbursement View</layout>
+        <recordType>AMASellingSupportExpense__c.Reimbursement_Request</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AMASellingSupportExpense__c-Dealer Reimbursement View</layout>
+        <recordType>AMASellingSupportExpense__c.Standard</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>API_Log__c-API Log Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-Dealer Community User Account Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-Dealer Community User Account Layout</layout>
+        <recordType>Account.Dealer_Coop_Account</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-Dealer Community User Account Layout</layout>
+        <recordType>Account.Direct_Producer_Account</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-Dealer Community User Account Layout</layout>
+        <recordType>Account.International_Dealer</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-Dealer Community User Account Layout</layout>
+        <recordType>Account.National_Account</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-Dealer Community User Account Layout</layout>
+        <recordType>Account.Other_Account</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-Dealer Community User Account Layout</layout>
+        <recordType>Account.Prospect_Dealer_Coop_Account</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-Dealer Community User Account Layout</layout>
+        <recordType>Account.Prospect_Direct_Producer_Account</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-Dealer Community User Account Layout</layout>
+        <recordType>Account.Prospect_Direct_Producer_Account_Save</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-Dealer Community User Account Layout</layout>
+        <recordType>Account.Prospect_Retail_Producer_Account</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-Dealer Community User Account Layout</layout>
+        <recordType>Account.Prospect_Retail_Producer_Account_Save</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-Dealer Community User Account Layout</layout>
+        <recordType>Account.Retail_Producer_Account</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-Dealer Community User Account Layout</layout>
+        <recordType>Account.Retail_Producer_Account_Save</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-Direct Producer Account Partner Layout</layout>
+        <recordType>Account.Direct_Producer_Account_Save</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AccountContactRelation-Account Contact Relationship Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AccountContactRole-Account Contact Role Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AccountTeamMember-Account Team Member Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account_Team__c-Acct Team - Additional Assignment Info Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Agronomy__c-Agronomy Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Agronomy__c-Agronomy Layout</layout>
+        <recordType>Agronomy__c.Agronomy</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Animal_Count_Lifestage__c-Producer Count %26 Lifestage Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Animal_Count_Lifestage__c-Producer Count %26 Lifestage Layout</layout>
+        <recordType>Animal_Count_Lifestage__c.Producer_Count_Lifestages</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Answer__c-Answer Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Answer__c-Answer Layout</layout>
+        <recordType>Answer__c.Digigraph_Answer</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Area_Code__c-Area Code Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Area_Code__c-Area Code Layout</layout>
+        <recordType>Area_Code__c.Customer_Ops_Area_Code</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Assessment__c-Assessment Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Assessment__c-Assessment Layout</layout>
+        <recordType>Assessment__c.Dairy</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Asset-Asset Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Blacklist_Audit__c-Blacklist Audit Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Blacklisted_Word__c-Blacklisted Word Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Branch_Product__c-Branch_Product_Sales_Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Branch_Product__c-Branch_Product_Sales_Layout</layout>
+        <recordType>Branch_Product__c.Sales</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Branch__c-Branch_Sales_Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Branch__c-Branch_Sales_Layout</layout>
+        <recordType>Branch__c.Sales</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>BusinessBuilderProgramYear__c-Business Builder Program Year Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CC_Error_Log__c-CC Error Log Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CC_OO_Customer_Freight__c-CC OO Customer Freight Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CC_OO_PlantCutOff__c-CC OO Plant CutOff Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CC_OO_PlantHolidayCalendar__c-CC OO Plant Holiday Calendar Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CHC_Summary__c-CHC Summary Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CHC_Summary__c-CHC Summary Layout</layout>
+        <recordType>CHC_Summary__c.Standard</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Campaign-Business Builder</layout>
+        <recordType>Campaign.Business_Builder_Promotions</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Campaign-Engagement Campaign</layout>
+        <recordType>Campaign.Engagement_Campaign</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Campaign-Farm VIP Event Layout</layout>
+        <recordType>Campaign.Farm_VIP_Event</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Campaign-National%2FRegional Event Layout</layout>
+        <recordType>Campaign.National_Regional_Events</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Campaign-Producer Meeting Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Campaign-Producer Meeting Layout</layout>
+        <recordType>Campaign.Customer_Events</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Campaign-Promotion Layout %28non-product%29</layout>
+        <recordType>Campaign.PromotionsPrebooking</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CampaignMember-Campaign Member Page Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CampaignMember-Campaign Member Page Layout</layout>
+        <recordType>CampaignMember.Campaign_Member</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case-Backlog Page Layout</layout>
+        <recordType>Case.Backlog</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case-Case Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case-Case Layout</layout>
+        <recordType>Case.Consumer</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case-Case Layout</layout>
+        <recordType>Case.Customer_Care</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case-Case Layout</layout>
+        <recordType>Case.Customer_Care_Service_Request</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case-Case Layout</layout>
+        <recordType>Case.Email2Case</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case-Case Layout</layout>
+        <recordType>Case.Mass_Channel_Farm_Ranch</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case-New User Request</layout>
+        <recordType>Case.New_User_Request</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case-Support Case</layout>
+        <recordType>Case.Support_Case</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CaseClose-Backlog Closed Case Layout</layout>
+        <recordType>Case.Backlog</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CaseClose-Close Case Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CaseClose-Mass Channel Close Case Layout</layout>
+        <recordType>Case.Mass_Channel_Farm_Ranch</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CaseClose-New User Request</layout>
+        <recordType>Case.New_User_Request</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CaseClose-Support Case</layout>
+        <recordType>Case.Support_Case</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CollaborationGroup-Group Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contact-Contact Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contact-Contact Layout</layout>
+        <recordType>Contact.Consumer_Contact</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contact-Contact Layout</layout>
+        <recordType>Contact.Contact</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contact-Contact Layout</layout>
+        <recordType>Contact.EMS_Contact</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contact-Internal Contact</layout>
+        <recordType>Contact.Internal</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contact-Purina Customer Service Layout</layout>
+        <recordType>Contact.Purina_Customer_Care_Contact</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contact-Purina Sales Contact Layout</layout>
+        <recordType>Contact.Purina_Sales</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ContentVersion-Content Version</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contract-Contract Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Coupon_Request_Line_Item__c-Coupon Request Line Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Coupon_Request_Line_Item__c-Coupon Request Line Item Layout</layout>
+        <recordType>Coupon_Request_Line_Item__c.Standard</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Coupon_Request__c-Coupon Request Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Coupon_Request__c-Coupon Request Layout</layout>
+        <recordType>Coupon_Request__c.Standard</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Coupon__c-Coupon Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Coupon__c-Coupon Layout</layout>
+        <recordType>Coupon__c.PMI</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Coupon__c-Coupon Layout</layout>
+        <recordType>Coupon__c.Purina</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CustomerEventMetadata__c-Customer Event Metadata Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CustomerEventMetadata__c-Customer Event Metadata Layout</layout>
+        <recordType>CustomerEventMetadata__c.Business_Builder_Program_Year_Metadata</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CustomerEventMetadata__c-Customer Event Metadata Layout</layout>
+        <recordType>CustomerEventMetadata__c.Customer_Event_Metadata</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CustomerEventMetadata__c-Customer Event Metadata Layout</layout>
+        <recordType>CustomerEventMetadata__c.Standard</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Dealer_Seg_Market_Share__c-Dealer Seg%2FMarket Share Junction Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Dealer_Segmentation__c-Dealer Segmentation Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Distribution_Alert_History__c-Distribution Alerts Detail Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Distribution_Alert_History__c-Distribution Alerts Detail Layout</layout>
+        <recordType>Distribution_Alert_History__c.Cooked_Tubs</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Distribution_Alert__c-Distribution Alerts %7C%7C Tubs</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Distribution_Alert__c-Distribution Alerts %7C%7C Tubs</layout>
+        <recordType>Distribution_Alert__c.Cooked_Tubs</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DuplicateRecordSet-Duplicate Record Set Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>EmailMessage-Email Message Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Event-Appointment %28Sales%29</layout>
+        <recordType>Event.Appointment</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Event-Event Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Event-Event Layout</layout>
+        <recordType>Event.Customer_Ops_Event</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Event-Event Layout</layout>
+        <recordType>Event.Event</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Event-General Admin Event</layout>
+        <recordType>Event.General_Admin_Event</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Event-Training Event</layout>
+        <recordType>Event.Training_Event</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Facility_Checklist__c-Facility Checklist Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Facility_Checklist__c-Facility Checklist Layout</layout>
+        <recordType>Facility_Checklist__c.Swine_Facility_Walk_Through</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Farm_VIP_Registration__c-Approved Farm VIP Registration</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Farm_VIP_Registration__c-Approved Farm VIP Registration</layout>
+        <recordType>Farm_VIP_Registration__c.Approved_Farm_VIP_Event_Registration</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Farm_VIP_Registration__c-Approved Farm VIP Registration</layout>
+        <recordType>Farm_VIP_Registration__c.FarmVIPEventRegistration</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>FeedItem-Feed Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial_Track_Sheet__c-Cattle Ingredient Track Sheet Layout</layout>
+        <recordType>Feeding_Trial_Track_Sheet__c.Ingredient</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial_Track_Sheet__c-Cattle Product Track Sheet Layout</layout>
+        <recordType>Feeding_Trial_Track_Sheet__c.Product</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial_Track_Sheet__c-Dairy Feeding Trial Track Sheet Layout</layout>
+        <recordType>Feeding_Trial_Track_Sheet__c.Dairy</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial_Track_Sheet__c-Deer Feeding Trial Track Sheet Layout</layout>
+        <recordType>Feeding_Trial_Track_Sheet__c.Deer</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial_Track_Sheet__c-Feeding Trial Track Sheet Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial_Track_Sheet__c-Horse Feeding Trial Track Sheet Layout</layout>
+        <recordType>Feeding_Trial_Track_Sheet__c.Horse</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial_Track_Sheet__c-Show Track Sheet Layout - Cattle</layout>
+        <recordType>Feeding_Trial_Track_Sheet__c.Show_Cattle</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial_Track_Sheet__c-Show Track Sheet Layout - Goat</layout>
+        <recordType>Feeding_Trial_Track_Sheet__c.Show_Goat</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial_Track_Sheet__c-Show Track Sheet Layout - Lamb</layout>
+        <recordType>Feeding_Trial_Track_Sheet__c.Show_Lamb</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial_Track_Sheet__c-Show Track Sheet Layout - Swine</layout>
+        <recordType>Feeding_Trial_Track_Sheet__c.Show_Swine</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial__c-Cattle Trial - 90 Day Mineral</layout>
+        <recordType>Feeding_Trial__c.Cattle_90D_Mineral_Trial</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial__c-Cattle Trial Layout</layout>
+        <recordType>Feeding_Trial__c.Cattle_Business_Builder</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial__c-Cattle Trial Layout</layout>
+        <recordType>Feeding_Trial__c.Cattle_Great_Starts</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial__c-Cattle Trial Layout</layout>
+        <recordType>Feeding_Trial__c.Cattle_Proof_Form</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial__c-Dairy Trial Layout</layout>
+        <recordType>Feeding_Trial__c.Dairy</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial__c-Deer Trial Layout</layout>
+        <recordType>Feeding_Trial__c.Deer</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial__c-Feeding Trial Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial__c-Horse Trial Layout</layout>
+        <recordType>Feeding_Trial__c.Horse</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial__c-Show Trial Layout - Cattle</layout>
+        <recordType>Feeding_Trial__c.Show_Cattle</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial__c-Show Trial Layout - Goat</layout>
+        <recordType>Feeding_Trial__c.Show_Goat</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial__c-Show Trial Layout - Lamb</layout>
+        <recordType>Feeding_Trial__c.Show_Lamb</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feeding_Trial__c-Show Trial Layout - Swine</layout>
+        <recordType>Feeding_Trial__c.Show_Swine</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Field_Trip__Field_Analysis__c-Field_Trip__Field Analysis Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Field_Trip__Object_Analysis__c-Field_Trip__Object Analysis Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Global-Purina SF1 Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>How_To__kav-How To Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Idea-Idea Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Investigation__c-Customer Ops Investigation Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Investigation__c-Customer Ops Investigation Layout</layout>
+        <recordType>Investigation__c.Customer_Ops_Investigation</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Knowledge__kav-Knowledge Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Lead-Purina Producer Lead %7C%7C Sales Team</layout>
+        <recordType>Lead.Producer_Lead</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Lead-Purina Producer%2FConsumer Lead %7C%7C Sales Team</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Lead-Purina Producer%2FConsumer Lead %7C%7C Sales Team</layout>
+        <recordType>Lead.Producer_Consumer_Lead</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Macro-Macro Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Market_Share__c-Market Share Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Market_Share__c-Market Share Layout</layout>
+        <recordType>Market_Share__c.Market_Share</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Opportunity-Agronomy Opportunity Layout %7C%7C Partner Community</layout>
+        <recordType>Opportunity.Agronomy_Opportunity</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Opportunity-Opportunity Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Opportunity-Opportunity Layout</layout>
+        <recordType>Opportunity.General_Opportunity</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>OpportunityLineItem-Opportunity Product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>OpportunityTeamMember-Opportunity Team Member Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Order-Order Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>OrderItem-Order Product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Pricebook2-Price Book Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>PricebookEntry-Price Book Entry</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Private_Notes__c-Private Note Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Private_Notes__c-Private Note Layout</layout>
+        <recordType>Private_Notes__c.Sales</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Product2-Product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Product2-Sales Layout</layout>
+        <recordType>Product2.Sales</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Program_Evaluation__c-Program Evaluation Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Program_Evaluation__c-Program Evaluation Layout</layout>
+        <recordType>Program_Evaluation__c.Swine_Program_Evaluation</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Prospecting_Kit_Request__c-Swine Prospecting Kit Request Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Prospecting_Kit_Request__c-Swine Prospecting Kit Request Layout</layout>
+        <recordType>Prospecting_Kit_Request__c.Swine_Prospecting_Kit</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Question__c-Question %26 Answer Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Question__c-Question %26 Answer Layout</layout>
+        <recordType>Question__c.Digigraph_Q_A</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Question__c-Question %26 Answer Layout</layout>
+        <recordType>Question__c.Digigraph_Question</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Reference_Materials__kav-Reference Materials Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Rich_Text_Article__kav-Rich Text Article Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>SOPs__kav-SOPs Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Sales_Team__c-Sales Team Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Sales_Team__c-Sales Team Layout</layout>
+        <recordType>Sales_Team__c.Animal_Milk</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Sales_Team__c-Sales Team Layout</layout>
+        <recordType>Sales_Team__c.Animal_Milk_Sales</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Sales_Team__c-Sales Team Layout</layout>
+        <recordType>Sales_Team__c.Milk_Products_Mgr</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Sales_Team__c-Sales Team Layout</layout>
+        <recordType>Sales_Team__c.Milk_Products_User</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Sales_Team__c-Sales Team Layout</layout>
+        <recordType>Sales_Team__c.Purina_ASM</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Sales_Team__c-Sales Team Layout</layout>
+        <recordType>Sales_Team__c.Purina_LPS</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Sales_Team__c-Sales Team Layout</layout>
+        <recordType>Sales_Team__c.Purina_Sales_Specialist</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Sales_Team__c-Technical Services</layout>
+        <recordType>Sales_Team__c.Technical_Services</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>SellingSupportProgramYear__c-Selling Support Program Year Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>SellingSupportProgramYear__c-Selling Support Program Year Layout</layout>
+        <recordType>SellingSupportProgramYear__c.Standard</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Service_Request_Product__c-Service Request Product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Service_Request_Product__c-Service Request Product Layout</layout>
+        <recordType>Service_Request_Product__c.Customer_Ops_SR_Product</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Solution-Solution Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Special_Order_Forms__kav-Special Order Forms Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Survey_Results_Summary__c-Survey Results Summary Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Survey_Results_Summary__c-Survey Results Summary Layout</layout>
+        <recordType>Survey_Results_Summary__c.Digigraph</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Survey_Results_Summary__c-Survey Results Summary Layout</layout>
+        <recordType>Survey_Results_Summary__c.Dr_Mike</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Survey_Results_Summary__c-Survey Results Summary Layout</layout>
+        <recordType>Survey_Results_Summary__c.Web_Form</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Survey_Results__c-Survey Results Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Survey_Results__c-Survey Results Layout</layout>
+        <recordType>Survey_Results__c.Digigraph_Survey_Results</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Custom Task Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Custom Task Layout</layout>
+        <recordType>Task.Consumer_Task</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Custom Task Layout</layout>
+        <recordType>Task.Customer_Ops_Task</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Custom Task Layout</layout>
+        <recordType>Task.Task</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Text_Article__kav-Tips %26 Tricks Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Time_Tracking_Activity__c-Time Tracking Activity Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Time_Tracking_Activity__c-Time Tracking Activity Layout</layout>
+        <recordType>Time_Tracking_Activity__c.Internal</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Time_Tracking_Week__c-Time Tracker Week Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Time_Tracking_Week__c-Time Tracker Week Layout</layout>
+        <recordType>Time_Tracking_Week__c.Internal</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Time_Tracking__c-Time Tracking Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Time_Tracking__c-Time Tracking Layout</layout>
+        <recordType>Time_Tracking__c.Internal_Time_Tracking</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Tip__c-Tip Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Tip__c-Tip Layout</layout>
+        <recordType>Tip__c.Management</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Tip__c-Tip Layout</layout>
+        <recordType>Tip__c.Mobile</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Training_Materials__kav-Training Materials Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>User-User Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>UserAlt-User Profile Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>VIP_Tons_Points__c-VIP Tons %26 Points Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>cc_oo_BrandCodes__c-CC OO BrandCode Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>cc_oo_ContractPrice__c-CC OO ContractPrice Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>cc_oo_ErrorLog__c-CC OO Error Log Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>cc_oo_Freight_Rate__c-CC OO Freight Rate Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>cc_oo_PriceList__c-CC OO PriceList Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_AccountAddressBook__c-ccrz__CC Account Address Book Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_AccountGroupPriceList__c-ccrz__CC Account Group Price List Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_AccountGroup__c-ccrz__CC Account Group Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_AccountSetting__c-ccrz__CC Account Setting Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_AddressBook__c-ccrz__CC Address Book Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_BreadCrumb__c-ccrz__CC BreadCrumb Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_CartCoupon__c-ccrz__CC Cart Coupon Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_CartItemPricingTier__c-ccrz__CC Cart Item Pricing Tier Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_CartItem__c-ccrz__CC Cart Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Cart__c-ccrz__CC Cart Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_CategoryI18N__c-ccrz__CC CategoryI18N Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_CategoryMedia__c-ccrz__CC Category Media Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_CategorySpec__c-ccrz__CC Category Spec Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Category__c-ccrz__CC Category Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_CompositeProduct__c-ccrz__CC Composite Product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_ConfigurationMeta__c-ccrz__CC Configuration Metadata Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_ConfigurationModule__c-ccrz__CC Configuration Module Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Configuration__c-ccrz__CC Configuration Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_ContactAddr__c-ccrz__CC Contact Address Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Content__c-ccrz__CC Content Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Coupon__c-ccrz__CC Coupon Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_FeaturedProductI18N__c-ccrz__CC FeaturedProductI18N Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_FeaturedProduct__c-ccrz__CC Featured Product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Foo__c-ccrz__CC Foo Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_HtmlCache__c-ccrz__CC Html Cache Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_InvoiceItem__c-ccrz__CC Invoice Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Invoice__c-ccrz__CC Invoice Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_LocaleFormatter__c-ccrz__CC Locale Formatter Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_MenuI18N__c-ccrz__CC Menu I18N Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_MenuItemI18N__c-ccrz__CC Menu Item I18N Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_MenuItem__c-ccrz__CC Menu Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Menu__c-ccrz__CC Menu Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_OrderItemPricingTier__c-ccrz__CC Order Item Pricing Tier Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_OrderItem__c-ccrz__CC Order Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_OrderShipmentItem__c-ccrz__CC Order Shipment Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_OrderShipment__c-ccrz__CC Order Shipment Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_OrderTerm__c-ccrz__CC Order Term Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Order__c-ccrz__CC Order Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_PageLabel__c-ccrz__CC Page Label Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_PageLabeli18n__c-ccrz__CC PageLabeli18n Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_PageSection__c-ccrz__CC Page Section Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_PaymentDetail__c-ccrz__CC Payment Detail Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Permissions__c-ccrz__E_Permissions Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_PriceGroupAccount__c-ccrz__CC Price Group Account Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_PriceGroupItem__c-ccrz__CC Price Group Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_PriceGroupPricelist__c-ccrz__CC Price Group Pricelist Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_PriceGroup__c-ccrz__CC Price Group Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_PriceListItem__c-ccrz__CC Price List Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_PriceList__c-ccrz__CC Price List Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_PriceModifier__c-ccrz__CC Price Modifier Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_PrivateCacheContent__c-ccrz__CC Private Cache Content Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_PrivateCache__c-ccrz__CC Private Cache Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_ProductCategory__c-ccrz__CC Product Category Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_ProductGuide__c-ccrz__CC Product Guide Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_ProductInventoryItem__c-ccrz__CC Product Inventory Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_ProductItemI18N__c-ccrz__CC Product Item I18N Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_ProductMedia__c-ccrz__CC Product Media Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_ProductMedia__c-ccrz__CC Product Media Layout</layout>
+        <recordType>ccrz__E_ProductMedia__c.ccrz__Datasheet</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_ProductMedia__c-ccrz__CC Product Media Layout</layout>
+        <recordType>ccrz__E_ProductMedia__c.ccrz__Image</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_ProductSpecIndex__c-ccrz__CC Product Spec Index Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_ProductSpec__c-ccrz__CC Product Spec Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_ProductStorefront__c-ccrz__CC Product Storefront Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_ProductTab__c-ccrz__CC Product Tab Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Product__c-ccrz__CC Product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Product__c-ccrz__CC Product Layout</layout>
+        <recordType>ccrz__E_Product__c.ccrz__ProductType_Assembly</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Product__c-ccrz__CC Product Layout</layout>
+        <recordType>ccrz__E_Product__c.ccrz__ProductType_Config</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Product__c-ccrz__CC Product Layout</layout>
+        <recordType>ccrz__E_Product__c.ccrz__ProductType_Normal</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_PromoI18n__c-ccrz__CC Promotion i18n Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Promo__c-ccrz__CC Promotion Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_PromotionAccountGroupFilter__c-ccrz__CC Promotion Account Group Filter Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_PublicCacheContent__c-ccrz__CC Public Cache Content Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_PublicCache__c-ccrz__CC Public Cache Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_RecentItem__c-ccrz__CC Recent Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_RelatedProductGroup__c-ccrz__CC Related Product Group Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_RelatedProduct__c-ccrz__CC Related Product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_RequestForQuote__c-ccrz__CC Request For Quote Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_ReviewLike__c-ccrz__Review Helpful Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Review__c-ccrz__CC Review Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_RulePricingModifier__c-ccrz__CC Rule Pricing Modifier Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_RuleSourceSKU__c-ccrz__CC Rule Source SKU Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_RuleSourceSpec__c-ccrz__CC Rule Source Spec Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_RuleTargetPLI__c-ccrz__CC Rule Target PLI Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_RuleTargetSKU__c-ccrz__CC Rule Target SKU Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_RuleTargetSpec__c-ccrz__CC Rule Target Spec Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Rule__c-ccrz__CC Rule Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_SellerI18N__c-ccrz__CC Seller I18N Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Seller__c-ccrz__CC Seller Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_ShippingRate__c-ccrz__CC Shipping Rate Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Spec__c-ccrz__CC Spec Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_StoredPayment__c-ccrz__CC Stored Payment Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_StorefrontAssociation__c-ccrz__CC StorefrontAssociation Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_StorefrontConfigSettings__c-ccrz__CC Storefront Config Setting Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_SubProdTermI18N__c-ccrz__CC SubProdTerm I18N Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_SubProdTerm__c-ccrz__CC SubProdTerm Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Subscriber_Page__c-ccrz__CC Subscriber Page Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Subscription__c-ccrz__CC Subscription Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_TaxRate__c-ccrz__CC Tax Rate Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_Term__c-ccrz__CC Term Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_TransactionPayment__c-ccrz__CC Transaction Payment Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__E_UserInventoryLocation__c-ccrz__CC User Inventory Location Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__L_Exception_Setup_Clone__c-ccrz__L_Exception Setup Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__L_Exception__c-ccrz__L_Exception Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__L_Logger_Setup_Clone__c-ccrz__L_Logger Setup Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ccrz__L_Logger__c-ccrz__L_Logger Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__AggregateLink__c-et4ae5__Aggregate Link Level Detail Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__Automated_Send__c-et4ae5__Active Send Layout</layout>
+        <recordType>et4ae5__Automated_Send__c.et4ae5__Active</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__Automated_Send__c-et4ae5__Inactive Send Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__Automated_Send__c-et4ae5__Inactive Send Layout</layout>
+        <recordType>et4ae5__Automated_Send__c.et4ae5__Inactive</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__Business_Unit__c-et4ae5__Business Unit Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__Campaign_Member_Configuration__c-et4ae5__Campaign Member Configuration Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__Configuration__c-et4ae5__Configuration Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__Email_Linkage__c-et4ae5__Email Linkage Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__IndividualEmailResult__c-et4ae5__Individual Email Result Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__IndividualLink__c-et4ae5__Individual Link Level Detail Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__SMSDefinition__c-et4ae5__Mobile Send Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__SMSDefinition__c-et4ae5__Mobile Send Layout</layout>
+        <recordType>et4ae5__SMSDefinition__c.et4ae5__SMS_Definition</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__SMSDefinition__c-et4ae5__Queued Mobile Send Layout</layout>
+        <recordType>et4ae5__SMSDefinition__c.et4ae5__Queued_SMS_Definition</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__SMSJunction__c-et4ae5__SMS Junction Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__SendDefinition__c-et4ae5__Trackable Send Definition Layout 2015-02</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__SendDefinition__c-et4ae5__Trackable Send Definition Layout 2015-02</layout>
+        <recordType>et4ae5__SendDefinition__c.et4ae5__Queued_Send_Definition</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__SendDefinition__c-et4ae5__Trackable Send Definition Layout 2015-02</layout>
+        <recordType>et4ae5__SendDefinition__c.et4ae5__Send_Definition</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__SendDefinition__c-et4ae5__Trackable Send Definition Layout 2015-02</layout>
+        <recordType>et4ae5__SendDefinition__c.et4ae5__Trackable_Send_Definition</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__SendJunction__c-et4ae5__Send Junction Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__SupportRequest__c-et4ae5__Support Request Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__Triggered_Send_Execution__c-et4ae5__Triggered Send Execution Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__UEBU__c-et4ae5__User Enabled Business Unit Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>et4ae5__abTest__c-et4ae5__AB Test Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>pi__AsyncRequest__c-pi__AsyncRequest Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>pi__Category_Contact_Score__c-pi__Pardot Category Score %28Contact%29 Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>pi__Category_Lead_Score__c-pi__Pardot Category Score %28Lead%29 Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>pi__EngageCampaignRecipient__c-pi__Engage Campaign Recipient Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>pi__LDFilter__c-pi__Lead Deck Filter Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>pi__ObjectChangeLog__c-pi__ObjectChangeLog Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>pi__PardotTask__c-pi__Pardot Task Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>pi__Pardot_Scoring_Category__c-pi__Pardot Scoring Category Layout</layout>
+    </layoutAssignments>
     <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>false</allowDelete>
