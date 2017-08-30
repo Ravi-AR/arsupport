@@ -242,6 +242,7 @@
         <name>CustomTab</name>
     </types>
     <types>
+        <members>SharedDocuments/AutoRABIT_Logo.png</members>
         <members>testingfolder</members>
         <name>Document</name>
     </types>
@@ -346,6 +347,10 @@
         <members>testing__mdt-testing Layout</members>
         <members>testobjectcreated__c-testobjectcreated Layout</members>
         <name>Layout</name>
+    </types>
+    <types>
+        <members>New_Logo_AutorRABIT</members>
+        <name>Letterhead</name>
     </types>
     <types>
         <members>Account.AllAccounts</members>
