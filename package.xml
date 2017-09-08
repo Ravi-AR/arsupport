@@ -2,8 +2,17 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <version>39.0</version>
     <types>
+        <members>AccCls1</members>
+        <members>AccCls2</members>
+        <members>AccCls3</members>
+        <members>AccCls4</members>
+        <members>AccCls5</members>
+        <members>Account1</members>
+        <members>Account1_Test</members>
+        <members>Account_2</members>
         <members>ApexC1</members>
         <members>ApexC2</members>
+        <members>SamplePageController</members>
         <members>Scenario2</members>
         <members>SupportStatus</members>
         <members>TestApexClass</members>
