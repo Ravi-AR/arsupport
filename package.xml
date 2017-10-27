@@ -172,6 +172,7 @@
         <members>Asset</members>
         <members>AssetRelationship</members>
         <members>AssistantProgress</members>
+        <members>CSYS__c</members>
         <members>Campaign</members>
         <members>CampaignMember</members>
         <members>Case</members>
