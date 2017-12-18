@@ -65,6 +65,47 @@
             </valueSetDefinition>
         </valueSet>
     </fields>
+    <fields>
+        <fullName>SampleField3__c</fullName>
+        <externalId>false</externalId>
+        <label>SampleField3</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SampleField4__c</fullName>
+        <externalId>false</externalId>
+        <label>SampleField4</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SampleField__c</fullName>
+        <externalId>false</externalId>
+        <label>SampleField</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ValicateCommitField__c</fullName>
+        <description>This is a test run, please ignore</description>
+        <externalId>false</externalId>
+        <label>ValicateCommitField</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
     <recordTypes>
         <fullName>TestingRecordTypeDeployment</fullName>
         <active>true</active>
