@@ -29,6 +29,12 @@
                 <div id="tab-default-6" class="slds-tabs--default__content slds-hide" role="tabpanel">
                     <h2>Load MetaData</h2>
                 </div>
+				<div id="tab-default-6" class="slds-tabs--default__content slds-hide" role="tabpanel">
+                    <h2>Load MetaData Test1</h2>
+                </div>
+				<div id="tab-default-6" class="slds-tabs--default__content slds-hide" role="tabpanel">
+                    <h2>Load MetaData Test2</h2>
+                </div>
             </div>
         </div>
     </div>
