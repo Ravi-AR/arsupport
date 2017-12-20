@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-    <version>39.0</version>
+    <version>40.0</version>
     <types>
         <members>AccCls1</members>
         <members>AccCls2</members>
@@ -37,6 +37,56 @@
         <members>Case</members>
         <members>Lead</members>
         <name>AssignmentRules</name>
+    </types>
+    <types>
+        <members>ARIndexCmp</members>
+        <members>AR_DX</members>
+        <members>AccountMap</members>
+        <members>Buttton</members>
+        <members>Create_DevHub_Org</members>
+        <members>DateCell</members>
+        <members>DateCellClick</members>
+        <members>DateChange</members>
+        <members>DatePicker</members>
+        <members>Ez_Commit_Filter</members>
+        <members>Ez_FetchChanges_Component</members>
+        <members>Ez_New_Label</members>
+        <members>FundFilterChange</members>
+        <members>FundInfoPopup</members>
+        <members>FundTile</members>
+        <members>HelloWorld</members>
+        <members>Hello_Bus</members>
+        <members>Paginator</members>
+        <members>PaginatorEvent</members>
+        <members>Rating</members>
+        <members>SFOrg_Login</members>
+        <members>ScratchOrgInfo</members>
+        <members>SearchBar</members>
+        <members>SearchKeyChange</members>
+        <members>Test1</members>
+        <members>Test2</members>
+        <members>URLApplication</members>
+        <members>ValueChange</members>
+        <members>camping</members>
+        <members>camping1</members>
+        <members>campingHeader</members>
+        <members>campingList</members>
+        <members>campingListItem</members>
+        <members>expense</members>
+        <members>expenseItem</members>
+        <members>expensesList</members>
+        <members>flagHandler</members>
+        <members>header</members>
+        <members>helloMessage</members>
+        <members>helloMessageInteractive</members>
+        <members>helloPlayground</members>
+        <members>help</members>
+        <members>loading</members>
+        <members>modal</members>
+        <members>setStartUrl</members>
+        <members>svg</members>
+        <members>svgIcon</members>
+        <name>AuraDefinitionBundle</name>
     </types>
     <types>
         <members>Case</members>
