@@ -12,6 +12,7 @@
         <members>Account_2</members>
         <members>ApexC1</members>
         <members>ApexC2</members>
+        <members>ApexClassTest</members>
         <members>SamplePageController</members>
         <members>Scenario2</members>
         <members>SupportStatus</members>
