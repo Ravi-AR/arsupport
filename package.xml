@@ -2,7 +2,6 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <version>40.0</version>
     <types>
-        <members>TestApexCls01</members>
         <members>AccCls1</members>
         <members>AccCls2</members>
         <members>AccCls3</members>
@@ -18,6 +17,7 @@
         <members>Scenario2</members>
         <members>SupportStatus</members>
         <members>TestApexClass</members>
+        <members>TestApexCls01</members>
         <members>WebtoCaseController</members>
         <name>ApexClass</name>
     </types>
