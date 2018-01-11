@@ -1,6 +1,6 @@
 public class ApexClassTestMerge {
 public String hello() {
-return 'Hello World5!';
+return 'Hello World7!';
 }
 public String hello1() {
 return 'Hello World5!';
