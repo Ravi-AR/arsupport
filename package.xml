@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-    <version>39.0</version>
+    <version>40.0</version>
     <types>
         <members>AccCls1</members>
         <members>AccCls2</members>
@@ -14,6 +14,7 @@
         <members>ApexC2</members>
         <members>ApexClassTest</members>
         <members>ApexClassTest1</members>
+        <members>ApexClassTestMerge</members>
         <members>SamplePageController</members>
         <members>Scenario2</members>
         <members>SupportStatus</members>
