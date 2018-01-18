@@ -168,7 +168,4 @@
         <type>Text</type>
     </nameField>
     <pluralLabel>Training1</pluralLabel>
-    <searchLayouts/>
-    <sharingModel>ReadWrite</sharingModel>
-    <visibility>Public</visibility>
 </CustomObject>

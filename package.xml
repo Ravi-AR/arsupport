@@ -160,6 +160,20 @@
         <members>Training2__c.Field4__c</members>
         <members>Training2__c.field1__c</members>
         <members>Training2__c.field2__c</members>
+        <members>Training1__c.PicklistRun1__c</members>
+        <members>User.ManagerId</members>
+        <members>UserProvisioningRequest.AppName</members>
+        <members>UserProvisioningRequest.ApprovalStatus</members>
+        <members>UserProvisioningRequest.ConnectedAppId</members>
+        <members>UserProvisioningRequest.ManagerId</members>
+        <members>UserProvisioningRequest.Operation</members>
+        <members>UserProvisioningRequest.OwnerId</members>
+        <members>UserProvisioningRequest.ParentId</members>
+        <members>UserProvisioningRequest.RetryCount</members>
+        <members>UserProvisioningRequest.SalesforceUserId</members>
+        <members>UserProvisioningRequest.State</members>
+        <members>UserProvisioningRequest.UserProvAccountId</members>
+        <members>UserTerritory2Association.RoleInTerritory2</members>
         <members>dataloader3935__c.AccountDataload__c</members>
         <members>dataloader3935__c.Test1__c</members>
         <members>dataloader3935__c.Test__c</members>
