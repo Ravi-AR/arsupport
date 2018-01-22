@@ -21,6 +21,7 @@
         <members>TestApexClass</members>
         <members>TestApexCls01</members>
         <members>WebtoCaseController</members>
+        <members>cases</members>
         <name>ApexClass</name>
     </types>
     <types>
