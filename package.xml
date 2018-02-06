@@ -315,6 +315,7 @@
         <name>EscalationRules</name>
     </types>
     <types>
+        <members>Flexipage</members>
         <members>LightningSalesConsole_UtilityBar</members>
         <members>LightningService_UtilityBar</members>
         <name>FlexiPage</name>
