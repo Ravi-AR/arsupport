@@ -106,6 +106,7 @@
         <members>standard__Chatter</members>
         <members>standard__Community</members>
         <members>standard__Content</members>
+        <members>standard__LightningSales</members>
         <members>standard__Marketing</members>
         <members>standard__Platform</members>
         <members>standard__Sales</members>
@@ -315,6 +316,7 @@
         <name>EscalationRules</name>
     </types>
     <types>
+        <members>FPSE_call</members>
         <members>Flexipage</members>
         <members>LightningSalesConsole_UtilityBar</members>
         <members>LightningService_UtilityBar</members>
@@ -542,6 +544,7 @@
         <name>QuickAction</name>
     </types>
     <types>
+        <members>Account.Testrecord</members>
         <members>Metric.Completion</members>
         <members>Metric.Progress</members>
         <members>Support_Test__c.RCTyp1</members>
