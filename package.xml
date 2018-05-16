@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-    <version>37.0</version>
+    <version>40.0</version>
     <types>
         <members>A0</members>
         <members>A0001</members>
@@ -636,16 +636,6 @@
         <members>Task.Type</members>
         <members>Task.WhatId</members>
         <members>Task.WhoId</members>
-        <members>Territory2.AccountAccessLevel</members>
-        <members>Territory2.CaseAccessLevel</members>
-        <members>Territory2.ContactAccessLevel</members>
-        <members>Territory2.Description</members>
-        <members>Territory2.DeveloperName</members>
-        <members>Territory2.Name</members>
-        <members>Territory2.OpportunityAccessLevel</members>
-        <members>Territory2.ParentTerritory2Id</members>
-        <members>Territory2.Territory2ModelId</members>
-        <members>Territory2.Territory2TypeId</members>
         <members>Territory2Model.ActivatedDate</members>
         <members>Territory2Model.DeactivatedDate</members>
         <members>Territory2Model.Description</members>
@@ -747,7 +737,6 @@
         <members>Solution</members>
         <members>StreamingChannel</members>
         <members>Task</members>
-        <members>Territory2</members>
         <members>Territory2Model</members>
         <members>User</members>
         <members>UserProvisioningRequest</members>
