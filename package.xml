@@ -5,6 +5,7 @@
         <members>ApexClassTest</members>
         <members>SupportStatus</members>
         <members>TestApexClass</members>
+        <members>x20443</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -605,7 +606,6 @@
         <members>UserProvisioningRequest.UserProvAccountId</members>
         <members>UserTerritory2Association.RoleInTerritory2</members>
         <members>X20443__c.X20443_1__c</members>
-        <members>X20443__c.X20443_2__c</members>
         <members>dataloader3935__c.AccountDataload__c</members>
         <members>dataloader3935__c.Test1__c</members>
         <members>dataloader3935__c.Test__c</members>
@@ -772,6 +772,7 @@
         <members>UserProvisioningLog-User Provisioning Log Layout</members>
         <members>UserProvisioningRequest-User Provisioning Request Layout</members>
         <members>X20443__c-20443 Layout</members>
+        <members>X20443__c-20443layout2</members>
         <members>dataloader3935__c-dataloader3935 Layout</members>
         <members>testing__mdt-testing Layout</members>
         <members>testobjectcreated__c-testobjectcreated Layout</members>

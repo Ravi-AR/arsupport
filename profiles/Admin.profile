@@ -1363,11 +1363,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>X20443__c.X20443_2__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>dataloader3935__c.Test1__c</field>
         <readable>true</readable>
     </fieldPermissions>
