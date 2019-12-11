@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-    <version>40.0</version>
+    <version>44.0</version>
     <types>
+        <members>ApexClassTest</members>
         <members>SupportStatus</members>
         <members>TestApexClass</members>
         <name>ApexClass</name>
@@ -675,6 +676,7 @@
         <members>User</members>
         <members>UserProvisioningRequest</members>
         <members>UserTerritory2Association</members>
+        <members>X20443__c</members>
         <members>dataloader3935__c</members>
         <members>testing__mdt</members>
         <members>testobjectcreated__c</members>
@@ -700,6 +702,7 @@
         <members>SharedDocuments/X3_9_2_Release_Logo.jpeg</members>
         <members>SharedDocuments/sample2.htm</members>
         <members>SharedDocuments/test1.png</members>
+        <members>testingfolder</members>
         <name>Document</name>
     </types>
     <types>
@@ -766,6 +769,7 @@
         <members>UserProvAccount-User Provisioning Account Layout</members>
         <members>UserProvisioningLog-User Provisioning Log Layout</members>
         <members>UserProvisioningRequest-User Provisioning Request Layout</members>
+        <members>X20443__c-20443 Layout</members>
         <members>dataloader3935__c-dataloader3935 Layout</members>
         <members>testing__mdt-testing Layout</members>
         <members>testobjectcreated__c-testobjectcreated Layout</members>
@@ -1008,7 +1012,7 @@
         <name>StaticResource</name>
     </types>
     <types>
-        <members>California</members>
+        <members>TRtestingModel.California</members>
         <name>Territory2</name>
     </types>
     <types>
@@ -1016,7 +1020,7 @@
         <name>Territory2Model</name>
     </types>
     <types>
-        <members>CA</members>
+        <members>TRtestingModel.CA</members>
         <name>Territory2Rule</name>
     </types>
     <types>
